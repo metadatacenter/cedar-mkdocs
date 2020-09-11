@@ -1,0 +1,7 @@
+name: cedar-mkdocs
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8.2
+  - mkdocs=1.1.2

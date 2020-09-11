@@ -1,0 +1,31 @@
+site_name: CEDAR
+theme: readthedocs
+
+repo_url: https://github.com/metadatacenter/cedar-mkdocs
+
+nav:
+    - Home: index.md
+    - Install Guides:
+        - Overview: install-overview.md
+        - Developer Install:
+            - Prerequisites: install-developer-infra-prereq.md
+            - Directories: install-developer-infra-directories.md
+            - SSL certificate:
+                - Self-signed certificate: install-developer-self-signed-certificate.md
+            - Infrastructure services:
+                - Helper scripts: install-developer-infra-helper-scripts.md
+                - MongoBD: install-developer-infra-mongodb.md
+                - MySql: install-developer-infra-mysql.md
+                - Elasticsearch: install-developer-infra-elasticsearch.md
+                - Neo4j: install-developer-infra-neo4j.md
+                - Redis: install-developer-infra-redis.md
+                - Keycloak: install-developer-infra-keycloak.md
+                - Nginx: install-developer-infra-nginx.md
+            - Java microservices:
+                - Cloning from Github: install-developer-microservices-github.md
+                - Building: install-developer-microservices-stopping.md
+                - Starting: install-developer-microservices-starting.md
+        - Production Install:
+            - Prerequisites: install-production-prereq.md
+        - Docker Install:
+            - Prerequisites: install-docker-prereq.md
