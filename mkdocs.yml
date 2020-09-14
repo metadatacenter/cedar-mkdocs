@@ -17,6 +17,7 @@ nav:
             - Infrastructure services:
                 - MongoBD: install-developer/infra-mongodb.md
                 - Elasticsearch: install-developer/infra-elasticsearch.md
+                - Keycloak: install-developer/infra-keycloak.md
 
 
                 - Helper scripts: install-developer-infra-helper-scripts.md
@@ -25,7 +26,6 @@ nav:
                 - MySql: install-developer-infra-mysql.md
                 - Neo4j: install-developer-infra-neo4j.md
                 - Redis: install-developer-infra-redis.md
-                - Keycloak: install-developer-infra-keycloak.md
                 - Nginx: install-developer-infra-nginx.md
             - Java microservices:
                 - Cloning from Github: install-developer-microservices-github.md
