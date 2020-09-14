@@ -8,13 +8,19 @@ nav:
     - Install Guides:
         - Overview: install-overview.md
         - Developer Install:
-            - Prerequisites: install-developer-infra-prereq.md
-            - Directories: install-developer-infra-directories.md
+            - Introduction: install-developer/intro.md
+            - System Architecture: install-developer/system-architecture.md
+            - Prerequisites: install-developer/prereq.md
+            - Directories: install-developer/directories.md
             - SSL certificate:
                 - Self-signed certificate: install-developer-self-signed-certificate.md
             - Infrastructure services:
+                - MongoBD: install-developer/infra-mongodb.md
+
+
                 - Helper scripts: install-developer-infra-helper-scripts.md
-                - MongoBD: install-developer-infra-mongodb.md
+
+
                 - MySql: install-developer-infra-mysql.md
                 - Elasticsearch: install-developer-infra-elasticsearch.md
                 - Neo4j: install-developer-infra-neo4j.md

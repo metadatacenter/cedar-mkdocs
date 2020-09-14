@@ -15,6 +15,8 @@ Please read the full documentation at [www.mkdocs.org](https://www.mkdocs.org/)
 
 ### Start built-in dev server
     mkdocs serve
+    
+You can see the content served by this dev server at http://localhost:8000/ 
 
 ### Build the documentation
     mkdocs build
