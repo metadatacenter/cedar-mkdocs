@@ -1,6 +1,13 @@
 # MkDocs for CEDAR
 
 ## Conda environment 
+### Install Conda
+Use the guide at: https://docs.conda.io/
+
+To install Anaconda, you can go directly to: https://www.anaconda.com/products/individual/get-started 
+
+Install Anaconda, close all your terminals and start a new one.
+
 ### Create Conda environment to run MkDocs
     conda env create -f ./environment.yml
 

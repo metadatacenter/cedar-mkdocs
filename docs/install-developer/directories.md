@@ -1,6 +1,6 @@
 # CEDAR User
 
-**Important**
+**Important!**
 
 The current guide assumes that you created a dedicated user `cedar-dev` to follow these steps.
 
@@ -13,7 +13,7 @@ You should create a directory under your home directory:
 
     mkdir ~/CEDAR 
 
-**Important**
+**Important!**
 
 Of course, you can choose to have this CEDAR home directory in a different place. We have an environment variable which holds this path.
 We suggest, however, that your CEDAR home directory path does not contain spaces or special characters.
