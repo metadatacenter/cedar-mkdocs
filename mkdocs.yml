@@ -16,13 +16,13 @@ nav:
                 - Self-signed certificate: install-developer-self-signed-certificate.md
             - Infrastructure services:
                 - MongoBD: install-developer/infra-mongodb.md
+                - Elasticsearch: install-developer/infra-elasticsearch.md
 
 
                 - Helper scripts: install-developer-infra-helper-scripts.md
 
 
                 - MySql: install-developer-infra-mysql.md
-                - Elasticsearch: install-developer-infra-elasticsearch.md
                 - Neo4j: install-developer-infra-neo4j.md
                 - Redis: install-developer-infra-redis.md
                 - Keycloak: install-developer-infra-keycloak.md
