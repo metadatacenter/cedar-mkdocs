@@ -13,7 +13,7 @@ brew install elasticsearch@6
 
 Do not add Elasticsearch as a background service! We will have scripts in place which will start it when necessary.
 
-Do not start Elasticsearch at this point!
+**Do not start Elasticsearch at this point!**
  
 ## Configure Elasticsearch
 
