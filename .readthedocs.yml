@@ -16,4 +16,5 @@ python:
         - method: pip
           path: .
           extra_requirements:
-            - mkdocs-material
+              - pymdown-extensions
+              - mkdocs-material
