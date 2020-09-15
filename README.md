@@ -16,19 +16,19 @@ Install Anaconda, close all your terminals and start a new one.
 
 ### Deactivate Conda environment
     conda deactivate
+    
+### Remove Conda environment
+
+    conda env remove --name cedar-mkdocs
 
 ## MKDocs Material
 
-    pip install mkdocs-material
+MkDocs-Material will be installed from conda-forge when creating the environment. 
 
-or 
-
-    git clone https://github.com/squidfunk/mkdocs-material.git
-
-and the copy content into mkdocs-material subfolder
-
+The documentation can be found at: https://squidfunk.github.io/mkdocs-material/
+ 
 ## MkDocs
-Please read the full documentation at [www.mkdocs.org](https://www.mkdocs.org/)
+Please read the full documentation at: https://www.mkdocs.org/
 
 ### Start built-in dev server
     mkdocs serve
