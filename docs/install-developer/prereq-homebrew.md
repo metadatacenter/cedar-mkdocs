@@ -6,18 +6,24 @@ If you do not have it yet, please install it following their guide at [https://b
 
 Or you can do this:
 
-    /bin/bash -c \
-    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```sh
+/bin/bash -c \
+"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
 
 If you run into problems during installing services with `brew`, remember that you can use these commands to try to debug issues:
 
-    brew doctor
-    brew cleanup
+```sh
+brew doctor
+brew cleanup
+```
 
 ## Update Homebrew
 If you had `brew` installed previously, please update it using:
 
-    brew update
+```sh
+brew update
+```
 
 ## Upgrade brewed components
 If you have software installed using `brew`, please upgrade them to their latest version.
@@ -26,5 +32,7 @@ If you have software installed using `brew`, please upgrade them to their latest
 
 If you need to pin down versions of components, do that before upgrading:
 
-    brew pin <formula>
-    brew upgrade 
+```sh
+brew pin <formula>
+brew upgrade 
+```

@@ -5,18 +5,23 @@ CEDAR uses `MySql` as the backend for Keycloak as well as storage for messages a
 
 Please install `MySql version 5.7`:
 
-    brew install mysql@5.7
+```sh
+brew install mysql@5.7
+```
     
 **Important!**
 
 Do not add MySql as a background service! We will have scripts in place which will start it when necessary.
 
 ## Start MySql
-    brew services start mysql@5.7
-
+```sh
+brew services start mysql@5.7
+```
 
 ## Secure MySql server
-    /usr/local/Cellar/mysql@5.7/5.7.31/bin/mysql_secure_installation
+```sh
+/usr/local/Cellar/mysql@5.7/5.7.31/bin/mysql_secure_installation
+```
 
 Respond to the questions as follows:
 
@@ -33,29 +38,31 @@ Respond to the questions as follows:
 ## Create CEDAR application users
 Connect to the running MySql server
 
-    /usr/local/Cellar/mysql@5.7/5.7.31/bin/mysql -uroot -p
+```sh
+/usr/local/Cellar/mysql@5.7/5.7.31/bin/mysql -uroot -p
+```
 
 Execute the below three groups of statements in order to create MySql databases and corresponding users for the different components of CEDAR: 
-```
+```sql
 CREATE DATABASE IF NOT EXISTS `cedar_keycloak`;
 CREATE USER 'cedarMySQLKeycloakUser'@'localhost' IDENTIFIED BY 'changeme';
 GRANT ALL PRIVILEGES ON cedar_keycloak.* TO 'cedarMySQLKeycloakUser'@'localhost';
 ```
 
-```
+```sql
 CREATE DATABASE IF NOT EXISTS `cedar_messaging`;
 CREATE USER 'cedarMySQLMessagingUser'@'localhost' IDENTIFIED BY 'changeme';
 GRANT ALL PRIVILEGES ON cedar_messaging.* TO 'cedarMySQLMessagingUser'@'localhost';
 ```
 
-```
+```sql
 CREATE DATABASE IF NOT EXISTS `cedar_log`;
 CREATE USER 'cedarMySQLLogUser'@'localhost' IDENTIFIED BY 'changeme';
 GRANT ALL PRIVILEGES ON cedar_log.* TO 'cedarMySQLLogUser'@'localhost';
 ```
 Flush privileges and quit:
 
-```
+```sql
 FLUSH PRIVILEGES;
 quit
 ```

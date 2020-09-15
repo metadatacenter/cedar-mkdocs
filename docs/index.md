@@ -1,3 +1,9 @@
+---
+summary: A CEDAR documentation, centered around the developer
+authors:
+    - Attila L. Egyedi
+date: 2020-09-14
+---
 # CEDAR Documentation
 
 Our running official CEDAR installation runs at [cedar.metadatacenter.org](https://cedar.metadatacenter.org).

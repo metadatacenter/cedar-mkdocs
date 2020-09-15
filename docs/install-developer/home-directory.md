@@ -3,7 +3,9 @@
 You will need a directory where all the CEDAR-related code, configuration, log files and some executable will reside.
 You should create a directory under your home directory:
 
-    mkdir ~/CEDAR 
+```sh
+mkdir ~/CEDAR 
+```
 
 **Important!**
 
