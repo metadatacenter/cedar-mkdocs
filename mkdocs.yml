@@ -1,5 +1,5 @@
 site_name: CEDAR
-theme: material
+theme: mkdocs
 
 repo_url: https://github.com/metadatacenter/cedar-mkdocs
 
