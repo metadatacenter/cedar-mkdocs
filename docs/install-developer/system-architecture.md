@@ -1,3 +1,4 @@
+# System Architecture
 In order to be able to better follow this guide, it is desirable to understand the CEDAR architecture.
 
 Our system is an open-source, Java microservice-based, REST-heavy system, with two frontends developed in AngularJS and Angular.

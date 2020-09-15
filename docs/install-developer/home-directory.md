@@ -1,12 +1,4 @@
-# CEDAR User
-
-**Important!**
-
-The current guide assumes that you created a dedicated user `cedar-dev` to follow these steps.
-
-It is totally fine if you proceed with your regular user. However, please replace your current username wherever you see `cedar-dev` throughout this guide. 
-
-# CEDAR Home
+# CEDAR Home Directory
 
 You will need a directory where all the CEDAR-related code, configuration, log files and some executable will reside.
 You should create a directory under your home directory:

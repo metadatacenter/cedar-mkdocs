@@ -1,3 +1,5 @@
+# Introduction
+
 The CEDAR Developer Team uses macOS Catalina for development. The below guide will describe how to install the CEDAR project and all the dependencies onto an empty macOS. 
 
 Of course, the project could be installed to other operating systems as well, and we encourage you to do so, if you have no other choice.

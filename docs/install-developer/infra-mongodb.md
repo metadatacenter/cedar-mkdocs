@@ -1,6 +1,7 @@
-CEDAR uses MongoDB as the storage for the CEDAR artifacts: fields, elements, templates and metadata instances.
+# MongoDB
+CEDAR uses `MongoDB` as the storage for the CEDAR artifacts: fields, elements, templates and metadata instances.
 
-# Install MongoBD
+## Install MongoBD
 
 Please install `MongoDB-Community, version 3.4`:
 
@@ -8,11 +9,11 @@ Please install `MongoDB-Community, version 3.4`:
     
 **Important!**
 
-Do not add MongoDB as a background service! We will have scripts in place which will start MongoDB when necessary.
+Do not add MongoDB as a background service! We will have scripts in place which will start it when necessary.
 
 Do not start MongoDB at this point!
 
-# Start MongoDB without access control
+## Start MongoDB without access control
 In order to have secure access to MongoDB, we will create a privileged user, a dedicated CEDAR user, and we will turn on access control.
 
 First, we will create a power user. You will need to start MongoDB without access control from the command line.
@@ -24,7 +25,7 @@ Please replace the path below with the one applicable to your system:
 --dbpath /usr/local/var/mongodb
 ```
 
-# Create privileged user
+## Create privileged user
 Once mongoDB is started, in a different terminal connect to it:
 
     /usr/local/Cellar/mongodb-community@3.4/3.4.24/bin/mongo
@@ -46,10 +47,10 @@ exit
 
 Close this terminal, and stop the running MongoDB by pressing ^C.
 
-# Start MongoDB with access control
+## Start MongoDB with access control
     brew services start mongodb-community@3.4
 
-# Create CEDAR application user
+## Create CEDAR application user
 Connect to MongoDB with the previously created user:
 ```
 /usr/local/Cellar/mongodb-community@3.4/3.4.24/bin/mongo \
@@ -73,5 +74,5 @@ db.createUser(
 exit
 ```
 
-# Restart MongoDB
+## Restart MongoDB
     brew services restart mongodb-community@3.4
