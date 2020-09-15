@@ -28,7 +28,8 @@ brew update
 ## Upgrade brewed components
 If you have software installed using `brew`, please upgrade them to their latest version.
 
-**This is an important step, do not skip this!**
+???+ warning "Important"
+    **This is an important step, do not skip this!**
 
 If you need to pin down versions of components, do that before upgrading:
 

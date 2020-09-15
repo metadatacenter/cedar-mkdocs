@@ -9,11 +9,11 @@ Please install `elasticsearch version 6.8`:
 brew install elasticsearch@6
 ```
     
-**Important!**
+???+ warning "Important"
 
-Do not add Elasticsearch as a background service! We will have scripts in place which will start it when necessary.
+    Do not add Elasticsearch as a background service! We will have scripts in place which will start it when necessary.
 
-**Do not start Elasticsearch at this point!**
+    **Do not start Elasticsearch at this point!**
  
 ## Configure Elasticsearch
 

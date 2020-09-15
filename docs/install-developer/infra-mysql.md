@@ -9,9 +9,9 @@ Please install `MySql version 5.7`:
 brew install mysql@5.7
 ```
     
-**Important!**
+???+ warning "Important"
 
-Do not add MySql as a background service! We will have scripts in place which will start it when necessary.
+    Do not add MySql as a background service! We will have scripts in place which will start it when necessary.
 
 ## Start MySql
 ```sh

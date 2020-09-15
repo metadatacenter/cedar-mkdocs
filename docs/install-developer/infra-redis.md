@@ -9,9 +9,9 @@ Please install `Redis, version 3.2`:
 brew install redis@3.2
 ```
     
-**Important!**
+???+ warning "Important"
 
-Do not add Redis as a background service! We will have scripts in place which will start it when necessary.
+    Do not add Redis as a background service! We will have scripts in place which will start it when necessary.
 
 ## Start Redis
 ```sh

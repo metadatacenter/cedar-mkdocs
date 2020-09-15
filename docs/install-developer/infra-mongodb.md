@@ -8,12 +8,12 @@ Please install `MongoDB-Community, version 3.4`:
 ```sh
 brew install mongodb-community@3.4
 ```
+
+???+ warning "Important"
     
-**Important!**
+    Do not add MongoDB as a background service! We will have scripts in place which will start it when necessary.
 
-Do not add MongoDB as a background service! We will have scripts in place which will start it when necessary.
-
-**Do not start MongoDB at this point!**
+    **Do not start MongoDB at this point!**
 
 ## Start MongoDB without access control
 In order to have secure access to MongoDB, we will create a privileged user, a dedicated CEDAR user, and we will turn on access control.
@@ -36,7 +36,7 @@ Once mongoDB is started, in a different terminal connect to it:
 ```
 
 In this new terminal use the `admin` collection and create a privileged user:
-```
+```js
 use admin
 
 db.createUser(
@@ -68,7 +68,7 @@ Connect to MongoDB with the previously created user:
 ```
 
 Create the user:
-```
+```js
 use cedar
 
 db.createUser(

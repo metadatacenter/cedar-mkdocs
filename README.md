@@ -17,6 +17,10 @@ Install Anaconda, close all your terminals and start a new one.
 ### Deactivate Conda environment
     conda deactivate
 
+## MKDocs Material
+
+    git clone https://github.com/squidfunk/mkdocs-material.git
+
 ## MkDocs
 Please read the full documentation at [www.mkdocs.org](https://www.mkdocs.org/)
 
@@ -30,3 +34,9 @@ You can see the content served by this dev server at http://localhost:8000/
 
 ### Build clean documentation
     mkdocs build --clean
+
+### Markdown extension syntax
+
+https://facelessuser.github.io/pymdown-extensions/extensions/superfences/
+
+https://python-markdown.github.io/extensions/

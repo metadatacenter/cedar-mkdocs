@@ -1,5 +1,30 @@
 site_name: CEDAR
-theme: mkdocs
+theme:
+    name: null
+    custom_dir: mkdocs-material/material
+    static_templates:
+        - 404.html
+    include_search_page: false
+    search_index_only: true
+    language: en
+    features:
+        - tabs
+    palette:
+        scheme: default
+        primary: indigo
+        accent: indigo
+    font:
+        text: Roboto
+        code: Roboto Mono
+    favicon: assets/favicon.png
+    icon:
+        logo: logo
+
+markdown_extensions:
+    - markdown.extensions.toc:
+          permalink: true
+    - pymdownx.details
+    - pymdownx.superfences
 
 repo_url: https://github.com/metadatacenter/cedar-mkdocs
 
@@ -14,7 +39,7 @@ nav:
                 - install-developer/prereq-macos.md
                 - install-developer/prereq-homebrew.md
                 - install-developer/prereq-openssl.md
-            - Users, directories, passwords:
+            - Users, directories and passwords:
                 - install-developer/user.md
                 - install-developer/home-directory.md
                 - install-developer/usernames-and-passwords.md
