@@ -6,35 +6,30 @@ repo_url: https://github.com/metadatacenter/cedar-mkdocs
 nav:
     - Home: index.md
     - Install Guides:
-        - Overview: install-overview.md
+        - install-overview.md
         - Developer Install:
-            - Introduction: install-developer/intro.md
-            - System Architecture: install-developer/system-architecture.md
+            - install-developer/intro.md
+            - install-developer/system-architecture.md
             - Prerequisites:
-                - Update macOS: install-developer/prereq-macos.md
-                - Update and upgrade Homebrew: install-developer/prereq-homebrew.md
-                - Install OpenSSL: install-developer/prereq-openssl.md
+                - install-developer/prereq-macos.md
+                - install-developer/prereq-homebrew.md
+                - install-developer/prereq-openssl.md
             - Users, directories, passwords:
-                - CEDAR User: install-developer/user.md
-                - CEDAR Home Directory: install-developer/home-directory.md
-                - Usernames & Passwords: install-developer/usernames-and-passwords.md
-            - SSL certificate:
-                - Self-signed certificate: install-developer-self-signed-certificate.md
+                - install-developer/user.md
+                - install-developer/home-directory.md
+                - install-developer/usernames-and-passwords.md
             - Infrastructure services:
-                - MongoBD: install-developer/infra-mongodb.md
-                - Elasticsearch: install-developer/infra-elasticsearch.md
-                - MySql: install-developer/infra-mysql.md
-
+                - install-developer/infra-mongodb.md
+                - install-developer/infra-elasticsearch.md
+                - install-developer/infra-mysql.md
 
                 - Keycloak: install-developer/infra-keycloak.md
-
-
                 - Helper scripts: install-developer-infra-helper-scripts.md
-
-
                 - Neo4j: install-developer-infra-neo4j.md
                 - Redis: install-developer-infra-redis.md
                 - Nginx: install-developer-infra-nginx.md
+            - SSL certificate:
+                  - Self-signed certificate: install-developer-self-signed-certificate.md
             - Java microservices:
                 - Cloning from Github: install-developer-microservices-github.md
                 - Building: install-developer-microservices-stopping.md

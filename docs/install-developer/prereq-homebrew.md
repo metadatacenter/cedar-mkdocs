@@ -1,6 +1,7 @@
-# Install/update Homebrew
+# Homebrew
 You will need `brew` to install some components.
 
+## Install Homebrew
 If you do not have it yet, please install it following their guide at [https://brew.sh/](https://brew.sh/)
 
 Or you can do this:
@@ -13,7 +14,8 @@ If you run into problems during installing services with `brew`, remember that y
     brew doctor
     brew cleanup
 
-If you had brew installed previously, please update it using:
+## Update Homebrew
+If you had `brew` installed previously, please update it using:
 
     brew update
 

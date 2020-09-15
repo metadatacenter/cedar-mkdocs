@@ -1,4 +1,4 @@
-# Welcome to CEDAR Installation Documentation
+# CEDAR Documentation
 
 Our running official CEDAR installation runs at [cedar.metadatacenter.org](https://cedar.metadatacenter.org).
 
