@@ -15,4 +15,5 @@ python:
     install:
         - method: pip
           path: .
-          extra_requirements: mkdocs-material
+          extra_requirements:
+            - mkdocs-material
