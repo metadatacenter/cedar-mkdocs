@@ -1,24 +1,6 @@
 site_name: CEDAR
 theme:
-    name: null
-    custom_dir: mkdocs-material/material
-    static_templates:
-        - 404.html
-    include_search_page: false
-    search_index_only: true
-    language: en
-    features:
-        - tabs
-    palette:
-        scheme: default
-        primary: indigo
-        accent: indigo
-    font:
-        text: Roboto
-        code: Roboto Mono
-    favicon: assets/favicon.png
-    icon:
-        logo: logo
+    name: material
 
 markdown_extensions:
     - markdown.extensions.toc:

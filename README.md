@@ -19,7 +19,13 @@ Install Anaconda, close all your terminals and start a new one.
 
 ## MKDocs Material
 
+    pip install mkdocs-material
+
+or 
+
     git clone https://github.com/squidfunk/mkdocs-material.git
+
+and the copy content into mkdocs-material subfolder
 
 ## MkDocs
 Please read the full documentation at [www.mkdocs.org](https://www.mkdocs.org/)
