@@ -1,20 +1,12 @@
 version: 2
 
 conda:
-    environment: environment.yml
+  environment: environment.yml
 
 build:
-    image: latest
+  image: latest
 
 mkdocs:
-    configuration: mkdocs.yml
+  configuration: mkdocs.yml
 
 formats: []
-
-python:
-    install:
-        - method: pip
-          path: .
-          extra_requirements:
-              - pymdown-extensions
-              - mkdocs-material
