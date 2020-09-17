@@ -30,5 +30,16 @@ cluster.name: elasticsearch_cedar
 ## Start Elasticsearch
 
 ```sh
-brew services start elasticsearch@6
+startelastic
+```
+
+## Check Elasticsearch status
+```sh
+cedarss
+```
+
+You should see the following lines in the output:
+```
+| Elasticsearch-REST         | Running | httpResponse| 9200| HTTP/1.1\s200\sOK |
+| Elasticsearch-Transport    | Running | openPort    | 9300|                   |
 ```

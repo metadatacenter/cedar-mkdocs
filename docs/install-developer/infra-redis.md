@@ -15,5 +15,15 @@ brew install redis@3.2
 
 ## Start Redis
 ```sh
-brew services start redis@3.2
+startredis
+```
+
+## Check Redis status
+```sh
+cedarss
+```
+
+You should see the following line in the output:
+```
+| Redis-persistent           | Running | redisPing   | 6379|                   |
 ```

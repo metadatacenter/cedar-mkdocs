@@ -15,7 +15,17 @@ brew install mysql@5.7
 
 ## Start MySql
 ```sh
-brew services start mysql@5.7
+startmysql
+```
+
+## Check MySql status
+```sh
+cedarss
+```
+
+You should see the following line in the output:
+```
+| MySQL                      | Running | openPort    | 3306|                   |
 ```
 
 ## Secure MySql server

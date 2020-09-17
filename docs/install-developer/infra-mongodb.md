@@ -50,11 +50,11 @@ db.createUser(
 exit
 ```
 
-Close this terminal, and stop the running MongoDB by pressing ^C.
+Close this terminal, and stop the running MongoDB by pressing ++ctrl++ + C.
 
 ## Start MongoDB with access control
 ```sh
-brew services start mongodb-community@3.4
+startmongo
 ```
 
 ## Create CEDAR application user
@@ -83,5 +83,16 @@ exit
 
 ## Restart MongoDB
 ```sh
-brew services restart mongodb-community@3.4
+stopmongo
+startmongo
+```
+
+## Check MongoDB status
+```sh
+cedarss
+```
+
+You should see the following line in the output:
+```
+| MongoDB                    | Running | openPort    |27017|                   |
 ```

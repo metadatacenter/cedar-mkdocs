@@ -2,7 +2,7 @@
 
 Throughout this guide we use some default usernames and passwords.
 
-The usernames reflect the system name they are associated with and their usage intent (for instance `cedarMongoUser` for the MongoDB access).
+The usernames reflect the system name they are associated with and their usage intent (e.g. `cedarMongoUser` is CEDAR app level user for MongoDB access).
 
 The passwords for all the users are set to `changeme`.
 

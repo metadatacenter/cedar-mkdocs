@@ -48,8 +48,19 @@ Execute the following:
 ## Start Neo4j
 
 ```sh
-~/CEDAR/neo4j/bin/neo4j start &
+startneo
 ```
+
+## Check Neo4j status
+```sh
+cedarss
+```
+
+You should see the following line in the output:
+```
+| Neo4j                      | Running | httpResponse| 7474| HTTP/1.1\s200\sOK |
+```
+
 
 ## Check the connection
 
