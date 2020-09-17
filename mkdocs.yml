@@ -25,6 +25,9 @@ nav:
                 - install-developer/user.md
                 - install-developer/home-directory.md
                 - install-developer/usernames-and-passwords.md
+            - Scripts and aliases:
+                  - install-developer/scripts-and-aliases-overview.md
+                  - install-developer/scripts-and-aliases-install.md
             - Infrastructure services:
                 - install-developer/infra-mongodb.md
                 - install-developer/infra-elasticsearch.md

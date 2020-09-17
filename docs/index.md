@@ -6,8 +6,17 @@ date: 2020-09-14
 ---
 # CEDAR Installation Documentation
 
-A full list of CEDAR documentation can be found at [https://metadatacenter.org/references](https://metadatacenter.org/references)
+## CEDAR Documentation location
+A comprehensive list of CEDAR documentation can be found at:
 
-This documentation focuses on the installation of CEDAR. Please use the left navigation to browse the install guide.
+[https://metadatacenter.org/references](https://metadatacenter.org/references)
 
-TYou can start here: [Install Overview](https://metadatacenter.readthedocs.io/en/latest/install-overview/)
+## Scope if this document
+
+This documentation focuses on the installation of CEDAR.
+
+If you are and end-user, or you have question about how to use CEDAR, please check out our resources at the link above.  
+
+If you want to install or develop CEDAR, please use the left navigation to browse the install guide.
+
+You should start here: [Install Overview](/install-overview/)
