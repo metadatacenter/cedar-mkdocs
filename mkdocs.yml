@@ -27,6 +27,7 @@ nav:
                 - install-developer/prereq-macos.md
                 - install-developer/prereq-homebrew.md
                 - install-developer/prereq-openssl.md
+                - install-developer/prereq-jdk.md
             - Users, directories and passwords:
                 - install-developer/user.md
                 - install-developer/home-directory.md
