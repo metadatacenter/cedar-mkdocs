@@ -37,6 +37,9 @@ nav:
                   - install-developer/scripts-and-aliases-overview.md
                   - install-developer/scripts-and-aliases-install.md
                   - install-developer/scripts-and-aliases-include.md
+            - SSL certificates:
+                  - install-developer/cert-overview.md
+                  - install-developer/cert-self-signed.md
             - CEDAR commands:
                   - install-developer/commands-overview.md
                   - install-developer/commands-cedarenv.md
