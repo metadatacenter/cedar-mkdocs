@@ -29,10 +29,11 @@ nav:
                 - install-developer/prereq-openssl.md
                 - install-developer/prereq-jdk.md
                 - install-developer/prereq-maven.md
-            - Users, directories and passwords:
+            - Users, directories, passwords and domain:
                 - install-developer/user.md
                 - install-developer/home-directory.md
                 - install-developer/usernames-and-passwords.md
+                - install-developer/domain.md
             - Scripts and aliases:
                   - install-developer/scripts-and-aliases-overview.md
                   - install-developer/scripts-and-aliases-install.md
