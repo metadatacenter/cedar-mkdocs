@@ -28,6 +28,7 @@ nav:
                 - install-developer/prereq-homebrew.md
                 - install-developer/prereq-openssl.md
                 - install-developer/prereq-jdk.md
+                - install-developer/prereq-maven.md
             - Users, directories and passwords:
                 - install-developer/user.md
                 - install-developer/home-directory.md
