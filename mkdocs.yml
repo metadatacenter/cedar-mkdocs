@@ -29,24 +29,27 @@ nav:
                 - install-developer/prereq-openssl.md
                 - install-developer/prereq-jdk.md
                 - install-developer/prereq-maven.md
-            - Users, directories, passwords and domain:
-                - install-developer/user.md
-                - install-developer/home-directory.md
-                - install-developer/usernames-and-passwords.md
-                - install-developer/domain.md
+            - User, home directory, passwords and domain:
+                - install-developer/os-user.md
+                - install-developer/os-home-directory.md
+                - install-developer/config-usernames-and-passwords.md
+                - install-developer/config-domain.md
             - Scripts and aliases:
                   - install-developer/scripts-and-aliases-overview.md
                   - install-developer/scripts-and-aliases-install.md
                   - install-developer/scripts-and-aliases-include.md
-            - SSL certificates:
-                  - install-developer/cert-overview.md
-                  - install-developer/cert-self-signed.md
-                  - install-developer/cert-install.md
             - CEDAR commands:
                   - install-developer/commands-overview.md
                   - install-developer/commands-cedarenv.md
                   - install-developer/commands-cedarss.md
                   - install-developer/commands-startstop.md
+            - SSL certificates:
+                - install-developer/cert-overview.md
+                - install-developer/cert-self-signed.md
+                - install-developer/cert-install.md
+            - Subdomains, directories:
+                - install-developer/os-subdomains.md
+                - install-developer/os-directories.md
             - Infrastructure services:
                 - install-developer/infra-mongodb.md
                 - install-developer/infra-elasticsearch.md
