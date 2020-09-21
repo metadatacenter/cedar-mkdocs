@@ -50,7 +50,8 @@ nav:
             - Subdomains, directories:
                 - install-developer/os-subdomains.md
                 - install-developer/os-directories.md
-            - Cloning and building the code:
+            - The code:
+                - install-developer/code-overview.md
                 - install-developer/code-git-clone.md
                 - install-developer/code-git-utils.md
                 - install-developer/code-build-parent.md
@@ -63,3 +64,7 @@ nav:
                 - install-developer/infra-mysql.md
                 - install-developer/infra-redis.md
                 - install-developer/infra-neo4j.md
+                - Keycloak:
+                    - install-developer/infra-keycloak-overview.md
+                    - install-developer/infra-keycloak-download.md
+                    - install-developer/infra-keycloak-mysql.md

@@ -4,7 +4,7 @@ The CEDAR parent repo sets the versions for the components used throughout the p
 Before building CEDAR, you need to build this repo first.
 Once built, you do not need to build it again, unless you change the `pom.xml`.
 
-## Building the parent
+## Build the parent
 
 ```sh
 goparent

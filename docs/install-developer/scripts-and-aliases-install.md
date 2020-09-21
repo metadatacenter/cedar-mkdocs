@@ -1,4 +1,4 @@
-# Installing the scripts
+# Install the scripts
 
 ???+ warning "Important"
 
@@ -6,7 +6,7 @@
     
     Please execute these steps with great care.
 
-## Cloning the script repo
+## Clone the script repo
 
 Please go to your previously created CEDAR home folder, and clone the following repo:
 

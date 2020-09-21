@@ -1,9 +1,9 @@
-# Cloning the project repos repos
+# Clone the project repos repos
 
 CEDAR is composed of numerous  `git` repos. However it is possible, it would be tedious to clone these repos one by one.
 We have a utility script that does just that.  
 
-## Cloning the repos using util script
+## Clone the repos using util script
 
 ```sh
 gocedar

@@ -1,4 +1,4 @@
-# Installing the self-signed root certificates
+# Install the self-signed root certificates
 
 ## Add to Java trust store
 Find the location of the JDK that you just installed:

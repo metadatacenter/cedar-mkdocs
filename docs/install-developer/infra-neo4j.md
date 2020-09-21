@@ -18,7 +18,7 @@ Please install `Neo4j Community, version 3.5`:
 Download the package from the distribution site:
 
 ```sh
-cd ~/CEDAR
+gocedar
 wget http://dist.neo4j.org/neo4j-community-3.5.21-unix.tar.gz
 # or
 wget http://dist.neo4j.org/neo4j-community-3.5.21-windows.zip

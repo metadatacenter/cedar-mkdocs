@@ -1,6 +1,6 @@
 # Build CEDAR project
 
-## Building the project
+## Build the project
 
 ```sh
 goproject

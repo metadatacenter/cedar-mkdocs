@@ -1,4 +1,4 @@
-# Generating self-signed certificates
+# Generate self-signed certificates
 
 ## Create working location
 Create a working folder for the certificate generation:
