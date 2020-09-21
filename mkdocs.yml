@@ -69,3 +69,5 @@ nav:
                     - install-developer/infra-keycloak-download.md
                     - install-developer/infra-keycloak-mysql.md
                     - install-developer/infra-keycloak-keystore.md
+                    - install-developer/infra-keycloak-nodeid.md
+                    - install-developer/infra-keycloak-event-listener.md
