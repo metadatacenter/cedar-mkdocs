@@ -27,7 +27,7 @@ gocedar
 cd CEDAR_CA
 
 sudo keytool -import -alias metadatacenter.orgx \
--file ./ca.crt -keystore ${JAVA_HOME}/lib/security/cacerts
+  -file ./ca.crt -keystore ${JAVA_HOME}/lib/security/cacerts
 ```
 
 When prompted, enter these value:
@@ -44,11 +44,11 @@ When prompted, enter these value:
 
     ```sh
     sudo keytool -list \
-    -keystore -keystore ${JAVA_HOME}/lib/security/cacerts \
-    | grep metadatacenter
+      -keystore -keystore ${JAVA_HOME}/lib/security/cacerts \
+      | grep metadatacenter
     
     sudo keytool -delete -alias metadatacenter.orgx \
-    -keystore -keystore ${JAVA_HOME}/lib/security/cacerts
+      -keystore -keystore ${JAVA_HOME}/lib/security/cacerts
     ```
 
 If the certificate was added succesfully, please close this session, to get rid of the `JAVA_HOME` environment variable.

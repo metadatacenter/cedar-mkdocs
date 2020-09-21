@@ -8,7 +8,7 @@ Or you can do this:
 
 ```sh
 /bin/bash -c \
-"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
 If you run into problems during installation of packages with `brew`, remember that you can use these commands to try to debug issues:

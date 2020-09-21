@@ -24,8 +24,8 @@ Please replace the path below with the one applicable to your system:
 
 ```sh
 /usr/local/Cellar/mongodb-community@3.4/3.4.24/bin/mongod \
---port 27017 \
---dbpath /usr/local/var/mongodb
+  --port 27017 \
+  --dbpath /usr/local/var/mongodb
 ```
 
 ## Create privileged user
@@ -61,10 +61,10 @@ startmongo
 Connect to MongoDB with the previously created user:
 ```sh
 /usr/local/Cellar/mongodb-community@3.4/3.4.24/bin/mongo \
---port 27017 \
---username "mongoRootUser" \
---password "changeme" \
---authenticationDatabase "admin"
+  --port 27017 \
+  --username "mongoRootUser" \
+  --password "changeme" \
+  --authenticationDatabase "admin"
 ```
 
 Create the user:

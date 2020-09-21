@@ -98,7 +98,7 @@ When asked, enter a `passphrase`. Remember this, since you will need to use it l
 
 ```sh
 openssl req -new -x509 -days 3650 \
--key ca.key -out ca.crt -config ./openssl-ca.cnf
+  -key ca.key -out ca.crt -config ./openssl-ca.cnf
 ```
 
 When prompted, enter these value:
@@ -119,8 +119,8 @@ openssl genrsa -out cedar.metadatacenter.orgx.key 2048
 
 ```sh
 openssl req -new -sha256 \
--key cedar.metadatacenter.orgx.key \
--out cedar.metadatacenter.orgx.csr -config ./openssl-san.cnf
+  -key cedar.metadatacenter.orgx.key \
+  -out cedar.metadatacenter.orgx.csr -config ./openssl-san.cnf
 ```
 
 Use the default values when prompted. Just press ++return++. 
@@ -133,8 +133,8 @@ touch index.txt
 touch index.txt.attr
 
 openssl ca -cert ca.crt -keyfile ca.key \
--in cedar.metadatacenter.orgx.csr -out cedar.metadatacenter.orgx.crt \
--outdir ./ -config ./openssl-san.cnf -verbose -extensions v3_req
+  -in cedar.metadatacenter.orgx.csr -out cedar.metadatacenter.orgx.crt \
+  -outdir ./ -config ./openssl-san.cnf -verbose -extensions v3_req
 ```
 
 ???+ warning "Important"

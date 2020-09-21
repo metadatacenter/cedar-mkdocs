@@ -7,7 +7,7 @@ Instead of the auto-generated `Keycloak` keystore, we wilkl generate our own bef
 ```sh
 cd ${KEYCLOAK_HOME}/standalone/configuration/
 keytool -genkey -alias auth.metadatacenter.orgx \
--keyalg RSA -keystore cedar.keycloak.keystore -validity 3650
+  -keyalg RSA -keystore cedar.keycloak.keystore -validity 3650
 ```
 
 We will use the default `password` password for the keystore.
