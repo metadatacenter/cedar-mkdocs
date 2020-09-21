@@ -31,3 +31,97 @@ wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.49
 gocedar
 tar -xvf mysql-connector-java-5.1.49.tar.gz
 ```
+
+## Move the driver under `Keycloak`
+
+```sh
+gocedar
+mv mysql-connector-java-5.1.49/mysql-connector-java-5.1.49.jar ${KEYCLOAK_HOME}/modules/system/layers/base/com/mysql/jdbc/main/
+```
+
+## Add a module descriptor
+
+You will need to add a module descriptor in order for `JBoss` to use the `JDBC` driver 
+
+```sh
+vi ${KEYCLOAK_HOME}/modules/system/layers/base/com/mysql/jdbc/main/module.xml
+```
+
+Paste the following code into this new file:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.0" name="com.mysql.jdbc">
+   <resources>
+      <resource-root path="mysql-connector-java-5.1.49.jar"/>
+   </resources>
+   <dependencies>
+      <module name="javax.api"/>
+      <module name="javax.transaction.api"/>
+   </dependencies>
+</module>
+```
+
+## Edit Keycloak configuration
+
+We will need to edit the configuration file to add a new datasource.
+
+```sh
+vi ${KEYCLOAK_HOME}/standalone/configuration/standalone.xml
+``` 
+
+### Add `driver`
+
+Around `Line #132` you will see a `<datasources>` element, containing two `<datasource>`-es and one `<driver>'.
+
+After the `driver` on `Line #156` add this block to enable the just added `MySql JDBC` driver:
+
+```xml
+<driver name="mysql" module="com.mysql.jdbc">
+    <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
+</driver>
+``` 
+
+???+ success "Indent in config file"
+
+    We are presenting the config blocks without leading whitespace for the readability of this section.
+    
+    When you add these blocks to the config file, please indent them according to the context, to improve config file readability. 
+
+
+### Add `datasource`
+
+Then after the datasources, before the drivers on `Line #152` add the new `MySql` datasource:
+
+```xml
+<datasource jndi-name="java:jboss/datasources/CedarKeycloakDS" pool-name="CedarKeycloakDS" enabled="true" use-java-context="true" use-ccm="true">
+    <connection-url>jdbc:mysql://${env.CEDAR_KEYCLOAK_MYSQL_HOST}:${env.CEDAR_KEYCLOAK_MYSQL_PORT}/${env.CEDAR_KEYCLOAK_MYSQL_DB}?useSSL=false</connection-url>
+    <driver>mysql</driver>
+    <pool>
+        <flush-strategy>IdleConnections</flush-strategy>
+    </pool>
+    <security>
+        <user-name>${env.CEDAR_KEYCLOAK_MYSQL_USER}</user-name>
+        <password>${env.CEDAR_KEYCLOAK_MYSQL_PASSWORD}</password>
+    </security>
+    <validation>
+        <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+        <background-validation>true</background-validation>
+        <background-validation-millis>60000</background-validation-millis>
+    </validation>
+</datasource>
+```
+
+### Change JPA datasource
+
+Around `Line #556` locate the following line configuring the `JPA` connection: 
+
+```xml
+<property name="dataSource" value="java:jboss/datasources/KeycloakDS"/>
+```
+
+Please change this into:
+
+```xml
+<property name="dataSource" value="java:jboss/datasources/CedarKeycloakDS"/>
+```
