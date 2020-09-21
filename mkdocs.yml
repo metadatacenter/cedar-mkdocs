@@ -50,6 +50,13 @@ nav:
             - Subdomains, directories:
                 - install-developer/os-subdomains.md
                 - install-developer/os-directories.md
+            - Cloning and building the code:
+                - install-developer/code-git-clone.md
+                - install-developer/code-git-utils.md
+                - install-developer/code-build-parent.md
+                - install-developer/code-maven-utils.md
+                - install-developer/code-build-project.md
+                - install-developer/code-more-utils.md
             - Infrastructure services:
                 - install-developer/infra-mongodb.md
                 - install-developer/infra-elasticsearch.md
