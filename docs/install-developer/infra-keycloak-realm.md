@@ -35,6 +35,17 @@ You can start `Keycloak` from now on by executing:
 startkk
 ```
 
+## Check Keycloak status
+```sh
+cedarss
+```
+
+You should see the following line in the output:
+```
+| Keycloak                   | Running | httpResponse| 8080| HTTP/1.1\s200\sOK |
+```
+
+
 ## Stop Keycloak
 
 If you need to stop `Keycloak`, do that by:
