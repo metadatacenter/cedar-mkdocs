@@ -78,3 +78,4 @@ nav:
                     - install-developer/infra-nginx-install.md
                     - install-developer/infra-nginx-certificates.md
                     - install-developer/infra-nginx-configure.md
+                    - install-developer/infra-nginx-start.md
