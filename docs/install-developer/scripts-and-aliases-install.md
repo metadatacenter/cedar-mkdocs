@@ -17,7 +17,8 @@ Since we are in development mode, please check out the `develop` branch.
 ```sh
 cd ~/CEDAR
 git clone https://github.com/metadatacenter/cedar-development
-checkout develop
+cd cedar-development
+git checkout develop
 ```
 
 ## Copy the helper scripts in place
