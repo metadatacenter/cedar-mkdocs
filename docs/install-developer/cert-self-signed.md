@@ -92,7 +92,7 @@ DNS.17  = worker.metadatacenter.orgx
 openssl genrsa -des3 -out ca.key 4096
 ```
 
-When asked, enter a `passphrase`. Remember this, since you will need to use it later.
+When asked, enter a `passphrase`. You could use `changeme`. Remember this, since you will need to use it later.
 
 ## Generate a self signed certificate for the CA
 
@@ -101,12 +101,14 @@ openssl req -new -x509 -days 3650 \
   -key ca.key -out ca.crt -config ./openssl-ca.cnf
 ```
 
+Use the default values when prompted. Just press ++return++. 
+
 When prompted, enter these value:
 
 | Question                   | Answer                   |
 | -----------                | -----------              |
-| Hostname                   | metadatacenter.orgx      |
-| Email                      | metadatacenter@gmail.com |
+| Common Name (e.g. server FQDN or YOUR name)[]:                   | metadatacenter.orgx      |
+| Email Address []:                     | metadatacenter@gmail.com |
 
 
 ## Generate an RSA private key for the server
@@ -125,10 +127,17 @@ openssl req -new -sha256 \
 
 Use the default values when prompted. Just press ++return++. 
 
+When prompted, enter these value:
+
+| Question                   | Answer                   |
+| -----------                | -----------              |
+| Common Name (e.g. server FQDN or YOUR name)[]:                   | auth.metadatacenter.orgx      |
+| Email Address []:                     | metadatacenter@gmail.com |
+
 ## Sign the request
 
 ```sh
-echo 1 >serial
+echo 00 >serial
 touch index.txt
 touch index.txt.attr
 
@@ -136,6 +145,11 @@ openssl ca -cert ca.crt -keyfile ca.key \
   -in cedar.metadatacenter.orgx.csr -out cedar.metadatacenter.orgx.crt \
   -outdir ./ -config ./openssl-san.cnf -verbose -extensions v3_req
 ```
+
+Respond with `y` to the two questions:
+
+* Sign the certificate? [y/n]
+* 1 out of 1 certificate requests certified, commit? [y/n]
 
 ???+ warning "Important"
     
