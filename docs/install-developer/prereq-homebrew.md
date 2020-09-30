@@ -11,12 +11,9 @@ Or you can do this:
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-If you run into problems during installation of packages with `brew`, remember that you can use these commands to try to debug issues:
-
-```sh
-brew doctor
-brew cleanup
-```
+???+ warning "Important"
+    
+    If you run into problems during installation of packages with `brew`, please read our next section: [Fix Homebrew](./prereq-homebrew-fix.md)
 
 ## Update Homebrew
 If you had `brew` installed previously, please update it using:
@@ -29,6 +26,7 @@ brew update
 If you have software installed using `brew`, please upgrade them to their latest version.
 
 ???+ warning "Important"
+    
     **This is an important step, do not skip this!**
     
     Because of package dependencies, this is actually a very important step. Please **really** do not skip this. We spent several hours debugging services not starting up. These issues were later fixed by a simple `brew upgrade` command. 

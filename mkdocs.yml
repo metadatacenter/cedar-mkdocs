@@ -26,6 +26,7 @@ nav:
             - Prerequisites:
                 - install-developer/prereq-macos.md
                 - install-developer/prereq-homebrew.md
+                - install-developer/prereq-homebrew-fix.md
                 - install-developer/prereq-openssl.md
                 - install-developer/prereq-jdk.md
                 - install-developer/prereq-maven.md
