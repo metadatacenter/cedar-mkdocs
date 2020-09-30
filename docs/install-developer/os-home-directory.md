@@ -9,7 +9,8 @@ mkdir ~/CEDAR
 
 ???+ warning "Important"
 
-    Of course, you can choose to have this CEDAR home directory in a different place. We have an environment variable (set up later during this guide as `CEDAR_HOME`) which holds this path.
+    Of course, you can choose to have this CEDAR home directory in a different place.
+    We have an environment variable (set up later during this guide as `CEDAR_HOME`) which holds this path.
     
     We suggest, however, that your CEDAR home directory path does not contain spaces or special characters.
 
