@@ -15,27 +15,19 @@ Please go to your previously created CEDAR Docker home folder, and clone the fol
 ```sh
 cd ~/CEDAR_DOCKER
 git clone https://github.com/metadatacenter/cedar-development
-cd cedar-development
 ```
 
-## Copy the helper scripts in place
+# Master vs develop branch
 
-There are three files that hold configuration.
-You need to copy these files from the just cloned repo into CEDAR Docker home folder.
+The above command cloned the repo, and set the active branch to `master`.
 
-These files are the following: 
+If you want to have the latest develop branch, you will need to check out that branch.
 
-| Git file path<br>(in bin/templates/)  | Final path<br>(in ~/CEDAR/)      | Content      |
-| -----------                           | -----------                      | -----------  |
-| set-env-internal.sh                   | set-env-internal.sh              |  Local infrastructure service connection usernames and password.|
-| set-env-external.sh                   | set-env-external.sh              |  Usernames, passwords and other connection data to remote systems that CEDAR integrates with.|
-| cedar-profile-docker-eval.sh          | cedar-profile-docker-eval.sh     |  Bash profile extension for Docker install.|
+???+ warning "Important"
 
-Please copy these files from the recently cloned repo to their final location:
-
+    Unless you specifically need something from the latest `develop` branch, you should use the `master` branch, so skip this step.
+    
 ```sh
-cd ~/CEDAR_DOCKER/
-cp cedar-development/bin/templates/set-env-internal.sh .
-cp cedar-development/bin/templates/set-env-external.sh .
-cp cedar-development/bin/templates/cedar-profile-docker-eval.sh .
+cd cedar-development
+git checkout develop
 ```
