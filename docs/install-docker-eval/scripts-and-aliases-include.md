@@ -5,7 +5,7 @@ Please edit your `bash profile` and add the following lines to it:
 ```sh
 # CEDAR Docker related scripts, aliases, environment variables
 export CEDAR_DOCKER_HOME=${HOME}/CEDAR_DOCKER/
-source ${CEDAR_DOCKER_HOME}/cedar-profile-docker-eval.sh
+source ${CEDAR_DOCKER_HOME}/bin/templates/cedar-profile-docker-eval.sh
 ```
 
 ???+ warning "Important"
