@@ -32,6 +32,6 @@ cd cedar-docker-build
 git checkout develop
 
 cd ${CEDAR_DOCKER_HOME}
-cd cedar-docker-develop
+cd cedar-docker-deploy
 git checkout develop
 ```
