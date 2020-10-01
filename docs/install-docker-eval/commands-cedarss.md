@@ -59,12 +59,13 @@ As you can see, all the services should be stopped at this point.
 ## Preexisting services
 
 If you have some services in the running state, that means that you already have some components of the CEDAR system installed.
-This could be a background service, that you use in another project, e.g. `MongoDB`, `Neo4j` and so on.
 
-???+ warning "Important - Preexisting services"
+This will cause issues since there will be a collision on the ports that CEDAR services will try to connect.
+
+???+ warning "Important - Stop conflicting services"
     
-    It is perfectly fine to have CEDAR components preinstalled onto your system.
+    If at this point you see any servers running on any of the ports enumerated here, please stop those services.
     
-    However, this guide presents an installation on a 'clean' OS.
+    The Dockerized CEDAR exposes all the infrastructure services on their native ports in order for the evaluator to be able to connect and inspect them.
     
-    If you already have some of these components installed, than it is your responsibility to make them work with CEDAR while maintaining their connection to your other projects. 
+    Conflicting services will make the Dockerized CEDAR not run properly.

@@ -99,29 +99,17 @@ nav:
                     - install-docker-eval/config-usernames-and-passwords.md
                     - install-docker-eval/config-domain.md
               - Scripts and aliases:
-                    - install-developer/scripts-and-aliases-overview.md
-                    - install-developer/scripts-and-aliases-install.md
-                    - install-developer/scripts-and-aliases-include.md
-              - CEDAR commands:
-                    - install-developer/commands-overview.md
-                    - install-developer/commands-cedarenv.md
-                    - install-developer/commands-cedarss.md
-              - SSL certificates:
-                    - install-developer/cert-overview.md
-                    - install-developer/cert-self-signed.md
-                    - install-developer/cert-install.md
-              - Subdomains, directories:
-                    - install-developer/os-subdomains.md
-                    - install-developer/os-directories.md
+                    - install-docker-eval/scripts-and-aliases-install.md
+                    - install-docker-eval/scripts-and-aliases-include.md
               - The code:
-                    - install-developer/code-overview.md
-                    - install-developer/code-git-clone.md
-                    - install-developer/code-git-utils.md
-              - Infrastructure services:
-                    - install-developer/infra-mongodb.md
-              - Microservices:
-                    - install-developer/frontend-overview.md
-              - Monitoring:
-                    - install-developer/frontend-overview.md
-              - Frontend components:
-                    - install-developer/frontend-overview.md
+                    - install-docker-eval/code-git-clone.md
+              - CEDAR commands:
+                    - install-docker-eval/commands-overview.md
+                    - install-docker-eval/commands-cedarenv.md
+                    - install-docker-eval/commands-cedarss.md
+              - Components:
+                    - install-docker-eval/startup-overview.md
+                    - install-docker-eval/startup-infra.md
+                    - install-docker-eval/startup-microservices.md
+                    - install-docker-eval/startup-frontend.md
+                    - install-docker-eval/startup-monitoring.md
