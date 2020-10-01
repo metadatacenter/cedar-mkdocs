@@ -37,7 +37,7 @@ Checking all CEDAR servers
 | Elasticsearch-REST         | Stopped | httpResponse| 9200| HTTP/1.1\s200\sOK |
 | Elasticsearch-Transport    | Stopped | openPort    | 9300|                   |
 | NGINX                      | Stopped | httpResponse|   80| Server:\snginx    |
-| Keycloak                   | Stopped | httpResponse| 8080| Server:\sWildFly  |
+| Keycloak                   | Stopped | httpResponse| 8080| HTTP/1.1\s200\sOK |
 | Neo4j                      | Stopped | httpResponse| 7474| HTTP/1.1\s200\sOK |
 | Redis-persistent           | Stopped | redisPing   | 6379|                   |
 | MySQL                      | Stopped | openPort    | 3306|                   |
@@ -48,8 +48,8 @@ Checking all CEDAR servers
 | Base-Frontend              | Stopped | httpResponse| 4200| HTTP/1.1\s200\sOK |
 | OpenView-Frontend          | Stopped | httpResponse| 4220| HTTP/1.1          |
 | --- Environment ---------- |         |             |     |                   |
-| CEDAR_NET_GATEWAY          |         | 127.0.0.1                             |
-| CEDAR_NET_SUBNET           |         | 127.0.0.0                             |
+| CEDAR_NET_GATEWAY          |         | 192.168.17.1                          |
+| CEDAR_NET_SUBNET           |         | 192.168.17.0                          |
 |==============================================================================|
 ```
 
