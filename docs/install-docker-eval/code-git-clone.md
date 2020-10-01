@@ -11,7 +11,7 @@ Clone these two repos which hold the Dockerfiles and the docker-compose descript
  
 ```sh
 cd ${CEDAR_DOCKER_HOME}
-${CEDAR_DEVELOP_HOME}/bin/util/git/git-clone-all.sh
+${CEDAR_DEVELOP_HOME}/bin/util/git/git-clone-docker.sh
 ```
 
 This will clone all the repos that are needed for the CEDAR Docker evaluation.
