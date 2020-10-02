@@ -4,10 +4,10 @@ The 20+ services that make up the CEDAR ecosystem are grouped in four categories
 
 | Group          | Start command       | Stop command       |
 | -----------    | -----------         | -----------        |
-| infrastructure | startinfrastructure | stopinfrastructure |
-| microservices  | startmicroservices  | stopmicroservices  |
-| frontend       | startfrontend       | stopfrontend       |
-| monitoring     | startmonitoring     | stopmonitoring     |
+| Infrastructure | startinfrastructure | stopinfrastructure |
+| Microservices  | startmicroservices  | stopmicroservices  |
+| Frontend       | startfrontend       | stopfrontend       |
+| Monitoring     | startmonitoring     | stopmonitoring     |
 
 We have `docker-compose` files for each of these groups.
 The services can be started one-by-one, but we suggest following this guide, and starting them in groups.
@@ -19,6 +19,8 @@ This can take around 5-10 minutes with an everyday internet connection.
 Starting a given group the second time will use the preexisting Docker images and containers, leading to a faster startup. 
 
 ## Build & run
+
+You should start each group in their own shell window, to be able to monitor the output separately:
 
 ```sh
 cd ${CEDAR_DOCKER_HOME}
