@@ -14,7 +14,7 @@ markdown_extensions:
 extra_css:
     - stylesheets/extra.css
 
-repo_url: https://github.com/metadatacenter/cedar-project
+repo_url: https://github.com/metadatacenter/cedar-mkdocs
 
 nav:
     - Home: index.md
