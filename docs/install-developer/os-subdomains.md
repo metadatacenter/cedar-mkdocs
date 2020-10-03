@@ -36,7 +36,7 @@ If the host will not reply, we consider that the subdomain is non-resolvable, so
 
 Please run:
 ```sh
-${CEDAR_DEVELOP_HOME}/bin/util/localdev/add-hosts.sh
+${CEDAR_DEVELOP_HOME}/bin/util/add-hosts.sh
 ```
 
 The output of the script should be similar to the one below:
@@ -89,7 +89,7 @@ You should run our script a second time.
 Since all the hosts should be known at this point, the script should report that there is nothing to do.
 
 ```sh
-${CEDAR_DEVELOP_HOME}/bin/util/localdev/add-hosts.sh
+${CEDAR_DEVELOP_HOME}/bin/util/add-hosts.sh
 ```
 
 The output should be:

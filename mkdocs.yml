@@ -111,6 +111,7 @@ nav:
                     - install-docker-eval/commands-cedarss.md
               - One-time setup:
                   - install-docker-eval/one-time-setup.md
+                  - install-docker-eval/os-subdomains.md
               - Components:
                     - install-docker-eval/startup-overview.md
                     - install-docker-eval/startup-infra.md
