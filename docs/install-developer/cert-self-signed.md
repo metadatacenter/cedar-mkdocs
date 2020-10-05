@@ -22,25 +22,41 @@ Modify this file:
 vi openssl-ca.cnf
 ```
 
-Make the following changes:
+Make/add the following changes/lines:
 
-```
-HOME                    = .
-RANDFILE                = $ENV::HOME/.rnd
-CEDAR_HOME              = $ENV::CEDAR_HOME
+(*The file uses tabs and spaces as indentation. The tab size is 8.
+The values are aligned at block level, not throughout the whole file.
+This is why our config here looks a bit unorganized.*)
+
+```{.py3 hl_lines="3 6-8 11 13 16 19 22 25 28"}
+HOME            = .
+RANDFILE        = $ENV::HOME/.rnd
+CEDAR_HOME      = $ENV::CEDAR_HOME
 
 [ CA_default ]
-dir             = $CEDAR_HOME/CEDAR_CA
-default_days    = 284
-default_md      = sha256
+dir         = $CEDAR_HOME/CEDAR_CA  # Where everything is kept
+default_days= 824                   # how long to certify for
+default_md  = sha256                # use public key default MD
 
 [ req_distinguished_name ]
-countryName_default             = US
-stateOrProvinceName_default     = California
-localityName                    = Locality Name
-localityName_default            = Stanford
-0.organizationName_default      = BMIR
+countryName_default     = US
+
+stateOrProvinceName_default = CA
+
+localityName            = Locality Name
+localityName_default    = Stanford
+
+0.organizationName      = Organization Name (eg, company)
+0.organizationName_default  = BMIR
+
+organizationalUnitName      = Organizational Unit Name (eg, section)
 organizationalUnitName_default  = CEDAR
+
+commonName_max			= 64
+commonName_default      = metadatacenter.orgx
+
+emailAddress_max		= 64
+emailAddress_default    = metadatacenter@gmail.com
 ```
 
 ## Configure `openssl` for SAN
@@ -59,11 +75,15 @@ vi openssl-san.cnf
 
 Make the following changes:
 
-```
+```{.py3 hl_lines="2 5 9 11-28"}
 [req]
-req_extensions = v3_req
+req_extensions = v3_req # The extensions to add to a certificate request
 
-[v3_req]
+[ req_distinguished_name ]
+#commonName_default      = metadatacenter.orgx
+
+[ v3_req ]
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 
 [alt_names]
@@ -84,6 +104,8 @@ DNS.14  = terminology.metadatacenter.orgx
 DNS.15  = user.metadatacenter.orgx
 DNS.16  = valuerecommender.metadatacenter.orgx
 DNS.17  = worker.metadatacenter.orgx
+
+[ v3_ca ]
 ```
 
 ## Generate an RSA private key for the CA
