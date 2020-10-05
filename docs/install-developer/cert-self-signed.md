@@ -80,7 +80,7 @@ Make the following changes:
 req_extensions = v3_req # The extensions to add to a certificate request
 
 [ req_distinguished_name ]
-#commonName_default      = metadatacenter.orgx
+commonName_default      = auth.metadatacenter.orgx
 
 [ v3_req ]
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
@@ -116,6 +116,12 @@ openssl genrsa -des3 -out ca.key 4096
 
 When asked, enter a `passphrase`. You could use `changeme`. Remember this, since you will need to use it later.
 
+The following files will be generated:
+
+* `ca.key`
+* `index.txt`
+* `index.txt.attr`
+
 ## Generate a self signed certificate for the CA
 
 ```sh
@@ -123,21 +129,17 @@ openssl req -new -x509 -days 3650 \
   -key ca.key -out ca.crt -config ./openssl-ca.cnf
 ```
 
-Use the default values when prompted. Just press ++return++. 
+Provide the previously set password for `ca.key`, and then accept all the default values by pressing  ++return++. 
 
-When prompted, enter these value:
-
-| Question                   | Answer                   |
-| -----------                | -----------              |
-| Common Name (e.g. server FQDN or YOUR name)[]:                   | metadatacenter.orgx      |
-| Email Address []:                     | metadatacenter@gmail.com |
-
+A new file, `ca.crt` will be generated. 
 
 ## Generate an RSA private key for the server
 
 ```sh
 openssl genrsa -out cedar.metadatacenter.orgx.key 2048
 ```
+
+A new file, `cedar.metadatacenter.orgx.key` will be generated.
 
 ## Generate signing request
 
@@ -149,12 +151,14 @@ openssl req -new -sha256 \
 
 Use the default values when prompted. Just press ++return++. 
 
-When prompted, enter these value:
+Lastly, you will be prompted for two values. Just leave them empty:
 
-| Question                   | Answer                   |
-| -----------                | -----------              |
-| Common Name (e.g. server FQDN or YOUR name)[]:                   | auth.metadatacenter.orgx      |
-| Email Address []:                     | metadatacenter@gmail.com |
+| Question                    | Answer                   |
+| -----------                 | -----------              |
+| A challenge password []:    | ++return++               |
+| An optional company name []:| ++return++               |
+
+A new file, `cedar.metadatacenter.orgx.csr` will be generated.
 
 ## Sign the request
 
@@ -168,10 +172,22 @@ openssl ca -cert ca.crt -keyfile ca.key \
   -outdir ./ -config ./openssl-san.cnf -verbose -extensions v3_req
 ```
 
+Provide the previously set password for `ca.key`.
+
 Respond with `y` to the two questions:
 
-* Sign the certificate? [y/n]
-* 1 out of 1 certificate requests certified, commit? [y/n]
+| Question                    | Answer                   |
+| -----------                 | -----------              |
+| Sign the certificate? [y/n]                             | y             |
+| 1 out of 1 certificate requests certified, commit? [y/n]| y              |
+
+The following files will be generated:
+
+* `00.pem`
+* `cedar.metadatacenter.orgx.crt`
+* `index.txt.attr.old`
+* `index.txt.old`
+* `serial.old`
 
 ???+ warning "Important"
     
