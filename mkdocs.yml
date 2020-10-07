@@ -119,3 +119,8 @@ nav:
                     - install-docker-eval/startup-microservices.md
                     - install-docker-eval/startup-frontend.md
                     - install-docker-eval/startup-monitoring.md
+                    - install-docker-eval/docker-commands.md
+              - Evaluate CEDAR:
+                    - install-docker-eval/eval-users.md
+                    - install-docker-eval/eval-component-urls.md
+                    - install-docker-eval/eval-component-urls.md
