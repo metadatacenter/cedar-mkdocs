@@ -9,10 +9,18 @@ The process depends on which browser you use. Please follow one - or both - of t
 ## Add to `Firefox`
 If you use Firefox, you will need to add the root CA certificate to the trusted list of the browser.
 
-Open the previously generated `ca-cedar.crt` from the browser using `File -> Open`. The file will be located in:
-<br>`${CEDAR_DOCKER_HOME}/cedar-docker-deploy/cedar-assets/ca/`.
+The process is the following:
 
-A popup will be shown, displaying three checkboxes. Check all those, and click OK. This means you added the root CA as a trusted authority. 
+- Open the `Preferences`.
+- In the `Find in Preferences` input type `certificates`.
+- Click the `View Certificates...` button.
+- Make sure the `Authorities` tab is open.
+- Click `Import`.
+- Browse for `ca-cedar.crt` file. It will be located in:<br>`${CEDAR_DOCKER_HOME}/cedar-docker-deploy/cedar-assets/ca/`.
+- Click both checkbox:
+    - `Trust this CA to identify websites.`
+    - `Trust this CA to identify email users.`
+- Click `OK`
 
 ## Add to `Keychain Access`
 If you use Chrome or Safari, or other browsers that use the system's trust store for certificates, you will need to add the root CA certificate to `Keychain Access`.
