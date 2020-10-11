@@ -44,11 +44,11 @@ When prompted, enter these value:
 
     ```sh
     sudo keytool -list \
-      -keystore -keystore ${JAVA_HOME}/lib/security/cacerts \
+      -keystore ${JAVA_HOME}/lib/security/cacerts \
       | grep metadatacenter
     
     sudo keytool -delete -alias metadatacenter.orgx \
-      -keystore -keystore ${JAVA_HOME}/lib/security/cacerts
+      -keystore ${JAVA_HOME}/lib/security/cacerts
     ```
 
 If the certificate was added successfully, please close this session, to get rid of the `JAVA_HOME` environment variable.
