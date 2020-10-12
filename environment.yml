@@ -1,0 +1,10 @@
+name: cedar-mkdocs
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8.2
+  - mkdocs=1.1.2
+  - mkdocs-material=5.5.12
+  - mkdocs-material-extensions=1.0
+  - pymdown-extensions=8.0

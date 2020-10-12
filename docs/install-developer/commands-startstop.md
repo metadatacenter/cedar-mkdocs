@@ -1,0 +1,64 @@
+# Startup and stop scripts
+
+There are start and stop scripts available for each service that is present in the CEDAR ecosystem.
+
+These will be introduced throughout this guide. As an example starting and stopping `MongoDB` after a brew installation would be done with:
+
+```sh
+brew services start mongodb-community@3.4
+brew services stop mongodb-community@3.4
+```
+
+In the CEDAR environment we have these aliases for simplicity:
+
+```sh
+startmongo
+stopmongo
+```
+
+
+## List of startup scripts
+A non-exhaustive list of the start aliases is as follows
+
+* Infrastructure
+```sh
+startmongo
+startneo
+startmysql
+startelastic
+startkibana
+startredis
+startrc
+startnginx
+startkk
+```
+
+* Microservices
+```sh
+startmessaging
+startgroup
+startrepo
+startresource
+startschema
+startartifact
+startterminology
+startuser
+startvaluerecommender
+startsubmission
+startworker
+startopenview
+startinternals
+```
+* Frontend
+```sh
+starteditor
+```
+
+## List of stop scripts
+For each start script/alias there is a corresponding stop script (with some exceptions).
+We will not enumerate all these.
+The full list of aliases available can be listed using:
+
+```sh
+alias
+```
