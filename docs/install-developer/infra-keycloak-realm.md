@@ -70,6 +70,8 @@ The script starts with `kill` to emphasize that actually the process is killed.
 
     ```sh
     killkk
+    ```
+    ```sh
     ${CEDAR_KEYCLOAK_HOME}/bin/standalone.sh \
       -Dkeycloak.migration.action=export \
       -Dkeycloak.migration.provider=singleFile \
