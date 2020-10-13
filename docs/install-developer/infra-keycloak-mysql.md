@@ -36,7 +36,7 @@ tar -xvf mysql-connector-java-5.1.49.tar.gz
 
 ```sh
 gocedar
-mv mysql-connector-java-5.1.49/mysql-connector-java-5.1.49.jar ${KEYCLOAK_HOME}/modules/system/layers/base/com/mysql/jdbc/main/
+mv mysql-connector-java-5.1.49/mysql-connector-java-5.1.49.jar ${CEDAR_KEYCLOAK_HOME}/modules/system/layers/base/com/mysql/jdbc/main/
 ```
 
 ## Add a module descriptor
@@ -44,7 +44,7 @@ mv mysql-connector-java-5.1.49/mysql-connector-java-5.1.49.jar ${KEYCLOAK_HOME}/
 You will need to add a module descriptor in order for `JBoss` to use the `JDBC` driver 
 
 ```sh
-vi ${KEYCLOAK_HOME}/modules/system/layers/base/com/mysql/jdbc/main/module.xml
+vi ${CEDAR_KEYCLOAK_HOME}/modules/system/layers/base/com/mysql/jdbc/main/module.xml
 ```
 
 Paste the following code into this new file:
@@ -67,7 +67,7 @@ Paste the following code into this new file:
 We will need to edit the configuration file to add a new datasource.
 
 ```sh
-vi ${KEYCLOAK_HOME}/standalone/configuration/standalone.xml
+vi ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/standalone.xml
 ``` 
 
 ### Add `driver`

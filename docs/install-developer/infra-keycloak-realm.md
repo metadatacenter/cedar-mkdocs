@@ -11,7 +11,7 @@ The CEDAR Keycloak realm can be found in the `${CEDAR_HOME}/cedar-util/keycloak/
 Importing a realm is done by starting `Keycloak` in the import mode
 ```sh
 cd ${CEDAR_HOME}/cedar-util/keycloak/realm/
-$KEYCLOAK_HOME/bin/standalone.sh \
+${CEDAR_KEYCLOAK_HOME}/bin/standalone.sh \
   -Dkeycloak.migration.action=import \
   -Dkeycloak.migration.provider=singleFile \
   -Dkeycloak.migration.file=keycloak-realm.CEDAR.development.20200922.json \
@@ -70,11 +70,14 @@ The script starts with `kill` to emphasize that actually the process is killed.
 
     ```sh
     killkk
-    $KEYCLOAK_HOME/bin/standalone.sh \
+    ${CEDAR_KEYCLOAK_HOME}/bin/standalone.sh \
       -Dkeycloak.migration.action=export \
       -Dkeycloak.migration.provider=singleFile \
       -Dkeycloak.migration.realmName=CEDAR \
-      -Dkeycloak.migration.file=keycloak-realm.CEDAR.development.<YOUR-DATE-HERE>.json \
+      -Dkeycloak.migration.file=keycloak-realm.CEDAR.development.<YOUR-DATE-HERE>.json
+    ```
+    Stop `Keycloak` using one ++ctrl++ + C.
+    ```sh
     startkk
     ```
  
