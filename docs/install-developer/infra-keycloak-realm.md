@@ -14,7 +14,7 @@ cd ${CEDAR_HOME}/cedar-util/keycloak/realm/
 ${CEDAR_KEYCLOAK_HOME}/bin/standalone.sh \
   -Dkeycloak.migration.action=import \
   -Dkeycloak.migration.provider=singleFile \
-  -Dkeycloak.migration.file=keycloak-realm.CEDAR.development.20200922.json \
+  -Dkeycloak.migration.file=keycloak-realm.CEDAR.development.20201013.json \
   -Dkeycloak.migration.strategy=IGNORE_EXISTING
 ```
 
@@ -22,7 +22,7 @@ Please monitor the log output for anomalies.
 
 Once the logs stopped, and you see the following line:
 ```
-TODO: KEYKLOAK started message here
+HH:MM:SS,SSS INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
 ``` 
 
 please stop `Keycloak` using one ++ctrl++ + C.

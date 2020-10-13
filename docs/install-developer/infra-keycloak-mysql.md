@@ -30,13 +30,16 @@ wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.49
 ```sh
 gocedar
 tar -xvf mysql-connector-java-5.1.49.tar.gz
+rm mysql-connector-java-5.1.49.tar.gz
 ```
 
 ## Move the driver under `Keycloak`
 
 ```sh
 gocedar
+mkdir -p ${CEDAR_KEYCLOAK_HOME}/modules/system/layers/base/com/mysql/jdbc/main/
 mv mysql-connector-java-5.1.49/mysql-connector-java-5.1.49.jar ${CEDAR_KEYCLOAK_HOME}/modules/system/layers/base/com/mysql/jdbc/main/
+rm -rf mysql-connector-java-5.1.49
 ```
 
 ## Add a module descriptor
@@ -72,7 +75,7 @@ vi ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/standalone.xml
 
 ### Add `driver`
 
-Around `Line #132` you will see a `<datasources>` element, containing two `<datasource>`-es and one `<driver>'.
+Around `Line #132` you will see a `<datasources>` element, containing two `<datasource>`-es and one `<driver>`.
 
 After the `driver` on `Line #156` add this block to enable the just added `MySql JDBC` driver:
 
@@ -114,7 +117,7 @@ Then after the datasources, before the drivers on `Line #152` add the new `MySql
 
 ### Change JPA datasource
 
-Around `Line #556` locate the following line configuring the `JPA` connection: 
+Around `Line #555` locate the following line configuring the `JPA` connection: 
 
 ```xml
 <property name="dataSource" value="java:jboss/datasources/KeycloakDS"/>

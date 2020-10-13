@@ -75,6 +75,7 @@ nav:
                     - install-developer/infra-keycloak-event-listener.md
                     - install-developer/infra-keycloak-theme.md
                     - install-developer/infra-keycloak-realm.md
+                    - install-developer/infra-keycloak-administrator.md
                 - Nginx:
                     - install-developer/infra-nginx-overview.md
                     - install-developer/infra-nginx-install.md
