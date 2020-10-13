@@ -1,7 +1,7 @@
 # Overview
-The CEDAR project can be installed in several ways, depending on the planned usage type of the system.
+The CEDAR project can be installed in several ways, depending on the planned usage of the system.
 
-The available install types are the following:
+The intended install types are in the following table. The highlighted links are installation types that are available today.
 
 | Install Type                 | Description |
 | -----------                  | ----------- |
