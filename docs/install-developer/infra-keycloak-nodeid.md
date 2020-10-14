@@ -3,7 +3,7 @@
 ## Change `nodeid`
 
 ```sh
-vi ${KEYCLOAK_HOME}/standalone/configuration/standalone.xml
+vi ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/standalone.xml
 ``` 
 
 Around `Line #489` locate the following line:

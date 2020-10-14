@@ -15,7 +15,7 @@ However, if there are no changes in the CEDAR codebase which will have an effect
 You will need to do this only once:
 
 ```sh
-vi ${KEYCLOAK_HOME}/standalone/configuration/standalone.xml
+vi ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/standalone.xml
 ``` 
 
 Around `Line #597` you will see the last `<spi>` element closing, just before the `<subsystem>` element closes as well.

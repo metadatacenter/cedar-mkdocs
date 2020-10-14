@@ -27,4 +27,5 @@ Once the package is downloaded, unpack it and rename it:
 ```sh
 tar -xvf keycloak-11.0.2.tar.gz
 mv keycloak-11.0.2 keycloak
+rm keycloak-11.0.2.tar.gz
 ```

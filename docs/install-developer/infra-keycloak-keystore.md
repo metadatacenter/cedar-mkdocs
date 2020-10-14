@@ -5,7 +5,7 @@ Instead of the auto-generated `Keycloak` keystore, we wilkl generate our own bef
 ## Generate keystore
 
 ```sh
-cd ${KEYCLOAK_HOME}/standalone/configuration/
+cd ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/
 keytool -genkey -alias auth.metadatacenter.orgx \
   -keyalg RSA -keystore cedar.keycloak.keystore -validity 3650
 ```
@@ -26,12 +26,12 @@ A list of questions will be shown, please answer them according to the following
 |What is the two-letter country code for this unit?|US|
 |Is CN=auth.metadatacenter.orgx, OU=BMIR, O=MED,<br> L=Stanford, ST=California, C=US correct?|yes|
 
-A file will be generated at the location `${KEYCLOAK_HOME}/standalone/configuration/cedar.keycloak.keystore`
+A file will be generated at the location `${CEDAR_KEYCLOAK_HOME}/standalone/configuration/cedar.keycloak.keystore`
 
 ## Change the config file
 
 ```sh
-vi ${KEYCLOAK_HOME}/standalone/configuration/standalone.xml
+vi ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/standalone.xml
 ``` 
 
 Around `Line #46` locate the line with the following content (there will be one long line without line breaks):

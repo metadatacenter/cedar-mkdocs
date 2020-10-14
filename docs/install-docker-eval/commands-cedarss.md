@@ -43,7 +43,8 @@ Checking all CEDAR servers
 | MySQL                      | Stopped | openPort    | 3306|                   |
 | --- Monitor ---------------|         |             |     |                   |
 | Kibana                     | Stopped | httpResponse| 5601| kbn-name:\skibana |
-| Redis-Commander            | Stopped | httpResponse| 8081| X-Powered-By:\sEx |
+| Redis-Commander            | Stopped | httpResponse| 8081| HTTP/1.1\s200\sOK |
+| PhpMyAdmin                 | Stopped | httpResponse| 8082| HTTP/1.1\s200\sOK |
 | --- Front End -------------|         |             |     |                   |
 | Base-Frontend              | Stopped | httpResponse| 4200| HTTP/1.1\s200\sOK |
 | OpenView-Frontend          | Stopped | httpResponse| 4220| HTTP/1.1          |
