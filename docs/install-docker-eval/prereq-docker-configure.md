@@ -24,4 +24,4 @@ under `Preferences` -> `Resources` -> `Swap` check the assigned storage. It is m
 
 ## Configure Disk Image Size
 In the Docker Desktop application 
-under `Preferences` -> `Resources` -> `Disk Image Size` check the assigned space. CEDAR Docker will need at least 20 GB. Please set it to accommodate your current date and the amount that CEDAR needs.
+under `Preferences` -> `Resources` -> `Disk Image Size` check the assigned space. CEDAR Docker will need at least 20 GB. Please set it to accommodate your current data and the amount that CEDAR needs.
