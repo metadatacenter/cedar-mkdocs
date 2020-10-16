@@ -11,9 +11,7 @@ startkk
 
 ## Access the Administration Console
 
-In your browser navigate to: [https://auth.metadatacenter.orgx/](https://auth.metadatacenter.orgx/).
-
-The page will tell you that you need local access to set up the administrative user, and will point you to the following link: [http://localhost:8080/auth](http://localhost:8080/auth). Proceede to this URL.
+In your browser navigate to: [http://localhost:8080/](http://localhost:8080/).
 
 ## Create administrator user
 

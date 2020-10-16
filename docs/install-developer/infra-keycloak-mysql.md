@@ -75,7 +75,7 @@ vi ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/standalone.xml
 
 ### Add `driver`
 
-Around `Line #132` you will see a `<datasources>` element, containing two `<datasource>`-es and one `<driver>`.
+Around `Line #132` you will see a `<datasources>` element, containing two `<datasource>`-es and a `<drivers>` element with one `<driver>`.
 
 After the `driver` on `Line #156` add this block to enable the just added `MySql JDBC` driver:
 

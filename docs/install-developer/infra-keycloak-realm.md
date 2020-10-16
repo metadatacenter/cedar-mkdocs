@@ -8,6 +8,13 @@ The CEDAR Keycloak realm can be found in the `${CEDAR_HOME}/cedar-util/keycloak/
 
 ## Import CEDAR realm
 
+You will need the `MySql` server running for this step. Check if it is already available using `cedarss`:
+
+```sh
+startmysql
+cedarss
+```
+
 Importing a realm is done by starting `Keycloak` in the import mode
 ```sh
 cd ${CEDAR_HOME}/cedar-util/keycloak/realm/
