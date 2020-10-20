@@ -11,7 +11,7 @@ Choose the one which matches the version of the recently installed JDK.
 
 Set the `JAVA_HOME` environment variable to point to this JDK:
 ```sh
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.8.jdk/Contents/Home/
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home/
 ```
 
 ???+ warning "JAVA_HOME"
