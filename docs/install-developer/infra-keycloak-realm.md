@@ -21,7 +21,7 @@ cd ${CEDAR_HOME}/cedar-util/keycloak/realm/
 ${CEDAR_KEYCLOAK_HOME}/bin/standalone.sh \
   -Dkeycloak.migration.action=import \
   -Dkeycloak.migration.provider=singleFile \
-  -Dkeycloak.migration.file=keycloak-realm.CEDAR.development.20201013.json \
+  -Dkeycloak.migration.file=keycloak-realm.CEDAR.development.20201020.json \
   -Dkeycloak.migration.strategy=IGNORE_EXISTING
 ```
 
