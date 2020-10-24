@@ -116,11 +116,9 @@ openssl genrsa -des3 -out ca.key 4096
 
 When asked, enter a `passphrase`. You could use `changeme`. Remember this, since you will need to use it later.
 
-The following files will be generated:
+The following file will be generated:
 
 * `ca.key`
-* `index.txt`
-* `index.txt.attr`
 
 ## Generate a self signed certificate for the CA
 
@@ -130,6 +128,13 @@ openssl req -new -x509 -days 3650 \
 ```
 
 Provide the previously set password for `ca.key`, and then accept all the default values by pressing  ++return++. 
+
+Provide these values when asked:
+
+| Question                                        | Answer                   |
+| -----------                                     | -----------              |
+| Common Name (e.g. server FQDN or YOUR name) []: | metadatacenter.orgx      |
+| Email Address []:                               | metadatacenter@gmail.com |
 
 A new file, `ca.crt` will be generated. 
 
