@@ -92,18 +92,19 @@ DNS.2   = auth.metadatacenter.orgx
 DNS.3   = cedar.metadatacenter.orgx
 DNS.4   = component.metadatacenter.orgx
 DNS.5   = group.metadatacenter.orgx
-DNS.6   = internals.metadatacenter.orgx
-DNS.7   = messaging.metadatacenter.orgx
-DNS.8   = open.metadatacenter.orgx
-DNS.9   = openview.metadatacenter.orgx
-DNS.10  = repo.metadatacenter.orgx
-DNS.11  = resource.metadatacenter.orgx
-DNS.12  = schema.metadatacenter.orgx
-DNS.13  = submission.metadatacenter.orgx
-DNS.14  = terminology.metadatacenter.orgx
-DNS.15  = user.metadatacenter.orgx
-DNS.16  = valuerecommender.metadatacenter.orgx
-DNS.17  = worker.metadatacenter.orgx
+DNS.6   = impex.metadatacenter.orgx
+DNS.7   = internals.metadatacenter.orgx
+DNS.8   = messaging.metadatacenter.orgx
+DNS.9   = open.metadatacenter.orgx
+DNS.10  = openview.metadatacenter.orgx
+DNS.11  = repo.metadatacenter.orgx
+DNS.12  = resource.metadatacenter.orgx
+DNS.13  = schema.metadatacenter.orgx
+DNS.14  = submission.metadatacenter.orgx
+DNS.15  = terminology.metadatacenter.orgx
+DNS.16  = user.metadatacenter.orgx
+DNS.17  = valuerecommender.metadatacenter.orgx
+DNS.18  = worker.metadatacenter.orgx
 
 [ v3_ca ]
 ```
