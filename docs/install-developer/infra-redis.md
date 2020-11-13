@@ -3,10 +3,10 @@ CEDAR uses `Redis` as message queue for communication between components of the 
 
 ## Install Redis
 
-Please install `Redis, version 3.2`:
+Please install `Redis, version 6.0.x`:
 
 ```sh
-brew install redis@3.2
+brew install redis
 ```
     
 ???+ warning "Important"
