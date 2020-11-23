@@ -16,12 +16,13 @@ under `Preferences` -> `Resources` -> `Memory` assign at least **12 GB** to Dock
 
 ## Configure CPUs
 In the Docker Desktop application 
-under `Preferences` -> `Resources` -> `CPUs` check the number of assigned cores. It is most probably set by default to the half of the available cores. That setting will work for CEDAR.
+under `Preferences` -> `Resources` -> `CPUs` check the number of assigned cores. It is typically set by default to the half of the available cores. That setting will work for CEDAR.
 
 ## Configure Swap
 In the Docker Desktop application 
-under `Preferences` -> `Resources` -> `Swap` check the assigned storage. It is most probably set by default to 1. That setting will work for CEDAR.
+under `Preferences` -> `Resources` -> `Swap` check the assigned storage. It is typically set by default to 1. That setting will work for CEDAR.
 
 ## Configure Disk Image Size
 In the Docker Desktop application 
-under `Preferences` -> `Resources` -> `Disk Image Size` check the assigned space. CEDAR Docker will need at least 20 GB. Please set it to accommodate your current data and the amount that CEDAR needs.
+under `Preferences` -> `Resources` -> `Disk Image Size` check the assigned space. CEDAR Docker will need at least 20 GB. 
+Please set it to accommodate your current data and the amount that CEDAR needs.
