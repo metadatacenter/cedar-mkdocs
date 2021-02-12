@@ -4,7 +4,7 @@ Please edit your `bash profile` and add the following lines to it:
 
 ```sh
 # CEDAR development related scripts, aliases, environment variables
-export CEDAR_HOME=${HOME}/CEDAR/
+export CEDAR_HOME=${HOME}/CEDAR
 source ${CEDAR_HOME}/cedar-profile-native-develop.sh
 ```
 
