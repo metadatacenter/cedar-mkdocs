@@ -6,6 +6,7 @@ CEDAR uses `MongoDB` as the storage for the CEDAR artifacts: fields, elements, t
 Please install `MongoDB-Community, version 3.4`:
 
 ```sh
+brew tap mongodb/brew
 brew install mongodb-community@3.4
 ```
 
