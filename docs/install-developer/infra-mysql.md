@@ -33,6 +33,11 @@ You should see the following line in the output:
 /usr/local/Cellar/mysql@5.7/5.7.31/bin/mysql_secure_installation
 ```
 
+If you get a 'Column count' error, you will need to run the following command first:
+```sh
+sudo /usr/local/Cellar/mysql@5.7/5.7.32/bin/mysql_upgrade
+```
+
 Respond to the questions as follows:
 
 | Question                 | Answer |
