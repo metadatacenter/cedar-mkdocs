@@ -24,7 +24,7 @@ This module is meant to be used for geolocation configuration.
 We use it in CEDAR to set boolean variable that later will have an effect on the main configuration.  
 
 ```sh
-cp ${CEDAR_DEVELOP_HOME}/os-mirror/usr/local/etc/nginx/cedar/module-geo.inc.conf \
+cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/cedar/module-geo.inc.conf \
   /usr/local/etc/nginx/cedar/.
 ```
 
@@ -38,7 +38,7 @@ We would need to include the same two lines in the config of each subdomain.
 To prevent this, we describe the `ssl` config in one include file, which we reference from each subdomain config. 
 
 ```sh
-cp ${CEDAR_DEVELOP_HOME}/os-mirror/usr/local/etc/nginx/cedar/include-ssl.conf \
+cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/cedar/include-ssl.conf \
   /usr/local/etc/nginx/cedar/.
 ```
 
@@ -47,9 +47,9 @@ cp ${CEDAR_DEVELOP_HOME}/os-mirror/usr/local/etc/nginx/cedar/include-ssl.conf \
 These files will configure the available subdomains one by one: 
 
 ```sh
-cp ${CEDAR_DEVELOP_HOME}/os-mirror/usr/local/etc/nginx/cedar/frontend-*.conf \
+cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/cedar/frontend-*.conf \
   /usr/local/etc/nginx/cedar/
-cp ${CEDAR_DEVELOP_HOME}/os-mirror/usr/local/etc/nginx/cedar/server-*.conf \
+cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/cedar/server-*.conf \
   /usr/local/etc/nginx/cedar/
 ```
 
@@ -58,7 +58,7 @@ cp ${CEDAR_DEVELOP_HOME}/os-mirror/usr/local/etc/nginx/cedar/server-*.conf \
 This config contains global settings:
 
 ```sh
-cp ${CEDAR_DEVELOP_HOME}/os-mirror/usr/local/etc/nginx/cedar/config-cedar-global.inc.conf \
+cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/cedar/config-cedar-global.inc.conf \
   /usr/local/etc/nginx/cedar/
 ```
 
@@ -69,7 +69,7 @@ At this step, we are replacing the factory default `nginx.conf` with one that se
 If you had `nginx` running before, possibly with a custom config, please merge your config, and the one mentioned here.
  
 ```sh
-cp ${CEDAR_DEVELOP_HOME}/os-mirror/usr/local/etc/nginx/nginx.conf \
+cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/nginx.conf \
   /usr/local/etc/nginx/.
 ```
 
