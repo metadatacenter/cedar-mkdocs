@@ -3,7 +3,7 @@ CEDAR uses `MongoDB` as the storage for the CEDAR artifacts: fields, elements, t
 
 ## Install MongoBD
 
-Please install `MongoDB-Community`, version 3.4:
+Please install `MongoDB Community`, version 3.4:
 
 ```sh
 brew tap mongodb/brew
@@ -43,6 +43,7 @@ Once mongoDB is started, in a different terminal connect to it:
 ```
 
 In this new terminal use the `admin` collection and create a privileged user:
+
 ```js
 use admin
 
