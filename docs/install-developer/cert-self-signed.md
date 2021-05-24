@@ -139,6 +139,10 @@ Provide these values when asked:
 
 A new file, `ca.crt` will be generated. 
 
+???+ warning "openssl"
+    
+    Make sure you are running version 1.1 of `openssl` that you previously installed via Homebrew and not the LibreSSL-based version pre-installed in macOS. 
+
 ## Generate an RSA private key for the server
 
 ```sh

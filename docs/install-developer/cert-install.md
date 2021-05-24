@@ -9,7 +9,7 @@ ls -ls /Library/Java/JavaVirtualMachines/
 
 Choose the one which matches the version of the recently installed JDK.
 
-Set the `JAVA_HOME` environment variable to point to this JDK:
+Set the `JAVA_HOME` environment variable to point to this JDK, e.g.,
 ```sh
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home/
 ```

@@ -7,4 +7,4 @@ Since this is a development installation, it is not easy to get proper SSL certi
 To overcome this, we will use self-signed certificates for development.
 
 There is also back-channel communication between microservices and `Keycloak`.
-In order to make this work, we will need to add our Self-signed certificates to the Java truststore. 
+In order to make this work, we will need to add our self-signed certificates to the Java truststore. 
