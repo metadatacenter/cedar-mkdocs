@@ -20,7 +20,7 @@ wget https://downloads.jboss.org/keycloak/11.0.2/keycloak-11.0.2.tar.gz
     
     Please save the archive into `CEDAR_HOME` if you choose this method/
 
-## Unpack and rename Keycloak
+## Unpack and rename Keycloak Directory
 
 Once the package is downloaded, unpack it and rename it:
 
