@@ -83,12 +83,16 @@ nav:
                     - install-developer/infra-nginx-certificates.md
                     - install-developer/infra-nginx-configure.md
                     - install-developer/infra-nginx-start.md
+            - Microservices:
+                  - install-developer/microservices-overview.md
             - Frontend components:
                   - install-developer/frontend-overview.md
                   - install-developer/frontend-node-install.md
                   - install-developer/frontend-gulp-angular-cli-install.md
                   - install-developer/frontend-editor.md
                   - install-developer/frontend-openview.md
+            - Logging in to CEDAR:
+                  - install-developer/frontend-logging-in.md
 
         - Docker Install:
               - install-docker-eval/intro.md
