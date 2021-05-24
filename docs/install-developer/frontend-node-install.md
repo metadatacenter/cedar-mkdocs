@@ -1,9 +1,15 @@
 # Install Node.js
 
-Please install `Node.js, version 12.18.*LTS`:
+Please install `Node`, version 12 LTS:
 
 ```sh
 brew install node@12
+```
+
+And pin this version:
+
+```sh
+brew pin node@12
 ```
 
 ## Add `node` and `npm` to `PATH`
@@ -36,9 +42,9 @@ node --version
 npm --version
 ```
 
-You should see the following:
+You should see something like the following:
 
 ```
-v12.19.0
-6.14.8
+v12.22.1
+6.14.12
 ```
