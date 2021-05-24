@@ -9,7 +9,7 @@ CEDAR uses `Neo4j` as storage for the following artifacts of CEDAR:
 
 ## Install Neo4j
 
-Please install `Neo4j Community, version 3.5`:
+Please install `Neo4j Community Edition`, version 3.5:
 
 ???+ warning "Important"
 

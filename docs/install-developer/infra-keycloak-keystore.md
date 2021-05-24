@@ -1,6 +1,6 @@
 # Generate keystore
 
-Instead of the auto-generated `Keycloak` keystore, we wilkl generate our own before the first run. 
+Instead of the auto-generated `Keycloak` keystore, we will generate our own before the first run. 
 
 ## Generate keystore
 

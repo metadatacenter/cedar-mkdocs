@@ -4,7 +4,7 @@ We will download and unpack the `Keycloak` distribution.
 
 ## Download Keycloak
 
-Please install `Keycloak, version 11.0.2`:
+Please install `Keycloak`, version 11.0.2:
 
 Download the package from the distribution site:
 
