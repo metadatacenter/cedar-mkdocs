@@ -10,6 +10,12 @@ brew tap mongodb/brew
 brew install mongodb-community@3.4
 ```
 
+And pin this version:
+
+```sh
+brew pin mongodb-community@3.4
+```
+
 ???+ warning "Important"
     
     Do not add MongoDB as a background service! We will have scripts in place which will start it when necessary.
@@ -24,7 +30,7 @@ First, we will create a power user. You will need to start MongoDB without acces
 Please replace the path below with the one applicable to your system:
 
 ```sh
-/usr/local/Cellar/mongodb-community@3.4/3.4.24/bin/mongod \
+/usr/local/Cellar/mongodb-community@3.4/3.4.<patch_version>/bin/mongod \
   --port 27017 \
   --dbpath /usr/local/var/mongodb
 ```
@@ -33,7 +39,7 @@ Please replace the path below with the one applicable to your system:
 Once mongoDB is started, in a different terminal connect to it:
 
 ```sh
-/usr/local/Cellar/mongodb-community@3.4/3.4.24/bin/mongo
+/usr/local/Cellar/mongodb-community@3.4/3.4.<patch_version>/bin/mongo
 ```
 
 In this new terminal use the `admin` collection and create a privileged user:
@@ -61,7 +67,7 @@ startmongo
 ## Create CEDAR application user
 Connect to MongoDB with the previously created user:
 ```sh
-/usr/local/Cellar/mongodb-community@3.4/3.4.24/bin/mongo \
+/usr/local/Cellar/mongodb-community@3.4/3.4.<patch_version>/bin/mongo \
   --port 27017 \
   --username "mongoRootUser" \
   --password "changeme" \
