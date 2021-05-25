@@ -1,8 +1,8 @@
-# Running the CEDAR microservices
+# Starting the CEDAR microservices
 
 ## Before running
 
-Before running tje microservices, execute the following script to initialize the CEDAR databases:
+Before running the microservices, execute the following script to initialize the CEDAR databases:
 
 ```sh
 cedarat system-reset
