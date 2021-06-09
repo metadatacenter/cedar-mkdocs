@@ -1,5 +1,15 @@
 # Build CEDAR project
 
+## Before building
+
+One of the the CEDAR components must be compiled with Java 8. We patch this component before building so that it works with Java 11.
+
+Run the following command to perfom this patch:
+
+```sh
+createjaxb2workaround
+```
+
 ## Build the project
 
 ```sh

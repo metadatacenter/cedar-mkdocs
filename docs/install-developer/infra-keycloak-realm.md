@@ -25,7 +25,7 @@ ${CEDAR_KEYCLOAK_HOME}/bin/standalone.sh \
   -Dkeycloak.migration.strategy=IGNORE_EXISTING
 ```
 
-Please monitor the log output for anomalies.
+Please monitor the log output for anomalies. Not that this importation process can take several minutes so please wait until it has finished.
 
 Once the logs stopped, and you see the following line:
 ```

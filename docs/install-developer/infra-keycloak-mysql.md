@@ -6,7 +6,7 @@ We will use `MySql` for this purpose. We will need to add support for MySql by i
 
 ## Download MySql `JDBC driver`
 
-Please install `Connector/J, version 5.1.49`:
+Please install `Connector/J`, version 5.1.49:
 
 Download the package from the distribution site:
 

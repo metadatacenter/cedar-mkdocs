@@ -12,7 +12,7 @@ mkdir ${CEDAR_HOME}/CEDAR_CA
 Copy the default `openssl.conf` to this new location, in order to modify it:
 
 ```sh
-cp /usr/local/etc/openssl/openssl.cnf ${CEDAR_HOME}/CEDAR_CA/openssl-ca.cnf
+cp /usr/local/etc/openssl@1.1/openssl.cnf ${CEDAR_HOME}/CEDAR_CA/openssl-ca.cnf
 cd ${CEDAR_HOME}/CEDAR_CA
 ```
 
@@ -108,6 +108,10 @@ DNS.18  = worker.metadatacenter.orgx
 
 [ v3_ca ]
 ```
+
+???+ warning "openssl"
+    
+    Make sure you are running version 1.1 of `openssl` that you previously installed via Homebrew and not the LibreSSL-based version pre-installed in macOS. 
 
 ## Generate an RSA private key for the CA
 

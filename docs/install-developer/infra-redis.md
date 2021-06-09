@@ -1,12 +1,18 @@
 # Redis
-CEDAR uses `Redis` as message queue for communication between components of the system.
+CEDAR uses `Redis` to implement a message queue for communication between components of the system.
 
 ## Install Redis
 
-Please install `Redis, version 6.0.x`:
+Please install `Redis`, version 6.2:
 
 ```sh
-brew install redis
+brew install redis@6.2
+```
+
+And pin this version:
+
+```sh
+brew pin redis@6.2
 ```
     
 ???+ warning "Important"

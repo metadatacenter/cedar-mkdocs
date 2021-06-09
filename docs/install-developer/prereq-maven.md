@@ -15,7 +15,7 @@ After the installation, please verify the version in a shell:
 mvn --version
 ```
 
-You should see something similar:
+You should see something like:
 ```
 Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/local/Cellar/maven/3.6.3_1/libexec

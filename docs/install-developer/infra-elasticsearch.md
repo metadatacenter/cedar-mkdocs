@@ -3,10 +3,16 @@ CEDAR uses `elasticsearch` to make search for artifacts possible.
 
 ## Install Elasticsearch
 
-Please install `elasticsearch version 6.8`:
+Please install `Elasticsearch`, version 6.8:
 
 ```sh
-brew install elasticsearch@6
+brew install elasticsearch@6.8
+```
+
+And pin this version:
+
+```sh
+brew pin elasticsearch@6.8
 ```
     
 ???+ warning "Important"
