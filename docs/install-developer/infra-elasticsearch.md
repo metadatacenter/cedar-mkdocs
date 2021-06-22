@@ -83,3 +83,4 @@ You should see the following lines in the output:
 | --- Monitoring ------------|         |             |     |                   |
 | Kibana                     | Running | httpResponse| 5601| kbn-name:\skibana |
 ```
+
