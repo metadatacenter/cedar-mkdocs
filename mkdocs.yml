@@ -85,6 +85,7 @@ nav:
                     - install-developer/infra-nginx-start.md
                 - install-developer/infra-start.md
             - Microservices:
+                  - install-developer/microservices-configuration.md
                   - install-developer/microservices-overview.md
             - Frontend components:
                   - install-developer/frontend-overview.md
