@@ -15,7 +15,7 @@ This microservice is configured using two environment variables:
 
 | Environment Variable                 | Description  |
 | -----------                          | ------------ |
-| `CEDAR_BIOPORTAL_API_KEY`            | Specifies a API key for accessing BioPortal REST services  |
+| `CEDAR_BIOPORTAL_API_KEY`            | Specifies a API key for accessing BioPortal or OntoPortal REST services  |
 | `CEDAR_BIOPORTAL_REST_BASE`          | Specifies the base URL for the REST APIs for a BioPortal or OntoPortal service |
 
 Instructions for obtaining a BioPortal or OntoPortal API key can be found  [here](https://bioportal.bioontology.org/help#Getting_an_API_key).
