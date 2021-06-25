@@ -19,3 +19,7 @@ This microservice is configured using two environment variables:
 | `CEDAR_BIOPORTAL_REST_BASE`          | Specifies the base URL for the REST APIs for a BioPortal or OntoPortal service |
 
 Instructions for obtaining a BioPortal or OntoPortal API key can be found  [here](https://bioportal.bioontology.org/help#Getting_an_API_key).
+
+After obtaining an API key and determining the base REST endpoint URL, edit your `set-env-internal.sh` file to set these variables.
+
+
