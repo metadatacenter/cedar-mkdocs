@@ -20,6 +20,9 @@ This microservice is configured using two environment variables:
 
 Instructions for obtaining a BioPortal or OntoPortal API key can be found  [here](https://bioportal.bioontology.org/help#Getting_an_API_key).
 
+The default `CEDAR_BIOPORTAL_REST_BASE` value is `https://data.bioontology.org/`, which is the public BioPortal service. 
+If you wish to use this service, you can create an account there and immediately maintain the BioPortal API key associated with that account.
+
 After obtaining an API key and determining the base REST endpoint URL, edit your `set-env-internal.sh` file to set these variables.
 
 
