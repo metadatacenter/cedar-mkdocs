@@ -9,7 +9,7 @@ You will have created this file [earlier in the CEDAR installation process](./sc
 
 CEDAR is supplied with controlled terminologies via a BioPortal or OntoPortal service, which may be running locally or remotely.
 
-All access to a BioPortal or OntoPortal server is routed through the CEDAR terminology microservice. 
+All access to a BioPortal or OntoPortal service is routed through the CEDAR terminology microservice. 
 
 This microservice is configured using two environment variables: 
 
