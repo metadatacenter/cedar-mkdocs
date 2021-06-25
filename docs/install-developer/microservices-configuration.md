@@ -5,7 +5,7 @@ Some CEDAR microservices must be configured to allow them to access external res
 This configuration information is stored in environment variables in the `set-env-external.sh` file, which is located at the base of your CEDAR installation directory.
 You will have created this file [earlier in the CEDAR installation process](./scripts-and-aliases-install.html).
 
-## Configuring BioPortal/Ontoportal 
+## Configuring CEDAR to use BioPortal/OntoPortal 
 
 CEDAR is supplied with controlled terminologies via a BioPortal or OntoPortal server, which may be running locally or remotely.
 
