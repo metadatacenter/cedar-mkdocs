@@ -2,7 +2,7 @@
 
 Some CEDAR microservices must be configured to allow them to access external resources.
 
-This configuration information is stored in environment variables in the `set-env-external.sh` file, which is located at the base of your CEDAR installation directory.
+This configuration information is stored in environment variables that are assigned by the `set-env-external.sh` script, which is located at the base of your CEDAR installation directory.
 You will have created this file [earlier in the CEDAR installation process](./scripts-and-aliases-install.html).
 
 ## Terminology microservice configuration
