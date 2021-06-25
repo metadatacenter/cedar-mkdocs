@@ -25,4 +25,6 @@ If you wish to use this service, you can create an account there and immediately
 
 After obtaining an API key and determining the base REST endpoint URL, edit your `set-env-internal.sh` file to set these variables.
 
+These variables are read at microservice startup, so you will need to stop and restart the terminology microservice (using the commands, `stopterminology` and `startterminology`, respectively) so that it picks up updated values.
+
 
