@@ -51,16 +51,12 @@ The following command will copy the event listener into it's proper location:
 copylistener
 ```
 
-You can execute this command from any location.
+You can execute this command from any location. This command copies the event listener JAR `cedar-keycloak-event-listener.jar` from `$CEDAR_HOME/cedar-keycloak-event-listener/target/` to `${CEDAR_KEYCLOAK_HOME}/standalone/deployments/`.
 
-You can find out what the command actually does by executing:
-```sh
-alias copylistener
-```
 
 ???+ warning "Deploy event listener"
 
     Please deploy the event listener every time a change in its code is performed..
     
-    Also please deploy it after a version change.
+    Also please deploy it after each CEDAR release.
 
