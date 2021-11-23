@@ -1,7 +1,7 @@
 # Set up CEDAR Keycloak administrator
 
 In order to administer Keycloak, you will need to set up an administrator user.
-This is a global system-wide administrator, it is different than the `cedar-admin` user that you will use to administer CEDAR resources.
+This is a global system-wide Keycloak administrator. It is different than the `cedar-admin` user that you will use to administer CEDAR resources.
 
 ## Start Keycloak
 
