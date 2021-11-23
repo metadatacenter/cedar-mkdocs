@@ -67,13 +67,13 @@ The script starts with `kill` to emphasize that actually the process is killed.
 
 ???+ success "Export CEDAR realm"
 
-    If at any moment you need to back up your realm, and you do not wish or cannot perform a full database export, you can export the realm as a config file:
+    If at any moment you need to back up your realm, and you do not wish or cannot perform a full database export, you can export the realm as a JSON file.
 
-    This will contain your realm settings, your users, roles and credentials.
+    This file will contain your realm settings, your users, roles and credentials.
 
-    This will not contain any logs or historical data.
+    It will not contain any logs or historical data.
     
-    First, you will need to stop `Keycloak`, export the data, and then start it again. 
+    to export the file, you will need to stop `Keycloak`, export the data, and then start it again. 
 
     ```sh
     killkk
