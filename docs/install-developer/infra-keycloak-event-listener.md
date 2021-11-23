@@ -18,9 +18,8 @@ You will need to do this only once:
 vi ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/standalone.xml
 ``` 
 
-Around `Line #597` you will see the last `<spi>` element closing, just before the `<subsystem>` element closes as well.
+Around `Line #597` add the following `<spi>` element to the enclosing `<subsystem>` element (which begins with `<subsystem xmlns="urn:jboss:domain:keycloak-server:1.1">`):
 
-After the last `<spi>` add this block:
 ```xml
 <spi name="eventsListener">
     <provider name="CEDAR-event-listener" enabled="true">
