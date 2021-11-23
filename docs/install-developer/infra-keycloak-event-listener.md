@@ -44,7 +44,7 @@ After the last `<spi>` add this block:
     This is actually correct: our team decided that we allow changing the base domain for all the artifacts, but we keep our users under the same base domain. 
 
 
-## Deploy the event listener `jar` under `Keycloak'
+## Deploy the event listener JAR
 
 The following command will copy the event listener into it's proper location:
 ```sh
