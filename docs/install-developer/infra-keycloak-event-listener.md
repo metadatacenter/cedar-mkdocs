@@ -3,7 +3,7 @@
 The CEDAR system needs to be notified every time when a login request is performed against the Keycloak authentication module.
 
 In order to accomplish this, we have an event listener in place.
-This is part of the CEDAR codebase, it resides in the `cedar-keycloak-event-listener` repo.
+This even lister part of the CEDAR code base, and can be found in the `cedar-keycloak-event-listener` repo.
 
 You will need to install this event listener under `Keycloak`
 
@@ -41,7 +41,7 @@ After the last `<spi>` add this block:
 
     You might notice that our user base domain is set to `metadatacenter.org` instead of `metadatacenter.orgx`.
     
-    This is actually correct, our team decided that we allow changing the base domain for all the artifacts, but we keep our users under the same base domain. 
+    This is actually correct: our team decided that we allow changing the base domain for all the artifacts, but we keep our users under the same base domain. 
 
 
 ## Deploy the event listener `jar` under `Keycloak'
