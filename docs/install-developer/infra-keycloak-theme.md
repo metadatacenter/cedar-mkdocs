@@ -1,6 +1,6 @@
 # Install CEDAR Keycloak theme
 
-Keycloak lets user customize the register/login experience by allowing to override the default theme.
+Keycloak lets user customize the registeration and login experience by allowing the default theme to be overridden.
 
 The CEDAR Keycloak theme can be found in the `${CEDAR_HOME}/cedar-util/keycloak/themes/cedar-03` directory.
 

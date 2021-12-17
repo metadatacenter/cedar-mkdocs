@@ -3,7 +3,7 @@
 The CEDAR system needs to be notified every time when a login request is performed against the Keycloak authentication module.
 
 In order to accomplish this, we have an event listener in place.
-This is part of the CEDAR codebase, it resides in the `cedar-keycloak-event-listener` repo.
+This even lister part of the CEDAR code base, and can be found in the `cedar-keycloak-event-listener` repo.
 
 You will need to install this event listener under `Keycloak`
 
@@ -18,9 +18,8 @@ You will need to do this only once:
 vi ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/standalone.xml
 ``` 
 
-Around `Line #597` you will see the last `<spi>` element closing, just before the `<subsystem>` element closes as well.
+Around `Line #597` add the following `<spi>` element to the enclosing `<subsystem>` element (which begins with `<subsystem xmlns="urn:jboss:domain:keycloak-server:1.1">`):
 
-After the last `<spi>` add this block:
 ```xml
 <spi name="eventsListener">
     <provider name="CEDAR-event-listener" enabled="true">
@@ -41,26 +40,22 @@ After the last `<spi>` add this block:
 
     You might notice that our user base domain is set to `metadatacenter.org` instead of `metadatacenter.orgx`.
     
-    This is actually correct, our team decided that we allow changing the base domain for all the artifacts, but we keep our users under the same base domain. 
+    This is actually correct: our team decided that we allow changing the base domain for all the artifacts, but we keep our users under the same base domain. 
 
 
-## Deploy the event listener `jar` under `Keycloak'
+## Deploy the event listener JAR
 
 The following command will copy the event listener into it's proper location:
 ```sh
 copylistener
 ```
 
-You can execute this command from any location.
+You can execute this command from any location. This command copies the event listener JAR `cedar-keycloak-event-listener.jar` from `$CEDAR_HOME/cedar-keycloak-event-listener/target/` to `${CEDAR_KEYCLOAK_HOME}/standalone/deployments/`.
 
-You can find out what the command actually does by executing:
-```sh
-alias copylistener
-```
 
 ???+ warning "Deploy event listener"
 
     Please deploy the event listener every time a change in its code is performed..
     
-    Also please deploy it after a version change.
+    Also please deploy it after each CEDAR release.
 
