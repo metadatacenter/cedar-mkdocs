@@ -42,3 +42,14 @@ Finally upgrade the packages:
 ```sh
 brew upgrade 
 ```
+
+## Intel vs Apple Silicon
+Homebrew changed its install prefix on Apple Silicon from `/usr/local` to `/opt/homebrew`.
+We are using `$(brew --prefix)` to get the current prefix throughout this guide.
+
+???+ warning "Important"
+
+    **Prefer `$(brew --prefix)` over hardcoded paths if possible!**
+    
+    If you have path-related errors while you install or run the application, please double check wether you are using the correct brew prefix or not.
+    Use `$(brew --prefix)` whenever this is possible. 
