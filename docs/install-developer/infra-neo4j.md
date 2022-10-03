@@ -19,16 +19,16 @@ Download the package from the distribution site:
 
 ```sh
 gocedar
-wget http://dist.neo4j.org/neo4j-community-3.5.21-unix.tar.gz
+wget http://dist.neo4j.org/neo4j-community-3.5.35-unix.tar.gz
 # or
-wget http://dist.neo4j.org/neo4j-community-3.5.21-windows.zip
+wget http://dist.neo4j.org/neo4j-community-3.5.35-windows.zip
 ```
 
 Once the package is downloaded, unpack it and rename it:
 
 ```sh
-tar -xvf neo4j-community-3.5.21-unix.tar.gz
-mv neo4j-community-3.5.21 neo4j
+tar -xvf neo4j-community-3.5.35-unix.tar.gz
+mv neo4j-community-3.5.35 neo4j
 ```
 
 ???+ warning "Important"
@@ -74,19 +74,19 @@ You will see a page resembling the image below:
 
 Please fill in the form according to these values:
 
-| Question                      | Answer |
-| -----------                   | ----------- |
-|Connect URL                    | bolt://   localhost:7687|
-|Authentication type:           | Username / Password|
-|Username:                      | neo4j|
-|Password                       | changeme|
+| Question             | Answer                |
+|----------------------|-----------------------|
+| Connect URL          | bolt://localhost:7687 |
+| Authentication type: | Username / Password   |
+| Username:            | neo4j                 |
+| Password             | changeme              |
 
 You should be able to log in to the system.
 
 ## Troubleshooting
 
 ### Default password
-If by mistake you started `neo4j` before changing the initial password, the password for user `neo4j` will be set to `neo4j'
+If by mistake you started `neo4j` before changing the initial password, the password for user `neo4j` will be set to `neo4j`
 
 Log in with this default password. You will be prompted to change it. Change it to `changeme`.
 

@@ -1,6 +1,6 @@
 # Install Nginx
 
-Please install `Nginx`, version 1.17:
+Please install `Nginx`, version 1.23.1:
 
 ```sh
 brew install nginx

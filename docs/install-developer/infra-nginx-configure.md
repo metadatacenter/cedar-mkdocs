@@ -25,7 +25,7 @@ We use it in CEDAR to set boolean variable that later will have an effect on the
 
 ```sh
 cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/cedar/module-geo.inc.conf \
-  /usr/local/etc/nginx/cedar/.
+  $(brew --prefix)/etc/nginx/cedar/.
 ```
 
 ## Create `ssl` include config
@@ -39,8 +39,24 @@ To prevent this, we describe the `ssl` config in one include file, which we refe
 
 ```sh
 cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/cedar/include-ssl.conf \
-  /usr/local/etc/nginx/cedar/.
+  $(brew --prefix)/etc/nginx/cedar/.
 ```
+
+???+ warning "Important"
+
+    If your environment runs on Apple Silicon, you will need to edit this file:
+
+    ```
+    vi $(brew --prefix)/etc/nginx/cedar/include-ssl.conf
+    ```
+
+    and replace the content with the following:
+
+    ```
+    ssl_certificate     /opt/homebrew/etc/nginx/cedar/ssl/cedar.metadatacenter.orgx.crt;
+    ssl_certificate_key /opt/homebrew/etc/nginx/cedar/ssl/cedar.metadatacenter.orgx.key;
+    ```
+
 
 ## Create subdomain config files
 
@@ -48,9 +64,9 @@ These files will configure the available subdomains one by one:
 
 ```sh
 cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/cedar/frontend-*.conf \
-  /usr/local/etc/nginx/cedar/
+  $(brew --prefix)/etc/nginx/cedar/
 cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/cedar/server-*.conf \
-  /usr/local/etc/nginx/cedar/
+  $(brew --prefix)/etc/nginx/cedar/
 ```
 
 ## Create global settings for CEDAR domains
@@ -59,7 +75,7 @@ This config contains global settings:
 
 ```sh
 cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/cedar/config-cedar-global.inc.conf \
-  /usr/local/etc/nginx/cedar/
+  $(brew --prefix)/etc/nginx/cedar/
 ```
 
 ## Replace main `nginx` config file
@@ -70,7 +86,7 @@ If you had `nginx` running before, possibly with a custom config, please merge y
  
 ```sh
 cp ${CEDAR_DEVELOP_HOME}/os-mirror/development-macos/usr/local/etc/nginx/nginx.conf \
-  /usr/local/etc/nginx/.
+  $(brew --prefix)/etc/nginx/.
 ```
 
 ???+ warning "Important"

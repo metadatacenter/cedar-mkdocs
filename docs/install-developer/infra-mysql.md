@@ -36,32 +36,32 @@ You should see the following line in the output:
 
 ## Secure MySql server
 ```sh
-/usr/local/Cellar/mysql@5.7/5.7.<minor_version>/bin/mysql_secure_installation
+$(brew --prefix)/Cellar/mysql@5.7/5.7.<minor_version>/bin/mysql_secure_installation
 ```
 
 If you get a 'Column count' error, you will need to run the following command first:
 
 ```sh
-sudo /usr/local/Cellar/mysql@5.7/5.7.<minor_version>/bin/mysql_upgrade
+sudo $(brew --prefix)/Cellar/mysql@5.7/5.7.<minor_version>/bin/mysql_upgrade
 ```
 
 Respond to the questions as follows:
 
-| Question                 | Answer |
-| -----------                  | ----------- |
-|Would you like to setup VALIDATE PASSWORD plugin?  | N|
-|New password:            | changeme|
-|Re-enter new password:   | changeme|
-|Remove anonymous users?  | Y|
-|Disallow root login remotely?  | Y|
-|Remove test database and access to it?  | Y|
-|Reload privilege tables now?            | Y|
+| Question                                          | Answer   |
+|---------------------------------------------------|----------|
+| Would you like to setup VALIDATE PASSWORD plugin? | N        |
+| New password:                                     | changeme |
+| Re-enter new password:                            | changeme |
+| Remove anonymous users?                           | Y        |
+| Disallow root login remotely?                     | Y        |
+| Remove test database and access to it?            | Y        |
+| Reload privilege tables now?                      | Y        |
 
 ## Create CEDAR application users
 Connect to the running MySql server
 
 ```sh
-/usr/local/Cellar/mysql@5.7/5.7.<minor_version>/bin/mysql -uroot -p
+$(brew --prefix)/Cellar/mysql@5.7/5.7.<minor_version>/bin/mysql -uroot -p
 ```
 
 Execute the below three groups of statements in order to create MySql databases and corresponding users for the different components of CEDAR: 

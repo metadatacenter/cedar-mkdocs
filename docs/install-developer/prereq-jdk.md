@@ -1,7 +1,7 @@
 # JDK
 
 You most probably already have `jdk` on your system.
-The CEDAR developer team uses `Oracle JDK 11`, and we strongly suggest that you use the same, for compatibility reasons.
+The CEDAR developer team uses `Oracle JDK 19`, and we strongly suggest that you use the same, for compatibility reasons.
 
 ???+ warning "Important"
     
@@ -11,9 +11,9 @@ The CEDAR developer team uses `Oracle JDK 11`, and we strongly suggest that you 
 
 ## Download JDK
 
-Please download the latest available version of `JDK 11` from:
+Please download the latest available version of `JDK 19` from:
 
-[https://www.oracle.com/java/technologies/javase-jdk11-downloads.html](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+[https://www.oracle.com/java/technologies/downloads/#jdk19-mac](https://www.oracle.com/java/technologies/downloads/#jdk19-mac)
 
 You will need to log in to be able to download the JDK.
 
@@ -30,8 +30,7 @@ java --version
 
 You should see something similar:
 ```
-java version "11.0.9" 2020-10-20 LTS
-Java(TM) SE Runtime Environment 18.9 (build 11.0.9+7-LTS)
-Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.9+7-LTS, mixed mode)
+java 19 2022-09-20
+Java(TM) SE Runtime Environment (build 19+36-2238)
+Java HotSpot(TM) 64-Bit Server VM (build 19+36-2238, mixed mode, sharing)
 ```
-

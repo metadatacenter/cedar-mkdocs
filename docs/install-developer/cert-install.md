@@ -11,7 +11,7 @@ Choose the one which matches the version of the recently installed JDK.
 
 Set the `JAVA_HOME` environment variable to point to this JDK, e.g.,
 ```sh
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home/
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home/
 ```
 
 ???+ warning "JAVA_HOME"
@@ -26,29 +26,34 @@ Then import it into the `cacerts`:
 gocedar
 cd CEDAR_CA
 
-sudo keytool -import -alias metadatacenter.orgx \
-  -file ./ca.crt -keystore ${JAVA_HOME}/lib/security/cacerts
+sudo keytool -import -cacerts -alias metadatacenter.orgx -file ./ca.crt
 ```
 
 When prompted, enter these value:
 
-| Question                   | Answer                   |
-| -----------                | -----------              |
-| First password             | This is `sudo` password. Enter your password (your macOS password)|
-| Second password            | This is the trust store password. By default it is `changeit` |
-| Trust                      | yes |
+| Question | Answer                   |
+|----------| -----------              |
+| Password | This is `sudo` password. Enter your password (your macOS password)|
+| Trust    | yes |
+
+
+???+ warning "Trust store password"
+
+    In older JDK versions the `cacerts` trust store had a default password: `changeit`
+    
+    It the above command asks for a second password, enter `changeit`. 
 
 ???+ success "Useful commands"
 
-    If you run into problems with the certificates, use these commands to list and filter the certificates, respectively to delete a certificate.
+    If you run into problems with the certificates, use these commands to list and filter the certificates:
 
     ```sh
-    sudo keytool -list \
-      -keystore ${JAVA_HOME}/lib/security/cacerts \
-      | grep metadatacenter
-    
-    sudo keytool -delete -alias metadatacenter.orgx \
-      -keystore ${JAVA_HOME}/lib/security/cacerts
+    sudo keytool -list -cacerts | grep metadatacenter
+    ```
+
+    respectively to delete a certificate    
+    ```
+    sudo keytool -delete -cacerts -alias metadatacenter.orgx
     ```
 
 If the certificate was added successfully, please close this session, to get rid of the `JAVA_HOME` environment variable.
@@ -77,7 +82,8 @@ The process is the following:
 * Using `Finder` navigate to `${CEDAR_HOME}/CEDAR_CA/`.
 * Double-click the `ca.crt` file.
 * The application called `Keychain Access` will be launched.
-* A dialog will pop up, prompting for a location for the certificate. The `login` will be preselected. Click the `Add` button.
+* A dialog will pop up, prompting for a location for the certificate. The `iCloud` will be preselected. Change this to `login`.
+* Click the `Add` button.
 * Locate the certificate you just added. It should be either in System or login Keychain. Search for `metadatacenter`.
 * The certificate will have a white `x` in a red circle, meaning it is not trusted.
 * Open it by double-clicking it.

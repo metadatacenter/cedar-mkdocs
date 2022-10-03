@@ -3,13 +3,13 @@
 Please install `Node`, version 12 LTS:
 
 ```sh
-brew install node@12
+brew install node@16
 ```
 
 And pin this version:
 
 ```sh
-brew pin node@12
+brew pin node@16
 ```
 
 ## Add `node` and `npm` to `PATH`
@@ -17,17 +17,17 @@ brew pin node@12
 The first lines of confirmation will contain something similar:
 
 ```
-node@12 is keg-only, which means it was not symlinked into /usr/local,
+node@16 is keg-only, which means it was not symlinked into /usr/local,
 because this is an alternate version of another formula.
 
-If you need to have node@12 first in your PATH run:
-  echo 'export PATH="/usr/local/opt/node@12/bin:$PATH"' >> ~/.zshrc
+If you need to have node@16 first in your PATH run:
+  echo 'export PATH="/usr/local/opt/node@16/bin:$PATH"' >> ~/.zshrc
 ```
 
 Please execute the suggested command to add the node `bin` directory to the `PATH` (this line can be different based in your shell):
 
 ```sh
-echo 'export PATH="/usr/local/opt/node@12/bin:$PATH"' >> ~/.zshrc
+echo 'export PATH="$(brew --prefix)/opt/node@16/bin:$PATH"' >> ~/.zshrc
 ```
 
 ## Check the installation
@@ -45,6 +45,6 @@ npm --version
 You should see something like the following:
 
 ```
-v12.22.1
-6.14.12
+v16.17.1
+8.15.0
 ```

@@ -3,16 +3,17 @@ CEDAR uses `Elasticsearch` to make search for artifacts possible.
 
 ## Install Elasticsearch
 
-Please install `Elasticsearch`, version 6.8:
+Please install `Elasticsearch`, version 7:
 
 ```sh
-brew install elasticsearch@6.8
+brew tap elastic/tap
+brew install elastic/tap/elasticsearch-full
 ```
 
 And pin this version:
 
 ```sh
-brew pin elasticsearch@6.8
+brew pin elasticsearch-full
 ```
     
 ???+ warning "Important"
@@ -57,13 +58,13 @@ You should see the following lines in the output:
 Please install `Elasticsearch`, version 6.8:
 
 ```sh
-brew install kibana@6.8
+brew install elastic/tap/kibana-full
 ```
 
 And pin this version:
 
 ```sh
-brew pin kibana@6.8
+brew pin kibana-full
 ```
 
 ## Start Kibana

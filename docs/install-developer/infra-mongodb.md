@@ -3,17 +3,17 @@ CEDAR uses `MongoDB` as the storage for the CEDAR artifacts: fields, elements, t
 
 ## Install MongoBD
 
-Please install `MongoDB Community`, version 3.4:
+Please install `MongoDB Community`, version 5.0:
 
 ```sh
 brew tap mongodb/brew
-brew install mongodb-community@3.4
+brew install mongodb-community@5.0
 ```
 
 And pin this version:
 
 ```sh
-brew pin mongodb-community@3.4
+brew pin mongodb-community@5.0
 ```
 
 ???+ warning "Important"
@@ -30,16 +30,16 @@ First, we will create a power user. You will need to start MongoDB without acces
 Please replace the path below with the one applicable to your system:
 
 ```sh
-/usr/local/Cellar/mongodb-community@3.4/3.4.<patch_version>/bin/mongod \
+$(brew --prefix)/Cellar/mongodb-community@5.0/5.0.<patch_version>/bin/mongod \
   --port 27017 \
-  --dbpath /usr/local/var/mongodb
+  --dbpath $(brew --prefix)/var/mongodb
 ```
 
 ## Create privileged user
 Once mongoDB is started, in a different terminal connect to it:
 
 ```sh
-/usr/local/Cellar/mongodb-community@3.4/3.4.<patch_version>/bin/mongo
+$(brew --prefix)/Cellar/mongodb-community@5.0/5.0.<patch_version>/bin/mongo
 ```
 
 In this new terminal use the `admin` collection and create a privileged user:
@@ -68,7 +68,7 @@ startmongo
 ## Create CEDAR application user
 Connect to MongoDB with the previously created user:
 ```sh
-/usr/local/Cellar/mongodb-community@3.4/3.4.<patch_version>/bin/mongo \
+$(brew --prefix)/Cellar/mongodb-community@5.0/5.0.<patch_version>/bin/mongo \
   --port 27017 \
   --username "mongoRootUser" \
   --password "changeme" \

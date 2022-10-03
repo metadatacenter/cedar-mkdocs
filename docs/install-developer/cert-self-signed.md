@@ -12,7 +12,7 @@ mkdir ${CEDAR_HOME}/CEDAR_CA
 Copy the default `openssl.conf` to this new location, in order to modify it:
 
 ```sh
-cp /usr/local/etc/openssl@1.1/openssl.cnf ${CEDAR_HOME}/CEDAR_CA/openssl-ca.cnf
+cp $(brew --prefix)/etc/openssl@1.1/openssl.cnf ${CEDAR_HOME}/CEDAR_CA/openssl-ca.cnf
 cd ${CEDAR_HOME}/CEDAR_CA
 ```
 
@@ -28,7 +28,7 @@ Make/add the following changes/lines:
 The values are aligned at block level, not throughout the whole file.
 This is why our config here looks a bit unorganized.*)
 
-```{.py3 hl_lines="3 6-8 11 13 16 19 22 25 28"}
+```{.py3 hl_lines="3 6-8 11-12 14 17 20 23 26 29"}
 HOME            = .
 RANDFILE        = $ENV::HOME/.rnd
 CEDAR_HOME      = $ENV::CEDAR_HOME
@@ -39,6 +39,7 @@ default_days= 824                   # how long to certify for
 default_md  = sha256                # use public key default MD
 
 [ req_distinguished_name ]
+countryName             = Country Name
 countryName_default     = US
 
 stateOrProvinceName_default = CA
@@ -75,7 +76,7 @@ vi openssl-san.cnf
 
 Make the following changes:
 
-```{.py3 hl_lines="2 5 9 11-28"}
+```{.py3 hl_lines="2 5 9 11-29"}
 [req]
 req_extensions = v3_req # The extensions to add to a certificate request
 
