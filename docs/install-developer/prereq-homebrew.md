@@ -8,7 +8,7 @@ Or you can do this:
 
 ```sh
 /bin/bash -c \
-  "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 ???+ warning "Important"

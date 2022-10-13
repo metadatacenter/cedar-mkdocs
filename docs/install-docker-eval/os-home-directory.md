@@ -3,7 +3,7 @@
 You will need a directory where all the CEDAR Docker related code, configuration and some executable will reside.
 You should create a directory under your home directory:
 
-```shell
+```sh
 mkdir ~/CEDAR_DOCKER
 ```
 
