@@ -9,4 +9,4 @@ build:
 mkdocs:
   configuration: mkdocs.yml
 
-formats: []
+formats: [ ]
