@@ -19,7 +19,7 @@ repo_url: https://github.com/metadatacenter/cedar-mkdocs
 edit_uri: edit/develop/docs/
 
 nav:
-  - Home: index.md
+  - Home: user-overview.md
   - Install Guides:
       - install-overview.md
       - Developer Install:
@@ -139,4 +139,47 @@ nav:
           - developer-guide/template-element-and-field-instances.md
           - developer-guide/template-element-and-fields.md
           - developer-guide/cedar-rest-apis.md
+  - User Guide:
+      - user-overview.md
+      - CEDAR Basics for All Users:
+          - Accounts and Logging In:
+              - user-guide/basic_topics/a1_accounts_and_logging_in.md
+              - user-guide/sections/a1/creating_a_cedar_account.md
+              - user-guide/sections/a1/logging_in_with_cedar.md
+              - user-guide/sections/a1/visibility_of_your_cedar_account.md
 
+          - Finding Resources:
+              - user-guide/basic_topics/a2_finding_resources.md
+              - user-guide/sections/a2/1_simple_searching.md
+              - user-guide/sections/a2/2_organizing_the_results.md
+              - user-guide/sections/a2/3_constraining_the_results_by_type.md
+              - user-guide/sections/a2/4_advanced_searching_search_fields.md
+              - user-guide/sections/a2/5_advanced_searching_patterns.md
+
+          - Viewing Resource Information:
+              - user-guide/basic_topics/a3_viewing_resource_information.md
+              - user-guide/sections/a3/1_viewing_resources_overview.md
+              - user-guide/sections/a3/2_viewing_resource_content_in_cedar.md
+              - user-guide/sections/a3/3_viewing_resource_content_on_the_web.md
+              - user-guide/sections/a3/4_viewing_resource_as_raw_json.md
+              - user-guide/sections/a3/5_viewing_resource_metadata.md
+
+          - Desktop and Navigation:
+              - user-guide/basic_topics/a4_desktop_and_navigation.md
+              - user-guide/sections/a4/1_managing_cedar_resources.md
+              - user-guide/sections/a4/2_navigating_within_cedar.md
+              - user-guide/sections/a4/3_your_cedar_workspace.md
+
+          - Filling Out (Creating) Metadata:
+              - user-guide/basic_topics/a5_filling_out_creating_metadata.md
+              - user-guide/sections/a5/1_creating_the_metadata_form_instance_for_filling.md
+              - user-guide/sections/a5/2_filling_out_metadata.md
+              - user-guide/sections/a5/3_saving_and_validating.md
+              - user-guide/sections/a5/4_special_case_submitting_your_metadata.md
+
+          - Sharing Your Content:
+                - user-guide/basic_topics/a6_sharing_your_content.md
+                - user-guide/sections/a6/1_creating_groups.md
+                - user-guide/sections/a6/2_how_permissions_work.md
+                - user-guide/sections/a6/3_sharing_for_reading_and_writing.md
+                - user-guide/sections/a6/4_sharing_via_the_web.md

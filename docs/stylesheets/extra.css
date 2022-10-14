@@ -1,3 +1,7 @@
 a.external {
     text-decoration: underline;
 }
+
+article {
+    text-align: justify;
+}
