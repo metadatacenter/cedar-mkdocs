@@ -10,6 +10,7 @@ markdown_extensions:
     - pymdownx.superfences
     - pymdownx.highlight:
           linenums: false
+    - markdown.extensions.attr_list
 
 extra_css:
     - stylesheets/extra.css
@@ -38,14 +39,14 @@ nav:
                 - install-developer/config-usernames-and-passwords.md
                 - install-developer/config-domain.md
             - Scripts and aliases:
-                  - install-developer/scripts-and-aliases-overview.md
-                  - install-developer/scripts-and-aliases-install.md
-                  - install-developer/scripts-and-aliases-include.md
+                - install-developer/scripts-and-aliases-overview.md
+                - install-developer/scripts-and-aliases-install.md
+                - install-developer/scripts-and-aliases-include.md
             - CEDAR commands:
-                  - install-developer/commands-overview.md
-                  - install-developer/commands-cedarenv.md
-                  - install-developer/commands-cedarss.md
-                  - install-developer/commands-startstop.md
+                - install-developer/commands-overview.md
+                - install-developer/commands-cedarenv.md
+                - install-developer/commands-cedarss.md
+                - install-developer/commands-startstop.md
             - SSL certificates:
                 - install-developer/cert-overview.md
                 - install-developer/cert-self-signed.md
@@ -85,49 +86,57 @@ nav:
                     - install-developer/infra-nginx-start.md
                 - install-developer/infra-start.md
             - Microservices:
-                  - install-developer/microservices-configuration.md
-                  - install-developer/microservices-overview.md
+                - install-developer/microservices-configuration.md
+                - install-developer/microservices-overview.md
             - Frontend components:
-                  - install-developer/frontend-overview.md
-                  - install-developer/frontend-node-install.md
-                  - install-developer/frontend-gulp-angular-cli-install.md
-                  - install-developer/frontend-editor.md
-                  - install-developer/frontend-openview.md
+                - install-developer/frontend-overview.md
+                - install-developer/frontend-node-install.md
+                - install-developer/frontend-gulp-angular-cli-install.md
+                - install-developer/frontend-editor.md
+                - install-developer/frontend-openview.md
             - Logging in to CEDAR:
-                  - install-developer/frontend-logging-in.md
+                - install-developer/frontend-logging-in.md
 
         - Docker Install:
-              - install-docker-eval/intro.md
-              - Prerequisites:
-                    - install-docker-eval/prereq-os.md
-                    - install-docker-eval/prereq-docker-install.md
-                    - install-docker-eval/prereq-docker-configure.md
-              - User, home directory, passwords and domain:
-                    - install-docker-eval/os-user.md
-                    - install-docker-eval/os-home-directory.md
-                    - install-docker-eval/config-usernames-and-passwords.md
-                    - install-docker-eval/config-domain.md
-              - Scripts and aliases:
-                    - install-docker-eval/scripts-and-aliases-install.md
-                    - install-docker-eval/scripts-and-aliases-include.md
-              - The code:
-                    - install-docker-eval/code-git-clone.md
-                    - install-docker-eval/docker-aliases-include.md
-              - CEDAR commands:
-                    - install-docker-eval/commands-overview.md
-                    - install-docker-eval/commands-cedarenv.md
-                    - install-docker-eval/commands-cedarss.md
-              - One-time setup:
-                  - install-docker-eval/one-time-setup.md
-                  - install-docker-eval/os-subdomains.md
-                  - install-docker-eval/cert-install.md
-              - Components:
-                    - install-docker-eval/startup-overview.md
-                    - install-docker-eval/startup-infra.md
-                    - install-docker-eval/startup-microservices.md
-                    - install-docker-eval/startup-frontend.md
-                    - install-docker-eval/startup-monitoring.md
-                    - install-docker-eval/docker-commands.md
-              - Evaluate CEDAR:
-                    - install-docker-eval/eval-users.md
-                    - install-docker-eval/eval-component-urls.md
+            - install-docker-eval/intro.md
+            - Prerequisites:
+                - install-docker-eval/prereq-os.md
+                - install-docker-eval/prereq-docker-install.md
+                - install-docker-eval/prereq-docker-configure.md
+            - User, home directory, passwords and domain:
+                - install-docker-eval/os-user.md
+                - install-docker-eval/os-home-directory.md
+                - install-docker-eval/config-usernames-and-passwords.md
+                - install-docker-eval/config-domain.md
+            - Scripts and aliases:
+                - install-docker-eval/scripts-and-aliases-install.md
+                - install-docker-eval/scripts-and-aliases-include.md
+            - The code:
+                - install-docker-eval/code-git-clone.md
+                - install-docker-eval/docker-aliases-include.md
+            - CEDAR commands:
+                - install-docker-eval/commands-overview.md
+                - install-docker-eval/commands-cedarenv.md
+                - install-docker-eval/commands-cedarss.md
+            - One-time setup:
+                - install-docker-eval/one-time-setup.md
+                - install-docker-eval/os-subdomains.md
+                - install-docker-eval/cert-install.md
+            - Components:
+                - install-docker-eval/startup-overview.md
+                - install-docker-eval/startup-infra.md
+                - install-docker-eval/startup-microservices.md
+                - install-docker-eval/startup-frontend.md
+                - install-docker-eval/startup-monitoring.md
+                - install-docker-eval/docker-commands.md
+            - Evaluate CEDAR:
+                - install-docker-eval/eval-users.md
+                - install-docker-eval/eval-component-urls.md
+    - Developer Guide:
+        - developer-overview.md
+        - Guides:
+            - CEDAR Repository Model: https://metadatacenter.org/tools-training/outreach/cedar-template-model
+            - developer-guide/template-element-and-field-instances.md
+            - developer-guide/template-element-and-fields.md
+            - developer-guide/cedar-rest-apis.md
+
