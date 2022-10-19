@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # How Permissions Work
 
 ## **Introduction**

@@ -132,6 +132,7 @@ nav:
           - Evaluate CEDAR:
               - install-docker-eval/eval-users.md
               - install-docker-eval/eval-component-urls.md
+
   - Developer Guide:
       - developer-overview.md
       - Guides:
@@ -139,6 +140,7 @@ nav:
           - developer-guide/template-element-and-field-instances.md
           - developer-guide/template-element-and-fields.md
           - developer-guide/cedar-rest-apis.md
+
   - User Guide:
       - user-overview.md
       - CEDAR Basics for All Users:
@@ -183,3 +185,17 @@ nav:
                 - user-guide/sections/a6/2_how_permissions_work.md
                 - user-guide/sections/a6/3_sharing_for_reading_and_writing.md
                 - user-guide/sections/a6/4_sharing_via_the_web.md
+
+      - About CEDAR Templates:
+            - Description of a Template:
+                  - user-guide/cedar_templates/c1_description_of_a_template.md
+                  - user-guide/sections/c1/1_template_overview.md
+                  - user-guide/sections/c1/2_template_organization.md
+
+            - Building Basic Templates:
+                  - user-guide/cedar_templates/c2_building_basic_templates.md
+                  - user-guide/sections/c2/1_first_steps.md
+                  - user-guide/sections/c2/2_adding_fields.md
+                  - user-guide/sections/c2/3_adding_elements.md
+                  - user-guide/sections/c2/4_saving_and_closing.md
+                  - user-guide/sections/c2/field_type_reference.md

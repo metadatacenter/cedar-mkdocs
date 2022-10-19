@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Creating the Metadata Form (Instance) for Filling
 
 ## **CEDAR's Metadata Instance**

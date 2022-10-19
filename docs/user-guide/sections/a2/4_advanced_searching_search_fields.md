@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Advanced Searching - Search Fields
 
 This section contains some examples of the query syntax that can be used to find CEDAR artifacts by field name and/or value.

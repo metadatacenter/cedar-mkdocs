@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Viewing Resource Content in CEDAR
 
 We use the phrase 'viewing resource content' to mean looking at the resource in human-friendly form, in this case within the CEDAR application.

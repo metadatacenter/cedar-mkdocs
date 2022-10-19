@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Intro: Filling Out (Creating) Metadata
 
 While CEDAR is intended to be used without any special knowledge, 

@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Viewing Resource Content on the Web
 
 We use the phrase 'viewing resource content' to mean looking at the resource in human-friendly form, in this case viewing it on the web using CEDAR OpenView.

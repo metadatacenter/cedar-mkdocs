@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Organizing the Results
 
 You can view the search resources either as a grid of different resource tiles (as shown in the figure below) or as a list of different resources. You can switch between these views using the icon highlighted in the small blue rectangle in the upper right of the figure. 

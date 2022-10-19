@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Filling Out Metadata
 
 ## **Basic Steps**

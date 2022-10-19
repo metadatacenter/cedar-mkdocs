@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Viewing Resource Metadata
 
 There are 3 ways you can view metadata about a CEDAR resource: within your CEDAR Workspace view; in the OpenView of any artifact that has OpenView enabled; and by looking at the content. Each of these is described below.

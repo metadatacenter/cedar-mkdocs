@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Simple Searching
 
 *To learn about simple navigation in the Desktop, visit [Navigating Within CEDAR](https://metadatacenter.github.io/cedar-manual/sections/a4/navigating_within_cedar/).*

@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Sharing for Reading and Writing
 
 ## **What it Means**

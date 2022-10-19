@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Special Case—Submitting Your Metadata
 
 In some cases, it may be possible to submit your data to external repositories

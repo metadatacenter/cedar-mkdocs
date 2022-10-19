@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Viewing Resources Overview
 
 <h1>Introduction to the Resources</h1>

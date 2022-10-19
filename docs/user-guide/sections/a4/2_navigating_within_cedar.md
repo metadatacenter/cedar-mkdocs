@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Navigating Within CEDAR
 
 ## **Introduction**

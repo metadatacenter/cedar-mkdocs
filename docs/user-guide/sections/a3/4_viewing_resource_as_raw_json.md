@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Viewing Resource as Raw JSON
 
 As noted in the [Viewing Resources Overview](https://metadatacenter.github.io/cedar-manual/sections/a3/1_viewing_resources_overview/), 

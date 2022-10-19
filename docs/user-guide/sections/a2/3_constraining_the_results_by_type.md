@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Constraining the Results by Type
 
 When you search for resources (for example, all resources that mention "Antibody"), by default all types of matching resources are shown, including folders, templates, elements, fields, and metadata instances. If you have access to many resources, you may find it hard to navigate these lists of matching resources. 

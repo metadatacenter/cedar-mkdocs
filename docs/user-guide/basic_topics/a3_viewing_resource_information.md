@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Intro: Viewing Resource Information
 
 This chapter describes how you can examine and understand resources

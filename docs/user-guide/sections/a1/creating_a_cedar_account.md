@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Creating a CEDAR Account
 
 The first step to create metadata templates and metadata with the CEDAR workbench is to create a CEDAR workbench user account. To do this, visit [https://cedar.metadatacenter.org](https://cedar.metadatacenter.org "CEDAR Workbench") and click on the "Register" link below the Password line. 

@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Intro: Sharing Your Content
 
 CEDAR provides multiple content-sharing techniques, 

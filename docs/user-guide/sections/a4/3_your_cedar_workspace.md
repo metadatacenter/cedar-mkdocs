@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Your CEDAR Workspace
 
 After you first log in to CEDAR, you will be in your own workspace, which will look something like the first annotated screenshot below. 

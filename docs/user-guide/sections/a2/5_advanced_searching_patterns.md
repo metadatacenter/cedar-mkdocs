@@ -1,3 +1,7 @@
+---
+author: John Graybeal
+status: Ready
+---
 # Advanced Searching - Patterns
 
 This section describes the more complex search patterns available in CEDAR. 
