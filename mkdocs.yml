@@ -199,3 +199,10 @@ nav:
                   - user-guide/sections/c2/3_adding_elements.md
                   - user-guide/sections/c2/4_saving_and_closing.md
                   - user-guide/sections/c2/field_type_reference.md
+
+            - More FAIR Templates Using Semantics  [Partial]:
+                  - user-guide/cedar_templates/c3_more_fair_templates_using_semantics.md
+                  - user-guide/sections/c3/1_why_semantics_are_important.md
+                  - user-guide/sections/c3/2_defining_your_answers_with_term_lists.md
+                  - user-guide/sections/c3/3_choosing_controlled_terms.md
+                  - user-guide/sections/c3/4_creating_lists_in_the_metadata_entry_forms_for_users.md
