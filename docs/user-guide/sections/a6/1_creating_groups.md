@@ -23,15 +23,15 @@ To begin, open the sharing menu as described in Sharing for Reading and Writing.
 
 Now, start typing in the name of the Everybody group. As you can see, several groups may be shown,
 and you can select the one you want.
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/share-settings-find-your-group-20190909.png){:width="75%" class="centered"}
+![](../../../../img/userguide/share-settings-find-your-group-20190909.png){:width="75%" class="centered"}
 
 After you've selected the Everyone group, you can enter the type of sharing (as described in Sharing for Reading and Writing). We highly recommend leaving this 'can read', the default!
 
 To complete the process, you must click on the OK button.
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/share-with-everyone-group-20190909.png){:width="75%" class="centered"}
+![](../../../../img/userguide/share-with-everyone-group-20190909.png){:width="75%" class="centered"}
 
 Now you should see the group displayed in the right-hand panel, showing the assigned permission.
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/shared-with-everyone-group-20190909.png){:width="75%" class="centered"}
+![](../../../../img/userguide/shared-with-everyone-group-20190909.png){:width="75%" class="centered"}
 
 If you had wanted to share your artifact with the CEDAR Dev Team so they can all see it, you could choose that group after typing the 'Ev' above!
 
@@ -39,32 +39,32 @@ If you had wanted to share your artifact with the CEDAR Dev Team so they can all
 
 What if you don't have a group yet, but want one?  Instead of entering an existing group name, enter your new group name in the box labeled 'enter new group name'.  Here we've entered ABCD Lab Team for the group name.
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/share-settings-create-group-20190909.png){:width="40%" class="centered"}
+![](../../../../img/userguide/share-settings-create-group-20190909.png){:width="40%" class="centered"}
 
 As soon as you hit return, the group is created, and you can give it read (or write) access permissions by clicking on the OK button.
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/group-created-ready-to-ok-20190909.png){:width="40%" class="centered"}
+![](../../../../img/userguide/group-created-ready-to-ok-20190909.png){:width="40%" class="centered"}
 
 ## **Modifying Groups**
 
 Presumably you want to add people to your group. To do this, 
 click on the blue Group settings link (pointed to by the green arrow in the screenshot below).
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/group-settings-selector-20190909.png){:width="75%" class="centered"}
+![](../../../../img/userguide/group-settings-selector-20190909.png){:width="75%" class="centered"}
 
 This brings up a window in which you have to re-select the group you want to modify.
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/group-settings-empty-20190909.png){:width="75%" class="centered"}
+![](../../../../img/userguide/group-settings-empty-20190909.png){:width="75%" class="centered"}
 
 Enter the group you want to make changes to, and when you choose the group name, the people in the group will be displayed.
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/group-settings-selected-group-20190909.png){:width="75%" class="centered"}
+![](../../../../img/userguide/group-settings-selected-group-20190909.png){:width="75%" class="centered"}
 
 To add someone to the group, start entering their name in the Add people box, select their name from the drop-down list, 
 and click on OK. (To remove someone, click on the X by their name.)
 
 To see more information about the group, click on the Detailed info link under the box on the right side. 
 This will bring up detailed information about the group, some of which you can edit.
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/group-settings-detailed-info-20190909.png){:width="75%" class="centered"}
+![](../../../../img/userguide/group-settings-detailed-info-20190909.png){:width="75%" class="centered"}
 
 ## **Group Administration**
 

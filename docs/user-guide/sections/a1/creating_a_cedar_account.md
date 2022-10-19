@@ -25,4 +25,4 @@ Click on the link in your email to complete the account creation process.
 After validation you can easily log in to the CEDAR workbench as indicated in the next section.
 
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/create_account1.png){:width="75%" class="centered"}
+![](../../../../img/userguide/create_account1.png){:width="75%" class="centered"}

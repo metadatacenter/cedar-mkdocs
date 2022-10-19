@@ -15,4 +15,4 @@ Another feature of the web view is that the artifact's metadata are customized f
 For example, in the screenshot below of a [demonstration template in CEDAR OpenView](https://openview.metadatacenter.org/templates/https:%2F%2Frepo.metadatacenter.org%2Ftemplates%2F4595e3d3-b0c5-467b-a967-fec870801624),
 you can see the links to visit the template in CEDAR, and to fill it out in CEDAR.
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/openview-template-header-metadata-2019117.png){:width="90%" class="centered"}
+![](../../../../img/userguide/openview-template-header-metadata-2019117.png){:width="90%" class="centered"}

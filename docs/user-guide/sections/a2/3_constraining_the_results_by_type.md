@@ -12,4 +12,4 @@ There is no way to disable the folder resource, as it is used to navigate to low
 
 These settings also apply to any other view of resources in the Workspace window, for example in the user's home directory. Note the settings persist from one session to the next, as long as the user stays logged in, so subsequent searches will have the same resource type constraints.
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/filter.png){:width="75%" class="centered"}
+![](../../../../img/userguide/filter.png){:width="75%" class="centered"}

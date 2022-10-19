@@ -38,10 +38,10 @@ To the right of the left arrow is an artifact type icon,
 showing the kind of artifact being modified. 
 The following images show the artifact type icons 
 for templates and instances.
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/metadata-editor-title-icon-2019117.png){:width="44%" class="right"}
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/template-designer-title-icon-2019117.png){:width="40%"}
+![](../../../../img/userguide/metadata-editor-title-icon-2019117.png){:width="44%" class="right"}
+![](../../../../img/userguide/template-designer-title-icon-2019117.png){:width="40%"}
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/artifact-editor-artifact-status-good-2019117.png){:width="15%" class="right"}
+![](../../../../img/userguide/artifact-editor-artifact-status-good-2019117.png){:width="15%" class="right"}
 In the upper right of each editor is an artifact status display, shown to the right.
 The artifact display shows white icons to reflect normal status, 
 and yellow icons if there is an issue. 
@@ -63,7 +63,7 @@ For templating artifacts, the Template Designer
 will show the elements and fields of the template,
 with visual indentation to show the organization of the elements within the template.
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/template-designer-example-2019117.png){:width="75%" class="centered"}
+![](../../../../img/userguide/template-designer-example-2019117.png){:width="75%" class="centered"}
 
 There is also an identifier field, which can be used to provide an external identifier for the template. (This is not the same as the artifact's identifier, which is always a CEDAR-generated IRI.) The external identifier does not have to be an IRI, and does not have to be unique across different artifacts, though both are highly recommended.
 
@@ -75,7 +75,7 @@ For metadata instances, the Metadata Editor
 will show the metadata as a form to be filled out,
 again with visual indentation to show the organization of the elements within the form.
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/metadata-editor-example-2019117.png){:width="75%" class="centered"}
+![](../../../../img/userguide/metadata-editor-example-2019117.png){:width="75%" class="centered"}
 
 If there is an arrow to the left of a given line, 
 clicking on the arrow will expand or collapse the content under that entity.

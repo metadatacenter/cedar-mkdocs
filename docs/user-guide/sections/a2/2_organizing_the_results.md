@@ -11,4 +11,4 @@ You can also sort the different resources based on their titles, creation dates,
 In the next section, we will discuss how to constrain the search results by filtering on the different resource types.
 
 
-![](https://github.com/metadatacenter/cedar-manual/raw/master/docs/assets/imgs/sort.png){:width="75%" class="centered"}
+![](../../../../img/userguide/sort.png){:width="75%" class="centered"}
