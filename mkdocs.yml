@@ -206,3 +206,18 @@ nav:
                   - user-guide/sections/c3/2_defining_your_answers_with_term_lists.md
                   - user-guide/sections/c3/3_choosing_controlled_terms.md
                   - user-guide/sections/c3/4_creating_lists_in_the_metadata_entry_forms_for_users.md
+
+            - Advanced Template Topics  [Partial]:
+                  - user-guide/cedar_templates/c4_advanced_template_topics.md
+                  - user-guide/sections/c4/1_extending_a_template_adding_fields.md
+                  - user-guide/sections/c4/2_more_semantics.md
+                  - user-guide/sections/c4/3_understanding_the_suggestion_system.md
+                  - user-guide/sections/c4/4_updating_and_versioning.md
+                  - user-guide/sections/c4/5_working_with_cdes.md
+
+            - Tips for Template Creation  [Pending]:
+                - user-guide/cedar_templates/c5_tips_for_template_creation.md
+                - user-guide/sections/c5/1_about_template_compatibility.md
+                - user-guide/sections/c5/2_composition.md
+                - user-guide/sections/c5/3_recipes_for_filling_out_everything_titles_names_descriptions_help_text_.md
+                - user-guide/sections/c5/4_term_discovery_selection.md
