@@ -5,7 +5,10 @@ channels:
 dependencies:
   - python=3.9.12
   - mkdocs=1.1.2
-  - mkdocs-material=5.5.12
-  - mkdocs-material-extensions=1.0
+  - mkdocs-material-extensions=1.0.3
+  - mkdocs-macros-plugin=0.7.0
   - pymdown-extensions=8.0
   - sphinx_rtd_theme=1.0.0
+  - pip
+  - pip:
+      - mkdocs-material==8.5.6

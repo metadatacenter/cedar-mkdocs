@@ -36,3 +36,7 @@ img.right {
     border-radius: 5px;
     float: right;
 }
+
+div.md-sidebar.md-sidebar--primary {
+    width:14rem;
+}

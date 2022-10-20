@@ -18,6 +18,10 @@ extra_css:
 repo_url: https://github.com/metadatacenter/cedar-mkdocs
 edit_uri: edit/develop/docs/
 
+extra:
+    page:
+        cedarw: CEDAR Workbench
+
 nav:
   - Home: user-overview.md
   - Install Guides:
@@ -234,3 +238,14 @@ nav:
               - user-guide/sections/b2/1_api_about_swagger_documentation.md
               - user-guide/sections/b2/2_api_accessing_metadata_instances.md
               - user-guide/sections/b2/3_api_using_google_sheets.md
+
+      - CEDAR for caDSR Users:
+          - user-guide/pages/cedar-for-cadsr.md
+          - user-guide/cadsr_users/1_building_templates.md
+          - user-guide/cadsr_users/2_importing_templates.md
+          - user-guide/cadsr_users/3_building_elements.md
+          - user-guide/cadsr_users/4_finding_cdes.md
+
+      - user-guide/pages/cedar-orientation.md
+      - user-guide/pages/faq.md
+      - user-guide/pages/glossary.md
