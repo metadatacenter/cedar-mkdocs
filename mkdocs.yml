@@ -12,15 +12,20 @@ markdown_extensions:
       linenums: false
   - markdown.extensions.attr_list
 
+plugins:
+  - markdownextradata: {}
+
+extra:
+    page:
+        cedarw: "CEDAR Workbench"
+        cdeb: "CDE Browser"
+        fb: "caDSR Form Builder"
+
 extra_css:
   - stylesheets/extra.css
 
 repo_url: https://github.com/metadatacenter/cedar-mkdocs
 edit_uri: edit/develop/docs/
-
-extra:
-    page:
-        cedarw: CEDAR Workbench
 
 nav:
   - Home: user-overview.md
