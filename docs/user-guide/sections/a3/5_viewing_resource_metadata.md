@@ -21,7 +21,7 @@ The information panel displays 3 types of metadata in the corresponding tabs: me
 
 In the main window, most of the metadata is self-explanatory, but there are two features of special interest. The Description field is the same content as the description at the top of the artifact when it is open, and this field is editable in the information panel. Also, for metadata templates the panel shows all the metadata instances that are visible to you; clicking on any of the instances in the list will open it. The count at the top of that metadata instances sub-panel is the count of instances you can see, and the total count of instances.
 
-![](../../../../img/userguide/cedar-workspace-annotated-20190911.png){:width="75%" class="centered"}
+![](../../../img/userguide/cedar-workspace-annotated-20190911.png){:width="75%" class="centered"}
 
 <h1>Metadata in an artifact's OpenView</h1>
 

@@ -41,7 +41,7 @@ There are two variants to create a new metadata instance from the Workspace view
 either click on the metadata tag to the right side of the template box (Item 1), or 
 click on the dropdown menu (Item 2a, the kebab, `:`) and select Populate Template (Item 2b).
 
-![](../../../../img/userguide/template-population-annotated-20191119.png){:width="60%" class="centered"}
+![](../../../img/userguide/template-population-annotated-20191119.png){:width="60%" class="centered"}
 
 
 ### **Via a Web Link (An External IRI)**
@@ -67,7 +67,7 @@ At that point the user can log in or register for an account, and will be return
 the Metadata Editor with the newly created instance already opened.
 
 Below is the Metadata Editor opened to the MiAIRR instance requested by the link above.
-![](../../../../img/userguide/miairr-instance-empty-20191119.png){:width="60%" class="centered"}
+![](../../../img/userguide/miairr-instance-empty-20191119.png){:width="60%" class="centered"}
 
 ### **From an existing instance made from that template**
 

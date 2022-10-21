@@ -112,25 +112,25 @@ and can still be accessed.
 However, by default the Workspace and search tools will show only the most recent published version
 of an artifact. (If a draft version exists, that will always be shown.)  
 
-![](../../../../img/userguide/version-control-closed-20191216.png){:width="20%" class="right"}
+![](../../../img/userguide/version-control-closed-20191216.png){:width="20%" class="right"}
 This behavior is controlled by the Version drop-down in the Filter section 
 on the left side of the CEDAR Workspace.  
 In a typical configuration, the Version drop-down is closed, as shown to the right.
 
-![](../../../../img/userguide/version-control-latest-enabled-20191216.png){:width="20%" class="right"}
+![](../../../img/userguide/version-control-latest-enabled-20191216.png){:width="20%" class="right"}
 If you open the Version drop-down, you will see a Latest indicator, 
 with a darkened checkbox indicating that viewing the Latest version only is enabled.
 Search results and other listings will not show older versions.
-![](../../../../img/userguide/version-control-latest-enabled-listed-20191216.png){:width="50%" class="centered"}
+![](../../../img/userguide/version-control-latest-enabled-listed-20191216.png){:width="50%" class="centered"}
 
-![](../../../../img/userguide/version-control-latest-disabled-20191216.png){:width="20%" class="right"}
+![](../../../img/userguide/version-control-latest-disabled-20191216.png){:width="20%" class="right"}
 To see all versions, click on the Latest item to disable the Latest filter. 
 Now, all versions will be shown in any search or folder display that contains them.
-![](../../../../img/userguide/version-control-latest-disabled-listed-20191216.png){:width="50%" class="centered"}
+![](../../../img/userguide/version-control-latest-disabled-listed-20191216.png){:width="50%" class="centered"}
 
 ### Seeing and Navigating to All Artifact Versions
 
-![](../../../../img/userguide/version-tab-metadata-panel-20191216.png){:width="25%" class="right"}
+![](../../../img/userguide/version-tab-metadata-panel-20191216.png){:width="25%" class="right"}
 The version history for any artifact is shown in the Version tab of the metadata panel 
 (see image on the right). 
 (Click on the 'i' icon to make this panel visible; see

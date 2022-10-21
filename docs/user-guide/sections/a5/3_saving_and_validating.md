@@ -8,7 +8,7 @@ status: Ready
 
 To save the instance, click on the Save button at the bottom right of the instance.
 
-![](../../../../img/userguide/entering-metadata-folded-elements-20191124.png){:width="75%" class="centered"}
+![](../../../img/userguide/entering-metadata-folded-elements-20191124.png){:width="75%" class="centered"}
 
 While an instance is being edited in the Metadata Editor, it can be saved at any time.
 If you have made changes and try to leave the instance without saving it, 

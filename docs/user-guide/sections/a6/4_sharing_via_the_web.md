@@ -17,7 +17,7 @@ Templates, elements, and fields are displayed as empty metadata instances contai
 To share your CEDAR template, element, or field via the web, simply select Enable OpenView via its drop-down menu. 
 The CEDAR system will display a message indicating the sharing was successful. 
 
-![](../../../../img/userguide/enable-openview-menu-20190908.png){:width="25%" class="centered"}
+![](../../../img/userguide/enable-openview-menu-20190908.png){:width="25%" class="centered"}
 
 To share a CEDAR metadata instance via the web, 
 you must also share the template on which the instance is based. 

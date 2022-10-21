@@ -19,7 +19,7 @@ underlined in the image below.
 The Name is used as the name of the artifact in the Desktop, 
 and can be changed from the Desktop view.
 
-![](../../../../img/userguide/creating-new-template-20191216.png){:width="80%" class="centered"}
+![](../../../img/userguide/creating-new-template-20191216.png){:width="80%" class="centered"}
 
 You can [save and close your Template](https://metadatacenter.github.io/cedar-manual/sections/c2/4-saving-and-closing/) at any time and return to it later. You can open it for viewing or editing
 (or any other Template for which you have those access privileges) 

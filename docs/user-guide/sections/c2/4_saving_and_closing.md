@@ -10,7 +10,7 @@ To save a templating resource—Template, Element, or Field—click on the Save 
 This will be labeled Save Template, Save Element, or Save Field depending on the
 type of templating resource you are editing.
 
-![](../../../../img/userguide/creating-new-template-20191216.png){:width="80%" class="centered"}
+![](../../../img/userguide/creating-new-template-20191216.png){:width="80%" class="centered"}
 
 At the top right of the templating resource, 
 there are 3 icons that indicate the resource status.
@@ -46,14 +46,14 @@ On a successful verification, CEDAR issues a green
 While a templating resource is being edited in the Template Designer, 
 it can be saved at any time.
 
-![](../../../../img/userguide/CEDAR-recent-changes-message-20200103.png){:width="15%" class="right"}
+![](../../../img/userguide/CEDAR-recent-changes-message-20200103.png){:width="15%" class="right"}
 If you have made changes and try to leave the resource without saving it
 by using the CEDAR back button,
 CEDAR will issue a warning. If you click Continue, any changes you made will be lost
 and CEDAR will return to the Desktop view. 
 Choosing the Go Back button will return you to the templating resource.
 
-![](../../../../img/userguide/chrome-browser-leaving-site-message-202000103.png){:width="15%" class="right"}
+![](../../../img/userguide/chrome-browser-leaving-site-message-202000103.png){:width="15%" class="right"}
 If you have made changes and try to leave the resource without saving it by using the browser back button or closing the browser window, the browser will issue an error message.
 In Chrome, click on Leave Site (the default) to close the resource, 
 and on Cancel to remain on the page.
@@ -69,7 +69,7 @@ return to the Desktop view or close the window.
 
 ### Returning to Desktop
 
-![](../../../../img/userguide/back-buttons-20200103.png){:width="20%" class="right"}
+![](../../../img/userguide/back-buttons-20200103.png){:width="20%" class="right"}
 When you close the template to return to the CEDAR Desktop view,
 there are two 'return left' buttons—the one in the browser, 
 and the one at the upper left of the CEDAR Template Designer.

@@ -17,11 +17,11 @@ click on the 'kebob' menu (the vertical dots) for that metadata instance.
 If the menu list shows the Submit menu is enabled (as in the image below),
 the artifact is capable of being submitted externally.
 
-![](../../../../img/userguide/submit-metadata-externally-menu-20191126.png){:width="80%" class="centered"}
+![](../../../img/userguide/submit-metadata-externally-menu-20191126.png){:width="80%" class="centered"}
 
 When you click on the Submit menu, CEDAR will displays a dialog box (shown below) with a list of the repositories to which these metadata can be submitted. 
 
-![](../../../../img/userguide/submit-metadata-externally-dialog-box-20191126.png){:width="50%" class="centered"}
+![](../../../img/userguide/submit-metadata-externally-dialog-box-20191126.png){:width="50%" class="centered"}
 
 ## **CEDAR Submission Workflows**
 

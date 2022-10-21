@@ -60,11 +60,11 @@ Click on the "New +" button in the upper-left portion of the window, and select 
 
 This will launch the "Import files" modal dialog where you can select XML files for import:
 
-![Import files modal dialog](../../../../img/userguide/cadsr/import-files-dialog.png)<br />
+![Import files modal dialog](../../img/userguide/cadsr/import-files-dialog.png)<br />
 
 Click the Select Files button and select the XML file for form 3918956 that you exported in a previous step. This will put the XML file in the right-hand pane of the dialog that lists XML files ready for import:
 
-![Import files dialog with XML files selected](../../../../img/userguide/cadsr/selected-file-for-import.png)<br />
+![Import files dialog with XML files selected](../../img/userguide/cadsr/selected-file-for-import.png)<br />
 
 _Note:_ The {{ page.cedarw }} allows you to import multiple XML files at a time. If desired, you can continue selecting XML files for import, which will be displayed in list format in the right-hand pane until such time that you proceed with clicking the Import button.
 
@@ -73,7 +73,7 @@ _Note:_ The {{ page.cedarw }} allows you to import multiple XML files at a time.
 
 Click the Import button in the Import files dialog to begin the import process. The dialog will show a progress bar while the import is performed:
 
-![Template import in progress](**../../../../img/userguide/cadsr/template-import-progress.png)<br />
+![Template import in progress](../../img/userguide/cadsr/template-import-progress.png)<br />
 
 During import, the {{ page.cedarw }} converts each module to a section, i.e.:
 
@@ -98,7 +98,7 @@ During import, the {{ page.cedarw }} converts each module to a section, i.e.:
 
 Once the import is complete, the dialog will show a completion message:
 
-![Template import completed](../../../../img/userguide/cadsr/template-import-complete.png)<br />
+![Template import completed](../../img/userguide/cadsr/template-import-complete.png)<br />
 
 ## Step 5 - Examine the import report
 <a name="import-report"></a>
@@ -111,44 +111,44 @@ This step is optional, but helpful if you want to be aware of any issues encoute
 
 The following screenshot shows the log from importing form 3918956 in the previous step with addition of a section with CDEs highlighted:
 
-![Template import report](../../../../img/userguide/cadsr/template-import-report.png)<br />
+![Template import report](../../img/userguide/cadsr/template-import-report.png)<br />
 
 _Note:_ The {{ page.cedarw }} only handles CDEs with released statuses. If you build a form in the Form Builder application that contains questions associated with CDEs that don't have a released status, these CDEs will be dropped from the template during the import process. You may want to pay special attention to lines in the import report that indicate removal of CDEs from templates, e.g.:
 
-![Template import report showing CDE rejection](../../../../img/userguide/cadsr/template-import-report-missing-cde.png)<br />
+![Template import report showing CDE rejection](../../img/userguide/cadsr/template-import-report-missing-cde.png)<br />
 
 If you import multiple XML files at once, the Report tab will contain a set of subtabs where each subtab contains the log output for a single XML file. The following screenshot shows the Report tab after the import of two XML files:
 
-![Template import report showing CDE rejection](../../../../img/userguide/cadsr/template-import-report-multi.png)<br />
+![Template import report showing CDE rejection](../../img/userguide/cadsr/template-import-report-multi.png)<br />
 
 ## Step 6 - View the imported template
 <a name="view-template"></a>
 
 After optionally reviewing the import report, click the Close button to dismiss the Import files dialog box. The newly imported template will now be visible in your workspace. The template title is created by concatenating the form's Long Name and Public ID in parenthesis. If you select the template and click the Details button (lowercase 'i' in the upper right), a details pane will be displayed with additional information about the template, e.g., description, location, persmissions, etc.:
 
-![Newly imported template in a personal workspace folder](../../../../img/userguide/cadsr/imported-template.png)<br />
+![Newly imported template in a personal workspace folder](../../img/userguide/cadsr/imported-template.png)<br />
 
 To view the contents of the template, double-click on the template in your workspace to open the template designer view. Each artifact will be listed in a collapsed format. To examine sections and fields, click anywhere in the header bars to expand the contents:
 
-![Newly imported template contents](../../../../img/userguide/cadsr/imported-template-contents.png)<br />
+![Newly imported template contents](../../img/userguide/cadsr/imported-template-contents.png)<br />
 
 It is also possible to create instances of templates so that you can see what they will look like to end users that need to populate the templates with data. Exit the template designer view by clicking the back arrow in the upper left corner of the window. Click the Populate button next to any imported template to open the metadata editor, which allows you to populate an instance of your template with values:
 
-![Populate an imported template in the metadata editor](../../../../img/userguide/cadsr/populate-imported-template.png)<br />
+![Populate an imported template in the metadata editor](../../img/userguide/cadsr/populate-imported-template.png)<br />
 
 # Editing imported templates
 
 When forms are imported into the {{ page.cedarw }}, the resulting templates are assigned a status of "published":
 
-![Template with published status](../../../../img/userguide/cadsr/template-published-status.png)<br />
+![Template with published status](../../img/userguide/cadsr/template-published-status.png)<br />
 
 Published templates are unmodifiable. If you wish to make changes to an imported template, you first need to make a copy of the template. Click the More menu (three vertical dots), select Copy to..., and save a copy of the template to a location of your choice.
 
-![More menu for a template](../../../../img/userguide/cadsr/template-more-menu.png)<br />
+![More menu for a template](../../img/userguide/cadsr/template-more-menu.png)<br />
 
 The copied template will not have a published status and will allow you to make any desired modifications:
 
-![Copied template in a personal workspace](../../../../img/userguide/cadsr/template-copy.png)<br />
+![Copied template in a personal workspace](../../img/userguide/cadsr/template-copy.png)<br />
 
 If you need general instructions for editing templates, please refer to the following sections of the user guide:
 

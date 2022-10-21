@@ -34,7 +34,7 @@ try shrinking the view within your browser to put more of the template on the sc
 
 ### Adding a Field Definition
 
-![](../../../../img/userguide/field-addition-menu-20191229.png){:width="8%" class="right"}
+![](../../../img/userguide/field-addition-menu-20191229.png){:width="8%" class="right"}
 Choose the type of field to add to your templating resource
 using the vertical selector at the upper right of your Template Designer window.
 The first few choices give you simple ways to add
@@ -119,14 +119,14 @@ the value in this field has a text length that does not satisfy the criteria.
 
 #### Values
 
-![](../../../../img/userguide/text-field-values-tab-20191229.png){:width="50%" class="right"}
+![](../../../img/userguide/text-field-values-tab-20191229.png){:width="50%" class="right"}
 The Values tab shows a view of the current value set(s) that the metadata author
 can use to fill out a text field. If no selections are listed, the metadata author
 is prompted to enter free text. 
 This ability to choose controlled values for the field is fundamental
 to CEDAR's semantic capabilities. 
 
-![](../../../../img/userguide/controlled-term-selection-modal-20191229.png){:width="50%" class="right"}
+![](../../../img/userguide/controlled-term-selection-modal-20191229.png){:width="50%" class="right"}
 Clicking on the Add button brings up a modal window 
 from which you can select the term, branch, or ontology 
 from which legal values may be chosen by the metadata author. 
@@ -195,7 +195,7 @@ underlined in the image below.
 Note the Name is used as the name of the artifact in CEDAR, 
 and can also be changed from the Desktop.
 
-![](../../../../img/userguide/field-artifact-created-20200101.png){:width="80%" class="centered"}
+![](../../../img/userguide/field-artifact-created-20200101.png){:width="80%" class="centered"}
 
 Now the content of the Field artifact—the field definition—can be created.
 Since only one field specification can be in a Field artifact,
@@ -220,7 +220,7 @@ the search (magnifying glass) icon in the Template Designer's field addition men
 brings up a window to find other CEDAR templating resources—Elements or Fields—
 that can be imported into the Element or Field you are editing.
 Use of this window is described in [Adding Elements](https://metadatacenter.github.io/cedar-manual/sections/c2/3_adding_elements/).
-![](../../../../img/userguide/artifact-import-window-20200101.png){:width="60%" class="centered"}
+![](../../../img/userguide/artifact-import-window-20200101.png){:width="60%" class="centered"}
 
 ## **Next Steps**
 

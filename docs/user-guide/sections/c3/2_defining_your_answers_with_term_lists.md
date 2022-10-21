@@ -64,7 +64,7 @@ and the search for terms begins immediately.
 In this case, the name is "Study Type", and a set of results has been returned.
 You can see each term in the scrollable list—the most likely terms are listed first.
 
-![](../../../../img/userguide/search-for-terms-list-results-20191229.png){:width="80%" class="centered"}
+![](../../../img/userguide/search-for-terms-list-results-20191229.png){:width="80%" class="centered"}
 
 You can change the search terms by typing in the search field. 
 If you search doesn't begin immediately, click on the magnifying glass to start it.
@@ -79,7 +79,7 @@ you will see a set of Advanced Search Options.
 The first option, to search for a term anywhere in BioPortal, is pre-selected.
 (We will discuss the other 'I want to…" options in later subsections.)
 
-![](../../../../img/userguide/search-for-term-advanced-options-20191229.png){:width="80%" class="centered"}
+![](../../../img/userguide/search-for-term-advanced-options-20191229.png){:width="80%" class="centered"}
 
 For now, we want to focus on the "Narrow your search to specific ontologies" field.
 If you know the ontologies in BioPortal that you want to use for your terms,
@@ -95,7 +95,7 @@ In this case, we have selected the ontologies with the acronyms CTO and NCIT.
 This technique can be used to see more terms in the given ontologies,
 or to exclude any other ontologies from being considered.
 
-![](../../../../img/userguide/search-for-term-restrict-ontologies-20191229.png){:width="80%" class="centered"}
+![](../../../img/userguide/search-for-term-restrict-ontologies-20191229.png){:width="80%" class="centered"}
 
 ### Reviewing Found Terms
 
@@ -113,7 +113,7 @@ in most cases scrolled to the specific term identified.
 (Sometimes the term appears multiple places in the ontology,
 and you will need to explore to find it.)
 
-![](../../../../img/userguide/search-for-terms-show-details-20191229.png){:width="80%" class="centered"}
+![](../../../img/userguide/search-for-terms-show-details-20191229.png){:width="80%" class="centered"}
 
 Whenever you click on a term, its detailed information appears
 in the Term Details tab on the right. 
@@ -124,7 +124,7 @@ and open and close its branches by clicking on the + and - boxes on the left sid
 Below we see the details of classes that were hidden under the Study Type branch 
 in the screenshot above.
 
-![](../../../../img/userguide/search-for-terms-open-branch-20191229.png){:width="80%" class="centered"}
+![](../../../img/userguide/search-for-terms-open-branch-20191229.png){:width="80%" class="centered"}
 
 In this case, we may decide this class is not appropriate, 
 as it contains many Study Types that are particular to plant science.
@@ -133,7 +133,7 @@ we can see from examining its branch contents
 (in the left-hand display under 'CTO classes')
 that it is a much more generic description of study types.
 
-![](../../../../img/userguide/search-for-branch-20191229.png){:width="80%" class="centered"}
+![](../../../img/userguide/search-for-branch-20191229.png){:width="80%" class="centered"}
 
 In the next section we'll discuss how you can choose what you want to include in your
 list of responses.
@@ -146,7 +146,7 @@ These control what you can select for your field's values.
 (If the term you have selected does not have any subclasses,
 you will not see the Branch tab, only Term and Ontology.)
 
-![](../../../../img/userguide/select-branch-for-addition-20191229.png){:width="80%" class="centered"}
+![](../../../img/userguide/select-branch-for-addition-20191229.png){:width="80%" class="centered"}
 
 In the screen shot, the BRANCH tab is selected; the term identifier and name are shown;
 and the description says "Click to add all the descendants of the selected term."
@@ -181,7 +181,7 @@ is used to find the results (by acronym or name).
 In the following example, a search for a Study Type ontology is being conducted;
 this will not find any results, since no Study Type ontologies exist in BioPortal.
 
-![](../../../../img/userguide/search-for-ontology-20191229.png){:width="80%" class="centered"}
+![](../../../img/userguide/search-for-ontology-20191229.png){:width="80%" class="centered"}
 
 A Value Set in CEDAR is like a very simple ontology; it consists only of a set of terms 
 that have identifiers and labels. 
@@ -194,7 +194,7 @@ The Source column is the name of the ontology containing the Value Set;
 in BioPortal Value Sets are typically grouped into organizational ontologies 
 for easier management. 
 
-![](../../../../img/userguide/search-for-value-set-20191229.png){:width="80%" class="centered"}
+![](../../../img/userguide/search-for-value-set-20191229.png){:width="80%" class="centered"}
 
 ## *Adding Your Own Terms*
 
@@ -231,21 +231,21 @@ and can not be modified once they are defined (per above paragraph).
 To begin the process of adding a new term, click on the Add New Terms link at the top of the term selection dialog box.
 The link is highlighted in the image below. 
 
-![](../../../../img/userguide/create-new-terms-20191229.png){:width="60%" class="centered"}
+![](../../../img/userguide/create-new-terms-20191229.png){:width="60%" class="centered"}
 
 The next two screenshots show the resulting dialog box,
 and the entry of appropriate text into the fields.
 
-![](../../../../img/userguide/create-term-20191229.png){:width="70%" class="centered"}
+![](../../../img/userguide/create-term-20191229.png){:width="70%" class="centered"}
 
-![](../../../../img/userguide/create-term-description-20191229.png){:width="70%" class="centered"}
+![](../../../img/userguide/create-term-description-20191229.png){:width="70%" class="centered"}
 
 If you click on the "Link to existing terms (optional)" rocker switch, you will be taken through additional dialogs (first one shown)
 that let you add relationships from your term to existing terms in existing ontologies.
 In the future, this information may support informing ontology resource authors
 of your proposed addition to their ontology. 
 
-![](../../../../img/userguide/create-term-linked-to-existing-20191229.png){:width="70%" class="centered"}
+![](../../../img/userguide/create-term-linked-to-existing-20191229.png){:width="70%" class="centered"}
 
 ### Adding a New List of Terms
 
@@ -265,7 +265,7 @@ or put some terms ahead of others. CEDAR supports these capabilities.
 Both use the Arrange button on the Values tab of the field in the Template Designer,
 which brings up the following dialog.
 
-![](../../../../img/userguide/arrange-terms-20210807.png){:width="60%" class="centered"}
+![](../../../img/userguide/arrange-terms-20210807.png){:width="60%" class="centered"}
 
 ### Rejecting Terms
 

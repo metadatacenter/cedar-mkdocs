@@ -6,7 +6,7 @@ status: Ready
 
 When you run CEDAR, the first page you see will be your Workspace home page, and the top of your browser may look something like this:
 
-![](../../../../img/userguide/browser-cedar-urls-20190910.png){:width="100%"}
+![](../../../img/userguide/browser-cedar-urls-20190910.png){:width="100%"}
 
 The bar at the top of the browser shows part of the IRI describing CEDAR's location. Here we describe how to read these IRIs (also known as URLs), so that you can use parts of it in the rest of this section. 
 

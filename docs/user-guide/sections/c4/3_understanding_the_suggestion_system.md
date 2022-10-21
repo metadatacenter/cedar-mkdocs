@@ -31,12 +31,12 @@ Suppose we have an “Experiment” template with three fields: (1) an “experi
 
 Fig. 1 shows the template in the Template Designer and the “Suggestions” setting for the field “tissue”. The user has clicked on the “tissue” field and enabled metadata recommendations for the field using the “Suggestions” tab. 
 
-![](../../../../img/userguide/IntelligentAuthoringGuideFigure1.png){:width="75%" class="centered"}
+![](../../../img/userguide/IntelligentAuthoringGuideFigure1.png){:width="75%" class="centered"}
 
 We will assume the user also enables suggestions for the field “disease”.
 
 Fig. 2 shows a screenshot of the Metadata Editor for a template generated from the Experiment template. The user entered the value “skin” for the field “tissue” and is about to enter a value for the field “disease”. In this case, the editor shows four suggested values: “skin ulcer”, “atopic dermatitis”, “melanoma”, and “psoriasis”. The percentage shown between brackets next to each suggestion represents the strength of the recommendation. The recommendations provided by the system are context-sensitive, meaning that the values predicted for the “disease” field are generated and ranked based on the value entered for the “tissue” field. In this case, the four values suggested by the system are useful, since all of them are diseases that affect the skin.
-![](../../../../img/userguide/IntelligentAuthoringGuideFigure2.png){:width="75%" class="centered"}
+![](../../../img/userguide/IntelligentAuthoringGuideFigure2.png){:width="75%" class="centered"}
 
 ## Frequently Asked Questions
 

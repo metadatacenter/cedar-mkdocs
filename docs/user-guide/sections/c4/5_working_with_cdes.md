@@ -52,7 +52,7 @@ This is the location of all the imported CDEs from caDSR.
 Double-click on the CDE folder to open it. You must wait a while (10-15 seconds) 
 before the first screen of CDEs is displayed.
 
-![](../../../../img/userguide/cde-folder-20191212.png){:width="80%" class="centered"}
+![](../../../img/userguide/cde-folder-20191212.png){:width="80%" class="centered"}
 
 You will quickly discover that navigating through this list isn't practical, as only a small 
 number can be presented at any one time. Instead, use the search bar to narrow down the list, 
@@ -60,7 +60,7 @@ as described above.
 
 ### Browsing by CDE Categories
 
-![](../../../../img/userguide/category-dropdown-20191212.png){:width="20%" class="right"}
+![](../../../img/userguide/category-dropdown-20191212.png){:width="20%" class="right"}
 In caDSR, CDEs and forms can be classified using Classifications, more specifically 
 Classification Schemes and Classification Scheme Item. The caDSR classifications have been
 imported into CEDAR as hierarchical categories under the NCI caDSR category, 

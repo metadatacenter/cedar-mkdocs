@@ -27,8 +27,8 @@ We will walk you through the content of this screenshot using the letters in the
 * (O) The profile icon lets you see information about your CEDAR profile, including your API key, and offers features like 'Support' and 'Logout'.
 
 
-![](../../../../img/userguide/cedar-workspace-annotated-20190911.png){:width="95%" class="centered"}
+![](../../../img/userguide/cedar-workspace-annotated-20190911.png){:width="95%" class="centered"}
 
 The left-hand image below shows the cards-based view of the Resources box. The right-hand image below shows the informational panel with metadata displayed for the highlighted resource.
 
-![](../../../../img/userguide/cedar-workspace-views-20190911.png){:width="95%" class="centered"}
+![](../../../img/userguide/cedar-workspace-views-20190911.png){:width="95%" class="centered"}

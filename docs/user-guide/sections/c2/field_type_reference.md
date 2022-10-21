@@ -178,14 +178,14 @@ Do so carefully, as clicking on the RDF icon again will clear any existing prope
 and begin a new search.
 
 #### Values
-![](../../../../img/userguide/text-field-values-tab-20191229.png){:width="50%" class="right"}
+![](../../../img/userguide/text-field-values-tab-20191229.png){:width="50%" class="right"}
 The Values tab shows a view of the current value set(s) that the metadata author
 can use to fill out a text field. If no selections are listed, the metadata author
 is prompted to enter free text. 
 This ability to choose controlled values for the field is fundamental
 to CEDAR's semantic capabilities. 
 
-![](../../../../img/userguide/controlled-term-selection-modal-20191229.png){:width="50%" class="right"}
+![](../../../img/userguide/controlled-term-selection-modal-20191229.png){:width="50%" class="right"}
 Clicking on the Add button brings up a modal window 
 from which you can select the term, branch, or ontology 
 from which legal values may be chosen by the metadata author. 

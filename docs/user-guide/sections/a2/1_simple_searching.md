@@ -23,4 +23,4 @@ You can also constrain the resulting resources by their type, as described in [C
 
 The search results are illustrated in the Figure below. In later sections, we will demonstrate how to organize and constrain these search results, and perform advanced searches.
 
-![](../../../../img/userguide/search.png){:width="75%" class="centered"}
+![](../../../img/userguide/search.png){:width="75%" class="centered"}

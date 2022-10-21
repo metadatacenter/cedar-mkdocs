@@ -98,7 +98,7 @@ Click on the "New +" button in the upper-left portion of the window, and select 
 
 This will create a new template object and open the template designer view:
 
-![New template in the {{ page.cedarw }} template designer view](../../../../img/userguide/cadsr/creating-new-template-20191216.png)<br />
+![New template in the {{ page.cedarw }} template designer view](../../img/userguide/cadsr/creating-new-template-20191216.png)<br />
 
 In the dark gray header at the top of the page, enter a name and description for your template, leaving the Identifier field blank.
 
@@ -109,23 +109,23 @@ Click the "SAVE TEMPLATE" button. This will ensure that your new template is sav
 
 Locate the vertical selector toolbar on the right-hand side of the template desinger view and click the "Search for fields and elements" button (depicted with a magnifying glass icon). This will launch a modal dialog where you can use the Search bar across the top to locate the desired CDE by entering, e.g., the Public ID or double quoted title and pressing the Enter key:
 
-![Search for CDE by Public ID in the template designer](../../../../img/userguide/cadsr/element-search-dialog.png)<br />
+![Search for CDE by Public ID in the template designer](../../img/userguide/cadsr/element-search-dialog.png)<br />
 
 If multiple items are returned in the search results, it can be particularly helpful to click on the individual entries to see additional information such as the description, location, permissions, version numbers, etc.:
 
-![View more information about a search result](../../../../img/userguide/cadsr/search-result-info.png)<br />
+![View more information about a search result](../../img/userguide/cadsr/search-result-info.png)<br />
 
 _Note:_ In addition to using the Search bar at the top of the modal dialog, you can browse for CDEs by location using the links in the top left, or browse by category using the NCI caDSR tree widget.
 
 Once you locate the desired CDE, select it in the middle pane and click the "SELECT" button. This will insert the CDE into your template and return to the template designer view.
 
-![CDE inside a template](../../../../img/userguide/cadsr/add-cde-to-template.png)<br />
+![CDE inside a template](../../img/userguide/cadsr/add-cde-to-template.png)<br />
 
 Feel free to practice by adding several more CDEs to your template.
 
 _Note:_ When a CDE or any other type of artifact is added to a template, it is initially show in an expanded view and others are collapsed. To expand an artifact and collapse others, simply click on the header bar of any given artifact. The following screen shot depicts a template with four CDEs where the second CDE is expanded, and all others are collapsed:
 
-![A CDE in expanded view](../../../../img/userguide/cadsr/expanded-vs-collapsed.png)<br />
+![A CDE in expanded view](../../img/userguide/cadsr/expanded-vs-collapsed.png)<br />
 
 There are several helpful tips to keep in mind when populating templates:
 
@@ -147,19 +147,19 @@ As indicated in the introduction, there are certain CDE options that you are all
 
 If you want to change question text, which is referred to as the "preferred label" in the {{ page.cedarw }}, you can place your mouse in the "Enter Preferred Label" text box (second text box from the top) to see a dropdown list of available options. If the CDE has a large number of options for the preferred label, the {{ page.cedarw }} offers the ability to view all of the options depicted as a tag group by clicking the OPTIONS link at the bottom of the CDE:
 
-![Preferred label options](../../../../img/userguide/cadsr/label-options.png)<br />
+![Preferred label options](../../img/userguide/cadsr/label-options.png)<br />
 
 Some CDEs have permissible values, which are referred to in the {{ page.cedarw }} as simply "values". If you added such a CDE to your template, there will be a VALUES link at the bottom of the CDE:
 
-![CDE with values](../../../../img/userguide/cadsr/cde-values-link.png)<br />
+![CDE with values](../../img/userguide/cadsr/cde-values-link.png)<br />
 
 To view the values, click the VALUES link at the bottom of the CDE, then click the ARRANGE link, which launches the Arrange Values modal dialog with the list of allowed values:
 
-![Arrange Values modal dialog](../../../../img/userguide/cadsr/arrange-values-modal.png)<br />
+![Arrange Values modal dialog](../../img/userguide/cadsr/arrange-values-modal.png)<br />
 
 Hover your mouse over individual values to display right hand icons that allow you to either delete a value, or move the value to the top and/or a specific position in the list.
 
-![Reposition allowed values](../../../../img/userguide/cadsr/reposition-values.png)<br />
+![Reposition allowed values](../../img/userguide/cadsr/reposition-values.png)<br />
 
 Adding values is not currently possible from within the {{ page.cedarw }}. Requests for new values should be submitted via email to the following address: [caDSR.RA@mail.nih.gov](mailto:caDSR.RA@mail.nih.gov).
 
@@ -170,15 +170,15 @@ Now that you have added several CDEs and possibly other artifacts to your templa
 
 If you want to get a sense for how your template will look to someone that is filling it out, click either the Populate icon, or click the More icon and select the Populate menu item. This will open your template in the metadata editor where you can populate an instance of your template:
 
-![Metadata editor](../../../../img/userguide/cadsr/metadata-editor-view.png)<br />
+![Metadata editor](../../img/userguide/cadsr/metadata-editor-view.png)<br />
 
 If you fill out your template and click the SAVE button, the {{ page.cedarw }} will create an instance of your template and save it in the same directory. To view the instance, click the left arrow in the top left corner of the main window to return to your workspace. The new instance will have the same name as your template with the word "metadata" tacked onto the end:
 
-![Template instance](../../../../img/userguide/cadsr/template-instance.png)<br />
+![Template instance](../../img/userguide/cadsr/template-instance.png)<br />
 
 If you want to organize your templates using folders, you can create new folders by clicking the "New +" button at the top left and selecting Folder from the resulting dropdown menu. Once you have your desired folder structure in place, you can click on the More buttons associated with your templates and select the "Copy to..." and/or "Move to..." menu items to relocate your templates:
 
-![More menu for artifacts](../../../../img/userguide/cadsr/more-menu.png)<br />
+![More menu for artifacts](../../img/userguide/cadsr/more-menu.png)<br />
 
 The More menu also contains options for renaming and deleting your templates.
 
@@ -190,7 +190,7 @@ When you create a template in your workspace or inside of a personal folder stru
 
 If you wish to share your template with another user or group, click the More icon and select the "Share..." menu item to bring up the "Share settings" modal dialog:
 
-![Share settings modal dialog](../../../../img/userguide/cadsr/share-settings-modal.png)<br />
+![Share settings modal dialog](../../img/userguide/cadsr/share-settings-modal.png)<br />
 
 Use the "With people" section to locate other users with whom you would like to share your template. After selecting a user name, you can use the dropdown on the right hand side of the user name to specify whether the user has read, write, or owner privileges for your template.
 

@@ -30,16 +30,16 @@ as "categories".
 To browse CDEs by category, open the root node of the tree structure in the 
 CATEGORIES pane entitled "NCI caDSR":
 
-![CATEGORIES pane](../../../../img/userguide/cadsr/categories.png)<br />
+![CATEGORIES pane](../../img/userguide/cadsr/categories.png)<br />
 
 Select a top-level category, e.g., "ABTC" to see all the CDEs in the category:
 
-![CATEGORIES pane with ABTC selected](../../../../img/userguide/cadsr/category-abtc.png)<br />
+![CATEGORIES pane with ABTC selected](../../img/userguide/cadsr/category-abtc.png)<br />
 
 Continue navigating deeper in the tree to further refine the list of CDEs 
 displayed in the center pane:
 
-![CATEGORIES pane with a leaf node in the tree selected](../../../../img/userguide/cadsr/category-leaf-node.png)<br />
+![CATEGORIES pane with a leaf node in the tree selected](../../img/userguide/cadsr/category-leaf-node.png)<br />
 
 To see more information about any of the CDEs listed in the center pane, 
 select the CDE, click the "Details" button (lowercase 'i'), and look to the 
@@ -47,7 +47,7 @@ righ-hand side of the window where the {{ page.cedarw }} displays a details
 pane. The details pane has several tabs that show a wide variety of attributes 
 including location, permissions, version, etc.:
 
-![CDE details pane](../../../../img/userguide/cadsr/cde-details-pane.png)<br />
+![CDE details pane](../../img/userguide/cadsr/cde-details-pane.png)<br />
 
 
 ## Browse CDEs via the Community Folder
@@ -61,7 +61,7 @@ To browse CDEs from the Community Folder, click the Community Folder link in
 the upper left portion of the window. In the center pane double-click the 
 folder entitled "CDE":
 
-![CDE Community Folder](../../../../img/userguide/cadsr/cde-folder.png)<br />
+![CDE Community Folder](../../img/userguide/cadsr/cde-folder.png)<br />
 
 All of the CDEs imported into CEDAR are shown in the center. The buttons at 
 the top right-hand side of the window are useful for tweaking how the CDEs 
@@ -72,7 +72,7 @@ are displayed, e.g.:
 - Use the Sort button to sort CDEs by creation date, modification date, or title
 <br /><br />
 
-![CDEs grid view sorted by title](../../../../img/userguide/cadsr/sorted-cdes.png)<br />
+![CDEs grid view sorted by title](../../img/userguide/cadsr/sorted-cdes.png)<br />
 
 
 ## Search for CDEs from the Desktop
@@ -95,27 +95,27 @@ box to efficiently locate CDEs:
 Perform a string search by entering the Long Name of the CDE, surrounded by 
 double quotes:
 
-![String search for a CDE by Long Name](../../../../img/userguide/cadsr/search-by-long-name.png)<br />
+![String search for a CDE by Long Name](../../img/userguide/cadsr/search-by-long-name.png)<br />
 
 Searching for a shorter Public ID like 62 will sometimes returns too many 
 results. Instead, enter the Public ID in parentheses surrounded by double 
 quotes:
 
-![String search for a CDE by Public ID](../../../../img/userguide/cadsr/search-by-public-id.png)<br />
+![String search for a CDE by Public ID](../../img/userguide/cadsr/search-by-public-id.png)<br />
 
 For longer Public IDs, simply entering the ID in the search box is sufficient:
 
-![Search for a CDE by Public ID](../../../../img/userguide/cadsr/search-by-id-only.png)<br />
+![Search for a CDE by Public ID](../../img/userguide/cadsr/search-by-id-only.png)<br />
 
 Perform a search by CDE Version number to see a list of CDEs with a 
 particular version:
 
-![Search for CDEs by version](../../../../img/userguide/cadsr/search-by-version.png)<br />
+![Search for CDEs by version](../../img/userguide/cadsr/search-by-version.png)<br />
 
 Perform a string search by entering the CDE Definition (known as "Description" 
 in the {{ page.cedarw }}) surrounded by double quotes:
 
-![Search for CDEs by definition (aka description)](../../../../img/userguide/cadsr/search-by-defintion.png)<br />
+![Search for CDEs by definition (aka description)](../../img/userguide/cadsr/search-by-defintion.png)<br />
 
 The {{ page.cedarw }} offers several more sophisticated methods of search 
 including the use of wildcards, boolean expressions, and the ability to search 
@@ -133,7 +133,7 @@ To search for a CDE from within a template:
 1. Create a new template, or open an existing template.
 2. In the resulting template designer interface, click the Search button 
    (magnifying glass icon) in the vertical finder toolbar:
-   ![Vertical finder toolbar](../../../../img/userguide/cadsr/vertical-finder.png)
+   ![Vertical finder toolbar](../../img/userguide/cadsr/vertical-finder.png)
 3. Use the search box in the resulting dialog to search for the desired CDE.
 
 To search for a CDE from within an element:

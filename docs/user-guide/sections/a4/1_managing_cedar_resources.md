@@ -43,7 +43,7 @@ There is always a destination folder selected.
 If no folder is highlighted in the window, the destination folder is the currently displayed folder.
 If a folder is highlighted in the window, the highlighted folder is the target folder that will be used.
 
-![](../../../../img/userguide/destination-selection-window-20190912.png){:width="50%" class="centered"}
+![](../../../img/userguide/destination-selection-window-20190912.png){:width="50%" class="centered"}
 
 #### ***Copy to…*** Command
 
@@ -78,4 +78,4 @@ The delete command displays a confirmation box, then deletes the item.
 
 Use this command with caution, as there is no undo command. Contact the CEDAR team to restore content you have deleted.
 
-![](../../../../img/userguide/cedar-resource-menu-20190912.png){:width="75%" class="centered"}
+![](../../../img/userguide/cedar-resource-menu-20190912.png){:width="75%" class="centered"}

@@ -17,7 +17,7 @@ CEDAR will search through the title, description, and version number of the arti
 
 Suppose the following metadata instance:
 
-![](../../../../img/userguide/field_search_example_1.png){:height="100%" width="100%"}
+![](../../../img/userguide/field_search_example_1.png){:height="100%" width="100%"}
 
 Examples of queries that will retrieve the instance above:
 
@@ -69,7 +69,7 @@ Examples of queries that will retrieve the instance above:
 
 Given the template for the previous instance:
 
-![](../../../../img/userguide/field_search_example_2.png){:height="100%" width="100%"}
+![](../../../img/userguide/field_search_example_2.png){:height="100%" width="100%"}
 
 Here are some examples of queries that can be used to find the template above:
 
