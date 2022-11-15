@@ -25,7 +25,7 @@ A non-exhaustive list of the start aliases is as follows
 startmongo
 startneo
 startmysql
-startelastic
+startsearch
 startkibana
 startredis
 startrc

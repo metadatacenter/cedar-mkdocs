@@ -19,9 +19,9 @@ You should see something like:
 ```
 Apache Maven 3.8.6 (84538c9988a25aec085021c365c560670ad80f63)
 Maven home: /opt/homebrew/Cellar/maven/3.8.6/libexec
-Java version: 18.0.2.1, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk/18.0.2.1/libexec/openjdk.jdk/Contents/Home
+Java version: 19, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk/19/libexec/openjdk.jdk/Contents/Home
 Default locale: en_US, platform encoding: UTF-8
-OS name: "mac os x", version: "12.6", arch: "aarch64", family: "mac"
+OS name: "mac os x", version: "13.0.1", arch: "aarch64", family: "mac"
 ```
 
 It is fine if `maven` uses `openjdk` as seen above. 

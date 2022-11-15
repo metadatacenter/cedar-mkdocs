@@ -30,7 +30,7 @@ java --version
 
 You should see something similar:
 ```
-java 19 2022-09-20
-Java(TM) SE Runtime Environment (build 19+36-2238)
-Java HotSpot(TM) 64-Bit Server VM (build 19+36-2238, mixed mode, sharing)
+java 19.0.1 2022-10-18
+Java(TM) SE Runtime Environment (build 19.0.1+10-21)
+Java HotSpot(TM) 64-Bit Server VM (build 19.0.1+10-21, mixed mode, sharing)
 ```

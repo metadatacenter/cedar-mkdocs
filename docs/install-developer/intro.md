@@ -1,6 +1,6 @@
 # Introduction
 
-The CEDAR Developer Team uses `macOS Catalina` for development. This guide will describe how to install the CEDAR project and all the dependencies onto an empty macOS. 
+The CEDAR Developer Team uses `macOS Ventura` for development. This guide will describe how to install the CEDAR project and all the dependencies onto an empty macOS. 
 
 Of course, the project could be installed to other operating systems as well, and we encourage you to do so.
 

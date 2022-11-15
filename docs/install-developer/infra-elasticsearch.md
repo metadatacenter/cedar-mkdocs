@@ -37,7 +37,7 @@ cluster.name: elasticsearch_cedar
 ## Start Elasticsearch
 
 ```sh
-startelastic
+startsearch
 ```
 
 ## Check Elasticsearch status
