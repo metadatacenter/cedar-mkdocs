@@ -1,31 +1,30 @@
-# Elasticsearch
-CEDAR uses `Elasticsearch` to make search for artifacts possible.
+# OpenSearch
+CEDAR uses `OpenSearch` to make search for artifacts possible.
 
-## Install Elasticsearch
+## Install OpenSearch
 
-Please install `Elasticsearch`, version 7:
+Please install `OpenSearch`, version 7:
 
 ```sh
-brew tap elastic/tap
-brew install elastic/tap/elasticsearch-full
+brew install opensearch
 ```
 
 And pin this version:
 
 ```sh
-brew pin elasticsearch-full
+brew pin opensearch
 ```
     
 ???+ warning "Important"
 
-    Do not add Elasticsearch as a background service! We will have scripts in place which will start it when necessary.
+    Do not add OpenSearch as a background service! We will have scripts in place which will start it when necessary.
 
-    **Do not start Elasticsearch at this point!**
+    **Do not start OpenSearch at this point!**
  
-## Configure Elasticsearch
+## Configure OpenSearch
 
 ```sh
-vi /usr/local/etc/elasticsearch/elasticsearch.yml
+vi $(brew --prefix)/etc/opensearch/opensearch.yml
 ```
 
 Around `line #17`, change the cluster name configuration:
@@ -34,46 +33,46 @@ Around `line #17`, change the cluster name configuration:
 cluster.name: elasticsearch_cedar
 ```
 
-## Start Elasticsearch
+## Start OpenSearch
 
 ```sh
 startsearch
 ```
 
-## Check Elasticsearch status
+## Check OpenSearch status
 ```sh
 cedarss
 ```
 
 You should see the following lines in the output:
 ```
-| Elasticsearch-REST         | Running | httpResponse| 9200| HTTP/1.1\s200\sOK |
-| Elasticsearch-Transport    | Running | openPort    | 9300|                   |
+| OpenSearch-REST            | Running | httpResponse| 9200| HTTP/1.1\s200\sOK |
+| OpenSearch-Transport       | Running | openPort    | 9300|                   |
 ```
 
-## Install Kibana
+## Install OpenSearch Dashboards
 
-`Kibana` can be used to interact with `Elasticsearch`.
+`OpenSearch Dashboards` can be used to interact with `OpenSearch`.
 
-Please install `Elasticsearch`, version 6.8:
+Please install the latest `OpenSearch Dashboards`:
 
 ```sh
-brew install elastic/tap/kibana-full
+brew install opensearch-dashboards
 ```
 
 And pin this version:
 
 ```sh
-brew pin kibana-full
+brew pin opensearch-dashboards
 ```
 
-## Start Kibana
+## Start OpenSearch Dashboards
 
 ```sh
-startkibana
+startsearchdash
 ```
 
-## Check Kibana status
+## Check OpenSearch Dashboards status
 
 ```sh
 cedarss
@@ -82,6 +81,6 @@ cedarss
 You should see the following lines in the output:
 ```
 | --- Monitoring ------------|         |             |     |                   |
-| Kibana                     | Running | httpResponse| 5601| kbn-name:\skibana |
+| OpenSearch-Dashboards      | Running | httpResponse| 5601| HTTP/1.1\s302\sFou|
 ```
 

@@ -42,7 +42,7 @@ Neo4j server uses a default username, 'neo4j'. We will change the password for t
 Execute the following:
 
 ```sh
-~/CEDAR/neo4j/bin/neo4j-admin set-initial-password changeme
+JAVA_HOME=$(brew --prefix)/opt/openjdk@11/ && ${CEDAR_NEO4J_HOME}/bin/neo4j-admin set-initial-password changeme
 ```
 
 ## Start Neo4j
