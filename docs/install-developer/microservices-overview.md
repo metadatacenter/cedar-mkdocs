@@ -1,19 +1,5 @@
 # Starting the CEDAR microservices
 
-## Before running
-
-Before running the microservices for the first time, execute the following script to initialize the CEDAR databases:
-
-```sh
-cedarat system-reset
-```
-
-???+ warning "Use System Reset with care"
-
-    This system-reset option deletes all user content in CEDAR. 
-    It should only be used before the microservices are first started or when you want to bring a system back to a clean-slate condition.
-    
-
 ## Running the microservices
 
 To run all the CEDAR microservices:

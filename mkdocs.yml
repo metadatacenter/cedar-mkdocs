@@ -205,7 +205,9 @@ nav:
               - install-developer/infra-start.md
           - Microservices:
               - install-developer/microservices-configuration.md
+              - install-developer/microservices-system-reset-1.md
               - install-developer/microservices-overview.md
+              - install-developer/microservices-system-reset-2.md
           - Frontend components:
               - install-developer/frontend-overview.md
               - install-developer/frontend-node-install.md
