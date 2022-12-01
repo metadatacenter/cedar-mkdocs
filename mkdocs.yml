@@ -148,7 +148,9 @@ nav:
               - install-developer/prereq-wget.md
               - install-developer/prereq-openssl.md
               - install-developer/prereq-jdk.md
+              - install-developer/prereq-jdk-11.md
               - install-developer/prereq-maven.md
+              - install-developer/prereq-python.md
           - User, home directory, passwords and domain:
               - install-developer/os-user.md
               - install-developer/os-home-directory.md
