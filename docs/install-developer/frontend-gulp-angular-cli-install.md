@@ -13,5 +13,5 @@ npm -g install gulp
 Please install the latest `Angular CLI`, make it available globally:
 
 ```sh
-npm install -g @angular/cli
+npm install -g @angular/cli@14
 ```
