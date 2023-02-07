@@ -30,7 +30,7 @@ vi $(brew --prefix)/etc/opensearch/opensearch.yml
 Around `line #17`, change the cluster name configuration:
 
 ```
-cluster.name: elasticsearch_cedar
+cluster.name: opensearch_cedar
 ```
 
 ## Start OpenSearch

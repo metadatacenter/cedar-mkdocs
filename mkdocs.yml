@@ -148,7 +148,6 @@ nav:
               - install-developer/prereq-wget.md
               - install-developer/prereq-openssl.md
               - install-developer/prereq-jdk.md
-              - install-developer/prereq-jdk-11.md
               - install-developer/prereq-maven.md
               - install-developer/prereq-python.md
           - User, home directory, passwords and domain:
@@ -182,7 +181,7 @@ nav:
               - install-developer/code-more-utils.md
           - Infrastructure services:
               - install-developer/infra-mongodb.md
-              - install-developer/infra-elasticsearch.md
+              - install-developer/infra-opensearch.md
               - install-developer/infra-mysql.md
               - install-developer/infra-redis.md
               - install-developer/infra-neo4j.md

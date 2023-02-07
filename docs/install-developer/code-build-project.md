@@ -2,7 +2,7 @@
 
 ## Before building
 
-One of the CEDAR components must be compiled with Java 8. We patch this component before building so that it works with Java 19.
+One of the CEDAR components needs a workaround to compile. We patch this component before building so that it works with Java 17.
 
 Run the following command to perform this patch:
 

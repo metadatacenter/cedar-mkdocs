@@ -9,7 +9,7 @@ CEDAR uses `Neo4j` as storage for the following artifacts of CEDAR:
 
 ## Install Neo4j
 
-Please install `Neo4j Community Edition`, version 3.5:
+Please install `Neo4j Community Edition`, version 5.4.0:
 
 ???+ warning "Important"
 
@@ -19,21 +19,39 @@ Download the package from the distribution site:
 
 ```sh
 gocedar
-wget http://dist.neo4j.org/neo4j-community-3.5.35-unix.tar.gz
+wget https://dist.neo4j.org/neo4j-community-5.4.0-unix.tar.gz
 # or
-wget http://dist.neo4j.org/neo4j-community-3.5.35-windows.zip
+wget https://dist.neo4j.org/neo4j-community-5.4.0-windows.zip
 ```
 
 Once the package is downloaded, unpack it and rename it:
 
 ```sh
-tar -xvf neo4j-community-3.5.35-unix.tar.gz
-mv neo4j-community-3.5.35 neo4j
+tar -xvf neo4j-community-5.4.0-unix.tar.gz
+mv neo4j-community-5.4.0-unix.tar.gz neo4j
 ```
 
 ???+ warning "Important"
 
     Do not start Neo4j yet. We need to set the initial password first.
+
+## Enable APOC procedures
+
+Move ```apoc-5.3.0-core.jar``` from ```labs``` to ```plugins```:
+
+```sh
+mv $CEDAR_HOME/neo4j/labs/apoc-5.3.0-core.jar $CEDAR_HOME/neo4j/plugins/. 
+```
+
+Edit the config, and enable the procedures:
+```sh
+vi $CEDAR_HOME/neo4j/conf/neo4j.conf 
+```
+Add this line:
+```
+dbms.security.procedures.unrestricted=algo.*,apoc.*
+```
+
 
 ## Set password for the neo4j user
 
@@ -42,7 +60,7 @@ Neo4j server uses a default username, 'neo4j'. We will change the password for t
 Execute the following:
 
 ```sh
-JAVA_HOME=$(brew --prefix)/opt/openjdk@11/ && ${CEDAR_NEO4J_HOME}/bin/neo4j-admin set-initial-password changeme
+${CEDAR_NEO4J_HOME}/bin/neo4j-admin set-initial-password changeme
 ```
 
 ## Start Neo4j

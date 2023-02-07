@@ -5,13 +5,14 @@ Find the location of the JDK that you just installed:
 
 ```sh
 ls -ls /Library/Java/JavaVirtualMachines/
+ls -ls ~/Library/Java/JavaVirtualMachines/
 ```
 
 Choose the one which matches the version of the recently installed JDK.
 
 Set the `JAVA_HOME` environment variable to point to this JDK, e.g.,
 ```sh
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home/
+export JAVA_HOME=~/Library/Java/JavaVirtualMachines/corretto-17.0.4.1/Contents/Home/
 ```
 
 ???+ warning "JAVA_HOME"
@@ -26,34 +27,32 @@ Then import it into the `cacerts`:
 gocedar
 cd CEDAR_CA
 
-sudo keytool -import -cacerts -alias metadatacenter.orgx -file ./ca.crt
+keytool -import -cacerts -alias metadatacenter.orgx -file ./ca.crt
 ```
 
 When prompted, enter these value:
 
-| Question | Answer                   |
-|----------| -----------              |
-| Password | This is `sudo` password. Enter your password (your macOS password)|
-| Trust    | yes |
+| Question | Answer                         |
+|----------|--------------------------------|
+| Password | ```changeit``` |
+| Trust    | yes                            |
 
 
 ???+ warning "Trust store password"
 
-    In older JDK versions the `cacerts` trust store had a default password: `changeit`
+    The `cacerts` trust store had a default password: `changeit`
     
-    It the above command asks for a second password, enter `changeit`. 
-
 ???+ success "Useful commands"
 
     If you run into problems with the certificates, use these commands to list and filter the certificates:
 
     ```sh
-    sudo keytool -list -cacerts | grep metadatacenter
+    keytool -list -cacerts | grep metadatacenter
     ```
 
     respectively to delete a certificate    
     ```
-    sudo keytool -delete -cacerts -alias metadatacenter.orgx
+    keytool -delete -cacerts -alias metadatacenter.orgx
     ```
 
 If the certificate was added successfully, please close this session, to get rid of the `JAVA_HOME` environment variable.

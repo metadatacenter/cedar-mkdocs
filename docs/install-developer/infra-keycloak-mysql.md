@@ -77,7 +77,7 @@ vi ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/standalone.xml
 
 Around `Line #132` you will see a `<datasources>` element, containing two `<datasource>`-es and a `<drivers>` element with one `<driver>`.
 
-After the `driver` on `Line #156` add this block to enable the just added `MySql JDBC` driver:
+After the `</driver>` on `Line #152` add this block to enable the just added `MySql JDBC` driver:
 
 ```xml
 <driver name="mysql" module="com.mysql.jdbc">
@@ -94,7 +94,7 @@ After the `driver` on `Line #156` add this block to enable the just added `MySql
 
 ### Add `datasource`
 
-Then after the datasources, before the drivers on `Line #152` add the new `MySql` datasource:
+Then after the datasources, before the drivers on `Line #149` add the new `MySql` datasource:
 
 ```xml
 <datasource jndi-name="java:jboss/datasources/CedarKeycloakDS" pool-name="CedarKeycloakDS" enabled="true" use-java-context="true" use-ccm="true">
@@ -117,7 +117,7 @@ Then after the datasources, before the drivers on `Line #152` add the new `MySql
 
 ### Change JPA datasource
 
-Around `Line #555` locate the following line configuring the `JPA` connection: 
+Around `Line #552` locate the following line configuring the `JPA` connection: 
 
 ```xml
 <property name="dataSource" value="java:jboss/datasources/KeycloakDS"/>

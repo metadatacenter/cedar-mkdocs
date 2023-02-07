@@ -6,7 +6,7 @@
 vi ${CEDAR_KEYCLOAK_HOME}/standalone/configuration/standalone.xml
 ``` 
 
-Around `Line #489` locate the following line:
+Around `Line #488` locate the following line:
 
 ```xml
 <core-environment node-identifier="${jboss.tx.node.id:1}">

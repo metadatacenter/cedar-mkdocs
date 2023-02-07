@@ -1,36 +1,47 @@
 # JDK
 
 You most probably already have `jdk` on your system.
-The CEDAR developer team uses `Oracle JDK 19`, and we strongly suggest that you use the same, for compatibility reasons.
+The CEDAR developer team uses `Open JDK 17`, and we strongly suggest that you use the same, for compatibility reasons.
 
 ???+ warning "Important"
     
     Please note, that a JDK is needed to configure and run CEDAR based on this guide. A JRE will not be enough.
-    
-    We strongly suggest to use the `macOS Installer` version available at Oracle's download site.
 
-## Download JDK
+## Install JDK 17
 
-Please download the latest available version of `JDK 19` from:
+```sh
+brew install openjdk@17
+```
 
-[https://www.oracle.com/java/technologies/downloads/#jdk19-mac](https://www.oracle.com/java/technologies/downloads/#jdk19-mac)
+## Set JAVA_HOME
+You should add this line into your ```.zshrc```
 
-You will need to log in to be able to download the JDK.
+```sh
+export JAVA_HOME=`/usr/libexec/java_home -v 17`
+```
 
-## Install JDK
+Verify that your ```JAVA_HOME``` is set properly:
+```sh
+echo $JAVA_HOME
+```
 
-Install the downloaded package.
+You should see something similar:
 
-## Verify JDK
+```
+~/Library/Java/JavaVirtualMachines/corretto-17.0.4.1/Contents/Home
+```
 
-After the installation, please verify the version in a shell: 
+## Verify the installation
+
+After the installation, please verify the version in a shell:
 ```sh
 java --version
 ```
 
 You should see something similar:
 ```
-java 19.0.1 2022-10-18
-Java(TM) SE Runtime Environment (build 19.0.1+10-21)
-Java HotSpot(TM) 64-Bit Server VM (build 19.0.1+10-21, mixed mode, sharing)
+openjdk 17.0.4.1 2022-08-12 LTS
+OpenJDK Runtime Environment Corretto-17.0.4.9.1 (build 17.0.4.1+9-LTS)
+OpenJDK 64-Bit Server VM Corretto-17.0.4.9.1 (build 17.0.4.1+9-LTS, mixed mode, sharing)
 ```
+
