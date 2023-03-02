@@ -17,15 +17,15 @@ cd ~/CEDAR_DOCKER
 git clone https://github.com/metadatacenter/cedar-development
 ```
 
-# Master vs develop branch
+# Main vs develop branch
 
-The above command cloned the repo, and set the active branch to `master`.
+The above command cloned the repo, and set the active branch to `main`.
 
-If you want to have the latest develop branch, you will need to check out that branch.
+If you want to have the latest `develop` branch, you will need to check out that branch.
 
 ???+ warning "Important"
 
-    Unless you specifically need something from the latest `develop` branch, you should use the `master` branch, so skip this step.
+    Unless you specifically need something from the latest `develop` branch, you should use the `main` branch, so skip this step.
     
 ```sh
 cd cedar-development

@@ -2,9 +2,9 @@
 
 ## Before building
 
-One of the the CEDAR components must be compiled with Java 8. We patch this component before building so that it works with Java 11.
+One of the CEDAR components needs a workaround to compile. We patch this component before building so that it works with Java 17.
 
-Run the following command to perfom this patch:
+Run the following command to perform this patch:
 
 ```sh
 createjaxb2workaround
@@ -31,4 +31,3 @@ mvn clean install -DskipTests=true
     Running the tests is the preferred way of building, however at this point the underlying infrastructure is not ready, so the tests would definitely fail.
 
     Because of this, we will skip the tests this time.  
-    

@@ -1,23 +1,22 @@
----
-summary: A CEDAR documentation, centered around the developer
-authors:
-    - Attila L. Egyedi
-    - John Graybeal
-date: 2020-09-14
----
-# CEDAR Installation Documentation
+# CEDAR Documentation
 
-## CEDAR Documentation location
+Welcome to the CEDAR Documentation hub.
 
-A comprehensive list of CEDAR documentation can be found at [metadatacenter.org/references](https://metadatacenter.org/references), 
-including the [CEDAR User Manual](https://metadatacenter.github.io/cedar-manual).
+???+ success "Work in progress"
 
-## Scope of this documentation
+    We are in the process of consolidating our documentation under this current website.
 
-This documentation focuses on the installation of CEDAR.
 
-If you are and end-user, or you have question about how to use CEDAR, please check out our resources at the links above.  
+At the moment you will find here the:
 
-If you want to install or develop CEDAR, please use the left navigation to browse the install guide.
+* [**CEDAR User Guide**](user-overview.md) - describing the purpose of CEDAR, the usage of the UI and also how to interact with our REST API
+* [**Install Guides**](install-overview.md) - describing how to install CEDAR onto your machine.
+* [**Developer Guide**](developer-overview.md) - presenting our repository model and a quick intro into our REST API
 
-We recommend you start at [Install Overview](./install-overview/).
+Please send us <a href="mailto:cedar-support@metadatacenter.org">your feedback</a> if you want additions or changes to the documentation.
+
+???+ success "Comprehensive list"
+
+    A comprehensive list of CEDAR documentation can be found at:
+    
+    [https://metadatacenter.org/references](https://metadatacenter.org/references){target="_blank"}

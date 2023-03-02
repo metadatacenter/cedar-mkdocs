@@ -33,16 +33,16 @@ Checking all CEDAR servers
 | ValueRecommender           | Stopped | healthCheck | 9106| HTTP/1.1\s200\sOK |
 | Worker                     | Stopped | healthCheck | 9111| HTTP/1.1\s200\sOK |
 | --- Infrastructure --------|         |             |     |                   |
-| MongoDB                    | Stopped | openPort    |27017|                   |
-| Elasticsearch-REST         | Stopped | httpResponse| 9200| HTTP/1.1\s200\sOK |
-| Elasticsearch-Transport    | Stopped | openPort    | 9300|                   |
+| MongoDB                    | Running | openPort    |27017|                   |
+| OpenSearch-REST            | Running | httpResponse| 9200| HTTP/1.1\s200\sOK |
+| OpenSearch-Transport       | Running | openPort    | 9300|                   |
 | NGINX                      | Stopped | httpResponse|   80| Server:\snginx    |
 | Keycloak                   | Stopped | httpResponse| 8080| HTTP/1.1\s200\sOK |
 | Neo4j                      | Stopped | httpResponse| 7474| HTTP/1.1\s200\sOK |
 | Redis-persistent           | Stopped | redisPing   | 6379|                   |
 | MySQL                      | Stopped | openPort    | 3306|                   |
 | --- Monitor ---------------|         |             |     |                   |
-| Kibana                     | Stopped | httpResponse| 5601| kbn-name:\skibana |
+| OpenSearch-Dashboards      | Stopped | httpResponse| 5601| HTTP/1.1\s302\sFou|
 | Redis-Commander            | Stopped | httpResponse| 8081| HTTP/1.1\s200\sOK |
 | PhpMyAdmin                 | Stopped | httpResponse| 8082| HTTP/1.1\s200\sOK |
 | --- Front End -------------|         |             |     |                   |

@@ -5,8 +5,8 @@ There are start and stop scripts available for each service that is present in t
 These will be introduced throughout this guide. As an example starting and stopping `MongoDB` after a brew installation would be done with:
 
 ```sh
-brew services start mongodb-community@3.4
-brew services stop mongodb-community@3.4
+brew services start mongodb-community@5.0
+brew services stop mongodb-community@5.0
 ```
 
 In the CEDAR environment we have these aliases for simplicity:
@@ -25,7 +25,7 @@ A non-exhaustive list of the start aliases is as follows
 startmongo
 startneo
 startmysql
-startelastic
+startsearch
 startkibana
 startredis
 startrc

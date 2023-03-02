@@ -18,5 +18,5 @@ To make sure that the Homebrew-installed version is used instead of the pre-inst
 
 
 ```sh
-export PATH=/usr/local/opt/openssl@1.1/bin:$PATH
+export PATH=$(brew --prefix)/opt/openssl@1.1/bin:$PATH
 ```

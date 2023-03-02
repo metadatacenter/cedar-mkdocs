@@ -46,15 +46,15 @@ Warning: Unbrewed header files were found in /usr/local/include.
 These are some commands that you can use to fix these issues. Here `cedar-dev` is your current username:
 
 ```sh
-sudo chown -R cedar-dev /usr/local/Homebrew/
+sudo chown -R cedar-dev $(brew --prefix)/Homebrew/
 
-sudo chown -R cedar-dev /usr/local/Cellar/
+sudo chown -R cedar-dev $(brew --prefix)/Cellar/
 
-sudo chown -R cedar-dev /usr/local/share
+sudo chown -R cedar-dev $(brew --prefix)/share
 
-sudo chown -R cedar-dev /usr/local/lib
+sudo chown -R cedar-dev $(brew --prefix)/lib
 
-sudo chown -R cedar-dev /usr/local/Frameworks/Python.framework
+sudo chown -R cedar-dev $(brew --prefix)/Frameworks/Python.framework
 
 brew link --overwrite python@3.8
 ```

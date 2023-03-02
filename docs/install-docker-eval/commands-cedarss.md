@@ -21,6 +21,7 @@ Checking all CEDAR servers
 | --- Microservices ---------|         |             |     |                   |
 | Artifact                   | Stopped | healthCheck | 9101| HTTP/1.1\s200\sOK |
 | Group                      | Stopped | healthCheck | 9109| HTTP/1.1\s200\sOK |
+| Impex                      | Stopped | healthCheck | 9108| HTTP/1.1\s200\sOK |
 | Internals                  | Stopped | healthCheck | 9114| HTTP/1.1\s200\sOK |
 | Messaging                  | Stopped | healthCheck | 9112| HTTP/1.1\s200\sOK |
 | OpenView                   | Stopped | healthCheck | 9113| HTTP/1.1\s200\sOK |
@@ -34,15 +35,15 @@ Checking all CEDAR servers
 | Worker                     | Stopped | healthCheck | 9111| HTTP/1.1\s200\sOK |
 | --- Infrastructure --------|         |             |     |                   |
 | MongoDB                    | Stopped | openPort    |27017|                   |
-| Elasticsearch-REST         | Stopped | httpResponse| 9200| HTTP/1.1\s200\sOK |
-| Elasticsearch-Transport    | Stopped | openPort    | 9300|                   |
+| OpenSearch-REST            | Stopped | httpResponse| 9200| HTTP/1.1\s200\sOK |
+| OpenSearch-Transport       | Stopped | openPort    | 9300|                   |
 | NGINX                      | Stopped | httpResponse|   80| Server:\snginx    |
 | Keycloak                   | Stopped | httpResponse| 8080| HTTP/1.1\s200\sOK |
 | Neo4j                      | Stopped | httpResponse| 7474| HTTP/1.1\s200\sOK |
 | Redis-persistent           | Stopped | redisPing   | 6379|                   |
 | MySQL                      | Stopped | openPort    | 3306|                   |
-| --- Monitor ---------------|         |             |     |                   |
-| Kibana                     | Stopped | httpResponse| 5601| kbn-name:\skibana |
+| --- Monitoring ------------|         |             |     |                   |
+| OpenSearch-Dashboards      | Stopped | httpResponse| 5601| HTTP/1.1\s302\sFou|
 | Redis-Commander            | Stopped | httpResponse| 8081| HTTP/1.1\s200\sOK |
 | PhpMyAdmin                 | Stopped | httpResponse| 8082| HTTP/1.1\s200\sOK |
 | --- Front End -------------|         |             |     |                   |
