@@ -3,16 +3,16 @@ CEDAR uses `MySql` as the backend for Keycloak as well as storage for messages a
 
 ## Install MySql
 
-Please install `MySql`, version 5.7:
+Please install `MySql`, version 8.0:
 
 ```sh
-brew install mysql@5.7
+brew install mysql@8.0
 ```
 
 And pin this version:
 
 ```sh
-brew pin mysql@5.7
+brew pin mysql@8.0
 ```
     
 ???+ warning "Important"
@@ -36,13 +36,13 @@ You should see the following line in the output:
 
 ## Secure MySql server
 ```sh
-$(brew --prefix)/Cellar/mysql@5.7/5.7.<minor_version>/bin/mysql_secure_installation
+$(brew --prefix)/Cellar/mysql/8.0.<minor_version>/bin/mysql_secure_installation
 ```
 
 If you get a 'Column count' error, you will need to run the following command first:
 
 ```sh
-sudo $(brew --prefix)/Cellar/mysql@5.7/5.7.<minor_version>/bin/mysql_upgrade
+sudo $(brew --prefix)/Cellar/mysql/8.0.<minor_version>/bin/mysql_upgrade
 ```
 
 Respond to the questions as follows:
@@ -61,7 +61,7 @@ Respond to the questions as follows:
 Connect to the running MySql server
 
 ```sh
-$(brew --prefix)/Cellar/mysql@5.7/5.7.<minor_version>/bin/mysql -uroot -p
+$(brew --prefix)/Cellar/mysql/8.0.<minor_version>/bin/mysql -uroot -p
 ```
 
 Execute the below three groups of statements in order to create MySql databases and corresponding users for the different components of CEDAR: 

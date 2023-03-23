@@ -18,21 +18,17 @@ cedarss
 Importing a realm is done by starting `Keycloak` in the import mode
 ```sh
 cd ${CEDAR_HOME}/cedar-util/keycloak/realm/
-${CEDAR_KEYCLOAK_HOME}/bin/standalone.sh \
-  -Dkeycloak.migration.action=import \
-  -Dkeycloak.migration.provider=singleFile \
-  -Dkeycloak.migration.file=keycloak-realm.CEDAR.development.20201020.json \
-  -Dkeycloak.migration.strategy=IGNORE_EXISTING
+${CEDAR_KEYCLOAK_HOME}/bin/kc.sh \
+  import \
+  --file keycloak-realm.CEDAR.development.20230322.json
 ```
 
 Please monitor the log output for anomalies. Not that this importation process can take several minutes so please wait until it has finished.
 
-Once the logs stopped, and you see the following line:
+Once the logs stopped, you should see the following line:
 ```
-HH:MM:SS,SSS INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
+YYYY-mm-dd HH:MM:SS,SSS INFO  [io.quarkus] (main) Keycloak stopped in X.XXXs
 ``` 
-
-please stop `Keycloak` using one ++ctrl++ + C.
 
 ## Start Keycloak in regular mode
 
@@ -73,19 +69,18 @@ The script starts with `kill` to emphasize that actually the process is killed.
 
     It will not contain any logs or historical data.
     
-    to export the file, you will need to stop `Keycloak`, export the data, and then start it again. 
+    To export the file, you will need to stop `Keycloak`, export the data, and then start it again. 
 
     ```sh
     killkk
     ```
     ```sh
-    ${CEDAR_KEYCLOAK_HOME}/bin/standalone.sh \
-      -Dkeycloak.migration.action=export \
-      -Dkeycloak.migration.provider=singleFile \
-      -Dkeycloak.migration.realmName=CEDAR \
-      -Dkeycloak.migration.file=keycloak-realm.CEDAR.development.<YOUR-DATE-HERE>.json
+    ${CEDAR_KEYCLOAK_HOME}/bin/kc.sh export \
+      --realm CEDAR \
+      --users realm_file \
+      --file ${CEDAR_HOME}/keycloak-realm.CEDAR.development.<YOUR-DATE-HERE>.json
     ```
-    Stop `Keycloak` using one ++ctrl++ + C.
+
     ```sh
     startkk
     ```
