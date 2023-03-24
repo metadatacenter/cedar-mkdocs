@@ -24,7 +24,7 @@ Checking all CEDAR servers
 |==============================================================================|
 | Server                     | Status  | CheckedFor  | Port| Value             |
 |------------------------------------------------------------------------------|
-| --- Microservices ---------|         |             |     |                   |
+| -- Microservices ----------|         |             |     |                   |
 | Artifact                   | Running | healthCheck | 9101| HTTP/1.1\s200\sOK |
 | Group                      | Running | healthCheck | 9109| HTTP/1.1\s200\sOK |
 | Impex                      | Running | healthCheck | 9108| HTTP/1.1\s200\sOK |
@@ -39,7 +39,7 @@ Checking all CEDAR servers
 | User                       | Running | healthCheck | 9105| HTTP/1.1\s200\sOK |
 | ValueRecommender           | Running | healthCheck | 9106| HTTP/1.1\s200\sOK |
 | Worker                     | Running | healthCheck | 9111| HTTP/1.1\s200\sOK |
-| --- Infrastructure --------|         |             |     |                   |
+| -- Infrastructure ---------|         |             |     |                   |
 | MongoDB                    | Running | openPort    |27017|                   |
 | OpenSearch-REST            | Running | httpResponse| 9200| HTTP/1.1\s200\sOK |
 | OpenSearch-Transport       | Running | openPort    | 9300|                   |
@@ -48,14 +48,20 @@ Checking all CEDAR servers
 | Neo4j                      | Running | httpResponse| 7474| HTTP/1.1\s200\sOK |
 | Redis-persistent           | Running | redisPing   | 6379|                   |
 | MySQL                      | Running | openPort    | 3306|                   |
-| --- Monitoring ------------|         |             |     |                   |
+| -- Front End --------------|         |             |     |                   |
+| Base-Frontend              | Running | httpResponse| 4200| HTTP/1.1\s200\sOK |
+| OpenView-Frontend          | Running | httpResponse| 4220| HTTP/1.1          |
+| InternalsView-Frontend     | Running | httpResponse| 4300| HTTP/1.1          |
+| Artifacts-Frontend         | Running | httpResponse| 4320| HTTP/1.1          |
+| -- Monitoring -------------|         |             |     |                   |
 | OpenSearch-Dashboards      | Stopped | httpResponse| 5601| HTTP/1.1\s302\sFou|
 | Redis-Commander            | Stopped | httpResponse| 8081| HTTP/1.1\s200\sOK |
 | PhpMyAdmin                 | Stopped | httpResponse| 8082| HTTP/1.1\s200\sOK |
-| --- Front End -------------|         |             |     |                   |
-| Base-Frontend              | Running | httpResponse| 4200| HTTP/1.1\s200\sOK |
-| OpenView-Frontend          | Running | httpResponse| 4220| HTTP/1.1          |
-| --- Environment ---------- |         |             |     |                   |
+| -- Front End Non-essential-|         |             |     |                   |
+| CEE-DEV-Frontend           | Stopped | httpResponse| 4240| HTTP/1.1          |
+| CEE-Demo-Frontend          | Stopped | httpResponse| 4260| HTTP/1.1          |
+| CEE-Docs-Frontend          | Stopped | httpResponse| 4280| HTTP/1.1          |
+| -- Environment ------------|         |             |     |                   |
 | CEDAR_NET_GATEWAY          |         | 127.0.0.1                             |
 | CEDAR_NET_SUBNET           |         | 127.0.0.0                             |
 |==============================================================================|
