@@ -45,6 +45,6 @@ npm --version
 You should see something like the following:
 
 ```
-v16.19.0
+v16.19.1
 8.19.3
 ```

@@ -7,7 +7,7 @@ and every time you add or change a dependency.
 
 ```sh
 goopenfront
-npm install
+npm install --legacy-peer-deps
 ``` 
 
 ## Start the OpenView frontend

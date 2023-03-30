@@ -188,17 +188,14 @@ nav:
               - Keycloak:
                   - install-developer/infra-keycloak-overview.md
                   - install-developer/infra-keycloak-download.md
-                  - install-developer/infra-keycloak-mysql.md
-                  - install-developer/infra-keycloak-keystore.md
-                  - install-developer/infra-keycloak-nodeid.md
                   - install-developer/infra-keycloak-event-listener.md
                   - install-developer/infra-keycloak-theme.md
+                  - install-developer/infra-keycloak-configure.md
                   - install-developer/infra-keycloak-realm.md
                   - install-developer/infra-keycloak-administrator.md
               - Nginx:
                   - install-developer/infra-nginx-overview.md
                   - install-developer/infra-nginx-install.md
-                  - install-developer/infra-nginx-certificates.md
                   - install-developer/infra-nginx-configure.md
                   - install-developer/infra-nginx-start.md
               - install-developer/infra-start.md
