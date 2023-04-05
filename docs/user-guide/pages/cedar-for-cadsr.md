@@ -24,4 +24,4 @@ The {{ page.fb }} and {{ page.cedarw }} use different naming conventions to desc
 |module|element|
 |permissible values|values|
 
-To get started with any of the following topics, navigate to the [CEDAR Workbench](http://cedar.metadatacenter.org/){:target="_blank"} and log in to your account. If you need instructions for creating an account, please refer to the "[Accounts and Logging In](basic_topics/a1_accounts_and_logging_in "Accounts and Logging In")" section of the user guide.
+To get started with any of the following topics, navigate to the [CEDAR Workbench](http://cedar.metadatacenter.org/){:target="_blank"} and log in to your account. If you need instructions for creating an account, please refer to the "[Accounts and Logging In](../../basic_topics/a1_accounts_and_logging_in "Accounts and Logging In")" section of the user guide.

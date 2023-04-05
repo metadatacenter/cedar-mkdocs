@@ -8,17 +8,17 @@ To go to a particular topic, click on that link.
 
 * [Introduction](#introduction)
 * [Basic Interactions](#basic-interactions)
-  * [Searching for Terms](#searching-for-terms)
-  * [Reviewing Found Terms](#reviewing-found-terms)
-  * [Selecting Terms, Branches, or Ontologies](#selecting-terms-branches-or-ontologies)
-  * [Searching for Ontologies and Value Sets](#searching-for-ontologies-and-value-sets)
+      * [Searching for Terms](#searching-for-terms)
+      * [Reviewing Found Terms](#reviewing-found-terms)
+      * [Selecting Terms, Branches, or Ontologies](#selecting-terms-branches-or-ontologies)
+      * [Searching for Ontologies and Value Sets](#searching-for-ontologies-and-value-sets)
 * [Adding Your Own Terms](#adding-your-own-terms)
-  * [About Provisional Terms](#about-provisional-terms)
-  * [Adding your Own Single Term(s)](#adding-your-own-single-terms)
-  * [Adding a New List of Terms](#adding-a-new-list-of-terms)
+      * [About Provisional Terms](#about-provisional-terms)
+      * [Adding your Own Single Term(s)](#adding-your-own-single-terms)
+      * [Adding a New List of Terms](#adding-a-new-list-of-terms)
 * [Customizing What You Have](#customizing-what-you-have)
-  * [Rejecting Terms](#rejecting-terms)
-  * [Putting Favorites First](#putting-favorites-first)
+      * [Rejecting Terms](#rejecting-terms)
+      * [Putting Favorites First](#putting-favorites-first)
   
 
 ## Introduction
@@ -26,12 +26,12 @@ To go to a particular topic, click on that link.
 Now we will show you exactly how to create questions 
 that have very precise answers, using CEDAR's semantic tools.
 You don't have to know semantics to use these tools—
-we'll give you some tips (in [Choosing Controlled Terms](https://metadatacenter.github.io/cedar-manual/sections/c3/3_choosing_controlled_terms/) that help you find good answers for your questions,
+we'll give you some tips (in [Choosing Controlled Terms](../../c3/3_choosing_controlled_terms/) that help you find good answers for your questions,
 and know they are good enough for your needs.
 
 For you semantic experts, we provide advanced details elsewhere in this User Manual:
-* [Tips for Template Creation: Term Discovery/Selection](https://metadatacenter.github.io/cedar-manual/sections/c5/term_discovery_selection/)
-* [Advanced Template Topics: More Semantics](https://metadatacenter.github.io/cedar-manual/sections/c4/more_semantics/)
+* [Tips for Template Creation: Term Discovery/Selection](../../c5/4_term_discovery_selection/)
+* [Advanced Template Topics: More Semantics](../../c4/2_more_semantics/)
 
 In this section we outline the mechanical steps to find, select, and even create terms. 
 The next section will tell how to figure out which terms are good ones to use.
@@ -42,12 +42,12 @@ walks you through CEDAR interfaces that work hand-in-hand with the
 This repository contains over 800 public terminologies that offer precise semantic content
 you can use for your metadata collection process. 
 But if BioPortal does not contain a terminology that you want to use, you can add it!
-See the subsection called "Adding Content to BioPortal" in the [More Semantics](https://metadatacenter.github.io/cedar-manual/sections/c4/more_semantics/) section for more information on this process.
+See the subsection called "Adding Content to BioPortal" in the [More Semantics](../../c4/2_more_semantics/) section for more information on this process.
 
 All the following sub-sections assume you have created a basic text field, 
 clicked on the Values tab for your field,
 and clicked on the Add button to bring up the term search dialog box, 
-as described in [Adding Fields](https://metadatacenter.github.io/cedar-manual/sections/c2/2_adding_fields/).
+as described in [Adding Fields](../../c2/2_adding_fields/).
 
 ## Basic Interactions
 

@@ -7,12 +7,12 @@ This page covers the basics of importing caDSR Form Builder forms into the {{ pa
 
 - [Introduction](#intro)
 - [Step-by-step guide: import a template](#step-by-step-guide)
-  - Step 1 - [Export form(s) to XML format](#export-forms)
-  - Step 2 - [Navigate to your workspace](#workspace)
-  - Step 3 - [Select XML files for import](#select-xml-files)
-  - Step 4 - [Perform an import](#import)
-  - Step 5 - [Look over the import report](#import-report)
-  - Step 6 - [View the imported template](#view-template)
+      - Step 1 - [Export form(s) to XML format](#export-forms)
+      - Step 2 - [Navigate to your workspace](#workspace)
+      - Step 3 - [Select XML files for import](#select-xml-files)
+      - Step 4 - [Perform an import](#import)
+      - Step 5 - [Look over the import report](#import-report)
+      - Step 6 - [View the imported template](#view-template)
 - [Editing imported templates](#edit-template)
 
 ---

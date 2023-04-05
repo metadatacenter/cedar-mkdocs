@@ -4,7 +4,7 @@ status: Ready
 ---
 # Viewing Resource as Raw JSON
 
-As noted in the [Viewing Resources Overview](https://metadatacenter.github.io/cedar-manual/sections/a3/1_viewing_resources_overview/), 
+As noted in the [Viewing Resources Overview](../../a3/1_viewing_resources_overview/), 
 all CEDAR artifacts are maintained internally in JSON.
 
 The three CEDAR templating artifacts—templates, elements, and fields—are maintained

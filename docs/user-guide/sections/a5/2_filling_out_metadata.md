@@ -15,11 +15,11 @@ In some cases (see the image below), the metadata instance may show elements as 
 ![](../../../img/userguide/entering-metadata-folded-elements-20191124.png){:width="80%" class="centered"}
 
 Your metadata is not saved until you hit the SAVE button, visible in the image above. 
-You may have to scroll to the end of a long template to see the Save button in the lower right corner. We recommend you save your metadata often, so that little is lost if your browser window is accidentally closed. See [Saving and Validating](https://metadatacenter.github.io/cedar-manual/sections/a5/3_saving_and_validating/) for more details.
+You may have to scroll to the end of a long template to see the Save button in the lower right corner. We recommend you save your metadata often, so that little is lost if your browser window is accidentally closed. See [Saving and Validating](../../a5/3_saving_and_validating/) for more details.
 
 ## **Viewing JSON-LD and RDF**
 
-You can see the JSON-LD and RDF versions of your metadata by clicking on the appropriate controls at the bottom of your metadata instance. For more information see [Viewing Resource as Raw JSON](https://metadatacenter.github.io/cedar-manual/sections/a3/4_viewing_resource_as_raw_json/).
+You can see the JSON-LD and RDF versions of your metadata by clicking on the appropriate controls at the bottom of your metadata instance. For more information see [Viewing Resource as Raw JSON](../../a3/4_viewing_resource_as_raw_json/).
 
 ## **Multiple Fields**
 
@@ -58,7 +58,7 @@ with one exception.
 The format control that enables filling out arrays ("spreadsheet view") is only visible if the element just contains simple fields. 
 If the element contains other elements or fields that allow MULTIPLE entries, 
 viewing and editing it as an array is not possible. 
-See the **Spreadsheet-compatible Elements** subsection of [Adding Elements](https://metadatacenter.github.io/cedar-manual/sections/c2/3_adding_elements)
+See the **Spreadsheet-compatible Elements** subsection of [Adding Elements](../../c2/3_adding_elements)
 to learn how to set up this feature.
 
 CEDAR's spreadsheet view of arrays automatically performs 
@@ -124,7 +124,7 @@ CEDAR will make the most likely answers visible to you as the suggested
 values we describe here (and show below).
 
 More details about the suggestion system in CEDAR may be found at 
-[Understanding the Suggestion System](https://metadatacenter.github.io/cedar-manual/sections/c4/understanding_the_suggestion_system/).
+[Understanding the Suggestion System](../../c4/3_understanding_the_suggestion_system/).
 
 ### Attribute-value fields
 

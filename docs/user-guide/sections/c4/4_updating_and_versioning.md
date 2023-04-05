@@ -23,7 +23,7 @@ First, you must update the element that needs to be changed.
 (If it is a versioned resource, follow the instructions in the Creating and Managing Versions topic below.)
 
 After saving your updated element, go to the template that contains it.
-Import the updated element as described in [Adding Elements](https://metadatacenter.github.io/cedar-manual/sections/c2/3_adding_elements/); the updated element will appear at the bottom of your form. 
+Import the updated element as described in [Adding Elements](../../c2/3_adding_elements/); the updated element will appear at the bottom of your form. 
 
 Move the element to the correct location in your form, 
 and delete the element that is already there. 
@@ -134,7 +134,7 @@ Now, all versions will be shown in any search or folder display that contains th
 The version history for any artifact is shown in the Version tab of the metadata panel 
 (see image on the right). 
 (Click on the 'i' icon to make this panel visible; see
-<a href="https://metadatacenter.github.io/cedar-manual/sections/a3/5_viewing_resource_metadata/">Viewing Resource Details</a> for more information.)  
+[Viewing Resource Details](../../a3/5_viewing_resource_metadata/) for more information.)  
 
 In the metadata panel example, 
 you can see the three versions of the Version Test artifact. 

@@ -47,7 +47,7 @@ and no useful information will be returned.
 To use CEDAR's API resource documentation to make CEDAR requests
 as we describe in this Guide,
 you must enter your API key to the documentation interface.
-To obtain your API key, reference the [CEDAR's API](../) documentation.
+To obtain your API key, reference the [CEDAR's API](../../advanced_topics/b2_cedars_api.md) documentation.
 
 In the upper right section of any API's documentation, 
 just under the summary description of the API method,

@@ -49,7 +49,7 @@ to customize presentation of the template to the metadata creator.
 The search (magnifying glass) icon brings up a window to find 
 other CEDAR templating resources—Elements or Fields—
 that can be imported into the resource you are editing.
-Use of this window is described in [Adding Elements](https://metadatacenter.github.io/cedar-manual/sections/c2/3_adding_elements/)
+Use of this window is described in [Adding Elements](../../c2/3_adding_elements/)
 
 ### Choosing and Configuring the Field Definition
 
@@ -57,7 +57,7 @@ For each data-entry field type, CEDAR supports certain options.
 For example, the Required option is offered on every data-entry field type.
 You can find simple information about a few key field types below, 
 and detailed information about field types and their customizations 
-in the [Field Type Reference](https://metadatacenter.github.io/cedar-manual/sections/c2/field_type_reference/).
+in the [Field Type Reference](../../c2/field_type_reference/).
 
 ### Common Options
 
@@ -133,14 +133,14 @@ from which legal values may be chosen by the metadata author.
 You can repeat this process as often as you want to select additional 
 terms, branches, or ontologies.
 
-Advice about finding and choosing controlled values is available in the [Choosing Controlled Terms](https://metadatacenter.github.io/cedar-manual/sections/c3/3_choosing_controlled_terms/) section.
+Advice about finding and choosing controlled values is available in the [Choosing Controlled Terms](../../c3/3_choosing_controlled_terms/) section.
 
 #### Suggestions
 
 Set the Suggestions tab to Yes to enable intelligent authoring suggestions 
 for this field from CEDAR. 
 You can read a detailed explanation of the suggestions system 
-at [Understanding the Suggestion System](https://metadatacenter.github.io/cedar-manual/sections/c4/understanding_the_suggestion_system/).
+at [Understanding the Suggestion System](../../c4/3_understanding_the_suggestion_system/).
 
 ### Options for Numeric Fields
 
@@ -178,7 +178,7 @@ entered by the metadata author.
 ## **Creating a Stand-Alone Field**
 
 This process begins by creating the Field artifact, 
-which is almost exactly like creating the Template artifact in [First Steps](https://metadatacenter.github.io/cedar-manual/sections/c2/1_first_steps/). 
+which is almost exactly like creating the Template artifact in [First Steps](../../c2/1_first_steps/). 
 After that, the content of the Field artifact—the field definition—
 is created following the 
 Adding a Field Definition subsection above.
@@ -208,7 +208,7 @@ you can save the artifact and use the Template Designer's left-arrow
 to return to the Desktop. 
 From there, you can modify the name, access permissions, and
 public visibility of the Field artifact, as described in
-[Managing CEDAR Resources](https://metadatacenter.github.io/cedar-manual/sections/a4/managing_cedar_resources/).
+[Managing CEDAR Resources](../../a4/1_managing_cedar_resources/).
 
 ## **Importing a Stand-Alone Field**
 
@@ -219,13 +219,13 @@ when you are editing a Template or Element,
 the search (magnifying glass) icon in the Template Designer's field addition menu 
 brings up a window to find other CEDAR templating resources—Elements or Fields—
 that can be imported into the Element or Field you are editing.
-Use of this window is described in [Adding Elements](https://metadatacenter.github.io/cedar-manual/sections/c2/3_adding_elements/).
+Use of this window is described in [Adding Elements](../../c2/3_adding_elements/).
 ![](../../../img/userguide/artifact-import-window-20200101.png){:width="60%" class="centered"}
 
 ## **Next Steps**
 
-You can fill in more content of your template by [Adding Elements](https://metadatacenter.github.io/cedar-manual/sections/c2/3_adding_elements/),
-or [save and close it](https://metadatacenter.github.io/cedar-manual/sections/c2/4-saving-and-closing/)
+You can fill in more content of your template by [Adding Elements](../../c2/3_adding_elements/),
+or [save and close it](../../c2/4_saving_and_closing/)
 to return to it later.
 
 
