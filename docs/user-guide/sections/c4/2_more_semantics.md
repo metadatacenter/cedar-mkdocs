@@ -5,18 +5,15 @@ chapter_title: Advanced Template Topics
 ---
 # More Semantics
 
-We're sorry, this resource has not yet been developed. 
-You are welcome to contribute to its development at the link below.
-
 ## Annotating Metadata and Fields
 
-CEDAR allows metadata to be of a particular type like an ontology class. This can be easily achieved by few clicks. For example, say we have a simple template named "Study" with a single field named "Study Title".
+CEDAR allows a metadata instance to be specified as a particular 'type', using an ontology class to choose the type. This can be easily achieved with a few clicks. For example, say we have a simple template named "Study" with a single field named "Study Title".
 
-We can indicate that the metadata is of a particular type by selecting the top right ontology icon and searching for study class in BioPortal. Image below shows selected Study class from NCIT.
+We can indicate that the metadata is of a particular type by selecting the top right triples icon and searching for study class in BioPortal. Image below shows selected Study class from NCIT.
 
 ![](../../../img/userguide/annotate-metadata-with-ontolgy-class-20230303.png){:width="90%" class="centered"}
 
-Fields can also be annotated with properties in a similar way. For example, to select property for the "Study Title" field, you can select the ontology icon near the top right of the field:
+Fields can also be annotated with properties in a similar way. For example, to select a property for the "Study Title" field, you can select the triples icon near the top right of the field:
 
 ![](../../../img/userguide/annotate-fields-with-property-20230303.png){:width="90%" class="centered"}
 
