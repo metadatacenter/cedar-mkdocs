@@ -3,7 +3,6 @@ The CEDAR project can be installed in several ways, depending on the planned usa
 
 The intended install types are in the following table. The highlighted links are installation types that are available today.
 
-[Native for Developer](../user-guide/pages/cedar-orientation)
 
 | Install Type                 | Description |
 | -----------                  | ----------- |
