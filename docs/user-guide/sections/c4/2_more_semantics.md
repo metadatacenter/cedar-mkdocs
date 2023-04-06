@@ -8,7 +8,7 @@ chapter_title: Advanced Template Topics
 We're sorry, this resource has not yet been developed. 
 You are welcome to contribute to its development at the link below.
 
-## Annotating Metadata with Ontology Classes
+## Annotating Metadata and Fields
 
 CEDAR allows metadata to be of a particular type like an ontology class. This can be easily achieved by few clicks. For example, say we have a simple template named "Study" with a single field named "Study Title".
 
