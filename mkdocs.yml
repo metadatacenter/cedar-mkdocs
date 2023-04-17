@@ -175,8 +175,8 @@ nav:
               - install-developer/code-overview.md
               - install-developer/code-git-clone.md
               - install-developer/code-git-utils.md
-              - install-developer/code-build-parent.md
               - install-developer/code-maven-utils.md
+              - install-developer/code-build-parent-and-libraries.md
               - install-developer/code-build-project.md
               - install-developer/code-more-utils.md
           - Infrastructure services:
