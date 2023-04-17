@@ -36,8 +36,6 @@ When prompted, enter these value:
     keytool -delete -cacerts -alias metadatacenter.orgx
     ```
 
-If the certificate was added successfully, please close this session, to get rid of the `JAVA_HOME` environment variable.
-
 ## Add to `Firefox`
 If you use Firefox, you will need to add the root CA certificate to the trusted list of the browser.
 
