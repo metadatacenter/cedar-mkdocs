@@ -1,15 +1,5 @@
 # Build CEDAR project
 
-## Before building
-
-One of the CEDAR components needs a workaround to compile. We patch this component before building so that it works with Java 17.
-
-Run the following command to perform this patch:
-
-```sh
-createjaxb2workaround
-```
-
 ## Build the project
 
 ```sh
