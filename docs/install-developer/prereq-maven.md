@@ -24,3 +24,11 @@ Default locale: en_US, platform encoding: UTF-8
 OS name: "mac os x", version: "13.2.1", arch: "aarch64", family: "mac"
 ```
 It is fine if `maven` uses `openjdk` as seen above. 
+
+## Configure CEDAR Nexus server
+
+```sh
+mkdir ~/.m2
+cp -r ${CEDAR_HOME}/cedar-development/os-mirror/development-macos/Users/cedar-dev/.m2/settings.xml \
+~/.m2/settings.xml
+```
