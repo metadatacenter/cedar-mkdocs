@@ -50,37 +50,60 @@ You should see the following lines in the output:
 | OpenSearch-Transport       | Running | openPort    | 9300|                   |
 ```
 
-## Install OpenSearch Dashboards
+[//]: # (## Install OpenSearch Dashboards)
 
-`OpenSearch Dashboards` can be used to interact with `OpenSearch`.
+[//]: # ()
+[//]: # (`OpenSearch Dashboards` can be used to interact with `OpenSearch`.)
 
-Please install the latest `OpenSearch Dashboards`:
+[//]: # ()
+[//]: # (Please install the latest `OpenSearch Dashboards`:)
 
-```sh
-brew install opensearch-dashboards
-```
+[//]: # ()
+[//]: # (```sh)
 
-And pin this version:
+[//]: # (brew install opensearch-dashboards)
 
-```sh
-brew pin opensearch-dashboards
-```
+[//]: # (```)
 
-## Start OpenSearch Dashboards
+[//]: # ()
+[//]: # (And pin this version:)
 
-```sh
-startsearchdash
-```
+[//]: # ()
+[//]: # (```sh)
 
-## Check OpenSearch Dashboards status
+[//]: # (brew pin opensearch-dashboards)
 
-```sh
-cedarss
-```
+[//]: # (```)
 
-You should see the following lines in the output:
-```
-| --- Monitoring ------------|         |             |     |                   |
-| OpenSearch-Dashboards      | Running | httpResponse| 5601| HTTP/1.1\s302\sFou|
-```
+[//]: # ()
+[//]: # (## Start OpenSearch Dashboards)
 
+[//]: # ()
+[//]: # (```sh)
+
+[//]: # (startsearchdash)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (## Check OpenSearch Dashboards status)
+
+[//]: # ()
+[//]: # (```sh)
+
+[//]: # (cedarss)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (You should see the following lines in the output:)
+
+[//]: # (```)
+
+[//]: # (| --- Monitoring ------------|         |             |     |                   |)
+
+[//]: # (| OpenSearch-Dashboards      | Running | httpResponse| 5601| HTTP/1.1\s302\sFou|)
+
+[//]: # (```)
+
+[//]: # ()

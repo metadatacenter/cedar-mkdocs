@@ -28,7 +28,7 @@ Once the package is downloaded, unpack it and rename it:
 
 ```sh
 tar -xvf neo4j-community-5.4.0-unix.tar.gz
-mv neo4j-community-5.4.0-unix.tar.gz neo4j
+mv neo4j-community-5.4.0-unix neo4j
 ```
 
 ???+ warning "Important"
