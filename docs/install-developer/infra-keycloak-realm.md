@@ -17,10 +17,10 @@ cedarss
 
 Importing a realm is done by starting `Keycloak` in the import mode
 ```sh
-cd ${CEDAR_HOME}/cedar-util/keycloak/realm/
+cd ${CEDAR_HOME}/cedar-development/os-mirror/development-macos/CEDAR_HOME/keycloak/
 ${CEDAR_KEYCLOAK_HOME}/bin/kc.sh \
   import \
-  --file keycloak-realm.CEDAR.development.20230322.json
+  --file keycloak-realm.CEDAR.development.2023-03-23.json
 ```
 
 Please monitor the log output for anomalies. Not that this importation process can take several minutes so please wait until it has finished.
