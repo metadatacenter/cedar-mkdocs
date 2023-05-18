@@ -1,25 +1,6 @@
 # Install the self-signed root certificates
 
 ## Add to Java trust store
-Find the location of the JDK that you just installed:
-
-```sh
-ls -ls /Library/Java/JavaVirtualMachines/
-ls -ls ~/Library/Java/JavaVirtualMachines/
-```
-
-Choose the one which matches the version of the recently installed JDK.
-
-Set the `JAVA_HOME` environment variable to point to this JDK, e.g.,
-```sh
-export JAVA_HOME=~/Library/Java/JavaVirtualMachines/corretto-17.0.4.1/Contents/Home/
-```
-
-???+ warning "JAVA_HOME"
-    
-    We do not require, and we do not take advantage of the `JAVA_HOME` environment variable during this installation.
-    We are setting it here to shorten the `keytool` command parameters.
-    Feel free to use that environment variable, but please note that this guide was tested without the variable being set. 
 
 Execute the commands below to navigate to the folder where the root CA certificate is stored.
 Then import it into the `cacerts`: 
@@ -54,8 +35,6 @@ When prompted, enter these value:
     ```
     keytool -delete -cacerts -alias metadatacenter.orgx
     ```
-
-If the certificate was added successfully, please close this session, to get rid of the `JAVA_HOME` environment variable.
 
 ## Add to `Firefox`
 If you use Firefox, you will need to add the root CA certificate to the trusted list of the browser.
