@@ -12,8 +12,8 @@ mkdir CEE
 cd CEE
 
 # Clone the repos
-git clone --branch develop https://github.com/metadatacenter/cedar-cee-demo
-git clone --branch develop https://github.com/metadatacenter/cedar-component-distribution
+git clone --branch release-2.6.31 https://github.com/metadatacenter/cedar-cee-demo
+git clone --branch release-2.6.31 https://github.com/metadatacenter/cedar-component-distribution
 
 # Install Node.Js 16 using your preferred method
 brew install node@16
