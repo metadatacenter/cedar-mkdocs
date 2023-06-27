@@ -260,4 +260,6 @@ nav:
           - developer-guide/template-element-and-field-instances.md
           - developer-guide/template-element-and-fields.md
           - developer-guide/cedar-rest-apis.md
-          - developer-guide/cedar-operations-and-management.md
+
+  - Operations and Management
+      - cedar-operations-and-management.md
