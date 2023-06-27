@@ -13,8 +13,7 @@ and commercialization of derivative products by everyone. We have
 used this license in our CEDAR, Protégé, and NCBO projects. The
 [CEDAR Web site](https://metadatacenter.org) facilitates browsing
 and downloading of all tools and knowledge resources in the
-project. The entire source code of CEDAR is available in a [public
-GitHub repository](https://github.com/metadatacenter).
+project.
 
 ## Issue Tracking
 
