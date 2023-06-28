@@ -63,16 +63,16 @@ tests fail so that issues can be quickly addressed.
 
 All CEDAR servers that contain persistent data are backed up
 nightly. The servers that host CEDAR’s main production and
-staging services are also backed up nightly with incremental
+staging services are also backed up nightly, with incremental
 backups every hour.
 
 ## Incident Management
 
 We define incidents as problems in production. Incidents may or may not be customer facing.  Incidents are categorized as:
 
-* Blocker. Major failure for a user or failure that affects the entire system or multiple modules of the system. This failure prevents a person from using the system.
-* Critical. Major functionality is impaired in one or more common scenarios. A temporary workaround is available.
-* Minor. A core function or feature is failing in rare or difficult-to-reproduce scenarios for a user.
+* _Blocker_ Major failure for a user or failure that affects the entire system or multiple modules of the system. This failure prevents a person from using the system.
+* _Critical_ Major functionality is impaired in one or more common scenarios. A temporary workaround is available.
+* _Minor_ A core function or feature is failing in rare or difficult-to-reproduce scenarios for a user.
 
 Incidents may be caught through automated monitoring and
 alerting (e.g., StatusCake, Slack) or manually (user-reported,
