@@ -16,7 +16,7 @@ The process is the following:
 - Click the `View Certificates...` button.
 - Make sure the `Authorities` tab is open.
 - Click `Import`.
-- Browse for `ca.crt` file. It will be located in:<br>`${CEDAR_DOCKER_HOME}/cedar-docker-deploy/cedar-assets/ca/`.
+- Browse for `ca.crt` file. It will be located in:<br>`${CEDAR_HOME}/cedar-docker-deploy/cedar-assets/ca/`.
 - Click both checkbox:
     - `Trust this CA to identify websites.`
     - `Trust this CA to identify email users.`
@@ -27,7 +27,7 @@ If you use Chrome or Safari, or other browsers that use the system's trust store
 
 The process is the following:
 
-* Using `Finder` navigate to:<br>`${CEDAR_DOCKER_HOME}/cedar-docker-deploy/cedar-assets/ca/`.
+* Using `Finder` navigate to:<br>`${CEDAR_HOME}/cedar-docker-deploy/cedar-assets/ca/`.
 * Double-click the `ca.crt` file.
 * The application called `Keychain Access` will be launched.
 * A dialog will pop up, prompting for a location for the certificate. The `login` will be preselected. Click the `Add` button.

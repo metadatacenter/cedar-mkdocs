@@ -220,20 +220,17 @@ nav:
               - install-docker-eval/prereq-docker-install.md
               - install-docker-eval/prereq-docker-configure.md
           - User, home directory, passwords and domain:
-              - install-docker-eval/os-user.md
               - install-docker-eval/os-home-directory.md
               - install-docker-eval/config-usernames-and-passwords.md
               - install-docker-eval/config-domain.md
           - Scripts and aliases:
-              - install-docker-eval/scripts-and-aliases-install.md
-              - install-docker-eval/scripts-and-aliases-include.md
-          - The code:
+              - install-docker-eval/cedar-cli-install.md
               - install-docker-eval/code-git-clone.md
-              - install-docker-eval/docker-aliases-include.md
+              - install-docker-eval/scripts-and-aliases-include.md
           - CEDAR commands:
               - install-docker-eval/commands-overview.md
-              - install-docker-eval/commands-cedarenv.md
-              - install-docker-eval/commands-cedarss.md
+              - install-docker-eval/commands-cedarcli-env-list.md
+              - install-docker-eval/commands-cedarcli-server-status.md
           - One-time setup:
               - install-docker-eval/one-time-setup.md
               - install-docker-eval/os-subdomains.md
@@ -242,8 +239,8 @@ nav:
               - install-docker-eval/startup-overview.md
               - install-docker-eval/startup-infra.md
               - install-docker-eval/startup-microservices.md
-              - install-docker-eval/startup-frontend.md
-              - install-docker-eval/startup-monitoring.md
+              - install-docker-eval/startup-frontends.md
+#              - install-docker-eval/startup-monitoring.md
               - install-docker-eval/docker-commands.md
           - Evaluate CEDAR:
               - install-docker-eval/eval-users.md

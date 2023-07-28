@@ -23,8 +23,7 @@ Starting a given group the second time will use the preexisting Docker images an
 You should start each group in their own shell window, to be able to monitor the output separately:
 
 ```sh
-cd ${CEDAR_DOCKER_HOME}
-start...
+cedarcli docker start <GROUPNAME>
 ```
 
 ## Wait & debug
@@ -51,6 +50,5 @@ You can press a single ++ctrl++ + C to stop a `docker-compose` group gracefully.
 Or you can, from a different shell, stop the group with the stop command:
 
 ```sh
-cd ${CEDAR_DOCKER_HOME}
-stop...
+cedarcli docker stop <GROUPNAME>
 ```

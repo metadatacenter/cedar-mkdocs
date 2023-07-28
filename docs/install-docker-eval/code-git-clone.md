@@ -5,33 +5,24 @@ Instead of retrieving the docker images, you will need to build them locally.
 
 This will be actually done transparently for you, if you follow this guide.
 
-## Clone the repos using util script
+## Clone the repos using CLI script
 
-Clone these two repos which hold the Dockerfiles and the docker-compose descriptors for all the system components:
+Clone the needed repos and then pull the `develop` branch by executing:
  
 ```sh
-cd ${CEDAR_DOCKER_HOME}
-${CEDAR_DEVELOP_HOME}/bin/util/git/git-clone-docker.sh
+cedarcli git clone docker
+cedarcli git checkout develop
 ```
 
-This will clone all the repos that are needed for the CEDAR Docker evaluation.
+It is fine if the second command results in some warnings. We are not using all the source repos that the cli has knowledge of.
 
-# Main vs develop branch
+## Main vs develop branch
 
-The above command cloned two repos, and set the active branch to `main`.
+The above command cloned two repos, and set the active branch to `develop`.
 
-If you want to have the latest `develop` branch, you will need to check out that branch.
+If you want to have the latest `main` branch, you will need to check out that branch.
 
 ???+ warning "Important"
 
-    Unless you specifically need something from the latest `develop` branch, you should use the `main` branch, so skip this step.
-    
-```sh
-cd ${CEDAR_DOCKER_HOME}
-cd cedar-docker-build
-git checkout develop
-
-cd ${CEDAR_DOCKER_HOME}
-cd cedar-docker-deploy
-git checkout develop
-```
+    At this moment we suggest you use the `develop` branch.
+[//]: # (    Unless you specifically need something from the latest `develop` branch, you should use the `main` branch, so skip this step.)

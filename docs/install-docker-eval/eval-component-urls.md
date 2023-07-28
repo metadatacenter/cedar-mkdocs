@@ -25,36 +25,54 @@ Neo4j is the graph database behind CEDAR.
 | Password:   | changeme                                  |
 
 
-## Redis Commander
+[//]: # (## Redis Commander)
 
-`Redis Commander` is an optional component, it is started with the `monitoring` group of services.
+[//]: # ()
+[//]: # (`Redis Commander` is an optional component, it is started with the `monitoring` group of services.)
 
-Redis is the memory cache and message queue behind CEDAR.
+[//]: # ()
+[//]: # (Redis is the memory cache and message queue behind CEDAR.)
 
-| Data        | Value                                     |
-| ----------- | -----------                               |
-| URL:        | [http://localhost:8081/](http://localhost:8081/)         |
+[//]: # ()
+[//]: # (| Data        | Value                                     |)
 
+[//]: # (| ----------- | -----------                               |)
 
-## Kibana
-
-`Kibana` is an optional component, it is started with the `monitoring` group of services.
-
-Kibana lets you monitor Elasticsearch, the search engine behind CEDAR.
-
-| Data        | Value                                     |
-| ----------- | -----------                               |
-| URL:        | [http://localhost:5601/](http://localhost:5601/)         |
-| DEVTools URL:   | [http://localhost:5601/app/kibana#/dev_tools/console?_g=()](http://localhost:5601/app/kibana#/dev_tools/console?_g=())           |
+[//]: # (| URL:        | [http://localhost:8081/]&#40;http://localhost:8081/&#41;         |)
 
 
-## phpMyAdmin
+[//]: # (## Kibana)
 
-`phpMyAdmin` is an optional component, it is started with the `monitoring` group of services.
+[//]: # ()
+[//]: # (`Kibana` is an optional component, it is started with the `monitoring` group of services.)
 
-| Data        | Value                                     |
-| ----------- | -----------                               |
-| URL:        | [http://localhost:8082/](http://localhost:8082/)         |
-| Server:     | 192.168.17.1                              |
-| Username:   | root                                      |
-| Password:   | changeme                                  |
+[//]: # ()
+[//]: # (Kibana lets you monitor Elasticsearch, the search engine behind CEDAR.)
+
+[//]: # ()
+[//]: # (| Data        | Value                                     |)
+
+[//]: # (| ----------- | -----------                               |)
+
+[//]: # (| URL:        | [http://localhost:5601/]&#40;http://localhost:5601/&#41;         |)
+
+[//]: # (| DEVTools URL:   | [http://localhost:5601/app/kibana#/dev_tools/console?_g=&#40;&#41;]&#40;http://localhost:5601/app/kibana#/dev_tools/console?_g=&#40;&#41;&#41;           |)
+
+
+[//]: # (## phpMyAdmin)
+
+[//]: # ()
+[//]: # (`phpMyAdmin` is an optional component, it is started with the `monitoring` group of services.)
+
+[//]: # ()
+[//]: # (| Data        | Value                                     |)
+
+[//]: # (| ----------- | -----------                               |)
+
+[//]: # (| URL:        | [http://localhost:8082/]&#40;http://localhost:8082/&#41;         |)
+
+[//]: # (| Server:     | 192.168.17.1                              |)
+
+[//]: # (| Username:   | root                                      |)
+
+[//]: # (| Password:   | changeme                                  |)

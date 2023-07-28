@@ -5,20 +5,20 @@ The microservices group provides the REST endpoints for CEDAR.
 ## Start microservices
 
 ```sh
-startmicroservices
+cedarcli docker start microservices
 ```
 
 ## Check microservices
 
 ```sh
-cedarss
+cedarcli status
 ```
 
 You should see all the services in the `Microservices` (1st) block in `Running` status.
 
 If this is not the case, please stop the microservices using one of these ways:
 
-* with the `stopmicroservices` command from another console
+* with the `cedarcli docker stop microservices` command from another console
 * with a single ++ctrl++ + C form the active console.
 
 Then please try running them again. If this does not help, please analyze the output for indications of what went wrong.
@@ -26,5 +26,5 @@ Then please try running them again. If this does not help, please analyze the ou
 ## Stop microservices
 
 ```sh
-stopmicroservices
+cedarcli docker stop microservices
 ```

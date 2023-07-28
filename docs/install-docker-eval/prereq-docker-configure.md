@@ -7,7 +7,7 @@ Running CEDAR means running 20+ containers. You will need to configure your Dock
     We will change memory, CPUs and disk settings for Docker.
     The **Memory** setting is crucial, errors will occur if Docker does not have enough memory set up.
     
-    The other settings will probably work with their default values as well, but please adjust those as well, if you can.
+    The other settings will probably work with their default values as well, but please adjust them as described below.
  
 
 ## Configure Memory

@@ -1,11 +1,11 @@
-# cedarenv
+# cedarcli env list
 
-`cedarenv` stands for CEDAR Environment Variables. You can check the values of all the environment variables that begin with the prefix `CEDAR_` in your current environment.
+`cedarcli env list` stands for CEDAR CLI Environment Variables List. You can check the values of all the environment variables that begin with the prefix `CEDAR_` in your current environment.
 
-## Running `cedarenv`
+## Running `cedarcli env list`
 Execute this: 
 ```sh
-cedarenv
+cedarcli env list
 ```
 
 You should see an output resembling this:
@@ -23,6 +23,6 @@ CEDAR_WORKER_HTTP_PORT=9011
 CEDAR_WORKER_STOP_PORT=9211
 ```
 
-## Debugging `cedarenv`
-If your output looks different, than the one presented above, please go back, and start from beginning.
+## Debugging `cedarcli env list`
+If your output looks different from the one presented above, please go back, and start from beginning.
 You will need your environment set up correctly before proceeding.
