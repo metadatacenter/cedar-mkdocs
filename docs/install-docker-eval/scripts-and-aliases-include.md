@@ -1,10 +1,9 @@
 # Source shell scripts
 
-Please edit your `.bash_profile` (or `.zshrc`) and add the following lines to it:
+Please edit your `.bash_profile` (or `.zshrc`) and add the following line to it:
 
 ```sh
-source ${CEDAR_HOME}/cedar-development/bin/templates/cedar-profile-docker-eval-1.sh
-source ${CEDAR_HOME}/cedar-development/bin/templates/cedar-profile-docker-eval-2.sh
+source ${CEDAR_HOME}/cedar-development/bin/templates/cedar-profile-docker-eval.sh
 ```
 
 As a result, this is how the CEDAR section of your `bash profile` should look like:
@@ -12,8 +11,7 @@ As a result, this is how the CEDAR section of your `bash profile` should look li
 ```sh
 export CEDAR_HOME=~/CEDAR_DOCKER
 alias cedarcli='source $CEDAR_HOME/decar-cli/cli.sh'
-source ${CEDAR_HOME}/cedar-development/bin/templates/cedar-profile-docker-eval-1.sh
-source ${CEDAR_HOME}/cedar-development/bin/templates/cedar-profile-docker-eval-2.sh
+source ${CEDAR_HOME}/cedar-development/bin/templates/cedar-profile-docker-eval.sh
 ```
 
 ???+ warning "Important"
