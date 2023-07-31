@@ -58,7 +58,7 @@ vi ~/.zshrc
 Add these lines at the end:
 ```sh
 export CEDAR_HOME=~/CEDAR_DOCKER
-alias cedarcli='source $CEDAR_HOME/decar-cli/cli.sh'
+alias cedarcli='source $CEDAR_HOME/cedar-cli/cli.sh'
 ```
 
 ## Reload your shell
