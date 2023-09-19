@@ -8,7 +8,9 @@ Then import it into the `cacerts`:
 gocedar
 cd CEDAR_CA
 
-keytool -import -cacerts -alias metadatacenter.orgx -file ./ca.crt
+sudo keytool -import -cacerts -alias metadatacenter.orgx -file ./ca.crt
+# or
+sudo keytool -import -keystore $JAVA_HOME/lib/security/cacerts -alias metadatacenter.orgx -file ./ca.crt
 ```
 
 When prompted, enter these value:
@@ -29,11 +31,15 @@ When prompted, enter these value:
 
     ```sh
     keytool -list -cacerts | grep metadatacenter
+    # or
+    keytool -list -keystore $JAVA_HOME/lib/security/cacerts | grep metadatacenter
     ```
 
     respectively to delete a certificate    
     ```
     keytool -delete -cacerts -alias metadatacenter.orgx
+    # or
+    keytool -delete -keystore $JAVA_HOME/lib/security/cacerts -alias metadatacenter.orgx
     ```
 
 ## Add to `Firefox`

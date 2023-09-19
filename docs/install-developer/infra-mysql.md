@@ -6,13 +6,13 @@ CEDAR uses `MySql` as the backend for Keycloak as well as storage for messages a
 Please install `MySql`, version 8.0:
 
 ```sh
-brew install mysql@8.0
+brew install mysql
 ```
 
 And pin this version:
 
 ```sh
-brew pin mysql@8.0
+brew pin mysql
 ```
     
 ???+ warning "Important"

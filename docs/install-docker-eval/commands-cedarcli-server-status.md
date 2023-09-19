@@ -52,11 +52,6 @@ You should see the following output:
 │ artifacts              │ ❌     │ 4320  │ Port not open │
 │ bridging               │ ❌     │ 4340  │ Port not open │
 ├────────────────────────┼────────┼───────┼───────────────┤
-│ Dashboard              │        │       │               │
-│ opensearch-dashboard   │ ❌     │ 5601  │ Port not open │
-│ redis-commander        │ ❌     │ 8081  │ Port not open │
-│ phpmyadmin             │ ❌     │ 8082  │ Port not open │
-├────────────────────────┼────────┼───────┼───────────────┤
 │ Frontend-non-essential │        │       │               │
 │ cee-dev                │ ❌     │ 4400  │ Port not open │
 │ demo.cee               │ ❌     │ 4260  │ Port not open │
