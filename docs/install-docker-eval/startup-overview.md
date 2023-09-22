@@ -1,13 +1,12 @@
 # Overview
 
-The 20+ services that make up the CEDAR ecosystem are grouped in four categories:
+The 20+ services that make up the CEDAR ecosystem are grouped in three categories:
 
-| Group          | Start command       | Stop command       |
-| -----------    | -----------         | -----------        |
-| Infrastructure | startinfrastructure | stopinfrastructure |
-| Microservices  | startmicroservices  | stopmicroservices  |
-| Frontend       | startfrontend       | stopfrontend       |
-| Monitoring     | startmonitoring     | stopmonitoring     |
+| Group          | cedarcli group name  |
+| -----------    |----------------------|
+| Infrastructure | nfrastructure        |
+| Microservices  | microservices        |
+| Frontend       | frontend             |
 
 We have `docker-compose` files for each of these groups.
 The services can be started one-by-one, but we suggest following this guide, and starting them in groups.

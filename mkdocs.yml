@@ -240,15 +240,15 @@ nav:
               - install-docker-eval/startup-infra.md
               - install-docker-eval/startup-microservices.md
               - install-docker-eval/startup-frontends.md
-#              - install-docker-eval/startup-monitoring.md
+              #              - install-docker-eval/startup-monitoring.md
               - install-docker-eval/docker-commands.md
           - Evaluate CEDAR:
               - install-docker-eval/eval-users.md
               - install-docker-eval/eval-component-urls.md
 
       - CEDAR Embeddable Editor:
-            - cedar-embeddable-editor/intro.md
-            - cedar-embeddable-editor/try-out.md
+          - cedar-embeddable-editor/intro.md
+          - cedar-embeddable-editor/try-out.md
 
   - Developer Guide:
       - developer-overview.md
@@ -258,5 +258,9 @@ nav:
           - developer-guide/template-element-and-fields.md
           - developer-guide/cedar-rest-apis.md
 
-  - Operations and Management
+  - HOWTOs:
+      - howtos/bioportal-integration-with-docker.md
+      - howtos/cedar-ui-transfer-ownership-of-artifacts.md
+
+  - Operations and Management:
       - operations-and-management.md

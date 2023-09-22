@@ -24,7 +24,7 @@ You should see the following output:
 │ impex                  │ ❌     │ 9008  │ Port not open │
 │ messaging              │ ❌     │ 9012  │ Port not open │
 │ monitor                │ ❌     │ 9014  │ Port not open │
-│ OpenView               │ ❌     │ 9013  │ Port not open │
+│ open                   │ ❌     │ 9013  │ Port not open │
 │ repo                   │ ❌     │ 9002  │ Port not open │
 │ resource               │ ❌     │ 9007  │ Port not open │
 │ schema                 │ ❌     │ 9003  │ Port not open │
@@ -46,7 +46,7 @@ You should see the following output:
 ├────────────────────────┼────────┼───────┼───────────────┤
 │ Frontend               │        │       │               │
 │ main                   │ ❌     │ 4200  │ Port not open │
-│ OpenView-Frontend      │ ❌     │ 4220  │ Port not open │
+│ openview               │ ❌     │ 4220  │ Port not open │
 │ component              │ ❌     │ 4240  │ Port not open │
 │ monitoring             │ ❌     │ 4300  │ Port not open │
 │ artifacts              │ ❌     │ 4320  │ Port not open │

@@ -4,7 +4,7 @@ Follow the below steps to try CEDAR Embeddable Editor
 
 The steps below were tested on a MacOS, but should run o any other system with slight modifications
 
-```bash
+```sh
 
 # Create a directory to hold the sample code
 cd

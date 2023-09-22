@@ -24,7 +24,7 @@ source ${CEDAR_HOME}/cedar-development/bin/templates/cedar-profile-docker-eval.s
     cedarcli env list
     ```
 
-    You should see a list of ~169 environment variables
+    You should see a list of ~166 environment variables
 
 ## CEDAR Docker shell environment
 
