@@ -4,7 +4,7 @@ conda:
   environment: environment.yml
 
 build:
-  image: latest
+  os: ubuntu-22.04
 
 mkdocs:
   configuration: mkdocs.yml
