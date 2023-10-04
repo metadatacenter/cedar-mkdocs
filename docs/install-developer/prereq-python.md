@@ -1,6 +1,6 @@
 # Python
 
-Some of the frontend tools will require `python`. This will be also needed if one wishes to work on the `readthedocs` MkDocs.
+Some of the frontend tools and the `cedar-cli` will require `python`. This will be also needed if one wishes to work on the `readthedocs` MkDocs.
 
 ???+ warning "Important"
     

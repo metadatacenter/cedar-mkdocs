@@ -17,13 +17,12 @@ mvn --version
 
 You should see something like:
 ```
-Apache Maven 3.9.1 (2e178502fcdbffc201671fb2537d0cb4b4cc58f8)
-Maven home: /opt/homebrew/Cellar/maven/3.9.1/libexec
-Java version: 17.0.4.1, vendor: Amazon.com Inc., runtime: /Users/cedar-dev/Library/Java/JavaVirtualMachines/corretto-17.0.4.1/Contents/Home
+Apache Maven 3.9.4 (dfbb324ad4a7c8fb0bf182e6d91b0ae20e3d2dd9)
+Maven home: /opt/homebrew/Cellar/maven/3.9.4/libexec
+Java version: 17.0.8, vendor: Oracle Corporation, runtime: /Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
 Default locale: en_US, platform encoding: UTF-8
-OS name: "mac os x", version: "13.2.1", arch: "aarch64", family: "mac"
+OS name: "mac os x", version: "14.0", arch: "aarch64", family: "mac"
 ```
-It is fine if `maven` uses `openjdk` as seen above. 
 
 ## Configure CEDAR Nexus server
 
