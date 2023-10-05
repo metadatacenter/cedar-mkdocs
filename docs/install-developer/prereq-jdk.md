@@ -10,7 +10,7 @@ The CEDAR developer team uses `Oracle JDK 17`, and we strongly suggest that you 
 ## Install JDK 17
 
 Please download and install the latest Oracle JDK 17 (17.0.8 at the time of writing) from:
-[https://www.oracle.com/java/technologies/downloads/#java17](https://www.oracle.com/java/technologies/downloads/#java17)
+[https://www.oracle.com/java/technologies/downloads/#jdk17-mac](https://www.oracle.com/java/technologies/downloads/#jdk17-mac)
 
 ## Verify the installation
 
@@ -26,6 +26,6 @@ Java(TM) SE Runtime Environment (build 17.0.8+9-LTS-211)
 Java HotSpot(TM) 64-Bit Server VM (build 17.0.8+9-LTS-211, mixed mode, sharing)
 ```
 
-## About+ `JAVA_HOME`
+## About `JAVA_HOME`
 
 Do not explicitly set `JAVA_HOME` at this time, we will set it in the next step using `jenv`

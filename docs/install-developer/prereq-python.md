@@ -21,5 +21,17 @@ python --version
 
 You should see something similar:
 ```
-Python 3.9.12
+Python 3.11.5
+```
+
+## Upgrade conda
+
+```sh
+conda update conda
+```
+
+## Init conda
+
+```sh
+conda init zsh
 ```

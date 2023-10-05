@@ -24,10 +24,3 @@ Default locale: en_US, platform encoding: UTF-8
 OS name: "mac os x", version: "14.0", arch: "aarch64", family: "mac"
 ```
 
-## Configure CEDAR Nexus server
-
-```sh
-mkdir ~/.m2
-cp -r ${CEDAR_HOME}/cedar-development/os-mirror/development-macos/Users/cedar-dev/.m2/settings.xml \
-~/.m2/settings.xml
-```

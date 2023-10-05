@@ -148,6 +148,7 @@ nav:
               - install-developer/prereq-homebrew-fix.md
               - install-developer/prereq-wget.md
               - install-developer/prereq-openssl.md
+              - install-developer/prereq-iterm2-oh-my-zsh-powerlevel10k.md
               - install-developer/prereq-jdk.md
               - install-developer/prereq-jenv.md
               - install-developer/prereq-maven.md
@@ -156,8 +157,13 @@ nav:
               - install-developer/os-home-directory.md
               - install-developer/config-usernames-and-passwords.md
               - install-developer/config-domain.md
+          - Cedar-CLI:
+              - install-developer/cedarcli-overview.md
+              - install-developer/cedarcli-install.md
+          - The code:
+                - install-developer/code-overview.md
+                - install-developer/code-git-clone.md
           - Scripts and aliases:
-              - install-developer/scripts-and-aliases-overview.md
               - install-developer/scripts-and-aliases-install.md
               - install-developer/scripts-and-aliases-include.md
           - CEDAR commands:
@@ -173,8 +179,6 @@ nav:
               - install-developer/os-subdomains.md
               - install-developer/os-directories.md
           - The code:
-              - install-developer/code-overview.md
-              - install-developer/code-git-clone.md
               - install-developer/code-git-utils.md
               - install-developer/code-maven-utils.md
               - install-developer/code-build-parent-and-libraries.md
