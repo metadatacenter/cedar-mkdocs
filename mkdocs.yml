@@ -200,12 +200,12 @@ nav:
                   - install-developer/infra-keycloak-theme.md
                   - install-developer/infra-keycloak-configure.md
                   - install-developer/infra-keycloak-realm.md
-                  - install-developer/infra-keycloak-administrator.md
               - Nginx:
                   - install-developer/infra-nginx-overview.md
                   - install-developer/infra-nginx-install.md
                   - install-developer/infra-nginx-configure.md
                   - install-developer/infra-nginx-start.md
+                  - install-developer/infra-keycloak-administrator.md
               - install-developer/infra-start.md
           - Microservices:
               - install-developer/microservices-configuration.md
