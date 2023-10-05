@@ -37,10 +37,10 @@ mv neo4j-community-5.4.0-unix neo4j
 
 ## Enable APOC procedures
 
-Move ```apoc-5.3.0-core.jar``` from ```labs``` to ```plugins```:
+Move ```apoc-5.4.1-core.jar``` from ```labs``` to ```plugins```:
 
 ```sh
-mv $CEDAR_HOME/neo4j/labs/apoc-5.3.0-core.jar $CEDAR_HOME/neo4j/plugins/. 
+mv $CEDAR_HOME/neo4j/labs/apoc-5.4.1-core.jar $CEDAR_HOME/neo4j/plugins/. 
 ```
 
 Edit the config, and enable the procedures:
@@ -71,7 +71,7 @@ startneo
 
 ## Check Neo4j status
 ```sh
-cedarss
+cedarcli status
 ```
 
 You should see the following line in the output:

@@ -1,6 +1,6 @@
 # CEDAR Maven utils
 
-During development you could take advantage if the following `maven`/related aliases:
+During development you could take advantage if the following `maven`-related aliases:
 
 You need to be in a directory with a `pom.xml` to take advantage of these aliases.
 

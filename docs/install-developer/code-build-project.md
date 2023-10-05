@@ -1,7 +1,11 @@
 # Build CEDAR project
 
 ## Build the project
-
+Execute this from anywhere:
+```sh
+cedarcli build project
+```
+or
 ```sh
 goproject
 mcit

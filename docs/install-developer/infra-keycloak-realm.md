@@ -12,7 +12,7 @@ You will need the `MySql` server running for this step. Check if it is already a
 
 ```sh
 startmysql
-cedarss
+cedarcli status
 ```
 
 Importing a realm is done by starting `Keycloak` in the import mode
@@ -20,7 +20,7 @@ Importing a realm is done by starting `Keycloak` in the import mode
 cd ${CEDAR_HOME}/cedar-development/os-mirror/development-macos/CEDAR_HOME/keycloak/
 ${CEDAR_KEYCLOAK_HOME}/bin/kc.sh \
   import \
-  --file keycloak-realm.CEDAR.development.2023-03-23.json
+  --file keycloak-realm.CEDAR.development.2023-07-05.json
 ```
 
 Please monitor the log output for anomalies. Not that this importation process can take several minutes so please wait until it has finished.

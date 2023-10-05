@@ -157,19 +157,21 @@ nav:
               - install-developer/os-home-directory.md
               - install-developer/config-usernames-and-passwords.md
               - install-developer/config-domain.md
-          - Cedar-CLI:
+          - CEDAR CLI:
               - install-developer/cedarcli-overview.md
               - install-developer/cedarcli-install.md
+              - install-developer/cedarcli-commands.md
           - The code:
                 - install-developer/code-overview.md
                 - install-developer/code-git-clone.md
           - Scripts and aliases:
               - install-developer/scripts-and-aliases-install.md
               - install-developer/scripts-and-aliases-include.md
-          - CEDAR commands:
+          - CEDAR CLI commands 1:
               - install-developer/commands-overview.md
-              - install-developer/commands-cedarenv.md
-              - install-developer/commands-cedarss.md
+              - install-developer/commands-env-list.md
+              - install-developer/commands-status.md
+          - Start and stop aliases:
               - install-developer/commands-startstop.md
           - SSL certificates:
               - install-developer/cert-overview.md
@@ -178,8 +180,9 @@ nav:
           - Subdomains, directories:
               - install-developer/os-subdomains.md
               - install-developer/os-directories.md
-          - The code:
+          - CEDAR CLI commands 2:
               - install-developer/code-git-utils.md
+          - The code:
               - install-developer/code-maven-utils.md
               - install-developer/code-build-parent-and-libraries.md
               - install-developer/code-build-project.md

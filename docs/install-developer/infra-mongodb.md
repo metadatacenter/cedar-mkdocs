@@ -97,7 +97,7 @@ startmongo
 
 ## Check MongoDB status
 ```sh
-cedarss
+cedarcli status
 ```
 
 You should see the following line in the output:

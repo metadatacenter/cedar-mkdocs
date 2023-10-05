@@ -41,7 +41,7 @@ startsearch
 
 ## Check OpenSearch status
 ```sh
-cedarss
+cedarcli status
 ```
 
 You should see the following lines in the output:
@@ -49,61 +49,3 @@ You should see the following lines in the output:
 | OpenSearch-REST            | Running | httpResponse| 9200| HTTP/1.1\s200\sOK |
 | OpenSearch-Transport       | Running | openPort    | 9300|                   |
 ```
-
-[//]: # (## Install OpenSearch Dashboards)
-
-[//]: # ()
-[//]: # (`OpenSearch Dashboards` can be used to interact with `OpenSearch`.)
-
-[//]: # ()
-[//]: # (Please install the latest `OpenSearch Dashboards`:)
-
-[//]: # ()
-[//]: # (```sh)
-
-[//]: # (brew install opensearch-dashboards)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (And pin this version:)
-
-[//]: # ()
-[//]: # (```sh)
-
-[//]: # (brew pin opensearch-dashboards)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (## Start OpenSearch Dashboards)
-
-[//]: # ()
-[//]: # (```sh)
-
-[//]: # (startsearchdash)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (## Check OpenSearch Dashboards status)
-
-[//]: # ()
-[//]: # (```sh)
-
-[//]: # (cedarss)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (You should see the following lines in the output:)
-
-[//]: # (```)
-
-[//]: # (| --- Monitoring ------------|         |             |     |                   |)
-
-[//]: # (| OpenSearch-Dashboards      | Running | httpResponse| 5601| HTTP/1.1\s302\sFou|)
-
-[//]: # (```)
-
-[//]: # ()
