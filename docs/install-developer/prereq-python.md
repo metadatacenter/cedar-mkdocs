@@ -1,6 +1,6 @@
 # Python
 
-Some of the frontend tools will require `python`. This will be also needed if one wishes to work on the `readthedocs` MkDocs.
+Some of the frontend tools and the `cedar-cli` will require `python`. This will be also needed if one wishes to work on the `readthedocs` MkDocs.
 
 ???+ warning "Important"
     
@@ -21,5 +21,17 @@ python --version
 
 You should see something similar:
 ```
-Python 3.9.12
+Python 3.11.5
+```
+
+## Upgrade conda
+
+```sh
+conda update conda
+```
+
+## Init conda
+
+```sh
+conda init zsh
 ```

@@ -11,7 +11,7 @@ startall
 The check the all the microservices are running, execute:
 
 ```sh
-cedarss
+cedarcli status
 ```
 
 You should see the following output:

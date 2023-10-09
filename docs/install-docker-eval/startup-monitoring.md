@@ -13,7 +13,7 @@ startmonitoring
 ## Check monitoring
 
 ```sh
-cedarss
+cedarcli status
 ```
 
 You should see all the services in the `Monitoring` (3rd) block in `Running` status.

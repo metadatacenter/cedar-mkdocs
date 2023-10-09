@@ -26,9 +26,7 @@ startmongo
 startneo
 startmysql
 startsearch
-startkibana
 startredis
-startrc
 startnginx
 startkk
 ```

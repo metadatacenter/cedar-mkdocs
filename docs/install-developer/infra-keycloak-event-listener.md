@@ -14,7 +14,7 @@ However, if there are no changes in the CEDAR codebase which will have an effect
 
 The following command will copy the event listener into it's proper location:
 ```sh
-copylistener
+cedarcli dev copy-keycloak-listener
 ```
 
 You can execute this command from any location. This command copies the event listener JAR `cedar-keycloak-event-listener.jar` from `$CEDAR_HOME/cedar-keycloak-event-listener/target/` to `${CEDAR_KEYCLOAK_HOME}/providers/`.

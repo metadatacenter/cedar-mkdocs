@@ -1,10 +1,9 @@
 # Source shell scripts
 
-Please edit your `bash profile` and add the following lines to it:
+Please edit your `bash profile` and add the following line to it:
 
 ```sh
-# CEDAR development related scripts, aliases, environment variables
-export CEDAR_HOME=${HOME}/CEDAR
+vi ~/.zshrc
 source ${CEDAR_HOME}/cedar-profile-native-develop.sh
 ```
 
@@ -15,13 +14,13 @@ source ${CEDAR_HOME}/cedar-profile-native-develop.sh
     
     Execute the following:
     ```sh
-    cedarenv
+    gocedar
     ```
 
-    You should see a list of 130+ environment variables
+    You should be taken to the previously created `CEDAR` directory
 
 ## CEDAR development shell environment
 
-Please make sure, that during this installation, and later during development you always use a shell where the `CEDAR_HOME` is set, and the above mentioned script is sourced.
+Please make sure, that during this installation, and later during development you always use a shell where the `CEDAR_HOME` is set, and the above-mentioned script is sourced.
 
 If you are using a terminal with multiple profile support (e.g. iTerm), make sure the active profile has the `CEDAR` environment set.

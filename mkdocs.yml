@@ -142,27 +142,36 @@ nav:
           - install-developer/intro.md
           - install-developer/system-architecture.md
           - Prerequisites:
+              - install-developer/os-user.md
               - install-developer/prereq-macos.md
               - install-developer/prereq-homebrew.md
               - install-developer/prereq-homebrew-fix.md
               - install-developer/prereq-wget.md
               - install-developer/prereq-openssl.md
+              - install-developer/prereq-iterm2-oh-my-zsh-powerlevel10k.md
               - install-developer/prereq-jdk.md
+              - install-developer/prereq-jenv.md
               - install-developer/prereq-maven.md
               - install-developer/prereq-python.md
           - User, home directory, passwords and domain:
-              - install-developer/os-user.md
               - install-developer/os-home-directory.md
               - install-developer/config-usernames-and-passwords.md
               - install-developer/config-domain.md
+          - CEDAR CLI:
+              - install-developer/cedarcli-overview.md
+              - install-developer/cedarcli-install.md
+              - install-developer/cedarcli-commands.md
+          - The code:
+                - install-developer/code-overview.md
+                - install-developer/code-git-clone.md
           - Scripts and aliases:
-              - install-developer/scripts-and-aliases-overview.md
               - install-developer/scripts-and-aliases-install.md
               - install-developer/scripts-and-aliases-include.md
-          - CEDAR commands:
+          - CEDAR CLI commands 1:
               - install-developer/commands-overview.md
-              - install-developer/commands-cedarenv.md
-              - install-developer/commands-cedarss.md
+              - install-developer/commands-env-list.md
+              - install-developer/commands-status.md
+          - Start and stop aliases:
               - install-developer/commands-startstop.md
           - SSL certificates:
               - install-developer/cert-overview.md
@@ -171,10 +180,9 @@ nav:
           - Subdomains, directories:
               - install-developer/os-subdomains.md
               - install-developer/os-directories.md
-          - The code:
-              - install-developer/code-overview.md
-              - install-developer/code-git-clone.md
+          - CEDAR CLI commands 2:
               - install-developer/code-git-utils.md
+          - The code:
               - install-developer/code-maven-utils.md
               - install-developer/code-build-parent-and-libraries.md
               - install-developer/code-build-project.md
@@ -192,12 +200,12 @@ nav:
                   - install-developer/infra-keycloak-theme.md
                   - install-developer/infra-keycloak-configure.md
                   - install-developer/infra-keycloak-realm.md
-                  - install-developer/infra-keycloak-administrator.md
               - Nginx:
                   - install-developer/infra-nginx-overview.md
                   - install-developer/infra-nginx-install.md
                   - install-developer/infra-nginx-configure.md
                   - install-developer/infra-nginx-start.md
+                  - install-developer/infra-keycloak-administrator.md
               - install-developer/infra-start.md
           - Microservices:
               - install-developer/microservices-configuration.md
@@ -220,38 +228,36 @@ nav:
               - install-docker-eval/prereq-docker-install.md
               - install-docker-eval/prereq-docker-configure.md
           - User, home directory, passwords and domain:
-              - install-docker-eval/os-user.md
               - install-docker-eval/os-home-directory.md
               - install-docker-eval/config-usernames-and-passwords.md
               - install-docker-eval/config-domain.md
           - Scripts and aliases:
-              - install-docker-eval/scripts-and-aliases-install.md
-              - install-docker-eval/scripts-and-aliases-include.md
-          - The code:
+              - install-docker-eval/cedar-cli-install.md
               - install-docker-eval/code-git-clone.md
-              - install-docker-eval/docker-aliases-include.md
+              - install-docker-eval/scripts-and-aliases-include.md
           - CEDAR commands:
               - install-docker-eval/commands-overview.md
-              - install-docker-eval/commands-cedarenv.md
-              - install-docker-eval/commands-cedarss.md
+              - install-docker-eval/commands-cedarcli-env-list.md
+              - install-docker-eval/commands-cedarcli-server-status.md
           - One-time setup:
               - install-docker-eval/one-time-setup.md
               - install-docker-eval/os-subdomains.md
+              - install-docker-eval/bioportal.md
               - install-docker-eval/cert-install.md
           - Components:
               - install-docker-eval/startup-overview.md
               - install-docker-eval/startup-infra.md
               - install-docker-eval/startup-microservices.md
-              - install-docker-eval/startup-frontend.md
-              - install-docker-eval/startup-monitoring.md
+              - install-docker-eval/startup-frontends.md
+              #              - install-docker-eval/startup-monitoring.md
               - install-docker-eval/docker-commands.md
           - Evaluate CEDAR:
               - install-docker-eval/eval-users.md
               - install-docker-eval/eval-component-urls.md
 
       - CEDAR Embeddable Editor:
-            - cedar-embeddable-editor/intro.md
-            - cedar-embeddable-editor/try-out.md
+          - cedar-embeddable-editor/intro.md
+          - cedar-embeddable-editor/try-out.md
 
   - Developer Guide:
       - developer-overview.md
@@ -261,5 +267,9 @@ nav:
           - developer-guide/template-element-and-fields.md
           - developer-guide/cedar-rest-apis.md
 
-  - Operations and Management
+  - HOWTOs:
+      - howtos/bioportal-integration-with-docker.md
+      - howtos/cedar-ui-transfer-ownership-of-artifacts.md
+
+  - Operations and Management:
       - operations-and-management.md

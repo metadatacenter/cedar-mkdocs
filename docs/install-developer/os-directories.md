@@ -12,16 +12,43 @@ CEDAR stores some data on the local filesystem. These folders must also be creat
 
 Please run:
 ```sh
-${CEDAR_DEVELOP_HOME}/bin/util/localdev/create-directories.sh
+cedarcli dev create-directories
 ```
 
 ## Check the directories
-You should run our script a second time.
-Since all the hosts should be known at this point, the script should report that there is nothing to do.
-
 ```sh
-ls ${CEDAR_HOME}
-ls ${CEDAR_HOME}/log
+ls -ls ${CEDAR_HOME}/log
 ```
 
-The output should contain all the directories just created.
+The output should contain all the directories just created:
+```
+cadsr-tools
+frontend-artifacts
+frontend-bridging
+frontend-cedar
+frontend-cee-demo-angular
+frontend-cee-demo-angular-dist
+frontend-cee-docs-angular
+frontend-cee-docs-angular-dist
+frontend-component
+frontend-monitoring
+frontend-openview
+frontend-shared
+nginx
+server-artifact
+server-auth
+server-bridge
+server-group
+server-impex
+server-messaging
+server-monitor
+server-open
+server-repo
+server-resource
+server-schema
+server-submission
+server-terminology
+server-user
+server-valuerecommender
+server-worker
+```

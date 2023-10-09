@@ -1,21 +1,9 @@
 # One-time setup
 
-The following steps need to be executed once for a CEDAR Docker installation: 
+The following step needs to be executed once for a CEDAR Docker installation. This will create the network, the volumes, and copy certificates: 
 
-## Create network
-
-```sh
-source ${CEDAR_DOCKER_DEPLOY}/bin/docker-create-network.sh
-```
-
-## Create volumes
+## Create network, create volumes, copy certificates
 
 ```sh
-source ${CEDAR_DOCKER_DEPLOY}/bin/docker-create-volumes.sh
-```
-
-## Copy certificates
-
-```sh
-source ${CEDAR_DOCKER_DEPLOY}/bin/docker-copy-certificates.sh
+cedarcli docker one-time-setup
 ```

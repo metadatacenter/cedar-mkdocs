@@ -11,6 +11,13 @@ goparent
 # aliases to 'cd $CEDAR_HOME/cedar-parent'
 ```
 
+## Change to the libraries directory
+
+```sh
+golibraries
+# aliases to 'cd $CEDAR_HOME/cedar-libraries'
+```
+
 ## Change to the CEDAR project directory
 
 ```sh
@@ -21,8 +28,8 @@ goproject
 ## Clean `Maven` cache
 
 ```sh
-rmmvn
-# aliases to 'rm -rf ~/.m2/repository/'
+cedarcli clean maven all
+# performs to 'rm -rf ~/.m2/repository/'
 ```
 
 ???+ warning "Important"

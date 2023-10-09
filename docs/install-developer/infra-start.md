@@ -9,7 +9,7 @@ startinfra
 ## Check status
 
 ```sh
-cedarss
+cedarcli status
 ```
 
 You should see all the services in the `Infrastructure` (2nd) block in `Running` status.

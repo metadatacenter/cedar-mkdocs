@@ -1,13 +1,12 @@
 # Overview
 
-The 20+ services that make up the CEDAR ecosystem are grouped in four categories:
+The 20+ services that make up the CEDAR ecosystem are grouped in three categories:
 
-| Group          | Start command       | Stop command       |
-| -----------    | -----------         | -----------        |
-| Infrastructure | startinfrastructure | stopinfrastructure |
-| Microservices  | startmicroservices  | stopmicroservices  |
-| Frontend       | startfrontend       | stopfrontend       |
-| Monitoring     | startmonitoring     | stopmonitoring     |
+| Group          | cedarcli group name  |
+| -----------    |----------------------|
+| Infrastructure | nfrastructure        |
+| Microservices  | microservices        |
+| Frontend       | frontend             |
 
 We have `docker-compose` files for each of these groups.
 The services can be started one-by-one, but we suggest following this guide, and starting them in groups.
@@ -23,8 +22,7 @@ Starting a given group the second time will use the preexisting Docker images an
 You should start each group in their own shell window, to be able to monitor the output separately:
 
 ```sh
-cd ${CEDAR_DOCKER_HOME}
-start...
+cedarcli docker start <GROUPNAME>
 ```
 
 ## Wait & debug
@@ -51,6 +49,5 @@ You can press a single ++ctrl++ + C to stop a `docker-compose` group gracefully.
 Or you can, from a different shell, stop the group with the stop command:
 
 ```sh
-cd ${CEDAR_DOCKER_HOME}
-stop...
+cedarcli docker stop <GROUPNAME>
 ```

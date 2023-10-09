@@ -8,11 +8,11 @@ The CEDAR Keycloak realm can be found in the `${CEDAR_HOME}/cedar-util/keycloak/
 
 ## Import CEDAR realm
 
-You will need the `MySql` server running for this step. Check if it is already available using `cedarss`:
+You will need the `MySql` server running for this step. Check if it is already available using `cedarcli status`:
 
 ```sh
 startmysql
-cedarss
+cedarcli status
 ```
 
 Importing a realm is done by starting `Keycloak` in the import mode
@@ -20,7 +20,7 @@ Importing a realm is done by starting `Keycloak` in the import mode
 cd ${CEDAR_HOME}/cedar-development/os-mirror/development-macos/CEDAR_HOME/keycloak/
 ${CEDAR_KEYCLOAK_HOME}/bin/kc.sh \
   import \
-  --file keycloak-realm.CEDAR.development.2023-03-23.json
+  --file keycloak-realm.CEDAR.development.2023-07-05.json
 ```
 
 Please monitor the log output for anomalies. Not that this importation process can take several minutes so please wait until it has finished.
@@ -40,7 +40,7 @@ startkk
 
 ## Check Keycloak status
 ```sh
-cedarss
+cedarcli status
 ```
 
 You should see the following line in the output:

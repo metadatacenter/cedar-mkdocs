@@ -15,7 +15,7 @@ docker ps -a
 
 Remove the CEDAR-related containers using:
 ```sh
-${CEDAR_DOCKER_DEPLOY}/bin/util/remove-docker-containers.sh 
+cedarcli docker remove containers
 ```
 
 ## Docker Volumes
@@ -27,7 +27,7 @@ docker volume list
 
 Remove the CEDAR-related volumes using:
 ```sh
-${CEDAR_DOCKER_DEPLOY}/bin/util/remove-docker-volumes.sh 
+cedarcli docker remove volumes 
 ```
 
 Or remove them one-by-one:
@@ -44,13 +44,9 @@ docker images
 
 Remove the CEDAR-related images using:
 ```sh
-${CEDAR_DOCKER_DEPLOY}/bin/util/remove-docker-images.sh 
+cedarcli docker remove images
 ```
 
-If you want to remove all the images, you can use:
-```sh
-${CEDAR_DOCKER_DEPLOY}/bin/util/remove-all-docker-images.sh
-```
 ## Docker Networks
 
 List the networks using:
@@ -60,5 +56,12 @@ docker network list
 
 Remove the CEDAR network using:
 ```sh
-${CEDAR_DOCKER_DEPLOY}/bin/util/remove-docker-network.sh 
+cedarcli docker remove network 
+```
+
+## Remove all CEDAR-related Docker artifacts
+
+Remove all CEDAR from Docker using:
+```sh
+cedarcli docker remove all 
 ```

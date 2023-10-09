@@ -5,17 +5,27 @@ Before building CEDAR, you need to build this repo first.
 Once built, you do not need to build it again, unless you change the `pom.xml`.
 
 ## Build the parent
+Execute this from anywhere:
+```sh
+cedarcli build parent
+```
 
+The same can be achieved by a more down-to earth approach:
 ```sh
 goparent
 mcit
 ```
 
 The above is a shorthand for the following, full version:
- 
 ```sh
 cd ${CEDAR_HOME}/cedar-parent
 mvn clean install -DskipTests=true
+```
+
+Another way, useful in some cases:
+```sh
+goparent
+cedarcli build this
 ```
 
 ## What are CEDAR Libraries
@@ -24,6 +34,11 @@ The CEDAR Libraries is a collection of common code used throughout the project.
 This codebase is also helpful to write third-party projects that use CEDAR constants and common model classes.
 
 ## Build the libraries
+Execute this from anywhere:
+```sh
+cedarcli build libraries
+```
+or 
 
 ```sh
 golibraries
