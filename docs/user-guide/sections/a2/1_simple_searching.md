@@ -4,7 +4,7 @@ status: Ready
 ---
 # Simple Searching
 
-*To learn about simple navigation in the Desktop, visit [Navigating Within CEDAR](https://metadatacenter.github.io/cedar-manual/sections/a4/navigating_within_cedar/).*
+*To learn about simple navigation in the Desktop, visit [Navigating Within CEDAR](../../a4/2_navigating_within_cedar/).*
 
 <h1>Searching use the search bar</h1>
 
@@ -19,7 +19,7 @@ The CEDAR Workbench organizes resources in three different categories, depending
 
 Searching for a resource in a particular set is very simple. Just click on the given set (e.g., "Shared with everybody") and input the search string as free text in the search bar, as described above. All the resources in the selected set that have the string  listed in their labels, version, or description are shown. 
 
-You can also constrain the resulting resources by their type, as described in [Constraining the Results by Type](https://metadatacenter.github.io/cedar-manual/sections/a2/3_constraining_the_results_by_type/).
+You can also constrain the resulting resources by their type, as described in [Constraining the Results by Type](../../a2/3_constraining_the_results_by_type/).
 
 The search results are illustrated in the Figure below. In later sections, we will demonstrate how to organize and constrain these search results, and perform advanced searches.
 

@@ -8,7 +8,7 @@ status: Ready
 
 There are four types of resources in CEDAR: folders, metadata templates, metadata elements, metadata fields, and metadata instances. In this section we will drop the term 'metadata' from these names and refer to each resource by its shorter form.
 
-CEDAR folders are used to organize CEDAR content and the sharing settings for that content. To view folder resources you navigate into the folders. This is described in [Navigating Within CEDAR](https://metadatacenter.github.io/cedar-manual/sections/a4/navigating_within_cedar/), under Browsing Within the Desktop.
+CEDAR folders are used to organize CEDAR content and the sharing settings for that content. To view folder resources you navigate into the folders. This is described in [Navigating Within CEDAR](../../a4/2_navigating_within_cedar/), under Browsing Within the Desktop.
 
 The rest of this section emphasizes CEDAR artifacts: 
 templates, elements, fields, and instances. 
@@ -31,7 +31,7 @@ make changes to the document.
 
 This is also the view which enables seeing the raw artifact content inside CEDAR.
 
-For more details about this viewing mode, visit [Viewing Resource Content](https://metadatacenter.github.io/cedar-manual/sections/a3/2_viewing_resource_content_in_cedar/).
+For more details about this viewing mode, visit [Viewing Resource Content](../2_viewing_resource_content_in_cedar/).
 
 <h2>On the Web with OpenView</h2>
 
@@ -45,7 +45,7 @@ to the web page for this artifact that supports navigation and viewing features.
 
 You can also see artifact metadata and raw artifact content from the OpenView format.
 
-For more details about this viewing mode, visit [Viewing Resource Content on the Web](https://metadatacenter.github.io/cedar-manual/sections/a3/3_viewing_resource_content_on_the_web/). 
+For more details about this viewing mode, visit [Viewing Resource Content on the Web](../../a3/3_viewing_resource_content_on_the_web/). 
 
 <h1>Viewing Resources in Raw Formats</h1>
 
@@ -60,7 +60,7 @@ Whichever format applies, the information is accessible at the bottom of the
 artifact's view in CEDAR by clicking on the appropriate link. 
 (Raw formats can also be accessed via the web when OpenView is enabled for the artifact.)
 
-For more details about this viewing mode, visit [Viewing Resource as Raw JSON](https://metadatacenter.github.io/cedar-manual/sections/a3/4_viewing_resource_as_raw_json/). 
+For more details about this viewing mode, visit [Viewing Resource as Raw JSON](../../a3/4_viewing_resource_as_raw_json/). 
 
 <h1>Viewing Resource Metadata</h1>
 
@@ -71,7 +71,7 @@ side of the Desktop, click on the 'i' information icon to open it.
 Another metadata panel is available from the top part of the OpenView format, 
 with a different metadata collection appropriate to OpenView users. 
 
-For more details about viewing resource , visit [Viewing Resource Metadata](https://metadatacenter.github.io/cedar-manual/sections/a3/5_viewing_resource_metadata/). 
+For more details about viewing resource , visit [Viewing Resource Metadata](../../a3/5_viewing_resource_metadata/). 
 
 
 

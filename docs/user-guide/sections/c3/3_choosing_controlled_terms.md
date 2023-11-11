@@ -259,7 +259,7 @@ For example, if instead of looking for 'location' or 'city' as an ontology name
 you search for a typical location with an uncommon name (say "Sacramento"),
 you can see ontologies containing items with that name. 
 In this case, you may quickly see that BioPortal has only one good location ontology
-(GAZ) and that it is flat, so you might [create your own vocabulary](../3_defining_your_answers_with_term_lists) for these purposes.
+(GAZ) and that it is flat, so you might [create your own vocabulary](../2_defining_your_answers_with_term_lists) for these purposes.
 
 ### Serendipity and Reuse
 

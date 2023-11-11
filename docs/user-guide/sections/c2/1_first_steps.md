@@ -21,7 +21,7 @@ and can be changed from the Desktop view.
 
 ![](../../../img/userguide/creating-new-template-20191216.png){:width="80%" class="centered"}
 
-You can [save and close your Template](https://metadatacenter.github.io/cedar-manual/sections/c2/4-saving-and-closing/) at any time and return to it later. You can open it for viewing or editing
+You can [save and close your Template](../../c2/4_saving_and_closing/) at any time and return to it later. You can open it for viewing or editing
 (or any other Template for which you have those access privileges) 
 by double-clicking on its icon in the Desktop. 
 
@@ -66,7 +66,7 @@ information you want to be able to search on to find this field.
 
 ## **Next Steps**
 
-Now, you can fill in the content of your template by [Adding Fields](https://metadatacenter.github.io/cedar-manual/sections/c2/2_adding_fields/) 
-and [Adding Elements](https://metadatacenter.github.io/cedar-manual/sections/c2/3_adding_elements/),
-or [save and close it](https://metadatacenter.github.io/cedar-manual/sections/c2/4-saving-and-closing/)
+Now, you can fill in the content of your template by [Adding Fields](../../c2/2_adding_fields/) 
+and [Adding Elements](../../c2/3_adding_elements/),
+or [save and close it](../../c2/4_saving_and_closing/)
 to return to it later.

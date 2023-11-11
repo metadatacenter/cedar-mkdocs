@@ -83,7 +83,7 @@ as the "Desktop". One way to make sure the Desktop view is displayed is to
 click on the Workspace link in the upper-left portion of the window. For a 
 more in-depth explanation of the Desktop and other components displayed in 
 the Workspace, refer to the section entitled 
-"[Your CEDAR Workspace](../../sections/a4/your_cedar_workspace)" in the 
+"[Your CEDAR Workspace](../../sections/a4/3_your_cedar_workspace)" in the 
 "[Desktop and Navigation](../../basic_topics/a4_desktop_and_navigation)" chapter.
 
 When CDEs are imported into the {{ page.cedarw }}, they are named by 

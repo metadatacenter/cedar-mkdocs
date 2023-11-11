@@ -7,16 +7,16 @@ This page covers the basics of building elements in the {{ page.cedarw }}, with 
 
 - [Introduction](#intro)
 - [Step-by-step guide: build an element](#step-by-step-guide)
-  - Step 1 - [Navigate to your workspace](#workspace)
-  - Step 2 - [Create a new element](#create-element)
-  - Step 3 - [Add CDEs to your element](#add-cdes)
-  - Step 4 - [Configure CDE options](#configure-cdes)
-    - [Preferred labels](#opts-labels)
-    - [Cardinality](#opts-cardinality)
-    - [Required vs. optional](#opts-required)
-    - [Suggestions](#opts-suggest)
-    - [Hidden](#opts-hide)
-    - [Permissible values](#opts-values)
+    - Step 1 - [Navigate to your workspace](#workspace)
+    - Step 2 - [Create a new element](#create-element)
+    - Step 3 - [Add CDEs to your element](#add-cdes)
+    - Step 4 - [Configure CDE options](#configure-cdes)
+        - [Preferred labels](#opts-labels)
+        - [Cardinality](#opts-cardinality)
+        - [Required vs. optional](#opts-required)
+        - [Suggestions](#opts-suggest)
+        - [Hidden](#opts-hide)
+        - [Permissible values](#opts-values)
 - [Arranging CDEs in elements](#arrange-cdes)
 - [Deleteing CDEs from elements](#delete-cdes)
 - [Nesting elements](#nesting)
@@ -91,7 +91,7 @@ This will launch a modal dialog where you can use the search bar across the top 
 
 You can select items in the list of search results to display a details pane on the right hand side of the dialog for viewing informaton such as the CDE owner, storage location, version number, etc.
 
-If you need more information about how to efficiently search for CDEs in the {{ page.cedarw }}, please refer to the ["Finding CDEs"](../finding_cdes) page.
+If you need more information about how to efficiently search for CDEs in the {{ page.cedarw }}, please refer to the ["Finding CDEs"](../4_finding_cdes) page.
 
 Once you locate the desired CDE, select it in the middle pane of the search dialog and click the "SELECT" button. This will insert the CDE into your element and return to the element designer.
 
@@ -146,7 +146,7 @@ The REQUIRED link allows you to specify whether or not the CDE needs to be fille
 ### Suggestions
 <a name="opts-suggest"></a>
 
-Setting SUGGESTIONS to YES enables the {{ page.cedarw }} intelligent authoring suggestion system for the field. For a detailed explanation of this functionality, see [Understanding the Suggestion System](../../sections/c4/understanding_the_suggestion_system/).
+Setting SUGGESTIONS to YES enables the {{ page.cedarw }} intelligent authoring suggestion system for the field. For a detailed explanation of this functionality, see [Understanding the Suggestion System](../../sections/c4/3_understanding_the_suggestion_system/).
 
 ### Hidden
 <a name="opts-hide"></a>

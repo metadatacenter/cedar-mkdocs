@@ -11,7 +11,7 @@ We're sorry, this resource has not yet been developed.
 You are welcome to contribute to its development at the link below.
 
 Will be just tips, in addition to those already provided in the detailed guide 
-[Choosing Controlled Terms](https://metadatacenter.github.io/cedar-manual/sections/c3/3_choosing_controlled_terms/)
+[Choosing Controlled Terms](../../c3/3_choosing_controlled_terms/)
 
 
 * prefill the label effectively

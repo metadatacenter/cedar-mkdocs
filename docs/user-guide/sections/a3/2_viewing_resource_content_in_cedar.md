@@ -55,7 +55,7 @@ the template model specifications.)
 
 <h2>Artifact Footers</h2>
 
-At the foot of every artifact one or two horizontal bars let you view the raw format of the artifact.  See [Viewing Resource as Raw JSON](https://metadatacenter.github.io/cedar-manual/sections/a3/4_viewing_resource_as_raw_json/) for more information.
+At the foot of every artifact one or two horizontal bars let you view the raw format of the artifact.  See [Viewing Resource as Raw JSON](../4_viewing_resource_as_raw_json/) for more information.
 
 <h1>Template Designer View</h1>
 
@@ -67,7 +67,7 @@ with visual indentation to show the organization of the elements within the temp
 
 There is also an identifier field, which can be used to provide an external identifier for the template. (This is not the same as the artifact's identifier, which is always a CEDAR-generated IRI.) The external identifier does not have to be an IRI, and does not have to be unique across different artifacts, though both are highly recommended.
 
-More information about using the Template Designer can be found in the CEDAR Templates chapter, starting with [Description of a Template](https://metadatacenter.github.io/cedar-manual/cedar_templates/c1_description_of_a_template/).
+More information about using the Template Designer can be found in the CEDAR Templates chapter, starting with [Description of a Template](../../../cedar_templates/c1_description_of_a_template/).
 
 <h1>Metadata Editor View</h1>
 
@@ -80,7 +80,7 @@ again with visual indentation to show the organization of the elements within th
 If there is an arrow to the left of a given line, 
 clicking on the arrow will expand or collapse the content under that entity.
 
-Information about using the Metadata Editor can be found in the Filling Out (Creating) Metadata chapter, starting with [Filling Out Metadata](https://metadatacenter.github.io/cedar-manual/sections/a5/2_filling_out_metadata/).
+Information about using the Metadata Editor can be found in the Filling Out (Creating) Metadata chapter, starting with [Filling Out Metadata](../../a5/2_filling_out_metadata/).
 
 
 

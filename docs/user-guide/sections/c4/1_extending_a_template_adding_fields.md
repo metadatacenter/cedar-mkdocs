@@ -29,7 +29,7 @@ doesn't really create a new specification
 
 many specifications are extended for additional uses (sometimes called profiling, alas)
 
-after basic steps, add your desired field, at end or (for eximple templates) inline
+after basic steps, add your desired field, at end or (for example templates) inline
 
 if you want inline but inside an element are used, 
 they would have to be extended themselves

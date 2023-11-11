@@ -49,7 +49,7 @@ click on the dropdown menu (Item 2a, the kebab, `:`) and select Populate Templat
 In this scenario, the template creator has obtained a web link (an IRI) that, 
 when entered into a browser or included clicked on as a link in a web page,
 will create a metadata instance for that template. (To create such a link
-for a template, see [Building Shareable Metadata Creation IRIs](https://metadatacenter.github.io/cedar-manual/sections/b1/building-sharable-metadata-creation-iris/).
+for a template, see [Building Shareable Metadata Creation IRIs](../../b1/2_building_sharable_metadata_creation_iris/).
 
 For example, clicking on the following link will start the process of creating 
 an instance to be filled out for the Adaptive Immune Receptor Repertoire community's minimum information model (MiAIRR). 
@@ -89,7 +89,7 @@ make a copy of the instance profile and replace 'name' and 'date' in the title w
 the name of the author and the date of this copy (or a short instance sequence number),
 or any other appropriate unique labeling. 
 (Note that the intended location to receive the filled-out instances must be
-writable by all the people who are creating metadata.)  See [Sharing Your Content](https://metadatacenter.github.io/cedar-manual/basic_topics/a6_sharing_your_content/) for more information on creating writable folders.
+writable by all the people who are creating metadata.)  See [Sharing Your Content](../../../basic_topics/a6_sharing_your_content/) for more information on creating writable folders.
 
 The copied instance will have all the information that was in the instance profile,
 and can be filled out and saved normally. 

@@ -6,7 +6,7 @@ status: Ready
 
 We use the phrase 'viewing resource content' to mean looking at the resource in human-friendly form, in this case viewing it on the web using CEDAR OpenView.
 
-OpenView is a CEDAR feature that allows you to publish CEDAR artifacts to the web, where anyone with the IRI can view them. The details of this process are described in [Sharing Via the Web](https://metadatacenter.github.io/cedar-manual/sections/a6/4_sharing_via_the_web/).
+OpenView is a CEDAR feature that allows you to publish CEDAR artifacts to the web, where anyone with the IRI can view them. The details of this process are described in [Sharing Via the Web](../../a6/4_sharing_via_the_web/).
 Under the heading Viewing the Shared Content on the Web, that page also describes how to access an OpenView page, what content is visible on the page, and how to view additional hidden information.
 
 An added feature of the web-based view of instance artifacts is that you can view not just the raw JSON-LD or RDF for the instance, but also the JSON Schema for that instance. Simply click on the appropriate viewing link at the bottom of the form on the web.

@@ -10,7 +10,7 @@ Navigating around CEDAR is pretty easy, but it helps to understand a few basics.
 
 CEDAR (the "CEDAR Workbench") has 3 tools:
 
-* the Desktop (which includes [your workspace](https://metadatacenter.github.io/cedar-manual/sections/a4/your_cedar_workspace/)),
+* the Desktop (which includes [your workspace](../../sections/a4/3_your_cedar_workspace/)),
 * the Template Editor, and
 * the Metadata Creator.
 
@@ -34,7 +34,7 @@ double-click on the folder.
 (You can also use the resource menu (*⋮*) and click on Open.)
 This works in either search or browse mode to display the contents of folder in the Desktop.
 
-Note that when My Workspace is the selected viewing mode (see [Your CEDAR Workspace](https://metadatacenter.github.io/cedar-manual/sections/a4/your_cedar_workspace/) for more details on viewing modes), you only see resources at the current folder level. In either of the Shared views you will see all the folders and artifacts that explicitly satisfy the chosen criteria.
+Note that when My Workspace is the selected viewing mode (see [Your CEDAR Workspace](../../a4/3_your_cedar_workspace/) for more details on viewing modes), you only see resources at the current folder level. In either of the Shared views you will see all the folders and artifacts that explicitly satisfy the chosen criteria.
 
 ## **Moving Back and Forth**
 

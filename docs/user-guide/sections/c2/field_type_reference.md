@@ -143,7 +143,7 @@ even though the required field is not completed.
 Set the Suggestions tab to Yes to enable intelligent authoring suggestions 
 for this field from CEDAR. 
 You can read a detailed explanation of the suggestions system 
-at [Understanding the Suggestion System](https://metadatacenter.github.io/cedar-manual/sections/c4/understanding_the_suggestion_system/).
+at [Understanding the Suggestion System](../../c4/3_understanding_the_suggestion_system/).
 
 #### Unit of Measure (Numeric field Option)
 
@@ -198,5 +198,5 @@ terms, branches, or ontologies.
 You can remove any of the selected terms, branches, or ontologies
 by clicking on the X to the right of the row you want to delete.
 
-Advice about finding and choosing controlled values is available in the [Choosing Controlled Terms](https://metadatacenter.github.io/cedar-manual/sections/c2/choosing_controlled_terms/)
+Advice about finding and choosing controlled values is available in the [Choosing Controlled Terms](../../c3/3_choosing_controlled_terms/)
 section.

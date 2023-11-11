@@ -7,12 +7,12 @@ This page covers the basics of building templates in the {{ page.cedarw }}, with
 
 - [Introduction](#intro)
 - [Step-by-step guide: build a template](#step-by-step-guide)
-  - Step 1 - [Navigate to your workspace](#workspace)
-  - Step 2 - [Create a new template object](#create-template)
-  - Step 3 - [Add CDEs to your template](#add-cdes)
-  - Step 4 - [Configure CDE options](#configure-cdes)
-  - Step 5 - [Save your template](#save-template)
-  - Step 6 - [Share your template](#share-template)
+      - Step 1 - [Navigate to your workspace](#workspace)
+      - Step 2 - [Create a new template object](#create-template)
+      - Step 3 - [Add CDEs to your template](#add-cdes)
+      - Step 4 - [Configure CDE options](#configure-cdes)
+      - Step 5 - [Save your template](#save-template)
+      - Step 6 - [Share your template](#share-template)
 
 ***
 
@@ -75,7 +75,7 @@ A section with instructions for making copies of CDEs is included later in this 
 
 This page describes the process of adding individual CDEs to templates. One advantage to this approach is that you are allowed to make edits to CDE's common options, as well as edits to all other field types from within a template container. The {{ page.cedarw }} offers the ability to group CDEs together into "elements" so that multiple CDEs can be added to a template at once. The tradeoff for this approach is that the CDEs and other fields contained in elements are unmodifiable once the element has been added to a template. 
 
-More detail and instructions for creating elements with multiple CDEs are given on a [separate page](../building_elements). Understanding how to build templates in the {{ page.cedarw }} is not a prerequisite for creating elements.
+More detail and instructions for creating elements with multiple CDEs are given on a [separate page](../3_building_elements). Understanding how to build templates in the {{ page.cedarw }} is not a prerequisite for creating elements.
 <br /><br />
 
 

@@ -30,7 +30,7 @@ and can also be changed from the Desktop.
 
 Now the content of the Element artifact can be created.
 Field definitions can be added directly, or by importing Field artifacts;
-instructions for both operations are found in the [Adding Fields](https://metadatacenter.github.io/cedar-manual/sections/c2/2_adding_fields/) section.
+instructions for both operations are found in the [Adding Fields](../../c2/2_adding_fields/) section.
 
 Element content can also be created by importing existing elements,
 as described below.
@@ -40,7 +40,7 @@ you can save the artifact and use the Template Designer's left-arrow
 to return to the Desktop. 
 From there, you can modify the name, access permissions, and
 public visibility of the Field artifact, as described in
-[Managing CEDAR Resources](https://metadatacenter.github.io/cedar-manual/sections/a4/managing_cedar_resources/).
+[Managing CEDAR Resources](../../a4/1_managing_cedar_resources/).
 
 ### **Spreadsheet-compatible Elements**
 
@@ -55,7 +55,7 @@ will prevent the user from displaying the element in spreadsheet mode.
 Also, the MULTIPLE attribute of the element must be defined to allow multiple entries.
 
 The process of filling out the metadata using spreadsheet mode
-is described in [Spreadsheet entry](https://metadatacenter.github.io/cedar-manual/sections/a5/2_filling_out_metadata/). 
+is described in [Spreadsheet entry](../../a5/2_filling_out_metadata/). 
 
 ## **Embedding the Element Resource**
 

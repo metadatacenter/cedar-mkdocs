@@ -17,17 +17,17 @@ If you want to submit your metadata (even including data) to a particular domain
 **How do I get an account on CEDAR?**
 
 Detailed instructions are available in our 
-CEDAR User Manual's [Accounts and Logging In chapter](https://metadatacenter.github.io/cedar-manual/basic_topics/a1_accounts_and_logging_in/).
+CEDAR User Manual's [Accounts and Logging In chapter](../../basic_topics/a1_accounts_and_logging_in/).
 
 Just go to [the CEDAR application](https://cedar.metadatacenter.org), where you will see a login screen. You can register for the system using the Register link on that screen (just above the red Google icon), using your social media account or email address. That's it—you can start using CEDAR now!
 
 **I can't figure out what to do! How do I create a template or fill one out?**
 
-**[Quick reference for template creation](https://metadatacenter.github.io/cedar-manual/cedar_templates/c2_building_basic_templates/)**  If you want to create a template that people can then use, go to your home directory (using the Home button at upper left). To create a new template (or anything else) move the mouse pointer to the New button in the upper left, wait for the options to pop up, and select what you want to create.
+**[Quick reference for template creation](../../cedar_templates/c2_building_basic_templates/)**  If you want to create a template that people can then use, go to your home directory (using the Home button at upper left). To create a new template (or anything else) move the mouse pointer to the New button in the upper left, wait for the options to pop up, and select what you want to create.
 
-**[Quick reference for filling out metadata](https://metadatacenter.github.io/cedar-manual/basic_topics/a5_filling_out_creating_metadata/)**  To fill out some metadata for a template, you'll need to find the template you're providing metadata for (hint: you can [search for it](https://metadatacenter.github.io/cedar-manual/basic_topics/a2_finding_resources/)), then control-click or right-click on the template and select "Populate" to generate a form to fill out. (If someone else has given you a link to fill out a CEDAR template, just go to that link in your browser.) Once you're logged in you'll be in the Metadata Editor, ready to start filling out metadata.
+**[Quick reference for filling out metadata](../../basic_topics/a5_filling_out_creating_metadata/)**  To fill out some metadata for a template, you'll need to find the template you're providing metadata for (hint: you can [search for it](../../basic_topics/a2_finding_resources/)), then control-click or right-click on the template and select "Populate" to generate a form to fill out. (If someone else has given you a link to fill out a CEDAR template, just go to that link in your browser.) Once you're logged in you'll be in the Metadata Editor, ready to start filling out metadata.
 
-For more startup information, go to our [CEDAR User Manual](https://metadatacenter.github.io/cedar-manual/), or to our [CEDAR training page](https://more.metadatacenter.org/tools-training/training-cedar), 
+For more startup information, go to our [CEDAR User Manual](../../../user-overview/), or to our [CEDAR training page](https://more.metadatacenter.org/tools-training/training-cedar), 
 which each have a variety of introductory content.
 
 **What makes CEDAR forms so special? Google forms/SurveyMonkey surveys can do most of this.**
@@ -51,7 +51,7 @@ Over time CEDAR developers will be adding more time savers, like pulling in meta
 **What format is the metadata saved in? How can I access it?**
 
 We save the metadata as JSON-LD (in a Mongo database). We make it available (to those with access privileges) via the user interface, in both JSON-LD and the equivalent RDF. Click on the format (at the bottom of the screen) to choose how you want to view it 
-[detailed information in CEDAR's User Manual](https://metadatacenter.github.io/cedar-manual/sections/a3/4_viewing_resource_as_raw_metadata/)
+[detailed information in CEDAR's User Manual](../../sections/a3/4_viewing_resource_as_raw_json/)
 
 You can also access the metadata via the CEDAR API, in both of these formats, and in a "condensed JSON" format. That last format gets rid of lots of the links in the metadata 
 (including much of the rich semantics).
@@ -76,8 +76,8 @@ Our example repository on GitHub shows how to generate Java classes that produce
 
 **What is the 'link' field type for?**
 
-This is appropriate when you know the result has to be a URL, or some other type of IRI (the internationalized, generalized form of a URL). Unlike text fields, this field type validates the metadata entry to make sure it’s an IRI, and it produces appropriately typed RDF in the resulting metadata. Please reference the [Adding Fields section](https://metadatacenter.github.io/cedar-manual/sections/c2/2_adding_fields/)
-and the [Field Type Reference](https://metadatacenter.github.io/cedar-manual/sections/c2/field_type_reference/)
+This is appropriate when you know the result has to be a URL, or some other type of IRI (the internationalized, generalized form of a URL). Unlike text fields, this field type validates the metadata entry to make sure it’s an IRI, and it produces appropriately typed RDF in the resulting metadata. Please reference the [Adding Fields section](../../sections/c2/2_adding_fields/)
+and the [Field Type Reference](../../sections/c2/field_type_reference/)
 for more information on field types.
 
 **What do you use for your identifiers?**
@@ -90,14 +90,14 @@ you will see the first identifier string, like `https://repo.metadatacenter.net/
 
 Note that the template identifier will not (yet) resolve in your browser if you do not prefix it with the appropriate CEDAR context, e.g., in this case `https://cedar.metadatacenter.net/templates/edit/`.
 
-Detailed information on our identifiers is available at [How CEDAR Defines and Applies IRIs (URIs, URLs)](https://metadatacenter.github.io/cedar-manual/sections/c4/how_cedar_defines_and_accesses_identifiers/)
+Detailed information on our identifiers is available at [How CEDAR Defines and Applies IRIs (URIs, URLs)](../../sections/b1/3_how_cedar_defines_and_accesses_identifiers/)
 
 
 **How do I look up all instances of a template?**
 
 If you have read access to the template, 
 you can look in the metadata for the template to see all the instances
-to which you have read or write access. See [Viewing Resource Metadata](https://metadatacenter.github.io/cedar-manual/a3/5_viewing_resource_metadata/)
+to which you have read or write access. See [Viewing Resource Metadata](../../sections/a3/5_viewing_resource_metadata/)
 to learn how to find the metadata for an artifact in the CEDAR Desktop.
 
 Use the API search feature with the identifier of the template to find all the related instances. See the [API search documentation](https://resource.metadatacenter.org/api/#!/Template32Instances/get_search) for the details. 
@@ -113,7 +113,7 @@ Please tell us if there is a CEDAR field that does not handle them correctly.
 **Can I deploy CEDAR in my own computing environment?**
 
 Yes, though CEDAR has not been thoroughly tested in remote deployments. 
-We have [detailed instructions about deploying CEDAR](https://metadatacenter.readthedocs.io/en/latest/install-developer/intro.html).
+We have [detailed instructions about deploying CEDAR](../../../install-overview/).
 There are several caveats:
 * We don't have a good way to upgrade metadata instances to match a new metadata schema. (We do this manually when our schema has a breaking change.)
 * You will need to continue using BioPortal or another OntoPortal-based ontology repository for your vocabularies.

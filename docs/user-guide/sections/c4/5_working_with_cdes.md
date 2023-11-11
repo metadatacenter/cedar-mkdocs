@@ -16,13 +16,13 @@ we can offer some tips for working with them efficiently in the CEDAR system.
 
 ## **Finding and Browsing CDEs** 
 
-The same practices used for [finding other CEDAR resources](https://metadatacenter.github.io/cedar-manual/basic_topics/a2_finding_resources/) will work with CDEs as well.
+The same practices used for [finding other CEDAR resources](../../../basic_topics/a2_finding_resources/) will work with CDEs as well.
 However, there are a few additional strategies that may be particular helpful for 
 those working with CDEs in CEDAR on a regular basis.
 
 ### Searching from the CEDAR Desktop
 
-As described in the section [Finding Resources](https://metadatacenter.github.io/cedar-manual/basic_topics/a2_finding_resources/)
+As described in the section [Finding Resources](../../../basic_topics/a2_finding_resources/)
 you can search for resources by name or description. 
 In the case of CDEs, it is also possible to search by their CDE identifier.
 This number is shown at the top middle of the CEDAR field in the Template Editor 
@@ -71,7 +71,7 @@ in the left-hand navigation panel. Selecting an item at any level of the categor
 hierarchy will show all the CDEs contained within that level, and all lower levels.
 
 You can view the Category or Categories for any CDE you see in the Desktop by clicking on
-the CDE, [bringing up the information metadata tab](https://metadatacenter.github.io/cedar-manual/cedar_templates/basic_topics/a3_viewing_resource_metadatda/), and selecting the Categories tab.
+the CDE, [bringing up the information metadata tab](../../../basic_topics/a3_viewing_resource_information/), and selecting the Categories tab.
 CEDAR lists all the Categories to which the selected CDE belongs.
 
 ### When Creating a Template
@@ -84,7 +84,7 @@ so searching using the identifier is the best approach.
 
 If you are trying to find all the templates (or instances) that are using a particular CDE,
 you could try using the field name of the CDE if it is relatively uncommon. 
-By using the [Advanced Searching—Field Names](https://metadatacenter.github.io/cedar-manual/sections/a2/4_advanced_searching_search_fields/)
+By using the [Advanced Searching—Field Names](../../a2/4_advanced_searching_search_fields/)
 strategies, you can search by the name of the field for templates and/or instances
 containing that field. (You must use the actual name of the field, not the displayed label.)
 
@@ -108,7 +108,7 @@ We do not manage the entire content of the CDE specification. CDEs in caDSR cont
 
 These references provide more information about performing CDE-related activities.
 
-* [CEDAR for caDSR Users](https://metadatacenter.github.io/cedar-manual/cedar-for-cadsr)—a separate section of this manual targeting users of caDSR systems
+* [CEDAR for caDSR Users](../../../pages/cedar-for-cadsr/)—a separate section of this manual targeting users of caDSR systems
 * [CEDAR Announcement of CDE Support](https://metadatacenter.org/happenings/news/cedar-announces-cde-support/)—Blog post describing CEDAR's support for CDEs
 * [Unleashing the value of Common Data Elements through the CEDAR Workbench](hhttps://www.ncbi.nlm.nih.gov/pmc/articles/PMC7153094/). Published in [Proceedings of AMIA 2019 Annual Symposium](https://knowledge.amia.org/69862-amia-1.4570936), 681-690.
 

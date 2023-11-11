@@ -8,7 +8,7 @@ status: Ready
 
 All information for the Metadata Template is stored internally in the JSON Schema format. 
 CEDAR lets you view the template in this format at any time during template creation.
-See [Viewing Resource as Raw JSON](https://metadatacenter.github.io/cedar-manual/basic_topics/a3_viewing_resource_information/)
+See [Viewing Resource as Raw JSON](../../a3/4_viewing_resource_as_raw_json/)
 to learn how to view the template in its raw form.
 
 The three Metadata Template functions (define questions, order the questions, and 
@@ -20,7 +20,7 @@ The details of the template artifact's format is described in more detail in the
 As a CEDAR user you will compose Metadata Templates from Template Elements and Template Fields.
 These three CEDAR resources, which we call templating resources, together establish the  
 questions for the metadata user to fill out. The actual process is described in 
-the [Building Basic Templates](https://metadatacenter.github.io/cedar-manual/cedar_templates/c2_building_basic_templates/)
+the [Building Basic Templates](../../../cedar_templates/c2_building_basic_templates/)
 chapter.
 
 As you reuse elements that you or others have created, CEDAR copies those elements 
