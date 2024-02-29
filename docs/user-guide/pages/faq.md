@@ -117,5 +117,3 @@ We have [detailed instructions about deploying CEDAR](https://metadatacenter.rea
 There are several caveats:
 * We don't have a good way to upgrade metadata instances to match a new metadata schema. (We do this manually when our schema has a breaking change.)
 * You will need to continue using BioPortal or another OntoPortal-based ontology repository for your vocabularies.
-
-(The Docker version of CEDAR is no longer maintained.)
