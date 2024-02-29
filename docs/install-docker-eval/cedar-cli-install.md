@@ -15,26 +15,7 @@ Please go to your previously created CEDAR Docker home folder, and clone the fol
 ```sh
 cd ~/CEDAR_DOCKER
 git clone https://github.com/metadatacenter/cedar-cli
-```
-
-## Main vs develop branch
-
-The above command cloned the repo, and set the active branch to `main`.
-
-We suggest that you use the latest code from the `develop` branch at the moment.
-
-[//]: # (If you want to have the latest `develop` branch, you will need to check out that branch.)
-
-[//]: # (???+ warning "Important")
-
-[//]: # ()
-[//]: # ()
-[//]: # (    Unless you specifically need something from the latest `develop` branch, you should use the `main` branch, so skip this step.)
-
-    
-```sh
 cd cedar-cli
-git checkout develop
 ```
 
 ## Configure the CLI

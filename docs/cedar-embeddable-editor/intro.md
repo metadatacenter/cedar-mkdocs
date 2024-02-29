@@ -1,7 +1,5 @@
 # Introduction
 
-**IMPORTANT: The CEDAR Embeddable Editor is under active development. If you wish to access the latest features, use the ```develop``` branch, but be aware that it is a develop branch!**
-
 The CEDAR Embeddable Editor is a stand-alone web-component that can be integrated into any kind of frontend which supports web components.
 It is an integral part of the CEDAR project, uses the same template structure that the CEDAR application does.
 
