@@ -1,8 +1,8 @@
 # Try CEDAR Embeddable Editor
 
-Follow the below steps to try CEDAR Embeddable Editor
+Follow the steps below to try the CEDAR Embeddable Editor
 
-The steps below were tested on a MacOS, but should run o any other system with slight modifications
+The steps below were tested on MacOS, but should run on systems with slight modifications
 
 ```sh
 
@@ -12,8 +12,8 @@ mkdir CEE
 cd CEE
 
 # Clone the repos
-git clone --branch release-2.6.31 https://github.com/metadatacenter/cedar-cee-demo
-git clone --branch release-2.6.31 https://github.com/metadatacenter/cedar-component-distribution
+git clone --branch release-2.6.55 https://github.com/metadatacenter/cedar-cee-demo
+git clone --branch release-2.6.55 https://github.com/metadatacenter/cedar-component-distribution
 
 # Install Node.Js 16 using your preferred method
 brew install node@16
@@ -42,5 +42,5 @@ ng serve
 
 After these steps you will have:
 
-* the demo app running at: [http://localhost:4260](http://localhost:4260)
-* the docs app at [http://localhost:4280](http://localhost:4280) 
+* The demo application running at: [http://localhost:4260](http://localhost:4260)
+* The docs application at [http://localhost:4280](http://localhost:4280) 

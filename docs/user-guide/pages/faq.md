@@ -112,10 +112,4 @@ Please tell us if there is a CEDAR field that does not handle them correctly.
 
 **Can I deploy CEDAR in my own computing environment?**
 
-Yes, though CEDAR has not been thoroughly tested in remote deployments. 
-We have [detailed instructions about deploying CEDAR](https://metadatacenter.readthedocs.io/en/latest/install-developer/intro.html).
-There are several caveats:
-* We don't have a good way to upgrade metadata instances to match a new metadata schema. (We do this manually when our schema has a breaking change.)
-* You will need to continue using BioPortal or another OntoPortal-based ontology repository for your vocabularies.
-
-(The Docker version of CEDAR is no longer maintained.)
+Yes. We have [detailed instructions about deploying CEDAR](https://metadatacenter.readthedocs.io/en/latest/install-overview/).
