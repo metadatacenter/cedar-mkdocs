@@ -55,7 +55,7 @@ Host unknown : bridge.metadatacenter.orgx
 Host unknown : bridging.metadatacenter.orgx
 Host unknown : auth.metadatacenter.orgx
 Host unknown : cedar.metadatacenter.orgx
-Host unknown : component.metadatacenter.orgx
+Host unknown : content.metadatacenter.orgx
 Host unknown : group.metadatacenter.orgx
 Host unknown : impex.metadatacenter.orgx
 Host unknown : monitor.metadatacenter.orgx
@@ -82,7 +82,7 @@ Host unknown, adding to /etc/hosts: bridge.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: bridging.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: auth.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: cedar.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: component.metadatacenter.orgx
+Host unknown, adding to /etc/hosts: content.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: group.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: impex.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: monitor.metadatacenter.orgx
@@ -121,7 +121,7 @@ Host known   : bridge.metadatacenter.orgx
 Host known   : bridging.metadatacenter.orgx
 Host known   : auth.metadatacenter.orgx
 Host known   : cedar.metadatacenter.orgx
-Host known   : component.metadatacenter.orgx
+Host known   : content.metadatacenter.orgx
 Host known   : group.metadatacenter.orgx
 Host known   : impex.metadatacenter.orgx
 Host known   : monitor.metadatacenter.orgx

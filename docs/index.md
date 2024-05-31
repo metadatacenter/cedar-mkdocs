@@ -10,9 +10,3 @@ At the moment you will find here the:
 * [**Operations and Management**](operations-and-management.md) - presenting an overview of our processes
 
 Please send us <a href="mailto:cedar-support@metadatacenter.org">your feedback</a> if you want additions or changes to the documentation.
-
-???+ success "Comprehensive list"
-
-    A comprehensive list of CEDAR documentation can be found at:
-    
-    [https://metadatacenter.org/references](https://metadatacenter.org/references){target="_blank"}
