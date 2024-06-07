@@ -1,9 +1,12 @@
 # Source shell scripts
 
-Please edit your `bash profile` and add the following line to it:
+Please edit your `bash profile`:
 
 ```sh
 vi ~/.zshrc
+```
+and add the following line to it:
+```sh
 source ${CEDAR_HOME}/cedar-profile-native-develop.sh
 ```
 
