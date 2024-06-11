@@ -45,3 +45,9 @@ eval "$(jenv init -)"
 export CEDAR_HOME=~/CEDAR
 alias cedarcli='source $CEDAR_HOME/cedar-cli/cli.sh'
 ```
+
+If you are installing on a system where `Python 3` CLI is available as `python3` instead of `python`, use this alternative instead:
+
+```sh
+alias cedarcli='source $CEDAR_HOME/cedar-cli/cli3.sh'
+```
