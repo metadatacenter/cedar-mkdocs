@@ -102,5 +102,5 @@ cedarcli status
 
 You should see the following line in the output:
 ```
-| MongoDB                    | Running | openPort    |27017|                   |
+│ MongoDB                │ ✅     │ 27017 │               │
 ```
