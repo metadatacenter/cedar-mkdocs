@@ -3,7 +3,7 @@ CEDAR uses `OpenSearch` to make search for artifacts possible.
 
 ## Install OpenSearch
 
-Please install `OpenSearch`, version 7:
+Please install `OpenSearch`, version 2.18:
 
 ```sh
 brew install opensearch
@@ -46,6 +46,6 @@ cedarcli status
 
 You should see the following lines in the output:
 ```
-| OpenSearch-REST            | Running | httpResponse| 9200| HTTP/1.1\s200\sOK |
-| OpenSearch-Transport       | Running | openPort    | 9300|                   |
+│ OpenSearch-REST        │ ✅     │ 9200  │               │
+│ OpenSearch-Transport   │ ✅     │ 9300  │               │
 ```
