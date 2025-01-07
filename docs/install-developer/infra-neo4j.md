@@ -19,16 +19,16 @@ Download the package from the distribution site:
 
 ```sh
 gocedar
-wget https://dist.neo4j.org/neo4j-community-5.4.0-unix.tar.gz
+wget https://dist.neo4j.org/neo4j-community-5.26.0-unix.tar.gz
 # or
-wget https://dist.neo4j.org/neo4j-community-5.4.0-windows.zip
+wget https://dist.neo4j.org/neo4j-community-5.26.0-windows.zip
 ```
 
 Once the package is downloaded, unpack it and rename it:
 
 ```sh
-tar -xvf neo4j-community-5.4.0-unix.tar.gz
-mv neo4j-community-5.4.0-unix neo4j
+tar -xvf neo4j-community-5.26.0-unix.tar.gz
+mv neo4j-community-5.26.0 neo4j
 ```
 
 ???+ warning "Important"
@@ -37,10 +37,10 @@ mv neo4j-community-5.4.0-unix neo4j
 
 ## Enable APOC procedures
 
-Move ```apoc-5.4.1-core.jar``` from ```labs``` to ```plugins```:
+Move ```apoc-5.26.0-core.jar``` from ```labs``` to ```plugins```:
 
 ```sh
-mv $CEDAR_HOME/neo4j/labs/apoc-5.4.1-core.jar $CEDAR_HOME/neo4j/plugins/. 
+mv $CEDAR_HOME/neo4j/labs/apoc-5.26.0-core.jar $CEDAR_HOME/neo4j/plugins/. 
 ```
 
 Edit the config, and enable the procedures:
@@ -60,7 +60,7 @@ Neo4j server uses a default username, 'neo4j'. We will change the password for t
 Execute the following:
 
 ```sh
-${CEDAR_NEO4J_HOME}/bin/neo4j-admin set-initial-password changeme
+${CEDAR_NEO4J_HOME}/bin/neo4j-admin dbms set-initial-password changeme
 ```
 
 ## Start Neo4j
@@ -76,7 +76,7 @@ cedarcli status
 
 You should see the following line in the output:
 ```
-| Neo4j                      | Running | httpResponse| 7474| HTTP/1.1\s200\sOK |
+│ Neo4j                  │ ✅     │ 7474  │               │
 ```
 
 
