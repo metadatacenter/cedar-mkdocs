@@ -17,10 +17,9 @@ mvn --version
 
 You should see something like:
 ```
-Apache Maven 3.9.4 (dfbb324ad4a7c8fb0bf182e6d91b0ae20e3d2dd9)
-Maven home: /opt/homebrew/Cellar/maven/3.9.4/libexec
-Java version: 17.0.8, vendor: Oracle Corporation, runtime: /Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
+Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
+Maven home: /opt/homebrew/Cellar/maven/3.9.9/libexec
+Java version: 17.0.13, vendor: Oracle Corporation, runtime: /Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
 Default locale: en_US, platform encoding: UTF-8
-OS name: "mac os x", version: "14.0", arch: "aarch64", family: "mac"
+OS name: "mac os x", version: "15.2", arch: "aarch64", family: "mac"
 ```
-
