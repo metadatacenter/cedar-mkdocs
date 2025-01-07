@@ -69,12 +69,12 @@ The process is the following:
 * The application called `Keychain Access` will be launched.
 * A dialog will pop up, prompting for a location for the certificate. The `iCloud` might be preselected. Change this to `login`.
 * Click the `Add` button. If the `Keychain Access` does not stay opened after the `Add`, launch it manually.
-* Locate the certificate you just added. It should be either in System or login Keychain. Search for `metadatacenter`.
+* Locate the certificate you just added. It should be either in `System` or `login` Keychain. Search for `metadatacenter`.
 * The certificate will have a white `x` in a red circle, meaning it is not trusted.
 * Open it by double-clicking it.
 * Expand the `Trust` branch on the top.
 * Change the dropdown labeled `When using this certificate:` to `Always Trust`.
 * Close the popup.
 * You will be prompted for your password.
-* You should see the icon of the certificate having a white cross inside a blue circle (Keychain Access at this point is still bogous, you need to refresh the cert (by searching for ```metadatacenter```) in order to see that it is trusted)
+* You should see the icon of the certificate having a white cross inside a blue circle (Keychain Access is still bogus at this point, you need to refresh the cert in order to see that it is trusted. One way to do it is to search for `metadatacenter`)
 * You are done.
