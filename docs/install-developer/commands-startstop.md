@@ -4,6 +4,11 @@ There are start and stop scripts available for each service that is present in t
 
 These will be introduced throughout this guide. As an example starting and stopping `MongoDB` after a brew installation would be done with:
 
+???+ warning "Important - Not yet working at this moment"
+
+    The examples below won't work at this phase of the installation process, they are just listed as an explanation. 
+
+
 ```sh
 brew services start mongodb-community@5.0
 brew services stop mongodb-community@5.0

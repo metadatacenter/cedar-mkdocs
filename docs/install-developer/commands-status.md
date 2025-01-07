@@ -46,7 +46,7 @@ You should see the following output:
 │ Frontend               │        │       │               │
 │ main                   │ ❌     │ 4200  │ Port not open │
 │ openview               │ ❌     │ 4220  │ Port not open │
-│ component              │ ❌     │ 4240  │ Port not open │
+│ content                │ ❌     │ 4240  │ Port not open │
 │ monitoring             │ ❌     │ 4300  │ Port not open │
 │ artifacts              │ ❌     │ 4320  │ Port not open │
 │ bridging               │ ❌     │ 4340  │ Port not open │

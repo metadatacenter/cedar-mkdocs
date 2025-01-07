@@ -19,7 +19,7 @@ You should see an output resembling this:
 ...
 │ CEDAR_WORKER_STOP_PORT                        │ 9211                                                                                            │
 └───────────────────────────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────┘
-                                                                   180 variables
+                                                                   182 variables
 ```
 
 ## Debugging `env list`
@@ -34,6 +34,7 @@ cedarcli env
 will present you with the other subcommands related to environment variables. Some examples:
 ```sh
 cedarcli env
+cedarcli env list
 cedarcli env core
 cedarcli env release
 cedarcli env filter WORKER

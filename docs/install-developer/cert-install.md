@@ -15,10 +15,11 @@ sudo keytool -import -keystore $JAVA_HOME/lib/security/cacerts -alias metadatace
 
 When prompted, enter these value:
 
-| Question | Answer                         |
-|----------|--------------------------------|
-| Password | ```changeit``` |
-| Trust    | yes                            |
+| Question                     | Answer                                     |
+|------------------------------|--------------------------------------------|
+| Password:                    | ```<YOUR ACCOUNT PASSWORD FOR THE SUDO>``` |
+| Enter keystore password:     | ```changeit```                             |
+| Trust this certificate [no]: | ```yes```                                  |
 
 
 ???+ warning "Trust store password"
@@ -66,8 +67,8 @@ The process is the following:
 * Using `Finder` navigate to `${CEDAR_HOME}/CEDAR_CA/`.
 * Double-click the `ca.crt` file.
 * The application called `Keychain Access` will be launched.
-* A dialog will pop up, prompting for a location for the certificate. The `iCloud` will be preselected. Change this to `login`.
-* Click the `Add` button.
+* A dialog will pop up, prompting for a location for the certificate. The `iCloud` might be preselected. Change this to `login`.
+* Click the `Add` button. If the `Keychain Access` does not stay opened after the `Add`, launch it manually.
 * Locate the certificate you just added. It should be either in System or login Keychain. Search for `metadatacenter`.
 * The certificate will have a white `x` in a red circle, meaning it is not trusted.
 * Open it by double-clicking it.
@@ -75,5 +76,5 @@ The process is the following:
 * Change the dropdown labeled `When using this certificate:` to `Always Trust`.
 * Close the popup.
 * You will be prompted for your password.
-* You should see the icon of the certificate having a white cross inside a blue circle.
+* You should see the icon of the certificate having a white cross inside a blue circle (Keychain Access at this point is still bogous, you need to refresh the cert (by searching for ```metadatacenter```) in order to see that it is trusted)
 * You are done.
