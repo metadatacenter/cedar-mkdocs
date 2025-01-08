@@ -45,7 +45,7 @@ cedarcli status
 
 You should see the following line in the output:
 ```
-| Keycloak                   | Running | httpResponse| 8080| HTTP/1.1\s200\sOK |
+│ Keycloak               │ ✅     │ 8080  │               │
 ```
 
 
