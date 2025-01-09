@@ -19,4 +19,4 @@ gulp
 
 ## Stop the main frontend
 
-If you need to stop the frontend, you can do this by pressing ++ctrl++ + C.
+If you need to stop the frontend, you can do this by pressing ++ctrl++ + ++C++.

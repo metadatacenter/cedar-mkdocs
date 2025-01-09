@@ -65,6 +65,7 @@ You should see the following output:
 
 ## Stopping the CEDAR microservices
 
+Do not stop microservices at this point! But if you need to do that in the future, you can perform:
 ```sh
-stopall
+cedarcli stop microservices
 ```
