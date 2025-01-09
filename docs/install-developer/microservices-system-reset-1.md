@@ -17,6 +17,6 @@ Answer `yes` to all the questions to confirm that a system reset should be perfo
 
 ???+ error "System Reset failing last step"
 
-    The last step of the system reset will fail. Tbhis is expected behavior at this point.
+    The last step of the system reset will fail. This is expected behavior at this point.
 
     We will execute a second round of system reset after all the microservices are started.

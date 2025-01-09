@@ -49,3 +49,5 @@ You should see the following lines in the output:
 │ OpenSearch-REST        │ ✅     │ 9200  │               │
 │ OpenSearch-Transport   │ ✅     │ 9300  │               │
 ```
+
+## Create 

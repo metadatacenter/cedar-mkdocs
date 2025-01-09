@@ -5,7 +5,7 @@
 To run all the CEDAR microservices:
 
 ```sh
-startall
+cedarcli start microservices
 ```
 
 The check the all the microservices are running, execute:
@@ -17,54 +17,50 @@ cedarcli status
 You should see the following output:
 
 ```
----------------------------------------------
-Checking all CEDAR servers
----------------------------------------------
-
-|==============================================================================|
-| Server                     | Status  | CheckedFor  | Port| Value             |
-|------------------------------------------------------------------------------|
-| -- Microservices ----------|         |             |     |                   |
-| Artifact                   | Running | healthCheck | 9101| HTTP/1.1\s200\sOK |
-| Group                      | Running | healthCheck | 9109| HTTP/1.1\s200\sOK |
-| Impex                      | Running | healthCheck | 9108| HTTP/1.1\s200\sOK |
-| Internals                  | Running | healthCheck | 9114| HTTP/1.1\s200\sOK |
-| Messaging                  | Running | healthCheck | 9112| HTTP/1.1\s200\sOK |
-| OpenView                   | Running | healthCheck | 9113| HTTP/1.1\s200\sOK |
-| Repo                       | Running | healthCheck | 9102| HTTP/1.1\s200\sOK |
-| Resource                   | Running | healthCheck | 9107| HTTP/1.1\s200\sOK |
-| Schema                     | Running | healthCheck | 9103| HTTP/1.1\s200\sOK |
-| Submission                 | Running | healthCheck | 9110| HTTP/1.1\s200\sOK |
-| Terminology                | Running | healthCheck | 9104| HTTP/1.1\s200\sOK |
-| User                       | Running | healthCheck | 9105| HTTP/1.1\s200\sOK |
-| ValueRecommender           | Running | healthCheck | 9106| HTTP/1.1\s200\sOK |
-| Worker                     | Running | healthCheck | 9111| HTTP/1.1\s200\sOK |
-| -- Infrastructure ---------|         |             |     |                   |
-| MongoDB                    | Running | openPort    |27017|                   |
-| OpenSearch-REST            | Running | httpResponse| 9200| HTTP/1.1\s200\sOK |
-| OpenSearch-Transport       | Running | openPort    | 9300|                   |
-| NGINX                      | Running | httpResponse|   80| Server:\snginx    |
-| Keycloak                   | Running | httpResponse| 8080| HTTP/1.1\s200\sOK |
-| Neo4j                      | Running | httpResponse| 7474| HTTP/1.1\s200\sOK |
-| Redis-persistent           | Running | redisPing   | 6379|                   |
-| MySQL                      | Running | openPort    | 3306|                   |
-| -- Front End --------------|         |             |     |                   |
-| Base-Frontend              | Running | httpResponse| 4200| HTTP/1.1\s200\sOK |
-| OpenView-Frontend          | Running | httpResponse| 4220| HTTP/1.1          |
-| InternalsView-Frontend     | Running | httpResponse| 4300| HTTP/1.1          |
-| Artifacts-Frontend         | Running | httpResponse| 4320| HTTP/1.1          |
-| -- Monitoring -------------|         |             |     |                   |
-| OpenSearch-Dashboards      | Stopped | httpResponse| 5601| HTTP/1.1\s302\sFou|
-| Redis-Commander            | Stopped | httpResponse| 8081| HTTP/1.1\s200\sOK |
-| PhpMyAdmin                 | Stopped | httpResponse| 8082| HTTP/1.1\s200\sOK |
-| -- Front End Non-essential-|         |             |     |                   |
-| CEE-DEV-Frontend           | Stopped | httpResponse| 4240| HTTP/1.1          |
-| CEE-Demo-Frontend          | Stopped | httpResponse| 4260| HTTP/1.1          |
-| CEE-Docs-Frontend          | Stopped | httpResponse| 4280| HTTP/1.1          |
-| -- Environment ------------|         |             |     |                   |
-| CEDAR_NET_GATEWAY          |         | 127.0.0.1                             |
-| CEDAR_NET_SUBNET           |         | 127.0.0.0                             |
-|==============================================================================|
+                 CEDAR Server status list
+┏━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Server                 ┃ Status ┃ Port  ┃ Error         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ Microservice           │        │       │               │
+│ artifact               │ ✅     │ 9001  │               │
+│ bridge                 │ ✅     │ 9015  │               │
+│ group                  │ ✅     │ 9009  │               │
+│ impex                  │ ✅     │ 9008  │               │
+│ messaging              │ ✅     │ 9012  │               │
+│ monitor                │ ✅     │ 9014  │               │
+│ open                   │ ✅     │ 9013  │               │
+│ repo                   │ ✅     │ 9002  │               │
+│ resource               │ ✅     │ 9007  │               │
+│ schema                 │ ✅     │ 9003  │               │
+│ submission             │ ✅     │ 9010  │               │
+│ terminology            │ ✅     │ 9004  │               │
+│ user                   │ ✅     │ 9005  │               │
+│ valuerecommender       │ ✅     │ 9006  │               │
+│ worker                 │ ✅     │ 9011  │               │
+├────────────────────────┼────────┼───────┼───────────────┤
+│ Infrastructure         │        │       │               │
+│ MongoDB                │ ✅     │ 27017 │               │
+│ OpenSearch-REST        │ ✅     │ 9200  │               │
+│ OpenSearch-Transport   │ ✅     │ 9300  │               │
+│ NGINX                  │ ✅     │ 80    │               │
+│ Keycloak               │ ✅     │ 8080  │               │
+│ Neo4j                  │ ✅     │ 7474  │               │
+│ Redis-persistent       │ ✅     │ 6379  │               │
+│ MySQL                  │ ✅     │ 3306  │               │
+├────────────────────────┼────────┼───────┼───────────────┤
+│ Frontend               │        │       │               │
+│ main                   │ ❌     │ 4200  │ Port not open │
+│ openview               │ ❌     │ 4220  │ Port not open │
+│ content                │ ❌     │ 4240  │ Port not open │
+│ monitoring             │ ❌     │ 4300  │ Port not open │
+│ artifacts              │ ❌     │ 4320  │ Port not open │
+│ bridging               │ ❌     │ 4340  │ Port not open │
+├────────────────────────┼────────┼───────┼───────────────┤
+│ Frontend-non-essential │        │       │               │
+│ cee-dev                │ ❌     │ 4400  │ Port not open │
+│ demo.cee               │ ❌     │ 4260  │ Port not open │
+│ docs.cee               │ ❌     │ 4280  │ Port not open │
+└────────────────────────┴────────┴───────┴───────────────┘
 ```
 
 ## Stopping the CEDAR microservices
