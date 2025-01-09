@@ -218,6 +218,10 @@ nav:
               - install-developer/frontend-gulp-angular-cli-install.md
               - install-developer/frontend-editor.md
               - install-developer/frontend-openview.md
+              - install-developer/frontend-monitoring.md
+              - install-developer/frontend-artifacts.md
+              - install-developer/frontend-bridging.md
+              - install-developer/frontend-content.md
           - Logging in to CEDAR:
               - install-developer/frontend-logging-in.md
 
