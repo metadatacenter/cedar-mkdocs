@@ -1,6 +1,6 @@
 # CEDAR REST APIs
 
-This page provides a guide to help developers to quickly get working with CEDAR's REST APIs. For a broad overview of the APIs, go [here](https://metadatacenter.org/tools-training/cedar-api).
+This page provides a guide to help developers to quickly get working with CEDAR's REST APIs. 
 
 Detailed documentation for each REST route is available [here](https://resource.metadatacenter.org/api){: target="_blank" .external }.
 
