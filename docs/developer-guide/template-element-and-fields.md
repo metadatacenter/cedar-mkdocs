@@ -1,8 +1,10 @@
 # CEDAR Template, Element, and Fields
 
-While CEDAR's Template Designer provides the most user-friendly mechanism for creating templates, elements, and fields, in some cases users may wish to programmatically create them.
+While CEDAR's Template Designer provides the most user-friendly mechanism for creating templates, elements, and fields, in some cases, users may wish to programmatically create them.
 
-This page describes the format of templates, elements, and fields and outlines how they can be programmatically created and then validated and uploaded to CEDAR using its REST APIs.
+We have two libraries for programmatically creating CEDAR templates, elements, and fields: (1) a Java-based library called the [CEDAR Artifact Library](https://github.com/metadatacenter/cedar-artifact-library), and (2) a TypeScript-based library called the [CEDAR Model TypeScript Library] (https://github.com/metadatacenter/cedar-model-typescript-library).
+
+These libraries hide the details of the underlying model serialization. This page gives a brief over of this serialization and outlines how templates rendered using this serialization can be uploaded to CEDAR via its REST API.
 
 The CEDAR Repository Model specifies the structure of the three core CEDAR schema artifacts: _templates_, _elements_, and _fields_. (A paper describing this model can be found [here](https://metadatacenter.org/open-repository-model-acquiring-knowledge-about-scientific-experiments); a full specification of the model is available [here](https://metadatacenter.org/tools-training/outreach/cedar-template-model).) These three artifacts are represented using JSON Schema. The structure of the JSON-based CEDAR instance derived from each artifact is constrained by the artifact's JSON Schema specification. The three corresponding instance types are _template instances_, _element instances_, and _field instances_. (Instructions on how to programmatically create, validate, and upload CEDAR instances can be found [here](https://github.com/metadatacenter/cedar-docs/wiki/CEDAR-Template,-Element,-and-Field-Instances).)
 
