@@ -28,8 +28,8 @@ vi ~/.zshrc
 Add these lines:
 
 ```sh
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+export CEDAR_HOME=~/CEDAR
+alias cedarcli='source $CEDAR_HOME/cedar-cli/cli.sh'
 ```
 
 ## Check bash profile content

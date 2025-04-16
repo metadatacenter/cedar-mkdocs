@@ -30,7 +30,7 @@ frontend-cee-demo-angular
 frontend-cee-demo-angular-dist
 frontend-cee-docs-angular
 frontend-cee-docs-angular-dist
-frontend-component
+frontend-content
 frontend-monitoring
 frontend-openview
 frontend-shared

@@ -12,7 +12,7 @@ startinfra
 cedarcli status
 ```
 
-You should see all the services in the `Infrastructure` (2nd) block in `Running` status.
+You should see all the services in the `Infrastructure` (2nd) block in `Running` (✅) status.
 
 If this is not the case, stop the infrastructure services using one of these ways:
 

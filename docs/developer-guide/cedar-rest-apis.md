@@ -1,6 +1,6 @@
 # CEDAR REST APIs
 
-This page provides a guide to help developers to quickly get working with CEDAR's REST APIs. For a broad overview of the APIs, go [here](https://metadatacenter.org/tools-training/cedar-api).
+This page provides a guide to help developers to quickly get working with CEDAR's REST APIs. 
 
 Detailed documentation for each REST route is available [here](https://resource.metadatacenter.org/api){: target="_blank" .external }.
 
@@ -17,7 +17,7 @@ Note this API key presented in the profile display. This key is needed for all C
 CEDAR templates, elements, and fields are represented using [JSON Schema](http://json-schema.org/).
 Instances are represented using [JSON-LD](http://json-ld.org/).
 
-The [CEDAR Template Model](https://metadatacenter.org/tools-training/outreach/cedar-template-model) defines the representation of these entities. You can directly access any of these key documents: [a paper describing this model](https://metadatacenter.org/open-repository-model-acquiring-knowledge-about-scientific-experiments); or, [a full description of the model](https://metadatacenter.org/tools-training/outreach/cedar-template-model); or [a description of the format of metadata instances in the CEDAR repository](https://github.com/metadatacenter/cedar-docs/wiki/CEDAR-Template,-Element,-and-Field-Instances).
+The [CEDAR Template Model](https://metadatacenter.org/tools-training/outreach/cedar-template-model) defines the representation of these entities. You can directly access any of these key documents: [a paper describing this model](https://metadatacenter.org/open-repository-model-acquiring-knowledge-about-scientific-experiments); or, [a full description of the model](https://metadatacenter.org/tools-training/outreach/cedar-template-model); or [a description of the format of metadata instances in the CEDAR repository](https://metadatacenter.readthedocs.io/en/latest/developer-guide/template-element-and-field-instances/).
 
 Note that you can also look at the JSON representing CEDAR resources by opening the resource in the CEDAR tool and clicking on the circle icons on the top right of the screen. (The left-hand icon shows template JSON, the right-hand icon shows instance JSON.) These will allow you to eyeball the representation of resources without going through the REST APIs.
 

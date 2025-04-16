@@ -67,5 +67,5 @@ cedarcli status
 
 You should see the following line in the output:
 ```
-| NGINX                      | Running | httpResponse|   80| Server:\snginx    |
+│ NGINX                  │ ✅     │ 80    │               │
 ```

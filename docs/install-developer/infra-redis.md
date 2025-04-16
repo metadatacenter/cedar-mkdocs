@@ -3,16 +3,16 @@ CEDAR uses `Redis` to implement a message queue for communication between compon
 
 ## Install Redis
 
-Please install `Redis`, version 6.2:
+Please install `Redis`, version 7.2:
 
 ```sh
-brew install redis@6.2
+brew install redis@7.2
 ```
 
 And pin this version:
 
 ```sh
-brew pin redis@6.2
+brew pin redis@7.2
 ```
     
 ???+ warning "Important"
@@ -31,5 +31,5 @@ cedarcli status
 
 You should see the following line in the output:
 ```
-| Redis-persistent           | Running | redisPing   | 6379|                   |
+│ Redis-persistent       │ ✅     │ 6379  │               │
 ```

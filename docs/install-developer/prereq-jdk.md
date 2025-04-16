@@ -9,8 +9,8 @@ The CEDAR developer team uses `Oracle JDK 17`, and we strongly suggest that you 
 
 ## Install JDK 17
 
-Please download and install the latest Oracle JDK 17 (17.0.8 at the time of writing) from:
-[https://www.oracle.com/java/technologies/downloads/#jdk17-mac](https://www.oracle.com/java/technologies/downloads/#jdk17-mac)
+Please download and install the latest Oracle JDK 17 (17.0.13 at the time of writing) from:
+[https://oracle.com/java/technologies/downloads/#java17-mac](https://oracle.com/java/technologies/downloads/#java17-mac)
 
 ## Verify the installation
 
@@ -21,9 +21,9 @@ java --version
 
 You should see something similar:
 ```
-java 17.0.8 2023-07-18 LTS
-Java(TM) SE Runtime Environment (build 17.0.8+9-LTS-211)
-Java HotSpot(TM) 64-Bit Server VM (build 17.0.8+9-LTS-211, mixed mode, sharing)
+java 17.0.13 2024-10-15 LTS
+Java(TM) SE Runtime Environment (build 17.0.13+10-LTS-268)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.13+10-LTS-268, mixed mode, sharing)
 ```
 
 ## About `JAVA_HOME`

@@ -18,23 +18,28 @@ The frontend is delivered differently during development than on production.
     The table is provided for better understanding of the infrastructure, it is not required for the installation process. 
 
 
-| Subdomain / <br> repo name | Service type        | Upstream / content on `dev`  | Upstream / content on `prod`  | Repo on `dev` / `prod` | 
-| -----------      | -----------                | -----------              | -----------               | -----------                           |
-| .                |Redirect                    | `nginx` redirect         |  `nginx` redirect         | N/A                                   |
-| cedar            |Frontend                    | `gulp` on 4200           |  `nginx` directory access | cedar-template-editor                 |
-| openview         |Frontend                    | `ng serve` on 4220       |  `nginx` directory access | cedar-openview / cedar-opernview-dist |
-| component        |Content distribution        | `nginx` directory access |  `nginx` directory access | cedar-component-distribution          |
-| auth             |Keycloak                    | 8443                     |  8443                     | N/A                                   |
-| artifact         |Microservice                | java on 9001             |                           | cedar-artifact-server                 |
-| repo             |Microservice                | java on 9002             |                           | cedar-repo-server                     |
-| schema           |Microservice                | java on 9003             |                           | cedar-schema-server                   |
-| terminology      |Microservice                | java on 9004             |                           | cedar-terminology-server              |
-| user             |Microservice                | java on 9005             |                           | cedar-user-server                     |
-| valuerecommender |Microservice                | java on 9006             |                           | cedar-valuerecommender-server         |
-| resource         |Microservice                | java on 9007             |                           | cedar-resource-server                 |
-| group            |Microservice                | java on 9009             |                           | cedar-group-server                    |
-| submission       |Microservice                | java on 9010             |                           | cedar-submission-server               |
-| worker           |Microservice                | java on 9011             |                           | cedar-worker-server                   |
-| messaging        |Microservice                | java on 9012             |                           | cedar-messaging-server                |
-| open             |Microservice                | java on 9013             |                           | cedar-openview-server                 |
-| internals        |Microservice                | java on 9014             |                           | cedar-internals-server                |
+| Subdomain / <br> repo name | Service type         | Upstream / content on `dev` | Upstream / content on `prod`  | Repo on `dev` / `prod`                 | 
+|----------------------------|----------------------|-----------------------------| -----------               |----------------------------------------|
+| .                          | Redirect             | `nginx` redirect            |  `nginx` redirect         | N/A                                    |
+| cedar                      | Frontend             | `gulp` on 4200              |  `nginx` directory access | cedar-template-editor                  |
+| openview                   | Frontend             | `ng serve` on 4220          |  `nginx` directory access | cedar-openview / cedar-opernview-dist  |
+| content                    | Content distribution | `ng serve` on 4240          |  `nginx` directory access | cedar-content-distribution             |
+| monitoring                 | Frontend             | `ng serve` on 4300          |  `nginx` directory access | cedar-monitoring/cedar-monitoring-dist |
+| artifacts                  | Frontend             | `ng serve` on 4320          |  `nginx` directory access | cedar-artifacts/cedar-artifacts-dist |
+| bridging                   | Frontend             | `ng serve` on 4340          |  `nginx` directory access | cedar-bridging/cedar-bridging-dist |
+| auth                       | Keycloak             | 8443                        |  8443                     | N/A                                    |
+| artifact                   | Microservice         | java on 9001                |                           | cedar-artifact-server                  |
+| repo                       | Microservice         | java on 9002                |                           | cedar-repo-server                      |
+| schema                     | Microservice         | java on 9003                |                           | cedar-schema-server                    |
+| terminology                | Microservice         | java on 9004                |                           | cedar-terminology-server               |
+| user                       | Microservice         | java on 9005                |                           | cedar-user-server                      |
+| valuerecommender           | Microservice         | java on 9006                |                           | cedar-valuerecommender-server          |
+| resource                   | Microservice         | java on 9007                |                           | cedar-resource-server                  |
+| impex                      | Microservice         | java on 9008                |                           | cedar-impex-server                     |
+| group                      | Microservice         | java on 9009                |                           | cedar-group-server                     |
+| submission                 | Microservice         | java on 9010                |                           | cedar-submission-server                |
+| worker                     | Microservice         | java on 9011                |                           | cedar-worker-server                    |
+| messaging                  | Microservice         | java on 9012                |                           | cedar-messaging-server                 |
+| open                       | Microservice         | java on 9013                |                           | cedar-openview-server                  |
+| monitor                    | Microservice         | java on 9014                |                           | cedar-monitor-server                   |
+| bridge                     | Microservice         | java on 9015                |                           | cedar-bridge-server                    |

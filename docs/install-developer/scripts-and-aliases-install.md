@@ -36,30 +36,29 @@ cedarcli check repos
 
 should result in:
 ```
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
-┃ Repo/File/Dir                              ┃ File Type ┃    Repo Type     ┃      Recognized as       ┃ Status ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃ Repo/File/Dir                                    ┃ File Type ┃    Repo Type     ┃      Recognized as       ┃ Status ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
 ...
-│ cedar-profile-native-develop.sh            │  📄 file  │                  │ Known CEDAR shell script │   ✅   │
-│ cedar-project                              │  🗂️  dir   │   java-wrapper   │        CEDAR repo        │   ✅   │
-│ cedar-repo-server                          │  🗂️  dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-resource-server                      │  🗂️  dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-rest-library                         │  🗂️  dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-schema-server                        │  🗂️  dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-shared-data                          │  🗂️  dir   │ content-delivery │        CEDAR repo        │   ✅   │
-│ cedar-submission-server                    │  🗂️  dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-swagger-ui                           │  🗂️  dir   │ content-delivery │        CEDAR repo        │   ✅   │
-│ cedar-template-editor                      │  🗂️  dir   │    angularJS     │        CEDAR repo        │   ✅   │
-│ cedar-terminology-server                   │  🗂️  dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-user-server                          │  🗂️  dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-util                                 │  🗂️  dir   │       misc       │        CEDAR repo        │   ✅   │
-│ cedar-valuerecommender-server              │  🗂️  dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-worker-server                        │  🗂️  dir   │       java       │        CEDAR repo        │   ✅   │
-│ set-env-external.sh                        │  📄 file  │                  │ Known CEDAR shell script │   ✅   │
-│ set-env-internal.sh                        │  📄 file  │                  │ Known CEDAR shell script │   ✅   │
-└────────────────────────────────────────────┴───────────┴──────────────────┴──────────────────────────┴────────┘
-                                           65 object/files recognized
-```
+│ cedar-profile-native-develop.sh                  │  📄 file  │                  │ Known CEDAR shell script │   ✅   │
+│ cedar-project                                    │  📁 dir   │   java-wrapper   │        CEDAR repo        │   ✅   │
+│ cedar-repo-server                                │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
+│ cedar-resource-server                            │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
+│ cedar-rest-library                               │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
+│ cedar-schema-server                              │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
+│ cedar-shared-data                                │  📁 dir   │ content-delivery │        CEDAR repo        │   ✅   │
+│ cedar-submission-server                          │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
+│ cedar-swagger-ui                                 │  📁 dir   │ content-delivery │        CEDAR repo        │   ✅   │
+│ cedar-template-editor                            │  📁 dir   │    angularJS     │        CEDAR repo        │   ✅   │
+│ cedar-terminology-server                         │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
+│ cedar-user-server                                │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
+│ cedar-util                                       │  📁 dir   │       misc       │        CEDAR repo        │   ✅   │
+│ cedar-valuerecommender-server                    │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
+│ cedar-worker-server                              │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
+│ set-env-external.sh                              │  📄 file  │                  │ Known CEDAR shell script │   ✅   │
+│ set-env-internal.sh                              │  📄 file  │                  │ Known CEDAR shell script │   ✅   │
+└──────────────────────────────────────────────────┴───────────┴──────────────────┴──────────────────────────┴────────┘
+                                              69 object/files recognized```
 
 ## Change the environment variable values
 
