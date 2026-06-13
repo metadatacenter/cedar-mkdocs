@@ -17,11 +17,9 @@ project.
 
 ## Issue Tracking
 
-CEDAR uses a [GitHub-based project issue tracking
-board](https://github.com/orgs/metadatacenter/projects/8/views/1)
-to track features and bug fixes. This board is integrated with
-GitHub so feature requests and bug reports made by GitHub users
-can be automatically tracked. We also have a dedicated [mailing list](https://metadatacenter.org/help/#subscribe). 
+CEDAR uses a [GitHub-based project issue tracking](https://github.com/metadatacenter/cedar-project/issues)
+to track features and bug fixes. Users should report issues
+to this central repository. We also have a dedicated [mailing list](https://metadatacenter.org/help/#subscribe). 
 
 ## Monitoring
 
