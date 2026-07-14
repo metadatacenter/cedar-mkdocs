@@ -139,91 +139,15 @@ nav:
   - Install Guides:
       - install-overview.md
       - Developer Install:
-          - install-developer/intro.md
-          - install-developer/system-architecture.md
-          - Prerequisites:
-              - install-developer/os-user.md
-              - install-developer/prereq-macos.md
-              - install-developer/prereq-homebrew.md
-              - install-developer/prereq-homebrew-fix.md
-              - install-developer/prereq-wget.md
-              - install-developer/prereq-openssl.md
-              - install-developer/prereq-iterm2-oh-my-zsh-powerlevel10k.md
-              - install-developer/prereq-jdk.md
-              - install-developer/prereq-jenv.md
-              - install-developer/prereq-maven.md
-              - install-developer/prereq-python.md
-          - User, home directory, passwords and domain:
-              - install-developer/os-home-directory.md
-              - install-developer/config-usernames-and-passwords.md
-              - install-developer/config-domain.md
-          - CEDAR CLI:
-              - install-developer/cedarcli-overview.md
-              - install-developer/cedarcli-install.md
-              - install-developer/cedarcli-commands.md
-          - The code:
-                - install-developer/code-overview.md
-                - install-developer/code-git-clone.md
-          - Scripts and aliases:
-              - install-developer/scripts-and-aliases-install.md
-              - install-developer/scripts-and-aliases-include.md
-          - CEDAR CLI commands 1:
-              - install-developer/commands-overview.md
-              - install-developer/commands-env-list.md
-              - install-developer/commands-status.md
-          - Start and stop aliases:
-              - install-developer/commands-startstop.md
-          - SSL certificates:
-              - install-developer/cert-overview.md
-              - install-developer/cert-self-signed.md
-              - install-developer/cert-install.md
-          - Subdomains, directories:
-              - install-developer/os-subdomains.md
-              - install-developer/os-directories.md
-          - CEDAR CLI commands 2:
-              - install-developer/code-git-utils.md
-          - The code:
-              - install-developer/code-maven-utils.md
-              - install-developer/code-build-parent-and-libraries.md
-              - install-developer/code-build-project.md
-              - install-developer/code-more-utils.md
-          - Infrastructure services:
-              - install-developer/infra-mongodb.md
-              - install-developer/infra-opensearch.md
-              - install-developer/infra-mysql.md
-              - install-developer/infra-redis.md
-              - install-developer/infra-neo4j.md
-              - Keycloak:
-                  - install-developer/infra-keycloak-overview.md
-                  - install-developer/infra-keycloak-download.md
-                  - install-developer/infra-keycloak-event-listener.md
-                  - install-developer/infra-keycloak-theme.md
-                  - install-developer/infra-keycloak-configure.md
-                  - install-developer/infra-keycloak-realm.md
-              - Nginx:
-                  - install-developer/infra-nginx-overview.md
-                  - install-developer/infra-nginx-install.md
-                  - install-developer/infra-nginx-configure.md
-                  - install-developer/infra-nginx-start.md
-                  - install-developer/infra-keycloak-administrator.md
-              - install-developer/infra-start.md
-          - Microservices:
-              - install-developer/microservices-configuration.md
-              - install-developer/microservices-system-reset-1.md
-              - install-developer/microservices-overview.md
-              - install-developer/microservices-system-reset-2.md
-          - Frontend components:
-              - install-developer/frontend-overview.md
-              - install-developer/frontend-node-install.md
-              - install-developer/frontend-gulp-angular-cli-install.md
-              - install-developer/frontend-editor.md
-              - install-developer/frontend-openview.md
-              - install-developer/frontend-monitoring.md
-              - install-developer/frontend-artifacts.md
-              - install-developer/frontend-bridging.md
-              - install-developer/frontend-content.md
-          - Logging in to CEDAR:
-              - install-developer/frontend-logging-in.md
+          - install-developer/overview.md
+          - install-developer/prerequisites.md
+          - install-developer/configuration.md
+          - install-developer/cedar-cli-and-scripts.md
+          - install-developer/building-the-code.md
+          - install-developer/ssl-certificates.md
+          - install-developer/infrastructure-services.md
+          - install-developer/microservices.md
+          - install-developer/frontends.md
 
       - Docker Install:
           - install-docker-eval/intro.md

@@ -1,6 +1,51 @@
-# Subdomains
+# Configuration
 
-## Overview
+## CEDAR Home Directory
+
+You will need a directory where all the CEDAR-related code, configuration, log files and some executable will reside.
+You should create a directory under your home directory:
+
+```sh
+mkdir ~/CEDAR 
+```
+
+???+ warning "Important"
+
+    Of course, you can choose to have this CEDAR home directory in a different place.
+    We have an environment variable (set up later during this guide as `CEDAR_HOME`) which holds this path.
+    
+    We suggest, however, that your CEDAR home directory path does not contain spaces or special characters.
+
+    If you see this path referenced directly in this guide (as in `~/CEDAR`) and you did not use the same path, please replace it with the proper value on your system.
+
+## Usernames and Passwords
+
+Throughout this guide we use some default usernames and passwords.
+
+The usernames reflect the system name they are associated with and their usage intent (e.g. `cedarMongoUser` is CEDAR app level user for MongoDB access).
+
+The passwords for all the users are set to `changeme`.
+
+You are welcome to change the usernames and/or passwords, but please make note of them.
+You will need them to properly configure the environment variables that govern the CEDAR configuration.
+
+## CEDAR Domain
+
+This guide assumes that the installation will be available at `cedar.metadatacenter.orgx`.
+Please note the `x` at the end of `orgx`.
+This way the development environment will be close to the final production environment even in the domain names.
+
+???+ warning "Important"
+    
+    We encourage you to follow this naming convention. The domain name appears in several places in this guide.
+    
+    Of course, if you prefer, you can set up your environment for a different domain.
+    
+    In that case, please make sure that you replace the domain name/names in every command and every file that references it.
+
+## Subdomains
+
+### Overview
 The CEDAR system runs several microservices. These run on different TCP ports, and the `nginx` reverse proxy in front of them hides them.
 
 However, we need to expose these microservices to the world. This is done using subdomains. Each microservice has its own subdomain under the main CEDAR domain.
@@ -9,7 +54,7 @@ For a local development machine the easiest way to have these subdomains resolve
 
 Since there are numerous such subdomains, we created a script which will add the subdomains to your hosts file.
 
-## Check the `CEDAR_HOST` variable
+### Check the `CEDAR_HOST` variable
 
 ```sh
 cedarcli env filter CEDAR_HOST
@@ -28,7 +73,7 @@ The output should be:
 
 If this is not what you see, please go back to the previous steps, and fix this. 
 
-## Add the subdomains
+### Add the subdomains
 
 Our utility script will check each subdomain by pinging it. 
 If the host does not reply, we consider that the subdomain is non-resolvable, so we need to add it to the `/etc/hosts` file.
@@ -104,7 +149,7 @@ Host unknown, adding to /etc/hosts: docs.cee.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: docs-dist.cee.metadatacenter.orgx
 ```
 
-## Check the subdomains
+### Check the subdomains
 You should run our script a second time.
 Since all the hosts should be known at this point, the script should report that there is nothing to do.
 
@@ -147,3 +192,58 @@ All CEDAR hosts are known, nothing to do
 ???+ warning "Important"
     
     If this is not what you see, please go back, and try to fix the issue.
+
+## Directories
+
+### Overview
+The CEDAR system runs several microservices and infrastructure services. All these will create log files.
+Some of them will create the log folder themselves, some of them chose not to do so (`Nginx` being one example).
+
+We need to make sure all the components that want to log, can log. We will need to create the folders to hold the log files.
+
+CEDAR stores some data on the local filesystem. These folders must also be created.
+
+### Create the directories
+
+Please run:
+```sh
+cedarcli dev create-directories
+```
+
+### Check the directories
+```sh
+ls -ls ${CEDAR_HOME}/log
+```
+
+The output should contain all the directories just created:
+```
+cadsr-tools
+frontend-artifacts
+frontend-bridging
+frontend-cedar
+frontend-cee-demo-angular
+frontend-cee-demo-angular-dist
+frontend-cee-docs-angular
+frontend-cee-docs-angular-dist
+frontend-content
+frontend-monitoring
+frontend-openview
+frontend-shared
+nginx
+server-artifact
+server-auth
+server-bridge
+server-group
+server-impex
+server-messaging
+server-monitor
+server-open
+server-repo
+server-resource
+server-schema
+server-submission
+server-terminology
+server-user
+server-valuerecommender
+server-worker
+```

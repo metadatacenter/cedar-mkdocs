@@ -1,6 +1,36 @@
-# Install the self-signed root certificates
+# SSL Certificates
 
-## Add to Java trust store
+## Overview
+To closely replicate the behavior of `CEDAR` in production environment, we will set up HTTPS access for `nginx` later during the installation.
+This means that the browser will communicate with the `nginx` using https.
+`Nginx` acting as a reverse proxy will communicate using plain HTTP with the microservices and frontends behind it.
+
+Since this is a development installation, it is not easy to get proper SSL certificates.
+To overcome this, we will use self-signed certificates for development.
+
+There is also back-channel communication between microservices and `Keycloak`.
+In order to make this work, we will need to add our self-signed certificates to the Java truststore.
+
+## Copy self-signed certificates
+
+We are using self-signed certificates for the local development.
+
+Instead of generating these, we are reusing the pre-created self-signed certificates.
+
+### Copy the certificates to working location
+
+```sh
+mkdir ${CEDAR_HOME}/CEDAR_CA
+cp -R ${CEDAR_HOME}/cedar-development/os-mirror/development-macos/CEDAR_HOME/CEDAR_CA/ ${CEDAR_HOME}/CEDAR_CA
+```
+
+???+ warning "Important"
+    
+    Keep this folder, and its contents intact. You will need these certificates at several points of the installation.
+
+## Install the self-signed root certificates
+
+### Add to Java trust store
 
 Execute the commands below to navigate to the folder where the root CA certificate is stored.
 Then import it into the `cacerts`: 
@@ -43,7 +73,7 @@ When prompted, enter these value:
     keytool -delete -keystore $JAVA_HOME/lib/security/cacerts -alias metadatacenter.orgx
     ```
 
-## Add to `Firefox`
+### Add to `Firefox`
 If you use Firefox, you will need to add the root CA certificate to the trusted list of the browser.
 
 The process is the following:
@@ -59,7 +89,7 @@ The process is the following:
     - `Trust this CA to identify email users.`
 - Click `OK`
 
-## Add to `Keychain Access`
+### Add to `Keychain Access`
 If you use Chrome or Safari, or other browsers that use the system's trust store for certificates, you will need to add the root CA certificate to `Keychain Access`.
 
 The process is the following:
