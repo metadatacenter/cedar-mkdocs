@@ -21,19 +21,9 @@ To get started with any of the following topics, navigate to the [CEDAR Workbenc
 
 This page covers the basics of building templates in the {{ page.cedarw }}, with a special focus on CDEs.
 
-- [Introduction](#intro)
-- [Step-by-step guide: build a template](#step-by-step-guide)
-  - Step 1 - [Navigate to your workspace](#workspace)
-  - Step 2 - [Create a new template object](#create-template)
-  - Step 3 - [Add CDEs to your template](#add-cdes)
-  - Step 4 - [Configure CDE options](#configure-cdes)
-  - Step 5 - [Save your template](#save-template)
-  - Step 6 - [Share your template](#share-template)
-
 ***
 
 ### Introduction
-<a name="intro"></a>
 
 NCI's Form Builder allows users to build forms that contain modules with questions. Equivalent functionality is available in the {{ page.cedarw }}, i.e., you can build templates that contain elements with fields. A key difference between the platforms is that the {{ page.cedarw }} allows fields to exist at the root level outside of elements.
 
@@ -94,21 +84,17 @@ This page describes the process of adding individual CDEs to templates. One adva
 More detail and instructions for creating elements with multiple CDEs are given on a [separate page](#use-case-building-resusable-groups-of-cdes). Understanding how to build templates in the {{ page.cedarw }} is not a prerequisite for creating elements.
 <br /><br />
 
-
 ### Build a Template Step-By-Step
-<a name="step-by-step-guide"></a>
 
 This section of the documenation will walk you through the mechanical steps of creating a template in the {{ page.cedarw }} that contains several CDEs.
 
 #### Step 1 - Go to your Workspace
-<a name="workspace"></a>
 
 Navigate to the [{{ page.cedarw }}](https://cedar.metadatacenter.org/){:target="_blank"} and make sure you're logged in. If you need help creating an account and logging in, see the [Accounts and Logging In](accounts-and-logging-in.md) section of this guide.
 
 Click the Workspace link in the upper-left portion of the window to start out in your personal workspace.
 
 #### Step 2 - Create a new template object
-<a name="create-template"></a>
 
 Click on the "New +" button in the upper-left portion of the window, and select "Template" from the resulting dropdown menu.
 
@@ -121,7 +107,6 @@ In the dark gray header at the top of the page, enter a name and description for
 Click the "SAVE TEMPLATE" button. This will ensure that your new template is saved in the {{ page.cedarw }}. If you need to exit your browser at any point and return to this tutorial at a later time, your new template will appear in your workspace, and you can double-click on it to reopen the template designer.
 
 #### Step 3 - Add some CDEs
-<a name="add-cdes"></a>
 
 Locate the vertical selector toolbar on the right-hand side of the template desinger view and click the "Search for fields and elements" button (depicted with a magnifying glass icon). This will launch a modal dialog where you can use the Search bar across the top to locate the desired CDE by entering, e.g., the Public ID or double quoted title and pressing the Enter key:
 
@@ -157,7 +142,6 @@ The {{ page.cedarw }} offers many other types of artifacts that you can add to t
 - [Field Type Reference](building-basic-templates.md#field-type-reference)
 
 #### Step 4 - Configure CDE options
-<a name="configure-cdes"></a>
 
 As indicated in the introduction, there are certain CDE options that you are allowed to configure. For example, if you want to indicate that the CDE is a required field, click the REQUIRED link at the bottom of the CDE and use the slider to indicate YES or NO. Another example is clicking on the MULTIPLE link to indicate whether the CDE can appear multiple times in a template, as well as the minimum and maximum number of occurrences.
 
@@ -180,7 +164,6 @@ Hover your mouse over individual values to display right hand icons that allow y
 Adding values is not currently possible from within the {{ page.cedarw }}. Requests for new values should be submitted via email to the following address: [caDSR.RA@mail.nih.gov](mailto:caDSR.RA@mail.nih.gov).
 
 #### Step 5 - Save your template
-<a name="save-template"></a>
 
 Now that you have added several CDEs and possibly other artifacts to your template, click the SAVE TEMPLATE button and use the left arrow in the top left corner of the main window to return to your workspace. Your new template will be displayed in the middle pane with "Populate" and "More" icons on the right-hand side.
 
@@ -198,9 +181,7 @@ If you want to organize your templates using folders, you can create new folders
 
 The More menu also contains options for renaming and deleting your templates.
 
-
 #### Step 6 - Share your template
-<a name="share-template"></a>
 
 When you create a template in your workspace or inside of a personal folder structure, you are the only person that can view and edit your template. The {{ page.cedarw }} facilitates the ability to grant other users and groups of users the ability to view and/or edit your templates.
 
@@ -212,7 +193,6 @@ Use the "With people" section to locate other users with whom you would like to 
 
 Use the "With groups" section to search for group names with whom you would like to share your template. The same read, write, and owner privileges are available to groups.
 
-
 <!-- ## Modifying CDEs using the copy method
 
 If you added one or more published CDEs to a template and later decide you want to modify those CDEs, you need to remove them from your template, make copies of the CDEs you want to change, and then add them back to your template after they've been modified.
@@ -221,16 +201,6 @@ If you added one or more published CDEs to a template and later decide you want 
 ## Use Case: Importing templates
 
 This page covers the basics of importing caDSR Form Builder forms into the {{ page.cedarw }}.
-
-- [Introduction](#intro)
-- [Step-by-step guide: import a template](#step-by-step-guide)
-  - Step 1 - [Export form(s) to XML format](#export-forms)
-  - Step 2 - [Navigate to your workspace](#workspace)
-  - Step 3 - [Select XML files for import](#select-xml-files)
-  - Step 4 - [Perform an import](#import)
-  - Step 5 - [Look over the import report](#import-report)
-  - Step 6 - [View the imported template](#view-template)
-- [Editing imported templates](#edit-template)
 
 ---
 
@@ -249,13 +219,10 @@ Each of these bullet points is discussed in more detail in the step-by-step guid
 <br />
 
 ### Import a template step-by-step
-<a name="step-by-step-guide"></a>
-
 
 This section of the documenation will walk you through the mechanical steps of importing a template into the {{ page.cedarw }}.
 
 #### Step 1 - Export your form(s) to XML format
-<a name="export-forms"></a>
 
 The {{ page.cedarw }} allows users to import forms in XML format. For any given form that you want to import into the {{ page.cedarw }}, you first need to use the Form Builder application to export the form to XML format. 
 
@@ -264,14 +231,12 @@ On this documenation page, we plan to use the form with a public ID of 3918956 (
 Navigate to the [Form Builder application](https://formbuilder.nci.nih.gov/FormBuilder/){:target="_blank"}, locate form 3918956, and download the XML format version of the form. If you need instructions for downloading forms in XML format, please refer to [this section](https://wiki.nci.nih.gov/display/caDSR/10+-+Downloading+and+Printing+in+Form+Builder#id-10DownloadingandPrintinginFormBuilder-DownloadFormtoXML){:target="_blank"} of the [Form Builder User Guide](https://wiki.nci.nih.gov/display/caDSR/Form+Builder+User+Guide){:target="_blank"}.
 
 #### Step 2 - Go to your Workspace
-<a name="workspace"></a>
 
 Navigate to the [{{ page.cedarw }}](https://cedar.metadatacenter.org/){:target="_blank"} and make sure you're logged in. If you need help creating an account and logging in, see the [Accounts and Logging In](accounts-and-logging-in.md) section of this guide.
 
 Click the Workspace link in the upper-left portion of the window to start out in your personal workspace.
 
 #### Step 3 - Select XML files for import
-<a name="select-xml-files"></a>
 
 Click on the "New +" button in the upper-left portion of the window, and select "Import" from the resulting dropdown menu.
 
@@ -286,7 +251,6 @@ Click the Select Files button and select the XML file for form 3918956 that you 
 _Note:_ The {{ page.cedarw }} allows you to import multiple XML files at a time. If desired, you can continue selecting XML files for import, which will be displayed in list format in the right-hand pane until such time that you proceed with clicking the Import button.
 
 #### Step 4 - Perform the import
-<a name="import"></a>
 
 Click the Import button in the Import files dialog to begin the import process. The dialog will show a progress bar while the import is performed:
 
@@ -318,7 +282,6 @@ Once the import is complete, the dialog will show a completion message:
 ![Template import completed](../img/userguide/cadsr/template-import-complete.png)<br />
 
 #### Step 5 - Examine the import report
-<a name="import-report"></a>
 
 This step is optional, but helpful if you want to be aware of any issues encoutered during an import process. After template import is complete, the Report tab displays a detailed log of the import process that typically includes:
 
@@ -339,7 +302,6 @@ If you import multiple XML files at once, the Report tab will contain a set of s
 ![Template import report showing CDE rejection](../img/userguide/cadsr/template-import-report-multi.png)<br />
 
 #### Step 6 - View the imported template
-<a name="view-template"></a>
 
 After optionally reviewing the import report, click the Close button to dismiss the Import files dialog box. The newly imported template will now be visible in your workspace. The template title is created by concatenating the form's Long Name and Public ID in parenthesis. If you select the template and click the Details button (lowercase 'i' in the upper right), a details pane will be displayed with additional information about the template, e.g., description, location, persmissions, etc.:
 
@@ -370,33 +332,15 @@ The copied template will not have a published status and will allow you to make 
 If you need general instructions for editing templates, please refer to the following sections of the user guide:
 
 [Building Basic Templates](building-basic-templates.md)<br />
-[Configure CDE Options](#configure-cdes)
+[Configure CDE Options](#step-4-configure-cde-options)
 
 ## Use Case: Building resusable groups of CDEs
 
 This page covers the basics of building elements in the {{ page.cedarw }}, with a special focus on CDEs.
 
-- [Introduction](#intro)
-- [Step-by-step guide: build an element](#step-by-step-guide)
-  - Step 1 - [Navigate to your workspace](#workspace)
-  - Step 2 - [Create a new element](#create-element)
-  - Step 3 - [Add CDEs to your element](#add-cdes)
-  - Step 4 - [Configure CDE options](#configure-cdes)
-    - [Preferred labels](#opts-labels)
-    - [Cardinality](#opts-cardinality)
-    - [Required vs. optional](#opts-required)
-    - [Suggestions](#opts-suggest)
-    - [Hidden](#opts-hide)
-    - [Permissible values](#opts-values)
-- [Arranging CDEs in elements](#arrange-cdes)
-- [Deleteing CDEs from elements](#delete-cdes)
-- [Nesting elements](#nesting)
-- [Adding elements to templates](#cdes-in-templates)
-
 ***
 
 ### Introduction
-<a name="intro"></a>
 
 Modules in the NCI Form Builder act as containers for one or more questions, allowing end users to create reusable groupings of questions for placement on forms. Equivalent functionality is available in the {{ page.cedarw }}, i.e., users can create elements with one or more fields and add them to templates.
 
@@ -422,20 +366,16 @@ Refer to the following graphical representations for terminology comparison:
 <br />
 
 ### Step-by-step guide: build an element
-<a name="step-by-step-guide"></a>
-
 
 This section of the documentation will walk you through the mechanical steps of creating elements in the {{ page.cedarw }}.
 
 #### Step 1 - Go to your Workspace
-<a name="workspace"></a>
 
 Navigate to the [{{ page.cedarw }}](https://cedar.metadatacenter.org/){:target="_blank"} and make sure you're logged in. If you need help creating an account and logging in, see the [Accounts and Logging In](accounts-and-logging-in.md) section of this guide.
 
 Click the Workspace link in the upper-left portion of the window to start out in your personal workspace.
 
 #### Step 2 - Create a new element
-<a name="create-element"></a>
 
 Click on the "New +" button in the upper-left portion of the window, and select "Element" from the resulting dropdown menu:
 
@@ -450,7 +390,6 @@ In the dark gray header at the top of the page, enter a name and description for
 Click the "SAVE ELEMENT" button. This will ensure that your new element is saved in the {{ page.cedarw }}. If you need to exit your browser and return to this tutorial at a later time, your new element will appear in your workspace, and you can double-click on it to reopen the element designer.
 
 #### Step 3 - Add some CDEs
-<a name="add-cdes"></a>
 
 Locate the vertical toolbar on the right-hand side of the element designer and click the "Search for fields and elements" button (depicted with a magnifying glass icon):
 
@@ -477,7 +416,6 @@ Note that CDEs aren't the only type of fields you can add to elements. The {{ pa
 Don't forget to periodically click the SAVE ELEMENT button to save your changes as you work your way through the documentation.
 
 #### Step 4 - Configure CDE options
-<a name="configure-cdes"></a>
 
 Click on the header bar (shows the field type and CDE's public identifier) of any of the CDEs you added to your element to show the expanded view of the CDE:
 
@@ -486,7 +424,6 @@ Click on the header bar (shows the field type and CDE's public identifier) of an
 CDEs are imported into the {{ page.cedarw }} as trusted artifacts, which means that many of the options are write protected and unmodifiable, e.g., the CDE's name and help text. There are some common options however, that users are allowed to configure.
 
 ##### Preferred labels
-<a name="opts-labels"></a>
 
 To modify the preferred question text (aka "preferred label" in the {{ page.cedarw }}), click the second text box from the top to display a dropdown list of alternate preferred labels. You can also click the "OPTIONS" link at the bottom of the CDE to view a tag group depiction of all possible labels:
 
@@ -497,7 +434,6 @@ The other bits of information displayed under the OPTIONS link are unmodifiable,
 ![CDE numeric options](../img/userguide/cadsr/cde-options-numeric.png)<br />
 
 ##### Cardinality
-<a name="opts-cardinality"></a>
 
 Use the MULTIPLE link at the bottom of any CDE to specify whether the CDE is allowed to appear multiple times (or not at all) in your element. Click the horizontal bar under YES, and use the MIN and MAX buttons to specify the number of allowed occurrences:
 
@@ -508,24 +444,20 @@ If you specify a cardinality and click the SAVE ELEMENT button, note that the ca
 ![CDE cardinality options](../img/userguide/cadsr/cde-header-cardinality.png)<br />
 
 ##### Required vs. optional
-<a name="opts-required"></a>
 
 The REQUIRED link allows you to specify whether or not the CDE needs to be filled out. If YES is selected, a red asterisk appears in the CDE header:
 
 ![CDE cardinality options](../img/userguide/cadsr/cde-header-required.png)<br />
 
 ##### Suggestions
-<a name="opts-suggest"></a>
 
 Setting SUGGESTIONS to YES enables the {{ page.cedarw }} intelligent authoring suggestion system for the field. For a detailed explanation of this functionality, see [Understanding the Suggestion System](advanced-template-topics.md#understanding-the-suggestion-system).
 
 ##### Hidden
-<a name="opts-hide"></a>
 
 Use HIDDEN if you want a particular field/CDE to be hidden from the end user during template population.
 
 ##### Permissible values
-<a name="opts-values"></a>
 
 If you added a CDE to your element with permissible values, aka "values" in the {{ page.cedarw }}, you will see a VALUES link at the bottom of the CDE:
 
@@ -542,26 +474,22 @@ Hover your mouse over individual values to display right hand icons that allow y
 Adding values is not currently possible from within the {{ page.cedarw }}. Requests for new values should be submitted via email to the following address: [caDSR.RA@mail.nih.gov](mailto:caDSR.RA@mail.nih.gov).
 
 ### Arranging CDEs in elements
-<a name="arrange-cdes"></a>
 
 The {{ page.cedarw }} user interface has full drag-and-drop support. To rearrange the ordering of your CDEs and other fields, simply click on the headers and drag to the desired location.
 
 ### Deleteing CDEs from elements
-<a name="delete-cdes"></a>
 
 To delete CDEs and other fields from your element, click the 'X' icon on the top right corner of the header:
 
 ![Delete button for a field](../img/userguide/cadsr/field-delete-button.png)<br />
 
 ### Nesting elements
-<a name="nesting"></a>
 
 The {{ page.cedarw }} allows users to nest elements inside of other elements. Note that nesting is restricted to one level deep. Adding an element to your element is done in the same way that you added CDEs. Click the "Search for fields and elements" button in the vertical toolbar, and select your element using the modal search dialog. When you add an element inside of another element, the user interface uses a slightly different border display to indicate the nesting:
 
 ![A nested element](../img/userguide/cadsr/nested-element.png)<br />
 
 ### Adding elements to templates
-<a name="cdes-in-templates"></a>
 
 Once you have created and saved elements in the {{ page.cedarw }}, you are now able to add those elements to any templates for which you have write access. As a quick example, navigate to your workspace, click the "New +" button, and select Template from the resulting dropdown menu. Use the "Search for fields and elements" button in the vertical toolbar to launch the modal search dialog and select one of your newly created elements. The following screen shot depicts a new template that contains the element created in this step-by-step guide:
 
@@ -584,16 +512,9 @@ nightly basis.
 
 This page describes the four main ways to browse and search for CDEs:
 
-- [Browse CDEs via the CATEGORIES pane](#browse-by-category)
-- [Browse CDEs via the Community Folder](#browse-by-community)
-- [Search for CDEs from the Desktop](#search-from-desktop)
-- [Search for CDEs from within templates and elements](#search-from-artifact)
-- [Search for CDEs by permissible values](#search-by-pv)
-
 ***
 
 ### Browse CDEs via the CATEGORIES pane
-<a name="browse-by-category"></a>
 
 The "All Program Areas" tab in the {{ page.cdeb }} displays a list of caDSR 
 contexts on the left-hand side of the window. These contexts have been 
@@ -625,9 +546,7 @@ including location, permissions, version, etc.:
 
 ![CDE details pane](../img/userguide/cadsr/cde-details-pane.png)<br />
 
-
 ### Browse CDEs via the Community Folder
-<a name="browse-by-community"></a>
 
 The authors of the {{ page.cedarw }} maintain a "Community Folder" that 
 contains CEDAR artifacts they feel may be of interest to the entire user 
@@ -650,9 +569,7 @@ are displayed, e.g.:
 
 ![CDEs grid view sorted by title](../img/userguide/cadsr/sorted-cdes.png)<br />
 
-
 ### Search for CDEs from the Desktop
-<a name="search-from-desktop"></a>
 
 The {{ page.cedarw }} displays a search box at the top of what is referred to 
 as the "Desktop". One way to make sure the Desktop view is displayed is to 
@@ -699,7 +616,6 @@ by field names and values. More information is available in the
 "[Finding Resources](finding-resources.md)" chapter.
 
 ### Search for CDEs from within templates and elements
-<a name="search-from-artifact"></a>
 
 This section assumes basic knowledge of creating and/or editing templates and 
 elements in the {{ page.cedarw }}.
@@ -720,7 +636,6 @@ To search for a CDE from within an element:
 3. Use the search box in the resulting dialog to search for the desired CDE.
 
 ### Search for CDEs by permissible values
-<a name="search-by-pv"></a>
 The CEDAR Workbench also supports a flexible syntax to search for CDEs by permissible value. This syntax is based on the patterns `[pv]VALUE` and `[pv]=VALUE`, which enable partial and full exact matches, respectively.
 
 For example, the query `[pv]Female` will retrieve all the CDEs with the word `Female` in at least one of their permissible values. CDEs with values `Female` and `Female person` would be returned by this query. Adding an `=` sign to the query enforces exact-phrase matches. For example, the query `[pv]=Female` will return the CDEs with `Female` as one of their values, but it won't return CDEs with value `Female person`, since the query doesn't match the full value.
