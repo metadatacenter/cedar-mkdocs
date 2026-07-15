@@ -1,4 +1,4 @@
-# Sharing Your Content
+# Sharing Resources
 
 CEDAR provides multiple content-sharing techniques, 
 with advanced group and permission management for its artifacts,

@@ -1,4 +1,4 @@
-# Managing CEDAR Resources
+# Managing Resources
 
 In CEDAR, resources include the various artifact types (templates, elements, fields, metadata instances) and folders. These are all managed through the CEDAR Desktop,
 typically through your [workspace view](your-cedar-workspace.md).

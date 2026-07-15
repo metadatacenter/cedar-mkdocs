@@ -274,7 +274,7 @@ you can save the artifact and use the Template Designer's left-arrow
 to return to the Desktop. 
 From there, you can modify the name, access permissions, and
 public visibility of the Field artifact, as described in
-[Managing CEDAR Resources](desktop-and-navigation.md#managing-cedar-resources).
+[Managing Resources](desktop-and-navigation.md#managing-resources).
 
 ### **Importing a Stand-Alone Field**
 
@@ -331,7 +331,7 @@ you can save the artifact and use the Template Designer's left-arrow
 to return to the Desktop. 
 From there, you can modify the name, access permissions, and
 public visibility of the Field artifact, as described in
-[Managing CEDAR Resources](desktop-and-navigation.md#managing-cedar-resources).
+[Managing Resources](desktop-and-navigation.md#managing-resources).
 
 #### **Spreadsheet-compatible Elements**
 
