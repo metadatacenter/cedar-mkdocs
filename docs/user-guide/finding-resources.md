@@ -2,8 +2,6 @@
 
 ## Simple Searching
 
-*To learn about simple navigation in the Desktop, visit [Navigating Within CEDAR](desktop-and-navigation.md#navigating-within-cedar).*
-
 ### Searching use the search bar
 
 Searching for a resource in CEDAR is simple if you know text in its title, description, or version. Just input the search string as free text (e.g., "Antibody") in the Search bar provided in the navigation header of the CEDAR Workbench. All the resources  that have the string "Antibody" in their labels, version, or description will be shown.

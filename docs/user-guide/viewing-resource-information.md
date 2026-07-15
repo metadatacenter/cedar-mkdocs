@@ -9,7 +9,7 @@ but also in their raw format, as well as on the web when shared in OpenView.
 
 There are four types of resources in CEDAR: folders, metadata templates, metadata elements, metadata fields, and metadata instances. In this section we will drop the term 'metadata' from these names and refer to each resource by its shorter form.
 
-CEDAR folders are used to organize CEDAR content and the sharing settings for that content. To view folder resources you navigate into the folders. This is described in [Navigating Within CEDAR](desktop-and-navigation.md#navigating-within-cedar), under Browsing Within the Desktop.
+CEDAR folders are used to organize CEDAR content and the sharing settings for that content. To view folder resources you navigate into the folders.
 
 The rest of this section emphasizes CEDAR artifacts: 
 templates, elements, fields, and instances. 
