@@ -1,11 +1,7 @@
 # About CEDAR Templates
 
-Templates define the structure of the metadata people create in CEDAR. This part
-covers designing them, from your first template through advanced, semantically rich,
-FAIR templates:
+Templates are the reusable forms that give CEDAR metadata its structure. These chapters take you from understanding what a template is to designing sophisticated ones of your own.
 
-* [Description of a Template](../description-of-a-template.md)
-* [Building Basic Templates](../building-basic-templates.md)
-* [More FAIR Templates Using Semantics](../more-fair-templates.md)
-* [Advanced Template Topics](../advanced-template-topics.md)
-* [Tips for Template Creation](../tips-for-template-creation.md)
+They begin with a description of what a template is and how it is organized, then walk through building a basic template field by field. From there they show how to make templates richer and more interoperable by adding controlled terms and ontology-based semantics, in line with FAIR principles.
+
+The later chapters cover advanced template topics — extending templates, versioning, working with common data elements, and the suggestion system — and close with practical tips for designing templates that others can reliably reuse.

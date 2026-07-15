@@ -1,10 +1,7 @@
 # CEDAR Basics for All Users
 
-The essential tasks for everyone using CEDAR:
+These chapters cover the everyday skills every CEDAR user needs, in roughly the order you'll meet them.
 
-* [Accounts and Logging In](../accounts-and-logging-in.md)
-* [Finding Resources](../finding-resources.md)
-* [Viewing Resource Information](../viewing-resource-information.md)
-* [Desktop and Navigation](../desktop-and-navigation.md)
-* [Filling Out (Creating) Metadata](../filling-out-metadata.md)
-* [Sharing Your Content](../sharing-your-content.md)
+You begin by creating an account and signing in, then learn to find resources — searching CEDAR and organizing and narrowing the results — and to view resource information, inspecting a resource's contents and metadata both inside CEDAR and out on the web.
+
+From there the focus shifts from browsing to working: getting around your workspace and managing your folders and files, filling out a template to create and validate your own metadata, and sharing your work with groups or publishing it for others to read or reuse.
