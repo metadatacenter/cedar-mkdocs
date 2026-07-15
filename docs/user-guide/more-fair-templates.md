@@ -105,7 +105,6 @@ we'll give you some tips (in [Choosing Controlled Terms](#choosing-controlled-te
 and know they are good enough for your needs.
 
 For you semantic experts, we provide advanced details elsewhere in this User Manual:
-* [Tips for Template Creation: Term Discovery/Selection](tips-for-template-creation.md#term-discovery-selection)
 * [Advanced Template Topics: More Semantics](advanced-template-topics.md#more-semantics)
 
 This section (except the Customization subsection at the end)

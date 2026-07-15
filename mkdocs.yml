@@ -50,7 +50,6 @@ nav:
           - user-guide/building-basic-templates.md
           - user-guide/more-fair-templates.md
           - user-guide/advanced-template-topics.md
-          - user-guide/tips-for-template-creation.md
       - Advanced Topics:
           - user-guide/advanced-topics/index.md
           - user-guide/cedar-identifiers-and-iris.md
