@@ -35,7 +35,7 @@ nav:
 
   - User Guide:
       - user-overview/index.md
-      - CEDAR Basics for All Users:
+      - CEDAR Basics:
           - user-guide/cedar-basics/index.md
           - user-guide/accounts-and-logging-in.md
           - user-guide/finding-resources.md
@@ -50,7 +50,7 @@ nav:
           - user-guide/more-fair-templates.md
           - user-guide/advanced-template-topics.md
           - user-guide/tips-for-template-creation.md
-      - Advanced Topics for All Users:
+      - Advanced Topics:
           - user-guide/advanced-topics/index.md
           - user-guide/cedar-identifiers-and-iris.md
           - user-guide/cedars-api.md

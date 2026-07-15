@@ -1,4 +1,4 @@
-# CEDAR Basics for All Users
+# CEDAR Basics
 
 These chapters cover the everyday skills every CEDAR user needs, in roughly the order you'll meet them.
 

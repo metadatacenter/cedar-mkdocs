@@ -1,4 +1,4 @@
-# Advanced Topics for All Users
+# Advanced Topics
 
 These chapters are for users ready to go beyond the everyday workbench.
 
