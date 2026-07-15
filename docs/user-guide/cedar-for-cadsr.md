@@ -646,9 +646,8 @@ The {{ page.cedarw }} displays a search box at the top of what is referred to
 as the "Desktop". One way to make sure the Desktop view is displayed is to 
 click on the Workspace link in the upper-left portion of the window. For a 
 more in-depth explanation of the Desktop and other components displayed in 
-the Workspace, refer to the section entitled 
-"[Your CEDAR Workspace](desktop-and-navigation.md#your-cedar-workspace)" in the 
-"[Desktop and Navigation](desktop-and-navigation.md)" chapter.
+the Workspace, refer to the 
+"[Your CEDAR Workspace](your-cedar-workspace.md)" chapter.
 
 When CDEs are imported into the {{ page.cedarw }}, they are named by 
 concatenating the Long Name of the CDE with it's Public ID in parentheses. For 
