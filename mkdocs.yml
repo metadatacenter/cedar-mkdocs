@@ -93,9 +93,4 @@ nav:
       - developer-guide/template-element-and-fields.md
       - developer-guide/cedar-rest-apis.md
 
-  - HOWTOs:
-      - howtos/index.md
-      - howtos/bioportal-integration-with-docker.md
-      - howtos/cedar-ui-transfer-ownership-of-artifacts.md
-
   - Operations and Management: operations-and-management.md
