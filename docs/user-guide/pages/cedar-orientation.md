@@ -21,7 +21,7 @@ soon!) about how to use the system and how to get help.
 
 
 **What CEDAR does:**
-The CEDAR Workbench makes it easy to collect and use metadata. CEDAR tools help you create forms to collect metadata,
+The CEDAR Workbench is used to collect and use metadata. CEDAR tools help you create forms to collect metadata,
 make those available to users, and download the information that users have provided.
 
 **What can CEDAR do for me?**

@@ -1,5 +1,5 @@
 # Advanced Topics
 
-These chapters are for users ready to go beyond the everyday workbench.
+These chapters cover topics beyond the basic use of the workbench.
 
-One explains how CEDAR identifies every resource with a persistent IRI, how to read those identifiers, and how to build an IRI that launches a ready-to-fill metadata form for a given template. The other introduces CEDAR's REST API, showing how to interact with the system programmatically to find and retrieve metadata.
+One describes how CEDAR identifies each resource with a persistent IRI, how to read those identifiers, and how to construct an IRI that opens a metadata form for a given template. The other introduces CEDAR's REST API for interacting with the system programmatically to find and retrieve metadata.

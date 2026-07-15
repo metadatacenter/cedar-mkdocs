@@ -381,7 +381,7 @@ So, term lists in popular ontologies, web sites, and reference books or articles
 And a final observation is that term lists for mundane things—
 topics that aren't specialized, like "types of stores"
 or "types of places for meetings"—
-these handy types of terms are almost impossible to find.
+these types of terms are almost impossible to find.
 You may well be on your own to create a term list like this.
 (On the bright side, if a lot of people need your list, it could be very popular.)
 

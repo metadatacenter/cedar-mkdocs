@@ -314,7 +314,7 @@ of the CDE. You can then search within the results set in your browser by scroll
 the results until they are all displayed, then enter into your browser 
 your identifier surrounded by parentheses (e.g., `(5)`).
 
-Another handy attribute for some searches is the version attribute.
+Another useful attribute for some searches is the version attribute.
 Entering the exact version number will find all artifacts with that version, 
 most of which will be CDEs. 
 Entering version numbers with wildcards can find many CDEs at once; 
