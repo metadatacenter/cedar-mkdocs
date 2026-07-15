@@ -206,7 +206,7 @@ Advice about finding and choosing controlled values is available in the [Choosin
 Set the Suggestions tab to Yes to enable intelligent authoring suggestions 
 for this field from CEDAR. 
 You can read a detailed explanation of the suggestions system 
-at [Understanding the Suggestion System](advanced-template-topics.md#understanding-the-suggestion-system).
+at [Understanding the Suggestion System](understanding-the-suggestion-system.md).
 
 #### Options for Numeric Fields
 
@@ -617,7 +617,7 @@ even though the required field is not completed.
 Set the Suggestions tab to Yes to enable intelligent authoring suggestions 
 for this field from CEDAR. 
 You can read a detailed explanation of the suggestions system 
-at [Understanding the Suggestion System](advanced-template-topics.md#understanding-the-suggestion-system).
+at [Understanding the Suggestion System](understanding-the-suggestion-system.md).
 
 ##### Unit of Measure (Numeric field Option)
 

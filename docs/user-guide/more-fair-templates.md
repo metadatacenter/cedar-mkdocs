@@ -104,16 +104,12 @@ You don't have to know semantics to use these tools—
 we'll give you some tips (in [Choosing Controlled Terms](#choosing-controlled-terms) that help you find good answers for your questions,
 and know they are good enough for your needs.
 
-For you semantic experts, we provide advanced details elsewhere in this User Manual:
-* [Advanced Template Topics: More Semantics](advanced-template-topics.md#more-semantics)
-
 This section (except the Customization subsection at the end)
 walks you through CEDAR interfaces that work hand-in-hand with the 
 [BioPortal ontology repository](https://bioportal.bioontology.org). 
 This repository contains over 800 public terminologies that offer precise semantic content
 you can use for your metadata collection process. 
 But if BioPortal does not contain a terminology that you want to use, you can add it!
-See the subsection called "Adding Content to BioPortal" in the [More Semantics](advanced-template-topics.md#more-semantics) section for more information on this process.
 
 All the following sub-sections assume you have created a basic text field, 
 clicked on the Values tab for your field,

@@ -224,7 +224,7 @@ CEDAR will make the most likely answers visible to you as the suggested
 values we describe here (and show below).
 
 More details about the suggestion system in CEDAR may be found at 
-[Understanding the Suggestion System](advanced-template-topics.md#understanding-the-suggestion-system).
+[Understanding the Suggestion System](understanding-the-suggestion-system.md).
 
 #### Attribute-value fields
 

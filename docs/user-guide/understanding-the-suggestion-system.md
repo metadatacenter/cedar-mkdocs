@@ -1,77 +1,8 @@
-# Advanced Template Topics
-
-CEDAR Metadata Templates—all CEDAR templating resources—are really modeling tools. 
-These tools define what information is important to collect, 
-what that information means (in terms a computer can understand and analyze),
-and how that information is organized and internally connected.
-
-## Extending a Template (adding fields)
-
-We're sorry, this resource has not yet been developed. 
-You are welcome to contribute to its development at the link below.
-
-### Introduction
-
-
-### How to Extend a Template
-
-make a copy
-
-rename appropriately
-
-add a comment (optional)
-
-
-### Letting Users Add Their Own Fields
-
-simple as using the Attribute-Value field type
-
-doesn't really create a new specification
-
-### Creating an Extended Specification
-
-many specifications are extended for additional uses (sometimes called profiling, alas)
-
-after basic steps, add your desired field, at end or (for example templates) inline
-
-if you want inline but inside an element are used, 
-they would have to be extended themselves
-
-## More Semantics
-
-We're sorry, this resource has not yet been developed. 
-You are welcome to contribute to its development at the link below.
-
-
-
-### Characterizing your templating artifact
-
-
-### Relating your Element or Field to its parent
-
-![](../img/userguide/search-for-property-20191229.png){:width="60%" class="centered"}
-
-![](../img/userguide/search-for-properties-ontology-details-20191229.png){:width="60%" class="centered"}
-
-![](../img/userguide/search-for-property-in-tree-20191229.png){:width="60%" class="centered"}
-
-![](../img/userguide/choose-property-20191229.png){:width="60%" class="centered"}
-
-
-
-### Characterizing your field (future)
-
-
-### Versioning vocabularies you use
-
-
-### Adding your terminology to BioPortal
-
-## Understanding the Suggestion System
+# Understanding the Suggestion System
 
 CEDAR's Value Recommender is a metadata recommendation system that helps users to fill out metadata templates with the most appropriate values. The system finds and applies patterns in the previously entered values to generate recommendations for all the recommendation-enabled fields. CEDAR's Value Recommender is integrated in the CEDAR Workbench [1] and it can also be invoked programmatically through its API [2].
 
-### Getting started
+## Getting started
 Metadata suggestions are disabled by default. When creating your template, you can enable suggestions by following these steps:
 * Log in to the CEDAR Workbench [1] and create a new template.
 * Add a new field to the template and use the “Suggestions” setting to enable recommendations for it. Note that:
@@ -89,7 +20,7 @@ Once the template has been saved, you can start filling it out with metadata and
 
 If you do not see a list of value recommendations when you expect them, it is likely that the metadata filled out so far for that template does not contain any patterns strong enough to recommend.  
 
-### Example
+## Example
 Suppose we have an “Experiment” template with three fields: (1) an “experiment ID” field that stores the identifier of the experiment; (2) a “tissue” field that captures the type of tissue tested in the experiment, and (3) a “disease” field to enter the disease of interest. 
 
 Fig. 1 shows the template in the Template Designer and the “Suggestions” setting for the field “tissue”. The user has clicked on the “tissue” field and enabled metadata recommendations for the field using the “Suggestions” tab. 
@@ -101,7 +32,7 @@ We will assume the user also enables suggestions for the field “disease”.
 Fig. 2 shows a screenshot of the Metadata Editor for a template generated from the Experiment template. The user entered the value “skin” for the field “tissue” and is about to enter a value for the field “disease”. In this case, the editor shows four suggested values: “skin ulcer”, “atopic dermatitis”, “melanoma”, and “psoriasis”. The percentage shown between brackets next to each suggestion represents the strength of the recommendation. The recommendations provided by the system are context-sensitive, meaning that the values predicted for the “disease” field are generated and ranked based on the value entered for the “tissue” field. In this case, the four values suggested by the system are useful, since all of them are diseases that affect the skin.
 ![](../img/userguide/IntelligentAuthoringGuideFigure2.png){:width="75%" class="centered"}
 
-### Frequently Asked Questions
+## Frequently Asked Questions
 
 **Can I enable suggestions for text fields whose values have been restricted to terms from ontologies?**
 :   Yes. CEDAR’s Value Recommender works both for plain text values and ontology terms.
@@ -131,7 +62,7 @@ Fig. 2 shows a screenshot of the Metadata Editor for a template generated from t
 :   Please cite the following paper, which describes CEDAR’s Value Recommender in some detail: <br />
    _Martínez-Romero M, O’Connor MJ, Egyedi AL, Willrett D, Hardi J, Graybeal J, Musen MA. Using association rule mining and ontologies to generate metadata recommendations from multiple biomedical databases. Database. Volume 2019, 10 June 2019. https://doi.org/10.1093/database/baz059._
 
-### References
+## References
 
 <pre>
 [1] https://cedar.metadatacenter.org/
