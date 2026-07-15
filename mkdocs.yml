@@ -39,10 +39,10 @@ nav:
           - user-guide/cedar-basics/index.md
           - user-guide/accounts-and-logging-in.md
           - user-guide/your-cedar-workspace.md
-          - user-guide/desktop-and-navigation.md
           - user-guide/finding-resources.md
           - user-guide/viewing-resource-information.md
           - user-guide/filling-out-metadata.md
+          - user-guide/desktop-and-navigation.md
           - user-guide/sharing-your-content.md
       - About CEDAR Templates:
           - user-guide/about-cedar-templates/index.md
