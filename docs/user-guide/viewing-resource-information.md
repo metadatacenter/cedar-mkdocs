@@ -13,7 +13,6 @@ CEDAR folders are used to organize CEDAR content and the sharing settings for th
 
 The rest of this section emphasizes CEDAR artifacts: 
 templates, elements, fields, and instances. 
-The section summarizes the more detailed content found in subsequent sections.
 
 ### Viewing Resource Content
 

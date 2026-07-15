@@ -19,7 +19,7 @@ If you want to submit your metadata (even including data) to a particular domain
 Detailed instructions are available in our 
 CEDAR User Manual's [Accounts and Logging In chapter](https://metadatacenter.github.io/cedar-manual/basic_topics/a1_accounts_and_logging_in/).
 
-Just go to [the CEDAR application](https://cedar.metadatacenter.org), where you will see a login screen. You can register for the system using the Register link on that screen (just above the red Google icon), using your social media account or email address. That's it—you can start using CEDAR now!
+Just go to [the CEDAR application](https://cedar.metadatacenter.org), where you will see a login screen. You can register for the system using the Register link on that screen (just above the red Google icon), using your social media account or email address.
 
 **I can't figure out what to do! How do I create a template or fill one out?**
 
@@ -33,7 +33,7 @@ which each have a variety of introductory content.
 **What makes CEDAR forms so special? Google forms/SurveyMonkey surveys can do most of this.**
 
 CEDAR has a number of features not available in Google forms or Survey Monkey surveys: real-time semantics; metadata smarts; a highly interoperable JSON-based model for 
-templates and metadata, and an API built for flexbile integration with external systems.
+templates and metadata, and an API built for flexible integration with external systems.
 
 With CEDAR semantics, you control exactly what terms can satisfy a query—and as soon as the source ontology changes, users see the updated list in the drop-down choices. By connecting your questions to other questions on the same subject, and connecting your answers to other answers that use different words but mean the same thing, these semantic relations can be exploited in the resulting metadata. As CEDAR collects more metadata for more standards and external systems, those connections will become more valuable whenever you ask about existing metadata (or build new CEDAR templates!).
 

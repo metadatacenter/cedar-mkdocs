@@ -42,7 +42,6 @@ And yet what happens instead is that the original questions were unclear,
 the descriptive answers that the users tried to provide—
 and that you are now working with—are confusing and ambiguous,
 and now there is no way you can obtain any sort of meaningful result from your efforts.
-If only people could be more careful when they created an described their results!
 
 ### Semantics: The Solution
 
@@ -78,7 +77,6 @@ to create more rigorous metadata forms that are *easier* for users to understand
 and fill out.  This process is rarely perfect, 
 but it can offer much, much more precision and recall for the person 
 finding or re-using the data.  
-And did we mention it can be easier for the user to use than existing forms?
 And even easier for you to set up the data collection system.
 
 ## Defining Your Answers with Term Lists
@@ -102,8 +100,6 @@ To go to a particular topic, click on that link.
 
 ### Introduction
 
-Now we will show you exactly how to create questions 
-that have very precise answers, using CEDAR's semantic tools.
 You don't have to know semantics to use these tools—
 we'll give you some tips (in [Choosing Controlled Terms](#choosing-controlled-terms) that help you find good answers for your questions,
 and know they are good enough for your needs.
@@ -111,9 +107,6 @@ and know they are good enough for your needs.
 For you semantic experts, we provide advanced details elsewhere in this User Manual:
 * [Tips for Template Creation: Term Discovery/Selection](tips-for-template-creation.md#term-discovery-selection)
 * [Advanced Template Topics: More Semantics](advanced-template-topics.md#more-semantics)
-
-In this section we outline the mechanical steps to find, select, and even create terms. 
-The next section will tell how to figure out which terms are good ones to use.
 
 This section (except the Customization subsection at the end)
 walks you through CEDAR interfaces that work hand-in-hand with the 
@@ -214,9 +207,6 @@ that it is a much more generic description of study types.
 
 ![](../img/userguide/search-for-branch-20191229.png){:width="80%" class="centered"}
 
-In the next section we'll discuss how you can choose what you want to include in your
-list of responses.
-
 #### Selecting Terms, Branches, or Ontologies
 
 By scrolling down in the Term Finder window, you can see additional controls (below).
@@ -244,8 +234,6 @@ is devoted to a single concept.
 For example, the Disease Ontology only contains disease terms,
 and is sometimes the perfect choice for selecting a disease.
 
-Here we talked about starting a term search, 
-then picking a whole ontology that contained the term.
 What if you just want to search for ontologies 
 (or its simpler cousins, Value Sets) by name?
 This takes us back to the control gear in the search box,
@@ -299,7 +287,7 @@ However, it does not provide any mechanism yet for taking action on those terms,
 like notifying owners of related resources of the proposed term,
 or annotating deprecations of provisional terms and referencing terms to replace them (if any).
 These features can not be implemented until there is support in BioPortal
-for managing provision terms. (Such support has been proposed in an award to be evaluted in 2021.)
+for managing provision terms. (Such support has been proposed in an award to be evaluated in 2021.)
 
 #### Adding your Own Single Term(s)
 
@@ -368,8 +356,6 @@ choosing controlled terms.
 A thorough tutorial deserves several chapters, if not a whole book.
 But you can do a very good job with just the advice offered here.
 
-Let's start with some general observations. 
-
 Perfect terms, or perfect lists of terms, can be elusive, 
 just like perfect software tools.
 It is often true that you can find many lists on a topic,
@@ -380,7 +366,6 @@ remove terms from your list, or reorder the terms in the list,
 and you can combine different lists of terms.
 If you find a list of terms that is almost perfect, 
 we highly recommend using that list and tweaking it with your changes.
-In this section, we assume you will be doing just that.
 
 It will help if you are familiar with the domain that you want terms for,
 especially if you already know vocabularies or people you can ask about vocabularies.
@@ -409,9 +394,6 @@ we leave it to you to weigh these criteria for yourself.
 
 The list of *General Criteria* that follows may be helpful
 in establishing in your own mind what you are looking for in your search.
-
-After that, we'll talk about how you can find better terms and term lists
-when using CEDAR.
 
 #### General Criteria
 
@@ -485,8 +467,6 @@ but make sure the term makes sense for the ontology
 
 #### Definition and Structure
 
-Yes, but what does that term _mean_? 
-
 You can see the definition of each term in CEDAR in the list of search term results.
 If your term does not have a definition, it can be hard to know what it means.
 Not only that, people looking up your term later (by its identifier, say)
@@ -514,7 +494,6 @@ hierarchies in BioPortal can express 'subclass' relations (B is a type of A);
 or for SKOS vocabularies, simple 'hierarchy' relations (B is narrower than A, in some undefined way). 
 
 To learn more about your term, you'll need to visit the term in BioPortal to see more details.
-This is described in the next section.
 
 #### More Context
 
@@ -668,9 +647,6 @@ for advice for your specific case.
 There are several ways to present a list of terms for the user to select from in CEDAR.
 Unfortunately, only one of these (described in previous chapters) is truly semantic.
 (Eventually we will offer semantic options for all these list types.)
-
-This section serves as a relatively simple review of the types of lists CEDAR
-supports. In each list type we'll discuss pros and cons unique to that list type.
 
 In the [Field Type Reference](building-basic-templates.md#field-type-reference), you can
 find listed the 4 field types

@@ -4,13 +4,10 @@ author: John Graybeal
 
 # CEDAR Workbench Orientation
 
-For new CEDAR users, this page describes how CEDAR helps with metadata, and how you can easily start using it.
-
 **How do I start?**
 If you're the experimenting type, just go to the CEDAR Workbench application
 at [cedar.metadatacenter.org](https://cedar.metadatacenter.org), create an account, and start playing with the system.
 If you can't see what templates are available to you, click on the Shared with Me link on the left side to find some.
-Most of CEDAR's features should be easy to see and use.
 
 After you sign up you'll be registered in our cedar-announcements and cedar-users email lists, and you can send your
 questions and feature requests to the cedar-users list.
@@ -42,7 +39,7 @@ CEDAR addresses these scenarios:
     - select any term or collection of terms from the NCBO BioPortal semantic repository
     - combine different terms from different controlled vocabularies into a single set of options
     - create your own terms, or term lists ('value sets') that can be re-used
-- **view metadata responses meeting your search critieria**, in several forms
+- **view metadata responses meeting your search criteria**, in several forms
     - CEDAR Metadata Editor's metadata view
     - an in-line JSON-LD format, used by CEDAR for all its metadata instances
     - download of JSON-LD files via the CEDAR REST API, for offline integration with your workflow
@@ -61,9 +58,6 @@ With these capabilities, you can capture simple or rich metadata for your projec
 metadata, or design and prototype a new metadata specification to meet your particular needs.
 
 Developers can integrate CEDAR with their own systems, submitting or reading metadata entries via CEDAR's REST API.
-
-Best of all, CEDAR is built to be easy to work with from day 1. We think metadata shouldn't be so hard, and we're
-building a system to prove it!
 
 **What's coming?**
 The CEDAR team has a lot of developments in the pipeline, with updates released frequently.

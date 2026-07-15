@@ -82,10 +82,6 @@ or by defining a field within an Element resource or a Template resource.
 (We refer to stand-alone CEDAR Field artifacts throughout this User Guide with a capital 'F',
 and refer to field definitions within templating artifacts with a lower-case 'f'.)
 
-We start this section by describing how a field definition is created directly in a templating resource, 
-then describe how a stand-alone CEDAR Field can be created, and finally
-how a Field can be found and included in a Template.
-
 ### **Creating Field Content in a Resource**
 
 While specifying a field in a templating resource (a Template, Element, or Field), 
@@ -195,8 +191,6 @@ the value in this field has a text length that does not satisfy the criteria.
 The Values tab shows a view of the current value set(s) that the metadata author
 can use to fill out a text field. If no selections are listed, the metadata author
 is prompted to enter free text. 
-This ability to choose controlled values for the field is fundamental
-to CEDAR's semantic capabilities. 
 
 ![](../img/userguide/controlled-term-selection-modal-20191229.png){:width="50%" class="right"}
 Clicking on the Add button brings up a modal window 
@@ -286,8 +280,7 @@ public visibility of the Field artifact, as described in
 
 Once the stand-alone Field artifact has been created, 
 you can import it into other Templates and Elements. 
-As mentioned above, 
-when you are editing a Template or Element,
+When you are editing a Template or Element,
 the search (magnifying glass) icon in the Template Designer's field addition menu 
 brings up a window to find other CEDAR templating resources—Elements or Fields—
 that can be imported into the Element or Field you are editing.
@@ -306,7 +299,7 @@ An Element resource is composed of field definitions (possibly imported within F
 (CEDAR does not handle recursion in Element resources.) 
 These Element resources enable Template creators to share, reuse, and extend existing Element resources across different Template resources and across user groups. 
 
-This section is divided into two parts. (1) First, we create a new Element resource. 
+(1) First, we create a new Element resource. 
 (2) We embed the newly created Element resource within our Template resource. 
 
 ### **Creating a new Element Resource**
@@ -663,8 +656,6 @@ and begin a new search.
 The Values tab shows a view of the current value set(s) that the metadata author
 can use to fill out a text field. If no selections are listed, the metadata author
 is prompted to enter free text. 
-This ability to choose controlled values for the field is fundamental
-to CEDAR's semantic capabilities. 
 
 ![](../img/userguide/controlled-term-selection-modal-20191229.png){:width="50%" class="right"}
 Clicking on the Add button brings up a modal window 

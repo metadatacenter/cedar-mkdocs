@@ -17,7 +17,7 @@ Any time you want a set of people to share equal access (read or write!) to CEDA
 
 ### **Using Groups: Share with Everybody**
 
-Let's say you have created an element and you want to let everyone in CEDAR use it. Good news!
+Let's say you have created an element and you want to let everyone in CEDAR use it.
 There's a group in CEDAR called Everyone, and if you share your content for reading with that group, 
 every CEDAR user can find it and view it. 
 
@@ -49,7 +49,7 @@ As soon as you hit return, the group is created, and you can give it read (or wr
 
 ### **Modifying Groups**
 
-Presumably you want to add people to your group. To do this, 
+To do this, 
 click on the blue Group settings link (pointed to by the green arrow in the screenshot below).
 
 [//]: # (![]&#40;../img/userguide/group-settings-xselector-20190909.png&#41;{:width="75%" class="centered"})
@@ -83,8 +83,6 @@ You may have some questions about CEDAR's access privileges, like these:
 4. How can I tell whether other people can see my file?
 5. I just logged in for the first time, why can't see some of the shared files?
 
-In this tutorial we'll talk about how CEDAR permissions work, and help you answer questions like these.
-
 (You can see answers to the questions at the end of this page.)
 
 ### **Permission types**
@@ -104,9 +102,7 @@ A basic concept that may help you interpret CEDAR permissions is that you only n
 ### **Permission rules**
 For simplicity, we refer to the object in each question as a resource (templates, elements, fields, and metadata instances are all resources), but this section also applies to folders.
 
-We should not that for practical reasons, the administrator of the CEDAR system has permission to do all of the actions represented by the 6 permission types above.
-
-Now let's start with a few easy-to-answer questions.
+We should note that for practical reasons, the administrator of the CEDAR system has permission to do all of the actions represented by the 6 permission types above.
 
 #### **Who can change the owner of a resource?**
 Only the owner of a resource can change the owner of a resource. Each resource has only one owner.
@@ -204,7 +200,6 @@ So be sure you want everyone to be able to read, or write, **all** the folder's 
 
 ### **How to Share**
 
-It is simple to enable sharing for your CEDAR artifacts. 
 Simply find the artifact you want to share in your Workspace. 
 Click on the menu selector for the artifact (the small green arrow in the screenshot below). 
 In the resulting menu, click on Share menu item (the larger green arrow in the screenshot).  

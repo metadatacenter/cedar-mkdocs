@@ -4,7 +4,7 @@
 
 ### **Introduction**
 
-This section describes how to manage CEDAR resources. In CEDAR, resources include the various artifact types (templates, elements, fields, metadata instances) and folders. These are all managed through the CEDAR Desktop,
+In CEDAR, resources include the various artifact types (templates, elements, fields, metadata instances) and folders. These are all managed through the CEDAR Desktop,
 typically through your [workspace view](#your-cedar-workspace).
 Management operations include copying, moving, renaming, and deleting resources, and
 setting sharing permissions on resources.
@@ -12,7 +12,7 @@ setting sharing permissions on resources.
 If you want to fill out metadata for a particular template,
 the **Populate** command will open the Metadata Creator set up to fill in metadata for that template.
 If you want to edit an artifact (including a populated metadata instance),
-the **Open** command will open the appopriate tool
+the **Open** command will open the appropriate tool
 (Template Editor for templates, elements, and fields; and Metadata Creator for metadata instances) with that resource.
 For a folder, the Open command changes the Resources box view to show the selected folder.
 
@@ -47,7 +47,7 @@ If a folder is highlighted in the window, the highlighted folder is the target f
 
 After selecting the Copy… command, you will be asked to select the destination folder, and can then complete the operation by clicking on COPY.
 
-his operation requires read permission for the resource.
+This operation requires read permission for the resource.
 You can copy any CEDAR artifact to another directory for which you have write permissions.
 However, you can not copy an entire CEDAR folder with a single command.
 
@@ -55,7 +55,7 @@ However, you can not copy an entire CEDAR folder with a single command.
 
 After selecting the Move… command, you will be asked to select the destination folder, and can then complete the operation by clicking on MOVE.
 
-his operation requires write permission for the resource.
+This operation requires write permission for the resource.
 You can move any CEDAR artifact or folder to another directory for which you have write permissions.
 
 #### ***Rename*** Command
@@ -81,8 +81,6 @@ Use this command with caution, as there is no undo command. Contact the CEDAR te
 ## Navigating Within CEDAR
 
 ### **Introduction**
-
-Navigating around CEDAR is pretty easy, but it helps to understand a few basics.
 
 CEDAR (the "CEDAR Workbench") has 3 tools:
 

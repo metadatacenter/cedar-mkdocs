@@ -176,8 +176,6 @@ then imported into CEDAR.
 
 ### **Advanced Tips for Fields**
 
-For certain types of metadata, some tips may be useful.
-
 #### Multiple free-text fields
 
 If you are entering multiple free-text fields, these are stored as values in an array. 

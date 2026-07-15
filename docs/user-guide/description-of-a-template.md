@@ -38,9 +38,6 @@ The Template Elements are made up of other Template Elements and Template Fields
 The [Building Basic Templates](building-basic-templates.md)
 chapter describes the template specification process using the Template Designer.
 
-Before reading about the specification process, you may want to review the [next section](#template-organization),
-which more explicitly addresses the organization of the template.
-
 ## Template Organization
 
 ### **Internal Organization**

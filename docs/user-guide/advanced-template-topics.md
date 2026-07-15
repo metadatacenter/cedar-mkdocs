@@ -32,7 +32,7 @@ doesn't really create a new specification
 
 many specifications are extended for additional uses (sometimes called profiling, alas)
 
-after basic steps, add your desired field, at end or (for eximple templates) inline
+after basic steps, add your desired field, at end or (for example templates) inline
 
 if you want inline but inside an element are used, 
 they would have to be extended themselves
@@ -70,8 +70,6 @@ You are welcome to contribute to its development at the link below.
 ## Understanding the Suggestion System
 
 CEDAR's Value Recommender is a metadata recommendation system that helps users to fill out metadata templates with the most appropriate values. The system finds and applies patterns in the previously entered values to generate recommendations for all the recommendation-enabled fields. CEDAR's Value Recommender is integrated in the CEDAR Workbench [1] and it can also be invoked programmatically through its API [2].
-
-This document describes the steps to enable recommendations for templates and use them to quickly and accurately create new metadata.
 
 ### Getting started
 Metadata suggestions are disabled by default. When creating your template, you can enable suggestions by following these steps:
@@ -148,7 +146,6 @@ Fig. 2 shows a screenshot of the Metadata Editor for a template generated from t
 As you build more complex templates, you will start using elements and want to update 
 these in your template. Doing so can be a little subtle in CEDAR, 
 especially when one wants to use rigorous version control.
-In this section, we describe working with CEDAR for these use cases.
 
 ### **Updating Fields and Elements**
 
@@ -386,8 +383,6 @@ provided in the caDSR export.
 We do not manage the entire content of the CDE specification. CDEs in caDSR contain a comprehensive implementation of the ISO/IEC 11179 standard, but focus instead on core functionality that relates to the precise specification of questions and the values used to answer those questions.
 
 ### **References**
-
-These references provide more information about performing CDE-related activities.
 
 * [CEDAR for caDSR Users](cedar-for-cadsr.md)—a separate section of this manual targeting users of caDSR systems
 * [CEDAR Announcement of CDE Support](https://metadatacenter.org/happenings/news/cedar-announces-cde-support/)—Blog post describing CEDAR's support for CDEs
