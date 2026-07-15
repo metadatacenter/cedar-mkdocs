@@ -14,7 +14,7 @@ the **Populate** command will open the Metadata Creator set up to fill in metada
 If you want to edit an artifact (including a populated metadata instance),
 the **Open** command will open the appropriate tool
 (Template Editor for templates, elements, and fields; and Metadata Creator for metadata instances) with that resource.
-For a folder, the Open command changes the Resources box view to show the selected folder.
+For a folder, the Open command changes the middle pane view to show the selected folder.
 
 Other artifact-related commands like Publish/Create version, Submit, and Enable/Disable/View OpenView are addressed
 in their respective sections of the User Guide.
@@ -100,7 +100,7 @@ To fill out a form, you'll use the Metadata Creator, which lets you edit and sav
 
 ### **Browsing in the Desktop**
 
-When the location bar is shown at the top of the Resources box,
+When the location bar is shown at the top of the middle pane,
 you can click on any of the highlighted components of the location to go to that folder.
 
 In any Desktop view, if you want to navigate into any of the folders that are listed,
@@ -119,7 +119,7 @@ Think of these tools as 'modal overlays' on the Desktop view—they replace the 
 
 The Desktop can also move into a search mode, either by entering a search string in the search bar,
 or by selecting the Shared with Me or Shared with Everybody search links from the left side.
-In these modes, the current location is not shown above the Resources box,
+In these modes, the current location is not shown above the middle pane,
 but is replaced by a string indicating what information is being shown.
 To return to the Desktop from one of these search modes, you can click on the Workspace link at upper left.
 
