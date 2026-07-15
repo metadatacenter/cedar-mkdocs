@@ -14,4 +14,4 @@ Our system is an open-source, Java microservice-based, REST-heavy system, with o
 The backend is provided by several industry standard storage solutions.
 The authentication is based on `Keycloak`. An `nginx` acts as a reverse proxy in front of our services and frontends.
 
-![CEDAR Architecture](../img/architecture.png)
+![CEDAR Architecture](../../img/architecture.png)

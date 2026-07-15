@@ -1,6 +1,8 @@
 site_name: CEDAR
 theme:
   name: material
+  features:
+    - navigation.indexes
 
 markdown_extensions:
   - markdown.extensions.toc:
@@ -32,8 +34,9 @@ nav:
   - Home: index.md
 
   - User Guide:
-      - user-overview.md
+      - user-overview/index.md
       - CEDAR Basics for All Users:
+          - user-guide/cedar-basics/index.md
           - user-guide/accounts-and-logging-in.md
           - user-guide/finding-resources.md
           - user-guide/viewing-resource-information.md
@@ -41,12 +44,14 @@ nav:
           - user-guide/filling-out-metadata.md
           - user-guide/sharing-your-content.md
       - About CEDAR Templates:
+          - user-guide/about-cedar-templates/index.md
           - user-guide/description-of-a-template.md
           - user-guide/building-basic-templates.md
           - user-guide/more-fair-templates.md
           - user-guide/advanced-template-topics.md
           - user-guide/tips-for-template-creation.md
       - Advanced Topics for All Users:
+          - user-guide/advanced-topics/index.md
           - user-guide/cedar-identifiers-and-iris.md
           - user-guide/cedars-api.md
       - user-guide/cedar-for-cadsr.md
@@ -55,9 +60,9 @@ nav:
       - user-guide/pages/glossary.md
 
   - Install Guides:
-      - install-overview.md
+      - install-overview/index.md
       - Developer Install:
-          - install-developer/overview.md
+          - install-developer/overview/index.md
           - install-developer/prerequisites.md
           - install-developer/configuration.md
           - install-developer/cedar-cli-and-scripts.md
@@ -68,7 +73,7 @@ nav:
           - install-developer/frontends.md
 
       - Docker Install:
-          - install-docker-eval/overview.md
+          - install-docker-eval/overview/index.md
           - install-docker-eval/prerequisites.md
           - install-docker-eval/configuration.md
           - install-docker-eval/cli-and-scripts.md
@@ -77,20 +82,19 @@ nav:
           - install-docker-eval/evaluate-cedar.md
 
       - CEDAR Embeddable Editor:
-          - cedar-embeddable-editor/intro.md
+          - cedar-embeddable-editor/intro/index.md
           - cedar-embeddable-editor/try-out.md
 
   - Developer Guide:
-      - developer-overview.md
-      - Guides:
-          - CEDAR Repository Model: https://metadatacenter.org/tools-training/outreach/cedar-template-model
-          - developer-guide/template-element-and-field-instances.md
-          - developer-guide/template-element-and-fields.md
-          - developer-guide/cedar-rest-apis.md
+      - developer-overview/index.md
+      - CEDAR Repository Model: https://metadatacenter.org/tools-training/outreach/cedar-template-model
+      - developer-guide/template-element-and-field-instances.md
+      - developer-guide/template-element-and-fields.md
+      - developer-guide/cedar-rest-apis.md
 
   - HOWTOs:
+      - howtos/index.md
       - howtos/bioportal-integration-with-docker.md
       - howtos/cedar-ui-transfer-ownership-of-artifacts.md
 
-  - Operations and Management:
-      - operations-and-management.md
+  - Operations and Management: operations-and-management.md
