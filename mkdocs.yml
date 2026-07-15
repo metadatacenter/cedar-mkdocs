@@ -39,15 +39,13 @@ nav:
           - user-guide/cedar-basics/index.md
           - user-guide/accounts-and-logging-in.md
           - user-guide/your-cedar-workspace.md
-          - user-guide/finding-resources.md
-          - user-guide/desktop-and-navigation.md
-          - user-guide/sharing-your-content.md
-      - CEDAR Templates:
-          - user-guide/about-cedar-templates/index.md
           - user-guide/description-of-a-template.md
           - user-guide/filling-out-metadata.md
           - user-guide/building-basic-templates.md
           - user-guide/more-fair-templates.md
+          - user-guide/finding-resources.md
+          - user-guide/desktop-and-navigation.md
+          - user-guide/sharing-your-content.md
       - Advanced Topics:
           - user-guide/advanced-topics/index.md
           - user-guide/viewing-resource-information.md
