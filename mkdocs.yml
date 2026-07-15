@@ -50,8 +50,10 @@ nav:
           - user-guide/building-basic-templates.md
           - user-guide/more-fair-templates.md
           - user-guide/advanced-template-topics.md
+          - user-guide/template-versioning.md
       - Advanced Topics:
           - user-guide/advanced-topics/index.md
+          - user-guide/working-with-cdes.md
           - user-guide/cedar-identifiers-and-iris.md
           - user-guide/cedars-api.md
       - user-guide/pages/cedar-orientation.md

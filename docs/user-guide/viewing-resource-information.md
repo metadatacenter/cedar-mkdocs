@@ -204,7 +204,7 @@ if it is not already visible.
 
 If no resource is selected, the 'i' icon presents metadata about the folder (B) shown in the middle pane. The right-hand smaller image below shows the information panel for one of these artifacts.
 
-The information panel displays 3 types of metadata in the corresponding tabs: metadata about the resource's general characteristics; metadata about an <a href="advanced-template-topics.md#updating-and-versioning">artifact's version history</a> (for templating resources only, not instances); and metadata about the categories into which the resource has been classified (artifacts only, not folders).
+The information panel displays 3 types of metadata in the corresponding tabs: metadata about the resource's general characteristics; metadata about an <a href="template-versioning.md">artifact's version history</a> (for templating resources only, not instances); and metadata about the categories into which the resource has been classified (artifacts only, not folders).
 
 In the main window, most of the metadata is self-explanatory, but there are two features of special interest. The Description field is the same content as the description at the top of the artifact when it is open, and this field is editable in the information panel. Also, for metadata templates the panel shows all the metadata instances that are visible to you; clicking on any of the instances in the list will open it. The count at the top of that metadata instances sub-panel is the count of instances you can see, and the total count of instances.
 
