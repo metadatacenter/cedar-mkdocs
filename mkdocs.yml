@@ -48,11 +48,11 @@ nav:
           - user-guide/filling-out-metadata.md
           - user-guide/building-basic-templates.md
           - user-guide/more-fair-templates.md
-          - user-guide/template-versioning.md
       - Advanced Topics:
           - user-guide/advanced-topics/index.md
           - user-guide/viewing-resource-information.md
           - user-guide/understanding-the-suggestion-system.md
+          - user-guide/template-versioning.md
           - user-guide/cedar-identifiers-and-iris.md
           - user-guide/cedars-api.md
           - user-guide/working-with-cdes.md
