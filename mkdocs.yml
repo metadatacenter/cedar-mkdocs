@@ -91,4 +91,20 @@ nav:
       - developer-guide/template-element-and-fields.md
       - developer-guide/cedar-rest-apis.md
 
+  - YAML Specification:
+      - yaml-spec/index.md
+      - yaml-spec/cedar-model.md
+      - yaml-spec/common-structure.md
+      - yaml-spec/templates.md
+      - yaml-spec/elements.md
+      - yaml-spec/fields-common.md
+      - yaml-spec/field-types.md
+      - yaml-spec/value-constraints.md
+      - yaml-spec/versioning.md
+      - yaml-spec/provenance.md
+      - yaml-spec/annotations.md
+      - yaml-spec/instances.md
+      - yaml-spec/examples.md
+      - yaml-spec/appendices.md
+
   - Operations and Management: operations-and-management.md
