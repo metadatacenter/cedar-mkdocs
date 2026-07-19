@@ -7,7 +7,7 @@ In YAML it names its template with `isBasedOn` and gives a value for each field 
 ```yaml
 type: instance
 name: SDY232
-isBasedOn: https://repo.metadatacenter.org/templates/ec3f500f
+isBasedOn: https://repo.metadatacenter.org/templates/ec3f500
 children:
   Study Name:
     value: Cardiology cohort
@@ -48,7 +48,7 @@ carries `id` with a `label`.
 ```yaml
 type: instance
 name: SDY232
-isBasedOn: https://repo.metadatacenter.org/templates/ec3f500f
+isBasedOn: https://repo.metadatacenter.org/templates/ec3f500
 children:
   Study Name:
     value: Cardiology cohort

@@ -38,7 +38,7 @@ An instance of it:
 ```yaml
 type: instance
 name: SDY232
-isBasedOn: https://repo.metadatacenter.org/templates/ec3f500f
+isBasedOn: https://repo.metadatacenter.org/templates/ec3f500
 children:
   Study Name:
     value: Cardiology cohort

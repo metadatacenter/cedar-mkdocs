@@ -14,7 +14,7 @@ type: template
 name: Study
 status: published
 version: 2.0.0
-previousVersion: https://repo.metadatacenter.org/templates/7b8977ed-c4d7-4c29-b202-53e38a41c723
+previousVersion: https://repo.metadatacenter.org/templates/7b8977e
 ```
 
 ## Keys

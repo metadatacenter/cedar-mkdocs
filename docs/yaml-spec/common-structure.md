@@ -7,7 +7,7 @@ keys give the artifact's type, name, description, and identity:
 type: text-field
 name: Study Name
 description: The name of the study
-id: https://repo.metadatacenter.org/template-fields/5c2d54c8-e32b-47aa-9393-48885fc75cff
+id: https://repo.metadatacenter.org/template-fields/5c2d54c
 ```
 
 Every artifact begins this way, differing only in its `type` and in the content it carries.
@@ -17,7 +17,7 @@ A template:
 type: template
 name: Study
 description: A clinical study
-id: https://repo.metadatacenter.org/templates/7b8977ed-c4d7-4c29-b202-53e38a41c723
+id: https://repo.metadatacenter.org/templates/7b8977e
 ```
 
 Or an element:
