@@ -135,9 +135,9 @@ element, or field.
 **Instance artifact** — an artifact that holds metadata: a template instance or element
 instance.
 
-**Template** — a complete metadata specification, built from fields and elements.
+**Template** — a complete metadata specification, built from elements and fields.
 
-**Element** — a reusable, nestable group of fields and elements.
+**Element** — a reusable, nestable group of elements and fields.
 
 **Field** — an atomic unit that collects one value or a list of values.
 

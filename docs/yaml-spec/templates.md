@@ -1,8 +1,8 @@
 # Templates
 
-A template is a complete metadata specification: an ordered set of fields and elements that
-describe one kind of thing. In YAML it is a mapping whose `type` is `template`, with its
-fields and elements listed under `children`:
+A template is a complete metadata specification: an ordered set of elements and fields that
+describe one kind of thing. In YAML it is written with `type: template`, its elements and
+fields listed under `children`:
 
 ```yaml
 type: template
@@ -26,7 +26,7 @@ Beyond the [common keys](common-structure.md) every artifact carries, a template
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
-| `children` | sequence | optional | The template's fields and elements, in display order. |
+| `children` | sequence | optional | The elements and fields it contains, in display order. |
 | `header` | string | optional | Content shown above the form. |
 | `footer` | string | optional | Content shown below the form. |
 | `instanceType` | IRI | optional | The type asserted on instances created from this template. |

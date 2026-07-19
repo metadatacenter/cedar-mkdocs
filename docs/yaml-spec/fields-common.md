@@ -1,13 +1,13 @@
 # Fields: Common Structure
 
-A field collects one value, or a list of values. In YAML it is a mapping whose `type` names
-its [field type](field-types.md). The type-specific keys differ, but every field shares the
+A field collects one value, or a list of values. In YAML its `type` names its
+[field type](field-types.md). The type-specific keys differ, but every field shares the
 same frame: the [common keys](common-structure.md) each artifact carries, plus a
 `configuration` block when the field sits inside a parent.
 
 ## The `configuration` block
 
-Inside a template or element, a field carries a `configuration` mapping for the settings
+Inside a template or element, a field carries a `configuration` block for the settings
 that depend on its place in that parent — whether it is required, whether it repeats, how it
 binds and displays:
 

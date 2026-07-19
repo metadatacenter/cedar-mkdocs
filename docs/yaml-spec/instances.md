@@ -1,8 +1,8 @@
 # Template Instances
 
 A template instance is an instance artifact: it holds metadata that conforms to a template.
-In YAML it is a mapping that names its template with `isBasedOn` and gives a value for each
-field under `children`, keyed by the field's name:
+In YAML it names its template with `isBasedOn` and gives a value for each field under
+`children`, keyed by the field's name:
 
 ```yaml
 type: instance
@@ -22,7 +22,7 @@ children:
 | `description` | string | optional | A description of the instance. |
 | `id` | IRI | optional | The instance's own identifier. |
 | `isBasedOn` | IRI | required | The template this instance conforms to. |
-| `children` | mapping | optional | The field and element values, keyed by name. |
+| `children` | mapping | optional | The element and field values, keyed by name. |
 | `annotations` | mapping | optional | Annotations on the instance; see [Annotations](annotations.md). |
 
 Provenance keys (`createdOn`, `createdBy`, `modifiedOn`, `modifiedBy`) are optional, as for

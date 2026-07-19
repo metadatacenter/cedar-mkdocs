@@ -3,14 +3,14 @@
 The CEDAR model is a single, general model for representing scientific metadata. It gives a
 community one standards-based way to state what must be recorded about a kind of experiment
 or dataset, to constrain how each item is expressed, and to record the metadata that
-results. The model has a small set of building blocks — fields, elements, and templates —
+results. The model has a small set of building blocks — templates, elements, and fields —
 that compose to describe requirements of any size, with the permitted values grounded in
 shared controlled vocabularies.
 
-The model calls each of these things an **artifact**, and it draws one distinction among
-them. Fields, elements, and templates are **schema artifacts**: they describe the shape of
-metadata. An instance is an **instance artifact**: it holds metadata. The schema artifacts
-are the specification; an instance artifact is what conforms to it.
+The model defines four kinds of artifact. Three are **schema artifacts** — templates,
+elements, and fields — which describe the shape of metadata. The fourth, the **instance
+artifact**, holds the metadata itself. A schema artifact is the specification; an instance is
+what conforms to it.
 
 ## Fields
 
@@ -29,7 +29,7 @@ required, or as recommended but not mandatory.
 
 ## Elements
 
-An element is a named group of fields and other elements. It packages a recurring cluster
+An element is a named group of elements and fields. It packages a recurring cluster
 of information so that the cluster can be defined once and reused.
 
 An element called Contact, for example, might group a name, an email address, and a
@@ -39,16 +39,23 @@ any depth.
 
 ## Templates
 
-A template is a complete metadata specification. It is an ordered arrangement of fields and
-elements that together describe one kind of thing — a study, a biological sample, an assay —
+A template is a complete metadata specification. It is an ordered arrangement of elements
+and fields that together describe one kind of thing — a study, a biological sample, an assay —
 carried with the template's own name, description, versioning, and provenance.
 
 The order is meaningful: it is the order in which the template presents its items. A
 template is the unit a community publishes and the unit an author fills out.
 
+## Instances
+
+Filling out a template produces an instance: the metadata itself. An instance conforms to
+the template it is based on and follows the same structure — a value for each field, a group
+of values for each element. Because the template fixes what an instance may contain, an
+instance can be checked against it for completeness and validity.
+
 ## Nesting and Repetition
 
-Fields and elements are arranged within a template or an element, and that arrangement
+Elements and fields are arranged within a template or an element, and that arrangement
 nests. An element sits within a template; a field or a further element sits within that
 element; and so on, with no fixed limit on depth.
 
@@ -56,16 +63,6 @@ An item may also repeat. A field or element marked as multiple stands for a list
 a single occurrence, and its number of occurrences can be bounded by a minimum and a
 maximum. A template might carry exactly one study description and any number of contributor
 records, where each contributor is a repeat of the same element.
-
-## Instances
-
-Filling out a template produces an instance: the metadata itself. An instance conforms to
-the template it is based on and follows the same structure.
-
-For each field, an instance supplies a value. For each element, it supplies a group of
-values. For each repeating item, it supplies as many entries as the data requires. Because
-the template fixes what an instance may contain, an instance can be checked against its
-template for completeness and validity.
 
 ## Controlled Terms and Value Constraints
 

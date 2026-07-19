@@ -1,7 +1,7 @@
 # Elements
 
-An element is a named group of fields and other elements, reusable across templates. In
-YAML it is a mapping whose `type` is `element`, with its members under `children`:
+An element is a named group of elements and fields, reusable across templates. In
+YAML it is written with `type: element`, its members listed under `children`:
 
 ```yaml
 type: element
@@ -19,7 +19,7 @@ children:
     name: Country Name
 ```
 
-An element's `children` may hold fields and further elements, nesting to any depth. An
+An element's `children` may hold elements and fields, nesting to any depth. An
 element may stand as its own document or sit inside a template or another element.
 
 ## Element keys
@@ -28,10 +28,10 @@ Beyond the [common keys](common-structure.md) every artifact carries, an element
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
-| `children` | sequence | optional | The element's fields and elements, in display order. |
+| `children` | sequence | optional | The elements and fields it contains, in display order. |
 | `instanceType` | IRI | optional | The type asserted on instances of this element. |
 
-Inside a parent, an element also carries a `key` and a `configuration` mapping.
+Inside a parent, an element also carries a `key` and a `configuration` block.
 
 ## Repetition
 

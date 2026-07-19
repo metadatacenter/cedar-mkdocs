@@ -1,7 +1,7 @@
 # Common Artifact Structure
 
-In the YAML serialization, an artifact is a single YAML mapping. Its opening keys give the
-artifact's type, name, description, and identity:
+In the YAML serialization, an artifact is written as a set of keys and values. Its opening
+keys give the artifact's type, name, description, and identity:
 
 ```yaml
 type: text-field
