@@ -32,12 +32,12 @@ Beyond the [core keys](core-structure.md) every artifact carries, an element add
 | `children` | sequence | optional | The elements and fields it contains. |
 | `instanceType` | IRI | optional | The type asserted on instances of this element. |
 
-Inside a parent, an element also carries a `key` and a `configuration` block.
+## Element Configuration
 
-## Repetition
-
-A nested element may repeat, standing for a list of occurrences rather than one. Its
-`configuration` marks it multiple and bounds the count.
+Inside a parent, an element carries a `configuration` block: the settings that depend on
+where the element sits rather than on the element itself. They control how it binds to a
+property, how it is labelled and described in this parent, and whether it repeats. A
+repeating element stands for a list of occurrences, bounded by a minimum and maximum count.
 
 | Key in `configuration` | Value | Meaning |
 |------------------------|-------|---------|

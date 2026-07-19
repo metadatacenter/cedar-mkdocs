@@ -38,25 +38,25 @@ Keys, in alphabetical order, with the chapter that defines each.
 | `label` | [Field Types](field-types.md#choice-fields), [Value Constraints](value-constraints.md), [Instances](instances.md) |
 | `language` | [Core Artifact Structure](core-structure.md#descriptive-keys), [Instances](instances.md) |
 | `maxDepth` | [Value Constraints](value-constraints.md) |
-| `maxItems` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#repetition) |
+| `maxItems` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `maxLength` | [Field Types](field-types.md#text-fields) |
 | `maxValue` | [Field Types](field-types.md#numeric-fields) |
-| `minItems` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#repetition) |
+| `minItems` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `minLength` | [Field Types](field-types.md#text-fields) |
 | `minValue` | [Field Types](field-types.md#numeric-fields) |
 | `modelVersion` | [Versioning and Status](versioning.md) |
 | `modifiedBy` | [Provenance](provenance.md) |
 | `modifiedOn` | [Provenance](provenance.md) |
-| `multiple` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#repetition) |
+| `multiple` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `name` | [Core Artifact Structure](core-structure.md#descriptive-keys) |
 | `notation` | [Instances](instances.md#field-values) |
 | `numTerms` | [Value Constraints](value-constraints.md) |
 | `ontologyName` | [Value Constraints](value-constraints.md) |
-| `overrideDescription` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#repetition) |
-| `overrideLabel` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#repetition) |
+| `overrideDescription` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
+| `overrideLabel` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `prefLabel` | [Fields: Core Structure](fields-core.md#semantic-labels), [Instances](instances.md#field-values) |
 | `previousVersion` | [Versioning and Status](versioning.md) |
-| `propertyIri` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#repetition) |
+| `propertyIri` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `recommended` | [Fields: Core Structure](fields-core.md) |
 | `regex` | [Field Types](field-types.md#text-fields) |
 | `required` | [Fields: Core Structure](fields-core.md) |
