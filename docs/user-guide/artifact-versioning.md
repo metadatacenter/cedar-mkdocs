@@ -1,4 +1,4 @@
-# Template Versioning
+# Artifact Versioning
 
 As you build more complex templates, you will start using elements and want to update 
 these in your template. Doing so can be a little subtle in CEDAR, 
