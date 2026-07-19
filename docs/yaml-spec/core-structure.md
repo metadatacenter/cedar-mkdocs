@@ -29,6 +29,15 @@ description: A postal address
 id: https://repo.metadatacenter.org/template-elements/be89d73
 ```
 
+An instance opens the same way, and additionally names the template it conforms to:
+
+```yaml
+type: instance
+name: SDY232
+id: https://repo.metadatacenter.org/template-instances/1f9a2b3
+isBasedOn: https://repo.metadatacenter.org/templates/7b8977e
+```
+
 ## The `type` discriminator
 
 Every definition opens with `type`, whose value names the artifact kind and, for fields, the
