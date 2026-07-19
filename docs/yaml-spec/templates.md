@@ -31,14 +31,3 @@ Beyond the [core keys](core-structure.md) every artifact carries, a template add
 | `header` | string | optional | Content shown above the form. |
 | `footer` | string | optional | Content shown below the form. |
 | `instanceType` | IRI | optional | The type asserted on instances created from this template. |
-
-## Minimal template
-
-The least a template needs is a `type` and a `name`:
-
-```yaml
-type: template
-name: Study
-```
-
-Such a template has no children. It is valid, but collects nothing until fields are added.
