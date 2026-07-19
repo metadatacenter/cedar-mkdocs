@@ -87,7 +87,7 @@ make a copy of the instance profile and replace 'name' and 'date' in the title w
 the name of the author and the date of this copy (or a short instance sequence number),
 or any other appropriate unique labeling. 
 (Note that the intended location to receive the filled-out instances must be
-writable by all the people who are creating metadata.)  See [Sharing Your Content](sharing-your-content.md) for more information on creating writable folders.
+writable by all the people who are creating metadata.)  See [Sharing Resources](sharing-resources.md) for more information on creating writable folders.
 
 The copied instance will have all the information that was in the instance profile,
 and can be filled out and saved normally. 

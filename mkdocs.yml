@@ -44,8 +44,8 @@ nav:
           - user-guide/building-basic-templates.md
           - user-guide/more-fair-templates.md
           - user-guide/finding-resources.md
-          - user-guide/desktop-and-navigation.md
-          - user-guide/sharing-your-content.md
+          - user-guide/managing-resources.md
+          - user-guide/sharing-resources.md
           - user-guide/artifact-versioning.md
       - Advanced Topics:
           - user-guide/advanced-topics/index.md

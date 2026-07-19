@@ -61,7 +61,7 @@ After selecting the Rename… command, you will be asked for the new name. This 
 The Share… command opens a sharing configuration window.
 
 In this window you can perform all sharing and group management operations needed to control resource access in CEDAR.
-See the [Sharing Your Content](sharing-your-content.md)
+See the [Sharing Resources](sharing-resources.md)
 section for detailed information about sharing resources in CEDAR.
 
 ## ***Delete*** Command
