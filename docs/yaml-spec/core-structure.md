@@ -41,7 +41,7 @@ isBasedOn: https://repo.metadatacenter.org/templates/7b8977e
 ## The `type` discriminator
 
 Every definition opens with `type`, whose value names the artifact kind and, for fields, the
-field type. The reader dispatches on it: the value fixes which further keys are meaningful.
+field type. The reader dispatches on it. The value fixes which further keys are meaningful.
 
 | Value | Artifact |
 |-------|----------|

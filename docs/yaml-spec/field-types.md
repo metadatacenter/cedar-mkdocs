@@ -166,7 +166,7 @@ takes type-specific keys.
 
 ## Attribute-value fields
 
-`attribute-value-field` collects a set of user-supplied attribute/value pairs: the instance
+`attribute-value-field` collects a set of user-supplied attribute/value pairs. The instance
 author names each attribute and gives its value. The field takes no type-specific keys; the
 attribute names are supplied in the instance (see [Template Instances](instances.md)).
 

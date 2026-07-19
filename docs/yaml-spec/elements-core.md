@@ -34,10 +34,10 @@ Beyond the [core keys](core-structure.md) every artifact carries, an element add
 
 ## Element Configuration
 
-Inside a parent, an element carries a `configuration` block: the settings that depend on
-where the element sits rather than on the element itself. They control how it binds to a
-property, how it is labelled and described in this parent, and whether it repeats. A
-repeating element stands for a list of occurrences, bounded by a minimum and maximum count.
+Inside a parent, an element carries a `configuration` block. These settings depend on where
+the element sits rather than on the element itself. They control how it binds to a property,
+how it is labelled and described in this parent, and whether it repeats. A repeating element
+stands for a list of occurrences, bounded by a minimum and maximum count.
 
 | Key in `configuration` | Value | Meaning |
 |------------------------|-------|---------|

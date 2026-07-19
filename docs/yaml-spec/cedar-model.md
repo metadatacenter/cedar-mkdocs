@@ -43,7 +43,7 @@ A template is a complete metadata specification. It is an ordered arrangement of
 and fields that together describe one kind of thing — a study, a biological sample, an assay —
 carried with the template's own name, description, versioning, and provenance.
 
-The order is meaningful: it is the order in which the template presents its items. A
+The order is meaningful. It is the sequence in which the template presents its items. A
 template is the unit a community publishes and the unit an author fills out.
 
 ## Instances

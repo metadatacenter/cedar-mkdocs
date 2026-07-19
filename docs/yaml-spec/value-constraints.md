@@ -77,7 +77,7 @@ Several entries may appear together; the permitted values are their union.
 
 ## Actions
 
-`actions` adjusts the term set drawn from the value specifications: it removes a term, or
+`actions` adjusts the term set drawn from the value specifications. An action removes a term, or
 moves one to a given position in the presented list. `actions` is a sequence.
 
 | Key | Value | Presence | Meaning |

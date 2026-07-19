@@ -28,5 +28,5 @@ previousVersion: https://repo.metadatacenter.org/templates/7b8977e
 | `modelVersion` | string | optional | The version of the CEDAR model the artifact conforms to (currently `1.6.0`). |
 
 `version`, `previousVersion`, and `derivedFrom` describe the artifact's own history.
-`modelVersion` is different: it names the version of the model the artifact is written
+`modelVersion` is different. It names the version of the model the artifact is written
 against, not a version of the artifact.

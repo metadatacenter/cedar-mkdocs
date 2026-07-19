@@ -5,11 +5,12 @@ A field collects one value, or a list of values. In YAML its `type` names its
 same frame: the [core keys](core-structure.md) each artifact carries, plus a
 `configuration` block when the field sits inside a parent.
 
-## The `configuration` block
+## Field Configuration
 
-Inside a template or element, a field carries a `configuration` block for the settings
-that depend on its place in that parent — whether it is required, whether it repeats, how it
-binds and displays:
+As with elements, a field inside a template or element carries a `configuration` block.
+These settings depend on where the field sits rather than on the field itself. They govern
+whether it is required or recommended, how it binds to a property, how it is labelled and
+laid out, and whether it repeats.
 
 ```yaml
 - key: study-name
@@ -18,9 +19,6 @@ binds and displays:
   configuration:
     required: true
 ```
-
-These settings are meaningful only for a field embedded in a parent, so they live in
-`configuration` rather than among the field's own keys.
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
