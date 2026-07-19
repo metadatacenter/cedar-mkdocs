@@ -46,11 +46,11 @@ nav:
           - user-guide/finding-resources.md
           - user-guide/desktop-and-navigation.md
           - user-guide/sharing-your-content.md
+          - user-guide/template-versioning.md
       - Advanced Topics:
           - user-guide/advanced-topics/index.md
           - user-guide/viewing-resource-information.md
           - user-guide/understanding-the-suggestion-system.md
-          - user-guide/template-versioning.md
           - user-guide/cedar-identifiers-and-iris.md
           - user-guide/cedars-api.md
           - user-guide/working-with-cdes.md
