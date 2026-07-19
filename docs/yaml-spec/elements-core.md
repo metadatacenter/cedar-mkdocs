@@ -1,4 +1,4 @@
-# Elements
+# Elements: Core Structure
 
 An element is a named group of elements and fields, reusable across templates. In
 YAML it is written with `type: element`, its members listed under `children`:
@@ -28,7 +28,7 @@ Beyond the [core keys](core-structure.md) every artifact carries, an element add
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
-| `children` | sequence | optional | The elements and fields it contains, in display order. |
+| `children` | sequence | optional | The elements and fields it contains. |
 | `instanceType` | IRI | optional | The type asserted on instances of this element. |
 
 Inside a parent, an element also carries a `key` and a `configuration` block.

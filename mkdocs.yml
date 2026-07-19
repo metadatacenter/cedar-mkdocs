@@ -95,8 +95,8 @@ nav:
       - yaml-spec/index.md
       - yaml-spec/cedar-model.md
       - yaml-spec/core-structure.md
-      - yaml-spec/templates.md
-      - yaml-spec/elements.md
+      - yaml-spec/templates-core.md
+      - yaml-spec/elements-core.md
       - yaml-spec/fields-core.md
       - yaml-spec/field-types.md
       - yaml-spec/value-constraints.md
