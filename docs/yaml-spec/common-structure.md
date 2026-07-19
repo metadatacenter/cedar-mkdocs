@@ -61,8 +61,8 @@ A nested child is not required to have an `id`; when it does, it is preserved.
 
 ## Field types
 
-A field's `type` is one of 25 field types, each collecting a particular kind of value. Each
-is specified in full in [Field Types](field-types.md).
+A field's `type` is one of 25 field types, each collecting a particular kind of value. We
+will cover these in more detail later in the document.
 
 | Field type | Collects |
 |-----------|----------|
@@ -76,6 +76,9 @@ is specified in full in [Field Types](field-types.md).
 | `checkbox-field` | Any number of options, as checkboxes. |
 | `multi-select-list-field` | Any number of options, from a dropdown list. |
 | `link-field` | A URI. |
+| `phone-number-field` | A phone number. |
+| `email-field` | An email address. |
+| `attribute-value-field` | User-supplied attribute/value pairs. |
 | `ext-ror-field` | A ROR identifier. |
 | `ext-orcid-field` | An ORCID identifier. |
 | `ext-doi-field` | A DOI. |
@@ -83,9 +86,6 @@ is specified in full in [Field Types](field-types.md).
 | `ext-pfas-field` | A PFAS identifier. |
 | `ext-pubmed-field` | A PubMed identifier. |
 | `ext-nih-grant-id-field` | An NIH grant identifier. |
-| `phone-number-field` | A phone number. |
-| `email-field` | An email address. |
-| `attribute-value-field` | User-supplied attribute/value pairs. |
 | `static-rich-text` | Fixed formatted text (collects no value). |
 | `static-image` | A fixed image (collects no value). |
 | `static-youtube-video` | An embedded video (collects no value). |

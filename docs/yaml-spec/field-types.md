@@ -142,12 +142,9 @@ may be marked `selected` as a default.
 Checkbox and multi-select fields are multi-valued by nature and do not take `multiple` in
 their `configuration`.
 
-## Link and identifier fields
+## Link fields
 
-`link-field` collects a URI. Seven external-identifier types collect a URI of a specific
-kind: `ext-ror-field`, `ext-orcid-field`, `ext-doi-field`, `ext-rrid-field`,
-`ext-pfas-field`, `ext-pubmed-field`, and `ext-nih-grant-id-field`. All take an optional
-`default` holding a URI.
+`link-field` collects a URI, with an optional `default` holding one.
 
 ```yaml
 - key: homepage
@@ -177,6 +174,20 @@ attribute names are supplied in the instance (see [Template Instances](instances
 - key: extra-attributes
   type: attribute-value-field
   name: Additional Characteristics
+```
+
+## Identifier fields
+
+Seven field types collect a URI that is a specific kind of external identifier:
+`ext-ror-field`, `ext-orcid-field`, `ext-doi-field`, `ext-rrid-field`, `ext-pfas-field`,
+`ext-pubmed-field`, and `ext-nih-grant-id-field`. Each takes an optional `default` holding a
+URI.
+
+```yaml
+- key: funder
+  type: ext-ror-field
+  name: Funder
+  default: https://ror.org/00f54p054
 ```
 
 ## Static fields
@@ -218,16 +229,16 @@ Five types present fixed content and collect no value.
 | `checkbox-field` | choice | `values` |
 | `multi-select-list-field` | choice | `values` |
 | `link-field` | link | `default` |
-| `ext-ror-field` | link | `default` |
-| `ext-orcid-field` | link | `default` |
-| `ext-doi-field` | link | `default` |
-| `ext-rrid-field` | link | `default` |
-| `ext-pfas-field` | link | `default` |
-| `ext-pubmed-field` | link | `default` |
-| `ext-nih-grant-id-field` | link | `default` |
 | `phone-number-field` | contact | — |
 | `email-field` | contact | — |
 | `attribute-value-field` | attribute-value | — |
+| `ext-ror-field` | identifier | `default` |
+| `ext-orcid-field` | identifier | `default` |
+| `ext-doi-field` | identifier | `default` |
+| `ext-rrid-field` | identifier | `default` |
+| `ext-pfas-field` | identifier | `default` |
+| `ext-pubmed-field` | identifier | `default` |
+| `ext-nih-grant-id-field` | identifier | `default` |
 | `static-rich-text` | static | `content`, `width`, `height` |
 | `static-image` | static | `content`, `width`, `height` |
 | `static-youtube-video` | static | `content`, `width`, `height` |
