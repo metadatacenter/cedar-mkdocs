@@ -26,6 +26,7 @@ Or an element:
 type: element
 name: Address
 description: A postal address
+id: https://repo.metadatacenter.org/template-elements/be89d73
 ```
 
 ## The `type` discriminator
