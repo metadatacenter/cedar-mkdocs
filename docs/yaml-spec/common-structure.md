@@ -38,7 +38,7 @@ field type. The reader dispatches on it: the value fixes which further keys are 
 |-------|----------|
 | `template` | A template. |
 | `element` | An element. |
-| a field-type token | A field. The 25 field types are listed in [Field Types](field-types.md) below. |
+| a field-type token | A field, of one of the field types below. |
 | `instance` | A template instance. |
 | `element-instance` | A standalone element instance. |
 
@@ -46,10 +46,10 @@ field type. The reader dispatches on it: the value fixes which further keys are 
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
-| `name` | string | required | The artifact's human-readable name. |
+| `name` | string | required | The artifact's human-readable name. Required. |
 | `description` | string | optional | A description of the artifact. Omitted when empty. |
-| `identifier` | string | optional | An application-defined identifier, distinct from `id`. |
-| `language` | string | optional | The natural language of the artifact's content. |
+| `identifier` | string | optional | An application-defined identifier, distinct from `id`. Not necessarily an IRI. Omitted when empty. |
+| `language` | string | optional | The natural language of the artifact's content, as an IETF BCP 47 language tag (for example `en`). Omitted when empty. |
 
 ## Identity
 
@@ -58,3 +58,36 @@ field type. The reader dispatches on it: the value fixes which further keys are 
 | `id` | IRI | conditional | The artifact's own identifier. Present when the artifact has been assigned one. |
 
 A nested child is not required to have an `id`; when it does, it is preserved.
+
+## Field types
+
+A field's `type` is one of 25 field types, each collecting a particular kind of value. Each
+is specified in full in [Field Types](field-types.md).
+
+| Field type | Collects |
+|-----------|----------|
+| `text-field` | Free text. |
+| `text-area-field` | Multi-line text. |
+| `numeric-field` | A number. |
+| `temporal-field` | A date, time, or datetime. |
+| `controlled-term-field` | A term from a controlled vocabulary. |
+| `radio-field` | One option, as radio buttons. |
+| `single-select-list-field` | One option, from a dropdown list. |
+| `checkbox-field` | Any number of options, as checkboxes. |
+| `multi-select-list-field` | Any number of options, from a dropdown list. |
+| `link-field` | A URI. |
+| `ext-ror-field` | A ROR identifier. |
+| `ext-orcid-field` | An ORCID identifier. |
+| `ext-doi-field` | A DOI. |
+| `ext-rrid-field` | An RRID. |
+| `ext-pfas-field` | A PFAS identifier. |
+| `ext-pubmed-field` | A PubMed identifier. |
+| `ext-nih-grant-id-field` | An NIH grant identifier. |
+| `phone-number-field` | A phone number. |
+| `email-field` | An email address. |
+| `attribute-value-field` | User-supplied attribute/value pairs. |
+| `static-rich-text` | Fixed formatted text (collects no value). |
+| `static-image` | A fixed image (collects no value). |
+| `static-youtube-video` | An embedded video (collects no value). |
+| `static-section-break` | A section divider (collects no value). |
+| `static-page-break` | A page divider (collects no value). |

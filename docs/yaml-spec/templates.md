@@ -16,9 +16,10 @@ children:
   name: Address
 ```
 
-Each entry in `children` is a field or element, told apart by its own `type`. Each carries a
-`key`: the name that identifies it within the template and binds its value in an instance.
-The order of `children` is the order the template presents.
+Each entry in `children` is a field or element, told apart by its own `type`. Its `name` is
+the user-friendly label. Its `key` is essentially the child artifact's index within the
+artifact: it must be unique per artifact, and it binds the child artifact's value in an
+instance.
 
 ## Template keys
 
