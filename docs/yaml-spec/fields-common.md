@@ -41,7 +41,7 @@ These settings are meaningful only for a field embedded in a parent, so they liv
 ## Nested and standalone fields
 
 A field written as a child of a template or element carries its parent-relative settings in
-`configuration`. A field written as a top-level document has no parent, so the
+`configuration`. A field written as a top-level definition has no parent, so the
 field-level settings that do not depend on a parent — `hidden`, `continuePreviousLine`,
 `valueRecommendation`, and the static-field `width` and `height` — appear directly among
 the field's keys instead. The parent-only settings (`propertyIri`, `overrideLabel`,

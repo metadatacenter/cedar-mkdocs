@@ -31,7 +31,7 @@ id: https://repo.metadatacenter.org/template-elements/be89d73
 
 ## The `type` discriminator
 
-Every document opens with `type`, whose value names the artifact kind and, for fields, the
+Every definition opens with `type`, whose value names the artifact kind and, for fields, the
 field type. The reader dispatches on it: the value fixes which further keys are meaningful.
 
 | Value | Artifact |

@@ -17,7 +17,7 @@ children:
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
-| `type` | `instance` | required | Marks the document as a template instance. |
+| `type` | `instance` | required | Marks the artifact as a template instance. |
 | `name` | string | required | The instance's name. |
 | `description` | string | optional | A description of the instance. |
 | `id` | IRI | optional | The instance's own identifier. |
@@ -108,7 +108,7 @@ user-supplied attribute and gives its value.
 
 ## Standalone element instances
 
-An element instance may be written as its own document, using `type: element-instance`. It
+An element instance may be written on its own, using `type: element-instance`. It
 carries the same `name`, `description`, `id`, and `children` as a nested element value, plus
 the `type` discriminator so it stands alone.
 

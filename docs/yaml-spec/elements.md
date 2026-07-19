@@ -20,7 +20,7 @@ children:
 ```
 
 An element's `children` may hold elements and fields, nesting to any depth. An
-element may stand as its own document or sit inside a template or another element.
+element may stand as its own definition or sit inside a template or another element.
 
 ## Element keys
 
