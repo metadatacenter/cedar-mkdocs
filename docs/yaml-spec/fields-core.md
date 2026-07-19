@@ -1,8 +1,8 @@
-# Fields: Common Structure
+# Fields: Core Structure
 
 A field collects one value, or a list of values. In YAML its `type` names its
 [field type](field-types.md). The type-specific keys differ, but every field shares the
-same frame: the [common keys](common-structure.md) each artifact carries, plus a
+same frame: the [core keys](core-structure.md) each artifact carries, plus a
 `configuration` block when the field sits inside a parent.
 
 ## The `configuration` block

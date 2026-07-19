@@ -2,7 +2,7 @@
 
 There are 25 field types, each named by the `type` value of the field. The keys common to
 all fields — description, identity, `configuration`, and semantic labels — are defined in
-[Fields: Common Structure](fields-common.md).
+[Fields: Core Structure](fields-core.md).
 
 Examples are shown as nested children (with a `key`), since that is how fields most often
 appear.

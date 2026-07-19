@@ -24,7 +24,7 @@ element may stand as its own definition or sit inside a template or another elem
 
 ## Element keys
 
-Beyond the [common keys](common-structure.md) every artifact carries, an element adds:
+Beyond the [core keys](core-structure.md) every artifact carries, an element adds:
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|

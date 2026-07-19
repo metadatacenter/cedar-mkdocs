@@ -94,10 +94,10 @@ nav:
   - YAML Specification:
       - yaml-spec/index.md
       - yaml-spec/cedar-model.md
-      - yaml-spec/common-structure.md
+      - yaml-spec/core-structure.md
       - yaml-spec/templates.md
       - yaml-spec/elements.md
-      - yaml-spec/fields-common.md
+      - yaml-spec/fields-core.md
       - yaml-spec/field-types.md
       - yaml-spec/value-constraints.md
       - yaml-spec/versioning.md

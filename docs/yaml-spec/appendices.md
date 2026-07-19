@@ -9,57 +9,57 @@ Keys, in alphabetical order, with the chapter that defines each.
 | `acronym` | [Value Constraints](value-constraints.md) |
 | `action` | [Value Constraints](value-constraints.md#actions) |
 | `actions` | [Value Constraints](value-constraints.md#actions) |
-| `altLabels` | [Fields: Common Structure](fields-common.md#semantic-labels) |
+| `altLabels` | [Fields: Core Structure](fields-core.md#semantic-labels) |
 | `annotations` | [Annotations](annotations.md) |
 | `children` | [Templates](templates.md), [Elements](elements.md), [Instances](instances.md) |
-| `configuration` | [Fields: Common Structure](fields-common.md) |
+| `configuration` | [Fields: Core Structure](fields-core.md) |
 | `content` | [Field Types](field-types.md#static-fields) |
-| `continuePreviousLine` | [Fields: Common Structure](fields-common.md) |
+| `continuePreviousLine` | [Fields: Core Structure](fields-core.md) |
 | `createdBy` | [Provenance](provenance.md) |
 | `createdOn` | [Provenance](provenance.md) |
 | `datatype` | [Field Types](field-types.md), [Instances](instances.md) |
 | `decimalPlaces` | [Field Types](field-types.md#numeric-fields) |
 | `default` | [Field Types](field-types.md), [Value Constraints](value-constraints.md#default-value) |
 | `derivedFrom` | [Versioning and Status](versioning.md) |
-| `description` | [Common Artifact Structure](common-structure.md#descriptive-keys) |
+| `description` | [Core Artifact Structure](core-structure.md#descriptive-keys) |
 | `footer` | [Templates](templates.md) |
 | `granularity` | [Field Types](field-types.md#temporal-fields) |
 | `header` | [Templates](templates.md) |
-| `height` | [Fields: Common Structure](fields-common.md), [Field Types](field-types.md#static-fields) |
-| `hidden` | [Fields: Common Structure](fields-common.md) |
-| `id` | [Common Artifact Structure](common-structure.md#identity), [Instances](instances.md) |
-| `identifier` | [Common Artifact Structure](common-structure.md#descriptive-keys) |
+| `height` | [Fields: Core Structure](fields-core.md), [Field Types](field-types.md#static-fields) |
+| `hidden` | [Fields: Core Structure](fields-core.md) |
+| `id` | [Core Artifact Structure](core-structure.md#identity), [Instances](instances.md) |
+| `identifier` | [Core Artifact Structure](core-structure.md#descriptive-keys) |
 | `inputTimeFormat` | [Field Types](field-types.md#temporal-fields) |
 | `inputTimeZone` | [Field Types](field-types.md#temporal-fields) |
 | `instanceType` | [Templates](templates.md), [Elements](elements.md) |
 | `iri` | [Value Constraints](value-constraints.md) |
 | `isBasedOn` | [Instances](instances.md) |
-| `key` | [Templates](templates.md), [Fields: Common Structure](fields-common.md) |
+| `key` | [Templates](templates.md), [Fields: Core Structure](fields-core.md) |
 | `label` | [Field Types](field-types.md#choice-fields), [Value Constraints](value-constraints.md), [Instances](instances.md) |
-| `language` | [Common Artifact Structure](common-structure.md#descriptive-keys), [Instances](instances.md) |
+| `language` | [Core Artifact Structure](core-structure.md#descriptive-keys), [Instances](instances.md) |
 | `maxDepth` | [Value Constraints](value-constraints.md) |
-| `maxItems` | [Fields: Common Structure](fields-common.md), [Elements](elements.md#repetition) |
+| `maxItems` | [Fields: Core Structure](fields-core.md), [Elements](elements.md#repetition) |
 | `maxLength` | [Field Types](field-types.md#text-fields) |
 | `maxValue` | [Field Types](field-types.md#numeric-fields) |
-| `minItems` | [Fields: Common Structure](fields-common.md), [Elements](elements.md#repetition) |
+| `minItems` | [Fields: Core Structure](fields-core.md), [Elements](elements.md#repetition) |
 | `minLength` | [Field Types](field-types.md#text-fields) |
 | `minValue` | [Field Types](field-types.md#numeric-fields) |
 | `modelVersion` | [Versioning and Status](versioning.md) |
 | `modifiedBy` | [Provenance](provenance.md) |
 | `modifiedOn` | [Provenance](provenance.md) |
-| `multiple` | [Fields: Common Structure](fields-common.md), [Elements](elements.md#repetition) |
-| `name` | [Common Artifact Structure](common-structure.md#descriptive-keys) |
+| `multiple` | [Fields: Core Structure](fields-core.md), [Elements](elements.md#repetition) |
+| `name` | [Core Artifact Structure](core-structure.md#descriptive-keys) |
 | `notation` | [Instances](instances.md#field-values) |
 | `numTerms` | [Value Constraints](value-constraints.md) |
 | `ontologyName` | [Value Constraints](value-constraints.md) |
-| `overrideDescription` | [Fields: Common Structure](fields-common.md), [Elements](elements.md#repetition) |
-| `overrideLabel` | [Fields: Common Structure](fields-common.md), [Elements](elements.md#repetition) |
-| `prefLabel` | [Fields: Common Structure](fields-common.md#semantic-labels), [Instances](instances.md#field-values) |
+| `overrideDescription` | [Fields: Core Structure](fields-core.md), [Elements](elements.md#repetition) |
+| `overrideLabel` | [Fields: Core Structure](fields-core.md), [Elements](elements.md#repetition) |
+| `prefLabel` | [Fields: Core Structure](fields-core.md#semantic-labels), [Instances](instances.md#field-values) |
 | `previousVersion` | [Versioning and Status](versioning.md) |
-| `propertyIri` | [Fields: Common Structure](fields-common.md), [Elements](elements.md#repetition) |
-| `recommended` | [Fields: Common Structure](fields-common.md) |
+| `propertyIri` | [Fields: Core Structure](fields-core.md), [Elements](elements.md#repetition) |
+| `recommended` | [Fields: Core Structure](fields-core.md) |
 | `regex` | [Field Types](field-types.md#text-fields) |
-| `required` | [Fields: Common Structure](fields-common.md) |
+| `required` | [Fields: Core Structure](fields-core.md) |
 | `sourceAcronym` | [Value Constraints](value-constraints.md#actions) |
 | `sourceIri` | [Value Constraints](value-constraints.md#actions) |
 | `status` | [Versioning and Status](versioning.md) |
@@ -67,13 +67,13 @@ Keys, in alphabetical order, with the chapter that defines each.
 | `termType` | [Value Constraints](value-constraints.md) |
 | `termIri` | [Value Constraints](value-constraints.md#actions) |
 | `to` | [Value Constraints](value-constraints.md#actions) |
-| `type` | [Common Artifact Structure](common-structure.md#the-type-discriminator) |
+| `type` | [Core Artifact Structure](core-structure.md#the-type-discriminator) |
 | `unit` | [Field Types](field-types.md#numeric-fields) |
 | `value` | [Value Constraints](value-constraints.md#default-value), [Instances](instances.md#field-values), [Annotations](annotations.md) |
 | `valueSetName` | [Value Constraints](value-constraints.md) |
 | `values` | [Field Types](field-types.md), [Value Constraints](value-constraints.md) |
 | `version` | [Versioning and Status](versioning.md) |
-| `width` | [Fields: Common Structure](fields-common.md), [Field Types](field-types.md#static-fields) |
+| `width` | [Fields: Core Structure](fields-core.md), [Field Types](field-types.md#static-fields) |
 
 ## Appendix B: Controlled vocabularies
 

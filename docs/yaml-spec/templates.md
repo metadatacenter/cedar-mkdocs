@@ -23,7 +23,7 @@ instance.
 
 ## Template keys
 
-Beyond the [common keys](common-structure.md) every artifact carries, a template adds:
+Beyond the [core keys](core-structure.md) every artifact carries, a template adds:
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
