@@ -56,6 +56,8 @@ repeating element stands for a list of occurrences, bounded by a minimum and max
     multiple: true
     minItems: 0
     maxItems: 4
+    overrideLabel: Postal Address
+    overrideDescription: The mailing address for this site
   children:
   - key: street
     type: text-field
