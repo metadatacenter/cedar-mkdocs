@@ -58,6 +58,11 @@ nav:
       - user-guide/pages/faq.md
       - user-guide/pages/glossary.md
 
+  - Tutorials:
+      - CEDAR Tutorial: tutorials/cedar_tutorial.md
+      - CEDAR Controlled Term Tutorial: tutorials/cedar_term_tutorial.md
+      - CEDAR MCPs Tutorial: tutorials/cedar_mcps_tutorial.md
+
   - Install Guides:
       - install-overview/index.md
       - Developer Install:
