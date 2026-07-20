@@ -59,6 +59,7 @@ nav:
       - user-guide/pages/glossary.md
 
   - Tutorials:
+      - tutorials/index.md
       - CEDAR Tutorial: tutorials/cedar_tutorial.md
       - CEDAR Controlled Term Tutorial: tutorials/cedar_term_tutorial.md
       - CEDAR MCPs Tutorial: tutorials/cedar_mcps_tutorial.md
