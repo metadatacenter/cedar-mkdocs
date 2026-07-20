@@ -1,6 +1,8 @@
 site_name: CEDAR
 theme:
   name: material
+  features:
+    - navigation.indexes
 
 markdown_extensions:
   - markdown.extensions.toc:
@@ -32,32 +34,40 @@ nav:
   - Home: index.md
 
   - User Guide:
-      - user-overview.md
-      - CEDAR Basics for All Users:
+      - user-overview/index.md
+      - CEDAR Basics:
+          - user-guide/cedar-basics/index.md
           - user-guide/accounts-and-logging-in.md
-          - user-guide/finding-resources.md
-          - user-guide/viewing-resource-information.md
-          - user-guide/desktop-and-navigation.md
-          - user-guide/filling-out-metadata.md
-          - user-guide/sharing-your-content.md
-      - About CEDAR Templates:
+          - user-guide/your-cedar-workspace.md
           - user-guide/description-of-a-template.md
+          - user-guide/filling-out-metadata.md
           - user-guide/building-basic-templates.md
           - user-guide/more-fair-templates.md
-          - user-guide/advanced-template-topics.md
-          - user-guide/tips-for-template-creation.md
-      - Advanced Topics for All Users:
+          - user-guide/finding-resources.md
+          - user-guide/managing-resources.md
+          - user-guide/sharing-resources.md
+          - user-guide/artifact-versioning.md
+      - Advanced Topics:
+          - user-guide/advanced-topics/index.md
+          - user-guide/viewing-resource-information.md
+          - user-guide/understanding-the-suggestion-system.md
           - user-guide/cedar-identifiers-and-iris.md
           - user-guide/cedars-api.md
-      - user-guide/cedar-for-cadsr.md
-      - user-guide/pages/cedar-orientation.md
+          - user-guide/working-with-cdes.md
+          - user-guide/cedar-for-cadsr.md
       - user-guide/pages/faq.md
       - user-guide/pages/glossary.md
 
+  - Tutorials:
+      - tutorials/index.md
+      - CEDAR Tutorial: tutorials/cedar_tutorial.md
+      - CEDAR Controlled Term Tutorial: tutorials/cedar_term_tutorial.md
+      - CEDAR MCPs Tutorial: tutorials/cedar_mcps_tutorial.md
+
   - Install Guides:
-      - install-overview.md
+      - install-overview/index.md
       - Developer Install:
-          - install-developer/overview.md
+          - install-developer/overview/index.md
           - install-developer/prerequisites.md
           - install-developer/configuration.md
           - install-developer/cedar-cli-and-scripts.md
@@ -68,7 +78,7 @@ nav:
           - install-developer/frontends.md
 
       - Docker Install:
-          - install-docker-eval/overview.md
+          - install-docker-eval/overview/index.md
           - install-docker-eval/prerequisites.md
           - install-docker-eval/configuration.md
           - install-docker-eval/cli-and-scripts.md
@@ -77,20 +87,46 @@ nav:
           - install-docker-eval/evaluate-cedar.md
 
       - CEDAR Embeddable Editor:
-          - cedar-embeddable-editor/intro.md
+          - cedar-embeddable-editor/intro/index.md
           - cedar-embeddable-editor/try-out.md
 
   - Developer Guide:
-      - developer-overview.md
-      - Guides:
-          - CEDAR Repository Model: https://metadatacenter.org/tools-training/outreach/cedar-template-model
-          - developer-guide/template-element-and-field-instances.md
-          - developer-guide/template-element-and-fields.md
-          - developer-guide/cedar-rest-apis.md
+      - developer-overview/index.md
+      - CEDAR Repository Model: https://metadatacenter.org/tools-training/outreach/cedar-template-model
+      - developer-guide/template-element-and-field-instances.md
+      - developer-guide/template-element-and-fields.md
+      - developer-guide/cedar-rest-apis.md
 
-  - HOWTOs:
-      - howtos/bioportal-integration-with-docker.md
-      - howtos/cedar-ui-transfer-ownership-of-artifacts.md
+  - YAML Specification:
+      - yaml-spec/index.md
+      - yaml-spec/cedar-model.md
+      - yaml-spec/core-structure.md
+      - yaml-spec/templates-core.md
+      - yaml-spec/elements-core.md
+      - yaml-spec/fields-core.md
+      - yaml-spec/instances-core.md
+      - Field Types:
+          - yaml-spec/field-types/index.md
+          - yaml-spec/field-types/text-field.md
+          - yaml-spec/field-types/text-area-field.md
+          - yaml-spec/field-types/numeric-field.md
+          - yaml-spec/field-types/temporal-field.md
+          - yaml-spec/field-types/radio-field.md
+          - yaml-spec/field-types/single-select-list-field.md
+          - yaml-spec/field-types/checkbox-field.md
+          - yaml-spec/field-types/multi-select-list-field.md
+          - yaml-spec/field-types/link-field.md
+          - yaml-spec/field-types/phone-number-field.md
+          - yaml-spec/field-types/email-field.md
+          - yaml-spec/field-types/controlled-term-field.md
+          - yaml-spec/field-types/external-authority-fields.md
+          - yaml-spec/field-types/attribute-value-field.md
+          - yaml-spec/field-types/static-fields.md
+          - yaml-spec/field-types/controlled-term-example.md
+      - yaml-spec/versioning.md
+      - yaml-spec/provenance.md
+      - yaml-spec/annotations.md
+      - yaml-spec/examples.md
+      - yaml-spec/appendices.md
 
-  - Operations and Management:
-      - operations-and-management.md
+  - Operations and Management: operations-and-management.md

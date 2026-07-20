@@ -98,8 +98,6 @@ More detail and instructions for creating elements with multiple CDEs are given 
 ### Build a Template Step-By-Step
 <a name="step-by-step-guide"></a>
 
-This section of the documenation will walk you through the mechanical steps of creating a template in the {{ page.cedarw }} that contains several CDEs.
-
 #### Step 1 - Go to your Workspace
 <a name="workspace"></a>
 
@@ -136,8 +134,6 @@ _Note:_ In addition to using the Search bar at the top of the modal dialog, you 
 Once you locate the desired CDE, select it in the middle pane and click the "SELECT" button. This will insert the CDE into your template and return to the template designer view.
 
 ![CDE inside a template](../img/userguide/cadsr/add-cde-to-template.png)<br />
-
-Feel free to practice by adding several more CDEs to your template.
 
 _Note:_ When a CDE or any other type of artifact is added to a template, it is initially show in an expanded view and others are collapsed. To expand an artifact and collapse others, simply click on the header bar of any given artifact. The following screen shot depicts a template with four CDEs where the second CDE is expanded, and all others are collapsed:
 
@@ -244,22 +240,17 @@ NCI's [Form Builder](https://formbuilder.nci.nih.gov/FormBuilder/){:target="_bla
 * Form customizations are preserved during import, with the exception of permissible value labels. For example, if you modify the Question Text associated with a question, that modification will be reflected in the {{ page.cedarw }} after import. However, any modifications made to the labels for permissible values are discarded.
 * Ordering of the questions inside modules is preserved during import.
 * The {{ page.cedarw }} only handles CDEs with statuses of released. Questions associated with CDEs that don't have a released status will be discarded during import, and will not appear in the resulting template.
-
-Each of these bullet points is discussed in more detail in the step-by-step guide that follows.
 <br />
 
 ### Import a template step-by-step
 <a name="step-by-step-guide"></a>
-
-
-This section of the documenation will walk you through the mechanical steps of importing a template into the {{ page.cedarw }}.
 
 #### Step 1 - Export your form(s) to XML format
 <a name="export-forms"></a>
 
 The {{ page.cedarw }} allows users to import forms in XML format. For any given form that you want to import into the {{ page.cedarw }}, you first need to use the Form Builder application to export the form to XML format. 
 
-On this documenation page, we plan to use the form with a public ID of 3918956 (Diagnosis Gross Pathology NCI Standard Template) as an example.
+On this documentation page, we plan to use the form with a public ID of 3918956 (Diagnosis Gross Pathology NCI Standard Template) as an example.
 
 Navigate to the [Form Builder application](https://formbuilder.nci.nih.gov/FormBuilder/){:target="_blank"}, locate form 3918956, and download the XML format version of the form. If you need instructions for downloading forms in XML format, please refer to [this section](https://wiki.nci.nih.gov/display/caDSR/10+-+Downloading+and+Printing+in+Form+Builder#id-10DownloadingandPrintinginFormBuilder-DownloadFormtoXML){:target="_blank"} of the [Form Builder User Guide](https://wiki.nci.nih.gov/display/caDSR/Form+Builder+User+Guide){:target="_blank"}.
 
@@ -424,9 +415,6 @@ Refer to the following graphical representations for terminology comparison:
 ### Step-by-step guide: build an element
 <a name="step-by-step-guide"></a>
 
-
-This section of the documentation will walk you through the mechanical steps of creating elements in the {{ page.cedarw }}.
-
 #### Step 1 - Go to your Workspace
 <a name="workspace"></a>
 
@@ -468,7 +456,7 @@ Once you locate the desired CDE, select it in the middle pane of the search dial
 
 ![CDE inside an element](../img/userguide/cadsr/add-cde-to-element.png)<br /> 
 
-Feel free to practice by adding several more CDEs of your choice to your element:
+You can add more CDEs of your choice to your element:
 
 ![Element with multiple CDEs](../img/userguide/cadsr/element-with-cdes.png)<br />
 
@@ -517,7 +505,7 @@ The REQUIRED link allows you to specify whether or not the CDE needs to be fille
 ##### Suggestions
 <a name="opts-suggest"></a>
 
-Setting SUGGESTIONS to YES enables the {{ page.cedarw }} intelligent authoring suggestion system for the field. For a detailed explanation of this functionality, see [Understanding the Suggestion System](advanced-template-topics.md#understanding-the-suggestion-system).
+Setting SUGGESTIONS to YES enables the {{ page.cedarw }} intelligent authoring suggestion system for the field. For a detailed explanation of this functionality, see [Understanding the Suggestion System](understanding-the-suggestion-system.md).
 
 ##### Hidden
 <a name="opts-hide"></a>
@@ -658,9 +646,8 @@ The {{ page.cedarw }} displays a search box at the top of what is referred to
 as the "Desktop". One way to make sure the Desktop view is displayed is to 
 click on the Workspace link in the upper-left portion of the window. For a 
 more in-depth explanation of the Desktop and other components displayed in 
-the Workspace, refer to the section entitled 
-"[Your CEDAR Workspace](desktop-and-navigation.md#your-cedar-workspace)" in the 
-"[Desktop and Navigation](desktop-and-navigation.md)" chapter.
+the Workspace, refer to the 
+"[Your CEDAR Workspace](your-cedar-workspace.md)" chapter.
 
 When CDEs are imported into the {{ page.cedarw }}, they are named by 
 concatenating the Long Name of the CDE with it's Public ID in parentheses. For 

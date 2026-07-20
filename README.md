@@ -1,5 +1,30 @@
 # MkDocs for CEDAR
 
+## Setup
+
+You can set up the build environment either with a plain Python virtual environment (`pip`) or with
+Conda. The `pip` approach is the simplest and does not require installing Conda.
+
+## Python virtual environment (pip)
+
+Requires Python 3 (any recent version). The pinned dependencies live in `requirements.txt`.
+
+### Create the virtual environment
+
+    python3 -m venv .venv
+
+### Activate it and install the dependencies
+
+    source .venv/bin/activate
+    pip install --upgrade pip
+    pip install -r requirements.txt
+
+Once activated, `mkdocs` is on your `PATH` and the commands under
+[MkDocs](#mkdocs) below work directly. Run `deactivate` to leave the environment.
+
+If you prefer not to activate it, you can call the tools directly, e.g. `.venv/bin/mkdocs serve`.
+The `.venv/` directory is git-ignored.
+
 ## Conda environment 
 ### Install Conda
 Use the guide at: https://docs.conda.io/

@@ -9,11 +9,10 @@ but also in their raw format, as well as on the web when shared in OpenView.
 
 There are four types of resources in CEDAR: folders, metadata templates, metadata elements, metadata fields, and metadata instances. In this section we will drop the term 'metadata' from these names and refer to each resource by its shorter form.
 
-CEDAR folders are used to organize CEDAR content and the sharing settings for that content. To view folder resources you navigate into the folders. This is described in [Navigating Within CEDAR](desktop-and-navigation.md#navigating-within-cedar), under Browsing Within the Desktop.
+CEDAR folders are used to organize CEDAR content and the sharing settings for that content. To view folder resources you navigate into the folders.
 
 The rest of this section emphasizes CEDAR artifacts: 
 templates, elements, fields, and instances. 
-The section summarizes the more detailed content found in subsequent sections.
 
 ### Viewing Resource Content
 
@@ -158,7 +157,7 @@ Information about using the Metadata Editor can be found in the Filling Out (Cre
 
 We use the phrase 'viewing resource content' to mean looking at the resource in human-friendly form, in this case viewing it on the web using CEDAR OpenView.
 
-OpenView is a CEDAR feature that allows you to publish CEDAR artifacts to the web, where anyone with the IRI can view them. The details of this process are described in [Sharing Via the Web](sharing-your-content.md#sharing-via-the-web).
+OpenView is a CEDAR feature that allows you to publish CEDAR artifacts to the web, where anyone with the IRI can view them. The details of this process are described in [Sharing Via the Web](sharing-resources.md#sharing-via-the-web).
 Under the heading Viewing the Shared Content on the Web, that page also describes how to access an OpenView page, what content is visible on the page, and how to view additional hidden information.
 
 An added feature of the web-based view of instance artifacts is that you can view not just the raw JSON-LD or RDF for the instance, but also the JSON Schema for that instance. Simply click on the appropriate viewing link at the bottom of the form on the web.
@@ -203,9 +202,9 @@ with metadata for that resource.
 Click on the 'i' icon (shown as item L in the diagram) to make the metadata panel visible
 if it is not already visible.
 
-If no resource is selected, the 'i' icon presents metadata about the folder (B) shown in the Resources box. The right-hand smaller image below shows the information panel for one of these artifacts.
+If no resource is selected, the 'i' icon presents metadata about the folder (B) shown in the middle pane. The right-hand smaller image below shows the information panel for one of these artifacts.
 
-The information panel displays 3 types of metadata in the corresponding tabs: metadata about the resource's general characteristics; metadata about an <a href="advanced-template-topics.md#updating-and-versioning">artifact's version history</a> (for templating resources only, not instances); and metadata about the categories into which the resource has been classified (artifacts only, not folders).
+The information panel displays 3 types of metadata in the corresponding tabs: metadata about the resource's general characteristics; metadata about an <a href="artifact-versioning.md">artifact's version history</a> (for templating resources only, not instances); and metadata about the categories into which the resource has been classified (artifacts only, not folders).
 
 In the main window, most of the metadata is self-explanatory, but there are two features of special interest. The Description field is the same content as the description at the top of the artifact when it is open, and this field is editable in the information panel. Also, for metadata templates the panel shows all the metadata instances that are visible to you; clicking on any of the instances in the list will open it. The count at the top of that metadata instances sub-panel is the count of instances you can see, and the total count of instances.
 

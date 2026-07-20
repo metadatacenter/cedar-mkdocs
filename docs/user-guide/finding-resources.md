@@ -2,8 +2,6 @@
 
 ## Simple Searching
 
-*To learn about simple navigation in the Desktop, visit [Navigating Within CEDAR](desktop-and-navigation.md#navigating-within-cedar).*
-
 ### Searching use the search bar
 
 Searching for a resource in CEDAR is simple if you know text in its title, description, or version. Just input the search string as free text (e.g., "Antibody") in the Search bar provided in the navigation header of the CEDAR Workbench. All the resources  that have the string "Antibody" in their labels, version, or description will be shown.
@@ -19,7 +17,7 @@ Searching for a resource in a particular set is very simple. Just click on the g
 
 You can also constrain the resulting resources by their type, as described in [Constraining the Results by Type](#constraining-the-results-by-type).
 
-The search results are illustrated in the Figure below. In later sections, we will demonstrate how to organize and constrain these search results, and perform advanced searches.
+The search results are illustrated in the Figure below.
 
 ![](../img/userguide/search.png){:width="75%" class="centered"}
 
@@ -28,9 +26,6 @@ The search results are illustrated in the Figure below. In later sections, we wi
 You can view the search resources either as a grid of different resource tiles (as shown in the figure below) or as a list of different resources. You can switch between these views using the icon highlighted in the small blue rectangle in the upper right of the figure. 
 
 You can also sort the different resources based on their titles, creation dates, and modification dates. To sort the resources, click on the sort icon highlighted in the small red rectangle at upper right, and select from the desired option that pops up. You can also click on the column header to sort by that column.
-
-In the next section, we will discuss how to constrain the search results by filtering on the different resource types.
-
 
 ![](../img/userguide/sort.png){:width="75%" class="centered"}
 

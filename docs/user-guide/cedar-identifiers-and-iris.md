@@ -13,7 +13,7 @@ When you run CEDAR, the first page you see will be your Workspace home page, and
 
 ![](../img/userguide/browser-cedar-urls-20190910.png){:width="100%"}
 
-The bar at the top of the browser shows part of the IRI describing CEDAR's location. Here we describe how to read these IRIs (also known as URLs), so that you can use parts of it in the rest of this section. 
+The bar at the top of the browser shows part of the IRI describing CEDAR's location. 
 
 ### **Workspace Home Directory IRI**
 
@@ -66,9 +66,6 @@ But if someone sent you the IRI from _their_ browser, it will try to return you 
 
 ## Building Shareable Metadata Creation IRIs
 
-Building on the other sections in this chapter, we briefly describe how to create an IRI 
-that will launch a fresh appropriate metadata creation form for your template. 
-
 Given a template IRI, you can preface it with the metadata creation IRI base, which is `https://cedar.metadatacenter.org/instances/create/`. 
 So if your template looks like
 `https://repo.metadatacenter.org/templates/f7d62955-ed10-4912-b4db-1b366ad4ff00` (_not a real template!_),
@@ -87,7 +84,6 @@ If the user will have write access to a particular folder where this metadata sh
 
 ## How CEDAR Defines and Applies IRIs (URIs, URLs)
 
-This page describes the CEDAR unique identifier format. 
 The advanced user may wish to consult the [CEDAR Template Model Specification](https://more.metadatacenter.org/tools-training/outreach/cedar-template-model) for more information.
 
 A CEDAR artifact has a unique identifier that is of the following form:

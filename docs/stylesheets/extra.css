@@ -40,3 +40,9 @@ img.right {
 div.md-sidebar.md-sidebar--primary {
     width:14rem;
 }
+
+/* Keep key/type names in a table's first column from wrapping. */
+.md-typeset table:not([class]) th:first-child code,
+.md-typeset table:not([class]) td:first-child code {
+    white-space: nowrap;
+}

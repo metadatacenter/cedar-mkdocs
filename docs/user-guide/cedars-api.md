@@ -3,7 +3,6 @@
 CEDAR is written in a way that all of its services are accessible via a RESTful API.
 A focused subset of those services are "open services",
 intended for any CEDAR user to use as they wish.
-In our CEDAR guide we will describe the use of these open services.
 
 To use the CEDAR API you will need the software tooling 
 required to make queries directly to the API.
@@ -58,7 +57,7 @@ but each of these must have a different name.
 You can view all the CEDAR documentation in this Swagger page. 
 When you have located the interface you want to use,
 if its documentation isn't visible,
-click on the interface'a header line to expand the documentation for that interface.
+click on the interface's header line to expand the documentation for that interface.
 You will then see the documentation details, 
 including a section called Parameters.
 If you fill out the parameters in the form
@@ -99,9 +98,6 @@ Your API key will continue to be active
 for any of the other API interface methods in the documentation page,
 until you close or leave the page.
 
-Now you can use the examples in the next section to begin trying
-your own CEDAR interface tests.
-
 ## API—Finding and Accessing Metadata Instances
 
 There are several API methods that can find and return metadata instances. 
@@ -109,10 +105,7 @@ Note that in the API, metadata instances are called Template Instances
 (template_instance in the method names). 
 The API refers to an actual CEDAR template as a Template, 
 though some might call it a 'template instance'. 
-We apologize for this semantic hiccup.
 
-We cover a few of the most useful API methods for finding and obtaining
-CEDAR metadata instances in this page.
 These same patterns and methods will also apply to searching and obtaining
 metadata templates and elements.
 
@@ -139,7 +132,6 @@ CEDAR administrators can arrange for all the artifacts of a particular template
 to be visible to a particular group, contact us at cedar-support@metadatacenter.org
 to make that request.
 
-This document describes one example in each section. 
 To learn how to perform more detailed searches or searches for other entities,
 simply review the appropriate [Swagger](https://resource.metadatacenter.org/api) forms 
 and enter parameters you are interested in. 
@@ -252,8 +244,6 @@ Arbitrarily advanced lookups can be performed in CEDAR metadata instances
 using the XPath-compatible data_path expression in the second parameter.
 These allow you to access the nested hierarchy in the metadata template,
 as well as index into multiple entries for a given field or element.
-(Unfortunately, describing the details of those expressions
-is beyond the scope of this help text.)
 
 There are two limits to the scope of this capability.
 First, if you have a lot of requests being made in your spreadsheet,
