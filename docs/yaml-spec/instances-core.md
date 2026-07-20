@@ -1,49 +1,26 @@
 # Instances: Core Structure
 
 A template instance is an instance artifact. It holds metadata that conforms to a template.
-In YAML it names its template with `isBasedOn` and gives a value for each field under
-`children`, keyed by the field's name:
+In YAML it identifies its template with `isBasedOn`. As with template and element artifacts,
+instances hold a value for each field or nested element under `children`, keyed by the
+child's name.
 
 ```yaml
 type: instance
 name: SDY232
+description: Metadata for the SDY232 cardiology study
+id: https://repo.metadatacenter.org/template-instances/1f9a2b3
 isBasedOn: https://repo.metadatacenter.org/templates/ec3f500
 children:
   Study Name:
     value: Cardiology cohort
 ```
 
-## Instance keys
-
-| Key | Value | Presence | Meaning |
-|-----|-------|----------|---------|
-| `type` | `instance` | required | Marks the artifact as a template instance. |
-| `name` | string | required | The instance's name. |
-| `description` | string | optional | A description of the instance. |
-| `id` | IRI | optional | The instance's own identifier. |
-| `isBasedOn` | IRI | required | The template this instance conforms to. |
-| `children` | mapping | optional | The element and field values, keyed by name. |
-| `annotations` | mapping | optional | Annotations on the instance; see [Annotations](annotations.md). |
-
-Provenance keys (`createdOn`, `createdBy`, `modifiedOn`, `modifiedBy`) are optional, as for
-schema artifacts.
-
 ## Field values
 
-A field's value is a mapping. Which keys it carries depends on the kind of value.
-
-| Key | Value | Meaning |
-|-----|-------|---------|
-| `value` | string or number | A literal value. |
-| `datatype` | datatype token | The value's type, when typed (for example `xsd:int`, `iri`). |
-| `id` | IRI | The identifier of a controlled term or linked resource. |
-| `label` | string | The display label of a controlled term. |
-| `prefLabel` | string | The preferred label of a controlled term. |
-| `notation` | string | The term's notation. |
-| `language` | string | The value's language. |
-
-A plain literal carries just `value`. A typed literal adds `datatype`. A controlled term
-carries `id` with a `label`.
+Which keys a field's value carries depends on the kind of value. A plain literal carries
+just `value`. A typed literal adds `datatype`. A controlled term carries `id` with a
+`label`.
 
 ```yaml
 type: instance
@@ -62,9 +39,24 @@ children:
 
 A field with no value is omitted from `children` entirely.
 
+A controlled term value can carry two further labels drawn from its vocabulary. `prefLabel`
+holds the term's preferred label, the canonical name the vocabulary assigns it, which may
+differ from the `label` shown to the author. `notation` holds the term's short code or
+accession within the vocabulary.
+
+```yaml
+  Disease:
+    id: http://purl.obolibrary.org/obo/DOID_530
+    label: eyelid disease
+    prefLabel: eyelid disease
+    notation: DOID:530
+```
+
 ## Multiple values
 
-A multi-valued field holds a sequence of value mappings.
+A field that accepts more than one value holds a list under its name. Each entry has the
+same shape it would have as a single value. For a plain literal field, each entry carries a
+`value`.
 
 ```yaml
   Keywords:
@@ -72,50 +64,13 @@ A multi-valued field holds a sequence of value mappings.
   - value: oncology
 ```
 
-## Nested elements
-
-An element value is a mapping with its own `children`. A repeating element holds a sequence
-of such mappings.
+A controlled-term field behaves the same way. Each entry is a full controlled term, carrying
+its `id` and `label`.
 
 ```yaml
-  Address:
-    children:
-      Street:
-        value: 450 Serra Mall
-      City:
-        value: Stanford
-  Contributors:
-  - children:
-      Name:
-        value: Dr Bob
-  - children:
-      Name:
-        value: Dr Joe
-```
-
-## Attribute-value fields
-
-An attribute-value field appears as a mapping keyed by the field's name. Each entry names a
-user-supplied attribute and gives its value.
-
-```yaml
-  Extra Attributes:
-    Study ZIP:
-      value: "94402"
-    Study Duration:
-      value: "2"
-```
-
-## Standalone element instances
-
-An element instance may be written on its own, using `type: element-instance`. It
-carries the same `name`, `description`, `id`, and `children` as a nested element value, plus
-the `type` discriminator so it stands alone.
-
-```yaml
-type: element-instance
-name: Address
-children:
-  Street:
-    value: 450 Serra Mall
+  Conditions:
+  - id: http://purl.obolibrary.org/obo/DOID_2841
+    label: asthma
+  - id: http://purl.obolibrary.org/obo/DOID_10763
+    label: hypertension
 ```

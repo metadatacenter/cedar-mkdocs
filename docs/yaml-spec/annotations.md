@@ -12,7 +12,7 @@ annotations:
     id: https://doi.org/10.60745/kys3-pa43
 ```
 
-`annotations` is a mapping from each annotation name to its value. A value is either a
+Under `annotations`, each annotation name is paired with its value. A value is either a
 literal, written with `value`, or an IRI, written with `id`.
 
 | Key within an annotation | Value | Meaning |
