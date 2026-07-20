@@ -1,8 +1,14 @@
 # Field Types
 
-A field's `type` is one of 25 field types, each collecting a particular kind of value. Each
-type has its own page, covering the keys specific to it. The keys every field shares — its
-core keys and its `configuration` block — are on [Fields: Core Structure](../fields-core.md).
+CEDAR has four main kinds of field: core fields, controlled term fields, external authority
+fields, and static fields.
+
+## Core Fields
+
+Core fields collect a value directly from the author: text, a number, a date, a choice from
+a fixed list, a link, contact details, or free-form attribute/value pairs. Each holds
+whatever the author types or picks, constrained only by its own type — the value is not
+drawn from an external vocabulary or authority.
 
 | Field type | Collects |
 |-----------|----------|
@@ -18,9 +24,45 @@ core keys and its `configuration` block — are on [Fields: Core Structure](../f
 | [`phone-number-field`](phone-number-field.md) | A phone number. |
 | [`email-field`](email-field.md) | An email address. |
 | [`attribute-value-field`](attribute-value-field.md) | User-supplied attribute/value pairs. |
-| [`controlled-term-field`](controlled-term-field.md) | A term from a controlled vocabulary. |
-| [`ext-*`](external-authority-fields.md) | An identifier from an external authority (ROR, ORCID, DOI, …). |
-| [`static-*`](static-fields.md) | Fixed content — a heading, image, or note — that collects no value. |
 
-Examples throughout are shown as nested children (with a `key`), since that is how fields
-most often appear.
+## Controlled Term Field
+
+A [controlled term field](controlled-term-field.md) binds a field's value to terms from a
+controlled vocabulary — an ontology, a branch of one, specific classes, or a value set — so
+the value is a shared, resolvable identifier rather than free text. This is what makes
+metadata from different authors and templates comparable and interoperable.
+
+| Field type | Collects |
+|-----------|----------|
+| [`controlled-term-field`](controlled-term-field.md) | A term from a controlled vocabulary. |
+
+## External Authority Fields
+
+[External authority fields](external-authority-fields.md) collect an identifier issued and
+maintained by an outside registry: an organization from ROR, a person from ORCID, a
+publication from DOI or PubMed, and so on. The stored value is a resolvable identifier from
+that authority, not a typed-in name.
+
+| Field type | Authority |
+|-----------|-----------|
+| `ext-ror-field` | ROR — Research Organization Registry. |
+| `ext-orcid-field` | ORCID — researcher identifiers. |
+| `ext-doi-field` | DOI — digital object identifiers. |
+| `ext-rrid-field` | RRID — research resource identifiers. |
+| `ext-pfas-field` | PFAS identifiers. |
+| `ext-pubmed-field` | PubMed identifiers. |
+| `ext-nih-grant-id-field` | NIH grant identifiers. |
+
+## Static Fields
+
+[Static fields](static-fields.md) collect no value. They present fixed content — a heading,
+an image, an explanatory note, or a divider — to structure and annotate the form the
+template presents.
+
+| Field type | Purpose |
+|-----------|---------|
+| `static-rich-text` | Formatted text. |
+| `static-image` | An image. |
+| `static-youtube-video` | An embedded video. |
+| `static-section-break` | A labeled section divider. |
+| `static-page-break` | A page divider. |

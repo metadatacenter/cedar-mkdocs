@@ -70,8 +70,7 @@ A nested child is not required to have an `id`; when it does, it is preserved.
 
 ## Field types
 
-A field's `type` is one of 25 field types, each collecting a particular kind of value. We
-will cover these in more detail later in the document.
+A field's `type` is one of 25 field types, each collecting a particular kind of value.
 
 | Field type | Collects |
 |-----------|----------|
