@@ -39,9 +39,9 @@ metadata from different authors and templates comparable and interoperable.
 ## External Authority Fields
 
 [External authority fields](external-authority-fields.md) collect an identifier issued and
-maintained by an outside registry: an organization from ROR, a person from ORCID, a
-publication from DOI or PubMed, and so on. The stored value is a resolvable identifier from
-that authority, not a typed-in name.
+maintained by an outside registry, such as an organization from ROR, a person from ORCID, or
+a publication from DOI. The stored value is a resolvable identifier from that authority, not
+a typed-in name. CEDAR can extend this set with further authorities.
 
 | Field type | Authority |
 |-----------|-----------|
