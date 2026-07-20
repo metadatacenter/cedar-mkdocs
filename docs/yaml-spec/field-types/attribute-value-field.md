@@ -5,7 +5,7 @@ author names each attribute and gives its value. In YAML its `type` is
 `attribute-value-field`.
 
 The field takes no type-specific keys; the attribute names are supplied in the instance (see
-[Template Instances](../instances.md)).
+[Instances: Core Structure](../instances-core.md)).
 
 ```yaml
 - key: extra-attributes

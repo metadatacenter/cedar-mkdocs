@@ -11,13 +11,13 @@ Keys, in alphabetical order, with the chapter that defines each.
 | `actions` | [Controlled Term Field](field-types/controlled-term-field.md#actions) |
 | `altLabels` | [Fields: Core Structure](fields-core.md#semantic-labels) |
 | `annotations` | [Annotations](annotations.md) |
-| `children` | [Templates: Core Structure](templates-core.md), [Elements: Core Structure](elements-core.md), [Instances](instances.md) |
+| `children` | [Templates: Core Structure](templates-core.md), [Elements: Core Structure](elements-core.md), [Instances: Core Structure](instances-core.md) |
 | `configuration` | [Fields: Core Structure](fields-core.md) |
 | `content` | [Static Fields](field-types/static-fields.md) |
 | `continuePreviousLine` | [Fields: Core Structure](fields-core.md) |
 | `createdBy` | [Provenance](provenance.md) |
 | `createdOn` | [Provenance](provenance.md) |
-| `datatype` | [Numeric Field](field-types/numeric-field.md), [Temporal Field](field-types/temporal-field.md), [Instances](instances.md) |
+| `datatype` | [Numeric Field](field-types/numeric-field.md), [Temporal Field](field-types/temporal-field.md), [Instances: Core Structure](instances-core.md) |
 | `decimalPlaces` | [Numeric Field](field-types/numeric-field.md) |
 | `default` | [Field Types](field-types/index.md), [Controlled Term Field](field-types/controlled-term-field.md#default-value) |
 | `derivedFrom` | [Versioning and Status](versioning.md) |
@@ -27,16 +27,16 @@ Keys, in alphabetical order, with the chapter that defines each.
 | `header` | [Templates: Core Structure](templates-core.md) |
 | `height` | [Fields: Core Structure](fields-core.md), [Static Fields](field-types/static-fields.md) |
 | `hidden` | [Fields: Core Structure](fields-core.md) |
-| `id` | [Core Artifact Structure](core-structure.md#identity), [Instances](instances.md) |
+| `id` | [Core Artifact Structure](core-structure.md#identity), [Instances: Core Structure](instances-core.md) |
 | `identifier` | [Core Artifact Structure](core-structure.md#descriptive-keys) |
 | `inputTimeFormat` | [Temporal Field](field-types/temporal-field.md) |
 | `inputTimeZone` | [Temporal Field](field-types/temporal-field.md) |
 | `instanceType` | [Templates: Core Structure](templates-core.md), [Elements: Core Structure](elements-core.md) |
 | `iri` | [Controlled Term Field](field-types/controlled-term-field.md) |
-| `isBasedOn` | [Instances](instances.md) |
+| `isBasedOn` | [Instances: Core Structure](instances-core.md) |
 | `key` | [Templates: Core Structure](templates-core.md), [Fields: Core Structure](fields-core.md) |
-| `label` | [Radio Field](field-types/radio-field.md), [Controlled Term Field](field-types/controlled-term-field.md), [Instances](instances.md) |
-| `language` | [Core Artifact Structure](core-structure.md#descriptive-keys), [Instances](instances.md) |
+| `label` | [Radio Field](field-types/radio-field.md), [Controlled Term Field](field-types/controlled-term-field.md), [Instances: Core Structure](instances-core.md) |
+| `language` | [Core Artifact Structure](core-structure.md#descriptive-keys), [Instances: Core Structure](instances-core.md) |
 | `maxDepth` | [Controlled Term Field](field-types/controlled-term-field.md) |
 | `maxItems` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `maxLength` | [Text Field](field-types/text-field.md) |
@@ -49,12 +49,12 @@ Keys, in alphabetical order, with the chapter that defines each.
 | `modifiedOn` | [Provenance](provenance.md) |
 | `multiple` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `name` | [Core Artifact Structure](core-structure.md#descriptive-keys) |
-| `notation` | [Instances](instances.md#field-values) |
+| `notation` | [Instances: Core Structure](instances-core.md#field-values) |
 | `numTerms` | [Controlled Term Field](field-types/controlled-term-field.md) |
 | `ontologyName` | [Controlled Term Field](field-types/controlled-term-field.md) |
 | `overrideDescription` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `overrideLabel` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
-| `prefLabel` | [Fields: Core Structure](fields-core.md#semantic-labels), [Instances](instances.md#field-values) |
+| `prefLabel` | [Fields: Core Structure](fields-core.md#semantic-labels), [Instances: Core Structure](instances-core.md#field-values) |
 | `previousVersion` | [Versioning and Status](versioning.md) |
 | `propertyIri` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `recommended` | [Fields: Core Structure](fields-core.md) |
@@ -69,7 +69,7 @@ Keys, in alphabetical order, with the chapter that defines each.
 | `to` | [Controlled Term Field](field-types/controlled-term-field.md#actions) |
 | `type` | [Core Artifact Structure](core-structure.md#the-type-discriminator) |
 | `unit` | [Numeric Field](field-types/numeric-field.md) |
-| `value` | [Controlled Term Field](field-types/controlled-term-field.md#default-value), [Instances](instances.md#field-values), [Annotations](annotations.md) |
+| `value` | [Controlled Term Field](field-types/controlled-term-field.md#default-value), [Instances: Core Structure](instances-core.md#field-values), [Annotations](annotations.md) |
 | `valueSetName` | [Controlled Term Field](field-types/controlled-term-field.md) |
 | `values` | [Field Types](field-types/index.md), [Controlled Term Field](field-types/controlled-term-field.md) |
 | `version` | [Versioning and Status](versioning.md) |

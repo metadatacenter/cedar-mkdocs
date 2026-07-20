@@ -1,4 +1,4 @@
-# Template Instances
+# Instances: Core Structure
 
 A template instance is an instance artifact. It holds metadata that conforms to a template.
 In YAML it names its template with `isBasedOn` and gives a value for each field under

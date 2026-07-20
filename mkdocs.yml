@@ -98,6 +98,7 @@ nav:
       - yaml-spec/templates-core.md
       - yaml-spec/elements-core.md
       - yaml-spec/fields-core.md
+      - yaml-spec/instances-core.md
       - Field Types:
           - yaml-spec/field-types/index.md
           - yaml-spec/field-types/text-field.md
@@ -119,7 +120,6 @@ nav:
       - yaml-spec/versioning.md
       - yaml-spec/provenance.md
       - yaml-spec/annotations.md
-      - yaml-spec/instances.md
       - yaml-spec/examples.md
       - yaml-spec/appendices.md
 
