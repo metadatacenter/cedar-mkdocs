@@ -1,14 +1,14 @@
 # Field Types
 
-CEDAR has four main kinds of field: core fields, controlled term fields, external authority
-fields, and static fields.
+CEDAR has five main kinds of field: core fields, controlled term fields, external authority
+fields, attribute-value fields, and static fields.
 
 ## Core Fields
 
 Core fields collect a value directly from the author: text, a number, a date, a choice from
-a fixed list, a link, contact details, or free-form attribute/value pairs. Each holds
-whatever the author types or picks, constrained only by its own type — the value is not
-drawn from an external vocabulary or authority.
+a fixed list, a link, or contact details. Each holds whatever the author types or picks,
+constrained only by its own type. The value is not drawn from an external vocabulary or
+authority.
 
 | Field type | Collects |
 |-----------|----------|
@@ -23,7 +23,6 @@ drawn from an external vocabulary or authority.
 | [`link-field`](link-field.md) | A URI. |
 | [`phone-number-field`](phone-number-field.md) | A phone number. |
 | [`email-field`](email-field.md) | An email address. |
-| [`attribute-value-field`](attribute-value-field.md) | User-supplied attribute/value pairs. |
 
 ## Controlled Term Field
 
@@ -53,9 +52,21 @@ a typed-in name. CEDAR can extend this set with further authorities.
 | `ext-pubmed-field` | PubMed identifiers. |
 | `ext-nih-grant-id-field` | NIH grant identifiers. |
 
+## Attribute-Value Field
+
+An [attribute-value field](attribute-value-field.md) lets the person filling out the
+template supply their own attribute-value pairs, naming each attribute and giving its value.
+Every other field has a name fixed by the template; an attribute-value field is open-ended,
+so the author adds as many pairs as they need. It suits metadata whose shape is not known in
+advance, capturing properties that vary from one instance to the next.
+
+| Field type | Collects |
+|-----------|----------|
+| [`attribute-value-field`](attribute-value-field.md) | User-supplied attribute/value pairs. |
+
 ## Static Fields
 
-[Static fields](static-fields.md) collect no value. They control a template's presentation
+[Static fields](static-fields.md) do not collect values. They control a template's presentation
 and display, governing its layout and the supporting content shown alongside the fields. A
 static field might present a heading, an image, or an explanatory note, or break the form
 into sections and pages.

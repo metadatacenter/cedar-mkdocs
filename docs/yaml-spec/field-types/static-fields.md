@@ -1,6 +1,6 @@
 # Static Fields
 
-Static fields present fixed content and collect no value. Five types are provided.
+Static fields present fixed content and do not collect values. Five types are provided.
 
 | Field type | Purpose |
 |-----------|---------|

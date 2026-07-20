@@ -111,9 +111,9 @@ nav:
           - yaml-spec/field-types/link-field.md
           - yaml-spec/field-types/phone-number-field.md
           - yaml-spec/field-types/email-field.md
-          - yaml-spec/field-types/attribute-value-field.md
           - yaml-spec/field-types/controlled-term-field.md
           - yaml-spec/field-types/external-authority-fields.md
+          - yaml-spec/field-types/attribute-value-field.md
           - yaml-spec/field-types/static-fields.md
           - yaml-spec/field-types/controlled-term-example.md
       - yaml-spec/versioning.md
