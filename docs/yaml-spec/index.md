@@ -1,4 +1,4 @@
-# CEDAR YAML Specification
+# CEDAR Model YAML Specification
 
 This specification defines the YAML serialization of the CEDAR model, the standards-based
 model with which scientific communities represent their metadata requirements precisely and
