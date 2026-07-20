@@ -55,9 +55,10 @@ a typed-in name. CEDAR can extend this set with further authorities.
 
 ## Static Fields
 
-[Static fields](static-fields.md) collect no value. They present fixed content — a heading,
-an image, an explanatory note, or a divider — to structure and annotate the form the
-template presents.
+[Static fields](static-fields.md) collect no value. They control a template's presentation
+and display, governing its layout and the supporting content shown alongside the fields. A
+static field might present a heading, an image, or an explanatory note, or break the form
+into sections and pages.
 
 | Field type | Purpose |
 |-----------|---------|
