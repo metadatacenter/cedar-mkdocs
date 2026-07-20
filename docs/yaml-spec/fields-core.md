@@ -1,7 +1,7 @@
 # Fields: Core Structure
 
 A field collects one value, or a list of values. In YAML its `type` names its
-[field type](field-types.md). The type-specific keys differ, but every field shares the
+[field type](field-types/index.md). The type-specific keys differ, but every field shares the
 same frame: the [core keys](core-structure.md) each artifact carries, plus a
 `configuration` block when the field sits inside a parent.
 
@@ -60,4 +60,4 @@ Any field may carry semantic labels, independent of its type:
 By default a field collects one value. Marking it `multiple` makes it collect a list, with
 `minItems` and `maxItems` bounding the length. Checkbox, multi-select list, and
 attribute-value fields are inherently multi-valued and do not use `multiple`; see their
-entries in [Field Types](field-types.md).
+entries in [Field Types](field-types/index.md).

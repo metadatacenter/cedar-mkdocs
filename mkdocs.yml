@@ -98,8 +98,24 @@ nav:
       - yaml-spec/templates-core.md
       - yaml-spec/elements-core.md
       - yaml-spec/fields-core.md
-      - yaml-spec/field-types.md
-      - yaml-spec/value-constraints.md
+      - Field Types:
+          - yaml-spec/field-types/index.md
+          - yaml-spec/field-types/text-field.md
+          - yaml-spec/field-types/text-area-field.md
+          - yaml-spec/field-types/numeric-field.md
+          - yaml-spec/field-types/temporal-field.md
+          - yaml-spec/field-types/radio-field.md
+          - yaml-spec/field-types/single-select-list-field.md
+          - yaml-spec/field-types/checkbox-field.md
+          - yaml-spec/field-types/multi-select-list-field.md
+          - yaml-spec/field-types/link-field.md
+          - yaml-spec/field-types/phone-number-field.md
+          - yaml-spec/field-types/email-field.md
+          - yaml-spec/field-types/attribute-value-field.md
+          - yaml-spec/field-types/controlled-term-field.md
+          - yaml-spec/field-types/external-authority-fields.md
+          - yaml-spec/field-types/static-fields.md
+          - yaml-spec/field-types/controlled-term-example.md
       - yaml-spec/versioning.md
       - yaml-spec/provenance.md
       - yaml-spec/annotations.md

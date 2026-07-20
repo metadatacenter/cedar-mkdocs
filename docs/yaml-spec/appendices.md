@@ -6,74 +6,74 @@ Keys, in alphabetical order, with the chapter that defines each.
 
 | Key | Defined in |
 |-----|-----------|
-| `acronym` | [Value Constraints](value-constraints.md) |
-| `action` | [Value Constraints](value-constraints.md#actions) |
-| `actions` | [Value Constraints](value-constraints.md#actions) |
+| `acronym` | [Controlled Term Field](field-types/controlled-term-field.md) |
+| `action` | [Controlled Term Field](field-types/controlled-term-field.md#actions) |
+| `actions` | [Controlled Term Field](field-types/controlled-term-field.md#actions) |
 | `altLabels` | [Fields: Core Structure](fields-core.md#semantic-labels) |
 | `annotations` | [Annotations](annotations.md) |
 | `children` | [Templates: Core Structure](templates-core.md), [Elements: Core Structure](elements-core.md), [Instances](instances.md) |
 | `configuration` | [Fields: Core Structure](fields-core.md) |
-| `content` | [Field Types](field-types.md#static-fields) |
+| `content` | [Static Fields](field-types/static-fields.md) |
 | `continuePreviousLine` | [Fields: Core Structure](fields-core.md) |
 | `createdBy` | [Provenance](provenance.md) |
 | `createdOn` | [Provenance](provenance.md) |
-| `datatype` | [Field Types](field-types.md), [Instances](instances.md) |
-| `decimalPlaces` | [Field Types](field-types.md#numeric-fields) |
-| `default` | [Field Types](field-types.md), [Value Constraints](value-constraints.md#default-value) |
+| `datatype` | [Numeric Field](field-types/numeric-field.md), [Temporal Field](field-types/temporal-field.md), [Instances](instances.md) |
+| `decimalPlaces` | [Numeric Field](field-types/numeric-field.md) |
+| `default` | [Field Types](field-types/index.md), [Controlled Term Field](field-types/controlled-term-field.md#default-value) |
 | `derivedFrom` | [Versioning and Status](versioning.md) |
 | `description` | [Core Artifact Structure](core-structure.md#descriptive-keys) |
 | `footer` | [Templates: Core Structure](templates-core.md) |
-| `granularity` | [Field Types](field-types.md#temporal-fields) |
+| `granularity` | [Temporal Field](field-types/temporal-field.md) |
 | `header` | [Templates: Core Structure](templates-core.md) |
-| `height` | [Fields: Core Structure](fields-core.md), [Field Types](field-types.md#static-fields) |
+| `height` | [Fields: Core Structure](fields-core.md), [Static Fields](field-types/static-fields.md) |
 | `hidden` | [Fields: Core Structure](fields-core.md) |
 | `id` | [Core Artifact Structure](core-structure.md#identity), [Instances](instances.md) |
 | `identifier` | [Core Artifact Structure](core-structure.md#descriptive-keys) |
-| `inputTimeFormat` | [Field Types](field-types.md#temporal-fields) |
-| `inputTimeZone` | [Field Types](field-types.md#temporal-fields) |
+| `inputTimeFormat` | [Temporal Field](field-types/temporal-field.md) |
+| `inputTimeZone` | [Temporal Field](field-types/temporal-field.md) |
 | `instanceType` | [Templates: Core Structure](templates-core.md), [Elements: Core Structure](elements-core.md) |
-| `iri` | [Value Constraints](value-constraints.md) |
+| `iri` | [Controlled Term Field](field-types/controlled-term-field.md) |
 | `isBasedOn` | [Instances](instances.md) |
 | `key` | [Templates: Core Structure](templates-core.md), [Fields: Core Structure](fields-core.md) |
-| `label` | [Field Types](field-types.md#choice-fields), [Value Constraints](value-constraints.md), [Instances](instances.md) |
+| `label` | [Radio Field](field-types/radio-field.md), [Controlled Term Field](field-types/controlled-term-field.md), [Instances](instances.md) |
 | `language` | [Core Artifact Structure](core-structure.md#descriptive-keys), [Instances](instances.md) |
-| `maxDepth` | [Value Constraints](value-constraints.md) |
+| `maxDepth` | [Controlled Term Field](field-types/controlled-term-field.md) |
 | `maxItems` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
-| `maxLength` | [Field Types](field-types.md#text-fields) |
-| `maxValue` | [Field Types](field-types.md#numeric-fields) |
+| `maxLength` | [Text Field](field-types/text-field.md) |
+| `maxValue` | [Numeric Field](field-types/numeric-field.md) |
 | `minItems` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
-| `minLength` | [Field Types](field-types.md#text-fields) |
-| `minValue` | [Field Types](field-types.md#numeric-fields) |
+| `minLength` | [Text Field](field-types/text-field.md) |
+| `minValue` | [Numeric Field](field-types/numeric-field.md) |
 | `modelVersion` | [Versioning and Status](versioning.md) |
 | `modifiedBy` | [Provenance](provenance.md) |
 | `modifiedOn` | [Provenance](provenance.md) |
 | `multiple` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `name` | [Core Artifact Structure](core-structure.md#descriptive-keys) |
 | `notation` | [Instances](instances.md#field-values) |
-| `numTerms` | [Value Constraints](value-constraints.md) |
-| `ontologyName` | [Value Constraints](value-constraints.md) |
+| `numTerms` | [Controlled Term Field](field-types/controlled-term-field.md) |
+| `ontologyName` | [Controlled Term Field](field-types/controlled-term-field.md) |
 | `overrideDescription` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `overrideLabel` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `prefLabel` | [Fields: Core Structure](fields-core.md#semantic-labels), [Instances](instances.md#field-values) |
 | `previousVersion` | [Versioning and Status](versioning.md) |
 | `propertyIri` | [Fields: Core Structure](fields-core.md), [Elements: Core Structure](elements-core.md#element-configuration) |
 | `recommended` | [Fields: Core Structure](fields-core.md) |
-| `regex` | [Field Types](field-types.md#text-fields) |
+| `regex` | [Text Field](field-types/text-field.md) |
 | `required` | [Fields: Core Structure](fields-core.md) |
-| `sourceAcronym` | [Value Constraints](value-constraints.md#actions) |
-| `sourceIri` | [Value Constraints](value-constraints.md#actions) |
+| `sourceAcronym` | [Controlled Term Field](field-types/controlled-term-field.md#actions) |
+| `sourceIri` | [Controlled Term Field](field-types/controlled-term-field.md#actions) |
 | `status` | [Versioning and Status](versioning.md) |
-| `termLabel` | [Value Constraints](value-constraints.md) |
-| `termType` | [Value Constraints](value-constraints.md) |
-| `termIri` | [Value Constraints](value-constraints.md#actions) |
-| `to` | [Value Constraints](value-constraints.md#actions) |
+| `termLabel` | [Controlled Term Field](field-types/controlled-term-field.md) |
+| `termType` | [Controlled Term Field](field-types/controlled-term-field.md) |
+| `termIri` | [Controlled Term Field](field-types/controlled-term-field.md#actions) |
+| `to` | [Controlled Term Field](field-types/controlled-term-field.md#actions) |
 | `type` | [Core Artifact Structure](core-structure.md#the-type-discriminator) |
-| `unit` | [Field Types](field-types.md#numeric-fields) |
-| `value` | [Value Constraints](value-constraints.md#default-value), [Instances](instances.md#field-values), [Annotations](annotations.md) |
-| `valueSetName` | [Value Constraints](value-constraints.md) |
-| `values` | [Field Types](field-types.md), [Value Constraints](value-constraints.md) |
+| `unit` | [Numeric Field](field-types/numeric-field.md) |
+| `value` | [Controlled Term Field](field-types/controlled-term-field.md#default-value), [Instances](instances.md#field-values), [Annotations](annotations.md) |
+| `valueSetName` | [Controlled Term Field](field-types/controlled-term-field.md) |
+| `values` | [Field Types](field-types/index.md), [Controlled Term Field](field-types/controlled-term-field.md) |
 | `version` | [Versioning and Status](versioning.md) |
-| `width` | [Fields: Core Structure](fields-core.md), [Field Types](field-types.md#static-fields) |
+| `width` | [Fields: Core Structure](fields-core.md), [Static Fields](field-types/static-fields.md) |
 
 ## Appendix B: Controlled vocabularies
 
