@@ -21,12 +21,12 @@ This tutorial walks the smallest end-to-end example of that division of labor.
 
 ## The Four MCP Servers
 
-Building a template this way touches four different jobs, and no single service
+Building a template this way touches four different tasks, and no single service
 does all of them well. Finding the right ontology term is a search problem
 against BioPortal. Turning a design into a valid CEDAR schema is a modeling and
 validation problem. Seeing what that schema looks like is a rendering problem.
 Keeping and sharing the result is a storage problem. So we built four small MCP
-servers, one for each job, and an assistant orchestrates them. Together they
+servers, one for each task, and an assistant orchestrates them. Together they
 carry a template from a plain-language description all the way to a stored,
 standards-based artifact, without the model ever having to invent a schema or an
 identifier on its own.
