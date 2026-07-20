@@ -28,7 +28,7 @@ extra_css:
   - stylesheets/extra.css
 
 repo_url: https://github.com/metadatacenter/cedar-mkdocs
-edit_uri: edit/develop/docs/
+edit_uri: edit/main/docs/
 
 nav:
   - Home: index.md
