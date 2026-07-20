@@ -47,7 +47,9 @@ Setup instructions are in the [Appendix](#appendix-configuring-the-mcp-servers).
 
 ## What We Will Build
 
-In this tutorial you build a real piece of CEDAR metadata by conversation alone.
+In this tutorial you build real CEDAR artifacts by conversation alone: a template,
+the specification that defines how a kind of data should be described, and an
+instance, the metadata that fills that specification in.
 You describe what you want in plain language, and an assistant backed by the four
 MCP servers does the rest: it finds the right ontology terms, assembles a valid
 template, renders it as a form you can inspect, and fills an instance of it, right
@@ -56,7 +58,7 @@ through and no schema to hand-write. That path, from a sentence to a
 standards-based artifact, is what we are demonstrating.
 
 Concretely, we build one template, **Tissue Sample**, with two plain identifier
-fields and three fields constrained to ontology terms, and then fill one instance
+fields and three fields constrained to ontology terms, and then populate one instance
 of it. Two companion tutorials do this by hand: the [CEDAR Tutorial](cedar_tutorial.md)
 walks through creating folders, templates, and fields in the Workbench, and the
 [CEDAR Controlled Term Tutorial](cedar_term_tutorial.md) clicks through the term
