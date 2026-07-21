@@ -74,3 +74,41 @@ its `id` and `label`.
   - id: http://purl.obolibrary.org/obo/DOID_10763
     label: hypertension
 ```
+
+## Nested Elements
+
+An element does not hold a value of its own. Its entry under `children` holds its own
+`children`, one for each field or element it contains, nested the same way as at the top
+level. A repeating element holds a list of such entries.
+
+```yaml
+  Address:
+    children:
+      Street:
+        value: 450 Serra Mall
+      City:
+        value: Stanford
+  Contributors:
+  - children:
+      Name:
+        value: Ada Lovelace
+  - children:
+      Name:
+        value: Alan Turing
+```
+
+## Standalone Element Instances
+
+An element instance can also stand on its own, outside any template instance, using
+`type: element-instance`. It carries the same `name`, `id`, and `children` as a nested
+element value, plus the `type` discriminator that lets it stand alone.
+
+```yaml
+type: element-instance
+name: Address
+children:
+  Street:
+    value: 450 Serra Mall
+  City:
+    value: Stanford
+```

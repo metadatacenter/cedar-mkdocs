@@ -58,6 +58,7 @@ Keys, in alphabetical order, with the page that defines each.
 | `recommended` | [Fields: Core Structure](../fields-core.md) |
 | `regex` | [Text Field](../field-types/text-field.md) |
 | `required` | [Fields: Core Structure](../fields-core.md) |
+| `selected` | [Radio Field](../field-types/radio-field.md), [Single-Select List Field](../field-types/single-select-list-field.md), [Checkbox Field](../field-types/checkbox-field.md), [Multi-Select List Field](../field-types/multi-select-list-field.md), [Text Field](../field-types/text-field.md) |
 | `sourceAcronym` | [Controlled Term Field](../field-types/controlled-term-field.md#actions) |
 | `sourceIri` | [Controlled Term Field](../field-types/controlled-term-field.md#actions) |
 | `status` | [Versioning and Status](../versioning.md) |

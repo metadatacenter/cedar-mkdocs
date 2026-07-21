@@ -54,9 +54,8 @@ giving the field a semantic identity beyond its name.
 
 These affect how the field appears in this parent, not what it means. `overrideLabel` and
 `overrideDescription` replace the field's own `name` and description for this placement.
-`hidden` keeps the field out of the form, `continuePreviousLine` sets it beside the previous
-field rather than on a new line, and `valueRecommendation` turns on value suggestions as the
-author fills it in.
+`hidden` keeps the field out of the form, and `continuePreviousLine` sets it beside the
+previous field rather than on a new line.
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
@@ -64,7 +63,6 @@ author fills it in.
 | `overrideDescription` | string | optional | A display description for this field in this parent. |
 | `hidden` | boolean | optional | The field is hidden in the form. |
 | `continuePreviousLine` | boolean | optional | Lay the field out on the same line as the previous one. |
-| `valueRecommendation` | boolean | optional | Enable value suggestions for the field. |
 
 Static fields additionally carry `width` and `height` here; see [Static Fields](field-types/static-fields.md).
 
@@ -72,9 +70,8 @@ Static fields additionally carry `width` and `height` here; see [Static Fields](
 
 A field written as a child of a template or element carries its parent-relative settings in
 `configuration`. A field written as a top-level definition has no parent, so the
-field-level settings that do not depend on a parent — `hidden`, `continuePreviousLine`,
-`valueRecommendation`, and the static-field `width` and `height` — appear directly among
-the field's keys instead. The parent-only settings (`propertyIri`, `overrideLabel`,
+field-level settings that do not depend on a parent — `hidden`, `continuePreviousLine`, and
+the static-field `width` and `height` — appear directly among the field's keys instead. The parent-only settings (`propertyIri`, `overrideLabel`,
 `overrideDescription`, and the required/recommended/multiple bindings) do not apply to a
 standalone field.
 

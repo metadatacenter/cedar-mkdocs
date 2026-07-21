@@ -18,7 +18,7 @@ children:
 
 Each entry in `children` is a field or element, told apart by its own `type`. Its `name` is
 the user-friendly label. Its `key` is essentially the child artifact's index within the
-artifact: it must be unique per artifact, and it binds the child artifact's value in an
+artifact. It must be unique per artifact, and it binds the child artifact's value in an
 instance.
 
 ## Template Keys
