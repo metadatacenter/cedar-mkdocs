@@ -29,7 +29,7 @@ description: A postal address
 id: https://repo.metadatacenter.org/template-elements/be89d73
 ```
 
-An instance opens the same way, and additionally names the template it conforms to:
+An instance opens the same way, and additionally identifies the template it conforms to:
 
 ```yaml
 type: instance
@@ -37,6 +37,11 @@ name: SDY232
 id: https://repo.metadatacenter.org/template-instances/1f9a2b3
 isBasedOn: https://repo.metadatacenter.org/templates/7b8977e
 ```
+
+These four kinds fall into two families. A template, element, or field is a **schema
+artifact**, describing the shape that metadata must take. An instance is an **instance
+artifact**, holding metadata that conforms to a template. A few keys apply only to schema
+artifacts, since only a schema artifact defines structure.
 
 ## The `type` Discriminator
 
@@ -61,6 +66,12 @@ field type. The reader dispatches on it. The value fixes which further keys are 
 | `language` | string | optional | The natural language of the artifact's content, as an IETF BCP 47 language tag (for example `en`). Omitted when empty. |
 
 ## Identity
+
+An artifact's `id` is its own identifier, an IRI. The model fixes no particular form for it.
+Any valid IRI serves. In practice CEDAR mints identifiers under its own repository, so a
+CEDAR `id` usually looks like `https://repo.metadatacenter.org/templates/7b8977e`, with a
+path segment naming the artifact kind and a trailing identifier. An `id` from another source
+is equally valid, as long as it is a well-formed IRI.
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
@@ -99,3 +110,14 @@ A field's `type` is one of 25 field types, each collecting a particular kind of 
 | `static-youtube-video` | An embedded video (collects no value). |
 | `static-section-break` | A section divider (collects no value). |
 | `static-page-break` | A page divider (collects no value). |
+
+## Model Version
+
+Every schema artifact records the version of the CEDAR model it is written against, in
+`modelVersion`. The current model version is `1.6.0`. Because it names the modelling language
+rather than any one artifact's content, `modelVersion` changes only when the CEDAR model
+itself changes. An instance does not carry it.
+
+| Key | Value | Presence | Meaning |
+|-----|-------|----------|---------|
+| `modelVersion` | string | optional | The version of the CEDAR model the artifact conforms to (currently `1.6.0`). |

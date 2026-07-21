@@ -6,5 +6,4 @@ in a form software can act on. It is the reference for writing and reading CEDAR
 YAML.
 
 The model is defined first, on its own terms and independently of any serialization. The
-rest of the specification defines the YAML for this model, construct by construct. It closes
-with complete worked artifact examples.
+rest of the specification defines the YAML for this model, construct by construct.

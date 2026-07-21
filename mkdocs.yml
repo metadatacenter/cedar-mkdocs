@@ -125,7 +125,11 @@ nav:
       - yaml-spec/versioning.md
       - yaml-spec/provenance.md
       - yaml-spec/annotations.md
-      - yaml-spec/examples.md
-      - yaml-spec/appendices.md
+      - Appendices:
+          - yaml-spec/appendices/index.md
+          - yaml-spec/appendices/key-index.md
+          - yaml-spec/appendices/controlled-vocabularies.md
+          - yaml-spec/appendices/datatypes.md
+          - yaml-spec/appendices/glossary.md
 
   - Operations and Management: operations-and-management.md
