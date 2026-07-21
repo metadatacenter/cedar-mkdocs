@@ -1,6 +1,9 @@
 # Text Field
 
-A text field collects free text. In YAML its `type` is `text-field`.
+A text field collects a single line of free text, the usual choice for a short,
+unconstrained value such as a name or an identifier. Optional keys bound and validate what
+the author enters. `minLength` and `maxLength` limit its length, and `regex` requires it to
+match a regular expression. In YAML its `type` is `text-field`.
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
@@ -18,8 +21,9 @@ A text field collects free text. In YAML its `type` is `text-field`.
   maxLength: 10
 ```
 
-A text field may constrain its value to a fixed list of literals. Each entry has a `label`;
-one may be marked `selected` as the default.
+A text field may also restrict its value to a fixed list of literals, turning it into a
+chooser among preset strings. Each entry has a `label`, and one may be marked `selected` as
+the default.
 
 ```yaml
 - key: phase

@@ -20,7 +20,7 @@ authority.
 | [`single-select-list-field`](single-select-list-field.md) | One option, from a dropdown list. |
 | [`checkbox-field`](checkbox-field.md) | Any number of options, as checkboxes. |
 | [`multi-select-list-field`](multi-select-list-field.md) | Any number of options, from a dropdown list. |
-| [`link-field`](link-field.md) | A URI. |
+| [`link-field`](link-field.md) | An IRI. |
 | [`phone-number-field`](phone-number-field.md) | A phone number. |
 | [`email-field`](email-field.md) | An email address. |
 

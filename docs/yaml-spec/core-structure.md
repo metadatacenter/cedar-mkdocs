@@ -38,7 +38,7 @@ id: https://repo.metadatacenter.org/template-instances/1f9a2b3
 isBasedOn: https://repo.metadatacenter.org/templates/7b8977e
 ```
 
-## The `type` discriminator
+## The `type` Discriminator
 
 Every definition opens with `type`, whose value names the artifact kind and, for fields, the
 field type. The reader dispatches on it. The value fixes which further keys are meaningful.
@@ -51,7 +51,7 @@ field type. The reader dispatches on it. The value fixes which further keys are 
 | `instance` | A template instance. |
 | `element-instance` | A standalone element instance. |
 
-## Descriptive keys
+## Descriptive Keys
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
@@ -68,7 +68,7 @@ field type. The reader dispatches on it. The value fixes which further keys are 
 
 A nested child is not required to have an `id`; when it does, it is preserved.
 
-## Field types
+## Field Types
 
 A field's `type` is one of 25 field types, each collecting a particular kind of value.
 
@@ -83,7 +83,7 @@ A field's `type` is one of 25 field types, each collecting a particular kind of 
 | `single-select-list-field` | One option, from a dropdown list. |
 | `checkbox-field` | Any number of options, as checkboxes. |
 | `multi-select-list-field` | Any number of options, from a dropdown list. |
-| `link-field` | A URI. |
+| `link-field` | An IRI. |
 | `phone-number-field` | A phone number. |
 | `email-field` | An email address. |
 | `attribute-value-field` | User-supplied attribute/value pairs. |

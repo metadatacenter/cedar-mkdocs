@@ -23,7 +23,7 @@ An element's `children` may hold elements and fields. Because an element can its
 elements, this allows nesting to any depth. An element may stand as its own definition or sit
 inside a template or another element.
 
-## Element keys
+## Element Keys
 
 Beyond the [core keys](core-structure.md) every artifact carries, an element adds:
 
@@ -34,17 +34,35 @@ Beyond the [core keys](core-structure.md) every artifact carries, an element add
 
 ## Element Configuration
 
-Inside a parent, an element carries a `configuration` block. These settings depend on where
-the element sits rather than on the element itself. They control how it binds to a property,
-how it is labelled and described in this parent, and whether it repeats. A repeating element
-stands for a list of occurrences, bounded by a minimum and maximum count.
+Inside a parent, an element carries a `configuration` block. Its settings depend on where the
+element sits, not on the element itself. They fall into a few groups.
 
-| Key in `configuration` | Value | Meaning |
-|------------------------|-------|---------|
+### Repetition
+
+A repeating element stands for a list of occurrences. `multiple` marks it as repeating, and
+`minItems` and `maxItems` bound how many times it may occur.
+
+| Key | Value | Meaning |
+|-----|-------|---------|
 | `multiple` | boolean | The element may occur more than once. |
 | `minItems` | integer | Minimum number of occurrences. |
 | `maxItems` | integer | Maximum number of occurrences. |
+
+### Property Binding
+
+`propertyIri` sets the property the element maps to when its contents appear in an instance.
+
+| Key | Value | Meaning |
+|-----|-------|---------|
 | `propertyIri` | IRI | The property the element binds to in an instance. |
+
+### Presentation
+
+`overrideLabel` and `overrideDescription` replace the element's own `name` and description
+for this placement, without changing the element itself.
+
+| Key | Value | Meaning |
+|-----|-------|---------|
 | `overrideLabel` | string | A display label for this element in this parent, replacing its `name`. |
 | `overrideDescription` | string | A display description for this element in this parent. |
 

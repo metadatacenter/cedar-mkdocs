@@ -2,7 +2,7 @@
 
 These examples put the pieces together. Each is complete.
 
-## A template and a conforming instance
+## A Template and a Conforming Instance
 
 A template with three fields — a required text field, a numeric field, and a controlled-term
 field:
@@ -50,7 +50,7 @@ children:
     label: heart disease
 ```
 
-## A repeating, nested element
+## A Repeating, Nested Element
 
 A template whose one child is an element that may occur up to four times, each holding two
 fields:
@@ -95,7 +95,7 @@ children:
         value: joe@example.edu
 ```
 
-## Controlled terms with an attribute-value field
+## Controlled Terms with an Attribute-Value Field
 
 A template combining a controlled-term field with an attribute-value field for
 author-supplied extras:

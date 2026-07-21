@@ -1,6 +1,8 @@
 # Text Area Field
 
-A text area field collects multi-line text. In YAML its `type` is `text-area-field`.
+A text area field collects multi-line text, suited to longer prose such as a summary or a
+set of notes. Like a text field, it accepts `minLength`, `maxLength`, and `regex` to bound
+and validate the entry. In YAML its `type` is `text-area-field`.
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|

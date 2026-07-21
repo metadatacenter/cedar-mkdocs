@@ -16,7 +16,7 @@ children:
     value: Cardiology cohort
 ```
 
-## Field values
+## Field Values
 
 Which keys a field's value carries depends on the kind of value. A plain literal carries
 just `value`. A typed literal adds `datatype`. A controlled term carries `id` with a
@@ -52,7 +52,7 @@ accession within the vocabulary.
     notation: DOID:530
 ```
 
-## Multiple values
+## Multiple Values
 
 A field that accepts more than one value holds a list under its name. Each entry has the
 same shape it would have as a single value. For a plain literal field, each entry carries a

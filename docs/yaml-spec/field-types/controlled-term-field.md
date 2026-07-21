@@ -9,11 +9,11 @@ and the four source kinds — an ontology, a branch of an ontology, individual c
 value set — cover the ways a field can be bound to a vocabulary. `actions` refines the set,
 and `default` names a starting term.
 
-## Value specifications
+## Value Specifications
 
 `values` is a sequence. Each entry is distinguished by its `type`.
 
-### An entire ontology
+### An Entire Ontology
 
 Every term in a named ontology. Here a **Cell Type** field is bound to the whole Cell
 Ontology, so any cell type is permitted.
@@ -38,7 +38,7 @@ Ontology, so any cell type is permitted.
     iri: https://data.bioontology.org/ontologies/CL
 ```
 
-### A branch of an ontology
+### A Branch of an Ontology
 
 Every term at or below a chosen class. Here an **Organ** field is bound to the *organ*
 branch of Uberon, so the value must be an organ.
@@ -66,7 +66,7 @@ branch of Uberon, so the value must be an organ.
     maxDepth: 0
 ```
 
-### Individual classes
+### Individual Classes
 
 One or more specific terms, listed explicitly. Here an **Assay Type** field permits exactly
 three assay classes from the Ontology for Biomedical Investigations.
@@ -106,7 +106,7 @@ three assay classes from the Ontology for Biomedical Investigations.
     iri: http://purl.obolibrary.org/obo/OBI_0002119
 ```
 
-### A value set
+### A Value Set
 
 Every term in a curated value set. Here an **Analyte Class** field is bound to the *Analyte
 class* value set from HRAVS.
@@ -131,7 +131,7 @@ class* value set from HRAVS.
     iri: https://purl.humanatlas.io/vocab/hravs#HRAVS_1000371
 ```
 
-## Combining specifications
+## Combining Specifications
 
 Several entries may appear together; the permitted values are their union. A field could, for
 example, allow every term in one ontology plus a handful of named classes from another.
@@ -159,7 +159,7 @@ or moves one to a given position in the presented list. `actions` is a sequence.
     type: class
 ```
 
-## Default value
+## Default Value
 
 A controlled-term default names a term by IRI and its label.
 

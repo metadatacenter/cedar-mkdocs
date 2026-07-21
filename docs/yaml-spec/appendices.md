@@ -1,6 +1,6 @@
 # Appendices
 
-## Appendix A: Key index
+## Appendix A: Key Index
 
 Keys, in alphabetical order, with the chapter that defines each.
 
@@ -75,7 +75,7 @@ Keys, in alphabetical order, with the chapter that defines each.
 | `version` | [Versioning and Status](versioning.md) |
 | `width` | [Fields: Core Structure](fields-core.md), [Static Fields](field-types/static-fields.md) |
 
-## Appendix B: Controlled vocabularies
+## Appendix B: Controlled Vocabularies
 
 **Artifact and instance `type`**: `template`, `element`, `instance`, `element-instance`,
 and the 25 field-type tokens.

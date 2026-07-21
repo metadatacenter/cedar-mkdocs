@@ -21,7 +21,7 @@ the user-friendly label. Its `key` is essentially the child artifact's index wit
 artifact: it must be unique per artifact, and it binds the child artifact's value in an
 instance.
 
-## Template keys
+## Template Keys
 
 Beyond the [core keys](core-structure.md) every artifact carries, a template can have the
 following fields:

@@ -1,7 +1,9 @@
 # Numeric Field
 
-A numeric field collects a number of a given XSD datatype. In YAML its `type` is
-`numeric-field`.
+A numeric field collects a number. Its required `datatype` fixes the kind of number, from an
+integer of a given width to a decimal or floating-point value. `minValue` and `maxValue`
+bound the range, `decimalPlaces` sets how many digits follow the decimal point, and `unit`
+records a unit of measure shown alongside the value. In YAML its `type` is `numeric-field`.
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
