@@ -125,6 +125,7 @@ nav:
       - yaml-spec/versioning.md
       - yaml-spec/provenance.md
       - yaml-spec/annotations.md
+      - yaml-spec/minimal-and-full.md
       - Appendices:
           - yaml-spec/appendices/index.md
           - yaml-spec/appendices/key-index.md
