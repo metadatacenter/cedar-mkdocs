@@ -1,9 +1,8 @@
 # The CEDAR Model
 
-The CEDAR model is a single, general model for representing scientific metadata. It gives a
-community one standards-based way to state what must be recorded about a kind of experiment
-or dataset, to constrain how each item is expressed, and to record the metadata that
-results. The model has a small set of building blocks — templates, elements, and fields —
+The CEDAR model is a single, general model for representing metadata. It gives one consistent
+way to state what must be recorded about a kind of thing, to constrain how each item is
+expressed, and to record the metadata that results. The model has a small set of building blocks — templates, elements, and fields —
 that compose to describe requirements of any size, with the permitted values grounded in
 shared controlled vocabularies.
 
