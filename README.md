@@ -71,3 +71,12 @@ You can see the content served by this dev server at http://localhost:8000/
 https://facelessuser.github.io/pymdown-extensions/extensions/superfences/
 
 https://python-markdown.github.io/extensions/
+
+## Regenerating tutorial screenshots
+
+The screenshots in the CEDAR Tutorial and CEDAR Controlled Term Tutorial are
+generated, not captured by hand, by a Playwright step-driver that walks the live
+CEDAR Workbench. It lives in [`runner/`](runner/) and writes straight into
+`docs/tutorials/img/` and `docs/tutorials/term-img/`. This is local authoring
+tooling (Node/Playwright); it never runs during a Read the Docs build. See
+[`runner/README.md`](runner/README.md) for setup and usage.

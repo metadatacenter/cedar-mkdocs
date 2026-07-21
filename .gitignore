@@ -3,3 +3,11 @@ site/
 *.iml
 .venv/
 .claude/
+
+# Screenshot-generation runner (Node/Playwright) — local tooling only
+node_modules/
+runner/storageState.json
+runner/failures/
+test-results/
+playwright-report/
+.DS_Store

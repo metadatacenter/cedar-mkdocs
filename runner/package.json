@@ -1,0 +1,15 @@
+{
+  "name": "cedar-tutorial-runner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Playwright step-driver that walks the CEDAR Workbench and generates tutorial screenshots",
+  "scripts": {
+    "auth": "node auth.mjs",
+    "run": "node run.mjs",
+    "run:headed": "HEADED=1 node run.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.48.0"
+  }
+}
