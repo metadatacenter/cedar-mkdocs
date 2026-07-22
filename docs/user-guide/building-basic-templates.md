@@ -1,674 +1,396 @@
 # Building Basic Templates
 
-The component templating resources can be shared with other users, published on the Web as JSON Schema, and reused within other Metadata Templates and Elements. 
-
-And of course, the completed Template generates the metadata form interfaces 
-for metadata authors to fill out with rigorous semantic metadata.
+You build a template in the Template Designer, composing it from fields and elements. The
+fields and elements you create can be shared, published on the Web, and reused in other
+templates and elements. The finished template generates the form that metadata authors fill
+out.
 
 ## First Steps
 
-In the first steps to create a CEDAR Metadata Template resource, 
-you will provide a human-readable label, a unique identifier, 
-and a description of what the Template resource represents (e.g., "Injury-related treatments"). 
+Creating a template starts with three things: a human-readable name, an optional identifier,
+and a description of what the template represents (for example, "Injury-related treatments").
 
-To create a new template, first click the "New" button on the Desktop's navigation sidebar
-(upper left of the Workspace view) and
-select the "Template" option in the dropdown menu. 
-This step opens the Template Designer as shown below. 
-
-Enter the human-readable Name, Identifier and Description of the Template resource 
-using the three text input fields ('Untitled', 'Identifier', 'Description') 
-underlined in the image below. 
-The Name is used as the name of the artifact in the Desktop, 
-and can be changed from the Desktop view.
+Click the **New** button on the navigation sidebar (upper left of the Workspace) and choose
+**Template** from the menu. This opens the Template Designer. Enter the Name, Identifier, and
+Description in the three text fields ('Untitled', 'Identifier', 'Description') underlined in
+the image below. The Name labels the artifact in your workspace and can be changed later.
 
 ![](../img/userguide/creating-new-template-20191216.png){:width="80%" class="centered"}
 
-You can [save and close your Template](#saving-and-closing) at any time and return to it later. You can open it for viewing or editing
-(or any other Template for which you have those access privileges) 
-by double-clicking on its icon in the Desktop. 
+You can [save and close a template](#saving-and-closing) at any time and return to it later.
+To reopen it, or any template you have access to, double-click its icon in the workspace.
 
-### **Useful Content Tips**
+### Naming and Describing a Template
 
-By default CEDAR searches look at the artifact Name, Identifier, Description,
-and Version fields for matches,
-so consider what terms will be most important to include 
-for searches to find your template. 
+CEDAR searches match on an artifact's Name, Identifier, Description, and Version, so choose
+words that will help the template be found.
 
-**Name:** The name of the template should fit easily into the Workspace view if possible, 
-keeping in mind that CEDAR names metadata instances by appending 'metadata' 
-to the template name. 
-The Name is analogous to the title of a web page. 
-As a rough guideline, allow about 40-50 characters for your label.
+**Name.** Keep the name short enough to fit the workspace view, around 40 to 50 characters.
+CEDAR names instances by appending "metadata" to the template name, so think of the Name as
+the title of the form. You need not add "Template" or "Form" to the end; that is clear from
+context.
 
-You don't need to append 'Template' or 'Form' to the end of the label; 
-this will be clear from context.
+**Identifier.** For a template, the Identifier is an *external* identifier for something the
+template corresponds to, not a CEDAR identifier. Most authors leave it blank. It is for those
+who want to tie the template to an outside entity, and it works best when that entity has a
+stable, automatically assigned identifier. This Identifier is for the template, not for the
+instances filled out from it.
 
-**Identifier:** For CEDAR templating artifacts, the Identifier 
-refers to an external identifier
-of an artifact corresponding to this template, not a CEDAR identifier.
-You do not have to create an identifier; 
-in fact, typically you will leave this field blank. 
-The attribute is provided for users
-who want to identify an external entity associated with this template. 
-The Identifier works best when unique identifiers for the external objects
-can be automatically assigned and persistently maintained.
-(Please note this Identifier corresponds to the template, 
-*not* for the metadata instances filled out for this template.)
+**Description.** The description can be any length; a sentence or short paragraph is common.
+Describe what the template documents. Since the context already establishes that this is a
+CEDAR template describing metadata, you need not say so, though "Metadata describing …" often
+makes a useful opening. Because it is a longer field, the description is a good place for
+keywords you want to search on.
 
-**Description:** This description can be any length; 
-a sentence or short paragraph is common. 
-Describe the subject that the template is documenting; 
-since we already know from context this is a CEDAR template, 
-you don't have to include that in the description.  
-Of course we also know it describes metadata, 
-but "Metadata describing …" often offers a useful setup for your description.
+### Next Steps
 
-Because Description is a longer field, it is a good place to include key words or other
-information you want to be able to search on to find this field. 
-
-### **Next Steps**
-
-Now, you can fill in the content of your template by [Adding Fields](#adding-fields) 
-and [Adding Elements](#adding-elements),
-or [save and close it](#saving-and-closing)
-to return to it later.
+Fill in the template by [adding fields](#adding-fields) and [adding elements](#adding-elements),
+or [save and close it](#saving-and-closing) to return later.
 
 ## Adding Fields
 
-Fields can be added to a CEDAR Template in two ways: 
-by importing a stand-alone Field artifact which was created separately,
-or by defining a field within an Element resource or a Template resource. 
-(We refer to stand-alone CEDAR Field artifacts throughout this User Guide with a capital 'F',
-and refer to field definitions within templating artifacts with a lower-case 'f'.)
+A field can be added to a template in two ways: by defining it directly inside a template or
+element, or by importing a stand-alone Field artifact created separately. Throughout this
+guide, a stand-alone Field artifact is written with a capital "F", and a field defined inside a
+template or element with a lower-case "f".
 
-### **Creating Field Content in a Resource**
+### Defining a Field in Place
 
-While specifying a field in a templating resource (a Template, Element, or Field), 
-you can customize the Field resource in a number of ways,
-including constraining the values that metadata editors can input 
-when they enter their metadata for the field. 
-Some customizations apply to almost every field type; 
-others are only allowed for one or two field types.
+A field defined inside a template or element can be customized in many ways, including
+constraining the values a metadata author may enter. Some customizations apply to nearly every
+field type; others belong to just one or two.
 
-In Template and Element artifacts, multiple fields can be added;
-in a Field artifact, only one field can exist, and it must be a data input field.
+A template or element can hold many fields. A Field artifact holds exactly one, and it must be
+a data-entry field.
 
-You organize Fields and Elements in your templating resource
-by dragging them where you want them.
-Use the drag handles at the upper left of a Field or Element to grab it, and drag up or down. If you have trouble dragging it to the desired location,
-try shrinking the view within your browser to put more of the template on the screen.
-(Note: You can not change or organize content in an imported Field or Element.)
+Arrange fields and elements by dragging them. Grab the drag handle at the upper left of a field
+or element and drag it up or down. If dragging is awkward, shrink the browser view to fit more
+of the template on screen. You cannot rearrange the contents of an imported Field or Element.
 
 #### Adding a Field Definition
 
 ![](../img/userguide/field-addition-menu-20191229.png){:width="8%" class="right"}
-Choose the type of field to add to your templating resource
-using the vertical selector at the upper right of your Template Designer window.
-The first few choices give you simple ways to add
-simple text, date, email, and numeric fields to your Template resource.
+Choose a field type from the vertical selector at the upper right of the Template Designer. The
+first few choices add common fields directly: text, date, email, and numeric.
 
-If you want a less common field type—including organizing and documentation fields—
-click on the ellipsis (three dots) icon to bring up many more field choices.
-The choices on the left are fields for data entry;
-the choices in the right column allow the template author 
-to customize presentation of the template to the metadata creator.
+For a less common field type, including presentation and documentation fields, click the
+ellipsis (three dots) for the full set. The left column holds data-entry fields; the right
+column holds fields that shape how the template is presented to the metadata author.
 
-The search (magnifying glass) icon brings up a window to find 
-other CEDAR templating resources—Elements or Fields—
-that can be imported into the resource you are editing.
-Use of this window is described in [Adding Elements](#adding-elements)
+The search (magnifying glass) icon opens a window for finding other elements or fields to
+import. That window is covered in [Adding Elements](#adding-elements).
 
-#### Choosing and Configuring the Field Definition
+#### Choosing and Configuring a Field
 
-For each data-entry field type, CEDAR supports certain options.
-For example, the Required option is offered on every data-entry field type.
-You can find simple information about a few key field types below, 
-and detailed information about field types and their customizations 
-in the [Field Type Reference](#field-type-reference).
+Each data-entry field type supports a set of options. Required, for instance, is offered on
+every data-entry field. A few key field types are covered next; the full set of types and
+their options is in the [Field Type Reference](#field-type-reference).
 
 #### Common Options
 
-In addition to the Required option mentioned above, many fields support the Multiple option. 
+Besides Required, many fields support the Multiple option.
 
-##### Required
+**Required.** When Required is set to Yes, the Metadata Editor marks the field as required and
+warns the author on save if it is empty. The author can dismiss the warning and save anyway.
 
-If this option is set to Yes, the Metadata Editor indicates to the metadata author
-that the field is required, and issues a warning when the metadata is saved 
-but this field has not been filled out with metadata.
-The metadata author can choose to ignore the warning and save the metadata 
-even though the required field is not completed.
+**Multiple.** When Multiple is set to Yes, the Template Designer shows controls for the minimum
+and maximum number of entries. The Metadata Editor then lets the author enter the field more
+than once, requires at least the minimum number of slots (though they need not be filled), and
+stops the author at the maximum by disabling the Copy icon.
 
-##### Multiple
+**Value Relation.** The Value Relation optionally sets the relationship from a field's parent
+(its template or element) to the field's value. With a Value Relation of "has study
+characteristic" from the Ontology for Clinical Relations
+(`http://purl.org/net/OCRe/OCRe.owl#OCRE406000`), the metadata reads as `<ParentElement>
+has_study_characteristic <user-selected-value>`. To set one, click the RDF icon at the right of
+the field and search for a property. If the search returns classes rather than properties,
+click Start Over to clear it. After you pick a property, the drop-down arrow beside the RDF
+icon shows the current choice. Clicking the RDF icon again clears the property and starts a new
+search.
 
-When Multiple is set to Yes, the Template Designer displays a control to define
-the minimum and maximum number of entries allowed for the field. 
+#### Options for a Text Field
 
-If Multiple is set to Yes, then the Metadata Editor 
-provides an interface to fill out the field multiple times. 
-The Metadata Editor requires the minimum number of cells for that field to be present
-(though they do not have to be filled out with values), 
-and prevents more than the maximum number of entries by making the Copy icon unavailable). 
+The Options tab presents features specific to the field type.
 
-##### Value Relation
+**Default Value.** Sets the value used when the author leaves the field empty. It can be a
+string or a controlled term (an IRI).
 
-The Value Relation optionally defines for every metadata-entry field 
-the relationship from the field's parent entity (the Template, or the Element)
-to the field's value. For example, when the Value Relation is 'has study characteristic'
-from the Ontology for Clinical Relations (http://purl.org/net/OCRe/OCRe.owl#OCRE406000), 
-the resulting metadata will be readable as
-`<ParentElement> has_study_characteristic <user-selected-value>`
-
-To select a Value Relation, click on the RDF icon at the right side of the field.
-This brings up a search field that allows you to choose an appropriate Value Relation.
-(If the search brings up Classes instead of Properties, 
-click on the Start Over button to clear the previous search.) 
-Once you select a property, you are returned to the template. 
-The selected property can be viewed by clicking on the drop-down arrow 
-next to the RDF icon. 
-(Clicking on the RDF icon again will clear any existing property and begin a new search.)
-
-#### Configurations for Basic Text Field
-
-Clicking on the Options tab presents additional features appropriate to the field type.
-
-##### Options—Default Value
-
-The Default Value option specifies the value for the field if the metadata author does not
-add a value to that field when filling out the metadata. 
-The value can be either a string or a controlled term (expressed as an IRI).
-
-##### Options—Minimum/Maximum String Length
-
-With this option you can set a minimum length for the string, 
-a maximum length for the string, or both.
-Users filling out the metadata will see a warning if the metadata is saved while 
-the value in this field has a text length that does not satisfy the criteria.
-
-##### Values
+**Minimum and Maximum Length.** Sets a minimum length, a maximum length, or both. The author
+is warned on save if the entry does not meet the limits.
 
 ![](../img/userguide/text-field-values-tab-20191229.png){:width="50%" class="right"}
-The Values tab shows a view of the current value set(s) that the metadata author
-can use to fill out a text field. If no selections are listed, the metadata author
-is prompted to enter free text. 
+**Values.** The Values tab shows the value sets an author may draw on. With none listed, the
+author enters free text.
 
 ![](../img/userguide/controlled-term-selection-modal-20191229.png){:width="50%" class="right"}
-Clicking on the Add button brings up a modal window 
-from which you can select the term, branch, or ontology 
-from which legal values may be chosen by the metadata author. 
-You can repeat this process as often as you want to select additional 
-terms, branches, or ontologies.
+Clicking Add opens a window for choosing a term, a branch, or a whole ontology of allowed
+values. Repeat to add more. For guidance on finding good terms, see
+[Choosing Controlled Terms](more-fair-templates.md#choosing-controlled-terms).
 
-Advice about finding and choosing controlled values is available in the [Choosing Controlled Terms](more-fair-templates.md#choosing-controlled-terms) section.
+**Suggestions.** Set the Suggestions tab to Yes to enable authoring suggestions for the field.
+See [Understanding the Suggestion System](understanding-the-suggestion-system.md).
 
-##### Suggestions
+#### Options for a Numeric Field
 
-Set the Suggestions tab to Yes to enable intelligent authoring suggestions 
-for this field from CEDAR. 
-You can read a detailed explanation of the suggestions system 
-at [Understanding the Suggestion System](understanding-the-suggestion-system.md).
+**Number Type.** By default a numeric field accepts any number, entered as an integer or a
+floating-point value. You can choose a more specific type from the 'Any numbers' drop-down:
+long integer, integer, double-precision real, or single-precision real. The choice constrains
+what the author may enter.
 
-#### Options for Numeric Fields
+**Unit of Measure.** A free-text label shown to authors and viewers of the metadata, before and
+after a value is entered.
 
-##### Number Type
+**Minimum and Maximum Value.** Sets a lowest value, a highest value, or both. The author is
+warned in real time if an entry falls outside the range.
 
-CEDAR provides a default numeric field, whose values can be entered as 
-either an integer or floating point number. 
-As a template creator you can also choose a more specific number type for this field.
+**Decimal Places.** Sets how many decimal places the author's value is displayed with.
 
-To select a specific number type for the field, click on the drop-down menu 
-labeled 'Any numbers'. Select from the list of number formats, including 
-long-integer numbers, integer numbers, double-precision real numbers, and
-single-precision real numbers. 
-Your choice will be reflected in the JSON value type used 
-to describe the number field in the template (JSON Schema), and 
-to specify the entered value in the metadata (JSON-LD).
+### Creating a Stand-Alone Field
 
-##### Unit of Measure
+Creating a Field artifact begins much like creating a template in [First Steps](#first-steps).
+Once created, its single field definition is built as in Adding a Field Definition above.
 
-You can specify the unit of measure as a string. 
-The string will be displayed to viewers and editors of metadata created using this field,
-both before and after a value is entered for the field. 
-
-##### Minimum/Maximum Value
-
-You can specify a minimum legal value, a maximum legal value, or both.
-Users entering metadata will be warned in real time 
-if entered values do not meet the field's value limit specifications.
-
-##### Decimal Places
-
-You can specify the number of decimal places used to display the value 
-entered by the metadata author. 
-
-### **Creating a Stand-Alone Field**
-
-This process begins by creating the Field artifact, 
-which is almost exactly like creating the Template artifact in [First Steps](#first-steps). 
-After that, the content of the Field artifact—the field definition—
-is created following the 
-Adding a Field Definition subsection above.
-
-To create a new stand-alone Field, 
-click the "New" button on the Desktop's navigation sidebar
-(upper left of the Workspace view) and
-select the "Field" option in the dropdown menu. 
-This step opens up the Field creation form as shown below. 
-
-Enter the human-readable Name, Identifier and Description of the Field  
-using the three text input fields ('Untitled', 'Identifier', 'Description') 
-underlined in the image below. 
-Note the Name is used as the name of the artifact in CEDAR, 
-and can also be changed from the Desktop.
+Click the **New** button on the navigation sidebar and choose **Field**. This opens the Field
+creation form. Enter the Name, Identifier, and Description in the three text fields ('Untitled',
+'Identifier', 'Description') underlined below. The Name labels the artifact in CEDAR and can be
+changed later.
 
 ![](../img/userguide/field-artifact-created-20200101.png){:width="80%" class="centered"}
 
-Now the content of the Field artifact—the field definition—can be created.
-Since only one field specification can be in a Field artifact,
-the Field template opens with a text field type already selected.
-If you want a different field type, simply select it from the drop-down menu,
-and the existing field definition will be replaced.
+Because a Field artifact holds exactly one field, it opens with a text field already selected.
+To use a different type, pick it from the drop-down; the existing definition is replaced.
 
-At any time during or following the Field artifact's creation, 
-you can save the artifact and use the Template Designer's left-arrow
-to return to the Desktop. 
-From there, you can modify the name, access permissions, and
-public visibility of the Field artifact, as described in
+At any point you can save the artifact and use the Template Designer's left-arrow to return to
+the workspace. From there you can change its name, permissions, and visibility, as described in
 [Managing Resources](managing-resources.md#managing-resources).
 
-### **Importing a Stand-Alone Field**
+### Importing a Stand-Alone Field
 
-Once the stand-alone Field artifact has been created, 
-you can import it into other Templates and Elements. 
-When you are editing a Template or Element,
-the search (magnifying glass) icon in the Template Designer's field addition menu 
-brings up a window to find other CEDAR templating resources—Elements or Fields—
-that can be imported into the Element or Field you are editing.
-Use of this window is described in [Adding Elements](#adding-elements).
+Once a Field artifact exists, you can import it into other templates and elements. While
+editing a template or element, the search (magnifying glass) icon in the field-addition menu
+opens a window for finding elements and fields to import. That window is covered in
+[Adding Elements](#adding-elements).
+
 ![](../img/userguide/artifact-import-window-20200101.png){:width="60%" class="centered"}
 
-### **Next Steps**
+### Next Steps
 
-You can fill in more content of your template by [Adding Elements](#adding-elements),
-or [save and close it](#saving-and-closing)
-to return to it later.
+Add more content by [adding elements](#adding-elements), or
+[save and close](#saving-and-closing) to return later.
 
 ## Adding Elements
 
-An Element resource is composed of field definitions (possibly imported within Field artifacts) and other Element resources. 
-(CEDAR does not handle recursion in Element resources.) 
-These Element resources enable Template creators to share, reuse, and extend existing Element resources across different Template resources and across user groups. 
+An element is composed of field definitions (possibly imported as Field artifacts) and other
+elements. Elements cannot recurse. They let template creators share, reuse, and extend the same
+group of fields across templates and across groups.
 
-(1) First, we create a new Element resource. 
-(2) We embed the newly created Element resource within our Template resource. 
+Adding an element takes two steps: create the element, then embed it in the template.
 
-### **Creating a new Element Resource**
+### Creating an Element
 
-To create a new Element resource, return to the Desktop if you are not already there. 
-(Use the "Back" button in the Template Designer—you may be prompted to save the artifact you are currently editing.) 
-Click on the "New" button in the navigation sidebar of the Desktop, 
-and select the "Element" option from the dropdown menu. 
-This action will launch the Element editor view of the Template Designer, 
-as shown below. 
+Return to the workspace, using the Back button in the Template Designer if needed (you may be
+prompted to save the artifact you are editing). Click **New** and choose **Element**. This
+opens the element view of the Template Designer.
 
 ![](../img/userguide/element-artifact-created-20200101.png){:width="80%" class="centered"}
 
-Enter the human-readable Name, Identifier and Description of the Field 
-using the three text input fields ('Untitled', 'Identifier', 'Description') 
-underlined in the image below. 
-Note the Name is used as the name of the artifact in CEDAR, 
-and can also be changed from the Desktop.
+Enter the Name, Identifier, and Description in the three text fields ('Untitled', 'Identifier',
+'Description') underlined below. The Name labels the artifact in CEDAR and can be changed later.
 
-Now the content of the Element artifact can be created.
-Field definitions can be added directly, or by importing Field artifacts;
-instructions for both operations are found in the [Adding Fields](#adding-fields) section.
+Build the element's content by adding field definitions directly or importing Field artifacts,
+both described in [Adding Fields](#adding-fields). You can also import existing elements, as
+described below.
 
-Element content can also be created by importing existing elements,
-as described below.
-
-At any time during or following the Field artifact's creation, 
-you can save the artifact and use the Template Designer's left-arrow
-to return to the Desktop. 
-From there, you can modify the name, access permissions, and
-public visibility of the Field artifact, as described in
+At any point you can save the artifact and use the left-arrow to return to the workspace, where
+you can change its name, permissions, and visibility, as described in
 [Managing Resources](managing-resources.md#managing-resources).
 
-#### **Spreadsheet-compatible Elements**
+#### Spreadsheet-Compatible Elements
 
-If you want users to be able to fill out their metadata using a spreadsheet—
-especially valuable if there are a lot of fields to be filled out with existing metadata—
-you must create your element to satisfy a particular requirement.
+To let authors fill an element out as a spreadsheet, useful when there are many fields to
+enter, the element must meet one requirement: it must be flat. It can hold no nested elements
+and no fields that allow multiple entries. The element itself must have Multiple enabled.
+Filling out such an element as a spreadsheet is described in
+[Filling Out Metadata](filling-out-metadata.md#filling-out-metadata).
 
-An element that is to be filled out as a spreadsheet must be 'flat', 
-meaning there are no further hierarchies or arrays within the element. 
-Embedding another element, or allowing multiple entries for any of its entries, 
-will prevent the user from displaying the element in spreadsheet mode.
-Also, the MULTIPLE attribute of the element must be defined to allow multiple entries.
+### Embedding an Element
 
-The process of filling out the metadata using spreadsheet mode
-is described in [Spreadsheet entry](filling-out-metadata.md#filling-out-metadata). 
+While editing a template or element, the search (magnifying glass) icon in the field-addition
+menu opens a window for finding elements and fields to import.
 
-### **Embedding the Element Resource**
-
-When you are editing a Template or Element,
-the search (magnifying glass) icon in the Template Designer's field addition menu 
-brings up a window to find other CEDAR templating resources—Elements or Fields—that 
-can be imported into the Element or Field you are editing.
 ![](../img/userguide/artifact-import-window-20200101.png){:width="60%" class="centered"}
 
-The navigation path in the lower left of the window starts in the current directory
-(from the last Desktop view), and can be used to navigate to other locations in CEDAR.
-However, most users will find Elements and Fields by searching for them.
+The navigation path at the lower left starts in your current folder and can move to other
+locations, but most authors find elements and fields by searching. Type a search string in the
+window's search field. Below, "Address" has been entered and searched; both elements and fields
+appear in the results.
 
-To perform a search, begin entering a search string in the search field of the window.
-In the image below, 'Address' has been added and the search performed when the user
-hit the return key. You can see that Elements and Fields are visible in the search results.
 ![](../img/userguide/artifact-import-window-search-20200101.png){:width="80%" class="centered"}
 
-To investigate a particular discovered Element for suitability,
-click on the Element to bring up its description, as seen below.
+To inspect a result, click it to see its description.
+
 ![](../img/userguide/artifact-import-window-metadata-20200101.png){:width="80%" class="centered"}
 
-To embed an Element or Field artifact in your templating resource, 
-either double-click on the artifact, 
-or click once on the artifact and then click on the Open button.
-The Element or Field will be incorporated at the end of your templating resource.
+To embed an element or field, double-click it, or click it once and click Open. It is added at
+the end of your template or element.
 
-Within the templating resource, you can not edit the core characteristics of 
-imported content (the Element or Field), 
-including the order of components within an imported Element.
-You will be able to relabel the imported content,
-and will be able to choose a property that relates the imported artifact to its parent.
-
-You can move an any imported Element or Field in your templating resource
-by dragging it where you want it.
-Use the drag handles at the upper left of the Element to grab it, and drag up or down. 
-If you have trouble dragging it to the desired location,
-try shrinking the view within your browser 
-to put more of the templating resource on the screen.
-(Note: You can not change or organize content in an imported Field or Element.)
+You cannot edit the core of imported content, including the order of components inside an
+imported element. You can relabel it and choose a property relating it to its parent. Move an
+imported element or field by dragging its handle at the upper left, up or down. If dragging is
+awkward, shrink the browser view to fit more on screen.
 
 ## Saving and Closing
 
-### **Saving**
+### Saving
 
-To save a templating resource—Template, Element, or Field—click on the Save button at the bottom right of the templating resource. 
-This will be labeled Save Template, Save Element, or Save Field depending on the
-type of templating resource you are editing.
+To save a template, element, or field, click the Save button at the lower right. It is labeled
+Save Template, Save Element, or Save Field depending on what you are editing.
 
 ![](../img/userguide/creating-new-template-20191216.png){:width="80%" class="centered"}
 
-At the top right of the templating resource, 
-there are 3 icons that indicate the resource status.
-The left-most icon (the circle) is filled when the instance has no unsaved changes, 
-but is a hollow yellow circle when there are unsaved changes.
+Three icons at the top right show the resource's status. The circle is filled when there are no
+unsaved changes and a hollow yellow circle when there are. When the lock (the middle icon) is
+yellow and closed, you cannot save your changes, even to a separate file. To get an editable
+version, exit the resource, copy it from the workspace, and edit the copy.
 
-If the lock (the middle icon) is yellow and locked, 
-you will not be able to save your changes, 
-even to a separate file. 
-To create an editable version of the resource,
-you will have to exit the resource, make a copy of it from the Desktop,
-and edit the copy you made.
+### Validation
 
-### **Validation**
+CEDAR checks that a template, element, or field is well-formed when it is opened and saved.
+This should always succeed, shown by a white checkmark in the third icon. A yellow checkmark
+signals a problem inside CEDAR; you can often keep working, but it is worth alerting the CEDAR
+team. On success, CEDAR shows a green "Template saved successfully" notice (or "Element" or
+"Field").
 
-CEDAR performs syntactical validation of a templating resource when it is opened and saved. 
-This checks that the resource conforms to the Template Model schema, 
-which is expressed as JSON Schema. 
-The validation should always succeed and yields a white checkmark in the third icon.
-If the syntactical validation fails, the checkmark turns yellow,
-indicating there is a problem in the CEDAR system. 
-Often you still will be able to work with the resource,
-but it is best to contact the CEDAR team to alert them to the problem.
+### Closing
 
-On a successful verification, CEDAR issues a green 
-"[Artifact] saved successfully" notification, where '[Artifact]' will be replaced by
-'Template', 'Element', or 'Field'. 
-
-### **Closing**
-
-#### Saving before closing
-
-While a templating resource is being edited in the Template Designer, 
-it can be saved at any time.
+While editing, you can save at any time.
 
 ![](../img/userguide/CEDAR-recent-changes-message-20200103.png){:width="15%" class="right"}
-If you have made changes and try to leave the resource without saving it
-by using the CEDAR back button,
-CEDAR will issue a warning. If you click Continue, any changes you made will be lost
-and CEDAR will return to the Desktop view. 
-Choosing the Go Back button will return you to the templating resource.
+If you try to leave with unsaved changes using the CEDAR back button, CEDAR warns you. Continue
+discards the changes and returns to the workspace; Go Back returns you to the resource.
 
 ![](../img/userguide/chrome-browser-leaving-site-message-202000103.png){:width="15%" class="right"}
-If you have made changes and try to leave the resource without saving it by using the browser back button or closing the browser window, the browser will issue an error message.
-In Chrome, click on Leave Site (the default) to close the resource, 
-and on Cancel to remain on the page.
+If you try to leave using the browser's back button or by closing the window, the browser warns
+you instead. In Chrome, Leave Site (the default) closes the resource, and Cancel keeps you on
+the page.
 
-``` 
-Because there might be unusual conditions that cause you to lose your session,
-we strongly encourage you to save your work often. 
-We are unable to restore work that has been lost when the session is lost.
-```
+Sessions can be lost in unusual conditions, and lost work cannot be restored, so save often.
 
-If you have remained on the page, you can save the resource and then 
-return to the Desktop view or close the window.
+If you stay on the page, save the resource and then return to the workspace or close the
+window.
 
-#### Returning to Desktop
+#### Returning to the Workspace
 
 ![](../img/userguide/back-buttons-20200103.png){:width="20%" class="right"}
-When you close the template to return to the CEDAR Desktop view,
-there are two 'return left' buttons—the one in the browser, 
-and the one at the upper left of the CEDAR Template Designer.
-The CEDAR button remembers the last folder you had open in the Desktop view,
-ignoring any searches you may have performed since then.
+Two "return left" buttons close a template: the browser's and the one at the upper left of the
+Template Designer. The CEDAR button returns to the last folder you had open, ignoring any
+searches since. If you opened the Template Designer from a search results page and want to
+return to it, use the browser back button, which re-runs the search. (If you took the CEDAR
+button by mistake, the browser button twice still gets you back to the results.)
 
-If you launched the Template Designer from a CEDAR search results page,
-and want to return to that page,
-use the browser back button,
-and the same search should be performed.
-(If you mistakenly chose the CEDAR back button, 
-you can still use the browser button twice to get back to the previous search results.)
+#### Recovering a Previous Version
 
-#### Recovering previous version
-
-Because there is no undo, should you need to recover a previous version of the document,
-you can contact CEDAR staff to restore a version from before the time you started editing.
-If you plan to make significant changes to a template, 
-especially if you are experimenting with it, 
-we recommend saving a copy before you start changing it.
+There is no undo. To recover an earlier version, contact the CEDAR team, who can restore one
+from before your edits. Before significant or experimental changes, save a copy first.
 
 ## Field Type Reference
 
-### **Field Type Reference**
+A field defined inside a template or element can be customized in many ways, including
+constraining the values an author may enter. Some customizations apply to nearly every field
+type; others belong to just one or two. The tables below list the field types and their
+options; each option is described afterward.
 
-While specifying a field in a templating resource (a Template, Element, or Field), 
-you can customize the Field resource in a number of ways,
-including constraining the values that metadata editors can input 
-when they enter their metadata for the field. 
-Some customizations apply to almost every field type; 
-others are only allowed for one or two field types.
+### Reference Tables
 
-All the customizations listed in the Reference tables are described 
-after the Reference Tables subsection. 
+#### Data-Entry Fields
 
-#### Reference Tables
+All data-entry fields support Required and Value Relation, and all support Multiple except
+where noted. The table lists the customizations unique to each type, along with the number
+types offered where relevant. A blank Data Type column means a text string.
 
-The tables in this subsection show the field types that CEDAR offers, 
-and the customizations or purpose supported by that field type.
-
-##### Data entry fields
-
-All data entry fields support the Required and Value Relation features, 
-and all of them support the Multiple feature except those noted in the next table.
-
-The following table lists CEDAR's supported customizations 
-unique to each field type for data entry. 
-It also shows the Data Type(s) used by CEDAR
-for those field types.
-If the Data Type(s) column is blank, the field type is the default (a text string).
-
-| Unique Field Type | Data Type(s) | Unique Supported Customizations |
+| Field Type | Data Type(s) | Unique Options |
 | --------- | :----- | :-------------- |
 | Short Text |   | Values; Suggestions; Hidden; Default  |
 | Paragraph Text |   |   |
 | Email |   |   |
 | Phone |   |   |
 | Link |   |   |
-| Numeric | any number (xsd:decimal); integer (xsd:integer); long integer (xsd:long); single-precision real (xsd:float); double-precision real (xsd:double) |  Unit of Measure, Minimum Value, Maximum Value, Decimal Places  |
-| Date |  xsd:date |   |
+| Numeric | any number; integer; long integer; single-precision real; double-precision real |  Unit of Measure; Minimum Value; Maximum Value; Decimal Places  |
+| Date |  date |   |
 | Multi-Choice |   | Default; _no Multiple_  |
 | Checkbox |   | Default; _no Multiple_ |
 | Pick From List |   | Single Select vs Multi-Select; Default; _no Multiple_  |
 
-A special type of data entry field is the Attribute-Value field type, 
-which lets the metadata author name the Attribute _and_ provide the Value 
-when entering the metadata. 
-This field type allows multiple (unlimited) entries by design.
+The Attribute-Value field is a special data-entry field: the author names the attribute *and*
+provides the value. It allows any number of entries by design.
 
-##### Special field types for presentation
+#### Presentation Fields
 
-The following special field types do not support data storage for the metadata creator,
-but allow the template author to customize presentation of the template
-to the metadata creator.
+These field types store no metadata. They let the template author shape how the form is
+presented.
 
-| Special Field Type | Description | Purpose |
+| Field Type | Description | Purpose |
 | --------- | :--------- | :------- |
-| Section | Creates a section break | Provides a textual separator with optional explanatory text  |
-| Page | Creates a page break | Breaks up form into multiple pages (screens) when entering metadata |
-| Rich Text | Support entry of rich text in HTML  | Provide a descriptive lead-in to the _following_ field for metadata creators |
-| Image | Specify location of an image to display | Provide a static visual lead-in to the following field for metadata creators |
-| YouTube | Specify location of a YouTube video to display | Provide a video lead-in to the following field for metadata creators |  
+| Section | Creates a section break | A textual separator, with optional explanatory text  |
+| Page | Creates a page break | Splits the form into multiple pages when entering metadata |
+| Rich Text | Rich text entered as HTML  | A descriptive lead-in to the *following* field |
+| Image | Location of an image to display | A visual lead-in to the following field |
+| YouTube | Location of a YouTube video to display | A video lead-in to the following field |
 
-#### Customization Descriptions
+### Option Descriptions
 
-This subsection describes the field customizations,
-which are presented in alphabetical order by name.
+The options are listed alphabetically.
 
-##### Decimal Places (Numeric field Option)
+**Decimal Places (numeric).** Sets how many decimal places constrain and display the author's
+value. The author cannot enter more; extra places are rounded to fit. This has no effect on an
+integer number type.
 
-You can specify the number of decimal places used to constrain and display the value 
-entered by the metadata author.  
-The metadata author will not be able to enter more decimal places 
-than the value specified by this option 
-(or if more decimal places are entered, the value will be rounded
-to fit into the specified number of decimal places).
+**Default Value (text).** The value used when the author leaves the field empty. It can be a
+string or a controlled term, expressed as an IRI from BioPortal.
 
-This customization has no impact if the Numeric field type is an integer type.
+**Minimum and Maximum Value (numeric).** A lowest value, a highest value, or both. The author
+is warned in real time if an entry falls outside the range.
 
-##### Default Value (Text field Option)
+**Minimum and Maximum Length (text).** A minimum string length, a maximum, or both. The author
+is warned on save if the entry does not meet the limits.
 
-The Default Value option specifies the value for the field if the metadata author does not
-add a value to that field when filling out the metadata. 
-The value can be either a string or a controlled term.
-The controlled term must be expressed as an IRI from BioPortal.
+**Multiple.** When set to Yes, the Template Designer shows controls for the minimum and maximum
+number of entries. The Metadata Editor then lets the author enter the field more than once,
+requires at least the minimum number of slots (though they need not be filled), and stops the
+author at the maximum by disabling the Copy icon.
 
-##### Minimum/Maximum Value (Numeric field Option)
+**Number Type (numeric).** By default a numeric field is a decimal, entered as an integer or a
+floating-point value (exponential notation is not supported). From the 'Any numbers' drop-down
+you can choose a more specific type: long integer, integer, double-precision real, or
+single-precision real. The choice constrains what the author may enter.
 
-For numeric fields, you can specify a minimum legal value, a maximum legal value, or both.
-Users entering metadata will be warned in real time 
-if entered values do not meet the field's value limit specifications.
+**Required.** When set to Yes, the Metadata Editor marks the field as required and warns the
+author on save if it is empty. The author can dismiss the warning and save anyway.
 
-##### Minimum/Maximum String Length (Text field Option)
+**Suggestions.** Set the Suggestions tab to Yes to enable authoring suggestions for the field.
+See [Understanding the Suggestion System](understanding-the-suggestion-system.md).
 
-With this option you can set a minimum length for the string, 
-a maximum length for the string, or both.
-Users filling out the metadata will see a warning if the metadata is saved while 
-the value in this field has a text length that does not satisfy the criteria.
+**Unit of Measure (numeric).** A free-text label for the field's unit, shown to authors and
+viewers of the metadata, before and after a value is entered.
 
-##### Multiple
+**Value Relation.** The Value Relation makes metadata more semantic. For any data-entry field,
+it optionally sets the relationship from the field's immediate parent (the element containing
+it, or the template if the field is top-level) to the field's value. With a Value Relation of
+"has study characteristic" from the Ontology for Clinical Relations
+(`http://purl.org/net/OCRe/OCRe.owl#OCRE406000`), the metadata reads as `<ParentElement>
+has_study_characteristic <user-selected-value>`, with each part standing for its IRI. To set
+one, click the RDF icon at the right of the field and search for a property. If the search
+returns classes rather than properties, click Start Over to clear it. After you pick a
+property, the drop-down arrow beside the RDF icon shows the current choice. Click the RDF icon
+again, carefully, to clear the property and start a new search.
 
-When Multiple is set to Yes, the Template Designer displays a control to define
-the minimum and maximum number of entries allowed for the field. 
-
-If Multiple is set to Yes, then the Metadata Editor 
-provides an interface to fill out the field multiple times. 
-The Metadata Editor forces the specified minimum number of fields to be present
-(though the user is not forced to fill out the fields with values). 
-The Metadata Editor prevents creating more than the maximum number of entries 
-by making the field Copy icon unavailable. 
-
-##### Number Type (Numeric field Option)
-
-CEDAR provides a default numeric field (decimal), whose values can be entered as 
-either an integer or floating point number. (Exponential notation is not supported.)
-As a template creator you can also choose a more specialized number type for this field.
-
-To select a specialized number type for the field, click on the drop-down menu 
-labeled 'Any numbers'. Select from the list of number formats, including 
-long-integer numbers, integer numbers, double-precision real numbers, and
-single-precision real numbers. 
-Your choice will be reflected in the JSON value type used 
-to describe the number field in the template (JSON Schema), and 
-to specify the entered value in the metadata (JSON-LD). 
-The Data entry field table in the Reference Tables section lists 
-the specific JSON value types used for each case. 
-
-##### Required
-
-If this option is set to Yes, the Metadata Editor indicates to the metadata author
-that the field is required, and issues a warning when the metadata is saved 
-while this field has not been filled out with metadata.
-
-The metadata author can choose to ignore the warning and save the metadata 
-even though the required field is not completed.
-
-##### Suggestions 
-
-Set the Suggestions tab to Yes to enable intelligent authoring suggestions 
-for this field from CEDAR. 
-You can read a detailed explanation of the suggestions system 
-at [Understanding the Suggestion System](understanding-the-suggestion-system.md).
-
-##### Unit of Measure (Numeric field Option)
-
-You can specify a unit of measure for the field as a string. 
-The string will be displayed to viewers and editors of metadata created using this field,
-both before and after a value is entered for the field. 
-
-##### Value Relation
-
-The Value Relation customization provides a unique capability to the CEDAR metadata model 
-for making metadata more semantic. 
-
-For every metadata-entry field, the Value Relation optionally defines
-the relationship from the field's immediate parent entity 
-(either the Element containing the field, or if the field is at the top level,
-the Template containing the field)
-to the field's value. For example, when the Value Relation is 'has study characteristic'
-from the Ontology for Clinical Relations (IRI of http://purl.org/net/OCRe/OCRe.owl#OCRE406000), 
-the resulting metadata will be readable as
-`<ParentElement> has_study_characteristic <user-selected-value>`
-where each of the 3 elements is replaced with its corresponding unique identifier (IRI).
-
-To select a Value Relation, click on the RDF icon at the right side of the field.
-This brings up a search field that allows you to choose an appropriate Value Relation.
-(If the search brings up Classes instead of Properties, 
-click on the Start Over button to clear the previous search.) 
-Once you select a property, you are returned to the template. 
-
-The selected property can be viewed by clicking on the drop-down arrow 
-next to the RDF icon. 
-Do so carefully, as clicking on the RDF icon again will clear any existing property 
-and begin a new search.
-
-##### Values
 ![](../img/userguide/text-field-values-tab-20191229.png){:width="50%" class="right"}
-The Values tab shows a view of the current value set(s) that the metadata author
-can use to fill out a text field. If no selections are listed, the metadata author
-is prompted to enter free text. 
+**Values.** The Values tab shows the value sets an author may draw on. With none listed, the
+author enters free text.
 
 ![](../img/userguide/controlled-term-selection-modal-20191229.png){:width="50%" class="right"}
-Clicking on the Add button brings up a modal window 
-from which you can select the term, branch, or ontology 
-from which legal values may be chosen by the metadata author. 
-After you've made the selection, you will be returned to the view of the field
-which includes a line describing your selection.
-
-You can repeat this process by (clicking the Add button) 
-as often as you want to select additional 
-terms, branches, or ontologies.
-You can remove any of the selected terms, branches, or ontologies
-by clicking on the X to the right of the row you want to delete.
-
-Advice about finding and choosing controlled values is available in the [Choosing Controlled Terms](more-fair-templates.md#choosing-controlled-terms)
-section.
+Clicking Add opens a window for choosing a term, a branch, or a whole ontology of allowed
+values. After you choose, you return to the field, which now shows a line describing the
+selection. Repeat with Add to include more, and remove any with the X at the right of its row.
+For guidance on finding good terms, see
+[Choosing Controlled Terms](more-fair-templates.md#choosing-controlled-terms).

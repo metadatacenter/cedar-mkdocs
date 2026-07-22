@@ -2,18 +2,23 @@
 
 ## Simple Searching
 
-### Searching use the search bar
+### Searching With the Search Bar
 
-Searching for a resource in CEDAR is simple if you know text in its title, description, or version. Just input the search string as free text (e.g., "Antibody") in the Search bar provided in the navigation header of the CEDAR Workbench. All the resources  that have the string "Antibody" in their labels, version, or description will be shown.
+Finding a resource is simple when you know text from its title, description, or version. Type
+the search string as free text (for example, "Antibody") into the search bar in the navigation
+header. CEDAR shows every resource with that string in its label, version, or description.
 
 More advanced search patterns, using wildcards and boolean expressions (with AND, OR, NOT, and parentheses), and searching on fields and their values, are addressed in the following sections.
 
-### Narrowing the list of returned resources
+### Narrowing the List of Returned Resources
 
-You may find there are too many resources available to you in the returned selection. 
-The CEDAR Workbench organizes resources in three different categories, depending on the ownership and sharing: 1) resources created by you, the logged-in user, listed under the "Workspace" tab, 2) resources shared with the logged-in user, and 3) public resources that are shared with every user. 
+A search can return more resources than you want to scan. CEDAR groups resources into three
+sets by ownership and sharing: resources you created, under the **Workspace** tab; resources
+shared with you; and public resources shared with everyone.
 
-Searching for a resource in a particular set is very simple. Just click on the given set (e.g., "Shared with everybody") and input the search string as free text in the search bar, as described above. All the resources in the selected set that have the string  listed in their labels, version, or description are shown. 
+To search within one set, click it (for example, **Shared With Everybody**) and type the
+search string as before. CEDAR shows only the resources in that set whose label, version, or
+description matches.
 
 You can also constrain the resulting resources by their type, as described in [Constraining the Results by Type](#constraining-the-results-by-type).
 
@@ -33,7 +38,11 @@ You can also sort the different resources based on their titles, creation dates,
 
 When you search for resources (for example, all resources that mention "Antibody"), by default all types of matching resources are shown, including folders, templates, elements, fields, and metadata instances. If you have access to many resources, you may find it hard to navigate these lists of matching resources. 
 
-You can constrain the search results by resource type using the type filter. To set a type filter, simply click on the  icons indicated in the left side-bar of the CEDAR Workbench, as highlighted in the figure below. These icons are listed as Template, Element, Field, and Metadata, from left to right. You can also display corresponding type represented by the icon by hovering over the icon. When the icon is displayed as a white icon, the resources for the corresponding type are NOT displayed in the search results (for example, Field resources are not shown in the search results in the figure below). To revert back (that is, to show the Field resources), simply click on the corresponding icon again to make its dominant color green.
+The type filter constrains the results by resource type. Click the icons in the left sidebar,
+highlighted below; from left to right they are Template, Element, Field, and Metadata, and
+hovering over one shows its type. A white icon hides that type from the results; the figure
+below hides Field resources. Click the icon again to turn it green and show that type once
+more.
 
 There is no way to disable the folder resource, as it is used to navigate to lower levels of content.
 
@@ -52,7 +61,7 @@ Those artifact metadata fields can not yet be searched individually by CEDAR.
 (When a search pattern is entered into CEDAR without a prefixed field name, 
 CEDAR will search through the title, description, and version number of the artifact for the entered search pattern.)
 
-### Finding metadata instances by field name and/or field value
+### Finding Metadata Instances by Field Name and Value
 
 Suppose the following metadata instance:
 
@@ -104,7 +113,7 @@ Examples of queries that will retrieve the instance above:
 
     - Search by term label and URI: `topic:http://edamontology.org/topic_2269 AND topic:data`
     
-### Finding templates, elements, and fields, by field name
+### Finding Templates, Elements, and Fields by Field Name
 
 Given the template for the previous instance:
 
@@ -127,11 +136,11 @@ You can find examples using these patterns with fields and values in the previou
 
 Regular expressions (beyond the ones described below) are not yet available in CEDAR.
 
-### Multi-word strings
+### Multi-Word Strings
 
 To search for a literal string that contains spaces (e.g., a multi-word phrase), surround the phrase with double quotes, like this: "Injury Type".
 
-### Boolean queries
+### Boolean Queries
 
 Boolean expressions let you combine different search patterns. These expressions include AND, OR, and NOT, and they can be organized with parentheses following algebraic rules. 
 
@@ -158,11 +167,11 @@ parentheses, the same search pattern would find resources with both injury and h
 In complex searches, using parentheses to make all your patterns explicit is the
 best way to be sure you will get what you want in your returned results.
 
-### Wildcard queries
+### Wildcard Queries
 
 You can use special characters to replace a single character, or any number of characters. However, you can only use each special character once in each word.
 
-#### Replacing multiple characters
+#### Replacing Multiple Characters
 
 You can use an asterisk (*) in your search term to indicate that any number of characters can be substituted in place of the asterisk.
 
@@ -170,7 +179,7 @@ For example: 'injur*' will return resources with any of these words: injury, inj
 
 CEDAR treats single-word search patterns as if they have an asterisk at the beginning and end, so 'injur' or 'jur' will also find the three examples above.
 
-#### Replacing a single character
+#### Replacing a Single Character
 
 The question mark (?) replaces any single character when searching in the resources.
 `injur?` will find anything containing the word injury, injured, or injuries.

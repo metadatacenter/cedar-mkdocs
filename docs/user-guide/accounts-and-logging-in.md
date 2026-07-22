@@ -2,30 +2,26 @@
 
 ## Creating a CEDAR Account
 
-The first step to create metadata templates and metadata with the CEDAR workbench is to create a CEDAR workbench user account. To do this, visit [https://cedar.metadatacenter.org](https://cedar.metadatacenter.org "CEDAR Workbench") and click on the "Register" link below the Password line. 
+Using the CEDAR Workbench starts with a free account. Go to
+[cedar.metadatacenter.org](https://cedar.metadatacenter.org "CEDAR Workbench") and click the
+**Register** link below the password field.
 
-In the next window, enter your first name, last name, a functional email address, 
-and a password as shown in the screenshot below. You should make the first name and last name 
-what you want to appear on your user folder. 
-(If you are creating a second account, be sure to make the first name/last name 
-combination for that account different than it was for your first account,
-so you can tell them apart in CEDAR.) 
+Enter your first name, last name, a working email address, and a password. Your first and last
+name become the label on your user folder, so choose what you want others to see. If you are
+creating a second account, give it a different name from the first, so you can tell the two
+apart in CEDAR.
 
-After clicking on the `REGISTER` button, check your email (at the address you provided) 
-for a link to validate your user account. 
-(This should not take very long, a few minutes at most. 
-Check your spam/junk folder if you do not see the mail.
-You can go back and resend the email from the registration screen,
-and if that doesn't work after a few minutes, and you're sure your email is working,
-send us an email to get help.)
-
-Click on the link in your email to complete the account creation process. 
-
+Click **REGISTER**. CEDAR emails a validation link to the address you gave, usually within a
+few minutes. If it does not arrive, check your spam folder or resend it from the registration
+screen. Click the link to finish creating the account.
 
 ![](../img/userguide/create_account1.png){:width="75%" class="centered"}
 
-## Logging in to CEDAR
+## Logging In to CEDAR
 
-To log in, go to [https://cedar.metadatacenter.org](https://cedar.metadatacenter.org "CEDAR Workbench"), and enter the account name and your password as shown in the screenshot below. If you have forgotten your password, you can use the "Forgot Password?" link just below the Password line. Once you have logged in, you will see the CEDAR Workspace. 
+To sign in, return to [cedar.metadatacenter.org](https://cedar.metadatacenter.org "CEDAR
+Workbench") and enter your email and password. If you have forgotten your password, use the
+**Forgot Password?** link below the password field. Once you sign in, you arrive at your CEDAR
+workspace.
 
 ![](../img/userguide/login.png){:width="50%" class="centered"}

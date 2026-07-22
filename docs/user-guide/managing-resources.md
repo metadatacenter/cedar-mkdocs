@@ -1,73 +1,57 @@
 # Managing Resources
 
-In CEDAR, resources include the various artifact types (templates, elements, fields, metadata instances) and folders. These are all managed through the CEDAR Desktop,
-typically through your [workspace view](your-cedar-workspace.md).
-Management operations include copying, moving, renaming, and deleting resources, and
-setting sharing permissions on resources.
+In CEDAR, resources are the artifacts (templates, elements, fields, and metadata instances)
+and the folders that hold them. You manage them from your
+[workspace](your-cedar-workspace.md). Management covers copying, moving, renaming, and deleting
+resources, and setting their sharing permissions.
 
-If you want to fill out metadata for a particular template,
-the **Populate** command will open the Metadata Creator set up to fill in metadata for that template.
-If you want to edit an artifact (including a populated metadata instance),
-the **Open** command will open the appropriate tool
-(Template Editor for templates, elements, and fields; and Metadata Creator for metadata instances) with that resource.
-For a folder, the Open command changes the middle pane view to show the selected folder.
+To fill out metadata for a template, the **Populate** command opens the Metadata Creator set
+up for that template. To edit an artifact, including a filled-out instance, the **Open**
+command opens the right tool: the Template Designer for templates, elements, and fields, and
+the Metadata Creator for instances. For a folder, **Open** shows that folder in the middle
+pane. Other commands, such as Publish, Create Version, and Submit, are covered in their own
+sections of this guide.
 
-Other artifact-related commands like Publish/Create version, Submit, and Enable/Disable/View OpenView are addressed
-in their respective sections of the User Guide.
+Every command lives on a resource's menu, opened by the vertical dots (the kebab menu, **⋮**)
+at the right of the resource. From it you can move, copy, rename, delete, and share the
+resource. A grayed-out item, such as Copy…, is unavailable for that resource. If *every* item
+is grayed out, no resource is selected, or there is a permissions inconsistency.
 
-All the resource options are managed through the menu of the resource (shown below).
-Access the resource menu by clicking on the vertical dots (the 'kebab menu', **⋮**) on the right side of the resource.
-A drop-down menu provides access to the options for moving, copying, renaming, deleting, and sharing the resource.
-If a menu item like Copy… is grayed out, it is not available for that resource.
-If **all** menu items are grayed out, either no resource is selected, or there is a permissions inconsistency.
+## Choosing a Destination
 
-## Destination Commands and Selection Window
+The **Copy to…** and **Move to…** commands open a window for choosing where the resource
+should go, starting from your current folder. Click the left arrow to move up the hierarchy,
+the right arrow on a folder to move into it, and the Home icon at the upper left to return to
+your workspace. Navigating to a folder you lack permission for shows an error.
 
-The Copy to… and Move to… commands will display a window for you to choose the destination for the command, shown here.
-The starting location is your current workspace folder.
-To navigate in this window, click on the left arrow to move up in the folder hierarchy,
-click on the right arrow for a folder to move into that folder, and
-click on the Home icon at upper left go to to your workspace (home folder).
-
-If you try to navigate to a folder to which you do not have needed permissions, an error message will be displayed.
-
-There is always a destination folder selected.
-If no folder is highlighted in the window, the destination folder is the currently displayed folder.
-If a folder is highlighted in the window, the highlighted folder is the target folder that will be used.
+A destination is always selected. With no folder highlighted, the destination is the folder on
+display; with one highlighted, that folder is the destination.
 
 ![](../img/userguide/destination-selection-window-20190912.png){:width="50%" class="centered"}
 
-### ***Copy to…*** Command
+### Copy To
 
-After selecting the Copy… command, you will be asked to select the destination folder, and can then complete the operation by clicking on COPY.
+After choosing **Copy to…**, select the destination folder and click COPY. Copying needs read
+permission on the resource, and write permission on the destination. You can copy any artifact
+to a folder you can write to, but you cannot copy a whole folder in one command.
 
-This operation requires read permission for the resource.
-You can copy any CEDAR artifact to another directory for which you have write permissions.
-However, you can not copy an entire CEDAR folder with a single command.
+### Move To
 
-### ***Move to…*** Command
+After choosing **Move to…**, select the destination folder and click MOVE. Moving needs write
+permission on the resource. You can move any artifact or folder to a folder you can write to.
 
-After selecting the Move… command, you will be asked to select the destination folder, and can then complete the operation by clicking on MOVE.
+## Rename
 
-This operation requires write permission for the resource.
-You can move any CEDAR artifact or folder to another directory for which you have write permissions.
+After choosing **Rename…**, enter the new name. Renaming needs write permission on the
+resource.
 
-## ***Rename*** Command
+## Share
 
-After selecting the Rename… command, you will be asked for the new name. This operation requires write permission for the resource.
+The **Share…** command opens the sharing window, where you handle all sharing and group
+management. See [Sharing Resources](sharing-resources.md) for details.
 
-## ***Share…*** Command
+## Delete
 
-The Share… command opens a sharing configuration window.
-
-In this window you can perform all sharing and group management operations needed to control resource access in CEDAR.
-See the [Sharing Resources](sharing-resources.md)
-section for detailed information about sharing resources in CEDAR.
-
-## ***Delete*** Command
-
-The delete command displays a confirmation box, then deletes the item.
-
-Use this command with caution, as there is no undo command.
+**Delete** shows a confirmation box, then removes the item. Use it with care: there is no undo.
 
 ![](../img/userguide/cedar-resource-menu-20190912.png){:width="75%" class="centered"}
