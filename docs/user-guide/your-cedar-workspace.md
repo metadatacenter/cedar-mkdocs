@@ -1,32 +1,52 @@
 # Your CEDAR Workspace
 
-When you first sign in, you land in your own workspace, shown annotated below. Your workspace
-will not yet hold any of the resources shown in the middle of this example.
+When you first sign in, you land in your workspace, the home for the resources you create. A
+new account starts empty; as you build templates, elements, fields, and metadata, they collect
+here. The workspace looks like this once it holds some content.
 
-![](../img/userguide/cedar-workspace-annotated-20190911.png){:width="95%" class="centered"}
+![](../img/userguide/workspace-overview.png){:width="95%" class="centered"}
 
-The labels below match the yellow circles in the screenshot.
+**The middle pane** lists the resources you can see. You sort it by clicking a column header or
+the sort control, and a count shows how many items it holds. A layout control switches the
+pane between this list and a card view.
 
-* **(A)** The search bar finds other CEDAR resources.
-* **(B)** The location string shows the folder you are viewing. When it is absent, you are looking at search results; click **Workspace** (C) to return to the folder view. Click any folder in the location string to move up the hierarchy.
-* **(C)** These three options on the left control which resources you see. **Workspace** shows your home folder. **Shared With Me** shows content shared with you or with a team you belong to. **Shared With Everybody** shows content shared with everyone on CEDAR.
-* **(D)** The **New+** button creates your own content: templates, elements, fields, and folders. To create a metadata instance instead, open the template you want the metadata to follow.
-* **(E)** The large middle pane lists the resources you can view. Controls (A), (B), (C), (H), and (I) determine what appears here. Sort the list by clicking a column header or the sort icon (M).
-* **(F)** Each resource has a dropdown menu, opened by the vertical triple-dots at its right. From it you can rename, copy, move, share, and more.
-* **(G)** Any template can produce a form for entering metadata. Click the metadata tag to open the Metadata Creator and start filling out metadata that follows that template.
-* **(H)** The round icons on the left filter the kinds of content shown. A green icon (white figures) is on; a white icon (green figures) is off. Folders are always visible.
-* **(I)** The Version selector controls which template versions you see: only the latest published version and its draft, if one exists, or every version. The default shows the latest published version and any draft.
-* **(J)** This shows how many items the middle pane holds. When there are more than fit, scroll to see the rest.
-* **(K)** This icon switches the middle pane between list and card layouts.
-* **(L)** The 'i' icon opens an information panel on the right with more detail about the selected resource. With nothing selected, it describes the current folder (B).
-* **(M)** The sort icon sets the sort order for the middle pane.
-* **(N)** The bell icon shows whether you have messages from CEDAR; a white bell means none.
-* **(O)** The profile icon opens your CEDAR profile, including your API key, along with Support and Logout.
+**The links on the left** choose which resources appear. *Workspace* is your own home folder,
+*Shared with Me* is content shared with you or with a team you belong to, *Shared with
+Everybody* is content shared with every CEDAR user, and *Community Folders* gathers folders
+shared by CEDAR communities. Above the pane, a location string shows the folder you are in;
+click a folder in it to move up the hierarchy.
 
-The card layout presents each resource in the middle pane as a card rather than a row in a table. Every card shows the resource's type icon, its title, and any tags it carries, along with the three-dot menu (F) for renaming, copying, moving, or sharing the item. This gives a more visual, at-a-glance view of a folder's contents. Switch between the list and card layouts at any time using the layout toggle (K).
+**The search bar** at the top finds resources anywhere in CEDAR. The round type-filter icons on
+the left narrow what the pane shows to particular kinds of resource, and the version selector
+controls whether you see only the latest published version of a template or every version.
+[Finding Resources](finding-resources.md) covers searching and filtering in full.
 
-![](../img/userguide/cedar-workspace-cards-20190911.png){:width="100%" class="centered"}
+**To create content**, the **New+** button makes a template, element, field, or folder. To
+enter metadata instead, open the template you want the metadata to follow and choose Populate;
+its metadata tag opens the Metadata Creator, the form for that template.
 
-The information panel opens along the right side of the workspace when you select a resource and click the 'i' icon (L). It summarizes the selected resource's metadata — its location in the folder hierarchy, its owner, the dates it was created and last modified, and your permissions on it — and offers INFO and VERSION tabs for switching between this summary and the resource's version history. When no resource is selected, the panel describes the current folder instead.
+**Each resource has its own menu**, opened by the vertical triple-dots (⋮) at its right, for
+renaming, copying, moving, sharing, and more. [Managing Resources](managing-resources.md)
+covers those commands.
 
-![](../img/userguide/cedar-workspace-infopanel-20190911.png){:width="100%" class="centered"}
+Along the top right sit the bell, which lights when you have messages from CEDAR, and the
+profile icon, which opens your CEDAR profile and API key.
+
+## The Card Layout
+
+The middle pane can show each resource as a card rather than a row. A card shows the resource's
+type icon, its title, and any tags it carries, along with the same ⋮ menu. This gives a more
+visual, at-a-glance view of a folder. Switch between the list and card layouts at any time with
+the layout control.
+
+![](../img/userguide/workspace-cards.png){:width="100%" class="centered"}
+
+## The Information Panel
+
+Selecting a resource and clicking the 'i' icon opens an information panel along the right side.
+It summarizes the resource's metadata — its place in the folder hierarchy, its owner, when it
+was created and last modified, and your permissions on it. Its INFO, VERSION, and CATEGORY tabs
+switch between this summary, the resource's version history, and its categories. With nothing
+selected, the panel describes the current folder instead.
+
+![](../img/userguide/workspace-info-panel.png){:width="100%" class="centered"}

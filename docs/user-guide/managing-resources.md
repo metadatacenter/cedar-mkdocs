@@ -27,7 +27,7 @@ your workspace. Navigating to a folder you lack permission for shows an error.
 A destination is always selected. With no folder highlighted, the destination is the folder on
 display; with one highlighted, that folder is the destination.
 
-![](../img/userguide/destination-selection-window-20190912.png){:width="50%" class="centered"}
+![](../img/userguide/destination-dialog.png){:width="50%" class="centered"}
 
 ### Copy To
 
@@ -54,4 +54,4 @@ management. See [Sharing Resources](sharing-resources.md) for details.
 
 **Delete** shows a confirmation box, then removes the item. Use it with care: there is no undo.
 
-![](../img/userguide/cedar-resource-menu-20190912.png){:width="75%" class="centered"}
+![](../img/userguide/resource-menu.png){:width="75%" class="centered"}

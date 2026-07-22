@@ -37,7 +37,12 @@ export async function gotoFolder(page, folderId) {
 }
 
 // Screenshot the full viewport to docs/tutorials/img/<name>.png.
+// When SKIP_TUTORIAL_SHOTS=1 (set by the manual/user-guide runner, which reuses
+// the tutorial build steps only to set up content), this no-ops so a manual run
+// never overwrites the tutorial screenshot set — it keeps the same paint-settle
+// pacing so the build steps behave identically.
 export async function shot(page, name) {
+  if (process.env.SKIP_TUTORIAL_SHOTS === '1') { await page.waitForTimeout(300); return; }
   await mkdir(IMG_DIR, { recursive: true });
   await page.waitForTimeout(300); // let paint settle
   await page.screenshot({ path: `${IMG_DIR}/${name}.png` });

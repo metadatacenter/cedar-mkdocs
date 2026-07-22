@@ -17,6 +17,9 @@ export const DEVICE_SCALE_FACTOR = 2;
 
 export const STORAGE_STATE = resolve(__dirname, 'storageState.json');
 export const IMG_DIR = resolve(__dirname, '..', 'docs', 'tutorials', 'img');
+// User-guide (manual) screenshots. This directory also holds hand-captured
+// images we keep, so the manual runner adds to it and never wipes it.
+export const USERGUIDE_IMG_DIR = resolve(__dirname, '..', 'docs', 'img', 'userguide');
 export const FAIL_DIR = resolve(__dirname, 'failures');
 
 export const HEADED = !!process.env.HEADED;
