@@ -32,8 +32,13 @@ export async function captureBuildTemplate(page, folderId) {
   await page.getByRole('textbox', { name: 'Description' }).fill(BASIC.templateDescription);
   await page.waitForTimeout(500);
   await ug(page, 'template-designer');       // named template, no fields yet
+  // The field-type palette: open the "More" flyout showing every field type.
+  await page.locator('a.more.dropdown-toggle').click();
+  await page.waitForTimeout(500);
+  await ug(page, 'field-palette');
+  await page.keyboard.press('Escape').catch(() => {});
+  await page.waitForTimeout(300);
   await addField(page, BASIC.fields[0]);      // text: Study Name
-  await ug(page, 'template-one-field');
   await addField(page, BASIC.fields[1]);      // numeric: Number of Participants
   await ug(page, 'template-two-fields');
   return saveTemplate(page);

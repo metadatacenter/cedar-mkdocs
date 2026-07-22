@@ -15,7 +15,7 @@ Click the **New** button on the navigation sidebar (upper left of the Workspace)
 Description in the three text fields ('Untitled', 'Identifier', 'Description') underlined in
 the image below. The Name labels the artifact in your workspace and can be changed later.
 
-![](../img/userguide/creating-new-template-20191216.png){:width="80%" class="centered"}
+![](../img/userguide/template-designer.png){:width="80%" class="centered"}
 
 You can [save and close a template](#saving-and-closing) at any time and return to it later.
 To reopen it, or any template you have access to, double-click its icon in the workspace.
@@ -69,13 +69,14 @@ of the template on screen. You cannot rearrange the contents of an imported Fiel
 
 #### Adding a Field Definition
 
-![](../img/userguide/field-addition-menu-20191229.png){:width="8%" class="right"}
 Choose a field type from the vertical selector at the upper right of the Template Designer. The
 first few choices add common fields directly: text, date, email, and numeric.
 
 For a less common field type, including presentation and documentation fields, click the
 ellipsis (three dots) for the full set. The left column holds data-entry fields; the right
 column holds fields that shape how the template is presented to the metadata author.
+
+![](../img/userguide/field-palette.png){:width="70%" class="centered"}
 
 The search (magnifying glass) icon opens a window for finding other elements or fields to
 import. That window is covered in [Adding Elements](#adding-elements).
@@ -246,7 +247,7 @@ awkward, shrink the browser view to fit more on screen.
 To save a template, element, or field, click the Save button at the lower right. It is labeled
 Save Template, Save Element, or Save Field depending on what you are editing.
 
-![](../img/userguide/creating-new-template-20191216.png){:width="80%" class="centered"}
+![](../img/userguide/template-designer.png){:width="80%" class="centered"}
 
 Three icons at the top right show the resource's status. The circle is filled when there are no
 unsaved changes and a hollow yellow circle when there are. When the lock (the middle icon) is
