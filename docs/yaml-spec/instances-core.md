@@ -1,9 +1,9 @@
 # Instances: Core Structure
 
 A template instance is an instance artifact. It holds metadata that conforms to a template.
-In YAML it identifies its template with `isBasedOn`. As with template and element artifacts,
-instances hold a value for each field or nested element under `children`, keyed by the
-child's name.
+In YAML it identifies its template with `isBasedOn`. It gives a value for each field or nested
+element under `children`, keyed by the child's `key`. The `key` is the identifier the
+template assigns each child, not its display name.
 
 ```yaml
 type: instance
@@ -12,7 +12,7 @@ description: Metadata for the SDY232 cardiology study
 id: https://repo.metadatacenter.org/template-instances/1f9a2b3
 isBasedOn: https://repo.metadatacenter.org/templates/ec3f500
 children:
-  Study Name:
+  study-name:
     value: Cardiology cohort
 ```
 
@@ -27,12 +27,12 @@ type: instance
 name: SDY232
 isBasedOn: https://repo.metadatacenter.org/templates/ec3f500
 children:
-  Study Name:
+  study-name:
     value: Cardiology cohort
-  Participants:
+  participants:
     value: 2323
     datatype: xsd:int
-  Disease:
+  disease:
     id: http://purl.obolibrary.org/obo/DOID_530
     label: eyelid disease
 ```
@@ -45,7 +45,7 @@ differ from the `label` shown to the author. `notation` holds the term's short c
 accession within the vocabulary.
 
 ```yaml
-  Disease:
+  disease:
     id: http://purl.obolibrary.org/obo/DOID_530
     label: eyelid disease
     prefLabel: eyelid disease
@@ -54,12 +54,12 @@ accession within the vocabulary.
 
 ## Multiple Values
 
-A field that accepts more than one value holds a list under its name. Each entry has the
-same shape it would have as a single value. For a plain literal field, each entry carries a
+A field that accepts more than one value holds a list under its key. Each entry has the same
+shape it would have as a single value. For a plain literal field, each entry carries a
 `value`.
 
 ```yaml
-  Keywords:
+  keywords:
   - value: genomics
   - value: oncology
 ```
@@ -68,7 +68,7 @@ A controlled-term field behaves the same way. Each entry is a full controlled te
 its `id` and `label`.
 
 ```yaml
-  Conditions:
+  conditions:
   - id: http://purl.obolibrary.org/obo/DOID_2841
     label: asthma
   - id: http://purl.obolibrary.org/obo/DOID_10763
@@ -82,18 +82,18 @@ An element does not hold a value of its own. Its entry under `children` holds it
 level. A repeating element holds a list of such entries.
 
 ```yaml
-  Address:
+  address:
     children:
-      Street:
+      street:
         value: 450 Serra Mall
-      City:
+      city:
         value: Stanford
-  Contributors:
+  contributors:
   - children:
-      Name:
+      full-name:
         value: Ada Lovelace
   - children:
-      Name:
+      full-name:
         value: Alan Turing
 ```
 
@@ -107,8 +107,8 @@ element value, plus the `type` discriminator that lets it stand alone.
 type: element-instance
 name: Address
 children:
-  Street:
+  street:
     value: 450 Serra Mall
-  City:
+  city:
     value: Stanford
 ```

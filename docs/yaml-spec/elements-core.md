@@ -23,13 +23,13 @@ An element's `children` may hold elements and fields. Because an element can its
 elements, this allows nesting to any depth. An element may stand as its own definition or sit
 inside a template or another element.
 
-## Element Keys
+## Instance Type
 
-Beyond the [core keys](core-structure.md) every artifact carries, an element adds:
+An element may declare an `instanceType`, the RDF type asserted on instances of the element.
+This is what lets an instance be read as Linked Data; see [Mapping to RDF](rdf-mapping.md).
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
-| `children` | sequence | optional | The elements and fields it contains. |
 | `instanceType` | IRI | optional | The type asserted on instances of this element. |
 
 ## Element Configuration
@@ -51,6 +51,8 @@ A repeating element stands for a list of occurrences. `multiple` marks it as rep
 ### Property Binding
 
 `propertyIri` sets the property the element maps to when its contents appear in an instance.
+It is the predicate the element takes in the RDF reading of an instance; see
+[Mapping to RDF](rdf-mapping.md).
 
 | Key | Value | Meaning |
 |-----|-------|---------|

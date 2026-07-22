@@ -17,17 +17,19 @@ instance is filled in.
 ## In an Instance
 
 An attribute-value field is represented differently from other fields in instances. Its
-values do not sit under the instance's `children`. Instead the field's name becomes a top-level key of the
-instance, and beneath it each attribute the author supplied is paired with its value.
+values do not sit under the instance's `children`. Instead the field's `key` becomes a
+top-level key of the instance, and beneath it each attribute the author supplied is paired
+with its value. Those attribute names are chosen by the author at fill-in time, not fixed by
+the template.
 
 ```yaml
 type: instance
 name: SDY232
 isBasedOn: https://repo.metadatacenter.org/templates/ec3f500
 children:
-  Study Name:
+  study-name:
     value: Cardiology cohort
-Additional Characteristics:
+extra-attributes:
   Batch Number:
     value: "3"
   Freezer ID:
@@ -35,13 +37,13 @@ Additional Characteristics:
 ```
 
 A parent may hold more than one attribute-value field. Each appears as its own top-level key,
-named for the field, carrying its own set of attribute-value pairs.
+keyed by the field's `key`, carrying its own set of attribute-value pairs.
 
 ```yaml
-Additional Characteristics:
+extra-attributes:
   Batch Number:
     value: "3"
-Storage Details:
+storage-details:
   Freezer ID:
     value: F-12
   Shelf:

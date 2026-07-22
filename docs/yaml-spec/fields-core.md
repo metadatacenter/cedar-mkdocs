@@ -44,7 +44,8 @@ multi-valued by nature and do not use `multiple`.
 ### Property Binding
 
 `propertyIri` sets the property the field maps to when its value appears in an instance,
-giving the field a semantic identity beyond its name.
+giving the field a semantic identity beyond its name. It is the predicate the field's value
+takes in the RDF reading of an instance; see [Mapping to RDF](rdf-mapping.md).
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|

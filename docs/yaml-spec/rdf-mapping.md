@@ -63,14 +63,14 @@ name: SDY232
 id: https://repo.metadatacenter.org/template-instances/1f9a2b3
 isBasedOn: https://repo.metadatacenter.org/templates/7b8977e
 children:
-  Study Name:
+  study-name:
     value: Immune biomarkers study
-  Condition:
+  condition:
     id: http://purl.obolibrary.org/obo/DOID_2841
     label: asthma
-  Contributor:
+  contributor:
     children:
-      Full Name:
+      full-name:
         value: Ada Lovelace
 ```
 
