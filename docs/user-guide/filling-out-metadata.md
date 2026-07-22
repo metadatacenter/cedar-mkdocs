@@ -23,11 +23,10 @@ involved.
 ### From the Workspace
 
 This is the most common way. Bring the template into view in the workspace, navigating or
-searching for it if needed. Then either click the metadata tag on the right side of the
-template box (Item 1), or open its dropdown menu (Item 2a, the kebab `⋮`) and choose Populate
-Template (Item 2b).
+searching for it if needed. Then either click the metadata tag on the right of the
+template's row, or open its dropdown menu (the kebab `⋮`) and choose Populate.
 
-![](../img/userguide/template-population-annotated-20191119.png){:width="60%" class="centered"}
+![](../img/userguide/resource-menu.png){:width="75%" class="centered"}
 
 ### Via a Web Link
 
@@ -79,10 +78,10 @@ When the instance opens, click in any field to start entering metadata. To move 
 field, press Return, once or twice depending on the field type; in a few cases you click the
 next field instead.
 
+![](../img/userguide/metadata-empty-form.png){:width="80%" class="centered"}
+
 Some instances show elements as a collapsed outline, with their fields hidden. Click an
 element's header to expand it and fill out the fields inside.
-
-![](../img/userguide/entering-metadata-folded-elements-20191124.png){:width="80%" class="centered"}
 
 Your metadata is not stored until you click **SAVE**, in the lower-right corner; you may need
 to scroll to the end of a long form to reach it. Save often, so little is lost if the browser
@@ -172,7 +171,7 @@ number.
 
 To save the instance, click the Save button at the lower right.
 
-![](../img/userguide/entering-metadata-folded-elements-20191124.png){:width="75%" class="centered"}
+![](../img/userguide/metadata-filled-form.png){:width="75%" class="centered"}
 
 You can save at any time while editing. If you try to leave with unsaved changes, CEDAR warns
 you: Continue discards the changes, Go Back returns you to the instance to save. There is no
