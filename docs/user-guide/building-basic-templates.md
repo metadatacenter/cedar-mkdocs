@@ -172,7 +172,7 @@ editing a template or element, the search (magnifying glass) icon in the field-a
 opens a window for finding elements and fields to import. That window is covered in
 [Adding Elements](#adding-elements).
 
-![](../img/userguide/artifact-import-window-20200101.png){:width="60%" class="centered"}
+![](../img/userguide/import-window.png){:width="70%" class="centered"}
 
 ### Next Steps
 
@@ -219,18 +219,17 @@ Filling out such an element as a spreadsheet is described in
 While editing a template or element, the search (magnifying glass) icon in the field-addition
 menu opens a window for finding elements and fields to import.
 
-![](../img/userguide/artifact-import-window-20200101.png){:width="60%" class="centered"}
+![](../img/userguide/import-window.png){:width="70%" class="centered"}
 
 The navigation path at the lower left starts in your current folder and can move to other
 locations, but most authors find elements and fields by searching. Type a search string in the
 window's search field. Below, "Address" has been entered and searched; both elements and fields
 appear in the results.
 
-![](../img/userguide/artifact-import-window-search-20200101.png){:width="80%" class="centered"}
+![](../img/userguide/import-window-search.png){:width="80%" class="centered"}
 
 To inspect a result, click it to see its description.
 
-![](../img/userguide/artifact-import-window-metadata-20200101.png){:width="80%" class="centered"}
 
 To embed an element or field, double-click it, or click it once and click Open. It is added at
 the end of your template or element.
@@ -266,11 +265,9 @@ team. On success, CEDAR shows a green "Template saved successfully" notice (or "
 
 While editing, you can save at any time.
 
-![](../img/userguide/CEDAR-recent-changes-message-20200103.png){:width="15%" class="right"}
 If you try to leave with unsaved changes using the CEDAR back button, CEDAR warns you. Continue
 discards the changes and returns to the workspace; Go Back returns you to the resource.
 
-![](../img/userguide/chrome-browser-leaving-site-message-202000103.png){:width="15%" class="right"}
 If you try to leave using the browser's back button or by closing the window, the browser warns
 you instead. In Chrome, Leave Site (the default) closes the resource, and Cancel keeps you on
 the page.
@@ -282,7 +279,6 @@ window.
 
 #### Returning to the Workspace
 
-![](../img/userguide/back-buttons-20200103.png){:width="20%" class="right"}
 Two "return left" buttons close a template: the browser's and the one at the upper left of the
 Template Designer. The CEDAR button returns to the last folder you had open, ignoring any
 searches since. If you opened the Template Designer from a search results page and want to

@@ -96,22 +96,24 @@ export async function captureValuesAndPicker(page, folderId) {
   return saveTemplate(page);
 }
 
-// The import/finder window: open, search, inspect a result. Reopens the given
-// saved template so the picker is not in the way.
-export async function captureImportWindow(page, templateId) {
-  await page.goto(`${BASE}/templates/edit/${enc(templateId)}`);
-  await page.getByRole('button', { name: /Save Template/i }).waitFor({ timeout: 20000 });
-  await page.waitForTimeout(1000);
-  await page.locator(FINDER_OPEN).first().click();
-  await page.waitForTimeout(1000);
+// The import/finder window: open, search. Uses a fresh template-create view
+// (where the finder icon is reliably present); nothing is saved.
+export async function captureImportWindow(page, folderId) {
+  await page.goto(`${BASE}/templates/create?folderId=${enc(folderId)}`);
+  await page.getByRole('textbox', { name: 'Name' }).fill('Import Demo');
+  await page.waitForTimeout(700);
+  const finder = page.locator(FINDER_OPEN).first();
+  await finder.scrollIntoViewIfNeeded().catch(() => {});
+  await finder.click({ timeout: 15000 });
+  await page.waitForTimeout(1200);
   await ug(page, 'import-window');
   const searchBox = page.locator('input[ng-model*="searchTerm"], .modal input[type="text"], #finder-modal input[type="text"]').first();
   await searchBox.fill('Address').catch(() => {});
   await page.locator('[ng-click*="finder.search"]').first().click().catch(() => {});
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(2200);
   await ug(page, 'import-window-search');
-  await page.locator('.modal button.close, [ng-click*="showFinderModal"]').first().click().catch(() => page.keyboard.press('Escape'));
-  await page.waitForTimeout(500);
+  await page.locator('.modal button.close').first().click().catch(() => page.keyboard.press('Escape'));
+  await page.waitForTimeout(400);
 }
 
 // The Element and stand-alone Field creation forms. Each is created, captured,

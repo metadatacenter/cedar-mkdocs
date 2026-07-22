@@ -4,8 +4,8 @@
 // tutorial image set (SKIP_TUTORIAL_SHOTS) and tears down what it makes.
 process.env.SKIP_TUTORIAL_SHOTS = '1';
 
-import { FAIL_DIR } from './config.mjs';
-import { launch } from './lib.mjs';
+import { FAIL_DIR, BASE } from './config.mjs';
+import { launch, enc } from './lib.mjs';
 import * as S from './steps.mjs';
 import * as M from './manual-steps.mjs';
 import { mkdir } from 'node:fs/promises';
@@ -31,13 +31,7 @@ try {
   folder = await S.step1_folder(page, runId);
   console.log(`Folder: ${folder.name}  (${folder.folderId})`);
 
-  let templateId = null;
-  await tryStep('values-and-picker', async () => {
-    templateId = await M.captureValuesAndPicker(page, folder.folderId);
-    artifacts.push({ name: 'Clinical Study', kind: 'template' });
-  });
-  if (templateId) await tryStep('import-window', () => M.captureImportWindow(page, templateId));
-  await tryStep('new-artifact-forms', () => M.captureNewArtifactForms(page, folder.folderId, artifacts));
+  await tryStep('import-window', () => M.captureImportWindow(page, folder.folderId));
 
   console.log('\n✅ building second-pass screenshots in docs/img/userguide');
 } catch (err) {
