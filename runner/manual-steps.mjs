@@ -2,8 +2,9 @@
 // has already been built in a folder (see manual-run.mjs) and write full-frame
 // shots into docs/img/userguide/.
 import { mkdir } from 'node:fs/promises';
-import { USERGUIDE_IMG_DIR } from './config.mjs';
-import { gotoFolder, row, openRowMenu } from './lib.mjs';
+import { USERGUIDE_IMG_DIR, BASE, BASIC } from './config.mjs';
+import { gotoFolder, row, openRowMenu, menuItem, enc, waitToast } from './lib.mjs';
+import { addField, saveTemplate } from './steps.mjs';
 
 const TOGGLE_VIEW = 'button[ng-click="dc.toggleView()"]';   // list ⇄ card layout
 const INFO_TOOLBAR = '#show-details button';                // opens the info panel
@@ -21,6 +22,46 @@ export async function ug(page, name) {
 async function ensureInfoClosed(page) {
   const close = page.locator(INFO_CLOSE);
   if (await close.count()) { await close.first().click().catch(() => {}); await page.waitForTimeout(400); }
+}
+
+// Build the basic Study template in the Template Designer, capturing the
+// building-basic-templates figures along the way. Returns the template id.
+export async function captureBuildTemplate(page, folderId) {
+  await page.goto(`${BASE}/templates/create?folderId=${enc(folderId)}`);
+  await page.getByRole('textbox', { name: 'Name' }).fill(BASIC.templateName);
+  await page.getByRole('textbox', { name: 'Description' }).fill(BASIC.templateDescription);
+  await page.waitForTimeout(500);
+  await ug(page, 'template-designer');       // named template, no fields yet
+  await addField(page, BASIC.fields[0]);      // text: Study Name
+  await ug(page, 'template-one-field');
+  await addField(page, BASIC.fields[1]);      // numeric: Number of Participants
+  await ug(page, 'template-two-fields');
+  return saveTemplate(page);
+}
+
+// Populate the template, capturing the empty and filled metadata form. Leaves a
+// saved instance behind (the caller tears it down).
+export async function captureFillForm(page, folderId, templateName) {
+  let navigated = false;
+  for (let attempt = 1; attempt <= 4 && !navigated; attempt++) {
+    await gotoFolder(page, folderId);
+    await openRowMenu(page, templateName);
+    await menuItem(page, 'Populate');
+    try {
+      await page.waitForURL(/instances\/create/, { waitUntil: 'commit', timeout: 8000 });
+      navigated = true;
+    } catch {
+      if (attempt === 4) throw new Error('Populate did not navigate after 4 attempts');
+    }
+  }
+  await page.waitForTimeout(800);
+  await ug(page, 'metadata-empty-form');
+  for (const [label, value] of Object.entries(BASIC.values)) {
+    await page.getByLabel(label, { exact: true }).fill(value);
+  }
+  await ug(page, 'metadata-filled-form');
+  await page.getByRole('button', { name: 'Save', exact: true }).click();
+  await waitToast(page, /metadata (have|has) been created/i);
 }
 
 // The clean workspace overview: the populated folder in list view.

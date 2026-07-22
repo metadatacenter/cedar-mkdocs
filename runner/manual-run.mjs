@@ -27,12 +27,12 @@ try {
   folder = await S.step1_folder(page, runId);
   console.log(`Folder: ${folder.name}  (${folder.folderId})`);
 
-  stepName = 'build-template';
-  await S.step2_basicTemplate(page, folder.folderId);
+  stepName = 'build-template';         // captures the Template Designer figures
+  await M.captureBuildTemplate(page, folder.folderId);
   artifacts.push({ name: BASIC.templateName, kind: 'template' });
 
-  stepName = 'build-instance';
-  await S.step3_populateBasic(page, folder.folderId, BASIC.templateName);
+  stepName = 'fill-form';              // captures the empty/filled metadata form
+  await M.captureFillForm(page, folder.folderId, BASIC.templateName);
   artifacts.push({ name: `${BASIC.templateName} metadata`, kind: 'instance' });
 
   stepName = 'capture-overview';
