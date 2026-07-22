@@ -3,7 +3,8 @@
 A numeric field collects a number. Its required `datatype` fixes the kind of number, from an
 integer of a given width to a decimal or floating-point value. `minValue` and `maxValue`
 bound the range, `decimalPlaces` sets how many digits follow the decimal point, and `unit`
-records a unit of measure shown alongside the value. In YAML its `type` is `numeric-field`.
+records a unit of measure shown alongside the value, written as a free-text label such as
+`mg` or `degree Celsius`. In YAML its `type` is `numeric-field`.
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
@@ -11,7 +12,7 @@ records a unit of measure shown alongside the value. In YAML its `type` is `nume
 | `minValue` | number | optional | Minimum value. |
 | `maxValue` | number | optional | Maximum value. |
 | `decimalPlaces` | integer | optional | Number of decimal places. |
-| `unit` | string | optional | Unit of measure. |
+| `unit` | string | optional | A unit of measure, as a free-text label (for example `mg`). |
 | `default` | number | optional | Default value. |
 
 ```yaml

@@ -3,6 +3,10 @@
 CEDAR has five main kinds of field: core fields, controlled term fields, external authority
 fields, attribute-value fields, and static fields.
 
+Each field type has its own keys. A field placed inside a template or element also carries a
+`configuration` block for its parent-relative settings, such as `required` and `propertyIri`.
+See [Fields: Core Structure](../fields-core.md).
+
 ## Core Fields
 
 Core fields collect a value directly from the author: text, a number, a date, a choice from

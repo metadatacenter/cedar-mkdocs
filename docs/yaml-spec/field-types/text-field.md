@@ -13,12 +13,19 @@ match a regular expression. In YAML its `type` is `text-field`.
 | `default` | string | optional | Default value. |
 | `values` | sequence | optional | A list of permitted literal values. |
 
+These keys are specific to a text field. Inside a template or element, the field also carries
+a `configuration` block for its parent-relative settings, such as `required` and
+`propertyIri`; see [Fields: Core Structure](../fields-core.md).
+
 ```yaml
 - key: study-id
   type: text-field
   name: Study ID
   minLength: 2
   maxLength: 10
+  configuration:
+    required: true
+    propertyIri: https://schema.org/identifier
 ```
 
 A text field may also restrict its value to a fixed list of literals, turning it into a

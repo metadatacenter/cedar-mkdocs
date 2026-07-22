@@ -17,6 +17,11 @@ The instance supplies the rest. Its `id` is the subject. Each field value is an 
 controlled term or link contributes its IRI, a plain or typed value contributes a literal. A
 nested element contributes a linked resource with its own type and its own triples.
 
+Both `instanceType` and `propertyIri` are IRIs. Any well-formed IRI is accepted, but the
+mapping is only as useful as the terms chosen. They should be real, resolvable classes and
+properties from shared vocabularies, whether general (such as `schema.org`) or domain-specific
+(such as an OBO ontology), so the resulting graph joins other data that uses the same terms.
+
 ## A Template That Carries Semantics
 
 The property and type bindings live in the template. Shown in full, a small Study template
