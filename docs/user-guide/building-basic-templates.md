@@ -119,11 +119,11 @@ string or a controlled term (an IRI).
 **Minimum and Maximum Length.** Sets a minimum length, a maximum length, or both. The author
 is warned on save if the entry does not meet the limits.
 
-![](../img/userguide/text-field-values-tab-20191229.png){:width="50%" class="right"}
+![](../img/userguide/field-values-tab.png){:width="80%" class="centered"}
 **Values.** The Values tab shows the value sets an author may draw on. With none listed, the
 author enters free text.
 
-![](../img/userguide/controlled-term-selection-modal-20191229.png){:width="50%" class="right"}
+![](../img/userguide/controlled-term-picker.png){:width="80%" class="centered"}
 Clicking Add opens a window for choosing a term, a branch, or a whole ontology of allowed
 values. Repeat to add more. For guidance on finding good terms, see
 [Choosing Controlled Terms](more-fair-templates.md#choosing-controlled-terms).
@@ -156,7 +156,7 @@ creation form. Enter the Name, Identifier, and Description in the three text fie
 'Identifier', 'Description') underlined below. The Name labels the artifact in CEDAR and can be
 changed later.
 
-![](../img/userguide/field-artifact-created-20200101.png){:width="80%" class="centered"}
+![](../img/userguide/field-designer.png){:width="80%" class="centered"}
 
 Because a Field artifact holds exactly one field, it opens with a text field already selected.
 To use a different type, pick it from the drop-down; the existing definition is replaced.
@@ -193,7 +193,7 @@ Return to the workspace, using the Back button in the Template Designer if neede
 prompted to save the artifact you are editing). Click **New** and choose **Element**. This
 opens the element view of the Template Designer.
 
-![](../img/userguide/element-artifact-created-20200101.png){:width="80%" class="centered"}
+![](../img/userguide/element-designer.png){:width="80%" class="centered"}
 
 Enter the Name, Identifier, and Description in the three text fields ('Untitled', 'Identifier',
 'Description') underlined below. The Name labels the artifact in CEDAR and can be changed later.
@@ -385,11 +385,11 @@ returns classes rather than properties, click Start Over to clear it. After you 
 property, the drop-down arrow beside the RDF icon shows the current choice. Click the RDF icon
 again, carefully, to clear the property and start a new search.
 
-![](../img/userguide/text-field-values-tab-20191229.png){:width="50%" class="right"}
+![](../img/userguide/field-values-tab.png){:width="80%" class="centered"}
 **Values.** The Values tab shows the value sets an author may draw on. With none listed, the
 author enters free text.
 
-![](../img/userguide/controlled-term-selection-modal-20191229.png){:width="50%" class="right"}
+![](../img/userguide/controlled-term-picker.png){:width="80%" class="centered"}
 Clicking Add opens a window for choosing a term, a branch, or a whole ontology of allowed
 values. After you choose, you return to the field, which now shows a line describing the
 selection. Repeat with Add to include more, and remove any with the X at the right of its row.
