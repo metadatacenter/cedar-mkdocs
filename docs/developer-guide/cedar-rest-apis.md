@@ -26,7 +26,7 @@ Try these endpoints interactively through the [Swagger](https://swagger.io/)-gen
 
 **Search for resources.** Set `q=*` to match everything, or supply a search query. The `resource_types` parameter takes one or more comma-separated types: `template`, `element`, `instance`, or `folder`.
 
-??? example "curl"
+???+ example "curl"
 
     ```bash
     curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
@@ -35,7 +35,7 @@ Try these endpoints interactively through the [Swagger](https://swagger.io/)-gen
 
 For example, to retrieve all templates and elements:
 
-??? example "curl"
+???+ example "curl"
 
     ```bash
     curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
@@ -44,7 +44,7 @@ For example, to retrieve all templates and elements:
 
 **Find all instances of a template.** Use the `is_based_on` parameter to identify the template. Its value must be URL-encoded.
 
-??? example "curl"
+???+ example "curl"
 
     ```bash
     curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
@@ -53,7 +53,7 @@ For example, to retrieve all templates and elements:
 
 **Retrieve a resource by its identifier.** Replace `<resourceType>` with `templates`, `template-elements`, or `template-instances`, and `<resourceId>` with the URL-encoded resource identifier (its `@id` value).
 
-??? example "curl"
+???+ example "curl"
 
     ```bash
     curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
@@ -63,7 +63,7 @@ For example, to retrieve all templates and elements:
 
 For example, to retrieve a specific template:
 
-??? example "curl"
+???+ example "curl"
 
     ```bash
     curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
@@ -73,7 +73,7 @@ For example, to retrieve a specific template:
 
 **Create a resource.** POST the resource to the route for its type. The optional `folder_id` parameter (URL-encoded) names the containing folder, found in the CEDAR Workbench URL; without it, the resource goes to your home folder.
 
-??? example "curl"
+???+ example "curl"
 
     ```bash
     curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
@@ -87,7 +87,7 @@ Here `resource.json` holds the template, element, or instance to create, and `<r
 
 Validate a resource before creating it. The `command/validate` route validates all four resource types; the `resource_type` parameter names the type as `template`, `element`, `field`, or `instance`.
 
-??? example "curl"
+???+ example "curl"
 
     ```bash
     curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" -H "Accept: application/json" \
