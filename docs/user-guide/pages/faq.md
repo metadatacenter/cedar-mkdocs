@@ -40,7 +40,7 @@ With CEDAR semantics, you control exactly what terms can satisfy a query—and a
 And CEDAR knows a lot about entering metadata. For starters, it can give a list of (semantically precise!) controlled terms to choose from, and auto-suggest completions for you. It can also learn and share how the community filled out those forms, to help you check your own work. And using CEDAR, your lab manager can pre-configure a form for the team to use, hiding all the irrelevant fields and pre-setting your team's defaults, 
 to make your job faster.
 
-CEDAR's [JSON-based Template Model](https://metadatacenter.org/tools-training/outreach/cedar-template-model) supports the specification of 
+CEDAR's [model](../../yaml-spec/cedar-model.md) supports the specification of 
 templates for diverse metadata models, and interoperable metadata instances 
 containing the metadata that satisfies those templates.
 
@@ -57,7 +57,7 @@ You can also access the metadata via the CEDAR API, in both of these formats, an
 (including much of the rich semantics).
 
 Detailed information about the metadata form is described as part of the 
-[CEDAR Template Model documentation](https://metadatacenter.org/tools-training/outreach/cedar-template-model).
+[CEDAR Model YAML Specification](../../yaml-spec/index.md).
 
 **Is CEDAR open source, and if so, does it plan to continue to be open source?**
 

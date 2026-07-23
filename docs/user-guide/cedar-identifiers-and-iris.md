@@ -84,7 +84,7 @@ If the user will have write access to a particular folder where this metadata sh
 
 ## How CEDAR Defines and Applies IRIs (URIs, URLs)
 
-The advanced user may wish to consult the [CEDAR Template Model Specification](https://more.metadatacenter.org/tools-training/outreach/cedar-template-model) for more information.
+The advanced user may wish to consult the [CEDAR Model YAML Specification](../yaml-spec/index.md) for more information.
 
 A CEDAR artifact has a unique identifier that is of the following form:
 `https://repo.metadatacenter.org` / `[type]` / `[UUID]`

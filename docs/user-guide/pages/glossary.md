@@ -5,7 +5,7 @@ author: John Graybeal
 
 <br />
 **artifact**: any of template, element, field, instance. All CEDAR artifacts 
-are specified using <a href="https://more.metadatacenter.org/tools-training/outreach/cedar-template-model" target="_blank">CEDAR's Template Model</a>.
+are specified using the [CEDAR model](../../yaml-spec/cedar-model.md).
 
 ---
 

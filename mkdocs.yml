@@ -92,9 +92,6 @@ nav:
 
   - Developer Guide:
       - developer-overview/index.md
-      - CEDAR Repository Model: https://metadatacenter.org/tools-training/outreach/cedar-template-model
-      - developer-guide/template-element-and-field-instances.md
-      - developer-guide/template-element-and-fields.md
       - developer-guide/cedar-rest-apis.md
 
   - YAML Specification:
