@@ -18,7 +18,7 @@ You can inspect any resource without going through the REST APIs: open it in the
 
 ### Creating Templates, Elements, and Fields
 
-CEDAR's Template Designer is the most convenient way to create templates, elements, and fields. To create them programmatically, two libraries generate the underlying representation for you: the Java-based [CEDAR Artifact Library](https://github.com/metadatacenter/cedar-artifact-library) and the TypeScript-based [CEDAR Model TypeScript Library](https://github.com/metadatacenter/cedar-model-typescript-library). Both represent the model defined in the [CEDAR Model YAML Specification](../yaml-spec/index.md).
+CEDAR's Template Designer is the most convenient way to create templates, elements, and fields. To create them programmatically, two libraries generate the underlying representation for you: the Java-based [CEDAR Artifact Library](https://github.com/metadatacenter/cedar-artifact-library) and the TypeScript-based [CEDAR Model TypeScript Library](https://github.com/metadatacenter/cedar-model-typescript-library). Both represent the model defined in the [CEDAR Model YAML Specification](../yaml-spec/index.md). [Creating Artifacts with the CEDAR Artifact Library](cedar-artifact-library.md) walks through the Java library.
 
 ### Invoking the REST Endpoints
 
