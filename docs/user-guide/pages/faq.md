@@ -3,7 +3,7 @@ author: John Graybeal
 ---
 # Frequently Asked Questions
 
-Here are our Frequently Asked Questions for CEDAR. Got a question? [Contact us](https://metadatacenter.org/contact "Contact us")!
+Here are our Frequently Asked Questions for CEDAR.
 
 **What is CEDAR good for?**
 
@@ -11,8 +11,6 @@ The CEDAR Workbench can be make an existing metadata or data processing pipeline
 help you submit metadata to an existing repository, or serve as a full-service metadata repository. It can be used to collect metadata following any metadata standard or
 any other user-specified template (metadata form). It has also proven useful for capturing metadata models or structures, with the added benefit of quickly testing those models by
 entering real data.
-
-If you want to submit your metadata (even including data) to a particular domain repository, contact us about your interest; we are always evaluating which repositories to add next. See our Orientation for details.
 
 **How do I get an account on CEDAR?**
 

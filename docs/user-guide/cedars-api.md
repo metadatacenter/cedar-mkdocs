@@ -128,10 +128,6 @@ or by giving Everyone group access to the artifacts,
 or by putting the artifacts into a folder visible to those people, those groups, 
 or the `Everyone` group.
 
-CEDAR administrators can arrange for all the artifacts of a particular template
-to be visible to a particular group, contact us at cedar-support@metadatacenter.org
-to make that request.
-
 To learn how to perform more detailed searches or searches for other entities,
 simply review the appropriate [Swagger](https://resource.metadatacenter.org/api) forms 
 and enter parameters you are interested in. 

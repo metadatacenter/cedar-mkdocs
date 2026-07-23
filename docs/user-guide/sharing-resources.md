@@ -240,8 +240,7 @@ the share.
 
 ![](../img/userguide/enable-openview-menu-20190908.png){:width="25%" class="centered"}
 
-To share a metadata instance, also share the template it is based on. If you do not own that
-template, ask its owner or the CEDAR team for help. Until the template is shared, anyone who
+To share a metadata instance, also share the template it is based on. Until the template is shared, anyone who
 opens the shared instance sees an error rather than the metadata.
 
 ### Viewing Shared Content on the Web
