@@ -75,7 +75,7 @@ the People list.
 
 ## How Permissions Work
 
-You may have questions about CEDAR's access privileges:
+CEDAR's access privileges raise a few common questions:
 
 1. How do I keep my files private, or make them public?
 2. How can someone collaborate with me on many files?
