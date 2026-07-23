@@ -98,9 +98,9 @@ TemplateInstanceArtifact instance = TemplateInstanceArtifact.builder()
 
 ## Serializing for Upload
 
-An artifact becomes useful once serialized. The library renders schema artifacts — templates, elements, and fields — as JSON Schema or YAML, and instance artifacts as JSON-LD.
+An artifact becomes useful once serialized. There are two serializations, JSON and YAML, and the library renders any artifact as either. In JSON, schema artifacts — templates, elements, and fields — take the form of JSON Schema, and instances the form of JSON-LD. YAML is a single, more readable form that covers every artifact type, defined by the [CEDAR Model YAML Specification](../yaml-spec/index.md).
 
-Render a template as JSON Schema with `JsonArtifactRenderer`, which returns a Jackson `ObjectNode`:
+`JsonArtifactRenderer` produces the JSON form, returning a Jackson `ObjectNode`. A schema artifact renders as JSON Schema:
 
 ```java
 JsonArtifactRenderer jsonRenderer = new JsonArtifactRenderer();
@@ -113,11 +113,12 @@ The same renderer serializes an instance as JSON-LD:
 ObjectNode instanceJsonLd = jsonRenderer.renderTemplateInstanceArtifact(instance);
 ```
 
-Render a template as YAML with `YamlArtifactRenderer`, whose constructor takes a flag selecting the full (`false`) or compact (`true`) form. It returns a map you can write out with Jackson's `YAMLFactory`:
+`YamlArtifactRenderer` produces the YAML form for either kind of artifact. Its constructor takes a flag selecting the full (`false`) or compact (`true`) form, and it returns a map you can write out with Jackson's `YAMLFactory`:
 
 ```java
 YamlArtifactRenderer yamlRenderer = new YamlArtifactRenderer(false);
 LinkedHashMap<String, Object> templateYaml = yamlRenderer.renderTemplateSchemaArtifact(study);
+LinkedHashMap<String, Object> instanceYaml = yamlRenderer.renderTemplateInstanceArtifact(instance);
 ```
 
-With a JSON Schema template or a JSON-LD instance in hand, you can upload it to CEDAR through the [CEDAR REST APIs](cedar-rest-apis.md).
+CEDAR's REST APIs work with JSON, so upload the JSON form — JSON Schema for a template, element, or field, and JSON-LD for an instance — through the [CEDAR REST APIs](cedar-rest-apis.md). Convert a YAML artifact to JSON before uploading it.
