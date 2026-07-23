@@ -26,60 +26,48 @@ Try these endpoints interactively through the [Swagger](https://swagger.io/)-gen
 
 **Search for resources.** Set `q=*` to match everything, or supply a search query. The `resource_types` parameter takes one or more comma-separated types: `template`, `element`, `instance`, or `folder`.
 
-???+ example "curl"
-
-    ```bash
-    curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-         -X GET "https://resource.metadatacenter.org/search?q=<searchQuery>&resource_types=<resourceTypes>"
-    ```
+```bash
+curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
+     -X GET "https://resource.metadatacenter.org/search?q=<searchQuery>&resource_types=<resourceTypes>"
+```
 
 For example, to retrieve all templates and elements:
 
-???+ example "curl"
-
-    ```bash
-    curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-         -X GET "https://resource.metadatacenter.org/search?q=*&resource_types=template,element"
-    ```
+```bash
+curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
+     -X GET "https://resource.metadatacenter.org/search?q=*&resource_types=template,element"
+```
 
 **Find all instances of a template.** Use the `is_based_on` parameter to identify the template. Its value must be URL-encoded.
 
-???+ example "curl"
-
-    ```bash
-    curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-         -X GET "https://resource.metadatacenter.org/search?q=*&is_based_on=https%3A%2F%2Frepo.metadatacenter.org%2Ftemplates%2Fc1199f96-dbd3-4476-8141-1f1fb13e1bca"
-    ```
+```bash
+curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
+     -X GET "https://resource.metadatacenter.org/search?q=*&is_based_on=https%3A%2F%2Frepo.metadatacenter.org%2Ftemplates%2Fc1199f96-dbd3-4476-8141-1f1fb13e1bca"
+```
 
 **Retrieve a resource by its identifier.** Replace `<resourceType>` with `templates`, `template-elements`, or `template-instances`, and `<resourceId>` with the URL-encoded resource identifier (its `@id` value).
 
-???+ example "curl"
-
-    ```bash
-    curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-         -X GET -H "Accept: application/json" \
-         "https://resource.metadatacenter.org/<resourceType>/<resourceId>"
-    ```
+```bash
+curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
+     -X GET -H "Accept: application/json" \
+     "https://resource.metadatacenter.org/<resourceType>/<resourceId>"
+```
 
 For example, to retrieve a specific template:
 
-???+ example "curl"
-
-    ```bash
-    curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-         -X GET -H "Accept: application/json" \
-         "https://resource.metadatacenter.org/templates/https%3A%2F%2Frepo.metadatacenter.org%2Ftemplates%2Fc1199f96-dbd3-4476-8141-1f1fb13e1bca"
-    ```
+```bash
+curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
+     -X GET -H "Accept: application/json" \
+     "https://resource.metadatacenter.org/templates/https%3A%2F%2Frepo.metadatacenter.org%2Ftemplates%2Fc1199f96-dbd3-4476-8141-1f1fb13e1bca"
+```
 
 **Create a resource.** POST the resource to the route for its type. The optional `folder_id` parameter (URL-encoded) names the containing folder, found in the CEDAR Workbench URL; without it, the resource goes to your home folder.
 
-???+ example "curl"
-
-    ```bash
-    curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-         -X POST --data-binary @resource.json \
-         "https://resource.metadatacenter.org/<resourceType>?folder_id=<folderId>"
-    ```
+```bash
+curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
+     -X POST --data-binary @resource.json \
+     "https://resource.metadatacenter.org/<resourceType>?folder_id=<folderId>"
+```
 
 Here `resource.json` holds the template, element, or instance to create, and `<resourceType>` is `templates`, `template-elements`, or `template-instances`.
 
@@ -87,13 +75,11 @@ Here `resource.json` holds the template, element, or instance to create, and `<r
 
 Validate a resource before creating it. The `command/validate` route validates all four resource types; the `resource_type` parameter names the type as `template`, `element`, `field`, or `instance`.
 
-???+ example "curl"
-
-    ```bash
-    curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" -H "Accept: application/json" \
-         -X POST --data-binary @MyTemplate.json \
-         "https://resource.metadatacenter.org/command/validate?resource_type=template"
-    ```
+```bash
+curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" -H "Accept: application/json" \
+     -X POST --data-binary @MyTemplate.json \
+     "https://resource.metadatacenter.org/command/validate?resource_type=template"
+```
 
 ### Uploading Instances
 
