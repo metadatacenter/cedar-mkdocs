@@ -54,9 +54,11 @@ async function switchMode(page, id) {
 async function searchOntologyUntilFound(page, query, rowText) {
   await page.getByRole('textbox', { name: 'Search field' }).fill(query);
   const rowLoc = page.getByText(rowText, { exact: false }).first();
-  for (let i = 0; i < 12; i++) {
+  // The list is fetched once (a slow, BioPortal-backed ~1300-ontology call). It can be very laggy,
+  // so give it a wide budget (~4 min) of re-searches before giving up.
+  for (let i = 0; i < 30; i++) {
     await page.locator('i.fa-search').last().click();
-    try { await rowLoc.waitFor({ timeout: 5000 }); return; } catch { await page.waitForTimeout(2000); }
+    try { await rowLoc.waitFor({ timeout: 5000 }); return; } catch { await page.waitForTimeout(3000); }
   }
   throw new Error(`ontology "${rowText}" never appeared in the picker (ontology list empty?)`);
 }
@@ -67,16 +69,33 @@ async function narrowToOntology(page, scope) {
   const sugg = page.locator('.suggestion-item, ti-autocomplete li').filter({ hasText: scope.match });
   await ont.click();
   await ont.pressSequentially(scope.type, { delay: 60 });
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 15; i++) {
     try { await sugg.first().waitFor({ timeout: 3000 }); return; } catch {}
     await ont.press('Backspace');                                 // re-trigger the filter once loaded
     await ont.pressSequentially(scope.type.slice(-1), { delay: 60 });
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(2500);
   }
 }
 async function pickSuggestion(page, match) {
   await page.locator('.suggestion-item, ti-autocomplete li').filter({ hasText: match }).first().click();
   await page.waitForTimeout(600);
+}
+// Select a term-search result, re-running the (laggy, flaky) live BioPortal search until the
+// expected class appears. BioPortal term search can take many seconds or drop a request.
+async function selectResultUntilFound(page, query, pick) {
+  const r = page.locator('[ng-click*="selectResult"]').filter({ hasText: pick }).first();
+  for (let i = 0; i < 8; i++) {
+    try {
+      await r.waitFor({ timeout: 8000 });
+      await r.click();
+      await page.waitForTimeout(1200);
+      return;
+    } catch {
+      await typeSearch(page, query);       // re-issue the search; BioPortal was slow/dropped it
+      await page.waitForTimeout(4000);
+    }
+  }
+  throw new Error(`result "${pick}" for "${query}" never appeared (BioPortal lag?)`);
 }
 // Click a stage button (Ontology/Branch/Term) then the picker's Add.
 async function stageAndAdd(page, stageNg) {
@@ -117,10 +136,7 @@ async function constrainBranch(page, { scope, query, pick }, shots = {}) {
   await typeSearch(page, query);
   await page.waitForTimeout(3000);
   if (shots.scoped) await shot(page, shots.scoped);                    // results narrowed to the ontology
-  const r = page.locator('[ng-click*="selectResult"]').filter({ hasText: pick }).first();
-  await r.waitFor({ timeout: 12_000 });
-  await r.click();
-  await page.waitForTimeout(1500);
+  await selectResultUntilFound(page, query, pick);
   if (shots.branch) await shot(page, shots.branch);                    // class selected, Branch chosen
   await stageAndAdd(page, 'stageBranchValueConstraint');
   if (shots.done) await shot(page, shots.done);                        // Values row: Branch
@@ -137,10 +153,7 @@ async function constrainClasses(page, { scope, terms }, shots = {}) {
     await pickSuggestion(page, scope.match);
     await typeSearch(page, terms[i].query);
     await page.waitForTimeout(3000);
-    const r = page.locator('[ng-click*="selectResult"]').filter({ hasText: terms[i].pick }).first();
-    await r.waitFor({ timeout: 12_000 });
-    await r.click();
-    await page.waitForTimeout(1200);
+    await selectResultUntilFound(page, terms[i].query, terms[i].pick);
     if (i === 0 && shots.search) await shot(page, shots.search);       // first assay, found
     await stageAndAdd(page, 'stageOntologyClassValueConstraint');
     if (i === 0 && shots.one) await shot(page, shots.one);             // Values row: one class so far
@@ -218,7 +231,14 @@ export async function buildTemplate(page, folderId) {
 // Reach the Metadata Editor via the row ⋮ → Populate (the deep link hits a
 // transient init warning). Retry until the SPA nav commits.
 async function openPopulate(page, folderId, templateName) {
-  await gotoFolder(page, folderId);
+  // A freshly-saved template lags the folder listing (search index), so poll for its row before
+  // opening the row menu (otherwise scrollIntoViewIfNeeded times out on a missing row).
+  let listed = false;
+  for (let i = 0; i < 12 && !listed; i++) {
+    await gotoFolder(page, folderId);
+    if (await row(page, templateName).count()) { listed = true; break; }
+    await page.waitForTimeout(2500);
+  }
   for (let attempt = 1; attempt <= 4; attempt++) {
     await openRowMenu(page, templateName);
     await menuItem(page, 'Populate');

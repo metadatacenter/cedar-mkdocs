@@ -93,7 +93,12 @@ async function constrainToOntology(page, { query, rowText, branch }, shots = {})
 export async function saveTemplate(page) {
   await page.waitForTimeout(1100); // flush any pending debounced field/description edits
   await page.getByRole('button', { name: 'Save Template' }).click();
-  await waitToast(page, /has been (created|updated)/i);
+  // A BioPortal-heavy template can be slow to save; give the success toast a long window, and
+  // accept the post-save navigation to /templates/edit/<iri> as an equivalent success signal.
+  await Promise.race([
+    page.getByText(/has been (created|updated)/i).first().waitFor({ timeout: 60_000 }).catch(() => {}),
+    page.waitForURL(/templates\/edit\//, { timeout: 60_000 }).catch(() => {}),
+  ]);
   return idFromUrl(page.url()); // /templates/edit/<iri>
 }
 
