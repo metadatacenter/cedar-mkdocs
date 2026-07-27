@@ -82,13 +82,33 @@ export async function menuItem(page, label) {
   await page.locator(`a:text-is(${JSON.stringify(label)}):visible`).first().click();
 }
 
+// Click the delete confirmation, once it can actually do something.
+//
+// The dialog is sweetalert, which binds its click handler as the dialog animates
+// in. Playwright clicks as soon as the button is visible, stable and enabled,
+// none of which implies a handler is attached yet, so the click gets swallowed
+// and the delete is never issued — the same race openRowMenu settles above.
+//
+// Diagnosed in cedar-development/ops/e2e/login-smoke-test.mjs, which shares these
+// gestures: an access log taken during a failure showed 285 requests and not one
+// DELETE across five attempts. Settling here took dropped gestures from two or
+// three per run to none.
 export async function confirmDelete(page) {
-  await page.getByRole('button', { name: 'Yes, delete it!' }).click();
+  const yes = page.getByRole('button', { name: 'Yes, delete it!' });
+  await yes.waitFor({ state: 'visible', timeout: 10_000 });
+  await page.waitForTimeout(600);
+  await yes.click({ timeout: 10_000 });
 }
 
-// Delete one dashboard row by name and confirm it's gone. The Angular dropdown
-// intermittently fires the anchor's href="#" instead of the delete action, so
-// retry the whole menu→Delete→confirm gesture until the row detaches.
+// Delete one dashboard row by name and confirm it's gone, retrying the whole
+// menu→Delete→confirm gesture until the row detaches: any step of it can be
+// swallowed and send no request at all, in which case only another attempt helps.
+//
+// The 3s wait below is not delete propagation, despite how it reads. The delete
+// itself answers promptly; what lags is the search index the listing is drawn
+// from. Now that confirmDelete settles, retries should be rare — if this starts
+// burning attempts again, check whether a DELETE is being sent before assuming
+// the backend is slow.
 export async function deleteRowByName(page, name, reloadHref, attempts = 6) {
   for (let attempt = 1; attempt <= attempts; attempt++) {
     // Always (re)load the list the row lives in — the caller may be inside a
@@ -100,7 +120,7 @@ export async function deleteRowByName(page, name, reloadHref, attempts = 6) {
     await openRowMenu(page, name);
     await menuItem(page, 'Delete');
     await confirmDelete(page).catch(() => {});
-    await page.waitForTimeout(3000); // CEDAR's delete propagation is laggy
+    await page.waitForTimeout(3000); // let the search index behind the listing catch up
     // Verify by reloading and re-counting rather than waiting for the specific
     // element to detach (the list re-renders, which races a detach check).
     await page.goto(reloadHref);
