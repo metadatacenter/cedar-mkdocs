@@ -56,12 +56,19 @@ async function constrainToOntology(page, { query, rowText, branch }, shots = {})
   await page.getByRole('button', { name: 'Add', exact: true }).click(); // opens the BioPortal picker
   await page.waitForTimeout(600);
   if (shots.picker) await shot(page, shots.picker);                      // picker: term-search mode
-  // Switch to ontology mode via the gear, then check the mode radio (styled/hidden).
+  // Switch to ontology mode via the gear. The mode radio is a hidden/styled input whose AngularJS
+  // ng-change only fires on a real DOM click (check()/coordinate clicks don't trigger it). And the
+  // ontology list now loads on demand (~7s — the startup pre-cache was removed), so the first
+  // search can hit an empty cache; re-run until the ontology row appears.
   await page.locator('i.fa-cog').first().click();
-  await page.locator('#search-scope-2').check({ force: true });          // "Search for an ontology…"
+  await page.locator('#search-scope-2').dispatchEvent('click');          // "Search for an ontology…"
+  await page.waitForTimeout(400);
   await page.getByRole('textbox', { name: 'Search field' }).fill(query);
-  await page.locator('i.fa-search').last().click();                      // run search
-  await page.getByText(rowText, { exact: false }).first().waitFor({ timeout: 12_000 }).catch(() => {});
+  const ontRow = page.getByText(rowText, { exact: false }).first();
+  for (let i = 0; i < 12; i++) {
+    await page.locator('i.fa-search').last().click();                    // run search
+    try { await ontRow.waitFor({ timeout: 5000 }); break; } catch { await page.waitForTimeout(2000); }
+  }
   if (shots.ontology) await shot(page, shots.ontology);                  // DOID result visible
   // Click the ontology row to explore its class tree (the explore view renders
   // over the row — the first click selects it; ignore any retry interception).

@@ -20,6 +20,7 @@ export async function launch() {
     viewport: VIEWPORT,
     deviceScaleFactor: DEVICE_SCALE_FACTOR,
     colorScheme: 'light',
+    ignoreHTTPSErrors: true, // allow a local CEDAR (self-signed .orgx cert) as CEDAR_BASE
   });
   await context.addInitScript(css => {
     const s = document.createElement('style'); s.textContent = css;

@@ -41,13 +41,38 @@ async function typeSearch(page, query) {
   await page.getByRole('textbox', { name: 'Search field' }).fill(query);
   await page.locator('i.fa-search').last().click();
 }
-// Add an ontology filter via the "Add ontologies" tag input; the tag triggers a
-// re-search on the current query.
+// The picker's mode radios are hidden/styled inputs whose AngularJS ng-change fires only on a
+// real DOM click; Playwright check()/coordinate clicks set the DOM but don't trigger it, leaving
+// the mode unchanged. Dispatch a DOM click straight at the input.
+async function switchMode(page, id) {
+  await page.locator(id).dispatchEvent('click');
+  await page.waitForTimeout(400);
+}
+// Ontology-mode search, resilient to the on-demand ontology list: since the startup pre-cache was
+// removed the list loads (~7s) the first time the picker needs it, so the first search can run
+// against an empty cache. Re-run until the ontology row appears.
+async function searchOntologyUntilFound(page, query, rowText) {
+  await page.getByRole('textbox', { name: 'Search field' }).fill(query);
+  const rowLoc = page.getByText(rowText, { exact: false }).first();
+  for (let i = 0; i < 12; i++) {
+    await page.locator('i.fa-search').last().click();
+    try { await rowLoc.waitFor({ timeout: 5000 }); return; } catch { await page.waitForTimeout(2000); }
+  }
+  throw new Error(`ontology "${rowText}" never appeared in the picker (ontology list empty?)`);
+}
+// Add an ontology filter via the "Add ontologies" tag input. Its suggestions come from the same
+// on-demand ontology list, so nudge the autocomplete (backspace + retype) until it appears.
 async function narrowToOntology(page, scope) {
   const ont = page.getByRole('textbox', { name: 'Add ontologies' });
+  const sugg = page.locator('.suggestion-item, ti-autocomplete li').filter({ hasText: scope.match });
   await ont.click();
   await ont.pressSequentially(scope.type, { delay: 60 });
-  await page.waitForTimeout(2000);
+  for (let i = 0; i < 10; i++) {
+    try { await sugg.first().waitFor({ timeout: 3000 }); return; } catch {}
+    await ont.press('Backspace');                                 // re-trigger the filter once loaded
+    await ont.pressSequentially(scope.type.slice(-1), { delay: 60 });
+    await page.waitForTimeout(1500);
+  }
 }
 async function pickSuggestion(page, match) {
   await page.locator('.suggestion-item, ti-autocomplete li').filter({ hasText: match }).first().click();
@@ -68,9 +93,8 @@ async function stageAndAdd(page, stageNg) {
 async function constrainWholeOntology(page, { query, rowText }, shots = {}) {
   await revealAdvanced(page);
   if (shots.modes) await shot(page, shots.modes);                      // the 3-way "I want to…" choice
-  await page.locator('#search-scope-2').check({ force: true });        // search for an ontology
-  await typeSearch(page, query);
-  await page.getByText(rowText, { exact: false }).first().waitFor({ timeout: 12_000 });
+  await switchMode(page, '#search-scope-2');                           // search for an ontology
+  await searchOntologyUntilFound(page, query, rowText);
   if (shots.search) await shot(page, shots.search);                    // the ontology, found
   await page.getByText(rowText, { exact: false }).first().click({ timeout: 8000 }).catch(() => {});
   await page.waitForTimeout(1800);
@@ -83,7 +107,7 @@ async function constrainWholeOntology(page, { query, rowText }, shots = {}) {
 // to the ontology, select the class, stage Branch, Add.
 async function constrainBranch(page, { scope, query, pick }, shots = {}) {
   await revealAdvanced(page);
-  await page.locator('#search-scope-1').check({ force: true });        // term mode
+  await switchMode(page, '#search-scope-1');                           // term mode
   await typeSearch(page, query);
   await page.waitForTimeout(3000);
   if (shots.unscoped) await shot(page, shots.unscoped);                // many results across ontologies
@@ -108,7 +132,7 @@ async function constrainClasses(page, { scope, terms }, shots = {}) {
   for (let i = 0; i < terms.length; i++) {
     if (i > 0) await reopenPicker(page);
     await revealAdvanced(page);
-    await page.locator('#search-scope-1').check({ force: true });
+    await switchMode(page, '#search-scope-1');
     await narrowToOntology(page, scope);
     await pickSuggestion(page, scope.match);
     await typeSearch(page, terms[i].query);
