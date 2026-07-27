@@ -300,8 +300,11 @@ export async function step7_openview(page, context, folderId, templateName, temp
 }
 
 // ── Teardown: delete everything in the run folder, then the folder ────────
-// Deletes instances before templates (a published template can't be deleted
-// while an instance of it exists) and verifies each delete by re-count.
+// Deletes instances before templates, since an instance without its template is meaningless,
+// and verifies each delete by re-count. Note that a published template *can* be deleted: the
+// guard against it in the resource server is commented out deliberately (commit 3f26ee7, 2021,
+// "Allow users to delete published resources"), so ordering here is about coherence, not a
+// restriction.
 export async function teardown(page, { folderId, folderName }) {
   await emptyAndDeleteFolder(page, folderId, folderName);
 }
