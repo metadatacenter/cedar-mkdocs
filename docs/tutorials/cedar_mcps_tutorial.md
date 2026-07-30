@@ -26,7 +26,7 @@ does all of them well. Finding the right ontology term is a search problem
 against BioPortal. Turning a design into a valid CEDAR schema is a modeling and
 validation problem. Seeing what that schema looks like is a rendering problem.
 Keeping and sharing the result is a storage problem. So we built four small MCP
-servers, one for each task, and an assistant orchestrates them. Together they
+servers, one for each task, and an LLM orchestrates them. Together they
 carry a template from a plain-language description all the way to a stored,
 standards-based artifact, without the model ever having to invent a schema or an
 identifier on its own.
@@ -50,7 +50,7 @@ Setup instructions are in the [Appendix](#appendix-configuring-the-mcp-servers).
 In this tutorial you build real CEDAR artifacts by conversation alone: a template,
 the specification that defines how a kind of data should be described, and an
 instance, the metadata that fills that specification in.
-You describe what you want in plain language, and an assistant backed by the four
+You describe what you want in plain language, and an LLM backed by the four
 MCP servers does the rest: it finds the right ontology terms, assembles a valid
 template, renders it as a form you can inspect, and fills an instance of it, right
 up to an artifact you could store and share. There is no CEDAR Workbench to click
@@ -65,7 +65,7 @@ walks through creating folders, templates, and fields in the Workbench, and the
 picker to constrain fields to ontology terms, using this very Tissue Sample
 template. Everything those two
 accomplish by pointing and clicking, you accomplish here by describing it in
-plain language. You need an assistant with the four servers configured and about
+plain language. You need an LLM with the four servers configured and about
 ten minutes.
 
 ## Step 1: Describe What You Want
@@ -79,12 +79,12 @@ what the template should hold:
 > organ from Uberon; and Assay Type, allowing three specific assays:
 > histopathology, imaging, and microscopy.
 
-Everything after this is the assistant working. It happens in three moves:
+Everything after this is the LLM working. It happens in three moves:
 resolve the terms, assemble the template, and preview it.
 
 ## Step 2: Resolve the Terms
 
-The assistant does not take ontology identifiers from memory. For each controlled
+The LLM does not take ontology identifiers from memory. For each controlled
 field it asks the BioPortal server, turning the names in your request into real
 classes and ontologies. To bind Cell Type to a whole ontology it calls
 `find_ontology`; to find the *organ* class in Uberon and the assay classes in OBI
@@ -106,7 +106,7 @@ template will point at terms that other people and other programs can resolve.
 
 ## Step 3: Assemble the Template
 
-With real IRIs in hand, the assistant builds the template on the CEDAR artifact
+With real IRIs in hand, the LLM builds the template on the CEDAR artifact
 server. It creates the template, adds each field, and attaches each field's value
 constraint. The three controlled fields take three different shapes of
 constraint. Cell Type is bound to an entire ontology, Organ to a branch (the
@@ -187,7 +187,7 @@ template, omitted here for readability.
 
 YAML is exact but hard to picture. The embeddable-editor server renders the
 template as the CEDAR form it describes, opened read-only in your browser, so you
-can check the design before saving anything. The assistant calls `show_template`
+can check the design before saving anything. The LLM calls `show_template`
 and returns a link:
 
 ![The Tissue Sample template, rendered by the CEDAR embeddable editor](../img/tutorials/mcps-tutorial-template.png)
@@ -200,12 +200,12 @@ JSON-LD and as JSON Schema, the standards-based forms CEDAR speaks natively.
 ## Step 5: Fill an Instance
 
 A template is a blueprint. The metadata you keep are *instances* of it, one per
-sample. Ask the assistant to fill one:
+sample. Ask the LLM to fill one:
 
 > Create an instance of that template: Sample ID TS-0001, Lab ID LAB-0042, Cell
 > Type hepatocyte, Organ liver, Assay Type histopathology assay.
 
-The assistant resolves the three controlled values through BioPortal again
+The LLM resolves the three controlled values through BioPortal again
 (*hepatocyte* to a Cell Ontology class, *liver* to a Uberon class,
 *histopathology assay* to its OBI class), builds the instance on the artifact
 server, validates it against the template, and renders it:
@@ -269,7 +269,7 @@ want, keep the approach, and the servers keep the output honest.
 
 ## Appendix: Configuring the MCP Servers
 
-Each server is a standalone MCP server that your assistant launches over stdio.
+Each server is a standalone MCP server that your LLM launches over stdio.
 You register the four in your client's MCP configuration once. The shape is the
 same across MCP-capable clients (Claude Desktop, Claude Code, and others); the
 launch command and paths depend on how you installed each server. A
@@ -312,6 +312,6 @@ A few notes on credentials:
 - The REST server needs a CEDAR API key and the base URL of your CEDAR server. It
   is required only if you save artifacts, as in [Save to CEDAR](#save-to-cedar).
 
-After adding the block, restart your client. The assistant then has the tools
+After adding the block, restart your client. The LLM then has the tools
 this tutorial used, from `find_class` and `set_branch_constraint` to
 `show_template`, ready to call.
