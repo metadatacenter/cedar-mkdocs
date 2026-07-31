@@ -128,6 +128,7 @@ nav:
       - Appendices:
           - yaml-spec/appendices/index.md
           - yaml-spec/appendices/key-index.md
+          - yaml-spec/appendices/versioned-value-constraints.md
           - yaml-spec/appendices/controlled-vocabularies.md
           - yaml-spec/appendices/datatypes.md
           - yaml-spec/appendices/glossary.md

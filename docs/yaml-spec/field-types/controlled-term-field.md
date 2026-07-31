@@ -9,11 +9,13 @@ and the four source kinds — an ontology, a branch of an ontology, individual c
 value set — cover the ways a field can be bound to a vocabulary. `actions` refines the set,
 and `default` names a starting term.
 
-Each entry's keys fall into two groups: `source*` keys identify the *vocabulary* the terms are
-drawn from, and `term*` keys identify the *member* within it. Every entry may also carry the
-optional versioning keys described in [Pinned Versions](#pinned-versions).
-
 ## Value Specifications
+
+> **Coming soon — this representation will change.** To support pinning a field to a specific
+> vocabulary version, the value-constraint keys shown below will be revised (the `source*`/`term*`
+> naming, plus an optional `version`). The keys on this page are the current, production form.
+> The forthcoming form is documented in
+> [Versioned Value Constraints (Preview)](../appendices/versioned-value-constraints.md).
 
 `values` is a sequence. Each entry is distinguished by its `type`.
 
@@ -25,11 +27,10 @@ Ontology, so any cell type is permitted.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `ontology` | The source is a whole ontology. |
-| `sourceAcronym` | string | The ontology's acronym — the handle used to resolve it. |
-| `sourceName` | string | The ontology's name. |
-| `sourceIri` | IRI | The ontology's canonical, cross-source identity. |
-| `sourceUri` | IRI | The ontology's URL in the backend. |
-| `termCount` | integer | Number of terms, when known. |
+| `acronym` | string | The ontology's acronym. |
+| `ontologyName` | string | The ontology's name. |
+| `iri` | IRI | The ontology's identifier. |
+| `numTerms` | integer | Number of terms, when known. |
 
 ```yaml
 - key: cell-type
@@ -38,10 +39,9 @@ Ontology, so any cell type is permitted.
   datatype: iri
   values:
   - type: ontology
-    sourceAcronym: CL
-    sourceName: Cell Ontology
-    sourceIri: http://purl.obolibrary.org/obo/cl
-    sourceUri: https://data.bioontology.org/ontologies/CL
+    acronym: CL
+    ontologyName: Cell Ontology
+    iri: https://data.bioontology.org/ontologies/CL
 ```
 
 ### A Branch of an Ontology
@@ -52,12 +52,11 @@ branch of Uberon, so the value must be an organ.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `branch` | The source is a branch rooted at a term. |
-| `sourceAcronym` | string | The source ontology's acronym. |
-| `sourceName` | string | The source ontology's name. |
-| `sourceIri` | IRI | The source ontology's canonical, cross-source identity. |
-| `termBaseIri` | IRI | The branch root term's identifier. |
-| `termBaseLabel` | string | The branch root term's label. |
-| `termMaxDepth` | integer | How many levels below the root to include; `0` for unlimited. |
+| `ontologyName` | string | The source ontology's name. |
+| `acronym` | string | The source ontology's acronym. |
+| `termLabel` | string | The label of the branch's root term. |
+| `iri` | IRI | The root term's identifier. |
+| `maxDepth` | integer | How many levels below the root to include; `0` for unlimited. |
 
 ```yaml
 - key: organ
@@ -66,12 +65,11 @@ branch of Uberon, so the value must be an organ.
   datatype: iri
   values:
   - type: branch
-    sourceAcronym: UBERON
-    sourceName: Uber Anatomy Ontology
-    sourceIri: http://purl.obolibrary.org/obo/uberon
-    termBaseIri: http://purl.obolibrary.org/obo/UBERON_0000062
-    termBaseLabel: organ
-    termMaxDepth: 0
+    ontologyName: Uber Anatomy Ontology
+    acronym: UBERON
+    termLabel: organ
+    iri: http://purl.obolibrary.org/obo/UBERON_0000062
+    maxDepth: 0
 ```
 
 ### Individual Classes
@@ -82,12 +80,11 @@ three assay classes from the Ontology for Biomedical Investigations.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `class` | The source is one term. |
-| `sourceAcronym` | string | The source ontology's acronym. |
-| `sourceIri` | IRI | The source ontology's canonical, cross-source identity. |
-| `termIri` | IRI | The term's identifier. |
+| `label` | string | The term's display label. |
+| `acronym` | string | The source's acronym. |
 | `termType` | `class` or `value` | Whether the term is an ontology class or a value-set value. |
 | `termLabel` | string | The term's preferred label. |
-| `label` | string | The term's display label. |
+| `iri` | IRI | The term's identifier. |
 
 ```yaml
 - key: assay-type
@@ -96,23 +93,23 @@ three assay classes from the Ontology for Biomedical Investigations.
   datatype: iri
   values:
   - type: class
-    sourceAcronym: OBI
-    termIri: http://purl.obolibrary.org/obo/OBI_0002564
+    label: histopathology assay
+    acronym: OBI
     termType: class
     termLabel: histopathology assay
-    label: histopathology assay
+    iri: http://purl.obolibrary.org/obo/OBI_0002564
   - type: class
-    sourceAcronym: OBI
-    termIri: http://purl.obolibrary.org/obo/OBI_0000185
+    label: imaging assay
+    acronym: OBI
     termType: class
     termLabel: imaging assay
-    label: imaging assay
+    iri: http://purl.obolibrary.org/obo/OBI_0000185
   - type: class
-    sourceAcronym: OBI
-    termIri: http://purl.obolibrary.org/obo/OBI_0002119
+    label: microscopy assay
+    acronym: OBI
     termType: class
     termLabel: microscopy assay
-    label: microscopy assay
+    iri: http://purl.obolibrary.org/obo/OBI_0002119
 ```
 
 ### A Value Set
@@ -123,11 +120,10 @@ class* value set from HRAVS.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `valueSet` | The source is a value set. |
-| `sourceAcronym` | string | The value set's collection acronym. |
-| `sourceIri` | IRI | The collection's canonical, cross-source identity. |
-| `termBaseIri` | IRI | The value set's identifier. |
-| `termBaseLabel` | string | The value set's name. |
-| `termCount` | integer | Number of terms, when known. |
+| `acronym` | string | The value set's collection acronym. |
+| `valueSetName` | string | The value set's name. |
+| `iri` | IRI | The value set's identifier. |
+| `numTerms` | integer | Number of terms, when known. |
 
 ```yaml
 - key: analyte-class
@@ -136,38 +132,9 @@ class* value set from HRAVS.
   datatype: iri
   values:
   - type: valueSet
-    sourceAcronym: HRAVS
-    termBaseIri: https://purl.humanatlas.io/vocab/hravs#HRAVS_1000371
-    termBaseLabel: Analyte class
-```
-
-### Pinned Versions
-
-Every value entry may pin the exact vocabulary version its terms are drawn from, so a
-published template reproduces its term state instead of drifting as the vocabulary changes.
-Three optional keys apply to any of the four entry kinds:
-
-| Key | Value | Meaning |
-|-----|-------|---------|
-| `sourceSystem` | string | The backend the vocabulary is served from. Absent ⇒ `bioportal`. |
-| `sourceIri` | IRI | The vocabulary's canonical, source-independent identity. Absent ⇒ derived from the acronym. |
-| `version` | `latest` or a triple | The pinned version. Absent, or the string `latest`, ⇒ the current version. |
-
-When pinned, `version` is a triple: `id` (the vocabulary snapshot's content hash, required),
-`effectiveDate` (the snapshot's release day), and `declaredVersion` (the source's self-declared
-label). The last two are for display and may be absent.
-
-```yaml
-  values:
-  - type: ontology
-    sourceAcronym: DOID
-    sourceName: Human Disease Ontology
-    sourceIri: http://purl.obolibrary.org/obo/doid
-    sourceUri: https://data.bioontology.org/ontologies/DOID
-    version:
-      id: 63ef56dff672b6a1d3f9f23201aae788bacac7f073b858e705b9a6624525dd8b
-      effectiveDate: 2026-07-01
-      declaredVersion: 2026-06-30
+    acronym: HRAVS
+    valueSetName: Analyte class
+    iri: https://purl.humanatlas.io/vocab/hravs#HRAVS_1000371
 ```
 
 ## Combining Specifications
