@@ -17,7 +17,8 @@ and `default` names a starting term.
 
 ## Value Specifications
 
-`values` is a sequence. Each entry is distinguished by its `type`.
+Each entry in `values` is an object. Its `type` selects one of the four source kinds, and the remaining
+keys it takes depend on that `type`.
 
 ### An Entire Ontology
 
