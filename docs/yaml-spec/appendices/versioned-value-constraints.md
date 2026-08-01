@@ -1,9 +1,9 @@
 # Versioned Value Constraints (Preview)
 
-**Coming soon — not yet in production.** The forthcoming form of a controlled-term field's value
-constraints adds the ability to pin a field to a specific vocabulary *version*. Nothing here is emitted
-or accepted by the released tools yet; the current, production keys are on the
-[Controlled Term Field](../field-types/controlled-term-field.md) page.
+> **Coming soon — not yet in production.** The forthcoming, version-aware form of a controlled-term
+> field's value constraints adds the ability to pin a field to a specific vocabulary version. It is not
+> yet emitted or accepted by the released tools; the current, production form is on the
+> [Controlled Term Field](../field-types/controlled-term-field.md) page.
 
 A controlled-term field carries its permitted terms in a `values` sequence: an array of entries, each
 naming one source of terms. An entry's `type` marks which of four source kinds it is — an entire
