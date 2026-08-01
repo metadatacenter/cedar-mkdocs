@@ -240,13 +240,14 @@ Each class entry pins independently, so a field can mix terms from different ver
 ## Coming from the Current Keys
 
 For readers migrating from the production keys, the existing keys are renamed as follows. The
-`Applies to` column disambiguates the current `iri` keys by what they identify. The ontology `iri`
+`Applies to` column names which of the four constraint kinds — ontology, branch, class, value set — a
+key applies to, and so disambiguates the current `iri` keys by what they identify. The ontology `iri`
 (its backend URL, `uri` in JSON) has no preview key: it is reconstructed from the acronym rather than
 stored.
 
 | Current key | Preview key | Applies to |
 |-------------|-------------|------------|
-| `acronym` | `sourceAcronym` | all kinds |
+| `acronym` | `sourceAcronym` | all four |
 | `ontologyName` | `sourceName` | ontology, branch |
 | `iri` | `termIri` | class |
 | `iri` | `termBaseIri` | branch, value set |
