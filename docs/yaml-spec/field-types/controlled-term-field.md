@@ -2,8 +2,8 @@
 
 > **Coming soon — a controlled-term field's value-constraint representation will change.** To support
 > pinning a field to a specific vocabulary version, the value-constraint keys shown below (the `values`
-> entries) will be revised (the `source*`/`term*` naming, plus an optional `version`). The keys on this
-> page are the current, production form. The forthcoming form is documented in
+> entries) will be revised. The keys on this page are the current, production form. The forthcoming form
+> is documented in
 > [Versioned Value Constraints (Preview)](../appendices/versioned-value-constraints.md).
 
 A controlled term field restricts its value to terms drawn from controlled vocabularies. In
