@@ -84,6 +84,11 @@ so the value must be an organ.
 One or more specific terms, listed explicitly. Here an **Assay Type** field permits exactly three assay
 classes from the Ontology for Biomedical Investigations.
 
+A class entry carries two labels. `termLabel` is the ontology's preferred label for the term; `label` is
+the display label shown to authors, which defaults to the preferred label. They are usually identical —
+which is why the example below repeats the text — but an author can override `label` without changing the
+term. This second label is unique to class entries; the other three kinds have none.
+
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `class` | The source is one term. |
