@@ -84,10 +84,9 @@ so the value must be an organ.
 One or more specific terms, listed explicitly. Here an **Assay Type** field permits exactly three assay
 classes from the Ontology for Biomedical Investigations.
 
-A class entry carries two labels. `termLabel` is the ontology's preferred label for the term; `label` is
-the display label shown to authors, which defaults to the preferred label. They are usually identical —
-which is why the example below repeats the text — but an author can override `label` without changing the
-term. This second label is unique to class entries; the other three kinds have none.
+A class entry has a single label in this dialect: `termLabel`, the ontology's preferred label. CEDAR also
+keeps an author-facing display label, but it defaults to the preferred label and is not part of the
+compact YAML.
 
 | Key | Value | Meaning |
 |-----|-------|---------|
@@ -98,7 +97,6 @@ term. This second label is unique to class entries; the other three kinds have n
 | `termIri` | IRI | The term's identifier. |
 | `termType` | `class` or `value` | Whether the term is an ontology class or a value-set value. |
 | `termLabel` | string | The term's preferred label, e.g. histopathology assay. |
-| `label` | string | The entry's display label, e.g. histopathology assay. |
 
 ```yaml
 - key: assay-type
@@ -113,7 +111,6 @@ term. This second label is unique to class entries; the other three kinds have n
     termIri: http://purl.obolibrary.org/obo/OBI_0002564
     termType: class
     termLabel: histopathology assay
-    label: histopathology assay
   - type: class
     sourceSystem: bioportal
     sourceAcronym: OBI
@@ -121,7 +118,6 @@ term. This second label is unique to class entries; the other three kinds have n
     termIri: http://purl.obolibrary.org/obo/OBI_0000185
     termType: class
     termLabel: imaging assay
-    label: imaging assay
   - type: class
     sourceSystem: bioportal
     sourceAcronym: OBI
@@ -129,7 +125,6 @@ term. This second label is unique to class entries; the other three kinds have n
     termIri: http://purl.obolibrary.org/obo/OBI_0002119
     termType: class
     termLabel: microscopy assay
-    label: microscopy assay
 ```
 
 ### A Value Set
@@ -222,7 +217,6 @@ Each class entry pins independently, so a field can mix terms from different ver
   termIri: http://purl.obolibrary.org/obo/OBI_0002564
   termType: class
   termLabel: histopathology assay
-  label: histopathology assay
   version:
     id: 3c4d5e6f7a8b
     effectiveDate: 2026-04-20
