@@ -1,15 +1,14 @@
 # Versioned Value Constraints (Preview)
 
-**Coming soon — not yet in production.** This page previews the forthcoming form of a controlled-term
-field's value constraints, which adds the ability to pin a field to a specific vocabulary *version*.
-Nothing here is emitted or accepted by the released tools yet; the current, production keys are on the
+**Coming soon — not yet in production.** The forthcoming form of a controlled-term field's value
+constraints adds the ability to pin a field to a specific vocabulary *version*. Nothing here is emitted
+or accepted by the released tools yet; the current, production keys are on the
 [Controlled Term Field](../field-types/controlled-term-field.md) page.
 
-The page is self-contained. It first introduces the four source kinds — an entire ontology, a branch,
-individual classes, and a value set — *without* a version, where each behaves exactly as a constraint
-does today. It then adds a `version` to each, pinning the field to one snapshot of its source. The keys
-fall into two groups: `source*` names the vocabulary the terms come from, and `term*` names the term or
-branch within it.
+A controlled-term field draws its value from one of four source kinds — an entire ontology, a branch,
+individual classes, or a value set. Each can be left unpinned, resolving against the latest version, or
+pinned to one snapshot of its source by adding a `version`. The keys fall into two groups: `source*`
+names the vocabulary the terms come from, and `term*` names the term or branch within it.
 
 ## Without a Version
 
@@ -21,8 +20,8 @@ no version at all.
 Unpinned is convenient while authoring, but it is not reproducible. As the source ontology is revised, an
 unpinned field's permitted terms — and their labels and place in the hierarchy — can change under an
 already-published template without warning. A value someone picked last year may be renamed, moved, or
-obsoleted this year. Pin a version (next section) when a published template must offer and resolve the
-same terms every time.
+obsoleted this year. Pin a version when a published template must offer and resolve the same terms every
+time.
 
 ### An Entire Ontology
 
@@ -167,8 +166,8 @@ set from HRAVS.
 A published template should stay reproducible: the terms a field offers should not shift when the
 underlying vocabulary is later updated. Adding a `version` to any of the four entries pins it to one
 snapshot of its source. At populate time, terms then resolve against that snapshot rather than against
-whatever is latest. Omitting `version` (or writing `version: latest`) tracks the latest version, exactly
-as the examples above do.
+whatever is latest. Omitting `version` (or writing `version: latest`) tracks the latest version — the
+unpinned behaviour.
 
 A `version` names one snapshot. Its keys, in order:
 
@@ -179,8 +178,8 @@ A `version` names one snapshot. Its keys, in order:
 | `declaredVersion` | string | The version string the source itself declared, when it has one. A human-facing label; not guaranteed unique. |
 
 Only the content-hash `id` — read together with the ontology's `sourceIri` — pins reproducibly;
-`effectiveDate` and `declaredVersion` are provenance labels for people to read. Each example below shows one `values` entry with a `version` added; the
-surrounding field is as in the previous section.
+`effectiveDate` and `declaredVersion` are provenance labels for people to read. Each example shows one
+`values` entry with a `version` added; the surrounding field is unchanged from its unpinned form.
 
 ### An Entire Ontology, Pinned
 
@@ -247,7 +246,7 @@ Each class entry pins independently, so a field can mix terms from different ver
 
 ## Coming from the Current Keys
 
-For readers migrating from the production keys, the existing keys are renamed as follows. The
+For readers migrating from the production keys, the existing keys are renamed. The
 `Applies to` column names which of the four constraint kinds — ontology, branch, class, value set — a
 key applies to, and so disambiguates the current `iri` keys by what they identify. The ontology `iri`
 (its backend URL, `uri` in JSON) has no preview key: it is reconstructed from the acronym rather than
