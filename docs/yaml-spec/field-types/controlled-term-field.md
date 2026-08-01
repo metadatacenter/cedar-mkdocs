@@ -1,5 +1,11 @@
 # Controlled Term Field
 
+> **Coming soon — a controlled-term field's value-constraint representation will change.** To support
+> pinning a field to a specific vocabulary version, the value-constraint keys shown below (the `values`
+> entries) will be revised (the `source*`/`term*` naming, plus an optional `version`). The keys on this
+> page are the current, production form. The forthcoming form is documented in
+> [Versioned Value Constraints (Preview)](../appendices/versioned-value-constraints.md).
+
 A controlled term field restricts its value to terms drawn from controlled vocabularies. In
 YAML its `type` is `controlled-term-field` and its `datatype` is always `iri`, because a
 controlled-term value is the IRI of a term.
@@ -10,12 +16,6 @@ value set — cover the ways a field can be bound to a vocabulary. `actions` ref
 and `default` names a starting term.
 
 ## Value Specifications
-
-> **Coming soon — this representation will change.** To support pinning a field to a specific
-> vocabulary version, the value-constraint keys shown below will be revised (the `source*`/`term*`
-> naming, plus an optional `version`). The keys on this page are the current, production form.
-> The forthcoming form is documented in
-> [Versioned Value Constraints (Preview)](../appendices/versioned-value-constraints.md).
 
 `values` is a sequence. Each entry is distinguished by its `type`.
 
