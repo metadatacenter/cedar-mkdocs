@@ -26,8 +26,8 @@ Ontology, so any cell type is permitted.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `ontology` | The source is a whole ontology. |
-| `acronym` | string | The ontology's acronym. |
-| `ontologyName` | string | The ontology's name. |
+| `acronym` | string | The ontology's acronym, e.g. `CL`. |
+| `ontologyName` | string | The ontology's name, e.g. Cell Ontology. |
 | `iri` | IRI | The ontology's identifier. |
 | `numTerms` | integer | Number of terms, when known. |
 
@@ -51,9 +51,9 @@ branch of Uberon, so the value must be an organ.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `branch` | The source is a branch rooted at a term. |
-| `ontologyName` | string | The source ontology's name. |
-| `acronym` | string | The source ontology's acronym. |
-| `termLabel` | string | The label of the branch's root term. |
+| `ontologyName` | string | The source ontology's name, e.g. Uber Anatomy Ontology. |
+| `acronym` | string | The source ontology's acronym, e.g. `UBERON`. |
+| `termLabel` | string | The label of the branch's root term, e.g. organ. |
 | `iri` | IRI | The root term's identifier. |
 | `maxDepth` | integer | How many levels below the root to include; `0` for unlimited. |
 
@@ -79,10 +79,10 @@ three assay classes from the Ontology for Biomedical Investigations.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `class` | The source is one term. |
-| `label` | string | The term's display label. |
-| `acronym` | string | The source's acronym. |
+| `label` | string | The term's display label, e.g. histopathology assay. |
+| `acronym` | string | The source's acronym, e.g. `OBI`. |
 | `termType` | `class` or `value` | Whether the term is an ontology class or a value-set value. |
-| `termLabel` | string | The term's preferred label. |
+| `termLabel` | string | The term's preferred label, e.g. histopathology assay. |
 | `iri` | IRI | The term's identifier. |
 
 ```yaml
@@ -119,8 +119,8 @@ class* value set from HRAVS.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `valueSet` | The source is a value set. |
-| `acronym` | string | The value set's collection acronym. |
-| `valueSetName` | string | The value set's name. |
+| `acronym` | string | The value set's collection acronym, e.g. `HRAVS`. |
+| `valueSetName` | string | The value set's name, e.g. Analyte class. |
 | `iri` | IRI | The value set's identifier. |
 | `numTerms` | integer | Number of terms, when known. |
 
