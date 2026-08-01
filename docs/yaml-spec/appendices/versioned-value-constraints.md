@@ -166,12 +166,12 @@ A `version` names one snapshot. Its keys, in order:
 
 | Key | Value | Meaning |
 |-----|-------|---------|
-| `id` | string | The snapshot's content-hash identity — a hash of the extracted ontology. This is what actually pins the constraint; it names one exact snapshot. |
+| `id` | string | The snapshot's content hash — a hash of the extracted ontology. Unique *within* an ontology (snapshots are partitioned by ontology iri, so two ontologies can share a hash), so together with `sourceAcronym`/`sourceIri` it pins the constraint to one exact snapshot. |
 | `effectiveDate` | date | When that snapshot was ingested or released. A human-facing label. |
 | `declaredVersion` | string | The version string the source itself declared, when it has one. A human-facing label; not guaranteed unique. |
 
-Only the content-hash `id` pins reproducibly; `effectiveDate` and `declaredVersion` are provenance
-labels for people to read. Each example below shows one `values` entry with a `version` added; the
+Only the content-hash `id` — read together with the source — pins reproducibly; `effectiveDate` and
+`declaredVersion` are provenance labels for people to read. Each example below shows one `values` entry with a `version` added; the
 surrounding field is as in the previous section.
 
 ### An Entire Ontology, Pinned
