@@ -5,17 +5,21 @@ constraints adds the ability to pin a field to a specific vocabulary *version*. 
 or accepted by the released tools yet; the current, production keys are on the
 [Controlled Term Field](../field-types/controlled-term-field.md) page.
 
-A controlled-term field draws its value from one of four source kinds — an entire ontology, a branch,
-individual classes, or a value set. Each can be left unpinned, resolving against the latest version, or
-pinned to one snapshot of its source by adding a `version`. The keys fall into two groups: `source*`
-names the vocabulary the terms come from, and `term*` names the term or branch within it.
+A controlled-term field carries its permitted terms in a `values` sequence: an array of entries, each
+naming one source of terms. An entry's `type` marks which of four source kinds it is — an entire
+ontology, a branch of one, individual classes, or a value set. A field may hold several entries at once,
+and the terms it permits are their union: a field could allow every term in one ontology plus a handful
+of named classes from another. Within an entry the keys fall into two groups — `source*` names the
+vocabulary the terms come from, and `term*` names the term or branch within it.
+
+Each entry can be left unpinned, resolving against the latest version of its source, or pinned to one
+exact snapshot by adding a `version`.
 
 ## Without a Version
 
-`values` is a sequence. Each entry is distinguished by its `type`. An entry with no `version` — or an
-explicit `version: latest` — is *unpinned*: at populate time it resolves against whatever version of its
-source the terminology server currently serves. This is exactly how the current keys behave; they carry
-no version at all.
+An entry with no `version` — or an explicit `version: latest` — is *unpinned*: at populate time it
+resolves against whatever version of its source the terminology server currently serves. This is exactly
+how the current keys behave; they carry no version at all.
 
 Unpinned is convenient while authoring, but it is not reproducible. As the source ontology is revised, an
 unpinned field's permitted terms — and their labels and place in the hierarchy — can change under an
