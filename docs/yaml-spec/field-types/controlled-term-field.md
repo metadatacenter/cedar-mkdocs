@@ -1,24 +1,22 @@
 # Controlled Term Field
 
 > **Coming soon — a controlled-term field's value-constraint representation will change.** To support
-> pinning a field to a specific vocabulary version, the value-constraint keys shown below (the `values`
-> entries) will be revised. The keys on this page are the current, production form. The forthcoming form
-> is documented in
-> [Versioned Value Constraints (Preview)](../appendices/versioned-value-constraints.md).
+> pinning a field to a specific vocabulary version, the way a field's permitted terms are declared will
+> be revised. The current, production form still applies; the forthcoming, version-aware form is
+> documented in [Versioned Value Constraints (Preview)](../appendices/versioned-value-constraints.md).
 
 A controlled term field restricts its value to terms drawn from controlled vocabularies. In
 YAML its `type` is `controlled-term-field` and its `datatype` is always `iri`, because a
 controlled-term value is the IRI of a term.
 
-The permitted terms are declared in a `values` sequence. Each entry names a source of terms,
-and the four source kinds — an ontology, a branch of an ontology, individual classes, and a
-value set — cover the ways a field can be bound to a vocabulary. `actions` refines the set,
-and `default` names a starting term.
+The permitted terms are declared in a `values` sequence, which `actions` can refine and
+`default` can seed with a starting term.
 
 ## Value Specifications
 
-Each entry in `values` is an object. Its `type` selects one of the four source kinds, and the remaining
-keys it takes depend on that `type`.
+`values` is a sequence of entries, each naming one source of terms. An entry's `type` selects one of the
+four source kinds — an entire ontology, a branch of an ontology, individual classes, or a value set — and
+the remaining keys it takes depend on that `type`.
 
 ### An Entire Ontology
 
