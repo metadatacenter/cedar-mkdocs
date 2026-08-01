@@ -12,21 +12,28 @@ available version, exactly as today.
 
 ## What Changed
 
+Existing keys are renamed. The `Applies to` column disambiguates the three current `iri` keys, which
+split by what they identify.
+
 | Current key | Preview key | Applies to |
 |-------------|-------------|------------|
 | `acronym` | `sourceAcronym` | all kinds |
 | `ontologyName` | `sourceName` | ontology, branch |
-| `iri` (of an ontology) | `sourceUri` | ontology |
-| `iri` (of a class) | `termIri` | class |
-| `iri` (of a branch root or value set) | `termBaseIri` | branch, value set |
-| `termLabel` (of a branch root) | `termBaseLabel` | branch |
+| `iri` | `sourceUri` | ontology |
+| `iri` | `termIri` | class |
+| `iri` | `termBaseIri` | branch, value set |
+| `termLabel` | `termBaseLabel` | branch |
 | `valueSetName` | `termBaseLabel` | value set |
 | `maxDepth` | `termMaxDepth` | branch |
 | `numTerms` | `termCount` | ontology, value set |
-| *(unchanged)* | `termLabel` | class |
-| *(new)* | `sourceSystem` | all kinds — the system that serves the vocabulary |
-| *(new)* | `sourceIri` | all kinds — the canonical, source-independent ontology identity |
-| *(new)* | `version` | all kinds — the pinned snapshot; omit for latest |
+
+A class's `termLabel` keeps its name. Three keys are new, each applying to every constraint kind:
+
+| New key | Meaning |
+|---------|---------|
+| `sourceSystem` | The system that serves the vocabulary; absent means BioPortal. |
+| `sourceIri` | The canonical, source-independent ontology identity. |
+| `version` | The pinned snapshot; omit to resolve against latest. |
 
 ## Without a Version
 
