@@ -13,8 +13,16 @@ branch within it.
 
 ## Without a Version
 
-`values` is a sequence. Each entry is distinguished by its `type`. With no `version`, an entry resolves
-against the latest available version of its source — the same behaviour as the current keys.
+`values` is a sequence. Each entry is distinguished by its `type`. An entry with no `version` — or an
+explicit `version: latest` — is *unpinned*: at populate time it resolves against whatever version of its
+source the terminology server currently serves. This is exactly how the current keys behave; they carry
+no version at all.
+
+Unpinned is convenient while authoring, but it is not reproducible. As the source ontology is revised, an
+unpinned field's permitted terms — and their labels and place in the hierarchy — can change under an
+already-published template without warning. A value someone picked last year may be renamed, moved, or
+obsoleted this year. Pin a version (next section) when a published template must offer and resolve the
+same terms every time.
 
 ### An Entire Ontology
 
