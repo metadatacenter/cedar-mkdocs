@@ -143,19 +143,37 @@ example, allow every term in one ontology plus a handful of named classes from a
 
 ## Actions
 
-`actions` adjusts the term set drawn from the value specifications. An action removes a term,
-or moves one to a given position in the presented list. `actions` is a sequence.
+The value specifications above are aggregated first — their union, per [Combining
+Specifications](#combining-specifications). `actions` then refines that combined set: an action
+removes a term, or moves one to a given position in the presented list. `actions` is a field-level
+sequence, a sibling of `values`.
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
 | `action` | `delete` or `move` | required | Remove the term, or reposition it. |
-| `to` | integer | conditional | Target position, for `move`. |
+| `to` | integer | conditional | Target position for `move` — an index into the merged list across all value specifications, not within one source. |
 | `termIri` | IRI | required | The affected term. |
 | `sourceIri` | IRI | optional | The term's source. |
 | `sourceAcronym` | string | required | The source's acronym. |
 | `type` | `class` or `value` | required | Whether the term is a class or a value-set value. |
 
+Because a `move` targets a position in the merged, cross-source list, `actions` lives at the field
+level rather than under any one `values` entry; each action names its own term and source, so it
+stands alone. Shown alongside `values` on an **Assay** field bound to the OBI *assay* branch, minus
+one class:
+
 ```yaml
+- key: assay
+  type: controlled-term-field
+  name: Assay
+  datatype: iri
+  values:
+  - type: branch
+    ontologyName: Ontology for Biomedical Investigations
+    acronym: OBI
+    termLabel: assay
+    iri: http://purl.obolibrary.org/obo/OBI_0000070
+    maxDepth: 0
   actions:
   - action: delete
     termIri: http://purl.obolibrary.org/obo/OBI_0000185
