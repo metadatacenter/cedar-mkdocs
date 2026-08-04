@@ -1,7 +1,7 @@
 # CEDAR MCPs Tutorial
 
 Good metadata is still made by hand. Someone reads a dataset, its data
-dictionary, a protocol, and a paper, then retypes what they learned into a
+dictionary, a protocol, and a paper, then transcribes what they learned into a
 structured form, choosing a standardized term for each value. It is slow work,
 and it is exactly the kind of reading and restructuring that a large language
 model does well.
