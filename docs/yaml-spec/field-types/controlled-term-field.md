@@ -138,8 +138,43 @@ class* value set from HRAVS.
 
 ## Combining Specifications
 
-Several entries may appear together; the permitted values are their union. A field could, for
-example, allow every term in one ontology plus a handful of named classes from another.
+A `values` list may hold several entries, and the four source kinds mix freely — an ontology, a
+branch, individual classes, and a value set can all appear in one field. The permitted terms are the
+**union** of what each entry contributes: an ontology entry yields all its terms, a branch its
+subtree, a value set its members, and a `class` its single term, and those results merge into one
+pick-list. Each entry is evaluated independently, so a term reached through two entries still appears
+once.
+
+Combining is how you assemble a value set no single source offers — for example every cell type from
+one ontology plus a couple of named anatomical structures from another. The order of the entries sets
+the initial order of the merged list, which [`actions`](#actions) can then refine.
+
+```yaml
+- key: sample-type
+  type: controlled-term-field
+  name: Sample Type
+  datatype: iri
+  values:
+  - type: ontology
+    acronym: CL
+    ontologyName: Cell Ontology
+    iri: https://data.bioontology.org/ontologies/CL
+  - type: class
+    label: blood
+    acronym: UBERON
+    termType: class
+    termLabel: blood
+    iri: http://purl.obolibrary.org/obo/UBERON_0000178
+  - type: class
+    label: bone tissue
+    acronym: UBERON
+    termType: class
+    termLabel: bone tissue
+    iri: http://purl.obolibrary.org/obo/UBERON_0002481
+```
+
+Here a **Sample Type** field permits any cell type (all of the Cell Ontology) plus the two named
+UBERON classes *blood* and *bone tissue* — a single merged list of choices.
 
 ## Actions
 
