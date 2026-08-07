@@ -51,11 +51,10 @@ releases.
 
 We use standard test-driven strategies for developing our
 REST-based services and also have developed an array of tests for
-CEDAR’s front end components. All CEDAR components have a set of
-tests that are executed automatically using the
-[Travis](https://www.travis-ci.com/) continuous integration
-system. All developers are immediately notified via Slack when
-tests fail so that issues can be quickly addressed.
+CEDAR’s front end components. The Java components run their tests
+automatically in [GitHub Actions](https://github.com/features/actions)
+on every push and pull request to the development branch, and a failing
+run is reported on the commit and the pull request that caused it.
 
 ## Backup Schedule
 
