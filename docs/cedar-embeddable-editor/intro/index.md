@@ -26,9 +26,9 @@ environment they were working in. Platform operators wrote transformations, brok
 kept their own copy of each template synchronized by hand, and did it again whenever a standard
 changed.
 
-The CEE removes the round trip. The template renders inside the host application, and the metadata is
-returned to it directly. Two consequences follow, and they are the reasons to reach for the CEE rather
-than build a form:
+The CEE removes the round trip. The template renders inside the host application, which receives
+the metadata directly. Two consequences follow, and between them they are the case for embedding the
+CEE rather than building a form:
 
 - **There is no metadata interface to build or maintain.** Presentation and data-creation logic
   live in the component. A platform adds a tag, not a form.
@@ -78,9 +78,9 @@ term's IRI alongside its label, so "Alzheimer's disease" in a form becomes a ref
 [external authority](../../yaml-spec/field-types/external-authority-fields.md) stores a persistent
 identifier: an ORCID for a person, a ROR for an institution, a DOI for a publication.
 
-Instances can be read back in as well as written out. Handing the CEE a template and an existing
-instance of it opens the form with those values in place, which is what turns the component from a
-one-way capture form into an editor.
+Instances travel in as well as out. Handing the CEE a template together with an existing instance
+of it opens the form with those values in place, which turns the component from a capture form into
+an editor.
 
 ## Two Serializations
 
@@ -89,14 +89,14 @@ can be written down in two ways, and the CEE handles both. A template can come i
 instance can go out as either, and the two choices are unrelated.
 
 A template is supplied as **JSON Schema** or as **YAML**. Both are read through the same model
-library, so a template written either way builds the same editor. The JSON Schema form is the
-default, and it is what the CEDAR Workbench exports. The YAML form is the one
-[the CEDAR Model YAML Specification](../../yaml-spec/index.md) defines. The CEDAR REST APIs serve
+library, so a template written either way builds the same editor. The CEDAR Workbench exports the
+JSON Schema form, which is also the default. [The CEDAR Model YAML
+Specification](../../yaml-spec/index.md) defines the YAML form. The CEDAR REST APIs serve
 both, so an application fetching a template from CEDAR can ask for whichever it prefers.
 
-An instance is returned as **JSON-LD** or as **YAML**. The JSON-LD form is what CEDAR stores,
-validates and indexes. The YAML form carries the same instance in the serialization that
-specification defines.
+An instance is returned as **JSON-LD** or as **YAML**. CEDAR stores, validates and indexes the
+JSON-LD form. The YAML form carries the same instance in the serialization that specification
+defines.
 
 The JSON forms are the default on both sides, and `inputSerialization` and `outputSerialization`
 select otherwise. Each governs one side only: an instance loaded into the form is read as JSON-LD
@@ -123,7 +123,7 @@ locally.
 ## What the CEE Does Not Do
 
 A few requirements fall outside CEDAR's current metadata model. Meeting one of them means building
-it outside the editor, so they are worth checking against early.
+it outside the editor, so check for them before committing to the CEE.
 
 - **Conditional logic.** Dynamic field branching, and skipping questions on the strength of earlier
   answers, are not supported. Clinical studies, environmental assessments and longitudinal
@@ -142,8 +142,7 @@ Many open data environments face a tension between broad accessibility and domai
 Generalist platforms must support heterogeneous users and content types, while domain repositories
 demand high-quality, semantically rich metadata. Embedding the CEE with discipline-specific
 templates lets a generalist platform support structured metadata capture without fragmenting its
-infrastructure or duplicating interface logic. That is the reasoning behind most of its
-adoptions.
+infrastructure or duplicating interface logic, which is what drew most of its adopters.
 
 As an authoring interface, the **Open Science Framework** invokes the CEE during dataset submission and
 project registration: a researcher picks a discipline-specific template, and the CEE renders it inside
@@ -152,12 +151,12 @@ templates from the HuBMAP Consortium.
 
 As a viewer, the **RADx Data Hub** presents metadata records for COVID-19 diagnostic projects
 through the CEE in read-only mode, and **HuBMAP** uses it as the public interface for inspecting every
-metadata template the consortium uses. The same component that collects metadata is what displays
-it, so a reviewer sees the record laid out the way its author entered it.
+metadata template the consortium uses. One component both collects the metadata and displays it,
+so a reviewer sees the record laid out the way its author entered it.
 
-The portability is not incidental. The HuBMAP templates are exported from the CEDAR Workbench once
-and embedded in both Dryad and OSF **without modification**, each platform applying its own
-configuration and styling. Host platforms have deployed the CEE in React, Django and custom
+That portability is not incidental. The HuBMAP templates leave the CEDAR Workbench once and embed
+in both Dryad and OSF **without modification**, each platform applying its own configuration and
+styling. Host platforms have deployed the CEE in React, Django and custom
 JavaScript environments.
 
 Datasets are the common case rather than the limit. The same template-driven approach applies to
@@ -169,10 +168,11 @@ protocols, software and project-level records.
 The CEE requires native
 [Custom Elements v1](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)
 and native
-[Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM). It
-supports the browser targets of the Angular version it is built with, and its automated
-compatibility suite runs against current desktop Chromium, Firefox and WebKit engines. Partner platforms have additionally validated releases
-in Chrome, Firefox, Safari and Edge, and on a selection of mobile devices.
+[Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM).
+It supports the browser targets of the Angular version it is built with, and its automated
+compatibility suite runs against current desktop Chromium, Firefox and WebKit engines. Partner
+platforms have additionally validated releases in Chrome, Firefox, Safari and Edge, and on a
+selection of mobile devices.
 
 Internet Explorer, legacy EdgeHTML, and any embedded web view without `window.customElements` and
 Shadow DOM are not supported. The CEE deliberately does not polyfill the page that hosts it: an

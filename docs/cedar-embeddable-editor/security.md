@@ -1,12 +1,12 @@
 # Security
 
-The CEE runs inside the embedding page, in the embedding origin. It is a custom element, and although
-its content lives in a shadow root, **Shadow DOM is not a security boundary**: it scopes styles and
-markup, not privileges. Anything the CEE executes has the same access to cookies, storage and network
-as the rest of the application.
+The CEE runs inside the embedding page, in the embedding origin. Its content lives in a shadow
+root, but **Shadow DOM is not a security boundary**: it scopes styles and markup, not privileges.
+Anything the CEE executes reaches cookies, storage and network exactly as the rest of the
+application does.
 
-That is unremarkable for a component whose input is data. It becomes worth thinking about because
-one of the CEE's inputs is not purely data.
+For a component whose inputs are data, that arrangement carries no risk. One of the CEE's inputs is
+not purely data.
 
 ## Templates Are Trusted Input
 
@@ -14,9 +14,9 @@ A CEDAR template can carry a [static rich-text field](../yaml-spec/field-types/s
 whose body is HTML composed by the template's author and rendered as HTML by the CEE. Template authors
 use it for instructions, formatted notes and links.
 
-Instance data is a different matter and is never in question. A value a user typed into a form is
-always sanitized, on the way in and on the way out, and no configuration changes that. A person
-filling in a form cannot introduce markup that runs.
+Instance data raises no such question. The CEE always sanitizes a value a user typed, on the way
+in and on the way out, and no configuration changes that. A person filling in a form cannot
+introduce markup that runs.
 
 The question is only what a *template author* may do.
 
@@ -26,9 +26,9 @@ The CEE sanitizes template rich text unless told not to. Script elements, event-
 as `onerror`, `javascript:` URLs, `iframe` elements, form controls and AngularJS directive
 attributes such as `ng-click` are removed before rendering.
 
-Formatting survives. Inline styles, tables, lists, headings, links, and inline `data:` images in the
-raster formats all render as the author composed them. The default is not a stripped-down rendering
-that authors will want to escape; it is the same rendering without the executable parts.
+Formatting survives. Inline styles, tables, lists, headings, links, and inline `data:` images in
+the raster formats all render as the author composed them. Sanitizing removes the executable parts
+and leaves the rendering otherwise untouched, so template authors gain nothing by turning it off.
 
 ## Rendering Markup Verbatim
 
@@ -46,9 +46,8 @@ on, a template author can run JavaScript in the application's origin. "Allowed t
 and "allowed to run code in this page" are very different permissions, and setting this key declares
 them to be the same.
 
-The conditions under which that is defensible are narrow: templates ship with the application, or
-come from a repository the operators control, and the people who can write templates are the people
-who could already deploy code.
+Only a narrow case justifies it. Templates ship with the application, or come from a repository
+the operators control, and whoever can write a template could already deploy code.
 
 **Do not set it if users choose their own templates.** A template from CEDAR's public library, from
 a colleague, or from anywhere users can write to is untrusted input, and rendering its markup
@@ -66,18 +65,18 @@ formatting without the risk.
 
 ## Requests the CEE Makes
 
-The CEE issues requests to the endpoints it is configured with, and to nothing else. In a default
-configuration that is CEDAR's terminology service, for term suggestions, and CEDAR's bridge service,
-for external-authority lookups. Both carry only the text the user typed and the constraint the
-template declares. An application that must keep those queries inside its own network points both
-settings at its own CEDAR deployment.
+The CEE issues requests to the endpoints it is configured with, and to nothing else. A default
+configuration reaches two: CEDAR's terminology service for term suggestions, and CEDAR's bridge
+service for external-authority lookups. Each request carries only the text the user typed and the
+constraint the template declares. An application that must keep those queries inside its own
+network points both settings at its own CEDAR deployment.
 
-The rest is local. Templates and instances are supplied by the application, the form is rendered in
-the browser, and the metadata is produced in the browser. The CEE sends metadata nowhere.
+Everything else happens locally. The application supplies the template and the instance, the
+browser renders the form, and the browser produces the metadata. The CEE sends metadata nowhere.
 
-Two configuration keys do make the CEE fetch on its own: `loadConfigFromURL`, and the
-`sampleTemplateLocationPrefix` route that has the CEE fetch a template. An application that would rather
-hold every network decision itself can avoid both by assigning `config` and `templateObject`
+Two configuration keys make the CEE fetch on its own: `loadConfigFromURL`, and the
+`sampleTemplateLocationPrefix` route that has it fetch a template. An application that would rather
+hold every network decision itself avoids both by assigning `config` and `templateObject`
 directly.
 
 ## A Content Security Policy

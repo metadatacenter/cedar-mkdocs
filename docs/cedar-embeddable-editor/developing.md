@@ -21,10 +21,10 @@ brew install node@24
 export PATH="$(brew --prefix)/opt/node@24/bin:$PATH"
 ```
 
-Nothing else is required. In particular, no sibling checkout is needed: the CEE resolves the CEDAR
-model library from the Stanford BMIR Nexus registry as an ordinary npm dependency, and reading from
-that registry needs no credentials. An `.npmrc` beside each manifest maps the
-`@org.metadatacenter` scope to Nexus; every other dependency comes from npmjs.org.
+Nothing else is required, and no sibling checkout in particular. The CEE resolves the CEDAR model
+library from the Stanford BMIR Nexus registry as an ordinary npm dependency, and reading from that
+registry needs no credentials. An `.npmrc` beside each manifest maps the `@org.metadatacenter` scope
+to Nexus, and every other dependency comes from npmjs.org.
 
 ## Getting the Code
 
@@ -34,7 +34,7 @@ cd cedar-embeddable-editor
 npm install
 ```
 
-Work lands on `develop`. `main` is owned by the release process.
+Land work on `develop`. The release process owns `main`.
 
 ## Running the Standalone Application
 
@@ -44,11 +44,11 @@ npm start
 
 Then open `http://localhost:4400/`. The application reloads as source files change.
 
-The standalone application loads a sample template and a matching instance from
-`src/assets/cee-demo/demo`, so it starts from this repository alone with nothing else running. Its
-configuration is `src/app/app.component.dev.ts`, which is TypeScript compiled into the build rather
-than a JSON file read at run time. Editing it is how a developer points the standalone application
-at a local terminology service, a different sample template, or a different set of panels.
+It loads a sample template and a matching instance from `src/assets/cee-demo/demo`, so it starts
+from this repository alone with nothing else running. Its configuration lives in
+`src/app/app.component.dev.ts`, as TypeScript compiled into the build rather than JSON read at run
+time. Edit that file to point the standalone application at a local terminology service, a
+different sample template, or a different set of panels.
 
 ## Running the Tests
 
@@ -58,7 +58,7 @@ One command runs everything, in order, stopping at the first failure:
 npm run test:ci
 ```
 
-Its stages are worth knowing individually, because each answers a different question:
+Each stage answers a different question:
 
 1. **Lint**, over the sources and the configuration.
 2. **A type check** of the application and the test harness, with `strict` on throughout.
@@ -74,7 +74,7 @@ Its stages are worth knowing individually, because each answers a different ques
 6. **Staging the npm package** from the exact bundle the suite exercised, then verifying every
    staged byte against its source.
 
-The test corpora are vendored in the repository, so no additional checkouts are needed.
+The repository vendors the test corpora, so no additional checkouts are needed.
 
 Before the first run, install the dependencies of the two nested projects and the browser binaries
 Playwright drives:
@@ -86,7 +86,7 @@ npm --prefix visual ci
 ./visual/node_modules/.bin/playwright install chromium firefox webkit
 ```
 
-While working on one layer, the focused commands give faster feedback:
+These focused commands give faster feedback while working on one layer:
 
 ```shell
 npm run test:unit:ci          # unit tests, one run
@@ -103,7 +103,7 @@ Continuous integration runs the same gate on every pull request, and on pushes t
 
 ## Building the Web Component
 
-The deliverable is one JavaScript file. Build it, then exercise it:
+The build produces one JavaScript file. Build it, then exercise it:
 
 ```shell
 npm run build:production
@@ -111,9 +111,9 @@ npm run test:visual:prebuilt
 ```
 
 Do not assemble the output by hand. Angular's builders change which files they emit and how those
-files are scoped, and a hand-written concatenation that was right for one builder produces a
-truncated or subtly broken bundle under the next, without failing. The repository's own packaging
-step decides what the build emitted and how to combine it.
+files are scoped, so a hand-written concatenation that suited one builder produces a truncated or
+subtly broken bundle under the next, and does so without failing. The repository's packaging step
+works out what the build emitted and how to combine it.
 
 Once that bundle is green, stage the publishable directory from it:
 
@@ -122,10 +122,10 @@ npm run package:npm:prebuilt
 ```
 
 This copies the tested bytes to `dist-npm/cedar-embeddable-editor/`, refreshes the manifest, the
-declarations, the README and the changelog, and records the bundle's digest. It refuses to run if
-the bundle is stale or does not match its recorded SHA-256, which is what guarantees that the bytes
-published are the bytes a browser exercised. `npm run check:npm-package` repeats that verification
-on demand.
+declarations, the README and the changelog, and records the bundle's digest. It refuses to run on a
+stale bundle, or on one whose SHA-256 does not match the recorded digest. That refusal guarantees
+that the bytes published are the bytes a browser exercised. `npm run check:npm-package` repeats that
+verification on demand.
 
 ## Auditing What Ships
 
@@ -133,15 +133,14 @@ on demand.
 npm run audit:prod
 ```
 
-Only runtime dependencies reach the file an application downloads, so this is the audit that
+Only runtime dependencies reach the file an application downloads, so this audit is the one that
 describes the shipped artifact. A root `npm audit` reports advisories against the Angular build
-toolchain, which is a hazard to a developer's machine rather than to a consumer, and `npm audit fix
---force` on this repository proposes walking that toolchain years backwards. Read the advisory
-instead.
+toolchain, which threatens a developer's machine rather than a consumer, and `npm audit fix --force`
+on this repository proposes walking that toolchain years backwards. Read the advisory instead.
 
 ## Further Reading
 
-The repository's own `README.md` is the reference for the host contract and the package layout, and
-`CHANGELOG.md` records what changed in each release. The public API a host programs against is a
-single source file, `src/app/cee-public-api.ts`, which is also what the shipped declarations are
-generated from, and reading it is the fastest way to see the whole surface at once.
+The repository's `README.md` documents the host contract and the package layout, and
+`CHANGELOG.md` records what changed in each release. One source file, `src/app/cee-public-api.ts`,
+declares the whole public API and generates the shipped declarations, so reading it shows the entire
+surface at once.

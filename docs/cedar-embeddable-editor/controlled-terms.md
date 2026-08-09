@@ -7,8 +7,8 @@ ontology or a value set. An
 registry such as ORCID or ROR. Both turn what the user types into a lookup, and both store a
 resolvable identifier alongside a human-readable label.
 
-These are the only parts of the CEE that reach the network, and each is a single configured URL away
-from working.
+These two field kinds are the only parts of the CEE that reach the network. One configured URL
+each is all they need.
 
 ## Controlled-Term Fields
 
@@ -23,13 +23,13 @@ combine them:
 | Class | One specific class, named outright. |
 | Value set | Any member of a named value set. |
 
-The constraint lives in the template, not in the configuration. The CEE reads it, and as the user types
-it sends the typed text and the constraint together to CEDAR's integrated-search endpoint, which
+The constraint lives in the template rather than in the configuration. As the user types, the CEE
+sends the typed text and the constraint together to CEDAR's integrated-search endpoint, which
 searches the permitted terms and returns the matches. Choosing a suggestion stores the term.
 
 ### Configuring the Lookup
 
-One key enables all of it:
+One key enables the lookup:
 
 ```json
 {
@@ -42,8 +42,9 @@ That URL is CEDAR's production terminology service, and it serves most applicati
 organization running its own CEDAR deployment points the key at that deployment's terminology
 service instead.
 
-With no value set, the CEE makes no requests and controlled fields show their empty-results row. The
-rest of the form is unaffected, so an application can defer the decision without breaking anything.
+Left unset, the key stops the CEE making any request, and controlled fields show their
+empty-results row. The rest of the form works unchanged, so an application can defer the decision
+safely.
 
 ### What Gets Stored
 
@@ -56,9 +57,9 @@ A chosen term is stored as its IRI and its label together:
 }
 ```
 
-The IRI makes the metadata machine-actionable, and the label makes it readable without a lookup. The CEE also renders a link beside the selected term, back to the term's page in
-BioPortal, built from the `bioPortalPrefix` configuration value and the constraint the field
-carries.
+The IRI makes the metadata machine-actionable, and the label makes it readable without a lookup.
+The CEE also renders a link beside the selected term, back to the term's page in BioPortal, built
+from the `bioPortalPrefix` configuration value and the constraint the field carries.
 
 ### Text That Is Not a Term
 
@@ -67,9 +68,9 @@ then leaving the field discards the entry rather than storing it, and the CEE sa
 
 > Entered value is not a term from the allowed set and has been cleared.
 
-Where the field already held a valid term, the previous term is restored instead, and the message
-reflects that. The behavior is deliberate: a controlled field that quietly accepted free text
-would produce metadata that looks controlled and is not.
+Where the field already held a valid term, the CEE restores that term instead, and says so. A
+controlled field that quietly accepted free text would produce metadata that looks controlled and
+is not.
 
 ## External Authorities
 
@@ -117,19 +118,19 @@ deployment that routes them differently:
 
 ## When a Lookup Service Is Unreachable
 
-A failed request is reported in the field, as a search that could not be completed, and is not
-treated as an empty result set. The distinction matters: an empty result set invites the user to
-try a different word, whereas an unreachable service invites them to try again later.
+The CEE reports a failed request in the field as a search that could not be completed, rather
+than as an empty result set. Empty results invite the user to try a different word; an unreachable
+service invites them to try again later.
 
-Nothing else in the form depends on either service. An application can be confident that a
-terminology outage degrades term selection and leaves everything else intact.
+Nothing else in the form depends on either service, so a terminology outage degrades term selection
+and leaves the rest of the form intact.
 
 ## What the CEE Does Not Check
 
-The CEE does not verify that a stored term actually belongs to the ontologies, branches, classes or
-value sets its field declares. Membership is a question only the terminology service can answer, and
-answering it would make an otherwise local operation depend on the network.
+The CEE does not verify that a stored term belongs to the ontologies, branches, classes or value
+sets its field declares. Only the terminology service can answer that, and asking it would make an
+otherwise local operation depend on the network.
 
-The structural checks are performed: a controlled value must carry an `@id` and an `rdfs:label`
-together, and the `@id` must be well formed. [Validation](validation.md) covers what the data
+The CEE does perform the structural checks. A controlled value must carry an `@id` and an
+`rdfs:label` together, and the `@id` must be well formed. [Validation](validation.md) covers what the data
 quality report does and does not examine.

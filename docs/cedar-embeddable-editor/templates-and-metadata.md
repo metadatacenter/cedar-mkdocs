@@ -1,10 +1,9 @@
 # Templates and Metadata
 
-Everything the CEE does sits between two artifacts. A [template](../yaml-spec/templates-core.md) goes
-in, and an [instance](../yaml-spec/instances-core.md) comes out. Both
-directions have more than one route: several ways to supply a template and an existing instance,
-several ways to read the metadata back, a choice of serialization on each side, and a way to know
-when something changed.
+A [template](../yaml-spec/templates-core.md) goes into the CEE and an
+[instance](../yaml-spec/instances-core.md) comes out. Each direction offers more than one route:
+several ways to supply a template and an existing instance, several ways to read the metadata back,
+a serialization to choose on each side, and an event that fires when a value changes.
 
 ## Supplying a Template
 
@@ -29,26 +28,26 @@ cee.templateAndInstanceObject = {
 };
 ```
 
-One assignment means one build. The form is constructed with the values already known, rather than
-built empty and then filled, which is both faster and the only route on which `hideEmptyFields` can
-take effect. The property name inside the object is `templateObject` and `instanceObject`, matching
-the two separate inputs.
+One assignment produces one build. The CEE constructs the form with the values already known
+instead of building it empty and then filling it, which is faster and is the only route on which
+`hideEmptyFields` takes effect. The two properties inside the object are named `templateObject` and
+`instanceObject`, matching the separate inputs.
 
 The separate inputs remain available for an application that genuinely obtains the two at different
-times. When using them, assign the instance first and the template second, because assigning the
-template is what triggers the build:
+times. When using them, assign the instance first and the template second, because the template
+assignment triggers the build:
 
 ```javascript
 cee.instanceObject = instance;
 cee.templateObject = template;
 ```
 
-An instance must have been produced from the template it is loaded against. Loading a mismatched
-pair is not diagnosed as a single clear error: values whose fields cannot be found are dropped, and
-the result is a form that silently lost data.
+An instance must have come from the template it is loaded against. A mismatched pair produces no
+single clear error. The CEE drops values whose fields it cannot find, leaving a form that has
+silently lost data.
 
-Three inputs can each supply an artifact, and what happens when more than one is set is not defined.
-Supply exactly one.
+Three inputs can each supply an artifact, and the CEE does not define what happens when more than
+one is set. Supply exactly one.
 
 ### Letting the CEE Fetch the Template
 
@@ -66,9 +65,9 @@ The CEE then requests `/assets/templates/dataset/template.json` and, alongside i
 `showSampleTemplateLinks` additionally renders a picker, whose entries come from a `registry.json`
 at the prefix.
 
-This route exists for demonstrations and for the standalone developer application. A production
-embedding should hand the CEE the template it has already obtained, and keep the decision about what to
-fetch, and how to authenticate the request, in the application.
+This route serves demonstrations and the standalone developer application. A production embedding
+should hand the CEE a template it has already obtained, keeping both the choice of template and the
+authentication of the request inside the application.
 
 ### Choosing the Template's Serialization
 
@@ -87,10 +86,10 @@ cee.config = { inputSerialization: 'yaml' };
 cee.templateObject = parsedTemplateYaml;
 ```
 
-That parsing is the application's job, and it is the one practical difference between the two.
+Parsing falls to the application, and it is the one practical difference between the two.
 Browsers parse JSON natively and YAML not at all, so a YAML template obliges the page to carry a
-parser such as [js-yaml](https://www.npmjs.com/package/js-yaml). Nothing else changes: both
-serializations are read through the same model library, so either builds the same editor.
+parser such as [js-yaml](https://www.npmjs.com/package/js-yaml). Nothing else differs, because the
+CEE reads both serializations through the same model library and either builds the same editor.
 
 ## Reading the Metadata Back
 
@@ -103,8 +102,8 @@ at the moment it is accessed, and none of them has side effects.
 | `currentMetadataYaml` | The instance as a CEDAR YAML string. Always YAML, whatever the configuration says. |
 | `currentMetadataSerialized` | Whichever of the two `outputSerialization` selects. |
 
-The first two are for code that knows which form it wants, and they save an application from having
-to reason about what the configuration happens to be:
+Use the first two where the code knows which form it wants, and neither has to reason about what
+the configuration happens to be:
 
 ```javascript
 const instance = cee.currentMetadata;
@@ -126,9 +125,9 @@ read as JSON-LD: `inputSerialization` selects the template parser and nothing el
 
 ## Knowing When Something Changed
 
-The CEE re-publishes its internal edits as a `change` event on the custom element. The event crosses
-the shadow boundary and bubbles, so an ordinary listener on the element hears every value edit in
-the form:
+The CEE re-publishes its internal edits as a `change` event on the custom element. That event
+crosses the shadow boundary and bubbles, so an ordinary listener on the element hears every value
+edit in the form:
 
 ```javascript
 cee.addEventListener('change', () => {
@@ -157,8 +156,8 @@ In Angular the same event is available as an output binding, `(change)="onChange
 
 ### Saving Periodically
 
-Nothing in the CEE persists anything. An application that wants an autosave writes one, reading the
-instance on a timer:
+The CEE persists nothing. An application wanting an autosave writes one, reading the instance on
+a timer:
 
 ```javascript
 const SAVE_INTERVAL = 15000;
@@ -195,7 +194,7 @@ The same padding rule applies to the remaining date-time granularities. When tim
 the CEE appends the selected fixed offset, `Z` or `+/-HH:mm`; when they are disabled it removes any
 offset present.
 
-Granularity wins when an existing instance is loaded, and information finer than the template
-declares is discarded rather than carried along invisibly. A day-granularity date-time field given
-`2026-08-09T21:45:32.125-07:00` stores `2026-08-09T00:00:00-07:00`. An application comparing a
-saved instance against the bytes it originally supplied should expect that normalization.
+Granularity wins when an existing instance is loaded. The CEE discards information finer than the
+template declares rather than carrying it along invisibly, so a day-granularity date-time field
+given `2026-08-09T21:45:32.125-07:00` stores `2026-08-09T00:00:00-07:00`. An application comparing
+a saved instance against the bytes it supplied should expect that normalization.

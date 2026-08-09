@@ -6,7 +6,7 @@ three at once, before any tooling hides them.
 
 ## Getting the Component
 
-The CEE is distributed as an npm package whose payload is a single JavaScript file.
+The CEE ships as an npm package carrying a single JavaScript file.
 
 Stable releases are published to npmjs.org as
 [`cedar-embeddable-editor`](https://www.npmjs.com/package/cedar-embeddable-editor):
@@ -25,8 +25,8 @@ The installed package holds five files, of which two matter to an embedding appl
 | `README.md`, `CHANGELOG.md` | Package documentation. |
 
 Copy `node_modules/cedar-embeddable-editor/cedar-embeddable-editor.js` into whatever directory the
-application serves static files from. It is a classic script rather than an ES module, so a plain
-`<script src>` loads it, and no bundler has to be involved.
+application serves static files from. A plain `<script src>` loads it, since it is a classic script
+rather than an ES module, and no bundler need be involved.
 
 Development builds are published separately, to the Stanford BMIR Nexus registry, under the scoped
 name `@org.metadatacenter/cedar-embeddable-editor` and the `dev` tag. They carry work that has not
@@ -43,14 +43,14 @@ An application already depending on the unscoped name can keep it, with an npm a
 "cedar-embeddable-editor": "npm:@org.metadatacenter/cedar-embeddable-editor@<version>"
 ```
 
-Because the two names are different packages, a development build never reaches an application by
+The two names are different packages, so a development build never reaches an application by
 accident. Reading from Nexus needs no credentials.
 
 Embedding platforms cannot absorb an upstream change without first checking it against their own
-workflows, so releases are meant to be adopted deliberately. Versions are stable and
-npm-distributed, changes are recorded in a public changelog, and breaking changes are announced
-ahead of the release that carries them. Pin a version, read the changelog, and move when it suits
-the application.
+workflows, so the CEE expects releases to be adopted deliberately. Versions are stable and
+npm-distributed, a public changelog records what changed, and breaking changes are announced ahead
+of the release carrying them. Pin a version, read the changelog, and move when it suits the
+application.
 
 ## The Page
 
@@ -90,7 +90,7 @@ the form should appear, load the script, then give the element a template:
 </html>
 ```
 
-That is a complete metadata editor. Opening the page renders the form the template describes, with
+That page is a complete metadata editor. Opening it renders the form the template describes, with
 its field types, its required markers, its repeating groups, and its term autocompletes.
 
 ## What Each Part Does
@@ -104,14 +104,14 @@ the ones almost every application wants: no sample-template picker, no raw sourc
 terminology service for controlled fields. [Configuration](configuration.md) covers the rest.
 
 **`cee.templateObject`** supplies the template, as a parsed object rather than as source text.
-Assigning it is what triggers a render, so it goes last: the configuration should already be in
-place when the form is built.
+That assignment triggers the render, so it goes last, with the configuration already in place
+when the form is built.
 
 ## Properties, Not Attributes
 
-Everything an application gives the CEE is a JavaScript **property** on the element, never an HTML
-attribute. Templates, instances and configuration are objects, and an HTML attribute can only carry
-a string.
+An application gives the CEE everything as a JavaScript **property** on the element, never as an
+HTML attribute. Templates, instances and configuration are objects, and an HTML attribute carries
+only a string.
 
 ```javascript
 cee.templateObject = template;              // correct
@@ -133,9 +133,9 @@ The instance under edit is available at any moment, as a plain object:
 const instance = cee.currentMetadata;
 ```
 
-Reading it is free of side effects and can be done as often as needed: on a save button, on an
-interval, or when the user navigates away. Nothing is submitted anywhere by the CEE itself. Where the
-metadata goes is entirely the application's decision.
+Reading it has no side effects, so an application can read as often as it needs: on a save button,
+on an interval, or when the user navigates away. The CEE submits nothing anywhere. The application
+decides where the metadata goes.
 
 ```javascript
 document.querySelector('#save').addEventListener('click', async () => {
@@ -166,10 +166,15 @@ assignment and when each is appropriate.
 
 ## Where Templates Come From
 
-The CEE does not care how the application obtained its template. The usual
-sources are the CEDAR Workbench, which can export any template it holds; the CEDAR REST API, which
-can fetch one by identifier; and the
-[CEDAR Artifact Library](../developer-guide/cedar-artifact-library.md), which builds templates in
-Java code. A template can also be written by hand in
-[the YAML serialization](../yaml-spec/index.md) of the CEDAR model, which the CEE reads once
-`inputSerialization` says so.
+The CEE does not care how the application obtained its template. The usual sources are the CEDAR
+Workbench, which can export any template it holds, and the CEDAR REST API, which can fetch one by
+identifier.
+
+A template can also be built in code. The
+[CEDAR Artifact Library](../developer-guide/cedar-artifact-library.md) builds one in Java, and the
+[CEDAR Model TypeScript Library](https://github.com/metadatacenter/cedar-model-typescript-library)
+builds one in TypeScript. An application that embeds the CEE has particular reason to prefer the
+TypeScript library, because the editor parses every template through it.
+
+A template can equally be written by hand in [the YAML serialization](../yaml-spec/index.md) of the
+CEDAR model, which the CEE reads once `inputSerialization` says so.

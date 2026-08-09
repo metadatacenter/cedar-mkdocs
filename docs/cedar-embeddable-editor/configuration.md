@@ -1,14 +1,13 @@
 # Configuration
 
-The CEE takes a single configuration object. Every key in it is optional, and everything that needs a
-default has one, so a minimal configuration is short and a complete one is rarely needed. The single
-setting worth supplying before anything else is the terminology endpoint, without which controlled
-fields have nothing to suggest.
+The CEE takes a single configuration object. Every key in it is optional and everything that needs
+a default has one, so a minimal configuration stays short and few applications ever write a complete
+one. Supply the terminology endpoint before anything else, because without it controlled fields have
+nothing to suggest.
 
 ## Supplying the Configuration
 
-The direct route is an assignment to the `config` property, with the object written in the
-application's own source:
+Assign the object to the `config` property, writing it in the application's own source:
 
 ```javascript
 cee.config = {
@@ -20,9 +19,8 @@ cee.config = {
 };
 ```
 
-A framework binds to the same property. In Angular that is `[config]="ceeConfig"`; in React and
-elsewhere it is an assignment through a ref, as [Embedding in a
-Framework](frameworks.md) describes.
+A framework binds to the same property. Angular writes `[config]="ceeConfig"`, and React and the
+others assign through a ref, as [Embedding in a Framework](frameworks.md) describes.
 
 The CEE can also fetch its configuration, for an application that keeps it in a deployed JSON file
 rather than in compiled source:
@@ -34,25 +32,25 @@ customElements.whenDefined('cedar-embeddable-editor').then(() => {
 });
 ```
 
-Optional success and error callbacks receive the parsed configuration and the failed request
-respectively. This route exists for applications that cannot construct the object themselves.
-Prefer assigning `config` when the choice is open: it keeps the CEE out of the business of fetching,
-and it lets a compiler check the object.
+Optional success and error callbacks receive the parsed configuration and the failed request.
+This route serves applications that cannot construct the object themselves. Prefer assigning
+`config` where the choice is open, since it keeps fetching out of the CEE and lets a compiler check
+the object.
 
 ## Treat Configuration as Set-Once
 
-Reassigning `config` does not currently behave uniformly. Most keys are **patched**, so a key
-omitted from the second object keeps the value the first one gave it, while `outputSerialization`
-follows the new object exactly. Two settings are one-way: once `readOnlyMode` or `hideEmptyFields`
-is enabled, passing `false` afterwards does not turn it off again.
+Reassigning `config` behaves inconsistently. The CEE **patches** most keys, so a key omitted from
+the second object keeps the value the first one gave it, while `outputSerialization` follows the new
+object exactly. Two settings run one way only: once `readOnlyMode` or `hideEmptyFields` is enabled,
+passing `false` afterwards does not turn it off.
 
-Build the configuration once, assign it once, and rebuild the element if it genuinely has to change.
+Build the configuration once, assign it once, and rebuild the element if it must change.
 
 ## What the CEE Reports About a Configuration
 
-A key the CEE does not recognize is ignored, exactly as an unread key always was. What has changed is
-that the CEE now says so. Every configuration passes a check as it crosses the boundary, whether it was
-assigned or fetched, and anything unusable is named:
+The CEE ignores a key it does not recognize, as it always has, but it now reports the key rather
+than passing over it in silence. Every configuration meets a check as it crosses the boundary,
+whether assigned or fetched, and anything unusable is named:
 
 ```
 CEE ERROR: Unknown configuration key "readOnlyMod". It has no effect. Did you mean "readOnlyMode"?
@@ -60,8 +58,9 @@ CEE ERROR: Configuration key "outputSerialization" expects "json" or "yaml", but
 CEE ERROR: Configuration key "hideEmptyFields" only takes effect in read-only mode, which is not enabled.
 ```
 
-The messages go to the browser console and to any handler registered on the `eventHandler` property.
-They are diagnostics only: nothing is rejected, and the CEE behaves as it would have without the check.
+The messages go to the browser console and to any handler registered on the `eventHandler`
+property. They diagnose only. The CEE rejects nothing and behaves exactly as it would without the
+check.
 
 ## TypeScript Declarations
 
@@ -78,18 +77,17 @@ cee!.config = config;
 const report = cee!.dataQualityReport;   // CeeDataQualityReport
 ```
 
-No cast is needed on the query, because the package declares its tag in
-`HTMLElementTagNameMap`.
+The query needs no cast, because the package declares its tag in `HTMLElementTagNameMap`.
 
-The declarations are **types only**, and that is a property of the bundle rather than an oversight.
-The published file is a script that registers a custom element and exports no values, so there is
-nothing to import at run time. Use `import type`, and let the interface catch a mistyped key rather
-than reaching for a constant that would be `undefined` when the page runs.
+The package publishes **types only**, which follows from the bundle rather than from an oversight.
+The published file is a script that registers a custom element and exports no values, so nothing
+exists to import at run time. Use `import type`, and let the interface catch a mistyped key rather
+than reaching for a constant that would read `undefined` when the page runs.
 
-One part of the interface is deliberately open. The per-authority endpoint keys are declared through
-an index signature rather than individually, so that an application can set a key for an authority
-added after its copy of the declarations was published. Typos in those keys are caught at run time,
-by the configuration check, rather than by the compiler.
+One part of the interface stays deliberately open. An index signature covers the per-authority
+endpoint keys instead of fourteen declarations, so an application can set a key for an authority
+added after its copy of the declarations was published. The configuration check catches typos in
+those keys at run time, where the compiler cannot.
 
 ## Reference
 
@@ -201,7 +199,7 @@ is appropriate, which is mostly demonstrations.
 
 ## Hearing What the CEE Has to Say
 
-The CEE reports its diagnostics to the console, and to a handler an application registers:
+The CEE reports its diagnostics to the console and to a handler the application registers:
 
 ```javascript
 cee.eventHandler = {
@@ -210,8 +208,7 @@ cee.eventHandler = {
 };
 ```
 
-Both members are optional, and the CEE calls only the ones present, so `{ error }` alone is a valid
-handler that will not be bothered with traces. `error` carries the things worth surfacing: a
+Both members are optional and the CEE calls only the ones present, so `{ error }` alone is a valid
+handler and receives no traces. `error` carries the failures an application should surface: a
 template the CEE could not read, a value it discarded, a configuration key it cannot use. `trace`
-carries the running commentary, including which language maps were loaded and which template was
-fetched.
+carries the running commentary, including which language maps loaded and which template was fetched.

@@ -1,9 +1,9 @@
 # Validation and the Data Quality Report
 
-The CEE checks what the user enters as they enter it, and it can report on the whole instance on
-demand. The two are different in scope and in purpose. Field-level feedback keeps a person on track
-while they work. The data quality report answers the question an application asks before it saves:
-is this metadata good enough to keep.
+The CEE checks each value as it is entered, and it reports on the whole instance on demand. The
+two serve different purposes. Field-level feedback keeps a person on track while they work. The
+data quality report answers the question an application asks before it saves, which is whether the
+metadata is good enough to keep.
 
 ## Feedback in the Form
 
@@ -16,8 +16,8 @@ external-authority fields, discards an entry that resolves to nothing and restor
 value where there was one, because storing unresolvable text in a field whose whole purpose is to
 store an identifier would defeat the field.
 
-None of this blocks anything. The CEE never prevents a save, because whether incomplete metadata may be
-saved is the application's decision, not the CEE's.
+Neither the messages nor the refusals block a save. The CEE never prevents one, because the
+application decides whether incomplete metadata may be kept.
 
 ## The Data Quality Report
 
@@ -27,7 +27,8 @@ The report is a snapshot of the whole instance, read from a property:
 const report = cee.dataQualityReport;
 ```
 
-It answers two questions: is anything required missing, and is anything present invalid.
+It answers two questions: whether anything required is missing, and whether anything present is
+invalid.
 
 ```
 requiredFieldValueCount: number        // required fields the template declares
@@ -36,8 +37,7 @@ problems: ValidationProblem[]          // everything wrong with a value that is 
 isValid: boolean                       // nothing missing and no problems
 ```
 
-`isValid` is true when both questions come back clean, which makes it the single value a save button
-should consult:
+`isValid` is true only when both answers are no, so a save button need consult nothing else:
 
 ```javascript
 saveButton.disabled = !cee.dataQualityReport.isValid;
@@ -46,15 +46,14 @@ saveButton.disabled = !cee.dataQualityReport.isValid;
 Recomputing it on every `change` event keeps the button honest as the user works. The report is
 computed locally and synchronously, so reading it costs nothing and requires no network.
 
-The CEE can also render the report itself, as a collapsible panel beneath the form, with
-`showDataQualityReport`. That gives a user one place to see everything still outstanding, rather
-than hunting for the marked fields, and it is a quick way to see what the report contains while
-building an integration.
+`showDataQualityReport` renders the report itself, as a collapsible panel beneath the form. It
+gives a user one place to see everything outstanding rather than hunting for marked fields, and it
+shows a developer what the report contains while an integration is being built.
 
-???+ note "A naming mismatch to know about"
+???+ note "A naming mismatch in older declarations"
 
-    The shipped TypeScript declarations currently name this array `validationProblems`. The object
-    the CEE returns carries it as `problems`.
+    TypeScript declarations published before this was corrected name the array `validationProblems`.
+    The object the CEE returns has always carried it as `problems`.
 
 ## Reading a Problem
 
@@ -71,9 +70,9 @@ Each problem names the field, says what is wrong, and carries the value that cau
 }
 ```
 
-`code` is the member to branch on. It is stable, and it stays stable while the wording of `message`
-changes. `path` is what lets an application point the user at the offending field rather than
-telling them something somewhere is wrong.
+Branch on `code`. It stays stable while the wording of `message` changes. `path` locates the
+offending field, so an application can point the user at it instead of reporting that something
+somewhere is wrong.
 
 The codes divide into the kinds of thing that can go wrong:
 
@@ -108,8 +107,8 @@ The report examines every constraint a template can declare about a value:
 - The structure of a [controlled value](../yaml-spec/field-types/controlled-term-field.md): an `@id`
   and an `rdfs:label` present as a pair, with a well-formed `@id`.
 
-An absent value produces no constraint problems at all. Emptiness is the required check's business,
-so an untouched form reports the fields that are missing rather than also reporting every blank as
+An absent value produces no constraint problems. The required check already covers emptiness, so
+an untouched form reports the fields that are missing rather than condemning every blank as
 malformed.
 
 ## What Is Not Checked
