@@ -1,0 +1,175 @@
+# Your First Embedded Editor
+
+A working editor is a script tag, an element, and a template. The smallest version of it is a plain
+HTML page with no framework and no build step, which keeps the mechanism visible before any tooling
+hides it.
+
+## Getting the Component
+
+The CEE is distributed as an npm package whose payload is a single JavaScript file.
+
+Stable releases are published to npmjs.org as
+[`cedar-embeddable-editor`](https://www.npmjs.com/package/cedar-embeddable-editor):
+
+```shell
+npm install cedar-embeddable-editor
+```
+
+The installed package holds five files, of which two matter to an embedding application:
+
+| File | Purpose |
+|---|---|
+| `cedar-embeddable-editor.js` | The component. One self-contained script, with no runtime dependencies. |
+| `cedar-embeddable-editor.d.ts` | TypeScript declarations for the configuration and the element. |
+| `bundle-manifest.json` | The SHA-256 digest and byte count of the script, for verifying what was installed. |
+| `README.md`, `CHANGELOG.md` | Package documentation. |
+
+Copy `node_modules/cedar-embeddable-editor/cedar-embeddable-editor.js` into whatever directory the
+application serves static files from. It is a classic script rather than an ES module, so a plain
+`<script src>` loads it, and no bundler has to be involved.
+
+Development builds are published separately, to the Stanford BMIR Nexus registry, under the scoped
+name `@org.metadatacenter/cedar-embeddable-editor` and the `dev` tag. They carry work that has not
+been released yet, and installing one is a deliberate act:
+
+```shell
+npm config set @org.metadatacenter:registry https://nexus.bmir.stanford.edu/repository/npm-cedar/
+npm install @org.metadatacenter/cedar-embeddable-editor@dev
+```
+
+An application already depending on the unscoped name can keep it, with an npm alias:
+
+```json
+"cedar-embeddable-editor": "npm:@org.metadatacenter/cedar-embeddable-editor@<version>"
+```
+
+Because the two names are different packages, a development build never reaches an application by
+accident. Reading from Nexus needs no credentials.
+
+Embedding platforms cannot absorb an upstream change without first checking it against their own
+workflows, so releases are meant to be adopted deliberately. Versions are stable and
+npm-distributed, changes are recorded in a public changelog, and breaking changes are announced
+ahead of the release that carries them. Pin a version, read the changelog, and move when it suits
+the application.
+
+## The Page
+
+Loading the script registers one custom element, `cedar-embeddable-editor`. Place the element where
+the form should appear, load the script, then give the element a template:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Describe your dataset</title>
+  </head>
+  <body>
+    <h1>Describe your dataset</h1>
+
+    <cedar-embeddable-editor></cedar-embeddable-editor>
+
+    <script src="/assets/cedar-embeddable-editor.js"></script>
+    <script type="module">
+      const template = await (await fetch('/assets/dataset-template.json')).json();
+
+      await customElements.whenDefined('cedar-embeddable-editor');
+      const cee = document.querySelector('cedar-embeddable-editor');
+
+      cee.config = {
+        showSampleTemplateLinks: false,
+        showTemplateSourceData: false,
+        showInstanceDataFull: false,
+        terminologyIntegratedSearchUrl:
+          'https://terminology.metadatacenter.org/bioportal/integrated-search',
+      };
+
+      cee.templateObject = template;
+    </script>
+  </body>
+</html>
+```
+
+That is a complete metadata editor. Opening the page renders the form the template describes, with
+its field types, its required markers, its repeating groups, and its term autocompletes.
+
+## What Each Part Does
+
+**`customElements.whenDefined`** waits for the component to register itself. The CEE bootstraps
+asynchronously after its script runs, so for a short while the tag in the page is an ordinary
+unknown element. Awaiting the definition is the reliable point at which to hand it anything.
+
+**`cee.config`** sets the editor's behavior. Every key is optional, and the four in the example are
+the ones almost every application wants: no sample-template picker, no raw source panels, and a
+terminology service for controlled fields. [Configuration](configuration.md) covers the rest.
+
+**`cee.templateObject`** supplies the template, as a parsed object rather than as source text.
+Assigning it is what triggers a render, so it goes last: the configuration should already be in
+place when the form is built.
+
+## Properties, Not Attributes
+
+Everything an application gives the CEE is a JavaScript **property** on the element, never an HTML
+attribute. Templates, instances and configuration are objects, and an HTML attribute can only carry
+a string.
+
+```javascript
+cee.templateObject = template;              // correct
+```
+
+```html
+<cedar-embeddable-editor template-object="..."></cedar-embeddable-editor>
+<!-- has no effect -->
+```
+
+The same rule shapes how frameworks bind to the CEE, which is why
+[Embedding in a Framework](frameworks.md) spends most of its time on property binding.
+
+## Reading the Metadata Back
+
+The instance under edit is available at any moment, as a plain object:
+
+```javascript
+const instance = cee.currentMetadata;
+```
+
+Reading it is free of side effects and can be done as often as needed: on a save button, on an
+interval, or when the user navigates away. Nothing is submitted anywhere by the CEE itself. Where the
+metadata goes is entirely the application's decision.
+
+```javascript
+document.querySelector('#save').addEventListener('click', async () => {
+  await fetch('/api/metadata', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(cee.currentMetadata),
+  });
+});
+```
+
+## Opening an Existing Instance
+
+To edit metadata that already exists rather than start from an empty form, supply the
+[instance](../yaml-spec/instances-core.md) as well. Both belong to the same assignment, so that the CEE
+builds the form once with the values already known:
+
+```javascript
+cee.templateAndInstanceObject = {
+  templateObject: template,
+  instanceObject: instance,
+};
+```
+
+The instance must be one built from the template being supplied alongside it.
+[Templates and Metadata](templates-and-metadata.md) describes the alternatives to this single
+assignment and when each is appropriate.
+
+## Where Templates Come From
+
+The CEE does not care how the application obtained its template. The usual
+sources are the CEDAR Workbench, which can export any template it holds; the CEDAR REST API, which
+can fetch one by identifier; and the
+[CEDAR Artifact Library](../developer-guide/cedar-artifact-library.md), which builds templates in
+Java code. A template can also be written by hand in
+[the YAML serialization](../yaml-spec/index.md) of the CEDAR model, which the CEE reads once
+`inputSerialization` says so.

@@ -88,7 +88,15 @@ nav:
 
       - CEDAR Embeddable Editor:
           - cedar-embeddable-editor/intro/index.md
-          - cedar-embeddable-editor/try-out.md
+          - cedar-embeddable-editor/first-editor.md
+          - cedar-embeddable-editor/frameworks.md
+          - cedar-embeddable-editor/templates-and-metadata.md
+          - cedar-embeddable-editor/configuration.md
+          - cedar-embeddable-editor/controlled-terms.md
+          - cedar-embeddable-editor/validation.md
+          - cedar-embeddable-editor/appearance.md
+          - cedar-embeddable-editor/security.md
+          - cedar-embeddable-editor/developing.md
 
   - Developer Guide:
       - developer-overview/index.md
