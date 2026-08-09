@@ -1,8 +1,8 @@
 # Your First Embedded Editor
 
-A working editor is a script tag, an element, and a template. The smallest version of it is a plain
-HTML page with no framework and no build step, which keeps the mechanism visible before any tooling
-hides it.
+Putting a working editor on a page takes three things: a script that registers the custom element,
+the element itself, and a template. A plain HTML page with no framework and no build step shows all
+three at once, before any tooling hides them.
 
 ## Getting the Component
 
