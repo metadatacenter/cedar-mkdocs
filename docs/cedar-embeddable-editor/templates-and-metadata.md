@@ -111,7 +111,7 @@ const instance = cee.currentMetadata;
 const asYaml = cee.currentMetadataYaml;
 ```
 
-`currentMetadataSerialized` is for an application whose output format is a deployment choice rather
+`currentMetadataSerialized` suits an application whose output format is a deployment choice rather
 than a fixed decision. It returns a JSON-LD object by default, and a YAML string when configured:
 
 ```json

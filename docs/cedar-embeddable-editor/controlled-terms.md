@@ -56,8 +56,7 @@ A chosen term is stored as its IRI and its label together:
 }
 ```
 
-The IRI is what makes the metadata machine-actionable, and the label is what makes it readable
-without a lookup. The CEE also renders a link beside the selected term, back to the term's page in
+The IRI makes the metadata machine-actionable, and the label makes it readable without a lookup. The CEE also renders a link beside the selected term, back to the term's page in
 BioPortal, built from the `bioPortalPrefix` configuration value and the constraint the field
 carries.
 

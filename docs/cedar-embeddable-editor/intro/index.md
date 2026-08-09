@@ -60,8 +60,8 @@ the [elements](../../yaml-spec/elements-core.md) that group fields and let a gro
 [controlled vocabularies](../../yaml-spec/field-types/controlled-term-field.md) that certain fields
 draw their values from. The CEE reads that specification at run time and builds the form to match.
 
-The consequence is worth stating plainly: changing the metadata a form collects means changing the
-template, not the application. A template author can add a field, tighten a constraint, or bind a
+Changing the metadata a form collects therefore means changing the template, not the
+application. A template author can add a field, tighten a constraint, or bind a
 field to a different ontology, and every application embedding the CEE picks the change up the next
 time it loads that template.
 

@@ -158,7 +158,7 @@ The published file has already been optimized. Passing it through a second minif
 among a build's own scripts rather than copying it as an asset — can break it, and the failure is
 quiet.
 
-The mechanism is worth knowing, because the symptom does not point at its cause. The bundle contains
+The symptom does not point at its cause, so the mechanism repays a little attention. The bundle contains
 minified class expressions of the form `var A = class B extends Error { static X = new B('X'); }`.
 A second minifier can decide the outer binding is unused, drop it, keep the static initializers, and
 rename the inner self-reference to the name it just deleted. The file still loads, then throws a

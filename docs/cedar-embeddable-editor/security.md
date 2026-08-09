@@ -43,8 +43,8 @@ written:
 
 **Set this only if template authors are as trusted as the application's own source code.** With it
 on, a template author can run JavaScript in the application's origin. "Allowed to define a form"
-and "allowed to run code in this page" are very different permissions, and this key is where an
-application declares them to be the same.
+and "allowed to run code in this page" are very different permissions, and setting this key declares
+them to be the same.
 
 The conditions under which that is defensible are narrow: templates ship with the application, or
 come from a repository the operators control, and the people who can write templates are the people

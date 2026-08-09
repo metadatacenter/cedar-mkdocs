@@ -1,11 +1,11 @@
 # Building the CEE from Source
 
-Embedding the CEE needs nothing but the published package. Building it from source is for changing the
-editor itself, or for running the current development version against an application before it is
-released.
+The published package is all an application needs in order to embed the CEE. Two situations call for
+the source instead: changing the editor itself, and trying an unreleased build inside an application
+before it ships.
 
-The CEE is a standalone Angular project and does not need a CEDAR installation. None of the commands
-here depends on the CEDAR microservices.
+The CEE is a standalone Angular project. It does not need a CEDAR installation, and none of its
+build or test commands depends on the CEDAR microservices.
 
 ## Prerequisites
 
