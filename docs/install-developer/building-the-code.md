@@ -46,7 +46,6 @@ Should render something similar:
 │ cedar-admin-tool                                 │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
 │ cedar-artifact-library                           │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
 │ cedar-artifact-server                            │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
-│ cedar-artifact-viewer                            │  📁 dir   │     angular      │  CEDAR repo   │   ✅   │
 │ cedar-artifacts                                  │  📁 dir   │      multi       │  CEDAR repo   │   ✅   │
 │ cedar-artifacts/cedar-artifacts-dist             │  📁 dir   │   angular-dist   │  CEDAR repo   │   ✅   │
 │ cedar-artifacts/cedar-artifacts-src              │  📁 dir   │     angular      │  CEDAR repo   │   ✅   │
