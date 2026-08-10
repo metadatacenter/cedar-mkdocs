@@ -197,4 +197,6 @@ cues, with WCAG AA as the target.
 The source is at
 [metadatacenter/cedar-embeddable-editor](https://github.com/metadatacenter/cedar-embeddable-editor),
 under the BSD 2-Clause License, and is maintained by the Division of Computational Medicine at
-Stanford University alongside the rest of the CEDAR Workbench.
+Stanford University alongside the rest of the CEDAR Workbench. Its
+[README](https://github.com/metadatacenter/cedar-embeddable-editor#readme) covers building the
+component from source, running its tests, and publishing a release.
