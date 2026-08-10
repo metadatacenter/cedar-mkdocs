@@ -46,3 +46,31 @@ div.md-sidebar.md-sidebar--primary {
 .md-typeset table:not([class]) td:first-child code {
     white-space: nowrap;
 }
+
+/*
+ * Figures. The appearance page's diagram is the first one in the site, so these
+ * are the defaults rather than an override of an established look: Material sets
+ * a caption in centred italics at body size, which came out larger than the
+ * drawing it describes, and `article { text-align: justify }` above stretched it.
+ */
+.md-typeset figure {
+    margin: 1.5rem 0;
+    max-width: 100%;
+    /*
+     * A diagram narrow enough for a phone column is too small to read on one, so
+     * the drawing keeps a minimum width and this scrolls rather than shrinking it
+     * past legibility. The scroll stays inside the figure; the page itself never
+     * scrolls sideways.
+     */
+    overflow-x: auto;
+}
+
+.md-typeset figcaption {
+    max-width: none;
+    margin: 0.5rem 0 0;
+    font-size: 0.65rem;
+    font-style: normal;
+    line-height: 1.5;
+    text-align: left;
+    color: var(--md-default-fg-color--light);
+}

@@ -81,6 +81,28 @@ CEDAR Workbench. It lives in [`runner/`](runner/) and writes straight into
 tooling (Node/Playwright); it never runs during a Read the Docs build. See
 [`runner/README.md`](runner/README.md) for setup and usage.
 
+## Diagrams
+
+Diagrams are hand-authored inline SVG in the Markdown, not images. That is a
+different case from the tutorial screenshots above: a screenshot records what
+CEDAR looks like and goes stale, while a diagram states a relationship and is
+reviewed like prose.
+
+The site enables no diagram extension, so there is no Mermaid fence to use.
+Conventions for a new one, as established by the CEE appearance page:
+
+- Wrap it in `<figure>` with a short `<figcaption>` naming what the figure shows.
+- Give the `<svg>` `role="img"` and an `aria-label` carrying the same claim in
+  words, since the drawing is the only place that information appears.
+- Draw in `currentColor` so it follows the theme's foreground, reserving a literal
+  color for the one thing that carries meaning.
+- Size it with `viewBox` plus `width: 100%; min-width: …; max-width: …`. The
+  minimum keeps labels legible on a phone; `.md-typeset figure` scrolls
+  horizontally rather than shrinking the drawing past reading size.
+- Keep it self-contained: no `<script>`, `<style>`, or external references.
+
+`mkdocs build` does not validate SVG, so preview the page before pushing.
+
 ## Contributing and Conventions
 
 Working in this repository, especially with an AI coding assistant? See

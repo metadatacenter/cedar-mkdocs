@@ -71,3 +71,8 @@ principle: generate screenshots programmatically, do not hand-capture them.
 - New tutorials go under `docs/tutorials/` and are listed in the `Tutorials`
   section of `mkdocs.yml`.
 - Keep prose clear and neutral.
+- Diagrams are hand-authored inline SVG in the Markdown, wrapped in `<figure>`
+  with a `<figcaption>` and an `aria-label`, drawn in `currentColor`, and sized
+  with a `min-width` so they stay legible on a narrow screen. The site enables no
+  diagram extension, so there is no Mermaid fence available. See the CEE
+  appearance page for the pattern, and the README for the full list.

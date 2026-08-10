@@ -11,77 +11,76 @@ Two of the things an application is most likely to try are among those that do n
 whole picture is worth having before the detail:
 
 <figure>
-<svg viewBox="0 0 900 432" role="img" aria-label="Five things an application can write. The published custom properties reach the text the CEE styles itself. An inherited font reaches that text but stops before the Angular Material theme. A selector against the CEE's internals and a change to the page's root font size both stop at the shadow boundary. Nothing reaches the Material theme, whose sizes and colors are compiled into the bundle." style="max-width: 100%; height: auto;">
+<svg viewBox="0 0 640 352" width="640" height="352" role="img" aria-label="Five kinds of declaration an application can write. The published --cee- custom properties reach the text the CEE styles itself. An inherited font-size or font-family reaches that text too, but stops before the Angular Material theme. A selector against the CEE's internals, and a change to the page's root font size, both stop at the shadow boundary. Nothing reaches the Material theme, whose sizes and colors are compiled into the bundle." style="width: 100%; min-width: 560px; max-width: 640px; height: auto;">
   <defs>
     <marker id="cee-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="currentColor"/>
     </marker>
-    <marker id="cee-arrow-blocked" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#d1524f"/>
+    <marker id="cee-arrow-no" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#c0392b"/>
     </marker>
   </defs>
 
-  <g fill="none" stroke="currentColor" stroke-width="1.5">
-    <rect x="16" y="26" width="286" height="40" rx="5"/>
-    <rect x="16" y="86" width="286" height="40" rx="5"/>
-    <rect x="16" y="146" width="286" height="40" rx="5"/>
-    <rect x="16" y="238" width="286" height="40" rx="5"/>
-    <rect x="16" y="298" width="286" height="40" rx="5"/>
+  <g fill="none" stroke="currentColor" stroke-width="1.4">
+    <rect x="8" y="16" width="182" height="34" rx="4"/>
+    <rect x="8" y="62" width="182" height="34" rx="4"/>
+    <rect x="8" y="108" width="182" height="50" rx="4"/>
+    <rect x="8" y="196" width="182" height="34" rx="4"/>
+    <rect x="8" y="242" width="182" height="34" rx="4"/>
   </g>
   <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="currentColor">
-    <text x="30" y="43">--cee-element-heading-size:</text><text x="30" y="59">  20px</text>
-    <text x="30" y="103">--cee-color-primary: #333</text>
-    <text x="30" y="163">font-size: 24px</text>
-    <text x="30" y="255">cedar-embeddable-editor</text><text x="30" y="271">  .mat-mdc-text-field-wrapper {}</text>
-    <text x="30" y="315">html { font-size: 62.5% }</text>
+    <text x="22" y="38">--cee-element-*</text>
+    <text x="22" y="84">--cee-color-*</text>
+    <text x="22" y="130">font-size</text>
+    <text x="22" y="148">font-family</text>
+    <text x="22" y="218">.mat-mdc-* rules</text>
+    <text x="22" y="264">html { font-size }</text>
   </g>
 
-  <line x1="400" y1="8" x2="400" y2="400" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 5"/>
-  <text x="410" y="422" font-size="12" fill="currentColor" font-style="italic">shadow boundary</text>
+  <line x1="248" y1="6" x2="248" y2="316" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="248" y="336" font-size="11" fill="currentColor" text-anchor="middle" font-style="italic">shadow boundary</text>
 
-  <g stroke="currentColor" stroke-width="1.5" fill="none">
-    <path d="M 302 46 L 520 84" marker-end="url(#cee-arrow)"/>
-    <path d="M 302 106 L 520 100" marker-end="url(#cee-arrow)"/>
-    <path d="M 302 166 L 520 116" marker-end="url(#cee-arrow)"/>
+  <g stroke="currentColor" stroke-width="1.4" fill="none">
+    <path d="M 190 33 L 296 60" marker-end="url(#cee-arrow)"/>
+    <path d="M 190 79 L 296 74" marker-end="url(#cee-arrow)"/>
+    <path d="M 190 133 L 296 88" marker-end="url(#cee-arrow)"/>
   </g>
-  <g stroke="#d1524f" stroke-width="1.5" fill="none">
-    <path d="M 302 258 L 386 258" marker-end="url(#cee-arrow-blocked)"/>
-    <path d="M 302 318 L 386 318" marker-end="url(#cee-arrow-blocked)"/>
+  <g stroke="#c0392b" stroke-width="1.4" fill="none">
+    <path d="M 190 213 L 238 213" marker-end="url(#cee-arrow-no)"/>
+    <path d="M 190 259 L 238 259" marker-end="url(#cee-arrow-no)"/>
   </g>
   <g font-size="11" fill="currentColor">
-    <text x="344" y="46" text-anchor="middle">sets</text>
-    <text x="346" y="148" text-anchor="middle">inherits</text>
+    <text x="216" y="34" text-anchor="middle">sets</text>
+    <text x="222" y="120" text-anchor="middle">inherits</text>
   </g>
-  <g font-size="11" fill="#d1524f">
-    <text x="344" y="284" text-anchor="middle">blocked</text>
-    <text x="344" y="344" text-anchor="middle">no effect</text>
-  </g>
-
-  <rect x="524" y="60" width="360" height="78" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <g font-size="12" fill="currentColor">
-    <text x="540" y="84" font-weight="600">Styled by the CEE itself</text>
-    <text x="540" y="104">field labels, element headings,</text>
-    <text x="540" y="122">the time picker, chips</text>
+  <g font-size="11" fill="#c0392b">
+    <text x="212" y="205" text-anchor="middle">blocked</text>
+    <text x="212" y="251" text-anchor="middle">no effect</text>
   </g>
 
-  <rect x="524" y="286" width="360" height="96" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
-  <g font-size="12" fill="currentColor">
-    <text x="540" y="312" font-weight="600">Styled by Angular Material</text>
-    <text x="540" y="332">input text, hints, control colors</text>
-    <text x="540" y="352" font-style="italic">px values compiled into the bundle,</text>
-    <text x="540" y="370" font-style="italic">so no property can reach them</text>
+  <rect x="300" y="30" width="332" height="74" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+  <g fill="currentColor">
+    <text x="316" y="52" font-size="13" font-weight="600">Styled by the CEE itself</text>
+    <text x="316" y="72" font-size="12">field labels, element headings,</text>
+    <text x="316" y="90" font-size="12">the time picker, chips</text>
   </g>
 
-  <path d="M 704 142 L 704 280" stroke="#d1524f" stroke-width="1.5" fill="none" stroke-dasharray="4 4" marker-end="url(#cee-arrow-blocked)"/>
-  <g stroke="#d1524f" stroke-width="2">
-    <line x1="688" y1="196" x2="720" y2="228"/>
-    <line x1="720" y1="196" x2="688" y2="228"/>
+  <rect x="300" y="212" width="332" height="94" rx="4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="4 3"/>
+  <g fill="currentColor">
+    <text x="316" y="234" font-size="13" font-weight="600">Styled by Angular Material</text>
+    <text x="316" y="254" font-size="12">input text, hints, control colors</text>
+    <text x="316" y="276" font-size="11" font-style="italic">px values compiled into the bundle,</text>
+    <text x="316" y="292" font-size="11" font-style="italic">so no property can reach them</text>
   </g>
-  <text x="732" y="216" font-size="11" fill="#d1524f">no route</text>
+
+  <path d="M 466 104 L 466 206" stroke="#c0392b" stroke-width="1.4" fill="none" stroke-dasharray="4 3" marker-end="url(#cee-arrow-no)"/>
+  <g stroke="#c0392b" stroke-width="2">
+    <line x1="454" y1="143" x2="478" y2="167"/>
+    <line x1="478" y1="143" x2="454" y2="167"/>
+  </g>
+  <text x="488" y="159" font-size="11" fill="#c0392b">no route</text>
 </svg>
-<figcaption>What an application can and cannot change. The published properties work. An inherited
-font reaches the text the CEE styles itself but not the form controls, which is why setting one
-leaves a form half-restyled.</figcaption>
+<figcaption>Which declarations cross the shadow boundary, and how far.</figcaption>
 </figure>
 
 ## Sizing and Layout
