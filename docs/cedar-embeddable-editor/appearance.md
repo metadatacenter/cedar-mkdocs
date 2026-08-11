@@ -17,7 +17,7 @@ whole picture is worth having before the detail:
 | `font-size` or `font-family` on the element | Inherits into the text the CEE styles itself — field labels, the time picker, chips — and stops before the form controls. |
 | A rule naming the CEE's internals, such as `.mat-mdc-text-field-wrapper` | Stops at the shadow boundary. Nothing changes. |
 | `html { font-size: 62.5% }` on the page | Nothing changes. The CEE states its own sizes absolutely. |
-| Anything at all, for input text, hints and the colour of the controls | Nothing reaches them. Angular Material compiles those sizes and colours into the bundle. |
+| A Material token, such as `--mat-form-field-container-text-size` | Nothing changes. The theme writes px literals into the bundle instead of emitting those tokens, so input text, hints and the colour of the controls have nothing to override. |
 
 ## Sizing and Layout
 
@@ -54,8 +54,8 @@ cedar-embeddable-editor {
 | `--cee-element-heading-weight` | `600` | `400`–`700` | The weight of that heading. |
 | `--cee-element-content-gap` | `12px` | `0`–`32px` | The space between an element's heading and its content. |
 | `--cee-color-primary` | `#0f7686` | — | The CEE's own accents, such as the focused time picker. |
-| `--cee-color-warn` | `#f44336` | — | The CEE's own error emphasis. |
-| `--cee-color-warning` | `#856404` | — | Warning text. |
+| `--cee-color-warn` | `#f44336` | — | Errors: a value the CEE has rejected. Named for Material's danger palette, which is where the red comes from. |
+| `--cee-color-warning` | `#856404` | — | Advisory notices that do not block, shown beside a field rather than as its error. |
 | `--cee-color-text-primary` | `#ffffff` | — | Reserved. No effect today. |
 | `--cee-color-accent` | `#ff5c55` | — | Reserved. No effect today. |
 

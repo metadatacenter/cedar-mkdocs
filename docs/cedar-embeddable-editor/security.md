@@ -5,14 +5,13 @@ root, but **Shadow DOM is not a security boundary**: it scopes styles and markup
 Anything the CEE executes reaches cookies, storage and network exactly as the rest of the
 application does.
 
-For a component whose inputs are data, that arrangement carries no risk. One of the CEE's inputs is
-not purely data.
-
 ## Templates Are Trusted Input
 
-A CEDAR template can carry a [static rich-text field](../yaml-spec/field-types/static-fields.md),
-whose body is HTML composed by the template's author and rendered as HTML by the CEE. Template authors
-use it for instructions, formatted notes and links.
+For a component whose inputs are data, that arrangement carries no risk. One of the CEE's inputs is
+not purely data: a CEDAR template can carry a
+[static rich-text field](../yaml-spec/field-types/static-fields.md), whose body is HTML composed by
+the template's author and rendered as HTML by the CEE. Template authors use it for instructions,
+formatted notes and links.
 
 Instance data raises no such question. The CEE always sanitizes a value a user typed, on the way
 in and on the way out, and no configuration changes that. A person filling in a form cannot
