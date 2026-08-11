@@ -88,8 +88,9 @@ different case from the tutorial screenshots above: a screenshot records what
 CEDAR looks like and goes stale, while a diagram states a relationship and is
 reviewed like prose.
 
-The site enables no diagram extension, so there is no Mermaid fence to use.
-Conventions for a new one, as established by the CEE appearance page:
+The site enables no diagram extension, so there is no Mermaid fence to use. No
+page carries a diagram at present — the CEE appearance page had the one, and it
+reads better as a table. Conventions for adding one:
 
 - Wrap it in `<figure>` with a short `<figcaption>` naming what the figure shows.
 - Give the `<svg>` `role="img"` and an `aria-label` carrying the same claim in

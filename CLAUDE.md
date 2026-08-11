@@ -74,5 +74,7 @@ principle: generate screenshots programmatically, do not hand-capture them.
 - Diagrams are hand-authored inline SVG in the Markdown, wrapped in `<figure>`
   with a `<figcaption>` and an `aria-label`, drawn in `currentColor`, and sized
   with a `min-width` so they stay legible on a narrow screen. The site enables no
-  diagram extension, so there is no Mermaid fence available. See the CEE
-  appearance page for the pattern, and the README for the full list.
+  diagram extension, so there is no Mermaid fence available. No page carries a
+  diagram at present, so the README holds the conventions rather than an example.
+  Reach for one only where a drawing states a relationship prose cannot; a table
+  usually reads better and is what replaced the one diagram the site had.
