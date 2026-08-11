@@ -13,11 +13,16 @@ execute. But one of the CEE's inputs is not purely data: a CEDAR template can ca
 the template's author and rendered as HTML by the CEE. Template authors use it for instructions,
 formatted notes and links.
 
-Instance data raises no such question. The CEE always sanitizes a value a user typed, on the way
-in and on the way out, and no configuration changes that. A person filling in a form cannot
-introduce markup that runs.
+Instance data raises no such question inside the CEE. A value a user typed is sanitized every time
+it is rendered, in the editable form and in read-only view alike, and no configuration changes
+that. A person filling in a form cannot introduce markup that runs in the editor.
 
-The question is only what a *template author* may do.
+Sanitizing happens at render, though, and not in the data. The instance the CEE hands back holds
+what the user typed, verbatim, because that is the metadata the application asked for. An
+application that displays those values somewhere else, in a summary or a search result, sanitizes
+them there as it would any other user input.
+
+The question left is what a *template author* may do.
 
 ## The Default: Sanitize
 
@@ -62,9 +67,21 @@ formatting without the risk.
 | Field values, in the form and in read-only view | Instance data | Always sanitized. Not configurable |
 | Multi-instance value summaries | Instance data | Always sanitized. Not configurable |
 
+The three static kinds in the second row render no markup at all, so nothing an author writes in
+them executes. Their URLs are still checked before the browser sees them. An image field refuses a
+scheme that cannot address an image, and refuses a `data:` URL that declares anything other than
+one. A video field embeds a validated YouTube video ID on a fixed `youtube.com` origin, so a link
+to a host that merely ends in the YouTube one is refused. Every refusal names the offending URL on
+the card rather than leaving it blank, which is what tells a template author to correct it.
+
+The image field accepts any image type, `image/svg+xml` among them, because it renders an `img`
+element the CEE writes itself and an SVG cannot execute from one. Rich text is stricter about the
+same URL, allowing the raster types only, because there the `img` is one element in an allowlist
+over markup the author composed.
+
 ## Requests the CEE Makes
 
-The CEE issues requests to the endpoints it is configured with, and to nothing else. The two are not
+The CEE issues requests to the endpoints it is configured with. The two are not
 symmetrical, which is worth knowing before auditing traffic. `extAuthBaseUrl` has a built-in default
 of CEDAR's bridge service, so an external-authority field looks up ORCID, ROR, DOI and the rest
 against `bridge.metadatacenter.org` unless an application says otherwise.
@@ -74,6 +91,13 @@ suggestions, and issues no request, until an application sets it.
 Each request carries only the text the user typed and the constraint the template declares. An
 application that must keep those queries inside its own network points both settings at its own
 CEDAR deployment.
+
+A template adds requests the application did not configure. A static image field makes the browser
+fetch the URL the template author wrote, at whatever origin that names, and a video field loads
+the player from `youtube.com`. Both tell that origin the reader's address and the page they are
+on. The player is loaded with a `strict-origin-when-cross-origin` referrer policy; an image sends
+the referrer its origin would ordinarily see. An application that must not leak either serves the
+images it is willing to show, and bounds the rest with a content security policy.
 
 Everything else happens locally. The application supplies the template and the instance, the
 browser renders the form, and the browser produces the metadata. The CEE sends metadata nowhere.
@@ -90,7 +114,14 @@ The CEE is a classic script, compiled ahead of time, and does not need `unsafe-e
 stylesheets travel inside the bundle rather than being fetched, so nothing has to be added to
 `font-src` or to `style-src` for a remote origin.
 
-A policy does have to allow two things. The CEE installs its component styles as inline `<style>`
-elements, in the manner of any Angular application, so `style-src` must permit inline styles. The
-endpoints the CEE is configured with also have to appear in `connect-src`: in a default
-configuration that is the terminology service and the bridge, and nothing else.
+A policy does have to allow the styles and the endpoints. The CEE installs its component styles as
+inline `<style>` elements, in the manner of any Angular application, so `style-src` must permit
+inline styles. The endpoints the CEE is configured with also have to appear in `connect-src`: in a
+default configuration that is the terminology service and the bridge, and nothing else.
+
+Templates carrying static content need two more directives. An image field renders an `img`, so
+`img-src` has to cover the origins those templates point at, along with `data:` for an image
+carried inline in a rich-text body or in the field itself. A video field renders an `iframe`, so
+`frame-src` has to allow `https://www.youtube.com`. Omitting either costs the content and not the
+form: a blocked image reports that it could not be loaded, a blocked video leaves an empty frame,
+and the rest of the template renders.
