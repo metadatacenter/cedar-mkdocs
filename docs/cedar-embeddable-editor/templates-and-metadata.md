@@ -86,8 +86,7 @@ cee.config = { inputSerialization: 'yaml' };
 cee.templateObject = parsedTemplateYaml;
 ```
 
-Parsing falls to the application, and it is the one practical difference between the two.
-Browsers parse JSON natively and YAML not at all, so a YAML template obliges the page to carry a
+Parsing falls to the application. Browsers parse JSON natively and YAML not at all, so a YAML template obliges the page to carry a
 parser such as [js-yaml](https://www.npmjs.com/package/js-yaml). Nothing else differs, because the
 CEE reads both serializations through the same model library and either builds the same editor.
 

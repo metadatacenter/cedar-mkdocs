@@ -15,7 +15,7 @@ Stable releases are published to npmjs.org as
 npm install cedar-embeddable-editor
 ```
 
-The installed package holds five files, of which two matter to an embedding application:
+The installed package holds five files, of which three matter to an embedding application:
 
 | File | Purpose |
 |---|---|
@@ -97,10 +97,10 @@ its field types, its required markers, its repeating groups, and its term autoco
 
 **`customElements.whenDefined`** waits for the component to register itself. The CEE bootstraps
 asynchronously after its script runs, so for a short while the tag in the page is an ordinary
-unknown element. Awaiting the definition is the reliable point at which to hand it anything.
+unknown element. Await the definition before handing it anything.
 
-**`cee.config`** sets the editor's behavior. Every key is optional, and the four in the example are
-the ones almost every application wants: no sample-template picker, no raw source panels, and a
+**`cee.config`** sets the editor's behavior. Every key is optional, and almost every application
+wants the four in the example: no sample-template picker, no raw source panels, and a
 terminology service for controlled fields. [Configuration](configuration.md) covers the rest.
 
 **`cee.templateObject`** supplies the template, as a parsed object rather than as source text.
@@ -122,8 +122,8 @@ cee.templateObject = template;              // correct
 <!-- has no effect -->
 ```
 
-The same rule shapes how frameworks bind to the CEE, which is why
-[Embedding in a Framework](frameworks.md) spends most of its time on property binding.
+The same rule shapes how a framework binds to the CEE.
+[Embedding in a Framework](frameworks.md) covers what each one needs.
 
 ## Reading the Metadata Back
 
@@ -166,7 +166,7 @@ assignment and when each is appropriate.
 
 ## Where Templates Come From
 
-The CEE does not care how the application obtained its template. The usual sources are the CEDAR
+How the application obtained its template makes no difference to the CEE. The usual sources are the CEDAR
 Workbench, which can export any template it holds, and the CEDAR REST API, which can fetch one by
 identifier.
 

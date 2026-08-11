@@ -2,8 +2,8 @@
 
 The CEE checks each value as it is entered, and it reports on the whole instance on demand. The
 two serve different purposes. Field-level feedback keeps a person on track while they work. The
-data quality report answers the question an application asks before it saves, which is whether the
-metadata is good enough to keep.
+data quality report answers the question an application asks before it saves: whether the metadata
+is good enough to keep.
 
 ## Feedback in the Form
 
@@ -119,7 +119,7 @@ synchronous report should not depend on the network. The structural checks still
 malformed controlled value is caught. A well-formed term from the wrong ontology is not.
 
 **Whether the instance is a valid CEDAR artifact.** The report describes the values, not the
-document. For the authoritative verdict on an instance, CEDAR's own validation is the arbiter: a
+document. CEDAR's own validation settles that. A
 CEDAR template is itself a JSON Schema for its instances, and
 [`cedar-model-validation-library`](https://github.com/metadatacenter/cedar-model-validation-library)
 validates one against the other. An application that must be certain a stored instance will be

@@ -91,7 +91,7 @@ those keys at run time, where the compiler cannot.
 
 ## Reference
 
-### The One Key Worth Setting First
+### The Key to Set First
 
 | Key | Type | Default | Meaning |
 |---|---|---|---|
@@ -194,10 +194,10 @@ translation are tried in turn.
 | `sampleTemplateLocationPrefix` | string | none | A directory holding template folders, each with a `template.json` and a `metadata.json`. |
 | `loadSampleTemplateName` | string | none | Which folder under that prefix to load. |
 
-[Templates and Metadata](templates-and-metadata.md#letting-the-cee-fetch-the-template) covers when this
-is appropriate, which is mostly demonstrations.
+[Templates and Metadata](templates-and-metadata.md#letting-the-cee-fetch-the-template) covers that
+route, which suits demonstrations rather than a production embedding.
 
-## Hearing What the CEE Has to Say
+## Receiving the Diagnostics
 
 The CEE reports its diagnostics to the console and to a handler the application registers:
 

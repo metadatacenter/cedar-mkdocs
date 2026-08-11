@@ -31,8 +31,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 export class MetadataPageModule {}
 ```
 
-Then bind in the template. Square brackets produce property bindings, which is the form the CEE
-accepts:
+Then bind in the template. Square brackets produce property bindings, which the CEE accepts:
 
 ```html
 <cedar-embeddable-editor
@@ -159,7 +158,7 @@ to that list, as Angular does through `CUSTOM_ELEMENTS_SCHEMA`.
 The published file has already been optimized. Passing it through a second minifier, by listing it
 among a build's own scripts rather than copying it as an asset, can break it silently.
 
-The symptom does not point at its cause, so the mechanism repays a little attention. The bundle
+The symptom does not point at its cause. The bundle
 contains minified class expressions of the form
 `var A = class B extends Error { static X = new B('X'); }`. A second minifier can decide the outer
 binding is unused, drop it, keep the static initializers, and rename the inner self-reference to the

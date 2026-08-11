@@ -7,8 +7,8 @@ ontology or a value set. An
 registry such as ORCID or ROR. Both turn what the user types into a lookup, and both store a
 resolvable identifier alongside a human-readable label.
 
-These two field kinds are the only parts of the CEE that reach the network. One configured URL
-each is all they need.
+These two field kinds are the only parts of the CEE that reach the network. Each needs one
+configured URL.
 
 ## Controlled-Term Fields
 

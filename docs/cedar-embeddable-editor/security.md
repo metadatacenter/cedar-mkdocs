@@ -22,7 +22,7 @@ what the user typed, verbatim, because that is the metadata the application aske
 application that displays those values somewhere else, in a summary or a search result, sanitizes
 them there as it would any other user input.
 
-The question left is what a *template author* may do.
+That leaves a template author's rich text as the one input whose treatment an application can change.
 
 ## The Default: Sanitize
 
@@ -72,7 +72,7 @@ them executes. Their URLs are still checked before the browser sees them. An ima
 scheme that cannot address an image, and refuses a `data:` URL that declares anything other than
 one. A video field embeds a validated YouTube video ID on a fixed `youtube.com` origin, so a link
 to a host that merely ends in the YouTube one is refused. Every refusal names the offending URL on
-the card rather than leaving it blank, which is what tells a template author to correct it.
+the card rather than leaving it blank, so a template author can see what to correct.
 
 The image field accepts any image type, `image/svg+xml` among them, because it renders an `img`
 element the CEE writes itself and an SVG cannot execute from one. Rich text is stricter about the
@@ -81,8 +81,8 @@ over markup the author composed.
 
 ## Requests the CEE Makes
 
-The CEE issues requests to the endpoints it is configured with. The two are not
-symmetrical, which is worth knowing before auditing traffic. `extAuthBaseUrl` has a built-in default
+The CEE issues requests to the endpoints it is configured with. The two do not behave alike.
+`extAuthBaseUrl` has a built-in default
 of CEDAR's bridge service, so an external-authority field looks up ORCID, ROR, DOI and the rest
 against `bridge.metadatacenter.org` unless an application says otherwise.
 `terminologyIntegratedSearchUrl` has no default at all: a controlled-term field offers no

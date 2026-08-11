@@ -4,11 +4,8 @@ The CEE renders inside a shadow root. The page's stylesheets do not reach into t
 form's styles do not leak out, so an application cannot restyle the CEE with CSS selectors written
 against its internals, and the CEE cannot disturb the application's own layout.
 
-Three things cross that boundary, each deliberately: the CSS custom properties the CEE publishes,
-the width of the container the application puts it in, and the language it is told to render in.
-
-Two of the things an application is most likely to try are among those that do not work, so the
-whole picture is worth having before the detail:
+Three things cross that boundary, each deliberately: the width of the container the application puts
+the CEE in, the CSS custom properties the CEE publishes, and the language it is told to render in.
 
 | What the application writes | How far it gets |
 |---|---|
@@ -35,6 +32,10 @@ The CEE measures itself as a CSS container, so it lays itself out against that w
 against the browser window. A form in a narrow sidebar arranges itself as it would on a narrow
 screen, even on a wide monitor. No configuration and no breakpoint are involved.
 
+Height is not part of the contract in either direction. The form is as tall as its content and
+reports that height to the page. Giving the container a fixed height clips the form rather than
+scrolling it, because the CEE has no internal scroller.
+
 ## Theming
 
 The CEE publishes eight custom properties on the element. Custom properties inherit through a shadow
@@ -59,17 +60,20 @@ cedar-embeddable-editor {
 | `--cee-color-text-primary` | `#ffffff` | — | Reserved. No effect today. |
 | `--cee-color-accent` | `#ff5c55` | — | Reserved. No effect today. |
 
-The three heading and spacing properties are the ones that change how a form reads. They adapt
+The three heading and spacing properties change how a form reads. They adapt
 typography and density without giving the application a second, competing say in the form's
 structure: which [elements](../yaml-spec/elements-core.md) nest, and which collapse, remains the
 template's decision.
 
 Two of the color properties are reserved rather than inert by oversight. They are published so the
-set can grow into them without a breaking change, and they are listed here so nobody spends an
-afternoon working out why setting one changes nothing.
+set can grow into them without a breaking change. The table marks them, so setting one and seeing
+nothing change does not read as a bug.
 
 These names are part of the published contract. Renaming or dropping one would break an application
 silently, so the set only grows.
+
+None of these values is read once at startup. Changing one at runtime restyles the form immediately, so
+an application can drive a theme switch from its own controls without rebuilding the element.
 
 ### Values Outside the Range
 
@@ -78,8 +82,7 @@ at the maximum, so a heading cannot be set to a size that clips its own text or 
 beneath it.
 
 Prefer absolute units. A `rem` value resolves against the *host page's* root font size, not the
-CEE's, so `3rem` means different things on different pages — and the clamp is what keeps that from
-mattering much.
+CEE's, so `3rem` means different things on different pages. The clamp keeps that from mattering much.
 
 A value of the wrong kind is discarded in favor of the default. `--cee-element-heading-size: 20`,
 missing its unit, renders at `18px` rather than at some unrelated size, and so does a misspelled one.
@@ -99,11 +102,10 @@ else. Other `--cee-` names occur inside the bundle, and they are internals rathe
 API: they are not declared on the element, and they can be renamed or dropped without notice.
 Setting one may happen to work today and will not be kept working.
 
-Three things that look like they should work do not, and each fails in a way worth knowing before
-you spend time on it.
+Three things that look like they should work do not, and each fails differently.
 
-**Selectors written against the CEE's internals do nothing.** The shadow boundary is the point of the
-design, and it holds in both directions:
+**Selectors written against the CEE's internals do nothing.** The CEE draws the shadow boundary
+deliberately, and it holds in both directions:
 
 ```css
 /* No effect. The CEE's internals are not in the page's tree. */
@@ -126,8 +128,8 @@ is [open work](https://github.com/metadatacenter/cedar-embeddable-editor) rather
 against it.
 
 **The host page's root font size does not resize the form.** The CEE states its own sizes
-absolutely, so `html { font-size: 62.5% }` — a common CSS reset — leaves the form as it is. This is
-deliberate: a form embedded in an application should not change size because the application adjusted
+absolutely, so `html { font-size: 62.5% }` — a common CSS reset — leaves the form as it is. That is
+deliberate. A form embedded in an application should not change size because the application adjusted
 a root value for its own typography.
 
 ## Read-Only Viewing
@@ -229,9 +231,24 @@ The CEE logs each step to the console under a `CEE TRACE` prefix and reports it 
 registered on `eventHandler`. That trace is the quickest way to see which map a page actually
 loaded.
 
+### What a Language Map Does Not Cover
+
+A language map holds the CEE's own wording: its buttons, its picker labels, the multi-instance
+controls, and its validation messages. Everything the template supplies stays in the language its
+author wrote it in, including field and element names, help text, and the template's title and
+description. So do the labels of controlled terms, which arrive from the terminology service. A
+German map therefore gives a German interface around English field names.
+
+The date fields ignore the setting entirely. `defaultLanguage` selects a string map and nothing else,
+so the calendar names its months in English and a date field reads `MM/DD/YYYY` in every language.
+
 ## Fonts
 
 The CEE embeds the fonts it needs and registers them under private names, `CEE Roboto` and
 `CEE Material Icons`, rather than the global `Roboto` and `Material Icons`. A page defining fonts
 under the ordinary names therefore cannot collide with the CEE's, and the CEE cannot change how the
 page's own text renders.
+
+The private names are also why an application cannot give the CEE its own typeface. The Material
+theme names `CEE Roboto` for the form controls when the bundle is built, so a `font-family` set on
+the element restyles the CEE's own text and leaves the controls in Roboto.
