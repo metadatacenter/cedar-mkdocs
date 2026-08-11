@@ -7,8 +7,8 @@ application does.
 
 ## Templates Are Trusted Input
 
-For a component whose inputs are data, that arrangement carries no risk. One of the CEE's inputs is
-not purely data: a CEDAR template can carry a
+For a component whose inputs are data, that arrangement costs nothing, because data does not
+execute. But one of the CEE's inputs is not purely data: a CEDAR template can carry a
 [static rich-text field](../yaml-spec/field-types/static-fields.md), whose body is HTML composed by
 the template's author and rendered as HTML by the CEE. Template authors use it for instructions,
 formatted notes and links.
@@ -64,19 +64,25 @@ formatting without the risk.
 
 ## Requests the CEE Makes
 
-The CEE issues requests to the endpoints it is configured with, and to nothing else. A default
-configuration reaches two: CEDAR's terminology service for term suggestions, and CEDAR's bridge
-service for external-authority lookups. Each request carries only the text the user typed and the
-constraint the template declares. An application that must keep those queries inside its own
-network points both settings at its own CEDAR deployment.
+The CEE issues requests to the endpoints it is configured with, and to nothing else. The two are not
+symmetrical, which is worth knowing before auditing traffic. `extAuthBaseUrl` has a built-in default
+of CEDAR's bridge service, so an external-authority field looks up ORCID, ROR, DOI and the rest
+against `bridge.metadatacenter.org` unless an application says otherwise.
+`terminologyIntegratedSearchUrl` has no default at all: a controlled-term field offers no
+suggestions, and issues no request, until an application sets it.
+
+Each request carries only the text the user typed and the constraint the template declares. An
+application that must keep those queries inside its own network points both settings at its own
+CEDAR deployment.
 
 Everything else happens locally. The application supplies the template and the instance, the
 browser renders the form, and the browser produces the metadata. The CEE sends metadata nowhere.
 
-Two configuration keys make the CEE fetch on its own: `loadConfigFromURL`, and the
-`sampleTemplateLocationPrefix` route that has it fetch a template. An application that would rather
-hold every network decision itself avoids both by assigning `config` and `templateObject`
-directly.
+Three configuration keys make the CEE fetch on its own: `loadConfigFromURL`, the
+`sampleTemplateLocationPrefix` route that has it fetch a template, and `languageMapPathPrefix`,
+which sends it looking for a language map instead of using the one inside the bundle. An
+application that would rather hold every network decision itself avoids all three by assigning
+`config` and `templateObject` directly and leaving the built-in languages alone.
 
 ## A Content Security Policy
 
