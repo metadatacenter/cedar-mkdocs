@@ -22,35 +22,39 @@ cee.config = {
 A framework binds to the same property. Angular writes `[config]="ceeConfig"`, and React and the
 others assign through a ref, as [Embedding in a Framework](frameworks.md) describes.
 
-The CEE can also fetch its configuration, for an application that keeps it in a deployed JSON file
-rather than in compiled source:
+An application that keeps its configuration in a deployed JSON file rather than in compiled source
+fetches the file and assigns the result:
 
 ```javascript
-customElements.whenDefined('cedar-embeddable-editor').then(() => {
+customElements.whenDefined('cedar-embeddable-editor').then(async () => {
   const cee = document.querySelector('cedar-embeddable-editor');
-  cee.loadConfigFromURL('/assets/cee-config.json');
+  cee.config = await (await fetch('/assets/cee-config.json')).json();
 });
 ```
 
-Optional success and error callbacks receive the parsed configuration and the failed request.
-This route serves applications that cannot construct the object themselves. Prefer assigning
-`config` where the choice is open, since it keeps fetching out of the CEE and lets a compiler check
-the object.
+## Configuration Is Set Once
 
-## Treat Configuration as Set-Once
+The CEE applies a configuration once and keeps it. Assigning `config` a second time is reported and
+ignored, and the first object stands:
 
-Reassigning `config` behaves inconsistently. The CEE **patches** most keys, so a key omitted from
-the second object keeps the value the first one gave it, while `outputSerialization` follows the new
-object exactly. Two settings run one way only: once `readOnlyMode` or `hideEmptyFields` is enabled,
-passing `false` afterwards does not turn it off.
+```
+CEE ERROR: CEDAR Embeddable Editor: "config" ignored, because the editor is already configured.
+Configuration takes one assignment; create a new editor element to configure it differently.
+```
 
-Build the configuration once, assign it once, and rebuild the element if it must change.
+So build the configuration you want, assign it once, and create a new element if it has to change.
+An application that offers the user a choice between editing and viewing builds a new editor for the
+other mode rather than reconfiguring the one on screen.
+
+The artifact inputs work the same way, as [Templates and Metadata](templates-and-metadata.md)
+describes. Nothing about the element accumulates: the same assignments in a different order give the
+same editor, which is what lets an application reason about what it is looking at.
 
 ## What the CEE Reports About a Configuration
 
 The CEE ignores a key it does not recognize, as it always has, but it now reports the key rather
 than passing over it in silence. Every configuration meets a check as it crosses the boundary,
-whether assigned or fetched, and anything unusable is named:
+and anything unusable is named:
 
 ```
 CEE ERROR: Unknown configuration key "readOnlyMod". It has no effect. Did you mean "readOnlyMode"?
@@ -117,8 +121,8 @@ those keys at run time, where the compiler cannot.
 
 | Key | Type | Default | Meaning |
 |---|---|---|---|
-| `readOnlyMode` | boolean | `false` | Present the metadata for reading, with no editing. One-way. |
-| `hideEmptyFields` | boolean | `false` | Omit fields that have no value. Takes effect only in read-only mode, and only when template and instance arrive together. One-way. |
+| `readOnlyMode` | boolean | `false` | Present the metadata for reading, with no editing. Locks the user's own read-only toggle. |
+| `hideEmptyFields` | boolean | `false` | Omit fields that have no value. Takes effect only in read-only mode, and only when template and instance arrive together. |
 | `trustTemplateMarkup` | boolean | `false` | Render a template author's rich text verbatim instead of sanitizing it. See [Security](security.md). |
 
 ### Serialization

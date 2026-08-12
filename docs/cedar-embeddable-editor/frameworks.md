@@ -4,7 +4,7 @@ The CEE is a custom element, so any framework that renders custom elements can h
 differ only in how they are persuaded to assign JavaScript properties rather than HTML attributes,
 and in how they are told that an unrecognized tag is intentional.
 
-Two rules hold everywhere.
+Three rules hold everywhere.
 
 **Load the bundle as a script rather than importing it into a build.** The published file is a
 self-contained classic script that registers the custom element and exports nothing. No value exists
@@ -14,6 +14,14 @@ which can break it.
 **Assign objects as properties.** Templates, instances, configuration and event handlers are all
 objects, and an attribute binding stringifies whatever it is given. A stringified object will not
 render a form.
+
+**Give the element a new identity rather than new inputs.** Each input takes one assignment, as
+[Configuration](configuration.md#configuration-is-set-once) and
+[Templates and Metadata](templates-and-metadata.md) describe. This needs attention in a framework,
+because a binding exists precisely to re-fire when the value behind it changes — and the CEE reports
+a second assignment and keeps the first. So a page that switches templates has to replace the
+element, which every framework already knows how to do: it is the same mechanism that gives a list
+item a stable identity. Each framework's own way of doing it is below.
 
 ## Angular
 
@@ -34,13 +42,21 @@ export class MetadataPageModule {}
 Then bind in the template. Square brackets produce property bindings, which the CEE accepts:
 
 ```html
-<cedar-embeddable-editor
-  [config]="ceeConfig"
-  [templateObject]="template"
-  [instanceObject]="instance"
-  (change)="onChange($event)"
-></cedar-embeddable-editor>
+@if (template) {
+  <cedar-embeddable-editor
+    [config]="ceeConfig"
+    [templateObject]="template"
+    [instanceObject]="instance"
+    (change)="onChange($event)"
+  ></cedar-embeddable-editor>
+}
 ```
+
+The `@if` is not only about waiting for the data. It is what destroys and recreates the element when
+the block's condition goes false and true again, which is how a component that loads a second
+template gets a second editor instead of a refused assignment. Rendering the element unconditionally
+and letting the bindings deliver the template as it arrives works for one template and silently
+keeps the first one after that.
 
 Read the metadata back through a view reference:
 
@@ -115,6 +131,17 @@ export function MetadataEditor({ template, instance, onReady }) {
 }
 ```
 
+The effect re-runs when the template or the instance changes, so the parent gives the component a
+`key` derived from the artifact. React then unmounts the old element and mounts a new one, and the
+effect assigns to an element with nothing set yet:
+
+```jsx
+<MetadataEditor key={templateId} template={template} instance={instance} onReady={setEditor} />
+```
+
+Without the `key`, React keeps the same element across the change, the effect's assignments are
+refused, and the form goes on showing the previous template.
+
 The `onReady` callback hands the element back to the parent, which keeps `currentMetadata`
 reachable from a save button living elsewhere in the tree.
 
@@ -145,13 +172,18 @@ export default class MetadataEditorComponent extends Component {
 ```
 {% endraw %}
 
+{% raw %}`{{did-insert}}`{% endraw %} runs once per element, which suits an input that takes one
+assignment — but it also means later changes to `this.args` never reach the editor. Render the
+component under a conditional block, or give it a `key`, so a new template produces a new element.
+
 ## Any Other Framework
 
 The pattern holds everywhere. Obtain a reference to the element, await the custom-element
-definition, assign the properties, and read `currentMetadata` when the application needs the
-metadata. Vue takes that reference from a template `ref` and assigns in `onMounted`. Svelte takes it
-from `bind:this`. A framework that checks tag names against a known list needs the CEE's tag added
-to that list, as Angular does through `CUSTOM_ELEMENTS_SCHEMA`.
+definition, assign the properties once, and read `currentMetadata` when the application needs the
+metadata. Vue takes that reference from a template `ref`, assigns in `onMounted`, and replaces the
+element with a `:key`. Svelte takes it from `bind:this` and replaces it by keying an each-block or
+wrapping it in an if-block. A framework that checks tag names against a known list needs the CEE's tag
+added to that list, as Angular does through `CUSTOM_ELEMENTS_SCHEMA`.
 
 ## Do Not Minify the Bundle Again
 
@@ -178,7 +210,9 @@ window.cedarEmbeddableEditorVersion;             // the version that won the boo
 
 Two `<cedar-embeddable-editor>` elements on the same page are independent. Each keeps its own
 configuration, template, instance and language, so a page can show two forms with different
-templates, or the same template in an editing and a read-only view.
+templates, or the same template in an editing and a read-only view. That independence is also what
+makes a new element the answer to a changed template: nothing is shared for an old editor to leak
+into a new one.
 
 Loading the bundle twice is also safe. The script claims a page-wide bootstrap slot before its
 framework starts, so a second copy stands down rather than replacing a registration already in

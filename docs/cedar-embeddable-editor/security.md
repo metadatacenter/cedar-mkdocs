@@ -102,11 +102,11 @@ images it is willing to show, and bounds the rest with a content security policy
 Everything else happens locally. The application supplies the template and the instance, the
 browser renders the form, and the browser produces the metadata. The CEE sends metadata nowhere.
 
-Three configuration keys make the CEE fetch on its own: `loadConfigFromURL`, the
-`sampleTemplateLocationPrefix` route that has it fetch a template, and `languageMapPathPrefix`,
-which sends it looking for a language map instead of using the one inside the bundle. An
-application that would rather hold every network decision itself avoids all three by assigning
-`config` and `templateObject` directly and leaving the built-in languages alone.
+Two configuration keys make the CEE fetch on its own: the `sampleTemplateLocationPrefix` route that
+has it fetch a template, and `languageMapPathPrefix`, which sends it looking for a language map
+instead of using the one inside the bundle. An application that would rather hold every network
+decision itself avoids both by assigning `templateObject` directly and leaving the built-in
+languages alone.
 
 ## A Content Security Policy
 

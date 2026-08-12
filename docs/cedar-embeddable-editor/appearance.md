@@ -157,14 +157,16 @@ a short summary of what is actually recorded:
 }
 ```
 
-`hideEmptyFields` carries two constraints. It is honoured only in read-only mode, and only when
-the template and the instance arrive together on `templateAndInstanceObject`, because the decision
-about which fields to omit is taken while the form is being built. Both settings are also one-way:
-once enabled, passing `false` afterwards does not turn them off. An application offering the user a
-choice between editing and viewing should rebuild the element rather than reconfigure it.
+`hideEmptyFields` carries two constraints. It is honoured only in read-only mode, and only when the
+template and the instance arrive together on `templateAndInstanceObject`, because the decision about
+which fields to omit is taken while the form is being built and the separate inputs have not read the
+instance by then. Configuration is applied once, so an application offering the user a choice between
+editing and viewing builds a new element for the other mode rather than reconfiguring this one.
 
-The CEE offers the user that switch itself, through a read-only toggle in a menu at the corner of
-the form. An application that governs the mode from its own interface turns the menu off:
+The CEE also offers the user a read-only toggle, in a menu at the corner of the form. `readOnlyMode`
+is the application's own policy and outranks it: while the key is set the toggle is visible but
+locked, so a record shown for reading cannot be made editable from the form. An application that
+governs the mode entirely from its own interface turns the menu off:
 
 ```json
 {

@@ -13,8 +13,9 @@ The template is a parsed object, assigned to `templateObject`:
 cee.templateObject = template;
 ```
 
-Assigning it builds the form, so configuration should already be set when it happens. Assigning a
-different template later replaces the form.
+Assigning it builds the form, so configuration should already be set when it happens. Each input
+takes one assignment: a second template is reported and ignored, and the first form stays. An
+application that has to show a different template creates a new element.
 
 ### Supplying an Instance as Well
 
@@ -34,8 +35,8 @@ instead of building it empty and then filling it, which is faster and is the onl
 `instanceObject`, matching the separate inputs.
 
 The separate inputs remain available for an application that genuinely obtains the two at different
-times. When using them, assign the instance first and the template second, because the template
-assignment triggers the build:
+times. They are independent, and either order works, because the CEE does not build the form until a
+template is present — an instance supplied ahead of one waits rather than loading against nothing:
 
 ```javascript
 cee.instanceObject = instance;
@@ -46,8 +47,18 @@ An instance must have come from the template it is loaded against. A mismatched 
 single clear error. The CEE drops values whose fields it cannot find, leaving a form that has
 silently lost data.
 
-Three inputs can each supply an artifact, and the CEE does not define what happens when more than
-one is set. Supply exactly one.
+An artifact is a template and optionally an instance, and each half can be claimed once.
+`templateAndInstanceObject` claims both, so it cannot be combined with either separate input. What
+an application supplies twice is reported and ignored:
+
+```
+CEE ERROR: CEDAR Embeddable Editor: "instanceObject" ignored, because the instance is already set.
+Each input takes one assignment; create a new editor element to load a different artifact.
+```
+
+The error reaches the browser console and any handler on the `eventHandler` property. Loading a
+different template or instance means a new element, which is also what keeps the two halves of a
+document from being mixed across artifacts.
 
 ### Letting the CEE Fetch the Template
 
