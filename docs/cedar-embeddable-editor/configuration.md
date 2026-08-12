@@ -110,7 +110,6 @@ those keys at run time, where the compiler cannot.
 |---|---|---|---|
 | `showHeader` | boolean | `false` | A CEDAR title bar above the form. |
 | `showFooter` | boolean | `false` | An attribution footer below the form. |
-| `showPreferencesMenu` | boolean | `true` | A menu offering the user a read-only toggle. |
 | `showTemplateDescription` | boolean | `false` | The template's description, under its title. |
 | `showStaticText` | boolean | `true` | Render the template's [static content fields](../yaml-spec/field-types/static-fields.md). |
 | `collapseStaticComponents` | boolean | `false` | Start static content collapsed. |
@@ -121,7 +120,7 @@ those keys at run time, where the compiler cannot.
 
 | Key | Type | Default | Meaning |
 |---|---|---|---|
-| `readOnlyMode` | boolean | `false` | Present the metadata for reading, with no editing. Locks the user's own read-only toggle. |
+| `readOnlyMode` | boolean | `false` | Present the metadata for reading, with no editing. |
 | `hideEmptyFields` | boolean | `false` | Omit fields that have no value. Takes effect only in read-only mode, and only when template and instance arrive together. |
 | `trustTemplateMarkup` | boolean | `false` | Render a template author's rich text verbatim instead of sanitizing it. See [Security](security.md). |
 

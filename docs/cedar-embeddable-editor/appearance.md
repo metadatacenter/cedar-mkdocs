@@ -163,16 +163,11 @@ which fields to omit is taken while the form is being built and the separate inp
 instance by then. Configuration is applied once, so an application offering the user a choice between
 editing and viewing builds a new element for the other mode rather than reconfiguring this one.
 
-The CEE also offers the user a read-only toggle, in a menu at the corner of the form. `readOnlyMode`
-is the application's own policy and outranks it: while the key is set the toggle is visible but
-locked, so a record shown for reading cannot be made editable from the form. An application that
-governs the mode entirely from its own interface turns the menu off:
-
-```json
-{
-  "showPreferencesMenu": false
-}
-```
+`readOnlyMode` is the only way in or out of read-only mode. The CEE used to offer the user a switch
+of its own, in a menu at the corner of the form, which wrote to the same state the widgets read — so
+a record shown for reading could be made editable from within the form, and an application with its
+own save button would then store the edits. The menu is gone, and with it the `showPreferencesMenu`
+key that governed it.
 
 ## Surrounding Chrome
 
