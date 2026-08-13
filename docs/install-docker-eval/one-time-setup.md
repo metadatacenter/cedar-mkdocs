@@ -48,8 +48,6 @@ Host unknown : valuerecommender.metadatacenter.orgx
 Host unknown : worker.metadatacenter.orgx
 Host unknown : demo.cee.metadatacenter.orgx
 Host unknown : demo-dist.cee.metadatacenter.orgx
-Host unknown : docs.cee.metadatacenter.orgx
-Host unknown : docs-dist.cee.metadatacenter.orgx
 Some CEDAR hosts are unknown, we will prompt for your password in order to make modifications to /etc/hosts !
 Password:
 Host unknown, adding to /etc/hosts: artifact.metadatacenter.orgx
@@ -76,8 +74,6 @@ Host unknown, adding to /etc/hosts: valuerecommender.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: worker.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: demo.cee.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: demo-dist.cee.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: docs.cee.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: docs-dist.cee.metadatacenter.orgx
 ```
 
 ## BioPortal integration

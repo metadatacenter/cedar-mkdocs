@@ -290,7 +290,6 @@ You should see the following output:
 │ Frontend-non-essential │        │       │               │
 │ cee-dev                │ ❌     │ 4400  │ Port not open │
 │ demo.cee               │ ❌     │ 4260  │ Port not open │
-│ docs.cee               │ ❌     │ 4280  │ Port not open │
 └────────────────────────┴────────┴───────┴───────────────┘
 ```
 

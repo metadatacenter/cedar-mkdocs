@@ -118,8 +118,6 @@ Host unknown : valuerecommender.metadatacenter.orgx
 Host unknown : worker.metadatacenter.orgx
 Host unknown : demo.cee.metadatacenter.orgx
 Host unknown : demo-dist.cee.metadatacenter.orgx
-Host unknown : docs.cee.metadatacenter.orgx
-Host unknown : docs-dist.cee.metadatacenter.orgx
 Some CEDAR hosts are unknown, we will prompt for your password in order to make modifications to /etc/hosts !
 Host unknown, adding to /etc/hosts: artifact.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: artifacts.metadatacenter.orgx
@@ -145,8 +143,6 @@ Host unknown, adding to /etc/hosts: valuerecommender.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: worker.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: demo.cee.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: demo-dist.cee.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: docs.cee.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: docs-dist.cee.metadatacenter.orgx
 ```
 
 ### Check the subdomains
@@ -184,8 +180,6 @@ Host known   : valuerecommender.metadatacenter.orgx
 Host known   : worker.metadatacenter.orgx
 Host known   : demo.cee.metadatacenter.orgx
 Host known   : demo-dist.cee.metadatacenter.orgx
-Host known   : docs.cee.metadatacenter.orgx
-Host known   : docs-dist.cee.metadatacenter.orgx
 All CEDAR hosts are known, nothing to do
 ```
 
@@ -223,8 +217,6 @@ frontend-bridging
 frontend-cedar
 frontend-cee-demo-angular
 frontend-cee-demo-angular-dist
-frontend-cee-docs-angular
-frontend-cee-docs-angular-dist
 frontend-content
 frontend-monitoring
 frontend-openview
