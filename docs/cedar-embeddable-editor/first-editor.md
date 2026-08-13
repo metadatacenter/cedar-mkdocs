@@ -28,23 +28,10 @@ Copy `node_modules/cedar-embeddable-editor/cedar-embeddable-editor.js` into what
 application serves static files from. A plain `<script src>` loads it, since it is a classic script
 rather than an ES module, and no bundler need be involved.
 
-Development builds are published separately, to the Stanford BMIR Nexus registry, under the scoped
-name `@org.metadatacenter/cedar-embeddable-editor` and the `dev` tag. They carry work that has not
-been released yet, and installing one is a deliberate act:
-
-```shell
-npm config set @org.metadatacenter:registry https://nexus.bmir.stanford.edu/repository/npm-cedar/
-npm install @org.metadatacenter/cedar-embeddable-editor@dev
-```
-
-An application already depending on the unscoped name can keep it, with an npm alias:
-
-```json
-"cedar-embeddable-editor": "npm:@org.metadatacenter/cedar-embeddable-editor@<version>"
-```
-
-The two names are different packages, so a development build never reaches an application by
-accident. Reading from Nexus needs no credentials.
+Every release is published under that one name on npmjs, so nothing unreleased can reach an
+application by accident. A development channel on the Stanford BMIR Nexus, under the scoped name
+`@org.metadatacenter/cedar-embeddable-editor`, has been retired; an application that still pins it
+through an npm alias should name a plain version instead.
 
 Embedding platforms cannot absorb an upstream change without first checking it against their own
 workflows, so the CEE expects releases to be adopted deliberately. Versions are stable and
