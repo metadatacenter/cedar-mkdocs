@@ -85,8 +85,10 @@ branch of Uberon, so the value must be an organ.
 One or more specific terms, listed explicitly. Here an **Assay Type** field permits exactly
 three assay classes from the Ontology for Biomedical Investigations.
 
-A class entry has a single label: `termLabel`, the ontology's preferred label. CEDAR also keeps an
-author-facing display label, but it defaults to the preferred label and is not part of the YAML.
+A class entry carries two labels, and usually writes one. `termLabel` is what the ontology calls the
+term. `termDisplayLabel` is what this field calls it in this form, for an author who wants wording of
+their own; it is written only where the two differ, and a class without one is shown under its preferred
+label.
 
 | Key | Value | Meaning |
 |-----|-------|---------|
@@ -96,7 +98,8 @@ author-facing display label, but it defaults to the preferred label and is not p
 | `sourceIri` | IRI | The source ontology's canonical identity. |
 | `termIri` | IRI | The term's identifier. |
 | `termType` | `class` or `value` | Whether the term is an ontology class or a value-set value. |
-| `termLabel` | string | The term's preferred label, e.g. histopathology assay. |
+| `termLabel` | string | The term's preferred label in its ontology, e.g. histopathology assay. |
+| `termDisplayLabel` | string | What this field calls the term instead; omitted when it matches `termLabel`. |
 
 ```yaml
 - key: assay-type
@@ -125,6 +128,18 @@ author-facing display label, but it defaults to the preferred label and is not p
     termIri: http://purl.obolibrary.org/obo/OBI_0002119
     termType: class
     termLabel: microscopy assay
+```
+
+Here the same field renames one of its terms for the people filling it in, while the term itself is
+unchanged:
+
+```yaml
+  - type: class
+    sourceAcronym: OBI
+    termIri: http://purl.obolibrary.org/obo/OBI_0002564
+    termType: class
+    termLabel: histopathology assay
+    termDisplayLabel: Histopathology
 ```
 
 ### A Value Set
@@ -352,6 +367,6 @@ ontology `iri` — its backend address — has no key here at all: it is reconst
 | `maxDepth` | `termMaxDepth` | branch |
 | `numTerms` | `termCount` | ontology, value set |
 
-A class's `termLabel` keeps its name, and its display `label` is gone: a class has one label now, the
-preferred one. Three keys are new, each applying to every source kind: `sourceSystem`, `sourceIri`, and
-`version`.
+A class's `termLabel` keeps its name, and the display label it carried as `label` is now
+`termDisplayLabel`, written only where it differs from the preferred label. Three further keys are new,
+each applying to every source kind: `sourceSystem`, `sourceIri`, and `version`.

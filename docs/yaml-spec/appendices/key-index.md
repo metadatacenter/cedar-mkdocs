@@ -64,6 +64,7 @@ Keys, in alphabetical order, with the page that defines each.
 | `termBaseIri` | [Controlled Term Field](../field-types/controlled-term-field.md) |
 | `termBaseLabel` | [Controlled Term Field](../field-types/controlled-term-field.md) |
 | `termCount` | [Controlled Term Field](../field-types/controlled-term-field.md) |
+| `termDisplayLabel` | [Controlled Term Field](../field-types/controlled-term-field.md) |
 | `termIri` | [Controlled Term Field](../field-types/controlled-term-field.md) |
 | `termLabel` | [Controlled Term Field](../field-types/controlled-term-field.md) |
 | `termMaxDepth` | [Controlled Term Field](../field-types/controlled-term-field.md) |
