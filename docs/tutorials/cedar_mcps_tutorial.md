@@ -177,8 +177,9 @@ children:
 Read down the `children` and you can see the request answered field by field: two
 plain `text-field`s, then three `controlled-term-field`s whose `values` hold the
 three constraint shapes, each pointing at an IRI the BioPortal server returned in
-Step 2. This is compact CEDAR YAML. CEDAR also mints a stable `@id` for the
-template, omitted here for readability.
+Step 2. This is compact CEDAR YAML — the form you author in. It carries no
+identifier, because the template does not have one yet: CEDAR assigns that when
+the template is saved.
 
 ## Step 4: Preview the Template
 
@@ -194,7 +195,19 @@ render as ontology-backed pickers, each inviting you to "Start typing to filter"
 its allowed terms. The panels at the bottom expose the very same template as
 JSON-LD and as JSON Schema, the standards-based forms CEDAR speaks natively.
 
-## Step 5: Fill an Instance
+## Step 5: Save the Template
+
+An instance says which template it was filled from, and it says so by IRI. Only
+CEDAR can supply that: the template you have authored exists on your machine and
+nowhere else. So save it before filling anything.
+
+> Save that template to CEDAR.
+
+The REST server uploads it and returns the IRI CEDAR assigned:
+`https://repo.metadatacenter.org/templates/940fa702-460a-4880-846d-d22cc168ea11`.
+That IRI is also what makes the template findable and reusable by other people.
+
+## Step 6: Fill an Instance
 
 A template is a blueprint. The metadata you keep are *instances* of it, one per
 sample. Ask the LLM to fill one:
@@ -204,8 +217,8 @@ sample. Ask the LLM to fill one:
 
 The LLM resolves the three controlled values through BioPortal again
 (*hepatocyte* to a Cell Ontology class, *liver* to a Uberon class,
-*histopathology assay* to its OBI class), builds the instance on the artifact
-server, validates it against the template, and renders it:
+*histopathology assay* to its OBI class), builds the instance against the saved
+template, validates it, and renders it:
 
 ```yaml
 type: instance
@@ -241,14 +254,11 @@ whole point. The instance stores *hepatocyte* as `CL_0000182`, not as the loose
 word "hepatocyte", so the value means the same thing to every reader and every
 program that encounters it.
 
-## Save to CEDAR
+## Save the Instance
 
-Everything so far has happened locally, on your machine and in your browser,
-without touching a server. When you want to keep what you built and let others
-find, fill, and reuse it, the CEDAR REST server uploads the template and the
-instance to a CEDAR account. It takes the same YAML you already have. That step
-is optional, and this tutorial stops short of it: the aim here is the
-construction, not the storage.
+The template is already in CEDAR; the filled instance is not. The same REST
+server uploads it, and CEDAR assigns it an identifier of its own. From there it
+is findable, and the values in it point at the ontology terms they came from.
 
 ## What Just Happened
 
@@ -258,7 +268,9 @@ field should take. The servers supplied the ground truth: real IRIs from
 BioPortal, a valid schema and a valid instance from the CEDAR artifact server,
 and a faithful rendering from the embeddable editor. Neither half is enough
 alone. The model without the servers invents identifiers; the servers without the
-model have nothing to assemble.
+model have nothing to assemble. That division is why the template is saved before
+an instance is filled: an instance belongs to a template CEDAR knows about, and
+only CEDAR can say which one that is.
 
 Because the workflow is a conversation over reusable tools rather than a one-off
 script, the same method retargets to any study. Change the description of what you
