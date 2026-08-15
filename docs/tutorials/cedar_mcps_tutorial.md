@@ -136,9 +136,9 @@ children:
     datatype: iri
     values:
       - type: ontology
-        acronym: CL
-        ontologyName: Cell Ontology
-        iri: https://data.bioontology.org/ontologies/CL
+        sourceAcronym: CL
+        sourceName: Cell Ontology
+        sourceIri: http://purl.obolibrary.org/obo/cl
   - key: organ
     type: controlled-term-field
     name: Organ
@@ -146,11 +146,11 @@ children:
     datatype: iri
     values:
       - type: branch
-        ontologyName: Uber Anatomy Ontology
-        acronym: UBERON
-        termLabel: organ
-        iri: http://purl.obolibrary.org/obo/UBERON_0000062
-        maxDepth: 0
+        sourceAcronym: UBERON
+        sourceName: Uber Anatomy Ontology
+        termBaseIri: http://purl.obolibrary.org/obo/UBERON_0000062
+        termBaseLabel: organ
+        termMaxDepth: 0
   - key: assay-type
     type: controlled-term-field
     name: Assay Type
@@ -158,23 +158,20 @@ children:
     datatype: iri
     values:
       - type: class
-        label: histopathology assay
-        acronym: OBI
+        sourceAcronym: OBI
+        termIri: http://purl.obolibrary.org/obo/OBI_0002564
         termType: class
         termLabel: histopathology assay
-        iri: http://purl.obolibrary.org/obo/OBI_0002564
       - type: class
-        label: imaging assay
-        acronym: OBI
+        sourceAcronym: OBI
+        termIri: http://purl.obolibrary.org/obo/OBI_0000185
         termType: class
         termLabel: imaging assay
-        iri: http://purl.obolibrary.org/obo/OBI_0000185
       - type: class
-        label: microscopy assay
-        acronym: OBI
+        sourceAcronym: OBI
+        termIri: http://purl.obolibrary.org/obo/OBI_0002119
         termType: class
         termLabel: microscopy assay
-        iri: http://purl.obolibrary.org/obo/OBI_0002119
 ```
 
 Read down the `children` and you can see the request answered field by field: two

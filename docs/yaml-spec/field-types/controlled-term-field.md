@@ -1,10 +1,5 @@
 # Controlled Term Field
 
-> **Coming soon — a controlled-term field's value-constraint representation will change.** To support
-> pinning a field to a specific vocabulary version, the way a field's permitted terms are declared will
-> be revised. The current, production form still applies; the forthcoming, version-aware form is
-> documented in [Versioned Value Constraints (Preview)](../appendices/versioned-value-constraints.md).
-
 A controlled term field restricts its value to terms drawn from controlled vocabularies. In
 YAML its `type` is `controlled-term-field` and its `datatype` is always `iri`, because a
 controlled-term value is the IRI of a term.
@@ -16,7 +11,11 @@ The permitted terms are declared in a `values` sequence, which `actions` can ref
 
 `values` is a sequence of entries, each naming one source of terms. An entry's `type` selects one of the
 four source kinds — an entire ontology, a branch of an ontology, individual classes, or a value set — and
-the remaining keys it takes depend on that `type`.
+the remaining keys it takes depend on that `type`. Within an entry the keys fall into two groups:
+`source*` names the vocabulary the terms come from, and `term*` names the term or branch within it.
+
+Each entry can be left unpinned, resolving against the latest version of its source, or pinned to one
+exact snapshot by adding a `version`, described under [Pinning a Version](#pinning-a-version).
 
 ### An Entire Ontology
 
@@ -26,10 +25,15 @@ Ontology, so any cell type is permitted.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `ontology` | The source is a whole ontology. |
-| `acronym` | string | The ontology's acronym, e.g. `CL`. |
-| `ontologyName` | string | The ontology's name, e.g. Cell Ontology. |
-| `iri` | IRI | The ontology's identifier. |
-| `numTerms` | integer | Number of terms, when known. |
+| `sourceSystem` | string | The system that serves the ontology; absent means BioPortal. |
+| `sourceAcronym` | string | The ontology's acronym, e.g. `CL`. |
+| `sourceName` | string | The ontology's name, e.g. Cell Ontology. |
+| `sourceIri` | IRI | The ontology's canonical, source-independent identity. |
+| `termCount` | integer | Number of terms, when known. |
+
+The ontology's backend address is not an authored key: it is reconstructed from the acronym —
+`https://data.bioontology.org/ontologies/{sourceAcronym}` for BioPortal — when the constraint is
+converted to a CEDAR JSON Schema.
 
 ```yaml
 - key: cell-type
@@ -38,9 +42,10 @@ Ontology, so any cell type is permitted.
   datatype: iri
   values:
   - type: ontology
-    acronym: CL
-    ontologyName: Cell Ontology
-    iri: https://data.bioontology.org/ontologies/CL
+    sourceSystem: bioportal
+    sourceAcronym: CL
+    sourceName: Cell Ontology
+    sourceIri: http://purl.obolibrary.org/obo/cl
 ```
 
 ### A Branch of an Ontology
@@ -51,11 +56,13 @@ branch of Uberon, so the value must be an organ.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `branch` | The source is a branch rooted at a term. |
-| `ontologyName` | string | The source ontology's name, e.g. Uber Anatomy Ontology. |
-| `acronym` | string | The source ontology's acronym, e.g. `UBERON`. |
-| `termLabel` | string | The label of the branch's root term, e.g. organ. |
-| `iri` | IRI | The root term's identifier. |
-| `maxDepth` | integer | How many levels below the root to include; `0` for unlimited. |
+| `sourceSystem` | string | The system that serves the ontology; absent means BioPortal. |
+| `sourceAcronym` | string | The source ontology's acronym, e.g. `UBERON`. |
+| `sourceName` | string | The source ontology's name, e.g. Uber Anatomy Ontology. |
+| `sourceIri` | IRI | The source ontology's canonical identity. |
+| `termBaseIri` | IRI | The branch root term's identifier. |
+| `termBaseLabel` | string | The branch root term's label, e.g. organ. |
+| `termMaxDepth` | integer | How many levels below the root to include; `0` for unlimited. |
 
 ```yaml
 - key: organ
@@ -64,11 +71,13 @@ branch of Uberon, so the value must be an organ.
   datatype: iri
   values:
   - type: branch
-    ontologyName: Uber Anatomy Ontology
-    acronym: UBERON
-    termLabel: organ
-    iri: http://purl.obolibrary.org/obo/UBERON_0000062
-    maxDepth: 0
+    sourceSystem: bioportal
+    sourceAcronym: UBERON
+    sourceName: Uber Anatomy Ontology
+    sourceIri: http://purl.obolibrary.org/obo/uberon
+    termBaseIri: http://purl.obolibrary.org/obo/UBERON_0000062
+    termBaseLabel: organ
+    termMaxDepth: 0
 ```
 
 ### Individual Classes
@@ -76,14 +85,18 @@ branch of Uberon, so the value must be an organ.
 One or more specific terms, listed explicitly. Here an **Assay Type** field permits exactly
 three assay classes from the Ontology for Biomedical Investigations.
 
+A class entry has a single label: `termLabel`, the ontology's preferred label. CEDAR also keeps an
+author-facing display label, but it defaults to the preferred label and is not part of the YAML.
+
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `class` | The source is one term. |
-| `label` | string | The term's display label, e.g. histopathology assay. |
-| `acronym` | string | The source's acronym, e.g. `OBI`. |
+| `sourceSystem` | string | The system that serves the source; absent means BioPortal. |
+| `sourceAcronym` | string | The source's acronym, e.g. `OBI`. |
+| `sourceIri` | IRI | The source ontology's canonical identity. |
+| `termIri` | IRI | The term's identifier. |
 | `termType` | `class` or `value` | Whether the term is an ontology class or a value-set value. |
 | `termLabel` | string | The term's preferred label, e.g. histopathology assay. |
-| `iri` | IRI | The term's identifier. |
 
 ```yaml
 - key: assay-type
@@ -92,23 +105,26 @@ three assay classes from the Ontology for Biomedical Investigations.
   datatype: iri
   values:
   - type: class
-    label: histopathology assay
-    acronym: OBI
+    sourceSystem: bioportal
+    sourceAcronym: OBI
+    sourceIri: http://purl.obolibrary.org/obo/obi
+    termIri: http://purl.obolibrary.org/obo/OBI_0002564
     termType: class
     termLabel: histopathology assay
-    iri: http://purl.obolibrary.org/obo/OBI_0002564
   - type: class
-    label: imaging assay
-    acronym: OBI
+    sourceSystem: bioportal
+    sourceAcronym: OBI
+    sourceIri: http://purl.obolibrary.org/obo/obi
+    termIri: http://purl.obolibrary.org/obo/OBI_0000185
     termType: class
     termLabel: imaging assay
-    iri: http://purl.obolibrary.org/obo/OBI_0000185
   - type: class
-    label: microscopy assay
-    acronym: OBI
+    sourceSystem: bioportal
+    sourceAcronym: OBI
+    sourceIri: http://purl.obolibrary.org/obo/obi
+    termIri: http://purl.obolibrary.org/obo/OBI_0002119
     termType: class
     termLabel: microscopy assay
-    iri: http://purl.obolibrary.org/obo/OBI_0002119
 ```
 
 ### A Value Set
@@ -119,10 +135,11 @@ class* value set from HRAVS.
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `type` | `valueSet` | The source is a value set. |
-| `acronym` | string | The value set's collection acronym, e.g. `HRAVS`. |
-| `valueSetName` | string | The value set's name, e.g. Analyte class. |
-| `iri` | IRI | The value set's identifier. |
-| `numTerms` | integer | Number of terms, when known. |
+| `sourceSystem` | string | The system that serves the value set; absent means BioPortal. |
+| `sourceAcronym` | string | The value set's collection acronym, e.g. `HRAVS`. |
+| `termBaseIri` | IRI | The value set's identifier. |
+| `termBaseLabel` | string | The value set's name, e.g. Analyte class. |
+| `termCount` | integer | Number of terms, when known. |
 
 ```yaml
 - key: analyte-class
@@ -131,9 +148,96 @@ class* value set from HRAVS.
   datatype: iri
   values:
   - type: valueSet
-    acronym: HRAVS
-    valueSetName: Analyte class
-    iri: https://purl.humanatlas.io/vocab/hravs#HRAVS_1000371
+    sourceSystem: bioportal
+    sourceAcronym: HRAVS
+    termBaseIri: https://purl.humanatlas.io/vocab/hravs#HRAVS_1000371
+    termBaseLabel: Analyte class
+```
+
+## Pinning a Version
+
+A published template should stay reproducible: the terms a field offers should not shift when the
+underlying vocabulary is later updated. An entry with no `version` — or an explicit `version: latest` —
+is *unpinned*, and at populate time it resolves against whatever version of its source the terminology
+server currently serves. That is convenient while authoring and is how a field behaves unless you say
+otherwise, but it is not reproducible: as the source ontology is revised, an unpinned field's permitted
+terms, their labels, and their place in the hierarchy can change under an already-published template. A
+value someone picked last year may be renamed, moved, or obsoleted this year.
+
+Adding a `version` to any of the four entries pins it to one snapshot of its source, and terms then
+resolve against that snapshot. A `version` names one snapshot with these keys, in order:
+
+| Key | Value | Meaning |
+|-----|-------|---------|
+| `id` | string | The snapshot's content hash — a hash of the extracted ontology. Unique *within* an ontology (snapshots are partitioned by ontology iri, so two ontologies can share a hash), so together with `sourceIri` — the ontology's canonical identity — it pins the constraint to one exact snapshot. |
+| `effectiveDate` | date | When that snapshot was ingested or released. A human-facing label. |
+| `declaredVersion` | string | The version string the source itself declared, when it has one. A human-facing label; not guaranteed unique. |
+
+Only the content-hash `id` — read together with the ontology's `sourceIri` — pins reproducibly;
+`effectiveDate` and `declaredVersion` are provenance labels for people to read. Each example below shows
+one `values` entry with a `version` added; the surrounding field is unchanged from its unpinned form.
+
+### An Entire Ontology, Pinned
+
+```yaml
+- type: ontology
+  sourceSystem: bioportal
+  sourceAcronym: CL
+  sourceName: Cell Ontology
+  sourceIri: http://purl.obolibrary.org/obo/cl
+  version:
+    id: a1b2c3d4e5f6
+    effectiveDate: 2026-06-15
+    declaredVersion: 2026-06-15
+```
+
+### A Branch, Pinned
+
+```yaml
+- type: branch
+  sourceSystem: bioportal
+  sourceAcronym: UBERON
+  sourceName: Uber Anatomy Ontology
+  sourceIri: http://purl.obolibrary.org/obo/uberon
+  termBaseIri: http://purl.obolibrary.org/obo/UBERON_0000062
+  termBaseLabel: organ
+  termMaxDepth: 0
+  version:
+    id: 7a8b9c0d1e2f
+    effectiveDate: 2026-05-30
+    declaredVersion: 2026-05-01
+```
+
+### Individual Classes, Pinned
+
+Each class entry pins independently, so a field can mix terms from different versions if needed.
+
+```yaml
+- type: class
+  sourceSystem: bioportal
+  sourceAcronym: OBI
+  sourceIri: http://purl.obolibrary.org/obo/obi
+  termIri: http://purl.obolibrary.org/obo/OBI_0002564
+  termType: class
+  termLabel: histopathology assay
+  version:
+    id: 3c4d5e6f7a8b
+    effectiveDate: 2026-04-20
+    declaredVersion: 2026-04-20
+```
+
+### A Value Set, Pinned
+
+```yaml
+- type: valueSet
+  sourceSystem: bioportal
+  sourceAcronym: HRAVS
+  termBaseIri: https://purl.humanatlas.io/vocab/hravs#HRAVS_1000371
+  termBaseLabel: Analyte class
+  version:
+    id: 9e0f1a2b3c4d
+    effectiveDate: 2026-03-10
+    declaredVersion: "2.3"
 ```
 
 ## Combining Specifications
@@ -156,21 +260,19 @@ the initial order of the merged list, which [`actions`](#actions) can then refin
   datatype: iri
   values:
   - type: ontology
-    acronym: CL
-    ontologyName: Cell Ontology
-    iri: https://data.bioontology.org/ontologies/CL
+    sourceAcronym: CL
+    sourceName: Cell Ontology
+    sourceIri: http://purl.obolibrary.org/obo/cl
   - type: class
-    label: blood
-    acronym: UBERON
+    sourceAcronym: UBERON
+    termIri: http://purl.obolibrary.org/obo/UBERON_0000178
     termType: class
     termLabel: blood
-    iri: http://purl.obolibrary.org/obo/UBERON_0000178
   - type: class
-    label: bone tissue
-    acronym: UBERON
+    sourceAcronym: UBERON
+    termIri: http://purl.obolibrary.org/obo/UBERON_0002481
     termType: class
     termLabel: bone tissue
-    iri: http://purl.obolibrary.org/obo/UBERON_0002481
 ```
 
 Here a **Sample Type** field permits any cell type (all of the Cell Ontology) plus the two named
@@ -204,11 +306,11 @@ one class:
   datatype: iri
   values:
   - type: branch
-    ontologyName: Ontology for Biomedical Investigations
-    acronym: OBI
-    termLabel: assay
-    iri: http://purl.obolibrary.org/obo/OBI_0000070
-    maxDepth: 0
+    sourceAcronym: OBI
+    sourceName: Ontology for Biomedical Investigations
+    termBaseIri: http://purl.obolibrary.org/obo/OBI_0000070
+    termBaseLabel: assay
+    termMaxDepth: 0
   actions:
   - action: delete
     termIri: http://purl.obolibrary.org/obo/OBI_0000185
@@ -231,3 +333,25 @@ A controlled-term default names a term by IRI and its label.
     value: http://purl.obolibrary.org/obo/UBERON_0002107
     label: liver
 ```
+
+## Coming from the Older Keys
+
+An earlier form of these entries used a different set of keys, and CEDAR no longer reads it: a document
+written that way is refused rather than silently misread. The `Applies to` column names which of the four
+source kinds a key applies to, and so disambiguates the older `iri` keys by what each identified. The
+ontology `iri` — its backend address — has no key here at all: it is reconstructed from the acronym.
+
+| Older key | Key | Applies to |
+|-------------|-------------|------------|
+| `acronym` | `sourceAcronym` | all four |
+| `ontologyName` | `sourceName` | ontology, branch |
+| `iri` | `termIri` | class |
+| `iri` | `termBaseIri` | branch, value set |
+| `termLabel` | `termBaseLabel` | branch |
+| `valueSetName` | `termBaseLabel` | value set |
+| `maxDepth` | `termMaxDepth` | branch |
+| `numTerms` | `termCount` | ontology, value set |
+
+A class's `termLabel` keeps its name, and its display `label` is gone: a class has one label now, the
+preferred one. Three keys are new, each applying to every source kind: `sourceSystem`, `sourceIri`, and
+`version`.
