@@ -100,11 +100,8 @@ element as an attribute or as a property:
 import { useEffect, useRef } from 'react';
 
 const config = {
-  showSampleTemplateLinks: false,
-  showTemplateSourceData: false,
-  showInstanceDataFull: false,
-  terminologyIntegratedSearchUrl:
-    'https://terminology.metadatacenter.org/bioportal/integrated-search',
+  terminologyBaseUrl: 'https://terminology.metadatacenter.org/',
+  bridgeBaseUrl: 'https://bridge.metadatacenter.org/',
 };
 
 export function MetadataEditor({ template, instance, onReady }) {

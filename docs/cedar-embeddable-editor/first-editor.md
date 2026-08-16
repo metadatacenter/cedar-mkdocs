@@ -64,11 +64,8 @@ the form should appear, load the script, then give the element a template:
       const cee = document.querySelector('cedar-embeddable-editor');
 
       cee.config = {
-        showSampleTemplateLinks: false,
-        showTemplateSourceData: false,
-        showInstanceDataFull: false,
-        terminologyIntegratedSearchUrl:
-          'https://terminology.metadatacenter.org/bioportal/integrated-search',
+        terminologyBaseUrl: 'https://terminology.metadatacenter.org/',
+        bridgeBaseUrl: 'https://bridge.metadatacenter.org/',
       };
 
       cee.templateObject = template;
@@ -164,4 +161,4 @@ builds one in TypeScript. An application that embeds the CEE has particular reas
 TypeScript library, because the editor parses every template through it.
 
 A template can equally be written by hand in [the YAML serialization](../yaml-spec/index.md) of the
-CEDAR model, which the CEE reads once `inputSerialization` says so.
+CEDAR model, which the CEE reads directly.

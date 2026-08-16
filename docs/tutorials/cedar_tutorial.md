@@ -154,10 +154,10 @@ Here, it shows the empty form to be filled in.
 Enter a **Study Name** — `Wearable Sensor Pilot Study` — and a
 **Number of Participants** — `40`. The number field won't accept text.
 
-The collapsible panels below (**JSON-LD**, **JSON Schema**, **Data Quality Report**)
-let you watch the machine-readable metadata take shape: CEDAR stores templates as
-JSON Schema and instances as JSON-LD, so what you type is immediately available
-as linked data that can be converted to RDF.
+What you type is immediately available as linked data: CEDAR stores templates as
+JSON Schema and instances as JSON-LD, which can be converted to RDF. The download
+menu at the top of the form saves either form, along with the data quality report,
+so you can watch the machine-readable metadata take shape.
 
 ![The filled-out Study form](img/08-filled-form.png)
 

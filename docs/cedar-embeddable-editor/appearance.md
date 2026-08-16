@@ -4,13 +4,11 @@ The CEE renders inside a shadow root. The page's stylesheets do not reach into t
 form's styles do not leak out, so an application cannot restyle the CEE with CSS selectors written
 against its internals, and the CEE cannot disturb the application's own layout.
 
-Three things cross that boundary, each deliberately: the width of the container the application puts
-the CEE in, the CSS custom properties the CEE publishes, and the language it is told to render in.
+Two things cross that boundary, each deliberately: the width of the container the application puts
+the CEE in, and the language it is told to render in.
 
 | What the application writes | How far it gets |
 |---|---|
-| `--cee-element-heading-size`, `--cee-element-heading-weight`, `--cee-element-content-gap` | Reaches the CEE's element headings and the space beneath them. |
-| `--cee-color-primary`, `--cee-color-warn`, `--cee-color-warning` | Reaches the CEE's own accents and error text. |
 | `font-size` or `font-family` on the element | Inherits into the text the CEE styles itself — field labels, the time picker, chips — and stops before the form controls. |
 | A rule naming the CEE's internals, such as `.mat-mdc-text-field-wrapper` | Stops at the shadow boundary. Nothing changes. |
 | `html { font-size: 62.5% }` on the page | Nothing changes. The CEE states its own sizes absolutely. |
@@ -38,69 +36,27 @@ scrolling it, because the CEE has no internal scroller.
 
 ## Theming
 
-The CEE publishes eight custom properties on the element. Custom properties inherit through a shadow
-boundary, so setting one on the element, or anywhere above it, reaches the CEE's internals:
+The CEE publishes no theming properties. It renders in its own type and its own colours, and an
+application places it rather than styles it.
 
-```css
-cedar-embeddable-editor {
-  --cee-element-heading-size: 20px;
-  --cee-element-heading-weight: 700;
-  --cee-element-content-gap: 16px;
-}
-```
+It published eight `--cee-*` custom properties until recently, and they are worth a paragraph because
+an application may still carry them in a stylesheet. Two of the eight were read nowhere. The five
+colours never reached a Material control — the theme is compiled into the bundle, so no override
+could touch a button, a chip, a form field or a focus ring — which left one of them moving the
+focused time picker's border and nothing else. The remaining three set the type size, weight and
+spacing of a collapsible element's heading, and no application had set any of the eight. Setting one
+now does nothing at all, and nothing reports it, because a custom property nobody reads is not an
+error.
 
-| Property | Default | Range | Affects |
-|---|---|---|---|
-| `--cee-element-heading-size` | `18px` | `12px`–`32px` | The type size of a collapsible element's heading. |
-| `--cee-element-heading-weight` | `600` | `400`–`700` | The weight of that heading. |
-| `--cee-element-content-gap` | `12px` | `0`–`32px` | The space between an element's heading and its content. |
-| `--cee-color-primary` | `#0f7686` | — | The CEE's own accents, such as the focused time picker. |
-| `--cee-color-warn` | `#f44336` | — | Errors: a value the CEE has rejected. Named for Material's danger palette, which is where the red comes from. |
-| `--cee-color-warning` | `#856404` | — | Advisory notices that do not block, shown beside a field rather than as its error. |
-| `--cee-color-text-primary` | `#ffffff` | — | Reserved. No effect today. |
-| `--cee-color-accent` | `#ff5c55` | — | Reserved. No effect today. |
-
-The three heading and spacing properties change how a form reads. They adapt
-typography and density without giving the application a second, competing say in the form's
-structure: which [elements](../yaml-spec/elements-core.md) nest, and which collapse, remains the
-template's decision.
-
-Two of the color properties are reserved rather than inert by oversight. They are published so the
-set can grow into them without a breaking change. The table marks them, so setting one and seeing
-nothing change does not read as a bug.
-
-These names are part of the published contract. Renaming or dropping one would break an application
-silently, so the set only grows.
-
-None of these values is read once at startup. Changing one at runtime restyles the form immediately, so
-an application can drive a theme switch from its own controls without rebuilding the element.
-
-### Values Outside the Range
-
-Each numeric property is clamped. A value below the range renders at the minimum and a value above it
-at the maximum, so a heading cannot be set to a size that clips its own text or overlaps the fields
-beneath it.
-
-Prefer absolute units. A `rem` value resolves against the *host page's* root font size, not the
-CEE's, so `3rem` means different things on different pages. The clamp keeps that from mattering much.
-
-A value of the wrong kind is discarded in favor of the default. `--cee-element-heading-size: 20`,
-missing its unit, renders at `18px` rather than at some unrelated size, and so does a misspelled one.
-
-```css
-cedar-embeddable-editor {
-  --cee-element-heading-size: 100px;  /* renders at 32px  */
-  --cee-element-heading-weight: 900;  /* renders at 700   */
-  --cee-element-content-gap: -8px;    /* renders at 0     */
-}
-```
+A real appearance contract — colours named for the roles the interface has, a Material theme that
+reads them, and a stated position on type — is open work rather than a decision against it.
 
 ## What the Application Cannot Change
 
-The appearance contract is the eight properties the CEE declares on its own element, and nothing
-else. Other `--cee-` names occur inside the bundle, and they are internals rather than published
-API: they are not declared on the element, and they can be renamed or dropped without notice.
-Setting one may happen to work today and will not be kept working.
+Everything about the CEE's appearance except its width, short of the language it renders in. Any
+`--cee-` name occurring inside the bundle is an internal: it is not declared on the element, and it
+can be renamed or dropped without notice, so setting one may happen to work today and will not be
+kept working.
 
 Three things that look like they should work do not, and each fails differently.
 
@@ -122,10 +78,9 @@ time. The result is a form whose labels have moved and whose input values have n
 cedar-embeddable-editor { font-size: 24px; }
 ```
 
-There is no property for the body type size, the field height, or the color of the form controls
-themselves, because those come from a Material theme compiled into the bundle. Making them settable
-is [open work](https://github.com/metadatacenter/cedar-embeddable-editor) rather than a decision
-against it.
+There is no property for the body type size, the field height, or the colour of the form controls,
+because those come from a Material theme compiled into the bundle. Making them settable is open work
+rather than a decision against it.
 
 **The host page's root font size does not resize the form.** The CEE states its own sizes
 absolutely, so `html { font-size: 62.5% }` — a common CSS reset — leaves the form as it is. That is
@@ -147,21 +102,8 @@ to show a submitted record, a previous version, or someone else's metadata, and 
 second renderer that would drift from the editor. The RADx Data Hub and HuBMAP both display
 metadata records and templates through the CEE this way.
 
-Read-only mode can also hide fields that were never filled, which turns a long sparse template into
-a short summary of what is actually recorded:
-
-```json
-{
-  "readOnlyMode": true,
-  "hideEmptyFields": true
-}
-```
-
-`hideEmptyFields` carries two constraints. It is honoured only in read-only mode, and only when the
-template and the instance arrive together on `templateAndInstanceObject`, because the decision about
-which fields to omit is taken while the form is being built and the separate inputs have not read the
-instance by then. Configuration is applied once, so an application offering the user a choice between
-editing and viewing builds a new element for the other mode rather than reconfiguring this one.
+Configuration is applied once, so an application offering the user a choice between editing and
+viewing builds a new element for the other mode rather than reconfiguring this one.
 
 `readOnlyMode` is the only way in or out of read-only mode. The CEE used to offer the user a switch
 of its own, in a menu at the corner of the form, which wrote to the same state the widgets read — so
@@ -171,20 +113,25 @@ key that governed it.
 
 ## Surrounding Chrome
 
-The CEE can render a CEDAR title bar above the form and an attribution footer below it. Both are
-off by default, because an embedded editor usually sits within the application's own headings and
-navigation:
+The CEE draws no page chrome. It rendered a CEDAR title bar above the form and an attribution footer
+below it, behind `showHeader` and `showFooter`; every string and destination was hardcoded, so an
+embedder took CEDAR's branding or nothing. An application renders its own headings and navigation
+around the element.
+
+What the CEE keeps is the CEDAR mark and the version stamp inside the form's own title block, which
+is a component naming itself rather than dressing someone else's page.
+
+One key adds to that block:
 
 ```json
 {
-  "showHeader": true,
-  "showFooter": true,
   "showTemplateDescription": true
 }
 ```
 
-`showTemplateDescription` adds the template's own description under its title. Turn it on where
-users meet a template they have not filled in before.
+It renders the template's own description under its title. Turn it on where users meet a template
+they have not filled in before, and leave it off where the application already shows the description
+in its own header.
 
 ## Translations
 

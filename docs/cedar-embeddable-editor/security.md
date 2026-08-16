@@ -41,7 +41,7 @@ written:
 
 ```json
 {
-  "trustTemplateMarkup": true
+  "trustTemplateRichText": true
 }
 ```
 
@@ -62,7 +62,7 @@ formatting without the risk.
 
 | Content | Origin | Treatment |
 |---|---|---|
-| Static rich-text field body | Template author | Sanitized, unless `trustTemplateMarkup` is on |
+| Static rich-text field body | Template author | Sanitized, unless `trustTemplateRichText` is on |
 | Static section break, image, YouTube | Template author | Not rendered as HTML. Used as text or as a URL |
 | Field values, in the form and in read-only view | Instance data | Always sanitized. Not configurable |
 | Multi-instance value summaries | Instance data | Always sanitized. Not configurable |
@@ -81,12 +81,14 @@ over markup the author composed.
 
 ## Requests the CEE Makes
 
-The CEE issues requests to the endpoints it is configured with. The two do not behave alike.
-`extAuthBaseUrl` has a built-in default
-of CEDAR's bridge service, so an external-authority field looks up ORCID, ROR, DOI and the rest
-against `bridge.metadatacenter.org` unless an application says otherwise.
-`terminologyIntegratedSearchUrl` has no default at all: a controlled-term field offers no
-suggestions, and issues no request, until an application sets it.
+The CEE issues requests to the two servers it is configured with, and to nothing else. Neither
+`terminologyBaseUrl` nor `bridgeBaseUrl` has a default, so an application that sets neither makes no
+requests at all: a controlled-term field offers no terms, an external-authority field resolves no
+identifiers, and the CEE reports which key is missing the first time a field needs it.
+
+`bridgeBaseUrl` had a default of CEDAR's production bridge, which meant an application deployed
+anywhere else sent its users' keystrokes to `bridge.metadatacenter.org` without asking and without
+saying so. That is why neither key has one now.
 
 Each request carries only the text the user typed and the constraint the template declares. An
 application that must keep those queries inside its own network points both settings at its own
@@ -102,11 +104,10 @@ images it is willing to show, and bounds the rest with a content security policy
 Everything else happens locally. The application supplies the template and the instance, the
 browser renders the form, and the browser produces the metadata. The CEE sends metadata nowhere.
 
-Two configuration keys make the CEE fetch on its own: the `sampleTemplateLocationPrefix` route that
-has it fetch a template, and `languageMapPathPrefix`, which sends it looking for a language map
-instead of using the one inside the bundle. An application that would rather hold every network
-decision itself avoids both by assigning `templateObject` directly and leaving the built-in
-languages alone.
+One configuration key makes the CEE fetch on its own: `languageMapPathPrefix`, which sends it
+looking for a language map instead of using the one inside the bundle. An application that would
+rather hold every network decision itself leaves it unset and takes the built-in languages. The CEE
+never fetches a template — the application supplies it.
 
 ## A Content Security Policy
 

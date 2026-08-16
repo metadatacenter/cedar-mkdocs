@@ -1,9 +1,9 @@
 # Configuration
 
-The CEE takes a single configuration object. Every key in it is optional and everything that needs
-a default has one, so a minimal configuration stays short and few applications ever write a complete
-one. Supply the terminology endpoint before anything else, because without it controlled fields have
-nothing to suggest.
+The CEE takes a single configuration object. Every key in it is optional, so a minimal configuration
+stays short and most applications never write a complete one. Nine keys exist in total, and only two
+of them have to be set: the CEDAR servers the editor calls, which nothing but the embedding
+application can know.
 
 ## Supplying the Configuration
 
@@ -11,11 +11,8 @@ Assign the object to the `config` property, writing it in the application's own 
 
 ```javascript
 cee.config = {
-  showSampleTemplateLinks: false,
-  showTemplateSourceData: false,
-  showInstanceDataFull: false,
-  terminologyIntegratedSearchUrl:
-    'https://terminology.metadatacenter.org/bioportal/integrated-search',
+  terminologyBaseUrl: 'https://terminology.metadatacenter.org/',
+  bridgeBaseUrl: 'https://bridge.metadatacenter.org/',
 };
 ```
 
@@ -46,25 +43,36 @@ So build the configuration you want, assign it once, and create a new element if
 An application that offers the user a choice between editing and viewing builds a new editor for the
 other mode rather than reconfiguring the one on screen.
 
+Configuration is not required at all. An element given a template and nothing else renders, taking
+every default.
+
 The artifact inputs work the same way, as [Templates and Metadata](templates-and-metadata.md)
 describes. Nothing about the element accumulates: the same assignments in a different order give the
 same editor, which is what lets an application reason about what it is looking at.
 
 ## What the CEE Reports About a Configuration
 
-The CEE ignores a key it does not recognize, as it always has, but it now reports the key rather
-than passing over it in silence. Every configuration meets a check as it crosses the boundary,
-and anything unusable is named:
+The CEE ignores a key it does not recognize, but it reports the key rather than passing over it in
+silence. Every configuration meets a check as it crosses the boundary, and anything unusable is
+named:
 
 ```
 CEE ERROR: Unknown configuration key "readOnlyMod". It has no effect. Did you mean "readOnlyMode"?
-CEE ERROR: Configuration key "outputSerialization" expects "json" or "yaml", but was "xml".
-CEE ERROR: Configuration key "hideEmptyFields" only takes effect in read-only mode, which is not enabled.
+CEE ERROR: Configuration key "readOnlyMode" expects a boolean, but was string. Ignored.
+CEE ERROR: Configuration key "bridgeBaseUrl" must end in a slash, but was "https://bridge.example.org".
 ```
 
 The messages go to the browser console and to any handler registered on the `eventHandler`
 property. They diagnose only. The CEE rejects nothing and behaves exactly as it would without the
 check.
+
+A server the application never named is reported once, when a field first needs it, rather than on
+every keystroke:
+
+```
+CEE ERROR: CEDAR Embeddable Editor: controlled-term search is off, because "terminologyBaseUrl"
+is not configured. Set it to the CEDAR terminology server, ending in a slash.
+```
 
 ## TypeScript Declarations
 
@@ -74,7 +82,7 @@ a typed element:
 ```typescript
 import type { CeeConfig, CedarEmbeddableEditorElement } from 'cedar-embeddable-editor';
 
-const config: CeeConfig = { readOnlyMode: true, outputSerialization: 'yaml' };
+const config: CeeConfig = { readOnlyMode: true, showDownloadMenu: true };
 
 const cee = document.querySelector('cedar-embeddable-editor');
 cee!.config = config;
@@ -83,122 +91,75 @@ const report = cee!.dataQualityReport;   // CeeDataQualityReport
 
 The query needs no cast, because the package declares its tag in `HTMLElementTagNameMap`.
 
+`CeeConfig` is closed: every key an application may set is declared, so a misspelling is a compile
+error rather than a setting that silently does nothing.
+
 The package publishes **types only**, which follows from the bundle rather than from an oversight.
 The published file is a script that registers a custom element and exports no values, so nothing
 exists to import at run time. Use `import type`, and let the interface catch a mistyped key rather
 than reaching for a constant that would read `undefined` when the page runs.
 
-One part of the interface stays deliberately open. An index signature covers the per-authority
-endpoint keys instead of fourteen declarations, so an application can set a key for an authority
-added after its copy of the declarations was published. The configuration check catches typos in
-those keys at run time, where the compiler cannot.
-
 ## Reference
 
-### The Key to Set First
+### The Two Servers
+
+Each names a CEDAR server and nothing below it: the CEE appends the paths itself, so an application
+supplies two hostnames and never restates a route. Both must end in a slash, and neither has a
+default — the CEE cannot know which deployment it is embedded in, and a default would name one.
 
 | Key | Type | Default | Meaning |
 |---|---|---|---|
-| `terminologyIntegratedSearchUrl` | string | none | The CEDAR integrated-search endpoint that controlled fields query. With no value, controlled fields offer no suggestions. |
+| `terminologyBaseUrl` | string | none | The CEDAR terminology server. Unset, controlled fields offer no terms. |
+| `bridgeBaseUrl` | string | none | The CEDAR bridge server. Unset, the external-authority fields offer no terms and resolve no identifiers. |
 
-`https://terminology.metadatacenter.org/bioportal/integrated-search` serves most applications.
-[Controlled Terms](controlled-terms.md) explains what it does and when another value is right.
+`https://terminology.metadatacenter.org/` and `https://bridge.metadatacenter.org/` serve most
+applications. [Controlled Terms](controlled-terms.md) explains what each one does.
+
+Below `terminologyBaseUrl` the CEE appends `bioportal/integrated-search`. Below `bridgeBaseUrl` it
+appends `ext-auth/`, then the search or details path of the authority a field is bound to. None of
+those paths is configurable: they are the servers' own routes, so an application free to move them
+could only move them somewhere nothing answers.
 
 ### What the User Sees
 
 | Key | Type | Default | Meaning |
 |---|---|---|---|
-| `showHeader` | boolean | `false` | A CEDAR title bar above the form. |
-| `showFooter` | boolean | `false` | An attribution footer below the form. |
 | `showTemplateDescription` | boolean | `false` | The template's description, under its title. |
-| `showStaticText` | boolean | `true` | Render the template's [static content fields](../yaml-spec/field-types/static-fields.md). |
-| `collapseStaticComponents` | boolean | `false` | Start static content collapsed. |
-| `showAllMultiInstanceValues` | boolean | `true` | A summary of every value in a repeating group, not only the one on the current page. |
-| `showSpinnerBeforeInit` | boolean | `true` | A spinner until the first render completes. |
+| `showDownloadMenu` | boolean | `false` | A menu offering the CEE's views of the artifact as files. |
+
+`showDownloadMenu` offers the instance and the template as JSON-LD, JSON Schema and YAML, plus the
+rendering data, the multi-instance information and the data quality report. Each file is named from
+the template, `AttributeValues-instance.yaml` rather than `instance.yaml`, so several open forms do
+not collide. Nothing is rendered beneath the form either way.
+
+A download is started by the page, and an application running under a restrictive sandbox can refuse
+one with no event to observe. The CEE traces each attempt through the event handler, so a developer
+seeing the trace and no file knows where to look.
 
 ### Editing Behaviour
 
 | Key | Type | Default | Meaning |
 |---|---|---|---|
 | `readOnlyMode` | boolean | `false` | Present the metadata for reading, with no editing. |
-| `hideEmptyFields` | boolean | `false` | Omit fields that have no value. Takes effect only in read-only mode, and only when template and instance arrive together. |
-| `trustTemplateMarkup` | boolean | `false` | Render a template author's rich text verbatim instead of sanitizing it. See [Security](security.md). |
+| `trustTemplateRichText` | boolean | `false` | Render a template author's rich text verbatim instead of sanitizing it. See [Security](security.md). |
 
-### Serialization
-
-The two are independent, and each defaults to the JSON form.
-
-| Key | Type | Default | Meaning |
-|---|---|---|---|
-| `inputSerialization` | `json` or `yaml` | `json` | Whether the supplied template is read as JSON Schema or as YAML. |
-| `outputSerialization` | `json` or `yaml` | `json` | Whether `currentMetadataSerialized` returns JSON-LD or YAML. |
-
-### Diagnostic Panels
-
-The CEE can render collapsible panels beneath the form, showing what it read and what it is producing.
-Each has a `show` key that renders it and an `expanded` key that opens it.
-
-| Panel | `show` key | Default | `expanded` key |
-|---|---|---|---|
-| JSON Schema - Template | `showTemplateSourceData` | `true` | `expandedTemplateSourceData` |
-| JSON-LD - Instance | `showInstanceDataFull` | `true` | `expandedInstanceDataFull` |
-| JSON-LD - Instance - Core | `showInstanceDataCore` | `false` | `expandedInstanceDataCore` |
-| Template Rendering Data | `showTemplateRenderingRepresentation` | `false` | `expandedTemplateRenderingRepresentation` |
-| Multi-Instance Information | `showMultiInstanceInfo` | `false` | `expandedMultiInstanceInfo` |
-| Data Quality Report | `showDataQualityReport` | `false` | `expandedDataQualityReport` |
-| Sample templates | `showSampleTemplateLinks` | `false` | `expandedSampleTemplateLinks` |
-
-Every `expanded` key defaults to `false`.
-
-**Two of these are on by default**, which is a legacy of the CEE's origins as a developer tool. A
-production embedding almost always wants:
-
-```json
-{
-  "showTemplateSourceData": false,
-  "showInstanceDataFull": false
-}
-```
-
-### Endpoints
-
-| Key | Type | Default | Meaning |
-|---|---|---|---|
-| `terminologyIntegratedSearchUrl` | string | none | The CEDAR integrated-search endpoint controlled fields query. |
-| `extAuthBaseUrl` | string | `https://bridge.metadatacenter.org/ext-auth/` | The CEDAR bridge serving external authorities. A trailing slash is required. |
-
-Fourteen further keys override the path appended to `extAuthBaseUrl`, two for each authority.
-[Controlled Terms](controlled-terms.md#external-authorities) lists them.
-
-### IRI Prefixes
-
-| Key | Type | Default | Meaning |
-|---|---|---|---|
-| `iriPrefix` | string | `https://repo.metadatacenter.org/` | The base for identifiers the CEE mints inside the instance, such as those of element instances. |
-| `bioPortalPrefix` | string | `https://bioportal.bioontology.org/ontologies/` | The base of the BioPortal link offered beside a selected term. |
-| `orcidPrefix` | string | `https://orcid.org/` | The prefix by which the CEE recognizes an ORCID held in a text field, so it can show the bare identifier. |
-| `rorPrefix` | string | `https://ror.org/` | The same, for a ROR. |
+`readOnlyMode` is the only way in or out of read-only. The CEE once offered the user a switch of its
+own, writing to the same state the widgets read, so a form embedded as a viewer could be made
+editable from inside it.
 
 ### Language
 
 | Key | Type | Default | Meaning |
 |---|---|---|---|
 | `defaultLanguage` | string | `en` | The language to render in. |
-| `fallbackLanguage` | string | `en` | The language to fall back to when the first is unavailable. |
+| `fallbackLanguage` | string | `en` | The language consulted for a string the first one lacks. |
 | `languageMapPathPrefix` | string | none | A directory of external language files. |
 
-[Appearance and Language](appearance.md#translations) describes how the four sources of a
-translation are tried in turn.
+These govern the CEE's own interface strings. A template's labels, descriptions and help text are
+rendered as their author wrote them.
 
-### Fetching a Template
-
-| Key | Type | Default | Meaning |
-|---|---|---|---|
-| `sampleTemplateLocationPrefix` | string | none | A directory holding template folders, each with a `template.json` and a `metadata.json`. |
-| `loadSampleTemplateName` | string | none | Which folder under that prefix to load. |
-
-[Templates and Metadata](templates-and-metadata.md#letting-the-cee-fetch-the-template) covers that
-route, which suits demonstrations rather than a production embedding.
+[Appearance and Language](appearance.md#translations) describes how the sources of a translation are
+tried in turn.
 
 ## Receiving the Diagnostics
 
@@ -214,4 +175,4 @@ cee.eventHandler = {
 Both members are optional and the CEE calls only the ones present, so `{ error }` alone is a valid
 handler and receives no traces. `error` carries the failures an application should surface: a
 template the CEE could not read, a value it discarded, a configuration key it cannot use. `trace`
-carries the running commentary, including which language maps loaded and which template was fetched.
+carries the running commentary, including which language maps loaded.

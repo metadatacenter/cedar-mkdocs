@@ -46,9 +46,9 @@ saveButton.disabled = !cee.dataQualityReport.isValid;
 Recomputing it on every `change` event keeps the button honest as the user works. The report is
 computed locally and synchronously, so reading it costs nothing and requires no network.
 
-`showDataQualityReport` renders the report itself, as a collapsible panel beneath the form. It
-gives a user one place to see everything outstanding rather than hunting for marked fields, and it
-shows a developer what the report contains while an integration is being built.
+`showDownloadMenu` offers the report as a file, alongside the CEE's other views of the artifact. The
+CEE renders nothing beneath the form: an application that wants to show a user everything outstanding
+in one place builds that from `dataQualityReport` in its own chrome.
 
 ???+ note "A naming mismatch in older declarations"
 

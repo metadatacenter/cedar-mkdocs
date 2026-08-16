@@ -98,9 +98,9 @@ An instance is returned as **JSON-LD** or as **YAML**. CEDAR stores, validates a
 JSON-LD form. The YAML form carries the same instance in the serialization that specification
 defines.
 
-The JSON forms are the default on both sides, and `inputSerialization` and `outputSerialization`
-select otherwise. Each governs one side only: an instance loaded into the form is read as JSON-LD
-whichever serialization the template was written in.
+A template may be supplied in either form and the CEE recognizes which it is given. An instance is
+returned as JSON-LD through `currentMetadata` and as YAML through `currentMetadataYaml`, so an
+application reads whichever it wants without configuring anything.
 [Templates and Metadata](../templates-and-metadata.md) covers both directions in full.
 
 ## What the CEE Needs

@@ -30,9 +30,8 @@ cee.templateAndInstanceObject = {
 ```
 
 One assignment produces one build. The CEE constructs the form with the values already known
-instead of building it empty and then filling it, which is faster and is the only route on which
-`hideEmptyFields` takes effect. The two properties inside the object are named `templateObject` and
-`instanceObject`, matching the separate inputs.
+instead of building it empty and then filling it, which is faster. The two properties inside the
+object are named `templateObject` and `instanceObject`, matching the separate inputs.
 
 The separate inputs remain available for an application that genuinely obtains the two at different
 times. They are independent, and either order works, because the CEE does not build the form until a
@@ -60,42 +59,16 @@ The error reaches the browser console and any handler on the `eventHandler` prop
 different template or instance means a new element, which is also what keeps the two halves of a
 document from being mixed across artifacts.
 
-### Letting the CEE Fetch the Template
+### Supplying a YAML Template
 
-The CEE can fetch a template itself, given a location prefix and a name:
-
-```javascript
-cee.config = {
-  sampleTemplateLocationPrefix: '/assets/templates/',
-  loadSampleTemplateName: 'dataset',
-};
-```
-
-The CEE then requests `/assets/templates/dataset/template.json` and, alongside it,
-`/assets/templates/dataset/metadata.json` as the instance to open. Setting
-`showSampleTemplateLinks` additionally renders a picker, whose entries come from a `registry.json`
-at the prefix.
-
-This route serves demonstrations and the standalone developer application. A production embedding
-should hand the CEE a template it has already obtained, keeping both the choice of template and the
-authentication of the request inside the application.
-
-### Choosing the Template's Serialization
-
-A template is supplied as JSON Schema or as [YAML](../yaml-spec/index.md), and
-`inputSerialization` says which. Its default is `json`, and any value other than `yaml` means the
-same thing, so an application holding JSON Schema sets nothing:
+A template is supplied as JSON Schema or as [YAML](../yaml-spec/index.md), and the CEE recognizes
+which it has been given. An application holding either assigns it directly:
 
 ```javascript
 cee.templateObject = template;
 ```
 
-For YAML, set the key and assign the **parsed** YAML object rather than the YAML source text:
-
-```javascript
-cee.config = { inputSerialization: 'yaml' };
-cee.templateObject = parsedTemplateYaml;
-```
+For YAML, assign the **parsed** YAML object rather than the YAML source text.
 
 Parsing falls to the application. Browsers parse JSON natively and YAML not at all, so a YAML template obliges the page to carry a
 parser such as [js-yaml](https://www.npmjs.com/package/js-yaml). Nothing else differs, because the
@@ -103,35 +76,27 @@ CEE reads both serializations through the same model library and either builds t
 
 ## Reading the Metadata Back
 
-Three read-only properties expose the instance under edit. Each reads the current state of the form
+Two read-only properties expose the instance under edit. Each reads the current state of the form
 at the moment it is accessed, and none of them has side effects.
 
 | Property | Returns |
 |---|---|
-| `currentMetadata` | The instance as a CEDAR JSON-LD object. Always JSON-LD, whatever the configuration says. |
-| `currentMetadataYaml` | The instance as a CEDAR YAML string. Always YAML, whatever the configuration says. |
-| `currentMetadataSerialized` | Whichever of the two `outputSerialization` selects. |
+| `currentMetadata` | The instance as a CEDAR JSON-LD object. |
+| `currentMetadataYaml` | The instance as a CEDAR YAML string. |
 
-Use the first two where the code knows which form it wants, and neither has to reason about what
-the configuration happens to be:
+Each says which form it returns, so no code has to reason about what the configuration happens to
+be:
 
 ```javascript
 const instance = cee.currentMetadata;
 const asYaml = cee.currentMetadataYaml;
 ```
 
-`currentMetadataSerialized` suits an application whose output format is a deployment choice rather
-than a fixed decision. It returns a JSON-LD object by default, and a YAML string when configured:
+A third property, `currentMetadataSerialized`, returned whichever of the two a configuration key
+selected. Both it and the key are gone: an application that wants YAML reads the YAML property.
 
-```json
-{
-  "outputSerialization": "yaml"
-}
-```
-
-`outputSerialization` governs only that third property. It has no effect on what the other two
-return, and none on how the template was read. An instance supplied to the editor is likewise always
-read as JSON-LD: `inputSerialization` selects the template parser and nothing else.
+An instance supplied to the editor is always read as JSON-LD, whichever serialization the template
+was written in.
 
 ## Knowing When Something Changed
 

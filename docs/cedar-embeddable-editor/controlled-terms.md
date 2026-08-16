@@ -29,14 +29,16 @@ searches the permitted terms and returns the matches. Choosing a suggestion stor
 
 ### Configuring the Lookup
 
-One key enables the lookup:
+One key enables the lookup, naming the terminology server and nothing below it:
 
 ```json
 {
-  "terminologyIntegratedSearchUrl":
-    "https://terminology.metadatacenter.org/bioportal/integrated-search"
+  "terminologyBaseUrl": "https://terminology.metadatacenter.org/"
 }
 ```
+
+The CEE appends `bioportal/integrated-search` itself. The base must end in a slash, and it has no
+default: unset, controlled fields offer no terms and the CEE says so once, naming the key.
 
 That URL is CEDAR's production terminology service, and it serves most applications. An
 organization running its own CEDAR deployment points the key at that deployment's terminology
@@ -59,7 +61,7 @@ A chosen term is stored as its IRI and its label together:
 
 The IRI makes the metadata machine-actionable, and the label makes it readable without a lookup.
 The CEE also renders a link beside the selected term, back to the term's page in BioPortal, built
-from the `bioPortalPrefix` configuration value and the constraint the field carries.
+from BioPortal's own address and the constraint the field carries.
 
 ### Text That Is Not a Term
 
@@ -92,29 +94,33 @@ field, and a previously valid identifier is restored where there was one.
 
 ### Configuring the Bridge
 
-Lookups go through the CEDAR bridge service, which fronts the authorities. It defaults to CEDAR's
-production deployment, so the fields work without configuration. An application using another CEDAR
-deployment overrides the base URL, which **must** end in a slash:
+Lookups go through the CEDAR bridge server, which fronts the authorities. One key names it, and it
+**must** end in a slash:
 
 ```json
 {
-  "extAuthBaseUrl": "https://bridge.metadatacenter.org/ext-auth/"
+  "bridgeBaseUrl": "https://bridge.metadatacenter.org/"
 }
 ```
 
-The CEE appends a search path or a details path to that base, depending on whether it is offering
-suggestions or resolving a chosen identifier. Both paths can be overridden per authority, for a
-deployment that routes them differently:
+It has no default, so an application that does not set it gets fields offering no terms and
+resolving no identifiers, reported once. There was a default — CEDAR's production bridge — which
+meant an application deployed anywhere else reached production without asking.
 
-| Authority | Search path key | Details path key | Default paths |
-|---|---|---|---|
-| ORCID | `orcidIntegratedExtAuthUrl` | `orcidIntegratedDetailsUrl` | `orcid/search-by-name`, `orcid` |
-| ROR | `rorIntegratedExtAuthUrl` | `rorIntegratedDetailsUrl` | `ror/search-by-name`, `ror` |
-| DOI | `doiIntegratedExtAuthUrl` | `doiIntegratedDetailsUrl` | `doi/search-by-name`, `doi` |
-| PubMed | `pmidIntegratedExtAuthUrl` | `pmidIntegratedDetailsUrl` | `pmid/search-by-name`, `pmid` |
-| RRID | `rridIntegratedExtAuthUrl` | `rridIntegratedDetailsUrl` | `rrid/search-by-name`, `rrid` |
-| NIH Grant | `nihGrantIntegratedExtAuthUrl` | `nihGrantIntegratedDetailsUrl` | `nih-grant/search-by-name`, `nih-grant` |
-| PFAS | `pfasIntegratedExtAuthUrl` | `pfasIntegratedDetailsUrl` | `comp-tox/search-by-name`, `comp-tox` |
+Below that base the CEE appends the bridge server's `ext-auth/` resource, then a search path or a
+details path, depending on whether it is offering suggestions or resolving a chosen identifier. None
+of those paths is configurable: they are the bridge server's own routes, so an application free to
+move them could only move them somewhere nothing answers.
+
+| Authority | Search path | Details path |
+|---|---|---|
+| ORCID | `ext-auth/orcid/search-by-name` | `ext-auth/orcid` |
+| ROR | `ext-auth/ror/search-by-name` | `ext-auth/ror` |
+| DOI | `ext-auth/doi/search-by-name` | `ext-auth/doi` |
+| PubMed | `ext-auth/pmid/search-by-name` | `ext-auth/pmid` |
+| RRID | `ext-auth/rrid/search-by-name` | `ext-auth/rrid` |
+| NIH Grant | `ext-auth/nih-grant/search-by-name` | `ext-auth/nih-grant` |
+| PFAS | `ext-auth/comp-tox/search-by-name` | `ext-auth/comp-tox` |
 
 ## When a Lookup Service Is Unreachable
 
