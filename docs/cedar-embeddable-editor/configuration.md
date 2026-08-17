@@ -52,19 +52,27 @@ same editor, which is what lets an application reason about what it is looking a
 
 ## What the CEE Reports About a Configuration
 
-The CEE ignores a key it does not recognize, but it reports the key rather than passing over it in
-silence. Every configuration meets a check as it crosses the boundary, and anything unusable is
-named:
+Every configuration meets a check as it crosses the boundary. A key the CEE cannot use is named
+rather than passed over in silence, and it is left unset — so the setting keeps the default it
+documents, and the report says what happened:
 
 ```
 CEE ERROR: Unknown configuration key "readOnlyMod". It has no effect. Did you mean "readOnlyMode"?
-CEE ERROR: Configuration key "readOnlyMode" expects a boolean, but was string. Ignored.
-CEE ERROR: Configuration key "bridgeBaseUrl" must end in a slash, but was "https://bridge.example.org".
+CEE ERROR: Configuration key "readOnlyMode" expects a boolean, but was string. Ignored, and the key
+reads as unset.
+CEE ERROR: Configuration key "bridgeBaseUrl" must end in a slash, but was
+"https://bridge.example.org". Ignored, and the key reads as unset.
 ```
 
-The messages go to the browser console and to any handler registered on the `eventHandler`
-property. They diagnose only. The CEE rejects nothing and behaves exactly as it would without the
-check.
+The messages go to the browser console and to any handler registered on the `eventHandler` property.
+
+One refused key costs only that key: every other key in the same configuration applies. The CEE does
+not repair a value either, so a base URL missing its slash is dropped rather than completed —
+appending a path to it would produce an endpoint no one chose, and an unnamed server is a state the
+CEE already reports.
+
+An assignment that is not an object at all — a string, an array, null — configures nothing and does
+not count as the one assignment. The next assignment is still the first one.
 
 A server the application never named is reported once, when a field first needs it, rather than on
 every keystroke:
