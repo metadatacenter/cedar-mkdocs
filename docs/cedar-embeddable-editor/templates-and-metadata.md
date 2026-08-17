@@ -92,9 +92,6 @@ const instance = cee.currentMetadata;
 const asYaml = cee.currentMetadataYaml;
 ```
 
-A third property, `currentMetadataSerialized`, returned whichever of the two a configuration key
-selected. Both it and the key are gone: an application that wants YAML reads the YAML property.
-
 An instance supplied to the editor is always read as JSON-LD, whichever serialization the template
 was written in.
 

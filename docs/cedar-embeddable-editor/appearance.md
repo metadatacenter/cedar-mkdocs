@@ -39,16 +39,10 @@ scrolling it, because the CEE has no internal scroller.
 The CEE publishes no theming properties. It renders in its own type and its own colours, and an
 application places it rather than styles it.
 
-It published eight `--cee-*` custom properties until recently, and they are worth a paragraph because
-an application may still carry them in a stylesheet. Two of the eight were read nowhere. The five
-colours never reached a Material control — the theme is compiled into the bundle, so no override
-could touch a button, a chip, a form field or a focus ring — which left one of them moving the
-focused time picker's border and nothing else. The remaining three set the type size, weight and
-spacing of a collapsible element's heading, and no application had set any of the eight. Setting one
-now does nothing at all, and nothing reports it, because a custom property nobody reads is not an
-error.
+Setting a `--cee-*` custom property does nothing, and nothing reports it: a custom property nobody
+reads is not an error.
 
-A real appearance contract — colours named for the roles the interface has, a Material theme that
+An appearance contract — colours named for the roles the interface has, a Material theme that
 reads them, and a stated position on type — is open work rather than a decision against it.
 
 ## What the Application Cannot Change
@@ -105,18 +99,13 @@ metadata records and templates through the CEE this way.
 Configuration is applied once, so an application offering the user a choice between editing and
 viewing builds a new element for the other mode rather than reconfiguring this one.
 
-`readOnlyMode` is the only way in or out of read-only mode. The CEE used to offer the user a switch
-of its own, in a menu at the corner of the form, which wrote to the same state the widgets read — so
-a record shown for reading could be made editable from within the form, and an application with its
-own save button would then store the edits. The menu is gone, and with it the `showPreferencesMenu`
-key that governed it.
+`readOnlyMode` is the only way in or out of read-only mode. Nothing inside the form can change it,
+so a record shown for reading stays that way.
 
 ## Surrounding Chrome
 
-The CEE draws no page chrome. It rendered a CEDAR title bar above the form and an attribution footer
-below it, behind `showHeader` and `showFooter`; every string and destination was hardcoded, so an
-embedder took CEDAR's branding or nothing. An application renders its own headings and navigation
-around the element.
+The CEE draws no page chrome. An application renders its own headings and navigation around the
+element.
 
 What the CEE keeps is the CEDAR mark and the version stamp inside the form's own title block, which
 is a component naming itself rather than dressing someone else's page.

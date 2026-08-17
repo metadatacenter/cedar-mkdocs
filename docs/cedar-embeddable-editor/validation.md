@@ -46,9 +46,9 @@ saveButton.disabled = !cee.dataQualityReport.isValid;
 Recomputing it on every `change` event keeps the button honest as the user works. The report is
 computed locally and synchronously, so reading it costs nothing and requires no network.
 
-`showDownloadMenu` offers the report as a file, alongside the CEE's other views of the artifact. The
-CEE renders nothing beneath the form: an application that wants to show a user everything outstanding
-in one place builds that from `dataQualityReport` in its own chrome.
+`showDownloadMenu` offers the report as a file, alongside the CEE's other views of the artifact. An
+application that wants to show a user everything outstanding in one place builds that from
+`dataQualityReport` in its own chrome.
 
 ???+ note "A naming mismatch in older declarations"
 

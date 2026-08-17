@@ -83,9 +83,9 @@ its field types, its required markers, its repeating groups, and its term autoco
 asynchronously after its script runs, so for a short while the tag in the page is an ordinary
 unknown element. Await the definition before handing it anything.
 
-**`cee.config`** sets the editor's behavior. Every key is optional, and almost every application
-wants the four in the example: no sample-template picker, no raw source panels, and a
-terminology service for controlled fields. [Configuration](configuration.md) covers the rest.
+**`cee.config`** sets the editor's behavior. Every key is optional, and the two in the example are
+the two that have no default: the CEDAR servers the editor calls, which only the embedding
+application knows. [Configuration](configuration.md) covers the rest.
 
 **`cee.templateObject`** supplies the template, as a parsed object rather than as source text.
 That assignment triggers the render, so it goes last, with the configuration already in place

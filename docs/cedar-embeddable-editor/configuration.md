@@ -130,7 +130,7 @@ could only move them somewhere nothing answers.
 `showDownloadMenu` offers the instance and the template as JSON-LD, JSON Schema and YAML, plus the
 rendering data, the multi-instance information and the data quality report. Each file is named from
 the template, `AttributeValues-instance.yaml` rather than `instance.yaml`, so several open forms do
-not collide. Nothing is rendered beneath the form either way.
+not collide.
 
 A download is started by the page, and an application running under a restrictive sandbox can refuse
 one with no event to observe. The CEE traces each attempt through the event handler, so a developer
@@ -143,9 +143,8 @@ seeing the trace and no file knows where to look.
 | `readOnlyMode` | boolean | `false` | Present the metadata for reading, with no editing. |
 | `trustTemplateRichText` | boolean | `false` | Render a template author's rich text verbatim instead of sanitizing it. See [Security](security.md). |
 
-`readOnlyMode` is the only way in or out of read-only. The CEE once offered the user a switch of its
-own, writing to the same state the widgets read, so a form embedded as a viewer could be made
-editable from inside it.
+`readOnlyMode` is the only way in or out of read-only. Nothing inside the form can change it, so a
+form embedded as a viewer stays one.
 
 ### Language
 

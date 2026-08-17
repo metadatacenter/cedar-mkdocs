@@ -192,8 +192,8 @@ and returns a link:
 
 The red asterisk marks Sample ID as required. Cell Type, Organ, and Assay Type
 render as ontology-backed pickers, each inviting you to "Start typing to filter"
-its allowed terms. The panels at the bottom expose the very same template as
-JSON-LD and as JSON Schema, the standards-based forms CEDAR speaks natively.
+its allowed terms. Behind the form is the very same template as JSON-LD and as
+JSON Schema, the standards-based forms CEDAR speaks natively.
 
 ## Step 5: Save the Template
 
