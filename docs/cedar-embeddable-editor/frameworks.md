@@ -44,29 +44,45 @@ export class MetadataPageModule {}
 Then bind in the template. Square brackets produce property bindings, which the CEE accepts:
 
 ```html
-@if (template) {
+@for (artifact of artifacts; track artifact.key) {
   <cedar-embeddable-editor
+    #cee
     [config]="ceeConfig"
-    [templateObject]="template"
-    [instanceObject]="instance"
+    [templateObject]="artifact.template"
+    [instanceObject]="artifact.instance"
     (change)="onChange($event)"
   ></cedar-embeddable-editor>
 }
 ```
 
-The `@if` is not only about waiting for the data. It is what destroys and recreates the element when
-the block's condition goes false and true again, which is how a component that loads a second
-template gets a second editor instead of a refused assignment. Rendering the element unconditionally
-and letting the bindings deliver the template as it arrives works for one template and silently
-keeps the first one after that.
-
-Read the metadata back through a view reference:
+`artifacts` holds one entry, or none before anything is loaded, and `key` identifies the whole
+artifact — the template *and* the instance, since loading a different instance of the same template
+is a different artifact:
 
 ```typescript
-@ViewChild('cee') ceeRef!: ElementRef<CedarEmbeddableEditorElement>;
+artifacts: { key: string; template: object; instance?: object }[] = [];
+
+show(templateId: string, template: object, instanceId: string | null, instance?: object): void {
+  this.artifacts = [{ key: `${templateId}:${instanceId ?? 'new'}`, template, instance }];
+}
+```
+
+`@for` is doing what a `key` does in React: `track` is what tells Angular the entry is a different
+one, so the old element is destroyed and a new one created for it. `@if (template)` will not do this,
+and the reason is worth being precise about — it recreates the element when its condition goes false
+and true again, and going from one loaded template straight to another never makes the condition
+false. The element survives, the second assignment is refused as a second one, and the form goes on
+showing the first template with nothing in the interface to say so. An unconditional element has the
+same problem from the first template onwards.
+
+Read the metadata back through the view reference the `#cee` above declares. It resolves once an
+artifact has rendered, so a save button reachable before then has to tolerate `undefined`:
+
+```typescript
+@ViewChild('cee') ceeRef?: ElementRef<CedarEmbeddableEditorElement>;
 
 save(): void {
-  const instance = this.ceeRef.nativeElement.currentMetadata;
+  const instance = this.ceeRef?.nativeElement.currentMetadata;
   // ...
 }
 ```
@@ -135,11 +151,20 @@ The effect re-runs when the template or the instance changes, so the parent give
 effect assigns to an element with nothing set yet:
 
 ```jsx
-<MetadataEditor key={templateId} template={template} instance={instance} onReady={setEditor} />
+<MetadataEditor
+  key={`${templateId}:${instanceId ?? 'new'}`}
+  template={template}
+  instance={instance}
+  onReady={setEditor}
+/>
 ```
 
-Without the `key`, React keeps the same element across the change, the effect's assignments are
-refused, and the form goes on showing the previous template.
+The key has to identify the artifact and not just the template. Keyed on `templateId` alone, opening
+a second instance of the same template leaves the key unchanged: React keeps the element, the effect
+re-runs and has its assignment refused, and the form goes on showing the first instance. Editing two
+records described by one template is the ordinary case, so this is the version to copy.
+
+Without any `key`, the same thing happens for a change of template as well.
 
 The `onReady` callback hands the element back to the parent, which keeps `currentMetadata`
 reachable from a save button living elsewhere in the tree.
