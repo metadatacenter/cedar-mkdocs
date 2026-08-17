@@ -15,13 +15,15 @@ which can break it.
 objects, and an attribute binding stringifies whatever it is given. A stringified object will not
 render a form.
 
-**Give the element a new identity rather than new inputs.** Each input takes one assignment, as
-[Configuration](configuration.md#configuration-is-set-once) and
+**Give the element a new identity rather than new inputs.** Configuration and the artifact inputs
+take one assignment each, as [Configuration](configuration.md#configuration-is-set-once) and
 [Templates and Metadata](templates-and-metadata.md) describe. This needs attention in a framework,
 because a binding exists precisely to re-fire when the value behind it changes — and the CEE reports
 a second assignment and keeps the first. So a page that switches templates has to replace the
 element, which every framework already knows how to do: it is the same mechanism that gives a list
 item a stable identity. Each framework's own way of doing it is below.
+
+`eventHandler` is the one input a binding may re-fire safely: the last handler assigned receives.
 
 ## Angular
 

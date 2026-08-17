@@ -183,3 +183,9 @@ Both members are optional and the CEE calls only the ones present, so `{ error }
 handler and receives no traces. `error` carries the failures an application should surface: a
 template the CEE could not read, a value it discarded, a configuration key it cannot use. `trace`
 carries the running commentary, including which language maps loaded.
+
+Unlike the configuration and the artifact, the handler may be replaced: the last one assigned
+receives, and the CEE traces the swap so a page whose diagnostics stopped arriving can see why. What
+a handler cannot do is hear what came before it, so register it ahead of the configuration and the
+artifact when the diagnostics from those matter — by the time a handler assigned afterwards is
+installed, the CEE has already reported on the configuration it was given.
