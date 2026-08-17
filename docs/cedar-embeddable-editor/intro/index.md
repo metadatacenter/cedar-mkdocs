@@ -108,17 +108,33 @@ application reads whichever it wants without configuring anything.
 A browser and a template are all the CEE needs. It runs entirely in the page and does not require a
 CEDAR installation, a CEDAR account, or any CEDAR service to render a form and produce metadata.
 
-Two capabilities do reach the network, and both are optional:
+Four things can reach the network, and an application writing a content security policy or reviewing
+what leaves the page needs all four.
+
+The CEE contacts two CEDAR services. Each is optional, and neither has a default, so an application
+that configures neither makes no requests of its own:
 
 - **Term lookup.** A field constrained to an ontology, a branch, a class, or a value set offers
-  suggestions as the user types. Those come from a CEDAR terminology service, configured with a
-  single URL. Without it, the rest of the form works and controlled fields simply offer nothing.
+  suggestions as the user types. Those come from a CEDAR terminology service, named by
+  `terminologyBaseUrl`. Without it, the rest of the form works and controlled fields simply offer
+  nothing.
 - **External authority lookup.** ORCID, ROR, DOI, PubMed, RRID, NIH Grant and PFAS fields resolve
-  identifiers through the CEDAR bridge service, which is configured with a base URL and defaults to
-  CEDAR's production deployment.
+  identifiers through the CEDAR bridge service, named by `bridgeBaseUrl`. Without it, those fields
+  resolve nothing and the CEE says which key is missing.
+
+Two further sources of requests are worth knowing about, because neither is the application asking
+for a CEDAR service:
+
+- **A template.** A static image field makes the browser fetch the URL its author wrote, at whatever
+  origin that names, and a video field loads the player from `youtube.com`. Both tell that origin the
+  reader's address.
+- **`languageMapPathPrefix`.** Setting it sends the CEE looking for a language map instead of using
+  the ones compiled into the bundle. Left unset, no such request happens.
 
 Everything else — rendering, editing, repeating groups, constraint checking, serialization — happens
-locally.
+locally, and the CEE sends metadata nowhere.
+[Embedding Security](../security.md#requests-the-cee-makes) gives the full account, with the policy
+directives each kind of request needs.
 
 ## What the CEE Does Not Do
 

@@ -81,10 +81,13 @@ over markup the author composed.
 
 ## Requests the CEE Makes
 
-The CEE issues requests to the two servers it is configured with, and to nothing else. Neither
-`terminologyBaseUrl` nor `bridgeBaseUrl` has a default, so an application that sets neither makes no
-requests at all: a controlled-term field offers no terms, an external-authority field resolves no
-identifiers, and the CEE reports which key is missing the first time a field needs it.
+Requests come from three places: the two CEDAR servers the application configures, a language map it
+may point the CEE at, and the template itself. Only the first two are the application's to decide.
+
+Of the servers, neither `terminologyBaseUrl` nor `bridgeBaseUrl` has a default, so an application
+that sets neither has the CEE make no requests of its own: a controlled-term field offers no terms,
+an external-authority field resolves no identifiers, and the CEE reports which key is missing the
+first time a field needs it.
 
 `bridgeBaseUrl` had a default of CEDAR's production bridge, which meant an application deployed
 anywhere else sent its users' keystrokes to `bridge.metadatacenter.org` without asking and without
@@ -117,8 +120,13 @@ stylesheets travel inside the bundle rather than being fetched, so nothing has t
 
 A policy does have to allow the styles and the endpoints. The CEE installs its component styles as
 inline `<style>` elements, in the manner of any Angular application, so `style-src` must permit
-inline styles. The endpoints the CEE is configured with also have to appear in `connect-src`: in a
-default configuration that is the terminology service and the bridge, and nothing else.
+inline styles.
+
+`connect-src` has to name every origin the CEE fetches from, which is exactly what the application
+configured: the terminology service, the bridge, and the origin serving the language maps if
+`languageMapPathPrefix` points at another one. Configure none of the three and `connect-src` needs
+nothing for the CEE at all. There is no default to account for — a policy written against one would
+be naming an origin the CEE never contacts.
 
 Templates carrying static content need two more directives. An image field renders an `img`, so
 `img-src` has to cover the origins those templates point at, along with `data:` for an image
