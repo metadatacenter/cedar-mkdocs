@@ -1,8 +1,8 @@
-# Minimal and Full Serializations
+# Compact and Full Serializations
 
-The same artifact can be written in a minimal form or a full form. They differ in what each is
-for. The minimal form describes an artifact being authored; the full form represents one a
-repository has stored, and carries what the repository assigned to it.
+The same artifact can be written in a compact (minimal) form or a full form. The CEDAR user
+interfaces call the former **Compact YAML**. The compact form describes an artifact being authored;
+the full form represents one a repository has stored and carries what the repository assigned to it.
 
 ## What an Artifact Requires
 
@@ -67,23 +67,20 @@ An instance follows the same pattern. Authored minimally it needs only `type`, `
 `version`, `status`, and `modelVersion` belong to schema artifacts and do not appear on an
 instance.
 
-## The Minimal Form Does Not Name Its Artifact
+## The Minimal Form Carries No Schema-Artifact Identity
 
-A minimal document leaves out the `id` of the artifact it describes, and a reader refuses one that
-carries it. This is stricter than the other omissions, and for a reason: the rest of what the minimal
-form leaves out is filled in by the repository on save, while a property IRI is not. Read a minimal
-document that claims to be a stored template, convert it back, and each child would be bound to an IRI
-derived from its name instead of the one the stored template uses — the fields would keep their labels
-and change their meaning, with nothing to signal it.
+A minimal document leaves out the `id` of the artifact it describes and the repository-assigned `id`
+of every embedded field and element. It is an identity-free structural description, not a compressed
+representation of stored artifacts. A reader refuses a root `id`; for compatibility it can read older
+minimal documents containing child IDs, but canonical output does not reproduce them.
 
 So a minimal document describes something new. To represent a stored artifact, use the full form,
 which carries both the artifact's `id` and its children's `propertyIri`.
 
-Two kinds of IRI are unaffected, because neither identifies the document's own artifact:
+Semantic references are unaffected because they are data, not schema-artifact identity:
 
-- A **child's** `id`. An embedded element names the library element it was copied from, which exists.
-- A **reference** to another artifact — an instance's `isBasedOn`, and `derivedFrom` or
-  `previousVersion` on a schema artifact.
+- An instance's `isBasedOn`, which identifies the template the instance conforms to.
+- An `id` used as a link value or controlled-term value in an instance.
 
 One thing the form cannot express: renaming a child. A minimal document identifies children by key, so
 a renamed child reads as one child gone and another arrived, and the new one is given a fresh

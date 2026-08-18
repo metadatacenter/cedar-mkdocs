@@ -90,7 +90,8 @@ is equally valid, as long as it is a well-formed IRI.
 |-----|-------|----------|---------|
 | `id` | IRI | conditional | The artifact's own identifier. Present when the artifact has been assigned one. |
 
-A nested child is not required to have an `id`; when it does, it is preserved.
+A nested child is not required to have an `id`. Full serialization preserves one when present;
+minimal serialization omits repository-assigned schema-artifact IDs at every depth.
 
 ## Field Types
 
