@@ -38,6 +38,19 @@ id: https://repo.metadatacenter.org/template-instances/1f9a2b3
 isBasedOn: https://repo.metadatacenter.org/templates/7b8977e
 ```
 
+## Scalar Style
+
+Quoted and plain strings carry the same model value, and readers accept both. The canonical CEDAR
+writers use plain scalars only for structural values whose complete vocabulary CEDAR controls:
+`type`, `modelVersion`, `status`, `version`, `datatype`, `action`, `granularity`, `termType`, and
+`inputTimeFormat`. A value must also be a recognized member for that key; `version` and
+`modelVersion` must have the three-part form `N.N.N`.
+
+All other strings are double-quoted in canonical output, including names, descriptions, identifiers,
+IRIs, timestamps, and values supplied by an external vocabulary. The examples in this specification
+sometimes leave other safe strings plain to keep hand-authored YAML concise. That is valid input, but
+it is not a promise that a CEDAR writer will preserve the same scalar style.
+
 These four kinds fall into two families. A template, element, or field is a **schema
 artifact**, describing the shape that metadata must take. An instance is an **instance
 artifact**, holding metadata that conforms to a template. A few keys apply only to schema

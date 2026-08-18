@@ -14,6 +14,12 @@ To find your API key, log in to CEDAR at `cedar.metadatacenter.org`, click the p
 
 Templates, elements, fields, and instances all follow the CEDAR model. The [CEDAR Model YAML Specification](../yaml-spec/index.md) gives the full specification, and the [model overview](../yaml-spec/cedar-model.md) is a good place to start.
 
+The artifact routes accept and return both the native JSON representation and CEDAR YAML. JSON is
+the default. Request YAML with `Accept: application/yaml`, and send it with
+`Content-Type: application/yaml`; `application/x-yaml` is also recognized. This applies to
+templates, elements, fields, and instances on `GET`, `POST`, and `PUT`. A template-instance request
+with an explicit `format` query parameter uses that format instead of content negotiation.
+
 You can inspect any resource without going through the REST APIs: open it in the CEDAR Workbench and click the circle icons at the top right of the screen. The left-hand icon shows the template, the right-hand icon shows the instance.
 
 ### Creating Templates, Elements, and Fields
@@ -71,6 +77,15 @@ curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>"
 
 Here `resource.json` holds the template, element, or instance to create, and `<resourceType>` is `templates`, `template-elements`, or `template-instances`.
 
+The same create call can send a YAML artifact directly:
+
+```bash
+curl -H "Content-Type: application/yaml" -H "Accept: application/yaml" \
+     -H "Authorization: apiKey <yourApiKey>" \
+     -X POST --data-binary @resource.yaml \
+     "https://resource.metadatacenter.org/<resourceType>?folder_id=<folderId>"
+```
+
 ### Validating Templates, Elements, Fields, and Instances
 
 Validate a resource before creating it. The `command/validate` route validates all four resource types; the `resource_type` parameter names the type as `template`, `element`, `field`, or `instance`.
@@ -80,6 +95,8 @@ curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>"
      -X POST --data-binary @MyTemplate.json \
      "https://resource.metadatacenter.org/command/validate?resource_type=template"
 ```
+
+Validation also accepts a YAML body when its `Content-Type` is `application/yaml`.
 
 ### Uploading Instances
 
