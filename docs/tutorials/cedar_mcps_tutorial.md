@@ -197,7 +197,8 @@ and returns a link:
 The red asterisk marks Sample ID as required. Cell Type, Organ, and Assay Type
 render as ontology-backed pickers, each inviting you to "Start typing to filter"
 its allowed terms. Behind the form is the very same template as JSON-LD and as
-JSON Schema, the standards-based forms CEDAR speaks natively.
+JSON Schema, the standards-based forms CEDAR speaks natively; the download control
+in the toolbar hands you either one.
 
 ## Step 5: Save the Template
 
@@ -260,10 +261,10 @@ Preview it the same way, with `show_instance`:
 
 ![The filled Tissue Sample instance, rendered by the CEDAR embeddable editor](../img/tutorials/mcps-tutorial-instance.png)
 
-Each controlled value carries a BioPortal badge and shows its IRI. That is the
-whole point. The instance stores *hepatocyte* as `CL_0000182`, not as the loose
-word "hepatocyte", so the value means the same thing to every reader and every
-program that encounters it.
+Each controlled value shows its label beside the IRI it stands for, and links out to the term.
+That is the whole point. The instance stores *hepatocyte* as `CL_0000182`, not as the loose word
+"hepatocyte", so the value means the same thing to every reader and every program that encounters
+it.
 
 ## Save the Instance
 
