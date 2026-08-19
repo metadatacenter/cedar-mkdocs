@@ -8,12 +8,12 @@ The options are listed under `values`. Each has a `label`, and one may be marked
 as the default.
 
 ```yaml
-- key: vaccine
+- key: "vaccine"
   type: single-select-list-field
-  name: Vaccine
+  name: "Vaccine"
   values:
-  - label: Moderna
-  - label: Pfizer
-  - label: None
+  - label: "Moderna"
+  - label: "Pfizer"
+  - label: "None"
     selected: true
 ```

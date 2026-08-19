@@ -29,10 +29,10 @@ label from `name` and carry no `content`.
 | `content` | string | optional | The formatted text, image URL, or video URL to display. |
 
 ```yaml
-- key: intro
+- key: "intro"
   type: static-rich-text
-  name: Introduction
-  content: <p>Please complete <strong>all</strong> fields.</p>
+  name: "Introduction"
+  content: "<p>Please complete <strong>all</strong> fields.</p>"
 ```
 
 ## Image and Video Size
@@ -47,10 +47,10 @@ field uses these keys.
 | `height` | integer | optional | Display height, in pixels. |
 
 ```yaml
-- key: logo
+- key: "logo"
   type: static-image
-  name: Project Logo
-  content: https://example.org/logo.png
+  name: "Project Logo"
+  content: "https://example.org/logo.png"
   width: 300
   height: 120
 ```

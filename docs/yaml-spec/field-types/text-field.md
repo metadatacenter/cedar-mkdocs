@@ -18,14 +18,14 @@ a `configuration` block for its parent-relative settings, such as `required` and
 `propertyIri`; see [Fields: Core Structure](../fields-core.md).
 
 ```yaml
-- key: study-id
+- key: "study-id"
   type: text-field
-  name: Study ID
+  name: "Study ID"
   minLength: 2
   maxLength: 10
   configuration:
     required: true
-    propertyIri: https://schema.org/identifier
+    propertyIri: "https://schema.org/identifier"
 ```
 
 A text field may also restrict its value to a fixed list of literals, turning it into a
@@ -33,11 +33,11 @@ chooser among preset strings. Each entry has a `label`, and one may be marked `s
 the default.
 
 ```yaml
-- key: phase
+- key: "phase"
   type: text-field
-  name: Phase
+  name: "Phase"
   values:
-  - label: Phase I
+  - label: "Phase I"
     selected: true
-  - label: Phase II
+  - label: "Phase II"
 ```

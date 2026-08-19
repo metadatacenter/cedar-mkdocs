@@ -9,8 +9,8 @@ is `link-field`.
 | `default` | IRI | optional | A default IRI. |
 
 ```yaml
-- key: homepage
+- key: "homepage"
   type: link-field
-  name: Institution Home Page
-  default: https://stanford.edu
+  name: "Institution Home Page"
+  default: "https://stanford.edu"
 ```

@@ -16,9 +16,9 @@ records a unit of measure shown alongside the value, written as a free-text labe
 | `default` | number | optional | Default value. |
 
 ```yaml
-- key: completed
+- key: "completed"
   type: numeric-field
-  name: Treatment Completed %
+  name: "Treatment Completed %"
   datatype: xsd:int
   minValue: 0
   maxValue: 100

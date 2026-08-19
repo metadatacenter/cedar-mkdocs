@@ -36,16 +36,16 @@ The ontology's backend address is not an authored key: it is reconstructed from 
 converted to a CEDAR JSON Schema.
 
 ```yaml
-- key: cell-type
+- key: "cell-type"
   type: controlled-term-field
-  name: Cell Type
+  name: "Cell Type"
   datatype: iri
   values:
   - type: ontology
-    sourceSystem: bioportal
-    sourceAcronym: CL
-    sourceName: Cell Ontology
-    sourceIri: http://purl.obolibrary.org/obo/cl
+    sourceSystem: "bioportal"
+    sourceAcronym: "CL"
+    sourceName: "Cell Ontology"
+    sourceIri: "http://purl.obolibrary.org/obo/cl"
 ```
 
 ### A Branch of an Ontology
@@ -65,18 +65,18 @@ branch of Uberon, so the value must be an organ.
 | `termMaxDepth` | integer | How many levels below the root to include; `0` for unlimited. |
 
 ```yaml
-- key: organ
+- key: "organ"
   type: controlled-term-field
-  name: Organ
+  name: "Organ"
   datatype: iri
   values:
   - type: branch
-    sourceSystem: bioportal
-    sourceAcronym: UBERON
-    sourceName: Uber Anatomy Ontology
-    sourceIri: http://purl.obolibrary.org/obo/uberon
-    termBaseIri: http://purl.obolibrary.org/obo/UBERON_0000062
-    termBaseLabel: organ
+    sourceSystem: "bioportal"
+    sourceAcronym: "UBERON"
+    sourceName: "Uber Anatomy Ontology"
+    sourceIri: "http://purl.obolibrary.org/obo/uberon"
+    termBaseIri: "http://purl.obolibrary.org/obo/UBERON_0000062"
+    termBaseLabel: "organ"
     termMaxDepth: 0
 ```
 
@@ -102,32 +102,32 @@ label.
 | `termDisplayLabel` | string | What this field calls the term instead; omitted when it matches `termLabel`. |
 
 ```yaml
-- key: assay-type
+- key: "assay-type"
   type: controlled-term-field
-  name: Assay Type
+  name: "Assay Type"
   datatype: iri
   values:
   - type: class
-    sourceSystem: bioportal
-    sourceAcronym: OBI
-    sourceIri: http://purl.obolibrary.org/obo/obi
-    termIri: http://purl.obolibrary.org/obo/OBI_0002564
+    sourceSystem: "bioportal"
+    sourceAcronym: "OBI"
+    sourceIri: "http://purl.obolibrary.org/obo/obi"
+    termIri: "http://purl.obolibrary.org/obo/OBI_0002564"
     termType: class
-    termLabel: histopathology assay
+    termLabel: "histopathology assay"
   - type: class
-    sourceSystem: bioportal
-    sourceAcronym: OBI
-    sourceIri: http://purl.obolibrary.org/obo/obi
-    termIri: http://purl.obolibrary.org/obo/OBI_0000185
+    sourceSystem: "bioportal"
+    sourceAcronym: "OBI"
+    sourceIri: "http://purl.obolibrary.org/obo/obi"
+    termIri: "http://purl.obolibrary.org/obo/OBI_0000185"
     termType: class
-    termLabel: imaging assay
+    termLabel: "imaging assay"
   - type: class
-    sourceSystem: bioportal
-    sourceAcronym: OBI
-    sourceIri: http://purl.obolibrary.org/obo/obi
-    termIri: http://purl.obolibrary.org/obo/OBI_0002119
+    sourceSystem: "bioportal"
+    sourceAcronym: "OBI"
+    sourceIri: "http://purl.obolibrary.org/obo/obi"
+    termIri: "http://purl.obolibrary.org/obo/OBI_0002119"
     termType: class
-    termLabel: microscopy assay
+    termLabel: "microscopy assay"
 ```
 
 Here the same field renames one of its terms for the people filling it in, while the term itself is
@@ -135,11 +135,11 @@ unchanged:
 
 ```yaml
   - type: class
-    sourceAcronym: OBI
-    termIri: http://purl.obolibrary.org/obo/OBI_0002564
+    sourceAcronym: "OBI"
+    termIri: "http://purl.obolibrary.org/obo/OBI_0002564"
     termType: class
-    termLabel: histopathology assay
-    termDisplayLabel: Histopathology
+    termLabel: "histopathology assay"
+    termDisplayLabel: "Histopathology"
 ```
 
 ### A Value Set
@@ -157,16 +157,16 @@ class* value set from HRAVS.
 | `termCount` | integer | Number of terms, when known. |
 
 ```yaml
-- key: analyte-class
+- key: "analyte-class"
   type: controlled-term-field
-  name: Analyte Class
+  name: "Analyte Class"
   datatype: iri
   values:
   - type: valueSet
-    sourceSystem: bioportal
-    sourceAcronym: HRAVS
-    termBaseIri: https://purl.humanatlas.io/vocab/hravs#HRAVS_1000371
-    termBaseLabel: Analyte class
+    sourceSystem: "bioportal"
+    sourceAcronym: "HRAVS"
+    termBaseIri: "https://purl.humanatlas.io/vocab/hravs#HRAVS_1000371"
+    termBaseLabel: "Analyte class"
 ```
 
 ## Pinning a Version
@@ -196,31 +196,31 @@ one `values` entry with a `version` added; the surrounding field is unchanged fr
 
 ```yaml
 - type: ontology
-  sourceSystem: bioportal
-  sourceAcronym: CL
-  sourceName: Cell Ontology
-  sourceIri: http://purl.obolibrary.org/obo/cl
+  sourceSystem: "bioportal"
+  sourceAcronym: "CL"
+  sourceName: "Cell Ontology"
+  sourceIri: "http://purl.obolibrary.org/obo/cl"
   version:
-    id: a1b2c3d4e5f6
-    effectiveDate: 2026-06-15
-    declaredVersion: 2026-06-15
+    id: "a1b2c3d4e5f6"
+    effectiveDate: "2026-06-15"
+    declaredVersion: "2026-06-15"
 ```
 
 ### A Branch, Pinned
 
 ```yaml
 - type: branch
-  sourceSystem: bioportal
-  sourceAcronym: UBERON
-  sourceName: Uber Anatomy Ontology
-  sourceIri: http://purl.obolibrary.org/obo/uberon
-  termBaseIri: http://purl.obolibrary.org/obo/UBERON_0000062
-  termBaseLabel: organ
+  sourceSystem: "bioportal"
+  sourceAcronym: "UBERON"
+  sourceName: "Uber Anatomy Ontology"
+  sourceIri: "http://purl.obolibrary.org/obo/uberon"
+  termBaseIri: "http://purl.obolibrary.org/obo/UBERON_0000062"
+  termBaseLabel: "organ"
   termMaxDepth: 0
   version:
-    id: 7a8b9c0d1e2f
-    effectiveDate: 2026-05-30
-    declaredVersion: 2026-05-01
+    id: "7a8b9c0d1e2f"
+    effectiveDate: "2026-05-30"
+    declaredVersion: "2026-05-01"
 ```
 
 ### Individual Classes, Pinned
@@ -229,29 +229,29 @@ Each class entry pins independently, so a field can mix terms from different ver
 
 ```yaml
 - type: class
-  sourceSystem: bioportal
-  sourceAcronym: OBI
-  sourceIri: http://purl.obolibrary.org/obo/obi
-  termIri: http://purl.obolibrary.org/obo/OBI_0002564
+  sourceSystem: "bioportal"
+  sourceAcronym: "OBI"
+  sourceIri: "http://purl.obolibrary.org/obo/obi"
+  termIri: "http://purl.obolibrary.org/obo/OBI_0002564"
   termType: class
-  termLabel: histopathology assay
+  termLabel: "histopathology assay"
   version:
-    id: 3c4d5e6f7a8b
-    effectiveDate: 2026-04-20
-    declaredVersion: 2026-04-20
+    id: "3c4d5e6f7a8b"
+    effectiveDate: "2026-04-20"
+    declaredVersion: "2026-04-20"
 ```
 
 ### A Value Set, Pinned
 
 ```yaml
 - type: valueSet
-  sourceSystem: bioportal
-  sourceAcronym: HRAVS
-  termBaseIri: https://purl.humanatlas.io/vocab/hravs#HRAVS_1000371
-  termBaseLabel: Analyte class
+  sourceSystem: "bioportal"
+  sourceAcronym: "HRAVS"
+  termBaseIri: "https://purl.humanatlas.io/vocab/hravs#HRAVS_1000371"
+  termBaseLabel: "Analyte class"
   version:
-    id: 9e0f1a2b3c4d
-    effectiveDate: 2026-03-10
+    id: "9e0f1a2b3c4d"
+    effectiveDate: "2026-03-10"
     declaredVersion: "2.3"
 ```
 
@@ -269,25 +269,25 @@ one ontology plus a couple of named anatomical structures from another. The orde
 the initial order of the merged list, which [`actions`](#actions) can then refine.
 
 ```yaml
-- key: sample-type
+- key: "sample-type"
   type: controlled-term-field
-  name: Sample Type
+  name: "Sample Type"
   datatype: iri
   values:
   - type: ontology
-    sourceAcronym: CL
-    sourceName: Cell Ontology
-    sourceIri: http://purl.obolibrary.org/obo/cl
+    sourceAcronym: "CL"
+    sourceName: "Cell Ontology"
+    sourceIri: "http://purl.obolibrary.org/obo/cl"
   - type: class
-    sourceAcronym: UBERON
-    termIri: http://purl.obolibrary.org/obo/UBERON_0000178
+    sourceAcronym: "UBERON"
+    termIri: "http://purl.obolibrary.org/obo/UBERON_0000178"
     termType: class
-    termLabel: blood
+    termLabel: "blood"
   - type: class
-    sourceAcronym: UBERON
-    termIri: http://purl.obolibrary.org/obo/UBERON_0002481
+    sourceAcronym: "UBERON"
+    termIri: "http://purl.obolibrary.org/obo/UBERON_0002481"
     termType: class
-    termLabel: bone tissue
+    termLabel: "bone tissue"
 ```
 
 Here a **Sample Type** field permits any cell type (all of the Cell Ontology) plus the two named
@@ -315,22 +315,22 @@ stands alone. Shown alongside `values` on an **Assay** field bound to the OBI *a
 one class:
 
 ```yaml
-- key: assay
+- key: "assay"
   type: controlled-term-field
-  name: Assay
+  name: "Assay"
   datatype: iri
   values:
   - type: branch
-    sourceAcronym: OBI
-    sourceName: Ontology for Biomedical Investigations
-    termBaseIri: http://purl.obolibrary.org/obo/OBI_0000070
-    termBaseLabel: assay
+    sourceAcronym: "OBI"
+    sourceName: "Ontology for Biomedical Investigations"
+    termBaseIri: "http://purl.obolibrary.org/obo/OBI_0000070"
+    termBaseLabel: "assay"
     termMaxDepth: 0
   actions:
   - action: delete
-    termIri: http://purl.obolibrary.org/obo/OBI_0000185
-    sourceIri: https://data.bioontology.org/ontologies/OBI
-    sourceAcronym: OBI
+    termIri: "http://purl.obolibrary.org/obo/OBI_0000185"
+    sourceIri: "https://data.bioontology.org/ontologies/OBI"
+    sourceAcronym: "OBI"
     type: class
 ```
 
@@ -345,8 +345,8 @@ A controlled-term default names a term by IRI and its label.
 
 ```yaml
   default:
-    value: http://purl.obolibrary.org/obo/UBERON_0002107
-    label: liver
+    value: "http://purl.obolibrary.org/obo/UBERON_0002107"
+    label: "liver"
 ```
 
 ## Coming from the Older Keys

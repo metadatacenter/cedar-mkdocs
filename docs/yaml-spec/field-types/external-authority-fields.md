@@ -20,8 +20,8 @@ Each takes an optional `default` holding an IRI.
 | `default` | IRI | optional | A default identifier IRI. |
 
 ```yaml
-- key: institution
+- key: "institution"
   type: ext-ror-field
-  name: Institution
-  default: https://ror.org/00f54p054
+  name: "Institution"
+  default: "https://ror.org/00f54p054"
 ```

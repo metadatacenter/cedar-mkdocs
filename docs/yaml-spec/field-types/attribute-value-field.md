@@ -9,9 +9,9 @@ The definition takes no type-specific keys, since the attribute names are not kn
 instance is filled in.
 
 ```yaml
-- key: extra-attributes
+- key: "extra-attributes"
   type: attribute-value-field
-  name: Additional Characteristics
+  name: "Additional Characteristics"
 ```
 
 ## In an Instance
@@ -24,16 +24,16 @@ the template.
 
 ```yaml
 type: instance
-name: SDY232
-isBasedOn: https://repo.metadatacenter.org/templates/ec3f500
+name: "SDY232"
+isBasedOn: "https://repo.metadatacenter.org/templates/ec3f500"
 children:
   study-name:
-    value: Cardiology cohort
+    value: "Cardiology cohort"
 extra-attributes:
   Batch Number:
     value: "3"
   Freezer ID:
-    value: F-12
+    value: "F-12"
 ```
 
 A parent may hold more than one attribute-value field. Each appears as its own top-level key,
@@ -45,7 +45,7 @@ extra-attributes:
     value: "3"
 storage-details:
   Freezer ID:
-    value: F-12
+    value: "F-12"
   Shelf:
     value: "4"
 ```

@@ -9,10 +9,10 @@ not versioned. It points instead to the template it was built from, with `isBase
 
 ```yaml
 type: template
-name: Study
+name: "Study"
 status: published
 version: 2.0.0
-previousVersion: https://repo.metadatacenter.org/templates/7b8977e
+previousVersion: "https://repo.metadatacenter.org/templates/7b8977e"
 ```
 
 ## Status

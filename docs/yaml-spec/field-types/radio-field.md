@@ -8,11 +8,11 @@ The options are listed under `values`. Each has a `label`, and one may be marked
 as the default.
 
 ```yaml
-- key: handedness
+- key: "handedness"
   type: radio-field
-  name: Handedness
+  name: "Handedness"
   values:
-  - label: Left
-  - label: Right
+  - label: "Left"
+  - label: "Right"
     selected: true
 ```

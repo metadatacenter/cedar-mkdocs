@@ -6,14 +6,14 @@ fields listed under `children`:
 
 ```yaml
 type: template
-name: Study
+name: "Study"
 children:
-- key: study-name
+- key: "study-name"
   type: text-field
-  name: Study Name
-- key: address
+  name: "Study Name"
+- key: "address"
   type: element
-  name: Address
+  name: "Address"
 ```
 
 Each entry in `children` is a field or element, told apart by its own `type`. Its `key` is

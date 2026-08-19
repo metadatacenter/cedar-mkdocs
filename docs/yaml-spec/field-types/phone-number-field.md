@@ -5,7 +5,7 @@ type alone marks the value as a phone number, distinguishing it from ordinary te
 its `type` is `phone-number-field`.
 
 ```yaml
-- key: contact-phone
+- key: "contact-phone"
   type: phone-number-field
-  name: Contact Phone
+  name: "Contact Phone"
 ```

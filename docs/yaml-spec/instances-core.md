@@ -7,13 +7,13 @@ template assigns each child, not its display name.
 
 ```yaml
 type: instance
-name: SDY232
-description: Metadata for the SDY232 cardiology study
-id: https://repo.metadatacenter.org/template-instances/1f9a2b3
-isBasedOn: https://repo.metadatacenter.org/templates/ec3f500
+name: "SDY232"
+description: "Metadata for the SDY232 cardiology study"
+id: "https://repo.metadatacenter.org/template-instances/1f9a2b3"
+isBasedOn: "https://repo.metadatacenter.org/templates/ec3f500"
 children:
   study-name:
-    value: Cardiology cohort
+    value: "Cardiology cohort"
 ```
 
 ## Field Values
@@ -24,17 +24,17 @@ just `value`. A typed literal adds `datatype`. A controlled term carries `id` wi
 
 ```yaml
 type: instance
-name: SDY232
-isBasedOn: https://repo.metadatacenter.org/templates/ec3f500
+name: "SDY232"
+isBasedOn: "https://repo.metadatacenter.org/templates/ec3f500"
 children:
   study-name:
-    value: Cardiology cohort
+    value: "Cardiology cohort"
   participants:
-    value: 2323
+    value: "2323"
     datatype: xsd:int
   disease:
-    id: http://purl.obolibrary.org/obo/DOID_530
-    label: eyelid disease
+    id: "http://purl.obolibrary.org/obo/DOID_530"
+    label: "eyelid disease"
 ```
 
 A field with no value is omitted from `children` entirely.
@@ -46,10 +46,10 @@ accession within the vocabulary.
 
 ```yaml
   disease:
-    id: http://purl.obolibrary.org/obo/DOID_530
-    label: eyelid disease
-    prefLabel: eyelid disease
-    notation: DOID:530
+    id: "http://purl.obolibrary.org/obo/DOID_530"
+    label: "eyelid disease"
+    prefLabel: "eyelid disease"
+    notation: "DOID:530"
 ```
 
 ## Multiple Values
@@ -60,8 +60,8 @@ shape it would have as a single value. For a plain literal field, each entry car
 
 ```yaml
   keywords:
-  - value: genomics
-  - value: oncology
+  - value: "genomics"
+  - value: "oncology"
 ```
 
 A controlled-term field behaves the same way. Each entry is a full controlled term, carrying
@@ -69,10 +69,10 @@ its `id` and `label`.
 
 ```yaml
   conditions:
-  - id: http://purl.obolibrary.org/obo/DOID_2841
-    label: asthma
-  - id: http://purl.obolibrary.org/obo/DOID_10763
-    label: hypertension
+  - id: "http://purl.obolibrary.org/obo/DOID_2841"
+    label: "asthma"
+  - id: "http://purl.obolibrary.org/obo/DOID_10763"
+    label: "hypertension"
 ```
 
 ## Nested Elements
@@ -85,16 +85,16 @@ level. A repeating element holds a list of such entries.
   address:
     children:
       street:
-        value: 450 Serra Mall
+        value: "450 Serra Mall"
       city:
-        value: Stanford
+        value: "Stanford"
   contributors:
   - children:
       full-name:
-        value: Ada Lovelace
+        value: "Ada Lovelace"
   - children:
       full-name:
-        value: Alan Turing
+        value: "Alan Turing"
 ```
 
 ## Standalone Element Instances
@@ -105,10 +105,10 @@ element value, plus the `type` discriminator that lets it stand alone.
 
 ```yaml
 type: element-instance
-name: Address
+name: "Address"
 children:
   street:
-    value: 450 Serra Mall
+    value: "450 Serra Mall"
   city:
-    value: Stanford
+    value: "Stanford"
 ```

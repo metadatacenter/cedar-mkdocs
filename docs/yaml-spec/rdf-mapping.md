@@ -29,32 +29,32 @@ declares an `instanceType` for itself and its element, and a `propertyIri` for e
 
 ```yaml
 type: template
-name: Study
-instanceType: https://schema.org/MedicalStudy
+name: "Study"
+instanceType: "https://schema.org/MedicalStudy"
 children:
-- key: study-name
+- key: "study-name"
   type: text-field
-  name: Study Name
+  name: "Study Name"
   configuration:
-    propertyIri: https://schema.org/name
-- key: condition
+    propertyIri: "https://schema.org/name"
+- key: "condition"
   type: controlled-term-field
-  name: Condition
+  name: "Condition"
   datatype: iri
   configuration:
-    propertyIri: https://schema.org/healthCondition
-- key: contributor
+    propertyIri: "https://schema.org/healthCondition"
+- key: "contributor"
   type: element
-  name: Contributor
-  instanceType: https://schema.org/Person
+  name: "Contributor"
+  instanceType: "https://schema.org/Person"
   configuration:
-    propertyIri: https://schema.org/contributor
+    propertyIri: "https://schema.org/contributor"
   children:
-  - key: full-name
+  - key: "full-name"
     type: text-field
-    name: Full Name
+    name: "Full Name"
     configuration:
-      propertyIri: https://schema.org/name
+      propertyIri: "https://schema.org/name"
 ```
 
 ## An Instance
@@ -64,19 +64,19 @@ its own. Those come from the template it is based on.
 
 ```yaml
 type: instance
-name: SDY232
-id: https://repo.metadatacenter.org/template-instances/1f9a2b3
-isBasedOn: https://repo.metadatacenter.org/templates/7b8977e
+name: "SDY232"
+id: "https://repo.metadatacenter.org/template-instances/1f9a2b3"
+isBasedOn: "https://repo.metadatacenter.org/templates/7b8977e"
 children:
   study-name:
-    value: Immune biomarkers study
+    value: "Immune biomarkers study"
   condition:
-    id: http://purl.obolibrary.org/obo/DOID_2841
-    label: asthma
+    id: "http://purl.obolibrary.org/obo/DOID_2841"
+    label: "asthma"
   contributor:
     children:
       full-name:
-        value: Ada Lovelace
+        value: "Ada Lovelace"
 ```
 
 ## The Resulting Graph

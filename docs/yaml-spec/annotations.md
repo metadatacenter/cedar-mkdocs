@@ -9,7 +9,7 @@ annotations:
   https://schema.org/version:
     value: "2"
   https://datacite.com/doi:
-    id: https://doi.org/10.60745/kys3-pa43
+    id: "https://doi.org/10.60745/kys3-pa43"
 ```
 
 Under `annotations`, each annotation name is paired with its value. A value is either a

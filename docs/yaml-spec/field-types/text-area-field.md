@@ -12,8 +12,8 @@ and validate the entry. In YAML its `type` is `text-area-field`.
 | `default` | string | optional | Default value. |
 
 ```yaml
-- key: summary
+- key: "summary"
   type: text-area-field
-  name: Summary
+  name: "Summary"
   maxLength: 1000
 ```

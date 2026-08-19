@@ -9,12 +9,12 @@ The options are listed under `values`. Each has a `label`, and any number may be
 `multiple` in its `configuration`.
 
 ```yaml
-- key: symptoms
+- key: "symptoms"
   type: checkbox-field
-  name: Symptoms
+  name: "Symptoms"
   values:
-  - label: Fever
-  - label: Cough
+  - label: "Fever"
+  - label: "Cough"
     selected: true
-  - label: Fatigue
+  - label: "Fatigue"
 ```

@@ -6,11 +6,11 @@ it is stored or exchanged. Both schema artifacts and instances carry it.
 
 ```yaml
 type: template
-name: Study
+name: "Study"
 createdOn: '2022-11-30T13:12:40-08:00'
-createdBy: https://metadatacenter.org/users/6d21a88
+createdBy: "https://metadatacenter.org/users/6d21a88"
 modifiedOn: '2022-12-01T14:25:30-08:00'
-modifiedBy: https://metadatacenter.org/users/6d21a88
+modifiedBy: "https://metadatacenter.org/users/6d21a88"
 ```
 
 ## Creation and Modification

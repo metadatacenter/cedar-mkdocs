@@ -5,9 +5,9 @@ keys give the artifact's type, name, description, and identity:
 
 ```yaml
 type: text-field
-name: Study Name
-description: The name of the study
-id: https://repo.metadatacenter.org/template-fields/5c2d54c
+name: "Study Name"
+description: "The name of the study"
+id: "https://repo.metadatacenter.org/template-fields/5c2d54c"
 ```
 
 Every artifact begins this way, differing only in its `type` and in the content it carries.
@@ -15,27 +15,27 @@ A template:
 
 ```yaml
 type: template
-name: Study
-description: A clinical study
-id: https://repo.metadatacenter.org/templates/7b8977e
+name: "Study"
+description: "A clinical study"
+id: "https://repo.metadatacenter.org/templates/7b8977e"
 ```
 
 Or an element:
 
 ```yaml
 type: element
-name: Address
-description: A postal address
-id: https://repo.metadatacenter.org/template-elements/be89d73
+name: "Address"
+description: "A postal address"
+id: "https://repo.metadatacenter.org/template-elements/be89d73"
 ```
 
 An instance opens the same way, and additionally identifies the template it conforms to:
 
 ```yaml
 type: instance
-name: SDY232
-id: https://repo.metadatacenter.org/template-instances/1f9a2b3
-isBasedOn: https://repo.metadatacenter.org/templates/7b8977e
+name: "SDY232"
+id: "https://repo.metadatacenter.org/template-instances/1f9a2b3"
+isBasedOn: "https://repo.metadatacenter.org/templates/7b8977e"
 ```
 
 ## Scalar Style
@@ -47,9 +47,8 @@ writers use plain scalars only for structural values whose complete vocabulary C
 `modelVersion` must have the three-part form `N.N.N`.
 
 All other strings are double-quoted in canonical output, including names, descriptions, identifiers,
-IRIs, timestamps, and values supplied by an external vocabulary. The examples in this specification
-sometimes leave other safe strings plain to keep hand-authored YAML concise. That is valid input, but
-it is not a promise that a CEDAR writer will preserve the same scalar style.
+IRIs, timestamps, and values supplied by an external vocabulary. The examples throughout this
+specification are written in that style, so what they show is what a CEDAR writer emits.
 
 These four kinds fall into two families. A template, element, or field is a **schema
 artifact**, describing the shape that metadata must take. An instance is an **instance

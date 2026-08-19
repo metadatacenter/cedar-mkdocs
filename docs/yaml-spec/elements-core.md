@@ -5,18 +5,18 @@ YAML it is written with `type: element`, its members listed under `children`:
 
 ```yaml
 type: element
-name: Address
+name: "Address"
 children:
-- key: street
+- key: "street"
   type: text-field
-  name: Street
-- key: country
+  name: "Street"
+- key: "country"
   type: element
-  name: Country
+  name: "Country"
   children:
-  - key: country-name
+  - key: "country-name"
     type: text-field
-    name: Country Name
+    name: "Country Name"
 ```
 
 An element's `children` may hold elements and fields. Because an element can itself hold
@@ -69,17 +69,17 @@ for this placement, without changing the element itself.
 | `overrideDescription` | string | A display description for this element in this parent. |
 
 ```yaml
-- key: address
+- key: "address"
   type: element
-  name: Address
+  name: "Address"
   configuration:
     multiple: true
     minItems: 0
     maxItems: 4
-    overrideLabel: Postal Address
-    overrideDescription: The mailing address for this site
+    overrideLabel: "Postal Address"
+    overrideDescription: "The mailing address for this site"
   children:
-  - key: street
+  - key: "street"
     type: text-field
-    name: Street
+    name: "Street"
 ```

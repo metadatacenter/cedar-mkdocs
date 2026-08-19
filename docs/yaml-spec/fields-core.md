@@ -11,9 +11,9 @@ A field placed inside a template or element carries a `configuration` block. Its
 depend on where the field sits, not on the field's own type. The most common is `required`.
 
 ```yaml
-- key: study-name
+- key: "study-name"
   type: text-field
-  name: Study Name
+  name: "Study Name"
   configuration:
     required: true
 ```

@@ -41,7 +41,8 @@ The MCPs are:
 - **CEDAR embeddable-editor server**: renders a template or an instance as a form
   in your browser, so you can see what the YAML actually produces.
 - **CEDAR REST server**: uploads and manages artifacts on a CEDAR server, so you
-  can keep and share what you built.
+  can keep and share what you built. It sends the same YAML you have been reading:
+  CEDAR reads and writes YAML as well as JSON, so nothing is converted on the way.
 
 Setup instructions are in the [Appendix](#appendix-configuring-the-mcp-servers).
 
@@ -116,68 +117,71 @@ a well-formed CEDAR template, rendered as YAML:
 
 ```yaml
 type: template
-name: Tissue Sample
-description: A tissue-sample record whose fields are constrained to ontology terms.
+name: "Tissue Sample"
+description: "A tissue-sample record whose fields are constrained to ontology terms."
 children:
-  - key: sample-id
+  - key: "sample-id"
     type: text-field
-    name: Sample ID
-    description: Local identifier for this tissue sample
+    name: "Sample ID"
+    description: "Local identifier for this tissue sample"
     configuration:
       required: true
-  - key: lab-id
+  - key: "lab-id"
     type: text-field
-    name: Lab ID
-    description: Identifier of the lab that produced the sample
-  - key: cell-type
+    name: "Lab ID"
+    description: "Identifier of the lab that produced the sample"
+  - key: "cell-type"
     type: controlled-term-field
-    name: Cell Type
+    name: "Cell Type"
     description: "The cell type, from the Cell Ontology"
     datatype: iri
     values:
       - type: ontology
-        sourceAcronym: CL
-        sourceName: Cell Ontology
-        sourceIri: http://purl.obolibrary.org/obo/cl
-  - key: organ
+        sourceAcronym: "CL"
+        sourceName: "Cell Ontology"
+        sourceIri: "http://purl.obolibrary.org/obo/cl"
+  - key: "organ"
     type: controlled-term-field
-    name: Organ
+    name: "Organ"
     description: "The organ the sample came from, from Uberon"
     datatype: iri
     values:
       - type: branch
-        sourceAcronym: UBERON
-        sourceName: Uber Anatomy Ontology
-        termBaseIri: http://purl.obolibrary.org/obo/UBERON_0000062
-        termBaseLabel: organ
+        sourceAcronym: "UBERON"
+        sourceName: "Uber Anatomy Ontology"
+        termBaseIri: "http://purl.obolibrary.org/obo/UBERON_0000062"
+        termBaseLabel: "organ"
         termMaxDepth: 0
-  - key: assay-type
+  - key: "assay-type"
     type: controlled-term-field
-    name: Assay Type
+    name: "Assay Type"
     description: "How the sample was analyzed, from OBI"
     datatype: iri
     values:
       - type: class
-        sourceAcronym: OBI
-        termIri: http://purl.obolibrary.org/obo/OBI_0002564
+        sourceAcronym: "OBI"
+        termIri: "http://purl.obolibrary.org/obo/OBI_0002564"
         termType: class
-        termLabel: histopathology assay
+        termLabel: "histopathology assay"
       - type: class
-        sourceAcronym: OBI
-        termIri: http://purl.obolibrary.org/obo/OBI_0000185
+        sourceAcronym: "OBI"
+        termIri: "http://purl.obolibrary.org/obo/OBI_0000185"
         termType: class
-        termLabel: imaging assay
+        termLabel: "imaging assay"
       - type: class
-        sourceAcronym: OBI
-        termIri: http://purl.obolibrary.org/obo/OBI_0002119
+        sourceAcronym: "OBI"
+        termIri: "http://purl.obolibrary.org/obo/OBI_0002119"
         termType: class
-        termLabel: microscopy assay
+        termLabel: "microscopy assay"
 ```
 
 Read down the `children` and you can see the request answered field by field: two
 plain `text-field`s, then three `controlled-term-field`s whose `values` hold the
 three constraint shapes, each pointing at an IRI the BioPortal server returned in
-Step 2. This is compact CEDAR YAML — the form you author in. It carries no
+Step 2. The quoting is the canonical CEDAR style: plain scalars for the structural
+keys whose vocabulary CEDAR controls — `type`, `datatype`, `status`, `version`,
+`modelVersion` — and double quotes on every other string. A reader accepts either,
+but this is what a CEDAR writer emits. This is compact CEDAR YAML — the form you author in. It carries no
 identifier, because the template does not have one yet: CEDAR assigns that when
 the template is saved.
 
@@ -207,6 +211,13 @@ The REST server uploads it and returns the IRI CEDAR assigned:
 `https://repo.metadatacenter.org/templates/940fa702-460a-4880-846d-d22cc168ea11`.
 That IRI is also what makes the template findable and reusable by other people.
 
+CEDAR assigns more than that one identifier. The stored template comes back with an IRI for every
+field as well, and a property IRI for each one in the `@context` its JSON form carries. None of
+them are invented anywhere else: an artifact reaches CEDAR naming nothing, and CEDAR is what names
+it. That is also why the YAML you send is the YAML you wrote — the upload is the compact form
+itself, not a JSON translation of it, and what comes back is the same form with the identifiers
+filled in.
+
 ## Step 6: Fill an Instance
 
 A template is a blueprint. The metadata you keep are *instances* of it, one per
@@ -222,22 +233,22 @@ template, validates it, and renders it:
 
 ```yaml
 type: instance
-name: Tissue Sample TS-0001
-isBasedOn: https://repo.metadatacenter.org/templates/940fa702-460a-4880-846d-d22cc168ea11
+name: "Tissue Sample TS-0001"
+isBasedOn: "https://repo.metadatacenter.org/templates/940fa702-460a-4880-846d-d22cc168ea11"
 children:
   sample-id:
-    value: TS-0001
+    value: "TS-0001"
   lab-id:
-    value: LAB-0042
+    value: "LAB-0042"
   cell-type:
-    id: http://purl.obolibrary.org/obo/CL_0000182
-    label: hepatocyte
+    id: "http://purl.obolibrary.org/obo/CL_0000182"
+    label: "hepatocyte"
   organ:
-    id: http://purl.obolibrary.org/obo/UBERON_0002107
-    label: liver
+    id: "http://purl.obolibrary.org/obo/UBERON_0002107"
+    label: "liver"
   assay-type:
-    id: http://purl.obolibrary.org/obo/OBI_0002564
-    label: histopathology assay
+    id: "http://purl.obolibrary.org/obo/OBI_0002564"
+    label: "histopathology assay"
 ```
 
 Notice the difference between the two kinds of value. Sample ID and Lab ID are
@@ -259,6 +270,10 @@ program that encounters it.
 The template is already in CEDAR; the filled instance is not. The same REST
 server uploads it, and CEDAR assigns it an identifier of its own. From there it
 is findable, and the values in it point at the ontology terms they came from.
+
+The instance you send stays as lean as the one above — it names only the five fields that hold a
+value. A stored CEDAR instance has to carry every field its template declares, empty ones included,
+so the upload completes it against the template first. Read it back and it is lean again.
 
 ## What Just Happened
 
@@ -319,7 +334,7 @@ A few notes on credentials:
 - The artifact and embeddable-editor servers need no credentials. One builds,
   validates, and renders locally; the other renders locally in your browser.
 - The REST server needs a CEDAR API key and the base URL of your CEDAR server. It
-  is required only if you save artifacts, as in [Save to CEDAR](#save-to-cedar).
+  is required only if you save artifacts, as in [Save the Template](#step-5-save-the-template).
 
 After adding the block, restart your client. The LLM then has the tools
 this tutorial used, from `find_class` and `set_branch_constraint` to

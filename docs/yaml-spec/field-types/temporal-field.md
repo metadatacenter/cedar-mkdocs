@@ -15,9 +15,9 @@ its `type` is `temporal-field`.
 | `default` | string | optional | Default value. |
 
 ```yaml
-- key: visit-time
+- key: "visit-time"
   type: temporal-field
-  name: Visit Time
+  name: "Visit Time"
   datatype: xsd:dateTime
   granularity: minute
   inputTimeFormat: 24h

@@ -9,11 +9,11 @@ The options are listed under `values`. Each has a `label`, and any number may be
 take `multiple` in its `configuration`.
 
 ```yaml
-- key: methods
+- key: "methods"
   type: multi-select-list-field
-  name: Methods
+  name: "Methods"
   values:
-  - label: PCR
-  - label: Sequencing
-  - label: Microscopy
+  - label: "PCR"
+  - label: "Sequencing"
+  - label: "Microscopy"
 ```

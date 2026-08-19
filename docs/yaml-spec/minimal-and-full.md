@@ -14,14 +14,14 @@ A minimal template, of the kind a person might author directly, carries just its
 
 ```yaml
 type: template
-name: Study
+name: "Study"
 children:
-- key: study-name
+- key: "study-name"
   type: text-field
-  name: Study Name
-- key: enrolled
+  name: "Study Name"
+- key: "enrolled"
   type: numeric-field
-  name: Enrolled Participants
+  name: "Enrolled Participants"
   datatype: xsd:int
 ```
 
@@ -41,24 +41,24 @@ The same template, serialized in full, carries all of them:
 
 ```yaml
 type: template
-name: Study
-id: https://repo.metadatacenter.org/templates/7b8977e
+name: "Study"
+id: "https://repo.metadatacenter.org/templates/7b8977e"
 status: published
 version: 1.0.0
 modelVersion: 1.6.0
-createdBy: https://metadatacenter.org/users/6d21a88
+createdBy: "https://metadatacenter.org/users/6d21a88"
 createdOn: '2022-11-30T13:12:40-08:00'
-modifiedBy: https://metadatacenter.org/users/6d21a88
+modifiedBy: "https://metadatacenter.org/users/6d21a88"
 modifiedOn: '2022-12-01T14:25:30-08:00'
 children:
-- key: study-name
+- key: "study-name"
   type: text-field
-  name: Study Name
+  name: "Study Name"
   configuration:
-    propertyIri: https://schema.org/name
-- key: enrolled
+    propertyIri: "https://schema.org/name"
+- key: "enrolled"
   type: numeric-field
-  name: Enrolled Participants
+  name: "Enrolled Participants"
   datatype: xsd:int
 ```
 

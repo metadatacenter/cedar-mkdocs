@@ -5,7 +5,7 @@ type alone marks the value as an email address, distinguishing it from ordinary 
 YAML its `type` is `email-field`.
 
 ```yaml
-- key: contact-email
+- key: "contact-email"
   type: email-field
-  name: Contact Email
+  name: "Contact Email"
 ```
