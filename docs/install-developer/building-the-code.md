@@ -46,16 +46,13 @@ Should render something similar:
 │ cedar-admin-tool                                 │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
 │ cedar-artifact-library                           │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
 │ cedar-artifact-server                            │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
-│ cedar-artifacts                                  │  📁 dir   │      multi       │  CEDAR repo   │   ✅   │
-│ cedar-artifacts/cedar-artifacts-dist             │  📁 dir   │   angular-dist   │  CEDAR repo   │   ✅   │
-│ cedar-artifacts/cedar-artifacts-src              │  📁 dir   │     angular      │  CEDAR repo   │   ✅   │
 │ cedar-bridge-server                              │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
 ...
 │ cedar-util                                       │  📁 dir   │       misc       │  CEDAR repo   │   ✅   │
 │ cedar-valuerecommender-server                    │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
 │ cedar-worker-server                              │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
 └──────────────────────────────────────────────────┴───────────┴──────────────────┴───────────────┴────────┘
-                                         66 object/files recognized
+                                         63 object/files recognized
 ```
 
 ## CEDAR Maven utils

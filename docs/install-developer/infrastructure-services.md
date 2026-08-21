@@ -625,7 +625,6 @@ The frontend is delivered differently during development than on production.
 | openview                   | Frontend             | `ng serve` on 4220          |  `nginx` directory access | cedar-openview / cedar-opernview-dist  |
 | content                    | Content distribution | `ng serve` on 4240          |  `nginx` directory access | cedar-content-distribution             |
 | monitoring                 | Frontend             | `ng serve` on 4300          |  `nginx` directory access | cedar-monitoring/cedar-monitoring-dist |
-| artifacts                  | Frontend             | `ng serve` on 4320          |  `nginx` directory access | cedar-artifacts/cedar-artifacts-dist |
 | bridging                   | Frontend             | `ng serve` on 4340          |  `nginx` directory access | cedar-bridging/cedar-bridging-dist |
 | auth                       | Keycloak             | 8443                        |  8443                     | N/A                                    |
 | artifact                   | Microservice         | java on 9001                |                           | cedar-artifact-server                  |

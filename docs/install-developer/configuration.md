@@ -95,7 +95,6 @@ The output of the script should be similar to the one below:
 ```
 Testing the list of CEDAR hosts:
 Host unknown : artifact.metadatacenter.orgx
-Host unknown : artifacts.metadatacenter.orgx
 Host unknown : bridge.metadatacenter.orgx
 Host unknown : bridging.metadatacenter.orgx
 Host unknown : auth.metadatacenter.orgx
@@ -120,7 +119,6 @@ Host unknown : demo.cee.metadatacenter.orgx
 Host unknown : demo-dist.cee.metadatacenter.orgx
 Some CEDAR hosts are unknown, we will prompt for your password in order to make modifications to /etc/hosts !
 Host unknown, adding to /etc/hosts: artifact.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: artifacts.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: bridge.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: bridging.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: auth.metadatacenter.orgx
@@ -157,7 +155,6 @@ The output should be:
 ```
 Testing the list of CEDAR hosts:
 Host known   : artifact.metadatacenter.orgx
-Host known   : artifacts.metadatacenter.orgx
 Host known   : bridge.metadatacenter.orgx
 Host known   : bridging.metadatacenter.orgx
 Host known   : auth.metadatacenter.orgx
@@ -212,7 +209,6 @@ ls -ls ${CEDAR_HOME}/log
 The output should contain all the directories just created:
 ```
 cadsr-tools
-frontend-artifacts
 frontend-bridging
 frontend-cedar
 frontend-cee-demo-angular

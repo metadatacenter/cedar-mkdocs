@@ -25,7 +25,6 @@ The output of the script should be similar to the one below:
 ```
 Testing the list of CEDAR hosts:
 Host unknown : artifact.metadatacenter.orgx
-Host unknown : artifacts.metadatacenter.orgx
 Host unknown : bridge.metadatacenter.orgx
 Host unknown : bridging.metadatacenter.orgx
 Host unknown : auth.metadatacenter.orgx
@@ -51,7 +50,6 @@ Host unknown : demo-dist.cee.metadatacenter.orgx
 Some CEDAR hosts are unknown, we will prompt for your password in order to make modifications to /etc/hosts !
 Password:
 Host unknown, adding to /etc/hosts: artifact.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: artifacts.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: bridge.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: bridging.metadatacenter.orgx
 Host unknown, adding to /etc/hosts: auth.metadatacenter.orgx
