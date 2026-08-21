@@ -43,8 +43,19 @@ isValid: boolean                       // nothing missing and no problems
 saveButton.disabled = !cee.dataQualityReport.isValid;
 ```
 
-Recomputing it on every `change` event keeps the button honest as the user works. The report is
-computed locally and synchronously, so reading it costs nothing and requires no network.
+The `change` detail already carries both `validity` and `dataQualityReport`, computed after the
+operation, so a listener does not need to reconstruct either from DOM controls:
+
+```javascript
+cee.addEventListener('change', ({ detail }) => {
+  saveButton.disabled = !detail.validity;
+  renderProblems(detail.dataQualityReport.problems);
+});
+```
+
+The report is computed locally and synchronously, so reading it costs nothing and requires no
+network. The CEE supplies the result but does not choose save policy: an application may block an
+invalid save, ask for confirmation, or store a draft while showing the outstanding problems.
 
 `showDownloadMenu` offers the report as a file, alongside the CEE's other views of the artifact. An
 application that wants to show a user everything outstanding in one place builds that from

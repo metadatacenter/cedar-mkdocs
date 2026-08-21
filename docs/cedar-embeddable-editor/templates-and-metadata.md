@@ -97,18 +97,39 @@ was written in.
 
 ## Knowing When Something Changed
 
-The CEE re-publishes its internal edits as a `change` event on the custom element. That event
-crosses the shadow boundary and bubbles, so an ordinary listener on the element hears every value
-edit in the form:
+The CEE publishes a `change` event only when an operation changes the serialized instance. That
+event crosses the shadow boundary and bubbles. Focus, blur, paging, read-only control traffic and a
+write that leaves `currentMetadata` identical produce no event; field edits, clears,
+controlled-term selections and repeating-group operations do.
 
-```javascript
-cee.addEventListener('change', () => {
-  saveButton.disabled = !cee.dataQualityReport.isValid;
+The package declarations type the listener as `CustomEvent<CeeChangeDetail>`:
+
+```typescript
+import type { CeeChangeDetail } from 'cedar-embeddable-editor';
+
+const cee = document.querySelector('cedar-embeddable-editor');
+if (!cee) throw new Error('CEE element is missing');
+
+cee.addEventListener('change', (event) => {
+  const detail: CeeChangeDetail = event.detail;
+  console.log(detail.operation, detail.path, detail.value);
+  saveButton.disabled = !detail.validity;
 });
 ```
 
-Structural edits to a [repeating group](../yaml-spec/elements-core.md#repetition) carry a
-`detail.message` naming what happened:
+Every detail carries the state after the operation:
+
+| Member | Meaning |
+|---|---|
+| `operation` | `valueChanged`, `multiInstanceAdded`, `multiInstanceCopied` or `multiInstanceDeleted`. |
+| `path` | The component path from the template root. |
+| `value` | The value supplied to the model operation. |
+| `validity` | Whether the resulting instance is valid. |
+| `dataQualityReport` | The full report for the resulting instance. |
+| `title`, `description` | The current instance envelope values, or `null` when absent. |
+
+Structural edits to a [repeating group](../yaml-spec/elements-core.md#repetition) also retain a
+compatibility `detail.message` naming what happened:
 
 | `detail.message` | Meaning |
 |---|---|
@@ -125,6 +146,16 @@ cee.addEventListener('change', (event) => {
 ```
 
 In Angular the same event is available as an output binding, `(change)="onChange($event)"`.
+
+A canonical instance produces no event merely because it was loaded. Temporal values are the
+exception when their stored precision exceeds the field's declared granularity: loading normalizes
+the serialized value, so the CEE publishes that real change during initialization. Install the
+listener before assigning the artifact if the application needs to observe normalization.
+
+The CEE does not own an unsaved-changes flag. Keep a structural snapshot of `currentMetadata` after
+load and after each successful save, then compare the current value after every `change`. This marks
+an edit dirty, clears dirty state when the edit is exactly undone, and establishes a new baseline
+only after persistence succeeds.
 
 ### Saving Periodically
 

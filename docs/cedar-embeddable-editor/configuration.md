@@ -184,6 +184,11 @@ handler and receives no traces. `error` carries the failures an application shou
 template the CEE could not read, a value it discarded, a configuration key it cannot use. `trace`
 carries the running commentary, including which language maps loaded.
 
+`eventHandler.valueChanged(path, value)` remains an optional callback for field mutations. Prefer
+the typed DOM `change` event when the application also needs structural changes, validity or the
+current report. The old `eventHandler.message` member has never been emitted; it is deprecated and
+will be removed in the next major release.
+
 Unlike the configuration and the artifact, the handler may be replaced: the last one assigned
 receives, and the CEE traces the swap so a page whose diagnostics stopped arriving can see why. What
 a handler cannot do is hear what came before it, so register it ahead of the configuration and the
