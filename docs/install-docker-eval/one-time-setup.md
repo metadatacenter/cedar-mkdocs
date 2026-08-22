@@ -60,15 +60,12 @@ docker volume inspect cedar_cert cedar_ca >/dev/null
 ## Connect CEDAR to BioPortal
 
 Template authors use CEDAR to find ontology terms while designing fields and entering metadata.
-Those searches go through CEDAR's terminology service to BioPortal or another OntoPortal instance.
-The public BioPortal endpoint is already the default; you only need to supply an API key in
+Those searches go through CEDAR's terminology service to BioPortal. The public BioPortal endpoint
+is already the default; you only need to supply an API key in
 `$CEDAR_HOME/set-env-external.sh`.
 
 You can obtain a key from the
-[BioPortal account help](https://bioportal.bioontology.org/help#Getting_an_API_key). If you operate
-another OntoPortal instance, set `CEDAR_BIOPORTAL_REST_BASE` in the same file to its API address.
-The [OntoPortal administration documentation](https://ontoportal.github.io/administration/) covers
-running that service yourself.
+[BioPortal account help](https://bioportal.bioontology.org/help#Getting_an_API_key).
 
 ## Trust the Self-Signed CA
 

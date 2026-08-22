@@ -16,7 +16,7 @@ cp cedar-development/bin/templates/set-env-internal.sh ./set-env-internal.sh
 ```
 
 The internal file holds credentials used among the local CEDAR services. The external file holds
-credentials for services outside CEDAR, most notably BioPortal or another OntoPortal instance.
+credentials for services outside CEDAR, most notably BioPortal.
 Edit the copies in `CEDAR_HOME`; do not edit the templates in `cedar-development`.
 
 For a useful terminology service, replace the placeholder `CEDAR_BIOPORTAL_API_KEY` in
@@ -47,8 +47,8 @@ mkdir -p "$CEDAR_HOME/cedar-term"
 
 The authentication setting matters even when every container looks healthy: it is what allows a
 backend service to retrieve Keycloak's signing keys when you make an authenticated request. The
-empty terminology-catalog setting tells CEDAR to use the BioPortal or OntoPortal endpoint configured
-in `set-env-external.sh`.
+empty terminology-catalog setting tells CEDAR to use the BioPortal endpoint configured in
+`set-env-external.sh`.
 
 Keep this Docker environment in a dedicated terminal. Native and hybrid development use some of the
 same variable names with different values, and combining profiles produces failures that are hard
