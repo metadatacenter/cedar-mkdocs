@@ -85,16 +85,21 @@ Expected result:
 29/29 required Docker services are ready.
 ```
 
-If a service is missing or unhealthy, inspect its stack:
+If a service is missing or unhealthy, note its `Stack` and `Service` in the status table. Each stack
+has its own Docker Compose directory:
+
+| Stack | Directory |
+| --- | --- |
+| `infrastructure` | `$CEDAR_HOME/cedar-docker-deploy/cedar-infrastructure` |
+| `microservices` | `$CEDAR_HOME/cedar-docker-deploy/cedar-microservices` |
+| `frontends` | `$CEDAR_HOME/cedar-docker-deploy/cedar-frontend` |
+
+Change to that directory, then inspect the containers and the failing service's logs:
 
 ```bash
-cd "$CEDAR_HOME/cedar-docker-deploy/cedar-microservices"
 docker compose ps
 docker compose logs --tail 200 <service>
 ```
-
-Use the corresponding `cedar-infrastructure` or `cedar-frontend` directory for failures in those
-stacks.
 
 ## Optional Administration Tools
 
