@@ -12,11 +12,14 @@ The library requires Java 17 and is built with Maven. Follow the repository's bu
 <dependency>
   <groupId>org.metadatacenter</groupId>
   <artifactId>cedar-artifact-library</artifactId>
-  <version>2.8.4-SNAPSHOT</version>
+  <version>${cedar-artifact-library.version}</version>
 </dependency>
 ```
 
-Check the repository for the current version. The builder and renderer classes shown below live in `org.metadatacenter.artifacts.model.core` and `org.metadatacenter.artifacts.model.renderer`.
+Set `cedar-artifact-library.version` in your Maven properties to the version declared by the library
+checkout or to the published version you intend to use. The builder and renderer classes shown
+below live in `org.metadatacenter.artifacts.model.core` and
+`org.metadatacenter.artifacts.model.renderer`.
 
 ## Creating Fields
 

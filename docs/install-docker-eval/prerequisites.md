@@ -5,10 +5,9 @@ that comfortably, but Docker needs enough room for several databases and Java se
 running together. Give Docker Desktop at least 12 GB of memory and make sure it has at least 20 GB
 of free disk space. Half of the host's CPU cores is a reasonable starting point.
 
-The current setup has been verified on an Apple Silicon Mac with Docker Engine 29.6.2 and Docker
-Compose 5.3.1. A recent Docker Desktop release with Compose v2 is the practical requirement. Other
-Docker Desktop platforms may work, but the complete installation has not recently been exercised
-on them.
+The current setup has been verified on an Apple Silicon Mac. A recent Docker Desktop release with
+Compose v2 is the practical requirement. Other Docker Desktop platforms may work, but the complete
+installation has not recently been exercised on them.
 
 You will also need Git, Python 3, and OpenSSL. Git retrieves the CEDAR support repositories, Python
 runs the CEDAR command-line helper, and OpenSSL creates certificates that your browser can trust.
