@@ -13,8 +13,18 @@ The expected result is `29/29 required Docker services are ready`.
 
 ## Frontend URLs
 
-All browser traffic enters through the infrastructure nginx container. The seven frontend
-applications are:
+CEDAR provides several browser applications, each at its own local HTTPS address. Those addresses
+all resolve to your computer, where the infrastructure nginx container is the single public entry
+point for the Docker deployment.
+
+For example, a request to `https://workspace.metadatacenter.orgx` reaches nginx on port 443. Nginx
+handles the HTTPS connection, recognizes the `workspace` hostname, and forwards the request across
+the private `cedarnet` Docker network to the Workspace frontend container. That container returns
+the HTML, JavaScript, and other files that your browser displays. Authentication and API requests
+from the application also return through the public nginx entry point to the appropriate backend
+containers. The frontend containers themselves do not need public ports.
+
+The seven browser applications are available at:
 
 | Application | URL |
 | --- | --- |
