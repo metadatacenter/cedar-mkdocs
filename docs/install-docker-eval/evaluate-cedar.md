@@ -1,4 +1,4 @@
-# Evaluate CEDAR
+# Verify the Docker Deployment
 
 ## Confirm Runtime Health
 
