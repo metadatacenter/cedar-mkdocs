@@ -1,5 +1,15 @@
 # Build and Run CEDAR
 
+CEDAR runs as a collection of cooperating containers rather than as one large container. The
+containers are organized into stacks: infrastructure provides databases, authentication, search,
+and public routing; microservices provide the CEDAR APIs and background processing; and frontends
+provide the browser applications. A fourth stack contains optional administration tools.
+
+An image is the packaged software used to create a container. Building prepares those images;
+starting creates and runs the containers from them. For a complete CEDAR installation, build and
+start the three required stacks in dependency order: infrastructure, microservices, then frontends.
+Normal stop and restart operations reuse the images and preserve the data stored in Docker volumes.
+
 ## Runtime Inventory
 
 | Stack | Containers | Purpose |
