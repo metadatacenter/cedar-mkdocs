@@ -321,21 +321,25 @@ representative configuration:
       "args": ["-jar", "/path/to/cedar-artifact-rest-mcp.jar"],
       "env": {
         "CEDAR_API_KEY": "your-cedar-api-key",
-        "CEDAR_BASE_URL": "https://your-cedar-server"
+        "CEDAR_BASE_URL": "https://resource.metadatacenter.org"
       }
     }
   }
 }
 ```
 
-A few notes on credentials:
+A few notes on configuration:
 
 - `BIOPORTAL_API_KEY` comes from your BioPortal account and lets the term server
   query BioPortal.
 - The artifact and embeddable-editor servers need no credentials. One builds,
   validates, and renders locally; the other renders locally in your browser.
-- The REST server needs a CEDAR API key and the base URL of your CEDAR server. It
-  is required only if you save artifacts, as in [Save the Template](#step-5-save-the-template).
+- `CEDAR_API_KEY` authenticates the REST server with CEDAR. It is required only
+  if you save artifacts, as in [Save the Template](#step-5-save-the-template).
+- `CEDAR_BASE_URL` is the CEDAR resource-server URL. For the public CEDAR system,
+  use `https://resource.metadatacenter.org`; the REST MCP server uses that value
+  by default when the variable is omitted. Set it only when targeting another
+  CEDAR deployment.
 
 After adding the block, restart your client. The LLM then has the tools
 this tutorial used, from `find_class` and `set_branch_constraint` to
