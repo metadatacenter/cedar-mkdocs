@@ -26,8 +26,7 @@ frontend containers.
 
 ## Build the Images
 
-Starting a Compose stack does not build its images. Build all three required groups before the first
-start:
+Build the images for CEDAR's three required stacks:
 
 ```bash
 cedarcli docker build infrastructure
