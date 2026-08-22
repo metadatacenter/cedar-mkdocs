@@ -1,8 +1,9 @@
 # Verify the Docker Deployment
 
-## Confirm Runtime Health
+## Check That the Containers Are Ready
 
-Before opening a browser, require the complete Docker estate:
+Before opening CEDAR in a browser, check that every application container has started and passed
+its health check:
 
 ```bash
 cedarcli docker status
