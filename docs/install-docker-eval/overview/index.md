@@ -22,6 +22,4 @@ the current snapshot are assembled on your computer rather than downloaded ready
 
 The next pages walk through the setup in the order you need it: prepare the machine, install the
 small CEDAR command-line helper, provide local configuration, create certificates, and then build
-and start the application. Operational detail and troubleshooting live in the
-[CEDAR Docker runbook](https://github.com/metadatacenter/cedar-development/blob/develop/ops/DOCKER-RUNBOOK.md),
-so you do not need to understand the whole service layout before getting started.
+and start the application.
