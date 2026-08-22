@@ -123,10 +123,15 @@ cedarcli docker stop infrastructure
 
 Ordinary stop operations retain Docker named volumes and therefore retain application data.
 
-## Destructive Reset Commands
+## Reset Your Docker Installation
 
-The following commands remove local Docker state and are not part of an ordinary restart. Inspect
-the target first and back up any required data.
+You do not need to remove Docker resources when you stop or restart CEDAR. Use these commands only
+when you want to rebuild from a clean state, recover from damaged local state, reclaim disk space,
+or remove the installation.
+
+Containers, images, and the Docker network can be recreated. Volumes are different: they hold your
+databases, certificates, and other persistent state. Choose the narrowest reset that meets your
+need, inspect its target first, and back up any data you want to keep.
 
 ### Containers
 
