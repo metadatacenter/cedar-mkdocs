@@ -1,4 +1,4 @@
-# Components and Lifecycle
+# Build and Run CEDAR
 
 ## Runtime Inventory
 

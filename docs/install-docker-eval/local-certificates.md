@@ -1,12 +1,12 @@
-# One-Time Setup
+# Set Up Local Certificates
 
-CEDAR uses several local web addresses so the browser, authentication system, and APIs interact as
-they do in a hosted installation. Your computer does not know those names yet, and your browser
-does not automatically trust a certificate created on your laptop. This one-time setup establishes
-that local identity before any application containers start.
+CEDAR uses several local HTTPS addresses so the browser, authentication system, and APIs interact
+as they do in a hosted installation. This page creates those local hostnames and their certificates,
+then tells your browser and the Docker deployment how to use them.
 
-It also creates the private Docker network that lets CEDAR's internal services find one another.
-These are installation-level resources: ordinary starts and stops reuse them.
+The Docker setup command also creates the private network that lets CEDAR's internal services find
+one another. Hostnames, certificates, and the network are installation-level resources: ordinary
+starts and stops reuse them.
 
 Run the following steps from the shell configured on the previous page.
 
@@ -56,16 +56,6 @@ Verify the resulting resources:
 docker network inspect cedarnet >/dev/null
 docker volume inspect cedar_cert cedar_ca >/dev/null
 ```
-
-## Connect CEDAR to BioPortal
-
-Template authors use CEDAR to find ontology terms while designing fields and entering metadata.
-Those searches go through CEDAR's terminology service to BioPortal. The public BioPortal endpoint
-is already the default; you only need to supply an API key in
-`$CEDAR_HOME/set-env-external.sh`.
-
-You can obtain a key from the
-[BioPortal account help](https://bioportal.bioontology.org/help#Getting_an_API_key).
 
 ## Trust the Self-Signed CA
 

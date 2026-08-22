@@ -82,8 +82,8 @@ nav:
           - install-docker-eval/prerequisites.md
           - install-docker-eval/cli-and-scripts.md
           - install-docker-eval/configuration.md
-          - install-docker-eval/one-time-setup.md
-          - install-docker-eval/components.md
+          - install-docker-eval/local-certificates.md
+          - install-docker-eval/build-and-run.md
           - Verify the Docker Deployment: install-docker-eval/verify-docker-deployment.md
 
       - CEDAR Embeddable Editor:

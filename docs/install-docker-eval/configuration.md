@@ -19,9 +19,17 @@ The internal file holds credentials used among the local CEDAR services. The ext
 credentials for services outside CEDAR, most notably BioPortal.
 Edit the copies in `CEDAR_HOME`; do not edit the templates in `cedar-development`.
 
-For a useful terminology service, replace the placeholder `CEDAR_BIOPORTAL_API_KEY` in
-`set-env-external.sh` with your own key. The other supplied credentials are deliberately simple
-evaluation defaults. They are suitable only for an isolated local installation.
+## Connect CEDAR to BioPortal
+
+Template authors use CEDAR to find ontology terms while designing fields and entering metadata.
+Those searches go through CEDAR's terminology service to BioPortal. The public BioPortal endpoint
+is already the default, but it requires an API key.
+
+Obtain a key by following the
+[BioPortal account help](https://bioportal.bioontology.org/help#Getting_an_API_key), then replace
+the placeholder `CEDAR_BIOPORTAL_API_KEY` in `$CEDAR_HOME/set-env-external.sh`. The other supplied
+credentials are deliberately simple evaluation defaults. They are suitable only for an isolated
+local installation.
 
 ## Select the Docker Environment
 
