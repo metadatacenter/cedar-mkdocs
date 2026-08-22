@@ -36,19 +36,6 @@ The seven browser applications are available at:
 | Monitoring | [https://monitoring.metadatacenter.orgx/](https://monitoring.metadatacenter.orgx/) |
 | Bridging | [https://bridging.metadatacenter.orgx/](https://bridging.metadatacenter.orgx/) |
 
-Verify the public routes without logging in:
-
-```bash
-for host in cedar workspace designer openview content monitoring bridging; do
-  curl -sk -o /dev/null -w "$host %{http_code}\n" \
-    "https://${host}.metadatacenter.orgx/"
-done
-```
-
-Every route should return HTTP 200. Then log into Workspace, open a folder, and open a template in
-Designer. This checks the split-frontend navigation and shared Keycloak session as well as static
-page delivery.
-
 ## Evaluation Users
 
 The checked-in evaluation realm contains these non-production accounts:
