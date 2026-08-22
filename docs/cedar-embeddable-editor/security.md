@@ -89,10 +89,6 @@ that sets neither has the CEE make no requests of its own: a controlled-term fie
 an external-authority field resolves no identifiers, and the CEE reports which key is missing the
 first time a field needs it.
 
-`bridgeBaseUrl` had a default of CEDAR's production bridge, which meant an application deployed
-anywhere else sent its users' keystrokes to `bridge.metadatacenter.org` without asking and without
-saying so. That is why neither key has one now.
-
 Each request carries only the text the user typed and the constraint the template declares. An
 application that must keep those queries inside its own network points both settings at its own
 CEDAR deployment.

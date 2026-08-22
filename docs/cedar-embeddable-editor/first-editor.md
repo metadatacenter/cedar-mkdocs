@@ -28,11 +28,6 @@ Copy `node_modules/cedar-embeddable-editor/cedar-embeddable-editor.js` into what
 application serves static files from. A plain `<script src>` loads it, since it is a classic script
 rather than an ES module, and no bundler need be involved.
 
-Every release is published under that one name on npmjs, so nothing unreleased can reach an
-application by accident. A development channel on the Stanford BMIR Nexus, under the scoped name
-`@org.metadatacenter/cedar-embeddable-editor`, has been retired; an application that still pins it
-through an npm alias should name a plain version instead.
-
 Embedding platforms cannot absorb an upstream change without first checking it against their own
 workflows, so the CEE expects releases to be adopted deliberately. Versions are stable and
 npm-distributed, a public changelog records what changed, and breaking changes are announced ahead

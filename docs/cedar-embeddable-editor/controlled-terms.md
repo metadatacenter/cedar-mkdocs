@@ -104,8 +104,7 @@ Lookups go through the CEDAR bridge server, which fronts the authorities. One ke
 ```
 
 It has no default, so an application that does not set it gets fields offering no terms and
-resolving no identifiers, reported once. There was a default — CEDAR's production bridge — which
-meant an application deployed anywhere else reached production without asking.
+resolving no identifiers, reported once.
 
 Below that base the CEE appends the bridge server's `ext-auth/` resource, then a search path or a
 details path, depending on whether it is offering suggestions or resolving a chosen identifier. None

@@ -59,6 +59,12 @@ The error reaches the browser console and any handler on the `eventHandler` prop
 different template or instance means a new element, which is also what keeps the two halves of a
 document from being mixed across artifacts.
 
+The combined object contains exactly `templateObject` and `instanceObject`. If the CEE cannot read
+the instance, it reports the rejection, renders no replacement empty form, and leaves the artifact
+inputs available for a corrected value. A failed combined assignment therefore claims neither half.
+The same rule applies to `instanceObject` on its own: only a readable instance spends the one
+assignment.
+
 ### Supplying a YAML Template
 
 A template is supplied as JSON Schema or as [YAML](../yaml-spec/index.md), and the CEE recognizes

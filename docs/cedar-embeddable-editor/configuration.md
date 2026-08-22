@@ -1,9 +1,9 @@
 # Configuration
 
 The CEE takes a single configuration object. Every key in it is optional, so a minimal configuration
-stays short and most applications never write a complete one. Nine keys exist in total, and only two
-of them have to be set: the CEDAR servers the editor calls, which nothing but the embedding
-application can know.
+stays short and most applications never write a complete one. Nine keys exist in total. Two name
+the CEDAR services that power controlled-term and external-authority lookups; set those when the
+template uses those fields. A template containing neither renders without them.
 
 ## Supplying the Configuration
 
@@ -135,10 +135,21 @@ could only move them somewhere nothing answers.
 | `showTemplateDescription` | boolean | `false` | The template's description, under its title. |
 | `showDownloadMenu` | boolean | `false` | A menu offering the CEE's views of the artifact as files. |
 
-`showDownloadMenu` offers the instance and the template as JSON-LD, JSON Schema and YAML, plus the
-rendering data, the multi-instance information and the data quality report. Each file is named from
-the template, `AttributeValues-instance.yaml` rather than `instance.yaml`, so several open forms do
-not collide.
+`showDownloadMenu` offers seven views of the artifact:
+
+| Menu entry | Saves | Filename suffix |
+|---|---|---|
+| JSON-LD - Instance | The instance as a CEDAR JSON-LD document | `-instance.json` |
+| YAML - Instance | The same instance as CEDAR YAML | `-instance.yaml` |
+| Compact YAML - Instance | The instance without root identity and provenance metadata | `-instance-compact.yaml` |
+| JSON Schema - Template | The template exactly as the application supplied it | `-template.json` |
+| YAML - Template | The same template as CEDAR YAML | `-template.yaml` |
+| Compact YAML - Template | Its compact authoring form, without repository-managed metadata | `-template-compact.yaml` |
+| Data Quality Report | Required-field totals and constraint violations | `-data-quality.json` |
+
+The filename begins with the template's own `schema:name`, reduced to filename-safe characters:
+`AttributeValues-instance.yaml` rather than `instance.yaml`. Several open forms therefore do not
+produce indistinguishable downloads.
 
 A download is started by the page, and an application running under a restrictive sandbox can refuse
 one with no event to observe. The CEE traces each attempt through the event handler, so a developer
@@ -176,6 +187,7 @@ The CEE reports its diagnostics to the console and to a handler the application 
 cee.eventHandler = {
   trace: (label, value) => console.debug('CEE', label, value),
   error: (label, value) => reportToMonitoring(label, value),
+  ready: () => enableSaveControls(),
 };
 ```
 
@@ -184,10 +196,13 @@ handler and receives no traces. `error` carries the failures an application shou
 template the CEE could not read, a value it discarded, a configuration key it cannot use. `trace`
 carries the running commentary, including which language maps loaded.
 
-`eventHandler.valueChanged(path, value)` remains an optional callback for field mutations. Prefer
-the typed DOM `change` event when the application also needs structural changes, validity or the
-current report. The old `eventHandler.message` member has never been emitted; it is deprecated and
-will be removed in the next major release.
+`ready` is called once after the element's first successful form render. It is not called for a
+rejected artifact and is not replayed to a handler attached after rendering, so register the handler
+before assigning the artifact when the lifecycle signal matters.
+
+`eventHandler.valueChanged(path, value)` is an optional callback for field mutations. Prefer the
+typed DOM `change` event when the application also needs structural changes, validity or the
+current report.
 
 Unlike the configuration and the artifact, the handler may be replaced: the last one assigned
 receives, and the CEE traces the swap so a page whose diagnostics stopped arriving can see why. What
