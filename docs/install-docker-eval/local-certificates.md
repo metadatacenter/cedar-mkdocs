@@ -19,14 +19,8 @@ The hostname helper reads the central CEDAR subdomain inventory and adds missing
 cedarcli dev add-hosts
 ```
 
-The command prompts for `sudo` only when changes are required. Confirm the principal frontend
-names resolve locally:
-
-```bash
-for host in cedar workspace designer openview content monitoring bridging; do
-  ping -c 1 "${host}.metadatacenter.orgx"
-done
-```
+The command checks the complete CEDAR hostname inventory and prompts for `sudo` only when it needs
+to add missing entries to `/etc/hosts`.
 
 ## Generate Current Certificates
 
