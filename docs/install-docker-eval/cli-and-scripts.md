@@ -1,9 +1,14 @@
 # Get the Installation Tools
 
-CEDAR spans several repositories and Docker Compose projects. You could manage each one directly,
-but that would make the installation depend on remembering where every file lives and which part
-must start first. The `cedarcli` helper provides one consistent entry point for setup, image builds,
-startup, shutdown, and health checks.
+`cedarcli` is the command-line tool used to set up and operate a CEDAR installation. It is a small
+Python program that knows how CEDAR's repositories, scripts, and Docker Compose projects fit
+together. In this guide, it retrieves the Docker support files, builds images, starts and stops the
+application, and reports whether the complete deployment is healthy.
+
+It does not replace Docker, and it is not a service that remains running with CEDAR. It provides a
+consistent interface to Docker Compose and the setup scripts that would otherwise have to be run by
+hand from several different directories. Native CEDAR development uses the same CLI for its own
+workflows, which is why Docker-specific operations appear under `cedarcli docker`.
 
 ## Install `cedarcli`
 
