@@ -19,11 +19,10 @@ Normal stop and restart operations reuse the images and preserve the data stored
 | Frontends | 7 | Main editor, Workspace, Designer, OpenView, Content, Monitoring, and Bridging |
 | Admin tools | 4 | Optional Kibana, phpMyAdmin, Redis Commander, and CEDAR admin tool |
 
-The first three stacks form the required 29-container deployment. Admin tools are optional. The
-build inventory contains 35 images because the Java services also use two non-runtime base images.
+The first three stacks form the required 29-container deployment. Admin tools are optional.
 
-Each frontend image has a private nginx that serves one immutable npm package. The infrastructure
-nginx remains the single public TLS endpoint and routes browser requests to those seven containers.
+The infrastructure nginx remains the single public TLS endpoint and routes browser requests to the
+frontend containers.
 
 ## Build the Images
 
