@@ -1,40 +1,29 @@
-# Prerequisites
+# Before You Begin
 
-## Host System
+This installation runs the whole CEDAR application on one computer. A development laptop can do
+that comfortably, but Docker needs enough room for several databases and Java services to remain
+running together. Give Docker Desktop at least 12 GB of memory and make sure it has at least 20 GB
+of free disk space. Half of the host's CPU cores is a reasonable starting point.
 
-The complete Docker deployment was last verified on macOS with Apple Silicon. Use a current Docker
-Desktop release with Docker Compose v2; Docker Engine 29.6.2 and Compose 5.3.1 are known-good.
+The current setup has been verified on an Apple Silicon Mac with Docker Engine 29.6.2 and Docker
+Compose 5.3.1. A recent Docker Desktop release with Compose v2 is the practical requirement. Other
+Docker Desktop platforms may work, but the complete installation has not recently been exercised
+on them.
 
-Before starting, stop native CEDAR components and any other programs listening on CEDAR's ports.
-The Docker backend and native backend cannot run at the same time. Native and containerized
-frontends also cannot share their seven frontend ports.
+You will also need Git, Python 3, and OpenSSL. Git retrieves the CEDAR support repositories, Python
+runs the CEDAR command-line helper, and OpenSSL creates certificates that your browser can trust.
+The installation downloads source and packaged application artifacts from GitHub, Nexus, and the
+registries that supply the underlying Docker images, so it needs normal internet access during the
+initial build.
 
-## Docker Resources
+You do not need a Java development environment for the normal evaluation path. The image builder
+uses already-published Java artifacts from Nexus. JDK 17 and the complete Java source tree matter
+only if you deliberately choose to rebuild the backend from source.
 
-Allocate at least:
+Finally, make sure another CEDAR installation is not already running. Native CEDAR and Docker CEDAR
+both use the same local web and database ports. If you have used the native development stack,
+stop it before continuing.
 
-- 12 GB of memory to Docker Desktop;
-- half of the host's CPU cores; and
-- 20 GB of free Docker disk space, plus room for application data and build layers.
-
-The complete 35-image build and 29-container runtime can require more disk and memory than the old
-20-container evaluation deployment. Increase these values if image builds are killed or
-OpenSearch, Neo4j, or the Java services repeatedly become unhealthy.
-
-## Required Software and Access
-
-- Git
-- Python 3 with `venv`
-- Docker with the Compose v2 plugin
-- OpenSSL, for generating current local certificates
-- Network access to GitHub, Docker base-image registries, and the CEDAR Nexus repositories
-
-JDK 17 and the Java source repositories are optional for the normal evaluation path, which builds
-server images from the published Maven snapshots on Nexus. They are required only when rebuilding
-all Java code locally and using `cedarcli docker build microservices --local`.
-
-## Local Domain
-
-The evaluation deployment uses `*.metadatacenter.orgx`; note the final `x`. The hostname helper
-maps the required names to `127.0.0.1`, and Docker nginx publishes the application on ports 80 and
-443.
+CEDAR will use local addresses ending in `metadatacenter.orgx`—the final `x` is intentional. A
+setup command later in the guide adds those names to your hosts file; there is no public DNS or
+external deployment involved.

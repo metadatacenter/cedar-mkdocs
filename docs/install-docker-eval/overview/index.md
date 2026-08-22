@@ -1,30 +1,27 @@
-# Docker Install Overview
+# Run CEDAR with Docker
 
-This guide installs a local CEDAR evaluation environment with Docker. The required runtime contains
-29 containers:
+CEDAR is more than a web page. The Workbench depends on authentication, databases, search, and a
+collection of services that store and coordinate your templates and metadata. Installing every
+part directly on a computer is useful for core development, but it is a lot to ask of someone who
+first wants to explore the complete system.
 
-- seven infrastructure services, including the public nginx and Keycloak;
-- fifteen Java microservices; and
-- seven frontend applications, including Workspace and Template Designer.
+This Docker installation brings those parts up together as one local CEDAR environment. When it is
+running, you use CEDAR in a browser much as you would use a hosted installation: sign in, work in
+Workspace, design a template, and enter or view metadata. The application is reached through local
+`metadatacenter.orgx` addresses, while its internal services stay on a private Docker network.
 
-Four administration-tool containers are available separately and are not required for normal use.
+Your data remains on your computer in Docker volumes. Stopping the application does not discard
+it, and restarting does not require another installation. The setup also leaves the native CEDAR
+development workflow intact; you simply cannot run native and Docker copies on the same ports at
+the same time.
 
-The complete application can run locally in Docker, but this is still a development and evaluation
-deployment rather than a registry-backed production release. CEDAR Docker images are not currently
-published for this snapshot, so they must be built locally before the first start. Java application
-artifacts and immutable frontend npm packages are downloaded from Nexus during the normal image
-build.
+This is a realistic local evaluation environment, not a one-container demo and not yet a production
+deployment recipe. It asks Docker Desktop to run the full application, so the first build and start
+take some time. CEDAR's packaged Java and frontend code comes from Nexus, but the Docker images for
+the current snapshot are assembled on your computer rather than downloaded ready-made.
 
-The known-good environment is macOS on Apple Silicon with Docker Engine 29.6.2 and Docker Compose
-5.3.1. Other Docker Desktop platforms may work, but have not been revalidated against the complete
-29-container estate.
-
-The detailed operator procedure, hybrid frontend option, acceptance tests, and current limitations
-are maintained in the
-[CEDAR Docker runbook](https://github.com/metadatacenter/cedar-development/blob/develop/ops/DOCKER-RUNBOOK.md).
-
-Follow every page in this section in order. A fresh installation should finish by reporting:
-
-```text
-29/29 required Docker services are ready.
-```
+The next pages walk through the setup in the order you need it: prepare the machine, install the
+small CEDAR command-line helper, provide local configuration, create certificates, and then build
+and start the application. Operational detail and troubleshooting live in the
+[CEDAR Docker runbook](https://github.com/metadatacenter/cedar-development/blob/develop/ops/DOCKER-RUNBOOK.md),
+so you do not need to understand the whole service layout before getting started.

@@ -1,12 +1,24 @@
-# CEDAR CLI and Repositories
+# Get the Installation Tools
+
+CEDAR spans several repositories and Docker Compose projects. You could manage each one directly,
+but that would make the installation depend on remembering where every file lives and which part
+must start first. The `cedarcli` helper provides one consistent entry point for setup, image builds,
+startup, shutdown, and health checks.
 
 ## Install `cedarcli`
 
-Clone the CLI into `CEDAR_HOME`, create its Python environment, and install its requirements:
+First choose a home for this CEDAR installation. The rest of the guide refers to it as
+`CEDAR_HOME`:
 
 ```bash
 export CEDAR_HOME="$HOME/CEDAR_DOCKER"
+mkdir -p "$CEDAR_HOME"
 cd "$CEDAR_HOME"
+```
+
+Clone the CLI and give it its own Python environment:
+
+```bash
 git clone https://github.com/metadatacenter/cedar-cli
 cd cedar-cli
 python3 -m venv .venv
@@ -14,89 +26,30 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-Define the CLI alias after `CEDAR_HOME`:
+The following alias makes `cedarcli` available in the current shell. The wrapper activates its
+Python environment automatically, so you do not need to activate the virtual environment before
+every command.
 
 ```bash
-export CEDAR_HOME="$HOME/CEDAR_DOCKER"
 alias cedarcli='source "$CEDAR_HOME/cedar-cli/cli.sh"'
 ```
 
-## Clone the Docker Repositories
+Add the `CEDAR_HOME` export and alias to your normal shell profile if you want them to be available
+in new terminals.
 
-The Docker selector clones `cedar-development`, `cedar-docker-build`, and
-`cedar-docker-deploy`:
+## Get the Docker Support Repositories
+
+Now let the CLI retrieve the repositories that describe how CEDAR images are constructed, how the
+containers fit together, and which environment settings they share:
 
 ```bash
 cd "$CEDAR_HOME"
 cedarcli git clone docker
 ```
 
-The Docker repositories currently develop on `develop`. The documentation repository is not
-required to run CEDAR.
+This does not clone the entire CEDAR source tree. A normal evaluation build consumes packaged Java
+and frontend artifacts from Nexus, so the Docker support repositories are enough. You can add the
+application source repositories later if you want to build the backend itself.
 
-Complete the installation-file copies and profile activation described on the
-[Configuration](configuration.md) page before using the Docker commands below.
-
-## Current Docker Commands
-
-`cedarcli` has separate Docker-aware commands because the native status command probes host ports
-that are intentionally private inside `cedarnet`.
-
-```bash
-cedarcli docker validate
-cedarcli docker build <target>
-cedarcli docker start <stack> -d
-cedarcli docker status
-cedarcli docker stop <stack>
-```
-
-Build targets are `infrastructure`, `microservices`, `frontends`, `admin`, `all`, or a single image
-name. Start and stop stacks are:
-
-| Stack | Containers | Required |
-| --- | ---: | --- |
-| `infrastructure` | 7 | Yes |
-| `microservices` | 15 | Yes |
-| `frontends` | 7 | Yes for all-Docker mode |
-| `admin` | 4 | No |
-
-Every start command accepts `--pull always`, `--pull missing`, or `--pull never`. The default is
-`never`, which is correct for the current locally built snapshot images.
-
-## Check the Environment
-
-`cedarcli env list` prints the active `CEDAR_*` variables. There is no fixed expected count; the
-profile evolves as services are added. Verify the important Docker values directly:
-
-```bash
-cedarcli env filter CEDAR_NET
-cedarcli env filter CEDAR_NGINX_HOST
-cedarcli env filter CEDAR_AUTH_HOST_TARGET
-cedarcli docker validate
-```
-
-## Docker Status
-
-Use this as the normal readiness gate:
-
-```bash
-cedarcli docker status
-```
-
-It reads the expected Compose services, inspects Docker runtime and health state, requires all 29
-core containers by default, and exits nonzero if one is absent or unhealthy.
-
-For the supported Docker-backend/native-frontend hybrid:
-
-```bash
-cedarcli docker status --no-frontends
-```
-
-To make the optional administration tools part of the gate:
-
-```bash
-cedarcli docker status --include-admin
-```
-
-Do not use `cedarcli status` to judge a Docker deployment. That command remains the native
-process/host-port diagnostic and can report false failures for Docker-internal ports.
+At this point the tools are installed, but the application is not configured yet. Continue to
+[Configure Your Installation](configuration.md) before running Docker commands.
