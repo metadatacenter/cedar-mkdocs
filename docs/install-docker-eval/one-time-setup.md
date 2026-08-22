@@ -57,7 +57,7 @@ docker network inspect cedarnet >/dev/null
 docker volume inspect cedar_cert cedar_ca >/dev/null
 ```
 
-## Connect CEDAR to Terminology
+## Connect CEDAR to BioPortal
 
 Template authors use CEDAR to find ontology terms while designing fields and entering metadata.
 Those searches go through CEDAR's terminology service to BioPortal or another OntoPortal instance.
