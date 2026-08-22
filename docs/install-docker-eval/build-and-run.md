@@ -40,9 +40,9 @@ and `frontends` builds the browser applications. `admin` builds the optional dia
 administration tools. Use `all` to build every group, or use an individual image name when you need
 to rebuild only one container image.
 
-The microservice build downloads the current `2.9.2-SNAPSHOT` application artifacts from Nexus. The
-frontend build downloads exact immutable `2.9.2-dev.<timestamp>.g<commit>` npm versions from Nexus;
-npm packages do not use a moving Maven-style snapshot version.
+The microservice build downloads the configured Java application artifacts from Nexus. The frontend
+build downloads immutable, commit-specific npm packages from Nexus; npm packages do not use a
+moving Maven-style snapshot version.
 
 To rebuild Java from checked-out source instead, first clone and compile the complete Java estate on
 JDK 17, then stage each local JAR into its image:
