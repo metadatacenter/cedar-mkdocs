@@ -1,215 +1,102 @@
-# CEDAR CLI and Scripts
+# CEDAR CLI and Repositories
 
-## Install CEDAR CLI
+## Install `cedarcli`
 
-???+ warning "Important"
+Clone the CLI into `CEDAR_HOME`, create its Python environment, and install its requirements:
 
-    These steps are crucial for the proper installation of CEDAR.
-    
-    Please execute these steps with great care.
-
-### Clone the CEDAR CLI repo
-
-Please go to your previously created CEDAR Docker home folder, and clone this repo:
-
-[https://github.com/metadatacenter/cedar-cli](https://github.com/metadatacenter/cedar-cli)
-
-```sh
-cd ~/CEDAR_DOCKER
+```bash
+export CEDAR_HOME="$HOME/CEDAR_DOCKER"
+cd "$CEDAR_HOME"
 git clone https://github.com/metadatacenter/cedar-cli
 cd cedar-cli
-```
-
-### Configure the CLI
-
-Execute these commands to create a Python virtual envrionment, activate it and install the requirements:
-
-```sh
-cd ~/CEDAR_DOCKER/cedar-cli
-python -m venv ./.venv
+python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-### Add `CEDAR_HOME` env var and `cedarcli` alias
+Define the CLI alias after `CEDAR_HOME`:
 
-Edit your bash profile script:
-```sh
-vi ~/.zshrc
+```bash
+export CEDAR_HOME="$HOME/CEDAR_DOCKER"
+alias cedarcli='source "$CEDAR_HOME/cedar-cli/cli.sh"'
 ```
 
-Add these lines at the end:
-```sh
-export CEDAR_HOME=~/CEDAR_DOCKER
-alias cedarcli='source $CEDAR_HOME/cedar-cli/cli.sh'
-```
+## Clone the Docker Repositories
 
-### Reload your shell
+The Docker selector clones `cedar-development`, `cedar-docker-build`, and
+`cedar-docker-deploy`:
 
-Reload your shell by closing and opening it again, or by sourcing your profile
-
-## Clone the Docker repos
-
-CEDAR does not publish Docker images to DockerHub or to our Nexus server.
-Instead of retrieving the docker images, you will need to build them locally.
-
-### Clone the repos using CLI script
-
-Clone the needed repos and then pull the `develop` branch by executing:
- 
-```sh
+```bash
+cd "$CEDAR_HOME"
 cedarcli git clone docker
 ```
 
-It is fine if the second command results in some warnings. We are not using all the source repos that the cli has knowledge of.
+The Docker repositories currently develop on `develop`. The documentation repository is not
+required to run CEDAR.
 
-## Source shell scripts
+Complete the installation-file copies and profile activation described on the
+[Configuration](configuration.md) page before using the Docker commands below.
 
-Please edit your `.bash_profile` (or `.zshrc`) and add this line to it:
+## Current Docker Commands
 
-```sh
-source ${CEDAR_HOME}/cedar-development/bin/templates/cedar-profile-docker-eval.sh
+`cedarcli` has separate Docker-aware commands because the native status command probes host ports
+that are intentionally private inside `cedarnet`.
+
+```bash
+cedarcli docker validate
+cedarcli docker build <target>
+cedarcli docker start <stack> -d
+cedarcli docker status
+cedarcli docker stop <stack>
 ```
 
-As a result, this is how the CEDAR section of your `bash profile` should look like:
+Build targets are `infrastructure`, `microservices`, `frontends`, `admin`, `all`, or a single image
+name. Start and stop stacks are:
 
-```sh
-export CEDAR_HOME=~/CEDAR_DOCKER
-alias cedarcli='source $CEDAR_HOME/decar-cli/cli.sh'
-source ${CEDAR_HOME}/cedar-development/bin/templates/cedar-profile-docker-eval.sh
+| Stack | Containers | Required |
+| --- | ---: | --- |
+| `infrastructure` | 7 | Yes |
+| `microservices` | 15 | Yes |
+| `frontends` | 7 | Yes for all-Docker mode |
+| `admin` | 4 | No |
+
+Every start command accepts `--pull always`, `--pull missing`, or `--pull never`. The default is
+`never`, which is correct for the current locally built snapshot images.
+
+## Check the Environment
+
+`cedarcli env list` prints the active `CEDAR_*` variables. There is no fixed expected count; the
+profile evolves as services are added. Verify the important Docker values directly:
+
+```bash
+cedarcli env filter CEDAR_NET
+cedarcli env filter CEDAR_NGINX_HOST
+cedarcli env filter CEDAR_AUTH_HOST_TARGET
+cedarcli docker validate
 ```
 
-???+ warning "Important"
+## Docker Status
 
-    Check your setup at this point.
-    Please close your shells, and start a new one.
-    
-    Execute the following:
-    ```sh
-    cedarcli env list
-    ```
+Use this as the normal readiness gate:
 
-    You should see a list of ~166 environment variables
-
-### CEDAR Docker shell environment
-
-Please make sure, that during this installation, and later during starting/stopping the CEDAR Docker components you always use a shell where the `CEDAR_HOME` is set, and the above mentioned script is sourced.
-
-If you are using a terminal with multiple profile support (e.g. iTerm), make sure the active profile has the `CEDAR` environment set.
-
-## Overview
-
-During the installation and maintenance of CEDAR Docker you can take advantage of the numerous commands of `cedarcli`.
-
-## cedarcli env list
-
-`cedarcli env list` stands for CEDAR CLI Environment Variables List. You can check the values of all the environment variables that begin with the prefix `CEDAR_` in your current environment.
-
-### Running `cedarcli env list`
-Execute this: 
-```sh
-cedarcli env list
+```bash
+cedarcli docker status
 ```
 
-You should see an output resembling this:
+It reads the expected Compose services, inspects Docker runtime and health state, requires all 29
+core containers by default, and exits nonzero if one is absent or unhealthy.
 
-```
-                                    CEDAR environment variables
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Name                                          ┃ Value                                            ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ CEDAR_ADMIN_USER_API_KEY                      │ 0000111122223333444455556666777788889999aaaabbb… │
-│ CEDAR_ADMIN_USER_PASSWORD                     │ Password123                                      │
-│ CEDAR_ANALYTICS_KEY                           │ false                                            │
-│ CEDAR_ARTIFACT_ADMIN_PORT                     │ 9101                                             │
-│ CEDAR_ARTIFACT_HTTP_PORT                      │ 9001                                             │
-│ CEDAR_ARTIFACT_SERVER_HOST                    │ 192.1680.17.111                                  │
-│ CEDAR_ARTIFACT_STOP_PORT                      │ 9201                                             │
-...
-│ CEDAR_WORKER_HTTP_PORT                        │ 9011                                             │
-│ CEDAR_WORKER_SERVER_HOST                      │ 192.1680.17.111                                  │
-│ CEDAR_WORKER_STOP_PORT                        │ 9211                                             │
-└───────────────────────────────────────────────┴──────────────────────────────────────────────────┘
-                                           166 variables
+For the supported Docker-backend/native-frontend hybrid:
+
+```bash
+cedarcli docker status --no-frontends
 ```
 
-### Debugging `cedarcli env list`
-If your output looks different from the one presented above, please go back, and start from beginning.
-You will need your environment set up correctly before proceeding.
+To make the optional administration tools part of the gate:
 
-## cedarcli server status
-
-`cedarcli server status` and its shortcut `cedarcli status` stands for CEDAR CLI Server Status. You can check the status of the various components.
-
-### Running `cedarcli server status`
-Execute this: 
-```sh
-cedarcli server status
-# or
-cedarcli status
+```bash
+cedarcli docker status --include-admin
 ```
 
-You should see the following output:
-
-```
-                 CEDAR Server status list
-┏━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━┓
-┃ Server                 ┃ Status ┃ Port  ┃ Error         ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━┩
-│ Microservice           │        │       │               │
-│ artifact               │ ❌     │ 9001  │ Port not open │
-│ bridge                 │ ❌     │ 9015  │ Port not open │
-│ group                  │ ❌     │ 9009  │ Port not open │
-│ impex                  │ ❌     │ 9008  │ Port not open │
-│ messaging              │ ❌     │ 9012  │ Port not open │
-│ monitor                │ ❌     │ 9014  │ Port not open │
-│ open                   │ ❌     │ 9013  │ Port not open │
-│ repo                   │ ❌     │ 9002  │ Port not open │
-│ resource               │ ❌     │ 9007  │ Port not open │
-│ schema                 │ ❌     │ 9003  │ Port not open │
-│ submission             │ ❌     │ 9010  │ Port not open │
-│ terminology            │ ❌     │ 9004  │ Port not open │
-│ user                   │ ❌     │ 9005  │ Port not open │
-│ valuerecommender       │ ❌     │ 9006  │ Port not open │
-│ worker                 │ ❌     │ 9011  │ Port not open │
-├────────────────────────┼────────┼───────┼───────────────┤
-│ Infrastructure         │        │       │               │
-│ MongoDB                │ ❌     │ 27017 │ Port not open │
-│ OpenSearch-REST        │ ❌     │ 9200  │ Port not open │
-│ OpenSearch-Transport   │ ❌     │ 9300  │ Port not open │
-│ NGINX                  │ ❌     │ 80    │ Port not open │
-│ Keycloak               │ ❌     │ 8080  │ Port not open │
-│ Neo4j                  │ ❌     │ 7474  │ Port not open │
-│ Redis-persistent       │ ❌     │ 6379  │ Port not open │
-│ MySQL                  │ ❌     │ 3306  │ Port not open │
-├────────────────────────┼────────┼───────┼───────────────┤
-│ Frontend               │        │       │               │
-│ main                   │ ❌     │ 4200  │ Port not open │
-│ openview               │ ❌     │ 4220  │ Port not open │
-│ component              │ ❌     │ 4240  │ Port not open │
-│ monitoring             │ ❌     │ 4300  │ Port not open │
-│ artifacts              │ ❌     │ 4320  │ Port not open │
-│ bridging               │ ❌     │ 4340  │ Port not open │
-├────────────────────────┼────────┼───────┼───────────────┤
-│ Frontend-non-essential │        │       │               │
-│ cee-dev                │ ❌     │ 4400  │ Port not open │
-│ demo.cee               │ ❌     │ 4260  │ Port not open │
-└────────────────────────┴────────┴───────┴───────────────┘
-```
-
-### Checking `cedarcli server status`
-As you can see, all the services should be stopped at this point.
-
-### Preexisting services
-
-If you have some services in the running state, that means that you already have some components of the CEDAR system installed.
-
-This will cause issues since there will be a collision on the ports that CEDAR services will try to connect.
-
-???+ warning "Important - Stop conflicting services"
-    
-    If at this point you see any servers running on any of the ports enumerated here, please stop those services.
-    
-    The Dockerized CEDAR exposes all the infrastructure services on their native ports in order for the evaluator to be able to connect and inspect them.
-    
-    Conflicting services will make the Dockerized CEDAR not run properly.
+Do not use `cedarcli status` to judge a Docker deployment. That command remains the native
+process/host-port diagnostic and can report false failures for Docker-internal ports.

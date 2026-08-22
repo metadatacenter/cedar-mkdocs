@@ -1,44 +1,40 @@
 # Prerequisites
 
-## Operating System
+## Host System
 
-While the CEDAR team uses `macOS` during development, running the Dockerized CEDAR should be possible under every OS that supports Docker.
+The complete Docker deployment was last verified on macOS with Apple Silicon. Use a current Docker
+Desktop release with Docker Compose v2; Docker Engine 29.6.2 and Compose 5.3.1 are known-good.
 
-Please upgrade your OS to the latest release, and have every security update installed.
+Before starting, stop native CEDAR components and any other programs listening on CEDAR's ports.
+The Docker backend and native backend cannot run at the same time. Native and containerized
+frontends also cannot share their seven frontend ports.
 
-## Install Docker
+## Docker Resources
 
-Please install the latest stable release of `Docker Desktop` from the Docker website:
+Allocate at least:
 
-[https://www.docker.com/](https://www.docker.com/)
+- 12 GB of memory to Docker Desktop;
+- half of the host's CPU cores; and
+- 20 GB of free Docker disk space, plus room for application data and build layers.
 
-### Upgrade Docker
-If you already have Docker, please upgrade it to the latest stable release.
+The complete 35-image build and 29-container runtime can require more disk and memory than the old
+20-container evaluation deployment. Increase these values if image builds are killed or
+OpenSearch, Neo4j, or the Java services repeatedly become unhealthy.
 
-## Configure Docker
+## Required Software and Access
 
-Running CEDAR means running 20+ containers. You will need to configure your Docker to make it possible running all the containers needed under optimal conditions.
+- Git
+- Python 3 with `venv`
+- Docker with the Compose v2 plugin
+- OpenSSL, for generating current local certificates
+- Network access to GitHub, Docker base-image registries, and the CEDAR Nexus repositories
 
-???+ warning "Important"
+JDK 17 and the Java source repositories are optional for the normal evaluation path, which builds
+server images from the published Maven snapshots on Nexus. They are required only when rebuilding
+all Java code locally and using `cedarcli docker build microservices --local`.
 
-    The **Memory** setting is crucial, errors will occur if Docker does not have enough memory set up.
-    
-    The other settings will probably work with their default values as well, but please adjust them as described below.
- 
+## Local Domain
 
-### Configure Memory
-In the Docker Desktop application 
-under `Preferences` -> `Resources` -> `Memory` assign at least **12 GB** to Docker.
-
-### Configure CPUs
-In the Docker Desktop application 
-under `Preferences` -> `Resources` -> `CPUs` check the number of assigned cores. It is typically set by default to the half of the available cores. That setting will work for CEDAR.
-
-### Configure Swap
-In the Docker Desktop application 
-under `Preferences` -> `Resources` -> `Swap` check the assigned storage. It is typically set by default to 1 GB. That setting will work for CEDAR.
-
-### Configure Disk Image Size
-In the Docker Desktop application 
-under `Preferences` -> `Resources` -> `Disk Image Size` check the assigned space. CEDAR Docker will need at least **20 GB**. 
-Please set it to accommodate your current data and the amount that CEDAR needs.
+The evaluation deployment uses `*.metadatacenter.orgx`; note the final `x`. The hostname helper
+maps the required names to `127.0.0.1`, and Docker nginx publishes the application on ports 80 and
+443.

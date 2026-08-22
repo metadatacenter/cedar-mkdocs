@@ -1,33 +1,65 @@
 # Configuration
 
-## CEDAR Docker Home Directory
+## Create `CEDAR_HOME`
 
-You will need a directory where all the CEDAR Docker related code, configuration and some executable will reside.
-You should create a directory under your home directory:
+Choose a path without spaces or shell metacharacters. This guide uses:
 
-```sh
-mkdir ~/CEDAR_DOCKER
+```bash
+mkdir -p "$HOME/CEDAR_DOCKER"
+export CEDAR_HOME="$HOME/CEDAR_DOCKER"
 ```
 
-???+ warning "Important"
+Keep `CEDAR_HOME` exported before sourcing any CEDAR profile. Sourcing the Docker profile with an
+empty value makes bind mounts and configuration paths resolve incorrectly.
 
-    Of course, you can choose to have this CEDAR Docker home directory in a different place.
-    We have an environment variable (set up later as `CEDAR_HOME`) which holds this path.
-    
-    We suggest, however, that your CEDAR Docker home directory path does not contain spaces or special characters.
+## Installation Configuration Files
 
-    If you see this path referenced directly (as in `~/CEDAR_DOCKER`) and you did not use the same path, please replace it with the proper value on your system.  
+After cloning `cedar-development` on the previous page, copy the two configuration templates to
+the root of `CEDAR_HOME`:
 
-## Usernames and Passwords
+```bash
+cd "$CEDAR_HOME"
+cp cedar-development/bin/templates/set-env-external.sh ./set-env-external.sh
+cp cedar-development/bin/templates/set-env-internal.sh ./set-env-internal.sh
+```
 
-We use some default usernames and passwords.
+Edit these installation copies, not the checked-in templates. At minimum, set a real
+`CEDAR_BIOPORTAL_API_KEY` in `set-env-external.sh`. The defaults are evaluation credentials and
+must never be reused for an exposed or production installation.
 
-Please do not change these for the evaluation phase.
-If you decide to use CEDAR, please change these variables before the first run.
+## Activate the Full-Docker Profile
 
-## CEDAR Docker Domain
+Use a dedicated shell for Docker commands:
 
-The domain used in the CEDAR Docker images is `cedar.metadatacenter.orgx`.
-Please note the `x` at the end of `orgx`.
+```bash
+export CEDAR_HOME="$HOME/CEDAR_DOCKER"
+alias cedarcli='source "$CEDAR_HOME/cedar-cli/cli.sh"'
+source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker-eval.sh"
 
-Since this installation serves evaluation purposes, please do not try to change this domain name, even if you find some of the places that will contain this string.
+# Required when nginx itself runs in Docker.
+export CEDAR_AUTH_HOST_TARGET="$CEDAR_NGINX_HOST"
+
+# Use remote BioPortal/OntoPortal rather than a local terminology catalog.
+export CEDAR_TERMINOLOGY_STORE_CATALOG=""
+mkdir -p "$CEDAR_HOME/cedar-term"
+```
+
+The authentication override is essential. Without it, containers can be healthy while authenticated
+API requests fail because a microservice cannot retrieve Keycloak signing keys through Docker nginx.
+
+The checked-in profile can also support a Docker-backend/native-frontend hybrid; that mode uses
+different frontend upstreams. Do not mix full-Docker and hybrid values in the same shell. See the
+[Docker runbook](https://github.com/metadatacenter/cedar-development/blob/develop/ops/DOCKER-RUNBOOK.md)
+for the hybrid procedure.
+
+## Validate the Environment
+
+After the repositories and Python dependencies are installed, run:
+
+```bash
+cedarcli docker validate
+```
+
+All four Compose projects—`cedar-infrastructure`, `cedar-microservices`, `cedar-frontend`, and
+`cedar-admin`—must report `OK`. The admin project must parse cleanly even though starting its
+containers is optional.

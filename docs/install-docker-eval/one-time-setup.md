@@ -1,84 +1,60 @@
 # One-Time Setup
 
-## One-time setup
+Run these steps from a shell with the full-Docker profile and overrides described on the
+[Configuration](configuration.md) page.
 
-This step needs to be executed once for a CEDAR Docker installation. This will create the network, the volumes, and copy certificates: 
+## Add Local Hostnames
 
-### Create network, create volumes, copy certificates
+The hostname helper reads the central CEDAR subdomain inventory and adds missing names to
+`/etc/hosts`, including Workspace and Designer:
 
-```sh
-cedarcli docker one-time-setup
-```
-
-## Subdomains
-
-Our utility script will add the subdomains needed for CEDAR Docker into the local `/etc/hosts` file.
-
-Please run:
-```sh
+```bash
 cedarcli dev add-hosts
 ```
 
-The script will ask you for your password to execute a `sudo`.
-The output of the script should be similar to the one below:
+The command prompts for `sudo` only when changes are required. Confirm the principal frontend
+names resolve locally:
 
+```bash
+for host in cedar workspace designer openview content monitoring bridging; do
+  ping -c 1 "${host}.metadatacenter.orgx"
+done
 ```
-Testing the list of CEDAR hosts:
-Host unknown : artifact.metadatacenter.orgx
-Host unknown : bridge.metadatacenter.orgx
-Host unknown : bridging.metadatacenter.orgx
-Host unknown : auth.metadatacenter.orgx
-Host unknown : cedar.metadatacenter.orgx
-Host unknown : content.metadatacenter.orgx
-Host unknown : group.metadatacenter.orgx
-Host unknown : impex.metadatacenter.orgx
-Host unknown : monitor.metadatacenter.orgx
-Host unknown : monitoring.metadatacenter.orgx
-Host unknown : messaging.metadatacenter.orgx
-Host unknown : open.metadatacenter.orgx
-Host unknown : openview.metadatacenter.orgx
-Host unknown : repo.metadatacenter.orgx
-Host unknown : resource.metadatacenter.orgx
-Host unknown : schema.metadatacenter.orgx
-Host unknown : submission.metadatacenter.orgx
-Host unknown : terminology.metadatacenter.orgx
-Host unknown : user.metadatacenter.orgx
-Host unknown : valuerecommender.metadatacenter.orgx
-Host unknown : worker.metadatacenter.orgx
-Host unknown : demo.cee.metadatacenter.orgx
-Host unknown : demo-dist.cee.metadatacenter.orgx
-Some CEDAR hosts are unknown, we will prompt for your password in order to make modifications to /etc/hosts !
-Password:
-Host unknown, adding to /etc/hosts: artifact.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: bridge.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: bridging.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: auth.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: cedar.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: content.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: group.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: impex.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: monitor.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: monitoring.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: messaging.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: open.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: openview.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: repo.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: resource.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: schema.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: submission.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: terminology.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: user.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: valuerecommender.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: worker.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: demo.cee.metadatacenter.orgx
-Host unknown, adding to /etc/hosts: demo-dist.cee.metadatacenter.orgx
+
+## Generate Current Certificates
+
+Generate a local CA and certificates rather than relying on the bundled fallback certificates,
+which may be expired:
+
+```bash
+cedarcli cert setup
+cedarcli cert ca
+cedarcli cert domains
+```
+
+These commands write the CA and domain certificates under `$CEDAR_HOME/CEDAR_CA`.
+
+## Create the Docker Network and Certificate Volumes
+
+Run this only while the CEDAR Docker stack is stopped. It recreates the external `cedarnet` network,
+creates the `cedar_cert` and `cedar_ca` volumes, and copies the generated certificates into them:
+
+```bash
+cedarcli docker one-time-setup
+```
+
+Verify the resulting resources:
+
+```bash
+docker network inspect cedarnet >/dev/null
+docker volume inspect cedar_cert cedar_ca >/dev/null
 ```
 
 ## BioPortal integration
 
 Some CEDAR microservices must be configured to allow them to access external resources.
 
-This configuration information is stored in environment variables that are assigned by the `$CEDAR_HOME/cedar-development/bin/templates/set-env-external.sh` script.
+This configuration is stored in the installation copy at `$CEDAR_HOME/set-env-external.sh`.
 
 ### Terminology microservice configuration
 
@@ -100,21 +76,23 @@ that is used for external deployments) you can see the [OntoPortal Administratio
 The default `CEDAR_BIOPORTAL_REST_BASE` value is `https://data.bioontology.org/`, which is the public BioPortal service.
 If you wish to use this service, you can create an account there and immediately obtain the BioPortal API key associated with that account.
 
-After obtaining an API key and determining the base REST endpoint URL, edit your `set-env-internal.sh` file to set these variables.
+After obtaining an API key and determining the base REST endpoint URL, edit
+`$CEDAR_HOME/set-env-external.sh`:
 
-```sh
-vi $CEDAR_HOME/cedar-development/bin/templates/set-env-external.sh
+```bash
+vi "$CEDAR_HOME/set-env-external.sh"
 ```
 
 These variables are read at microservice startup, described in a later step.
 
-## Install the self-signed root certificates
+## Trust the Self-Signed CA
 
 The CEDAR Docker setup uses self-signed certificates for the `*.metadatacenter.orgx` domains.
 
 In order for these to work with your browser, you will need to trust our CA by importing its certificate into your truststore.
 
-The process depends on which browser you use. Please follow one - or both - of the methods desribed below:
+Import `$CEDAR_HOME/CEDAR_CA/ca.crt` into the trust store used by your browser. The process depends
+on the browser.
 
 ### Add to `Firefox`
 If you use Firefox, you will need to add the root CA certificate to the trusted list of the browser.
@@ -126,7 +104,7 @@ The process is the following:
 - Click the `View Certificates...` button.
 - Make sure the `Authorities` tab is open.
 - Click `Import`.
-- Browse for `ca.crt` file. It will be located in:<br>`${CEDAR_HOME}/cedar-docker-deploy/cedar-assets/ca/`.
+- Select `$CEDAR_HOME/CEDAR_CA/ca.crt`.
 - Click both checkbox:
     - `Trust this CA to identify websites.`
     - `Trust this CA to identify email users.`
@@ -137,7 +115,7 @@ If you use Chrome or Safari, or other browsers that use the system's trust store
 
 The process is the following:
 
-* Using `Finder` navigate to:<br>`${CEDAR_HOME}/cedar-docker-deploy/cedar-assets/ca/`.
+* In Finder, navigate to `$CEDAR_HOME/CEDAR_CA`.
 * Double-click the `ca.crt` file.
 * The application called `Keychain Access` will be launched.
 * A dialog will pop up, prompting for a location for the certificate. The `login` will be preselected. Click the `Add` button.
@@ -149,4 +127,4 @@ The process is the following:
 * Close the popup.
 * You will be prompted for your password.
 * You should see the icon of the certificate having a white cross inside a blue circle.
-* You are done.
+After trusting the CA, completely restart the browser before opening CEDAR.

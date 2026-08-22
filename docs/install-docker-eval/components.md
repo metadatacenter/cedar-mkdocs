@@ -1,216 +1,147 @@
-# Components
+# Components and Lifecycle
 
-## Overview
+## Runtime Inventory
 
-The 20+ services that make up the CEDAR ecosystem are grouped in three categories:
+| Stack | Containers | Purpose |
+| --- | ---: | --- |
+| Infrastructure | 7 | nginx, Keycloak, MySQL, MongoDB, Redis, Neo4j, and OpenSearch |
+| Microservices | 15 | CEDAR REST and background services |
+| Frontends | 7 | Main editor, Workspace, Designer, OpenView, Content, Monitoring, and Bridging |
+| Admin tools | 4 | Optional Kibana, phpMyAdmin, Redis Commander, and CEDAR admin tool |
 
-| Group          | cedarcli group name  |
-| -----------    |----------------------|
-| Infrastructure | nfrastructure        |
-| Microservices  | microservices        |
-| Frontend       | frontend             |
+The first three stacks form the required 29-container deployment. Admin tools are optional. The
+build inventory contains 35 images because the Java services also use two non-runtime base images.
 
-We have `docker-compose` files for each of these groups.
-The services can be started one-by-one, but we suggest starting them in groups.
+Each frontend image has a private nginx that serves one immutable npm package. The infrastructure
+nginx remains the single public TLS endpoint and routes browser requests to those seven containers.
 
-Starting a given group the first time will build the all the Docker images, and will start the corresponding `docker-compose` file.
+## Build the Images
 
-This can take around 5-10 minutes with an everyday internet connection.
+Starting a Compose stack does not build its images. Build all three required groups before the first
+start:
 
-Starting a given group the second time will use the preexisting Docker images and containers, leading to a faster startup. 
-
-### Build & run
-
-You should start each group in their own shell window, to be able to monitor the output separately:
-
-```sh
-cedarcli docker start <GROUPNAME>
+```bash
+cedarcli docker build infrastructure
+cedarcli docker build microservices
+cedarcli docker build frontends
 ```
 
-### Wait & debug
+The microservice build downloads the current `2.9.2-SNAPSHOT` application artifacts from Nexus. The
+frontend build downloads exact immutable `2.9.2-dev.<timestamp>.g<commit>` npm versions from Nexus;
+npm packages do not use a moving Maven-style snapshot version.
 
-The system components have interdependencies.
-This means that after all the docker images are built, all the docker containers are started, some of them will wait for others before starting their internal components.
+To rebuild Java from checked-out source instead, first clone and compile the complete Java estate on
+JDK 17, then stage each local JAR into its image:
 
-For instance `Keycloak` will wait for `MySql` to start first. 
-
-This also applies to microservices, which have a start order. 
-    
-???+ warning "Important"
-
-    Please allow the script to run until the output stabilizes.
-    
-    You will see some red text in the output. Please note that some of this red text is normal. Even some warnings are expected.
-    
-    However, if the console does not stabilize after a while, please scroll back, and try to analyze the error messages.
-
-### Stop a service group
-
-You can press a single ++ctrl++ + C to stop a `docker-compose` group gracefully.
-
-Or you can, from a different shell, stop the group with the stop command:
-
-```sh
-cedarcli docker stop <GROUPNAME>
+```bash
+cedarcli build java
+cedarcli docker build microservices --local
 ```
 
-## Infrastructure services
+The local path is stronger verification but is not required for a normal evaluation installation.
 
-The infrastructure group provides the backend for CEDAR. 
+## Start the Required Deployment
 
-### Start infra services
+Start the stacks in dependency order and in detached mode:
 
-```sh
-cedarcli docker start infrastructure
+```bash
+cedarcli docker start infrastructure -d
+cedarcli docker start microservices -d
+cedarcli docker start frontends -d
 ```
 
-### Check infra services
+These commands default to `--pull never`, preventing Compose from replacing locally built snapshot
+images or failing while looking for unpublished Docker Hub tags. A cold start can take several
+minutes because infrastructure and microservice health dependencies are enforced by Compose.
 
-```sh
-cedarcli status
+There is not yet a single aggregate start-and-wait command. Check readiness separately:
+
+```bash
+cedarcli docker status
 ```
 
-You should see all the services in the `Infrastructure` (2nd) block in `Running` status.
+Expected result:
 
-If this is not the case, stop the infrastructure services using one of these ways:
+```text
+29/29 required Docker services are ready.
+```
 
-* with the `cedarcli docker stop infrastructure` command from another console
-* with a single ++ctrl++ + C form the active console.
+If a service is missing or unhealthy, inspect its stack:
 
-Then please try running them again. If this does not help, please analyze the output for indications of what went wrong.
+```bash
+cd "$CEDAR_HOME/cedar-docker-deploy/cedar-microservices"
+docker compose ps
+docker compose logs --tail 200 <service>
+```
 
-### Stop infra services
+Use the corresponding `cedar-infrastructure` or `cedar-frontend` directory for failures in those
+stacks.
 
-```sh
+## Optional Administration Tools
+
+Build and start the admin stack only when needed:
+
+```bash
+cedarcli docker build admin
+cedarcli docker start admin -d
+cedarcli docker status --include-admin
+```
+
+## Stop and Restart
+
+Stop in reverse dependency order:
+
+```bash
+cedarcli docker stop frontends
+cedarcli docker stop microservices
 cedarcli docker stop infrastructure
 ```
 
-## Microservices
+Ordinary stop operations retain Docker named volumes and therefore retain application data.
 
-The microservices group provides the REST endpoints for CEDAR. 
+## Destructive Reset Commands
 
-### Start microservices
+The following commands remove local Docker state and are not part of an ordinary restart. Inspect
+the target first and back up any required data.
 
-```sh
-cedarcli docker start microservices
-```
+### Containers
 
-### Check microservices
-
-```sh
-cedarcli status
-```
-
-You should see all the services in the `Microservices` (1st) block in `Running` status.
-
-If this is not the case, please stop the microservices using one of these ways:
-
-* with the `cedarcli docker stop microservices` command from another console
-* with a single ++ctrl++ + C form the active console.
-
-Then please try running them again. If this does not help, please analyze the output for indications of what went wrong.
-
-### Stop microservices
-
-```sh
-cedarcli docker stop microservices
-```
-
-## Frontends
-
-The frontends group provides the four frontends for CEDAR (main CEDAR, OpenView, Monitoring and Bridging). 
-
-### Start frontends
-
-```sh
-cedarcli docker start frontends
-```
-
-### Check frontend
-
-```sh
-cedarcli status
-```
-
-You should see all the services in the `Front End` (4th) block in `Running` status.
-
-If this is not the case, please stop the frontend using one of these ways:
-
-* with the `cedarcli docker stop frontends` command from another console
-* with a single ++ctrl++ + C form the active console.
-
-Then please try running them again. If this does not help, please analyze the output for indications of what went wrong.
-
-### Stop frontend
-
-```sh
-cedarcli docker stop frontends
-```
-
-## Docker commands
-
-While starting, stopping and evaluating CEDAR Docker, you could meet issues with the Docker images and containers.
-
-Sometimes you could need to delete Docker resources (volumes, images, containers) in order to create/build them again.
-
-To do so, we have a set of utility scripts that can help you:
-
-### Docker Containers
-
-List the containers using:
-```sh
+```bash
 docker ps -a
-```
-
-Remove the CEDAR-related containers using:
-```sh
 cedarcli docker remove containers
 ```
 
-### Docker Volumes
+### Volumes
 
-List the volumes using:
-```sh
-docker volume list 
+```bash
+docker volume ls
+cedarcli docker remove volumes
 ```
 
-Remove the CEDAR-related volumes using:
-```sh
-cedarcli docker remove volumes 
-```
+Removing volumes deletes CEDAR databases, state, certificates, and logs. It cannot be undone by
+restarting the containers.
 
-Or remove them one-by-one:
-```sh
-docker volume rm <volume_name>
-```
+### Images
 
-### Docker Images
-
-List the images using:
-```sh
+```bash
 docker images
-```
-
-Remove the CEDAR-related images using:
-```sh
 cedarcli docker remove images
 ```
 
-### Docker Networks
+### Network
 
-List the networks using:
-```sh
-docker network list
+```bash
+docker network ls
+cedarcli docker remove network
 ```
 
-Remove the CEDAR network using:
-```sh
-cedarcli docker remove network 
+The network cannot be removed while a container is attached to it.
+
+### Everything
+
+```bash
+cedarcli docker remove all
 ```
 
-### Remove all CEDAR-related Docker artifacts
-
-Remove all CEDAR from Docker using:
-```sh
-cedarcli docker remove all 
-```
+This force-removes matching containers and images, deletes all named CEDAR volumes, and removes
+`cedarnet`. Use it only for an intentional full reset.

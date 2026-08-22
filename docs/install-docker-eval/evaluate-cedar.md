@@ -1,95 +1,63 @@
 # Evaluate CEDAR
 
-## Users
+## Confirm Runtime Health
 
-You can start using CEDAR at this point. The main point of access is:
+Before opening a browser, require the complete Docker estate:
 
-[https://cedar.metadatacenter.orgx](https://cedar.metadatacenter.orgx) 
+```bash
+cedarcli docker status
+```
 
-### Users and passwords
+The expected result is `29/29 required Docker services are ready`.
 
-You can log in with several users. The permissions of the different users is slighly different:
+## Frontend URLs
 
-| Username                        | Password            | User type       |
-| -----------                     | -----------         | -----------        |
-| cedar-admin                     | Password123         | Power user, with all the available roles. It can perform virtually any operation that is possible in CEDAR. |
-| cadsr-admin                     | Password123         | Power user, with special roles for category administration. |
-| my@user.com                     | my                  | Regular user. |
-| test1@test.com                  | test1               | Regular user, also used in test cases. |
-| test2@test.com                  | test2               | Regular user, also used in test cases. |
+All browser traffic enters through the infrastructure nginx container. The seven frontend
+applications are:
 
-## Components, URLs
+| Application | URL |
+| --- | --- |
+| Main editor | [https://cedar.metadatacenter.orgx/](https://cedar.metadatacenter.orgx/) |
+| Workspace | [https://workspace.metadatacenter.orgx/](https://workspace.metadatacenter.orgx/) |
+| Template Designer | [https://designer.metadatacenter.orgx/](https://designer.metadatacenter.orgx/) |
+| OpenView | [https://openview.metadatacenter.orgx/](https://openview.metadatacenter.orgx/) |
+| Content | [https://content.metadatacenter.orgx/](https://content.metadatacenter.orgx/) |
+| Monitoring | [https://monitoring.metadatacenter.orgx/](https://monitoring.metadatacenter.orgx/) |
+| Bridging | [https://bridging.metadatacenter.orgx/](https://bridging.metadatacenter.orgx/) |
 
-### Keycloak
+Verify the public routes without logging in:
 
-Keycloak serves as the authentication and autorization system for CEDAR.
+```bash
+for host in cedar workspace designer openview content monitoring bridging; do
+  curl -sk -o /dev/null -w "$host %{http_code}\n" \
+    "https://${host}.metadatacenter.orgx/"
+done
+```
 
-| Data        | Value                                     |
-| ----------- | -----------                               |
-| URL:        | [https://auth.metadatacenter.orgx/](https://auth.metadatacenter.orgx/)         |
-| Username:   | administrator                             |
-| Password:   | changeme                                  |
+Every route should return HTTP 200. Then log into Workspace, open a folder, and open a template in
+Designer. This checks the split-frontend navigation and shared Keycloak session as well as static
+page delivery.
 
+## Evaluation Users
 
-### Neo4j
+The checked-in evaluation realm contains these non-production accounts:
 
-Neo4j is the graph database behind CEDAR.
+| Username | Password | Role |
+| --- | --- | --- |
+| `cedar-admin` | `Password123` | Power user with all available roles |
+| `cadsr-admin` | `Password123` | Power user with category-administration roles |
+| `my@user.com` | `my` | Regular user |
+| `test1@test.com` | `test1` | Regular test user |
+| `test2@test.com` | `test2` | Regular test user |
 
-| Data        | Value                                     |
-| ----------- | -----------                               |
-| URL:        | [http://localhost:7474/](http://localhost:7474/)         |
-| Username:   | neo4j                                     |
-| Password:   | changeme                                  |
+These credentials are for a local evaluation deployment only.
 
+## Infrastructure URLs
 
-[//]: # (## Redis Commander)
+| Component | URL | Evaluation credentials |
+| --- | --- | --- |
+| Keycloak | [https://auth.metadatacenter.orgx/](https://auth.metadatacenter.orgx/) | `administrator` / `changeme` |
+| Neo4j Browser | [http://localhost:7474/](http://localhost:7474/) | `neo4j` / `changeme` |
 
-[//]: # ()
-[//]: # (`Redis Commander` is an optional component, it is started with the `monitoring` group of services.)
-
-[//]: # ()
-[//]: # (Redis is the memory cache and message queue behind CEDAR.)
-
-[//]: # ()
-[//]: # (| Data        | Value                                     |)
-
-[//]: # (| ----------- | -----------                               |)
-
-[//]: # (| URL:        | [http://localhost:8081/]&#40;http://localhost:8081/&#41;         |)
-
-
-[//]: # (## Kibana)
-
-[//]: # ()
-[//]: # (`Kibana` is an optional component, it is started with the `monitoring` group of services.)
-
-[//]: # ()
-[//]: # (Kibana lets you monitor Elasticsearch, the search engine behind CEDAR.)
-
-[//]: # ()
-[//]: # (| Data        | Value                                     |)
-
-[//]: # (| ----------- | -----------                               |)
-
-[//]: # (| URL:        | [http://localhost:5601/]&#40;http://localhost:5601/&#41;         |)
-
-[//]: # (| DEVTools URL:   | [http://localhost:5601/app/kibana#/dev_tools/console?_g=&#40;&#41;]&#40;http://localhost:5601/app/kibana#/dev_tools/console?_g=&#40;&#41;&#41;           |)
-
-
-[//]: # (## phpMyAdmin)
-
-[//]: # ()
-[//]: # (`phpMyAdmin` is an optional component, it is started with the `monitoring` group of services.)
-
-[//]: # ()
-[//]: # (| Data        | Value                                     |)
-
-[//]: # (| ----------- | -----------                               |)
-
-[//]: # (| URL:        | [http://localhost:8082/]&#40;http://localhost:8082/&#41;         |)
-
-[//]: # (| Server:     | 192.168.17.1                              |)
-
-[//]: # (| Username:   | root                                      |)
-
-[//]: # (| Password:   | changeme                                  |)
+The admin-tool URLs are available only after starting the optional `admin` stack. Their ports come
+from the active Docker profile: Redis Commander 8081, phpMyAdmin 8082, and Kibana 5601.
