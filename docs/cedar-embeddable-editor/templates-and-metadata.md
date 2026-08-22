@@ -78,7 +78,7 @@ For YAML, assign the **parsed** YAML object rather than the YAML source text.
 
 Parsing falls to the application. Browsers parse JSON natively and YAML not at all, so a YAML template obliges the page to carry a
 parser such as [js-yaml](https://www.npmjs.com/package/js-yaml). Nothing else differs, because the
-CEE reads both serializations through the same model library and either builds the same editor.
+The CEE reads both serializations through the same model library and either builds the same editor.
 
 ## Reading the Metadata Back
 

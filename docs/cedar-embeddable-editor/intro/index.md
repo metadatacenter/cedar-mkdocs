@@ -27,8 +27,8 @@ kept their own copy of each template synchronized by hand, and did it again when
 changed.
 
 The CEE removes the round trip. The template renders inside the host application, which receives
-the metadata directly. Two consequences follow, and between them they are the case for embedding the
-CEE rather than building a form:
+the metadata directly. Two consequences follow, and between them they are the case for embedding
+the CEE rather than building a form:
 
 - **There is no metadata interface to build or maintain.** Presentation and data-creation logic
   live in the component. A platform adds a tag, not a form.

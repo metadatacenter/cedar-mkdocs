@@ -68,8 +68,8 @@ The messages go to the browser console and to any handler registered on the `eve
 
 One refused key costs only that key: every other key in the same configuration applies. The CEE does
 not repair a value either, so a base URL missing its slash is dropped rather than completed —
-appending a path to it would produce an endpoint no one chose, and an unnamed server is a state the
-CEE already reports.
+appending a path to it would produce an endpoint no one chose, and an unnamed server is a state
+the CEE already reports.
 
 An assignment that is not an object at all — a string, an array, null — configures nothing and does
 not count as the one assignment. The next assignment is still the first one.
