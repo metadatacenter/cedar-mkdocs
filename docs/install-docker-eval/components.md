@@ -26,6 +26,12 @@ cedarcli docker build microservices
 cedarcli docker build frontends
 ```
 
+The argument after `build` is a build target. `infrastructure` builds the databases, identity
+provider, public nginx, and other platform services. `microservices` builds the CEDAR Java services,
+and `frontends` builds the browser applications. `admin` builds the optional diagnostic and
+administration tools. Use `all` to build every group, or use an individual image name when you need
+to rebuild only one container image.
+
 The microservice build downloads the current `2.9.2-SNAPSHOT` application artifacts from Nexus. The
 frontend build downloads exact immutable `2.9.2-dev.<timestamp>.g<commit>` npm versions from Nexus;
 npm packages do not use a moving Maven-style snapshot version.
@@ -41,6 +47,11 @@ cedarcli docker build microservices --local
 The local path is stronger verification but is not required for a normal evaluation installation.
 
 ## Start the Required Deployment
+
+The argument after `start` or `stop` names a stack: a related group of containers managed together
+by one Docker Compose project. The required stacks are `infrastructure`, `microservices`, and
+`frontends`; `admin` is optional. Unlike a build target, a stack controls running containers rather
+than constructing images.
 
 Start the stacks in dependency order and in detached mode:
 

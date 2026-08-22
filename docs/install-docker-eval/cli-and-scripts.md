@@ -42,19 +42,20 @@ alias cedarcli='source "$CEDAR_HOME/cedar-cli/cli.sh"'
 Add the `CEDAR_HOME` export and alias to your normal shell profile if you want them to be available
 in new terminals.
 
-## Get the Docker Support Repositories
+## Get the Docker Deployment Repositories
 
-Now let the CLI retrieve the repositories that describe how CEDAR images are constructed, how the
-containers fit together, and which environment settings they share:
+Now let the CLI retrieve the core Docker repositories. These define how CEDAR images are built,
+how the containers are assembled into a working application, how requests are routed, and which
+environment settings the deployment shares:
 
 ```bash
 cd "$CEDAR_HOME"
 cedarcli git clone docker
 ```
 
-This does not clone the entire CEDAR source tree. A normal evaluation build consumes packaged Java
-and frontend artifacts from Nexus, so the Docker support repositories are enough. You can add the
-application source repositories later if you want to build the backend itself.
+This does not clone the entire CEDAR source tree. A normal evaluation build combines these Docker
+deployment definitions with packaged Java and frontend artifacts from Nexus. You only need the
+application source repositories if you want to rebuild those artifacts yourself.
 
 At this point the tools are installed, but the application is not configured yet. Continue to
 [Configure Your Installation](configuration.md) before running Docker commands.
