@@ -54,7 +54,7 @@ cedarcli docker build microservices --local
 
 The local path is stronger verification but is not required for a normal evaluation installation.
 
-## Start the Required Deployment
+## Start the Deployment
 
 The argument after `start` or `stop` names a stack: a related group of containers managed together
 by one Docker Compose project. The required stacks are `infrastructure`, `microservices`, and
@@ -73,7 +73,7 @@ These commands default to `--pull never`, preventing Compose from replacing loca
 images or failing while looking for unpublished Docker Hub tags. A cold start can take several
 minutes because infrastructure and microservice health dependencies are enforced by Compose.
 
-There is not yet a single aggregate start-and-wait command. Check readiness separately:
+Check that all CEDAR containers are running and healthy:
 
 ```bash
 cedarcli docker status
