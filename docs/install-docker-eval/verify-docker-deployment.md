@@ -11,7 +11,7 @@ cedarcli docker status
 
 The expected result is `29/29 required Docker services are ready`.
 
-## Frontend URLs
+## Open CEDAR in Your Browser
 
 CEDAR provides several browser applications, each at its own local HTTPS address. Those addresses
 all resolve to your computer, where the infrastructure nginx container is the single public entry
@@ -24,7 +24,7 @@ the HTML, JavaScript, and other files that your browser displays. Authentication
 from the application also return through the public nginx entry point to the appropriate backend
 containers. The frontend containers themselves do not need public ports.
 
-The seven browser applications are available at:
+You can open any of the seven browser applications directly:
 
 | Application | URL |
 | --- | --- |
@@ -36,9 +36,16 @@ The seven browser applications are available at:
 | Monitoring | [https://monitoring.metadatacenter.orgx/](https://monitoring.metadatacenter.orgx/) |
 | Bridging | [https://bridging.metadatacenter.orgx/](https://bridging.metadatacenter.orgx/) |
 
-## Evaluation Users
+## Log In to CEDAR
 
-The checked-in evaluation realm contains these non-production accounts:
+Start with [CEDAR Workspace](https://workspace.metadatacenter.orgx/). When you sign in, CEDAR sends
+you to the local Keycloak service at `auth.metadatacenter.orgx`. After Keycloak accepts your
+credentials, it returns you to Workspace.
+
+The browser applications share that Keycloak session. For example, opening a template from
+Workspace takes you to Template Designer without asking you to sign in again.
+
+The local evaluation realm provides these accounts:
 
 | Username | Password | Role |
 | --- | --- | --- |
