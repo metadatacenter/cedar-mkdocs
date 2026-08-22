@@ -133,14 +133,19 @@ Containers, images, and the Docker network can be recreated. Volumes are differe
 databases, certificates, and other persistent state. Choose the narrowest reset that meets your
 need, inspect its target first, and back up any data you want to keep.
 
-### Containers
+### Remove and Recreate the Containers
+
+Use this when you want fresh containers while keeping downloaded images and persistent data. The
+next start recreates the containers.
 
 ```bash
 docker ps -a
 cedarcli docker remove containers
 ```
 
-### Volumes
+### Delete Persistent Data and Certificates
+
+Remove the volumes only when you intend to discard the installation's stored state.
 
 ```bash
 docker volume ls
@@ -150,14 +155,19 @@ cedarcli docker remove volumes
 Removing volumes deletes CEDAR databases, state, certificates, and logs. It cannot be undone by
 restarting the containers.
 
-### Images
+### Remove Locally Stored Images
+
+Use this to reclaim image storage or force the images to be built or downloaded again. Persistent
+data remains in its volumes.
 
 ```bash
 docker images
 cedarcli docker remove images
 ```
 
-### Network
+### Remove the CEDAR Docker Network
+
+Remove the network when uninstalling CEDAR or recreating its Docker networking.
 
 ```bash
 docker network ls
@@ -166,7 +176,7 @@ cedarcli docker remove network
 
 The network cannot be removed while a container is attached to it.
 
-### Everything
+### Reset the Entire Docker Installation
 
 ```bash
 cedarcli docker remove all
