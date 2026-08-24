@@ -61,6 +61,22 @@ Keep this Docker environment in a dedicated terminal. Native and hybrid developm
 same variable names with different values, and combining profiles produces failures that are hard
 to interpret.
 
+## Choose Where Docker Images Come From
+
+CEDAR image names begin with a registry and namespace prefix. The Docker profile defaults to the
+`metadatacenter` namespace on Docker Hub. If your installation uses a private registry such as a
+Nexus Docker repository, set its prefix before sourcing the profile:
+
+```bash
+export CEDAR_IMAGE_PREFIX=<registry-host>:<port>/<namespace>
+source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker-eval.sh"
+```
+
+This is Docker image syntax, not a web address: do not include `https://`, an image tag, or a
+trailing slash. Log in with `docker login <registry-host>:<port>` if the registry is private. The
+same value controls image builds, CEDAR base images, Compose pulls and starts, and CLI image
+cleanup, so keep it unchanged throughout a build and deployment.
+
 ## Check the Result
 
 Ask the CLI to render the Docker configuration before creating anything:
@@ -69,5 +85,6 @@ Ask the CLI to render the Docker configuration before creating anything:
 cedarcli docker validate
 ```
 
-Each Compose project should report `OK`. This check catches missing variables and malformed
-configuration early; it does not start Docker or modify application data.
+Each Compose project should report `OK`. This check rejects an invalid image prefix and catches
+missing variables or malformed Compose configuration early; it does not start Docker or modify
+application data.
