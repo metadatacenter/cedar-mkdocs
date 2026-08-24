@@ -100,6 +100,7 @@ nav:
   - Developer Guide:
       - developer-overview/index.md
       - developer-guide/cedar-artifact-library.md
+      - developer-guide/cedar-model-typescript-library.md
       - developer-guide/cedar-rest-apis.md
 
   - YAML Specification:
