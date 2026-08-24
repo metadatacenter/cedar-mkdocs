@@ -81,6 +81,7 @@ nav:
           - install-docker/overview/index.md
           - install-docker/prerequisites.md
           - install-docker/cli-and-scripts.md
+          - CEDAR CLI Cheat Sheet: install-docker/cedarcli-cheat-sheet.md
           - install-docker/configuration.md
           - install-docker/local-certificates.md
           - install-docker/build-and-run.md

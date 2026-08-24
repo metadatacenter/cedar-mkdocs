@@ -25,19 +25,26 @@ The first three stacks form the complete 29-container deployment. Admin tools ar
 The infrastructure nginx remains the single public TLS endpoint and routes browser requests to the
 frontend containers.
 
-## Build the Images
+## Select the Image Set
 
 CEDAR publishes development Java artifacts and Docker images as immutable build trains. A train
 gives every Java artifact and image one unique version and records the exact source commits and
 package inputs used to create it. The Docker CLI never guesses from whichever Maven snapshot or
 container tag happened to be uploaded last.
 
-`cedarcli build train` creates the complete published set. It builds Java in dependency order,
-builds the two Java base images followed by the 29 runtime images, and pushes them to Nexus. A final
-clean verifier pulls all 31 images and records their immutable registry digests. The deployable
-Docker pointer changes only after that inventory succeeds.
+CEDAR maintainers create a complete published set with `cedarcli build train`. It builds Java in
+dependency order, builds the two Java base images followed by the 29 runtime images, and pushes them
+to Nexus. A clean verifier then pulls all 31 images and records their immutable registry digests.
+The deployable Docker pointer changes only after that inventory succeeds.
 
-Build the images for CEDAR's three core stacks:
+An ordinary installation does not run that publication workflow and does not need to build the
+images. `cedarcli docker start all` selects the most recently verified train, and the pull policy
+decides whether Docker downloads it.
+
+### Build Images Locally
+
+The build commands are for developers changing image definitions or application source. Build the
+images for CEDAR's three core stacks with:
 
 ```bash
 cedarcli docker build infrastructure
@@ -54,9 +61,9 @@ administration tools. `core` builds the 31 images needed by the application; `al
 optional administration images. You can also use an individual image name when rebuilding one
 container image.
 
-The microservice build downloads the selected train's Java application artifacts from Nexus. The frontend
-build downloads immutable, commit-specific npm packages from Nexus; npm packages do not use a
-moving Maven-style snapshot version.
+Without `--local`, a microservice build downloads the selected train's exact Java application
+artifacts from Nexus. The frontend build downloads immutable, commit-specific npm packages from
+Nexus; npm packages do not use a moving Maven-style snapshot version.
 
 To reproduce an older completed train, select it explicitly for both build and start:
 
@@ -97,15 +104,18 @@ ports; starts each stack in dependency order; waits for health; and checks authe
 seven public frontend routes:
 
 ```bash
-cedarcli docker start all --mode full --pull never
+cedarcli docker start all --mode full --pull missing --timeout 1800
 ```
 
 An ordinary start selects the most recently verified Docker train. This pointer can lag the Java
-artifact pointer while container builds are still running. `--pull never` uses images already
-present on the machine and fails if one is absent. Use
-`--pull missing` to download only absent images or `--pull always` to refresh all images from the
-configured registry. A cold start can take several minutes; change the ten-minute limit with
-`--timeout SECONDS`.
+artifact pointer while container builds are still running. `--pull missing` downloads only absent
+images. Use `--pull always` to check the configured registry even when a local image is present.
+`--pull never` requires the complete selected image set to exist locally and fails when any image
+is absent.
+
+The timeout covers the complete start, including image downloads. A cold pull is several gigabytes,
+so the example allows 30 minutes. Later starts normally finish much sooner; choose a shorter value
+with `--timeout SECONDS` if appropriate for the machine and image cache.
 
 Two other modes support development and automated REST work:
 

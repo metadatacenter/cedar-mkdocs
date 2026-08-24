@@ -16,10 +16,11 @@ development workflow intact; you simply cannot run native and Docker copies on t
 the same time.
 
 This is a realistic local CEDAR environment, not a one-container demo and not yet a production
-deployment recipe. It asks Docker Desktop to run the full application, so the first build and start
-take some time. CEDAR's packaged Java and frontend code comes from Nexus, but the Docker images for
-the current snapshot are assembled on your computer rather than downloaded ready-made.
+deployment recipe. It asks Docker Desktop to run the full application, so the first download and
+start take some time. CEDAR publishes the complete, tested image set to Nexus as an immutable build
+train. The command-line tool selects the latest verified train and Docker downloads any images that
+are not already on your computer.
 
 The next pages walk through the setup in the order you need it: prepare the machine, install the
-small CEDAR command-line helper, provide local configuration, create certificates, and then build
-and start the application.
+small CEDAR command-line helper, provide local configuration, create certificates, and then start
+the application. Building from source remains available as a separate developer path.

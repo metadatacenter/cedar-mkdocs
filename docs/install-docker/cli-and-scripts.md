@@ -59,3 +59,6 @@ application source repositories if you want to rebuild those artifacts yourself.
 
 At this point the tools are installed, but the application is not configured yet. Continue to
 [Configure Your Installation](configuration.md) before running Docker commands.
+
+For a compact reference covering the normal native and Docker commands, see the
+[cedarcli cheat sheet](cedarcli-cheat-sheet.md).
