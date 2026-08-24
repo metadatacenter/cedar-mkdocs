@@ -65,17 +65,27 @@ to interpret.
 
 CEDAR image names begin with a registry and namespace prefix. The Docker profile defaults to the
 `metadatacenter` namespace on Docker Hub. If your installation uses a private registry such as a
-Nexus Docker repository, set its prefix before sourcing the profile:
+Nexus Docker repository, set its runtime prefix before sourcing the profile. Set the base prefix
+only when the two non-runtime Java base images live in a separate repository:
 
 ```bash
 export CEDAR_IMAGE_PREFIX=<registry-host>:<port>/<namespace>
+export CEDAR_BASE_IMAGE_PREFIX=<registry-host>:<port>/<internal-namespace>
 source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker.sh"
 ```
 
 This is Docker image syntax, not a web address: do not include `https://`, an image tag, or a
 trailing slash. Log in with `docker login <registry-host>:<port>` if the registry is private. The
-same value controls image builds, CEDAR base images, Compose pulls and starts, and CLI image
-cleanup, so keep it unchanged throughout a build and deployment.
+runtime prefix controls the images Compose pulls and starts. The base prefix controls
+`cedar-java`, `cedar-microservice`, and the `FROM` references used to build the Java services. CLI
+image cleanup covers both, so keep both unchanged throughout a build and deployment.
+
+CEDAR's Nexus deployment uses HTTPS path-based routing:
+
+```bash
+export CEDAR_IMAGE_PREFIX=nexus.bmir.stanford.edu/docker-cedar
+export CEDAR_BASE_IMAGE_PREFIX=nexus.bmir.stanford.edu/docker-cedar-internal
+```
 
 ## Check the Result
 

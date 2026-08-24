@@ -27,10 +27,15 @@ frontend containers.
 
 ## Build the Images
 
-CEDAR publishes development Java artifacts as immutable build trains. A train gives every Java
-artifact one unique version and records the exact source commits used to create it. The Docker CLI
-automatically selects the most recently completed train; it never guesses from whichever Maven
-snapshot happened to be uploaded last.
+CEDAR publishes development Java artifacts and Docker images as immutable build trains. A train
+gives every Java artifact and image one unique version and records the exact source commits and
+package inputs used to create it. The Docker CLI never guesses from whichever Maven snapshot or
+container tag happened to be uploaded last.
+
+`cedarcli build train` creates the complete published set. It builds Java in dependency order,
+builds the two Java base images followed by the 29 runtime images, and pushes them to Nexus. A final
+clean verifier pulls all 31 images and records their immutable registry digests. The deployable
+Docker pointer changes only after that inventory succeeds.
 
 Build the images for CEDAR's three core stacks:
 
@@ -38,13 +43,16 @@ Build the images for CEDAR's three core stacks:
 cedarcli docker build infrastructure
 cedarcli docker build microservices
 cedarcli docker build frontends
+# Or build the same core inventory in one command:
+cedarcli docker build core
 ```
 
 The argument after `build` is a build target. `infrastructure` builds the databases, identity
 provider, public nginx, and other platform services. `microservices` builds the CEDAR Java services,
 and `frontends` builds the browser applications. `admin` builds the optional diagnostic and
-administration tools. Use `all` to build every group, or use an individual image name when you need
-to rebuild only one container image.
+administration tools. `core` builds the 31 images needed by the application; `all` adds the four
+optional administration images. You can also use an individual image name when rebuilding one
+container image.
 
 The microservice build downloads the selected train's Java application artifacts from Nexus. The frontend
 build downloads immutable, commit-specific npm packages from Nexus; npm packages do not use a
@@ -77,9 +85,10 @@ The local path is useful while changing Java source but is not required for a no
 installation. It uses the development image tag rather than claiming to reproduce a published
 train.
 
-Every locally built image is tagged under the `CEDAR_IMAGE_PREFIX` selected during configuration.
-If you change that value, the deployment selects a different image set; rebuild under the new
-prefix or pull a complete published set from that registry.
+The 29 locally built runtime images are tagged under the `CEDAR_IMAGE_PREFIX` selected during
+configuration. `CEDAR_BASE_IMAGE_PREFIX` can place `cedar-java` and `cedar-microservice` in a
+separate internal repository and otherwise defaults to the runtime prefix. If you change either,
+rebuild under the new prefixes or pull a complete published set from those registries.
 
 ## Start the Deployment
 
@@ -91,7 +100,9 @@ seven public frontend routes:
 cedarcli docker start all --mode full --pull never
 ```
 
-`--pull never` uses images already present on the machine and fails if one is absent. Use
+An ordinary start selects the most recently verified Docker train. This pointer can lag the Java
+artifact pointer while container builds are still running. `--pull never` uses images already
+present on the machine and fails if one is absent. Use
 `--pull missing` to download only absent images or `--pull always` to refresh all images from the
 configured registry. A cold start can take several minutes; change the ten-minute limit with
 `--timeout SECONDS`.
