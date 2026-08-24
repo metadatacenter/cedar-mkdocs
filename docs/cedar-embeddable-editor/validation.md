@@ -37,8 +37,8 @@ problems: ValidationProblem[]          // everything wrong with a value that is 
 isValid: boolean                       // nothing missing and no problems
 ```
 
-These four members are the whole object, so an application can show the pair of counts as
-progress without deciding which parts of the report are meant for it.
+These four members are the whole object. The pair of counts is a progress figure an application
+can show as it stands.
 
 The counts are per declaration, not per occurrence. A required field repeated five times counts
 once, as does a required field inside an element repeated five times, and either is satisfied
@@ -51,7 +51,7 @@ repeating group.
 saveButton.disabled = !cee.dataQualityReport.isValid;
 ```
 
-The `change` detail already carries both `validity` and `dataQualityReport`, computed after the
+The `change` detail carries both `validity` and `dataQualityReport`, computed after the
 operation, so a listener does not need to reconstruct either from DOM controls:
 
 ```javascript
@@ -68,11 +68,6 @@ invalid save, ask for confirmation, or store a draft while showing the outstandi
 `showDownloadMenu` offers the report as a file, alongside the CEE's other views of the artifact. An
 application that wants to show a user everything outstanding in one place builds that from
 `dataQualityReport` in its own chrome.
-
-???+ note "A naming mismatch in older declarations"
-
-    TypeScript declarations published before this was corrected name the array `validationProblems`.
-    The object the CEE returns has always carried it as `problems`.
 
 ## Reading a Problem
 
@@ -142,8 +137,5 @@ synchronous report should not depend on the network. The structural checks still
 malformed controlled value is caught. A well-formed term from the wrong ontology is not.
 
 **Whether the instance is a valid CEDAR artifact.** The report describes the values, not the
-document. CEDAR's own validation settles that. A
-CEDAR template is itself a JSON Schema for its instances, and
-[`cedar-model-validation-library`](https://github.com/metadatacenter/cedar-model-validation-library)
-validates one against the other. An application that must be certain a stored instance will be
-accepted by CEDAR validates it there, on the server, rather than relying on a browser-side report.
+document that carries them. An application storing metadata through CEDAR gets that check when it
+saves: the server validates the instance against its template and refuses an invalid one.
