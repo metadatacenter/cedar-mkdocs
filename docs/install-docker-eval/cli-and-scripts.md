@@ -6,8 +6,8 @@ together. In this guide, it retrieves the Docker support files, builds images, s
 application, and reports whether the complete deployment is healthy.
 
 It does not replace Docker, and it is not a service that remains running with CEDAR. It provides a
-consistent interface to Docker Compose and the setup scripts that would otherwise have to be run by
-hand from several different directories. Native CEDAR development uses the same CLI for its own
+consistent interface to Docker Compose and the deployment scripts that would otherwise have to be
+run by hand from several different directories. Native CEDAR development uses the same CLI for its own
 workflows, which is why Docker-specific operations appear under `cedarcli docker`.
 
 ## Install `cedarcli`

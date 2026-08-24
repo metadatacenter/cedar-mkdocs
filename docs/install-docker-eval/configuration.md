@@ -43,20 +43,19 @@ alias cedarcli='source "$CEDAR_HOME/cedar-cli/cli.sh"'
 source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker-eval.sh"
 ```
 
-The profile is also used by a hybrid developer setup, so two choices need to be made explicitly for
-this all-Docker installation. Route authentication through the nginx container, and use the remote
-terminology service rather than expecting a local terminology catalog:
+The profile supplies the fixed Docker network and container addresses. `cedarcli` selects
+full-Docker, hybrid, or backend routing in the child processes it starts, so there are no routing
+overrides to export in this shell. For an evaluation installation, use BioPortal rather than
+expecting a local terminology catalog:
 
 ```bash
-export CEDAR_AUTH_HOST_TARGET="$CEDAR_NGINX_HOST"
 export CEDAR_TERMINOLOGY_STORE_CATALOG=""
 mkdir -p "$CEDAR_HOME/cedar-term"
 ```
 
-The authentication setting matters even when every container looks healthy: it is what allows a
-backend service to retrieve Keycloak's signing keys when you make an authenticated request. The
-empty terminology-catalog setting tells CEDAR to use the BioPortal endpoint configured in
-`set-env-external.sh`.
+The empty terminology-catalog setting tells CEDAR to use the BioPortal endpoint configured in
+`set-env-external.sh`. Aggregate startup checks that a backend container can retrieve Keycloak's
+signing configuration before it reports the deployment ready.
 
 Keep this Docker environment in a dedicated terminal. Native and hybrid development use some of the
 same variable names with different values, and combining profiles produces failures that are hard

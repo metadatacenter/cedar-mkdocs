@@ -6,9 +6,10 @@ and public routing; microservices provide the CEDAR APIs and background processi
 provide the browser applications. A fourth stack contains optional administration tools.
 
 An image is the packaged software used to create a container. Building prepares those images;
-starting creates and runs the containers from them. For a complete CEDAR installation, build and
-start the three required stacks in dependency order: infrastructure, microservices, then frontends.
-Normal stop and restart operations reuse the images and preserve the data stored in Docker volumes.
+starting creates and runs the containers from them. For a complete CEDAR installation, build the
+three core stacks: infrastructure, microservices, and frontends. The CLI starts them in dependency
+order. Normal stop and restart operations reuse the images and preserve the data stored in Docker
+volumes.
 
 ## Runtime Inventory
 
@@ -19,14 +20,14 @@ Normal stop and restart operations reuse the images and preserve the data stored
 | Frontends | 7 | Main editor, Workspace, Designer, OpenView, Content, Monitoring, and Bridging |
 | Admin tools | 4 | Optional Kibana, phpMyAdmin, Redis Commander, and CEDAR admin tool |
 
-The first three stacks form the required 29-container deployment. Admin tools are optional.
+The first three stacks form the complete 29-container deployment. Admin tools are optional.
 
 The infrastructure nginx remains the single public TLS endpoint and routes browser requests to the
 frontend containers.
 
 ## Build the Images
 
-Build the images for CEDAR's three required stacks:
+Build the images for CEDAR's three core stacks:
 
 ```bash
 cedarcli docker build infrastructure
@@ -56,22 +57,26 @@ The local path is stronger verification but is not required for a normal evaluat
 
 ## Start the Deployment
 
-The argument after `start` or `stop` names a stack: a related group of containers managed together
-by one Docker Compose project. The required stacks are `infrastructure`, `microservices`, and
-`frontends`; `admin` is optional. Unlike a build target, a stack controls running containers rather
-than constructing images.
-
-Start the stacks in dependency order and in detached mode:
+Select the complete Docker topology. The CLI checks configuration, networking, certificates, and
+ports; starts each stack in dependency order; waits for health; and checks authentication and the
+seven public frontend routes:
 
 ```bash
-cedarcli docker start infrastructure -d
-cedarcli docker start microservices -d
-cedarcli docker start frontends -d
+cedarcli docker start all --mode full --pull never
 ```
 
-These commands default to `--pull never`, preventing Compose from replacing locally built snapshot
-images or failing while looking for unpublished Docker Hub tags. A cold start can take several
-minutes because infrastructure and microservice health dependencies are enforced by Compose.
+`--pull never` uses images already present on the machine and fails if one is absent. Use
+`--pull missing` to download only absent images or `--pull always` to refresh all images from the
+configured registry. A cold start can take several minutes; change the ten-minute limit with
+`--timeout SECONDS`.
+
+Two other modes support development and automated REST work:
+
+| Mode | What the CLI starts and checks |
+| --- | --- |
+| `full` | All 29 core containers and all seven public frontend routes |
+| `hybrid` | The 22-container backend plus seven native frontend routes through Docker nginx |
+| `backend` | The 22-container backend, with no frontend-route requirement |
 
 Check that all CEDAR containers are running and healthy:
 
@@ -79,11 +84,8 @@ Check that all CEDAR containers are running and healthy:
 cedarcli docker status
 ```
 
-Expected result:
-
-```text
-29/29 required Docker services are ready.
-```
+The command remembers the successful mode, so status applies the same expectations. The full-mode
+result includes 29 healthy containers and passing authentication and frontend-route checks.
 
 If a service is missing or unhealthy, note its `Stack` and `Service` in the status table. Each stack
 has its own Docker Compose directory:
@@ -107,18 +109,15 @@ Build and start the admin stack only when needed:
 
 ```bash
 cedarcli docker build admin
-cedarcli docker start admin -d
-cedarcli docker status --include-admin
+cedarcli docker start all --mode full --include-admin
 ```
 
 ## Stop and Restart
 
-Stop in reverse dependency order:
+Stop all Docker stacks selected by the aggregate deployment. The CLI uses reverse dependency order:
 
 ```bash
-cedarcli docker stop frontends
-cedarcli docker stop microservices
-cedarcli docker stop infrastructure
+cedarcli docker stop all
 ```
 
 Ordinary stop operations retain Docker named volumes and therefore retain application data.

@@ -9,7 +9,9 @@ its health check:
 cedarcli docker status
 ```
 
-The expected result is `29/29 required Docker services are ready`.
+For a full deployment, the expected result is 29 healthy containers followed by successful
+authentication and frontend-route checks. `hybrid` and `backend` modes expect 22 containers;
+hybrid additionally checks the seven routes served by native frontend processes.
 
 ## Open CEDAR in Your Browser
 
