@@ -27,6 +27,11 @@ frontend containers.
 
 ## Build the Images
 
+CEDAR publishes development Java artifacts as immutable build trains. A train gives every Java
+artifact one unique version and records the exact source commits used to create it. The Docker CLI
+automatically selects the most recently completed train; it never guesses from whichever Maven
+snapshot happened to be uploaded last.
+
 Build the images for CEDAR's three core stacks:
 
 ```bash
@@ -41,19 +46,36 @@ and `frontends` builds the browser applications. `admin` builds the optional dia
 administration tools. Use `all` to build every group, or use an individual image name when you need
 to rebuild only one container image.
 
-The microservice build downloads the configured Java application artifacts from Nexus. The frontend
+The microservice build downloads the selected train's Java application artifacts from Nexus. The frontend
 build downloads immutable, commit-specific npm packages from Nexus; npm packages do not use a
 moving Maven-style snapshot version.
+
+To reproduce an older completed train, select it explicitly for both build and start:
+
+```bash
+cedarcli docker build microservices --train <TRAIN>
+cedarcli docker start all --mode full --train <TRAIN> --pull never
+```
 
 To rebuild Java from checked-out source instead, first clone and compile the complete Java estate on
 JDK 17, then stage each local JAR into its image:
 
 ```bash
 cedarcli build java
+cedarcli docker build infrastructure --local
 cedarcli docker build microservices --local
+cedarcli docker build frontends --local
 ```
 
-The local path is stronger verification but is not required for a normal Docker installation.
+Start locally built images with the matching local selector:
+
+```bash
+cedarcli docker start all --mode backend --local --pull never
+```
+
+The local path is useful while changing Java source but is not required for a normal Docker
+installation. It uses the development image tag rather than claiming to reproduce a published
+train.
 
 Every locally built image is tagged under the `CEDAR_IMAGE_PREFIX` selected during configuration.
 If you change that value, the deployment selects a different image set; rebuild under the new

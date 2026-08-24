@@ -37,6 +37,14 @@ problems: ValidationProblem[]          // everything wrong with a value that is 
 isValid: boolean                       // nothing missing and no problems
 ```
 
+These four members are the whole object, so an application can show the pair of counts as
+progress without deciding which parts of the report are meant for it.
+
+The counts are per declaration, not per occurrence. A required field repeated five times counts
+once, as does a required field inside an element repeated five times, and either is satisfied
+when any occurrence carries a value — so the numbers do not move as a person pages through a
+repeating group.
+
 `isValid` is true only when both answers are no, so a save button need consult nothing else:
 
 ```javascript
@@ -84,6 +92,10 @@ Each problem names the field, says what is wrong, and carries the value that cau
 Branch on `code`. It stays stable while the wording of `message` changes. `path` locates the
 offending field, so an application can point the user at it instead of reporting that something
 somewhere is wrong.
+
+`value` is the value as CEDAR writes it. A literal appears as itself, and a controlled value
+appears as the document it is stored as — a `controlledStructure` problem on a term with no
+label carries `{ '@id': 'http://purl.bioontology.org/ontology/MESH/D000086382' }`.
 
 The codes divide into the kinds of thing that can go wrong:
 
