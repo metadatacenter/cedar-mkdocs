@@ -53,7 +53,7 @@ cedarcli build java
 cedarcli docker build microservices --local
 ```
 
-The local path is stronger verification but is not required for a normal evaluation installation.
+The local path is stronger verification but is not required for a normal Docker installation.
 
 Every locally built image is tagged under the `CEDAR_IMAGE_PREFIX` selected during configuration.
 If you change that value, the deployment selects a different image set; rebuild under the new

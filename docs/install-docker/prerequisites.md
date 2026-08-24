@@ -15,7 +15,7 @@ The installation downloads source and packaged application artifacts from GitHub
 registries that supply the underlying Docker images, so it needs normal internet access during the
 initial build.
 
-You do not need a Java development environment for the normal evaluation path. The image builder
+You do not need a Java development environment for the normal Docker path. The image builder
 uses already-published Java artifacts from Nexus. JDK 17 and the complete Java source tree matter
 only if you deliberately choose to rebuild the backend from source.
 

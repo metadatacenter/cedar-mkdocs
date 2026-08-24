@@ -47,7 +47,7 @@ credentials, it returns you to Workspace.
 The browser applications share that Keycloak session. For example, opening a template from
 Workspace takes you to Template Designer without asking you to sign in again.
 
-The local evaluation realm provides these accounts:
+The local realm provides these accounts:
 
 | Username | Password | Role |
 | --- | --- | --- |
@@ -57,11 +57,11 @@ The local evaluation realm provides these accounts:
 | `test1@test.com` | `test1` | Regular test user |
 | `test2@test.com` | `test2` | Regular test user |
 
-These credentials are for a local evaluation deployment only.
+These credentials are for this local deployment only.
 
 ## Infrastructure URLs
 
-| Component | URL | Evaluation credentials |
+| Component | URL | Local credentials |
 | --- | --- | --- |
 | Keycloak | [https://auth.metadatacenter.orgx/](https://auth.metadatacenter.orgx/) | `administrator` / `changeme` |
 | Neo4j Browser | [http://localhost:7474/](http://localhost:7474/) | `neo4j` / `changeme` |

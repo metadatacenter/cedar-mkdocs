@@ -53,7 +53,7 @@ cd "$CEDAR_HOME"
 cedarcli git clone docker
 ```
 
-This does not clone the entire CEDAR source tree. A normal evaluation build combines these Docker
+This does not clone the entire CEDAR source tree. A normal Docker build combines these Docker
 deployment definitions with packaged Java and frontend artifacts from Nexus. You only need the
 application source repositories if you want to rebuild those artifacts yourself.
 

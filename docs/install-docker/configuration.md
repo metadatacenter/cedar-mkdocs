@@ -28,24 +28,24 @@ is already the default, but it requires an API key.
 Obtain a key by following the
 [BioPortal account help](https://bioportal.bioontology.org/help#Getting_an_API_key), then replace
 the placeholder `CEDAR_BIOPORTAL_API_KEY` in `$CEDAR_HOME/set-env-external.sh`. The other supplied
-credentials are deliberately simple evaluation defaults. They are suitable only for an isolated
+credentials are deliberately simple local defaults. They are suitable only for an isolated
 local installation.
 
 ## Select the Docker Environment
 
 A CEDAR profile translates the general application settings into addresses used by a particular
-deployment. Source the Docker evaluation profile in the shell where you will build and run the
+deployment. Source the Docker profile in the shell where you will build and run the
 application:
 
 ```bash
 export CEDAR_HOME="$HOME/CEDAR_DOCKER"
 alias cedarcli='source "$CEDAR_HOME/cedar-cli/cli.sh"'
-source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker-eval.sh"
+source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker.sh"
 ```
 
 The profile supplies the fixed Docker network and container addresses. `cedarcli` selects
 full-Docker, hybrid, or backend routing in the child processes it starts, so there are no routing
-overrides to export in this shell. For an evaluation installation, use BioPortal rather than
+overrides to export in this shell. For a local installation, use BioPortal rather than
 expecting a local terminology catalog:
 
 ```bash
@@ -69,7 +69,7 @@ Nexus Docker repository, set its prefix before sourcing the profile:
 
 ```bash
 export CEDAR_IMAGE_PREFIX=<registry-host>:<port>/<namespace>
-source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker-eval.sh"
+source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker.sh"
 ```
 
 This is Docker image syntax, not a web address: do not include `https://`, an image tag, or a

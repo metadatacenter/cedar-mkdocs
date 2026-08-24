@@ -15,7 +15,7 @@ it, and restarting does not require another installation. The setup also leaves 
 development workflow intact; you simply cannot run native and Docker copies on the same ports at
 the same time.
 
-This is a realistic local evaluation environment, not a one-container demo and not yet a production
+This is a realistic local CEDAR environment, not a one-container demo and not yet a production
 deployment recipe. It asks Docker Desktop to run the full application, so the first build and start
 take some time. CEDAR's packaged Java and frontend code comes from Nexus, but the Docker images for
 the current snapshot are assembled on your computer rather than downloaded ready-made.

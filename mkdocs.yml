@@ -78,13 +78,13 @@ nav:
           - install-developer/frontends.md
 
       - Docker Install:
-          - install-docker-eval/overview/index.md
-          - install-docker-eval/prerequisites.md
-          - install-docker-eval/cli-and-scripts.md
-          - install-docker-eval/configuration.md
-          - install-docker-eval/local-certificates.md
-          - install-docker-eval/build-and-run.md
-          - Verify the Docker Deployment: install-docker-eval/verify-docker-deployment.md
+          - install-docker/overview/index.md
+          - install-docker/prerequisites.md
+          - install-docker/cli-and-scripts.md
+          - install-docker/configuration.md
+          - install-docker/local-certificates.md
+          - install-docker/build-and-run.md
+          - Verify the Docker Deployment: install-docker/verify-docker-deployment.md
 
       - CEDAR Embeddable Editor:
           - cedar-embeddable-editor/intro/index.md
