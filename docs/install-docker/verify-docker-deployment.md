@@ -9,13 +9,12 @@ its health check:
 cedarcli docker status
 ```
 
-For a full deployment, the expected result is 29 healthy containers followed by successful
+For a Docker deployment, the expected result is 29 healthy containers followed by successful
 authentication and frontend-route checks. `hybrid` mode expects 22 containers and additionally
 checks the seven routes served by native frontend processes.
 
-Run the command from the shell where you sourced the Docker profile. If the CLI reports that the
-Docker profile is not loaded, source
-`$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker.sh` and run it again.
+If the CLI reports that no mode is configured, run `cedarcli mode docker` and try again. If another
+mode is already configured, stop it and run `cedarcli mode --clear` first.
 
 ## Open CEDAR in Your Browser
 

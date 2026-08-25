@@ -66,7 +66,7 @@ To reproduce an older completed train, select it explicitly for both build and s
 
 ```bash
 cedarcli docker build microservices --train <TRAIN>
-cedarcli docker start all --mode full --train <TRAIN> --pull never
+cedarcli docker start all --train <TRAIN> --pull never
 ```
 
 To rebuild Java from checked-out source instead, first clone and compile the complete Java estate on
@@ -82,7 +82,7 @@ cedarcli docker build frontends --local
 Start locally built images with the matching local selector:
 
 ```bash
-cedarcli docker start all --mode full --local --pull never
+cedarcli docker start all --local --pull never
 ```
 
 The local path is useful while changing Java source but is not required for a normal Docker
@@ -96,12 +96,12 @@ rebuild under the new prefixes or pull a complete published set from those regis
 
 ## Start the Deployment
 
-Select the complete Docker topology. The CLI checks configuration, networking, certificates, and
-ports; starts each stack in dependency order; waits for health; and checks authentication and the
-seven public frontend routes:
+After selecting `cedarcli mode docker` during configuration, start the complete deployment. The CLI
+checks configuration, networking, certificates, and ports; starts each stack in dependency order;
+waits for health; and checks authentication and the seven public frontend routes:
 
 ```bash
-cedarcli docker start all --mode full --pull missing --timeout 1800
+cedarcli docker start all --pull missing --timeout 1800
 ```
 
 An ordinary start selects the most recently verified Docker train. This pointer can lag the Java
@@ -114,12 +114,13 @@ The timeout covers the complete start, including image downloads. A cold pull is
 so the example allows 30 minutes. Later starts normally finish much sooner; choose a shorter value
 with `--timeout SECONDS` if appropriate for the machine and image cache.
 
-Two deployment modes are available:
+Three persistent deployment modes are available, although this installation guide uses `docker`:
 
 | Mode | What the CLI starts and checks |
 | --- | --- |
-| `full` | All 29 core containers and all seven public frontend routes |
+| `docker` | All 29 core containers and all seven public frontend routes |
 | `hybrid` | The 22-container backend plus seven native frontend routes through Docker nginx |
+| `native` | The host-based backend and frontend processes; Docker commands are rejected |
 
 Check that all CEDAR containers are running and healthy:
 
@@ -127,8 +128,8 @@ Check that all CEDAR containers are running and healthy:
 cedarcli docker status
 ```
 
-The command remembers the successful mode, so status applies the same expectations. The full-mode
-result includes 29 healthy containers and passing authentication and frontend-route checks.
+Status uses the configured mode. In Docker mode the result includes 29 healthy containers and
+passing authentication and frontend-route checks.
 
 If a service is missing or unhealthy, note its `Stack` and `Service` in the status table. Each stack
 has its own Docker Compose directory:

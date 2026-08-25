@@ -54,17 +54,23 @@ def draw_title(c: canvas.Canvas, text: str, x: float, y: float, width: float) ->
     c.drawCentredString(x + width / 2, y, text.lower())
 
 
-def draw_lines(c: canvas.Canvas, entries: list[Entry], x: float, top: float) -> None:
+def draw_lines(
+        c: canvas.Canvas,
+        entries: list[Entry],
+        x: float,
+        top: float,
+        leading: float = BODY_LEADING,
+) -> None:
     c.setFont("MenloBold", BODY_SIZE)
     y = top
     for entry in entries:
         if isinstance(entry, tuple):
-            text, color = entry
+            text, _color = entry
         else:
-            text, color = entry, BLACK
-        c.setFillColor(color)
+            text = entry
+        c.setFillColor(BLACK)
         c.drawString(x, y, text)
-        y -= BODY_LEADING
+        y -= leading
 
 
 def browser_icon(c: canvas.Canvas, x: float, y: float, scale: float) -> None:
@@ -216,6 +222,31 @@ def brand_panel(c: canvas.Canvas, cli_version: str) -> None:
     c.drawCentredString(x + CELL_WIDTH / 2, y + 15, cli_version)
 
 
+def docker_panel(c: canvas.Canvas) -> None:
+    column = 2
+    row = 1
+    x = column * CELL_WIDTH
+    y = PAGE_HEIGHT - (row + 1) * CELL_HEIGHT
+    panel(c, column, row, "docker", [], span=3)
+
+    body_top = y + CELL_HEIGHT - 42
+    draw_lines(c, [
+        "status",
+        "build all | <run_target> | <image>",
+        "start",
+        "  all [--train TRAIN_ID|--local] [--pull POLICY] [--timeout SEC]",
+        ("  <run_target> [--detach] [--train TRAIN_ID|--local] [--pull POLICY]", ORANGE),
+        ("  POLICY=never|missing|always", TEAL),
+        "stop all | <run_target>",
+        ("validate", ORANGE),
+        "create-network",
+        "create-certificates-volume",
+        "copy-certificates",
+        ("one-time-setup", ORANGE),
+        ("remove containers | images | network | volumes | all", OUTLINE),
+    ], x + 8, body_top, leading=8.1)
+
+
 def latest_cli_version() -> str:
     cli_repository = Path(__file__).resolve().parents[2] / "cedar-cli"
     result = subprocess.run(
@@ -243,68 +274,55 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     panel(c, 3, 0, "maven", [("clean all", ORANGE), "clean cedar"],
           icon=clean_icon, icon_scale=0.25)
     panel(c, 4, 0, "build", [
-        "<build_target>", "this",
+        ("all", ORANGE), "<build_target>", "this",
     ])
     panel(c, 5, 0, "publish", [
-        "<build_target>", "this", ("train [--resume TRAIN_ID]", ORANGE),
+        ("all", ORANGE), "<build_target>", "this",
+        ("train [--resume TRAIN_ID]", ORANGE),
     ], icon=deploy_icon, icon_scale=0.22)
 
     panel(c, 0, 2, "repo", [("config", ORANGE)])
     panel(c, 1, 2, "check", [("repos", ORANGE), ("versions", ORANGE)],
           icon=check_icon, icon_scale=0.24)
-    panel(c, 2, 2, "release", [
-        ("all-in-one", ORANGE), "prepare", "commit", "cleanup", "check-tools",
-        "rollback --tag --branch",
-    ])
-    panel(c, 3, 2, "dev", [
+    panel(c, 2, 2, "env", ["core", "filter TERM", "list", "release"])
+    panel(c, 3, 2, "cert", ["ca", "domains", ("setup", ORANGE)],
+          icon=check_icon, icon_scale=0.22)
+    panel(c, 4, 2, "dev", [
         ("add-hosts", ORANGE), "copy-keycloak-listener", "create-directories",
         "generate-api-key",
     ])
-    panel(c, 4, 2, "prod", ["configure-frontends", "reset-frontends"])
-    panel(c, 5, 1, "env", ["core", "filter TERM", "list", "release"])
+    panel(c, 5, 2, "prod", ["configure-frontends", "reset-frontends"])
 
-    panel(c, 0, 1, "native", [
-        ("status", ORANGE), ("start <run_target>", ORANGE),
-        ("stop <run_target>", ORANGE), "health", "watch",
+    panel(c, 0, 1, "mode", ["native", "hybrid", "docker", "--clear"])
+    panel(c, 1, 1, "native", [
+        ("status", ORANGE), ("start all | <run_target>", ORANGE),
+        ("stop all | <run_target>", ORANGE), "health", "watch",
         "restart [microservice...]", "logs <microservice>",
     ], icon=terminal_icon, icon_scale=0.20)
-    panel(c, 1, 1, "docker", (
-        ["build <run_target> | <image>", ("status [--mode full|hybrid]", ORANGE),
-         ("validate", ORANGE), "create-network", "create-certificates-volume"],
-        ["copy-certificates", ("one-time-setup", ORANGE), "start <run_target>",
-         "stop <run_target>", ("remove <docker_resource>", OUTLINE)],
-    ), span=2, icon=server_icon, icon_scale=0.21)
-    panel(c, 3, 1, "docker start", (
-        [("all --mode full | hybrid", ORANGE), "  [--timeout SEC]",
-         "<run_target> [--detach]"],
-        [("shared options", TEAL), "[--pull missing|always|never]",
-         "[--train TRAIN_ID]", "[--local]"],
-    ), span=2)
-    panel(c, 5, 2, "cert", ["ca", "domains", ("setup", ORANGE)],
-          icon=check_icon, icon_scale=0.22)
+    docker_panel(c)
+    panel(c, 5, 1, "release", [
+        ("all-in-one", ORANGE), "prepare", "commit", "cleanup", "check-tools",
+        "rollback --tag --branch",
+    ])
 
     panel(c, 0, 3, "<build_target>", [
-        ("all", ORANGE), "java", "project", "parent", "libraries", "clients",
-        "frontends",
+        "java", "project", "parent", "libraries", "clients", "frontends",
     ])
     panel(c, 1, 3, "<run_target>", [
-        ("all", ORANGE), "infra", "microservices", "frontends", "admin",
-        "keycloak / kk", "frontend <frontend>", "microservice <microservice>",
+        "infra", "microservices", "frontends", "admin",
+        ("frontend all", ORANGE), "frontend <frontend>",
+        ("microservice all", ORANGE), "microservice <microservice>",
+        "keycloak / kk",
     ])
     panel(c, 2, 3, "<frontend>", [
-        ("all", ORANGE), "main", "openview", "monitoring", "bridging",
-        "content", "workspace", "designer",
+        "main", "openview", "monitoring", "bridging", "content", "workspace",
+        "designer",
     ], icon=browser_icon, icon_scale=0.21)
     panel(c, 3, 3, "<microservice>", (
-        [("all", ORANGE), "artifact", "bridge", "group", "impex", "messaging",
-         "monitor", "open"],
+        ["artifact", "bridge", "group", "impex", "messaging", "monitor", "open"],
         ["repo", "resource", "schema", "submission", "terminology", "user",
          "valuerecommender", "worker"],
-    ), span=2)
-    panel(c, 5, 3, "<docker_resource>", [
-        "containers", "images", "network", ("volumes", OUTLINE),
-        ("all", OUTLINE),
-    ])
+    ), span=3)
 
     c.setStrokeColor(OUTLINE)
     c.setLineWidth(1.2)

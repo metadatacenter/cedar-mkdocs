@@ -1,20 +1,24 @@
 # CEDAR CLI Cheat Sheet
 
-`cedarcli` uses the environment selected in the current shell. Source the Docker profile before
-running Docker commands:
+`cedarcli` is CEDAR's command-line interface for building, publishing, starting, stopping, and
+checking the installation. Make it available and select a persistent deployment mode before the
+first native or Docker operation:
 
 ```bash
 export CEDAR_HOME=$HOME/CEDAR
 alias cedarcli='source "$CEDAR_HOME/cedar-cli/cli.sh"'
-source $CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker.sh
+cedarcli mode docker
 ```
+
+Mode selection starts nothing. The choices are `native`, `hybrid`, and `docker`. A second selection
+is rejected; stop the current deployment and run `cedarcli mode --clear` before changing it.
 
 ## Normal Docker Workflow
 
 ```bash
 cedarcli docker validate
 cedarcli docker one-time-setup
-cedarcli docker start all --mode full --pull missing --timeout 1800
+cedarcli docker start all --pull missing --timeout 1800
 cedarcli docker status
 cedarcli docker stop all
 ```
@@ -40,8 +44,9 @@ the clearer group spellings are `frontends` and `microservices`.
 
 | Mode | Runtime selected by the CLI |
 | --- | --- |
-| `full` | All 29 core containers, including the seven frontend applications |
+| `docker` | All 29 core containers, including the seven frontend applications |
 | `hybrid` | The 22-container Docker backend, with Docker nginx routing to seven native frontend servers |
+| `native` | The complete host-based deployment; Docker commands are unavailable |
 
 ## Image Selection and Pulling
 
@@ -67,7 +72,7 @@ cedarcli build java
 cedarcli docker build infra --local
 cedarcli docker build microservices --local
 cedarcli docker build frontends --local
-cedarcli docker start all --mode full --local --pull never
+cedarcli docker start all --local --pull never
 ```
 
 Docker build targets are `infra`, `microservices`, `frontends`, `admin`, `all`, or one
@@ -91,14 +96,14 @@ newer source commits must be included.
 ## Diagnose a Docker Service
 
 ```bash
-cedarcli docker status --mode full
+cedarcli docker status
 cd $CEDAR_HOME/cedar-docker-deploy/cedar-microservices
 docker compose ps
 docker compose logs --tail 200 server-resource
 ```
 
-If the CLI says the Docker profile is not loaded, source
-`cedar-development/bin/templates/cedar-profile-docker.sh` in that shell.
+If the CLI says no mode is configured, run `cedarcli mode docker`. If another mode is configured,
+stop it, clear it with `cedarcli mode --clear`, and then select Docker mode.
 
 ## Cleanup Commands
 
