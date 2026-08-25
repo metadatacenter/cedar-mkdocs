@@ -91,10 +91,25 @@ Later `cedarcli docker ...` commands work from a bare shell because cedarcli loa
 profile itself. A second mode selection is rejected. To switch after stopping the current
 deployment, run `cedarcli mode --clear` and then select the replacement mode.
 
+The CLI verifies the runtime during this transition. Docker and hybrid selection reject native
+backend or infrastructure listeners that would compete for the same host ports. Hybrid permits the
+seven native frontend servers but rejects a leftover Docker frontend project. Clearing native mode
+requires its applications and infrastructure to be stopped; clearing hybrid requires both its
+native frontends and Docker projects to be stopped; clearing Docker requires its Docker projects to
+be stopped. Stop commands on an allowed surface remain usable if saved state and the runtime
+disagree, so the mismatch can be repaired before the mode is cleared. Stop the optional admin
+project separately with `cedarcli docker stop admin` when it is running.
+
+Keep Docker running until `cedarcli docker stop all` completes. If Docker was deliberately shut down
+first, the CLI cannot confirm teardown. `cedarcli mode --clear --force` discards the inactive Docker
+deployment record so another mode can be selected. It does not stop containers and cannot bypass
+running CEDAR Compose projects.
+
 The other choices are `native`, for the complete host-based stack, and `hybrid`, for native
 frontend development servers with the Docker backend. Docker commands are rejected in native
 mode, native commands are rejected in Docker mode, and hybrid mode permits only native frontend
-operations alongside Docker backend operations.
+operations alongside Docker backend operations. Hybrid also permits stopping stale Docker
+frontends, although starting Docker frontends remains prohibited.
 
 ## Check the Result
 

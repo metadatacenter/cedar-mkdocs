@@ -11,7 +11,11 @@ cedarcli mode docker
 ```
 
 Mode selection starts nothing. The choices are `native`, `hybrid`, and `docker`. A second selection
-is rejected; stop the current deployment and run `cedarcli mode --clear` before changing it.
+is rejected; stop the current deployment and run `cedarcli mode --clear` before changing it. Clear
+refuses while the selected topology still owns processes or Compose projects. If the optional admin
+project is running, stop it separately with `cedarcli docker stop admin`.
+If Docker has already been deliberately shut down and therefore cannot confirm teardown, use
+`cedarcli mode --clear --force` to discard the inactive deployment record.
 
 ## Normal Docker Workflow
 
@@ -25,6 +29,9 @@ cedarcli docker stop all
 
 `one-time-setup` recreates the private Docker network, so run it only while the stack is stopped.
 Ordinary stop and start operations preserve the named volumes that hold CEDAR data.
+Keep Docker running until stop completes. When the daemon is unavailable, aggregate stop reports one
+error without attempting each stack. `mode --clear --force` clears CLI state only; it does not stop
+or remove Docker resources.
 
 ## Start or Stop One Target
 

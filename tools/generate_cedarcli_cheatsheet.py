@@ -293,7 +293,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     ])
     panel(c, 5, 2, "prod", ["configure-frontends", "reset-frontends"])
 
-    panel(c, 0, 1, "mode", ["native", "hybrid", "docker", "--clear"])
+    panel(c, 0, 1, "mode", ["native", "hybrid", "docker", "--clear [--force]"])
     panel(c, 1, 1, "native", [
         ("status", ORANGE), ("start all | <run_target>", ORANGE),
         ("stop all | <run_target>", ORANGE), "health", "watch",
@@ -309,9 +309,9 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         "java", "project", "parent", "libraries", "clients", "frontends",
     ])
     panel(c, 1, 3, "<run_target>", [
-        "infra", "microservices", "frontends", "admin",
-        ("frontend all", ORANGE), "frontend <frontend>",
+        "infra", "microservices",
         ("microservice all", ORANGE), "microservice <microservice>",
+        "frontends", ("frontend all", ORANGE), "frontend <frontend>", "admin",
         "keycloak / kk",
     ])
     panel(c, 2, 3, "<frontend>", [

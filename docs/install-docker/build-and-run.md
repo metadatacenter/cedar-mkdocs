@@ -166,6 +166,22 @@ cedarcli docker stop all
 
 Ordinary stop operations retain Docker named volumes and therefore retain application data.
 
+The core aggregate does not include the optional administration tools. If they are running, stop
+them separately before clearing the deployment mode:
+
+```bash
+cedarcli docker stop admin
+```
+
+Stop commands remain available when the saved mode and the running Compose projects disagree. This
+is intentional: stale infrastructure, microservice, frontend, or admin projects must be removable
+before `cedarcli mode --clear` will discard the selected topology.
+
+Keep Docker running until this command completes. If Docker was deliberately shut down first,
+restart it and rerun the stop. If the intent is instead to abandon the inactive Docker deployment
+record, use `cedarcli mode --clear --force`. This recovery option clears CLI state only and is refused
+when Docker reports running CEDAR Compose projects.
+
 ## Reset Your Docker Installation
 
 You do not need to remove Docker resources when you stop or restart CEDAR. Use these commands only
