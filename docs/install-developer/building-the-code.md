@@ -201,7 +201,7 @@ goproject
 ### Clean `Maven` cache
 
 ```sh
-cedarcli clean maven all
+cedarcli maven clean all
 # performs to 'rm -rf ~/.m2/repository/'
 ```
 

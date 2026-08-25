@@ -32,7 +32,7 @@ gives every Java artifact and image one unique version and records the exact sou
 package inputs used to create it. The Docker CLI never guesses from whichever Maven snapshot or
 container tag happened to be uploaded last.
 
-CEDAR maintainers create a complete published set with `cedarcli build train`. It builds Java in
+CEDAR maintainers create a complete published set with `cedarcli publish train`. It builds Java in
 dependency order, builds the two Java base images followed by the 29 runtime images, and pushes them
 to Nexus. A clean verifier then pulls all 31 images and records their immutable registry digests.
 The deployable Docker pointer changes only after that inventory succeeds.
@@ -47,19 +47,16 @@ The build commands are for developers changing image definitions or application 
 images for CEDAR's three core stacks with:
 
 ```bash
-cedarcli docker build infrastructure
+cedarcli docker build infra
 cedarcli docker build microservices
 cedarcli docker build frontends
-# Or build the same core inventory in one command:
-cedarcli docker build core
 ```
 
-The argument after `build` is a build target. `infrastructure` builds the databases, identity
+The argument after `build` is a build target. `infra` builds the databases, identity
 provider, public nginx, and other platform services. `microservices` builds the CEDAR Java services,
 and `frontends` builds the browser applications. `admin` builds the optional diagnostic and
-administration tools. `core` builds the 31 images needed by the application; `all` adds the four
-optional administration images. You can also use an individual image name when rebuilding one
-container image.
+administration tools. `all` builds every image, including the optional administration images. You
+can also use an individual image name when rebuilding one container image.
 
 Without `--local`, a microservice build downloads the selected train's exact Java application
 artifacts from Nexus. The frontend build downloads immutable, commit-specific npm packages from
@@ -77,7 +74,7 @@ JDK 17, then stage each local JAR into its image:
 
 ```bash
 cedarcli build java
-cedarcli docker build infrastructure --local
+cedarcli docker build infra --local
 cedarcli docker build microservices --local
 cedarcli docker build frontends --local
 ```
@@ -85,7 +82,7 @@ cedarcli docker build frontends --local
 Start locally built images with the matching local selector:
 
 ```bash
-cedarcli docker start all --mode backend --local --pull never
+cedarcli docker start all --mode full --local --pull never
 ```
 
 The local path is useful while changing Java source but is not required for a normal Docker
@@ -117,13 +114,12 @@ The timeout covers the complete start, including image downloads. A cold pull is
 so the example allows 30 minutes. Later starts normally finish much sooner; choose a shorter value
 with `--timeout SECONDS` if appropriate for the machine and image cache.
 
-Two other modes support development and automated REST work:
+Two deployment modes are available:
 
 | Mode | What the CLI starts and checks |
 | --- | --- |
 | `full` | All 29 core containers and all seven public frontend routes |
 | `hybrid` | The 22-container backend plus seven native frontend routes through Docker nginx |
-| `backend` | The 22-container backend, with no frontend-route requirement |
 
 Check that all CEDAR containers are running and healthy:
 
@@ -156,7 +152,7 @@ Build and start the admin stack only when needed:
 
 ```bash
 cedarcli docker build admin
-cedarcli docker start all --mode full --include-admin
+cedarcli docker start admin --detach
 ```
 
 ## Stop and Restart

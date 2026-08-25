@@ -10,8 +10,8 @@ cedarcli docker status
 ```
 
 For a full deployment, the expected result is 29 healthy containers followed by successful
-authentication and frontend-route checks. `hybrid` and `backend` modes expect 22 containers;
-hybrid additionally checks the seven routes served by native frontend processes.
+authentication and frontend-route checks. `hybrid` mode expects 22 containers and additionally
+checks the seven routes served by native frontend processes.
 
 Run the command from the shell where you sourced the Docker profile. If the CLI reports that the
 Docker profile is not loaded, source

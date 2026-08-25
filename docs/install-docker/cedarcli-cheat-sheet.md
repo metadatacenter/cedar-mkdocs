@@ -22,13 +22,26 @@ cedarcli docker stop all
 `one-time-setup` recreates the private Docker network, so run it only while the stack is stopped.
 Ordinary stop and start operations preserve the named volumes that hold CEDAR data.
 
+## Start or Stop One Target
+
+Use a target when you need to operate on less than the complete deployment:
+
+```bash
+cedarcli docker start infra
+cedarcli docker start keycloak
+cedarcli docker start frontend workspace
+cedarcli docker stop microservice resource
+```
+
+`kk` is the short spelling of `keycloak`. `frontend all` and `microservice all` are accepted, but
+the clearer group spellings are `frontends` and `microservices`.
+
 ## Deployment Modes
 
 | Mode | Runtime selected by the CLI |
 | --- | --- |
 | `full` | All 29 core containers, including the seven frontend applications |
 | `hybrid` | The 22-container Docker backend, with Docker nginx routing to seven native frontend servers |
-| `backend` | The 22-container backend, without requiring any frontend routes |
 
 ## Image Selection and Pulling
 
@@ -40,7 +53,6 @@ selection or control how it reaches this machine:
 - `--pull never` requires every selected image to exist locally.
 - `--train <TRAIN>` selects a particular older, completed train.
 - `--local` selects locally built development tags rather than a published train.
-- `--include-admin` adds the four optional administration containers.
 
 The timeout covers the complete start, including image downloads. A cold pull is several gigabytes,
 so the example gives it 30 minutes. Later starts normally finish much sooner.
@@ -52,22 +64,24 @@ from checked-out source:
 
 ```bash
 cedarcli build java
-cedarcli docker build core --local
+cedarcli docker build infra --local
+cedarcli docker build microservices --local
+cedarcli docker build frontends --local
 cedarcli docker start all --mode full --local --pull never
 ```
 
-Docker build targets are `infrastructure`, `microservices`, `frontends`, `admin`, `core`, `all`, or
-one image name. `core` builds the 29 runtime images and two build-only Java bases. `all` adds the
-four optional administration images. `--no-deps` skips required CEDAR base images and should be
-used only when the exact bases are already present.
+Docker build targets are `infra`, `microservices`, `frontends`, `admin`, `all`, or one
+image name. `all` builds every image, including the four optional administration images.
+`--no-deps` skips required CEDAR base images and should be used only when the exact bases are
+already present.
 
 ## Immutable Development Trains
 
 CEDAR maintainers publish one internally consistent Maven and Docker set with:
 
 ```bash
-cedarcli build train
-cedarcli build train --resume <TRAIN>
+cedarcli publish train
+cedarcli publish train --resume <TRAIN>
 ```
 
 The first command allocates an identifier such as `<NEXT>-dev.YYYYMMDD.HHMM`; operators do not

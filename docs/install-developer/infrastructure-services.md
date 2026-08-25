@@ -99,7 +99,7 @@ startmongo
 
 ### Check MongoDB status
 ```sh
-cedarcli status
+cedarcli native status
 ```
 
 You should see the following line in the output:
@@ -150,7 +150,7 @@ startsearch
 
 ### Check OpenSearch status
 ```sh
-cedarcli status
+cedarcli native status
 ```
 
 You should see the following lines in the output:
@@ -187,7 +187,7 @@ startmysql
 
 ### Check MySql status
 ```sh
-cedarcli status
+cedarcli native status
 ```
 
 You should see the following line in the output:
@@ -278,7 +278,7 @@ startredis
 
 ### Check Redis status
 ```sh
-cedarcli status
+cedarcli native status
 ```
 
 You should see the following line in the output:
@@ -359,7 +359,7 @@ startneo
 
 ### Check Neo4j status
 ```sh
-cedarcli status
+cedarcli native status
 ```
 
 You should see the following line in the output:
@@ -519,11 +519,11 @@ The CEDAR Keycloak realm can be found in the `${CEDAR_HOME}/cedar-util/keycloak/
 
 #### Import CEDAR realm
 
-You will need the `MySql` server running for this step. Check if it is already available using `cedarcli status`:
+You will need the `MySql` server running for this step. Check if it is already available using `cedarcli native status`:
 
 ```sh
 startmysql
-cedarcli status
+cedarcli native status
 ```
 
 Importing a realm is done by starting `Keycloak` in the import mode
@@ -551,7 +551,7 @@ startkk
 
 #### Check Keycloak status
 ```sh
-cedarcli status
+cedarcli native status
 ```
 
 You should see the following line in the output:
@@ -760,7 +760,7 @@ startnginx
 
 #### Check `nginx` status
 ```sh
-cedarcli status
+cedarcli native status
 ```
 
 You should see the following line in the output:
@@ -814,7 +814,7 @@ startinfra
 ### Check status
 
 ```sh
-cedarcli status
+cedarcli native status
 ```
 
 You should see all the services in the `Infrastructure` (2nd) block in `Running` (✅) status.

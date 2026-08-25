@@ -44,7 +44,7 @@ source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-docker.sh"
 ```
 
 The profile supplies the fixed Docker network and container addresses. `cedarcli` selects
-full-Docker, hybrid, or backend routing in the child processes it starts, so there are no routing
+full-Docker or hybrid routing in the child processes it starts, so there are no routing
 overrides to export in this shell. For a local installation, use BioPortal rather than
 expecting a local terminology catalog:
 
