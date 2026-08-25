@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Strict MkDocs build (Python 3.11)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out the documentation
+        uses: actions/checkout@v7
+
+      # Read the Docs builds this site from main on every push, under Python
+      # 3.11 and from requirements.txt. Both are mirrored here so a failure
+      # shows up on the pull request rather than after the merge.
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      # --strict promotes MkDocs warnings to failures, which is what makes this
+      # a gate: a broken internal link or a nav entry naming a missing page
+      # aborts the build instead of shipping a dead link.
+      - name: Build the site
+        run: mkdocs build --strict

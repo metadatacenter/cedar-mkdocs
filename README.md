@@ -1,5 +1,7 @@
 # MkDocs for CEDAR
 
+[![CI](https://github.com/metadatacenter/cedar-mkdocs/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/metadatacenter/cedar-mkdocs/actions/workflows/ci.yml)
+
 ## Setup
 
 You can set up the build environment either with a plain Python virtual environment (`pip`) or with
