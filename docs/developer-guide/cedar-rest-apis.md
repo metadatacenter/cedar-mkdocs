@@ -1,103 +1,125 @@
 # CEDAR REST APIs
 
-This page helps developers get working quickly with CEDAR's REST APIs.
+The REST API lets another application work with the same templates and metadata that people use in
+the CEDAR Workbench. Use it when a workflow needs to find a template, retrieve its definition,
+validate metadata, or store a completed instance without asking a person to perform those steps in
+the browser.
 
-Detailed documentation for each REST route is available [here](https://resource.metadatacenter.org/api){: target="_blank" .external }.
+The API is usually not the best place to design a template from scratch. Template Designer and the
+CEDAR artifact libraries provide safer ways to construct the underlying model. Once the artifact
+exists, the REST API is the natural way to move it into or out of a CEDAR repository.
 
-### Getting a CEDAR API Key
+## Authenticate as a CEDAR User
 
-First create an account on CEDAR at `cedar.metadatacenter.org`. Each registered user is assigned an API key. For a research group it may make sense to create a central project user and use that user's API key for all CEDAR access.
+API requests act on behalf of a CEDAR account and follow that account's permissions. Log in to
+CEDAR, open **Profile** from the person menu, and copy the API key shown there. For a long-running
+project integration, use a dedicated project account rather than tying the workflow to one person's
+account.
 
-To find your API key, log in to CEDAR at `cedar.metadatacenter.org`, click the person icon at the top right of the desktop, and select **Profile**. The key shown there is needed for every CEDAR REST call.
+The key is sent in the `Authorization` header:
 
-### Format of CEDAR Resources
-
-Templates, elements, fields, and instances all follow the CEDAR model. The [CEDAR Model YAML Specification](../yaml-spec/index.md) gives the full specification, and the [model overview](../yaml-spec/cedar-model.md) is a good place to start.
-
-The artifact routes accept and return both the native JSON representation and CEDAR YAML. JSON is
-the default. Request YAML with `Accept: application/yaml`, and send it with
-`Content-Type: application/yaml`; `application/x-yaml` is also recognized. This applies to
-templates, elements, fields, and instances on `GET`, `POST`, and `PUT`. A template-instance request
-with an explicit `format` query parameter uses that format instead of content negotiation.
-
-You can inspect any resource without going through the REST APIs: open it in the CEDAR Workbench and click the circle icons at the top right of the screen. The left-hand icon shows the template, the right-hand icon shows the instance.
-
-### Creating Templates, Elements, and Fields
-
-CEDAR's Template Designer is the most convenient way to create templates, elements, and fields. To create them programmatically, two libraries generate the underlying representation for you: the Java-based [CEDAR Artifact Library](https://github.com/metadatacenter/cedar-artifact-library) and the TypeScript-based [CEDAR Model TypeScript Library](https://github.com/metadatacenter/cedar-model-typescript-library). Both represent the model defined in the [CEDAR Model YAML Specification](../yaml-spec/index.md). [Creating Artifacts with the CEDAR Artifact Library](cedar-artifact-library.md) walks through the Java library.
-
-### Invoking the REST Endpoints
-
-Try these endpoints interactively through the [Swagger](https://swagger.io/)-generated pages, or from the command line with a tool like `curl`. Each call passes your API key in the `Authorization` header.
-
-**Search for resources.** Set `q=*` to match everything, or supply a search query. The `resource_types` parameter takes one or more comma-separated types: `template`, `element`, `instance`, or `folder`.
-
-```bash
-curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-     -X GET "https://resource.metadatacenter.org/search?q=<searchQuery>&resource_types=<resourceTypes>"
+```text
+Authorization: apiKey <YOUR_API_KEY>
 ```
 
-For example, to retrieve all templates and elements:
+The examples below use two shell variables so the key and server address do not have to be repeated:
 
 ```bash
-curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-     -X GET "https://resource.metadatacenter.org/search?q=*&resource_types=template,element"
+export CEDAR_API_KEY="<YOUR_API_KEY>"
+export CEDAR_API="https://resource.metadatacenter.org"
 ```
 
-**Find all instances of a template.** Use the `is_based_on` parameter to identify the template. Its value must be URL-encoded.
+Treat the API key as a password. Do not place it in source code or commit it to a repository.
+
+## Understand What the API Stores
+
+CEDAR has two closely related kinds of resources:
+
+- **Templates, elements, and fields** describe the structure of metadata.
+- **Instances** contain the values entered using a template.
+
+Every stored resource receives a stable CEDAR identifier. An instance also records the identifier
+of the template it follows in `schema:isBasedOn`. Understanding that relationship is more useful
+than memorizing route names: a typical integration first finds a template, retrieves it, creates an
+instance that refers to it, validates the instance, and then stores it.
+
+The API uses CEDAR's native JSON representation by default. It also accepts and returns the
+[CEDAR YAML representation](../yaml-spec/index.md) when requests use `application/yaml`. The model
+is the same in either format; choose the representation that fits the calling application.
+
+## Find the Template You Need
+
+Search returns resources the account is allowed to see. This example searches templates, with `*`
+meaning all matching templates:
 
 ```bash
-curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-     -X GET "https://resource.metadatacenter.org/search?q=*&is_based_on=https%3A%2F%2Frepo.metadatacenter.org%2Ftemplates%2Fc1199f96-dbd3-4476-8141-1f1fb13e1bca"
+curl --get "$CEDAR_API/search" \
+  -H "Authorization: apiKey $CEDAR_API_KEY" \
+  --data-urlencode "q=*" \
+  --data-urlencode "resource_types=template"
 ```
 
-**Retrieve a resource by its identifier.** Replace `<resourceType>` with `templates`, `template-elements`, or `template-instances`, and `<resourceId>` with the URL-encoded resource identifier (its `@id` value).
+Replace `*` with a title or other search text to narrow the result. Search can also include
+elements, instances, and folders. The result provides the stable identifiers needed for later
+requests.
+
+## Retrieve an Artifact
+
+Retrieve a template by placing its URL-encoded identifier after the `templates` route:
 
 ```bash
-curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-     -X GET -H "Accept: application/json" \
-     "https://resource.metadatacenter.org/<resourceType>/<resourceId>"
+curl "$CEDAR_API/templates/<URL_ENCODED_TEMPLATE_ID>" \
+  -H "Authorization: apiKey $CEDAR_API_KEY" \
+  -H "Accept: application/json"
 ```
 
-For example, to retrieve a specific template:
+Use `template-elements` for an element and `template-instances` for an instance. Request
+`application/yaml` instead when the YAML form is easier for the calling workflow to read or edit.
+
+## Create and Validate Metadata
+
+An instance must name its template in `schema:isBasedOn`. CEDAR also supplies its repository
+identifier and provenance when the instance is stored. Include the following provenance properties
+with `null` values in a new instance so the server can fill them in:
+
+- `@id`
+- `pav:createdOn`
+- `pav:createdBy`
+- `pav:lastUpdatedOn`
+- `oslc:modifiedBy`
+
+Validate the completed instance before storing it:
 
 ```bash
-curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-     -X GET -H "Accept: application/json" \
-     "https://resource.metadatacenter.org/templates/https%3A%2F%2Frepo.metadatacenter.org%2Ftemplates%2Fc1199f96-dbd3-4476-8141-1f1fb13e1bca"
+curl -X POST "$CEDAR_API/command/validate?resource_type=instance" \
+  -H "Authorization: apiKey $CEDAR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  --data-binary @instance.json
 ```
 
-**Create a resource.** POST the resource to the route for its type. The optional `folder_id` parameter (URL-encoded) names the containing folder, found in the CEDAR Workbench URL; without it, the resource goes to your home folder.
+Validation catches structural and value errors without creating a repository resource. Once it
+passes, store the instance with:
 
 ```bash
-curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" \
-     -X POST --data-binary @resource.json \
-     "https://resource.metadatacenter.org/<resourceType>?folder_id=<folderId>"
+curl -X POST "$CEDAR_API/template-instances?folder_id=<URL_ENCODED_FOLDER_ID>" \
+  -H "Authorization: apiKey $CEDAR_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data-binary @instance.json
 ```
 
-Here `resource.json` holds the template, element, or instance to create, and `<resourceType>` is `templates`, `template-elements`, or `template-instances`.
+The folder identifier determines where the instance appears in Workspace. Omit `folder_id` to use
+the account's home folder.
 
-The same create call can send a YAML artifact directly:
+The same pattern creates templates and elements: validate the artifact with the appropriate
+resource type, then send it to `templates` or `template-elements`. The
+[CEDAR Artifact Library](cedar-artifact-library.md) and
+[CEDAR Model TypeScript Library](cedar-model-typescript-library.md) can construct those artifacts
+without requiring application code to assemble the model by hand.
 
-```bash
-curl -H "Content-Type: application/yaml" -H "Accept: application/yaml" \
-     -H "Authorization: apiKey <yourApiKey>" \
-     -X POST --data-binary @resource.yaml \
-     "https://resource.metadatacenter.org/<resourceType>?folder_id=<folderId>"
-```
+## Explore the Complete API
 
-### Validating Templates, Elements, Fields, and Instances
-
-Validate a resource before creating it. The `command/validate` route validates all four resource types; the `resource_type` parameter names the type as `template`, `element`, `field`, or `instance`.
-
-```bash
-curl -H "Content-Type: application/json" -H "Authorization: apiKey <yourApiKey>" -H "Accept: application/json" \
-     -X POST --data-binary @MyTemplate.json \
-     "https://resource.metadatacenter.org/command/validate?resource_type=template"
-```
-
-Validation also accepts a YAML body when its `Content-Type` is `application/yaml`.
-
-### Uploading Instances
-
-Upload an instance with the create call shown above, using the `template-instances` resource type. A CEDAR server generates several provenance fields when it stores an instance: `@id`, `pav:createdOn`, `pav:createdBy`, `pav:lastUpdatedOn`, and `oslc:modifiedBy`. These must be present but set to `null` in the instance you upload. The `schema:isBasedOn` field must hold the identifier of the template the instance conforms to, and the `@type` field is optional.
+This page describes the normal integration path rather than every route and option. Use the
+[interactive API documentation](https://resource.metadatacenter.org/api){: target="_blank" .external }
+to explore additional searches, updates, permissions, folders, and administrative operations. It
+shows the accepted parameters and response shapes for the deployed CEDAR version.
