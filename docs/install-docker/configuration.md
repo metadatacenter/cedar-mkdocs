@@ -52,30 +52,22 @@ The empty terminology-catalog setting tells CEDAR to use the BioPortal endpoint 
 `set-env-external.sh`. Aggregate startup checks that a backend container can retrieve Keycloak's
 signing configuration before it reports the deployment ready.
 
-## Choose Where Docker Images Come From
+## Select the CEDAR Image Repositories
 
-CEDAR image names begin with a registry and namespace prefix. The Docker configuration defaults to
-the `metadatacenter` namespace on Docker Hub. If your installation uses a private registry such as
-a Nexus Docker repository, set its runtime prefix before selecting the deployment mode. Set the
-base prefix only when the two non-runtime Java base images live in a separate repository:
-
-```bash
-export CEDAR_IMAGE_PREFIX=<registry-host>:<port>/<namespace>
-export CEDAR_BASE_IMAGE_PREFIX=<registry-host>:<port>/<internal-namespace>
-```
-
-This is Docker image syntax, not a web address: do not include `https://`, an image tag, or a
-trailing slash. Log in with `docker login <registry-host>:<port>` if the registry is private. The
-runtime prefix controls the images Compose pulls and starts. The base prefix controls
-`cedar-java`, `cedar-microservice`, and the `FROM` references used to build the Java services. CLI
-image cleanup covers both, so keep both unchanged throughout a build and deployment.
-
-CEDAR's Nexus deployment uses HTTPS path-based routing:
+The verified CEDAR build trains used by this guide are published in two Nexus repositories. Set
+their image prefixes before selecting the deployment mode; cedarcli records them with the mode so
+later commands work from a bare shell:
 
 ```bash
 export CEDAR_IMAGE_PREFIX=nexus.bmir.stanford.edu/docker-cedar
 export CEDAR_BASE_IMAGE_PREFIX=nexus.bmir.stanford.edu/docker-cedar-internal
 ```
+
+Anonymous reads are enabled for these repositories, so an ordinary installation does not need a
+Nexus login. The values use Docker image syntax, not web addresses: do not add `https://`, an image
+tag, or a trailing slash. The runtime prefix controls the 29 images Compose pulls and starts. The
+base prefix identifies the two Java base images used only while constructing images. CLI image
+cleanup covers both prefixes, so keep them unchanged throughout a build and deployment.
 
 ## Select Docker Mode
 
@@ -90,6 +82,12 @@ Compose project can be rendered, and records the selection in `$CEDAR_HOME/.ceda
 Later `cedarcli docker ...` commands work from a bare shell because cedarcli loads the recorded
 profile itself. A second mode selection is rejected. To switch after stopping the current
 deployment, run `cedarcli mode --clear` and then select the replacement mode.
+
+Confirm the recorded mode, profile, and image repositories:
+
+```bash
+cedarcli env status
+```
 
 The CLI verifies the runtime during this transition. Docker and hybrid selection reject native
 backend or infrastructure listeners that would compete for the same host ports. Hybrid permits the

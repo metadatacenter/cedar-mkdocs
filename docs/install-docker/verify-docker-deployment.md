@@ -27,7 +27,8 @@ handles the HTTPS connection, recognizes the `workspace` hostname, and forwards 
 the private `cedarnet` Docker network to the Workspace frontend container. That container returns
 the HTML, JavaScript, and other files that your browser displays. Authentication and API requests
 from the application also return through the public nginx entry point to the appropriate backend
-containers. The frontend containers themselves do not need public ports.
+containers. Compose also publishes their development ports on localhost for diagnostics, but the
+browser route above goes through nginx.
 
 You can open any of the seven browser applications directly:
 

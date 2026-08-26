@@ -6,10 +6,10 @@ and public routing; microservices provide the CEDAR APIs and background processi
 provide the browser applications. A fourth stack contains optional administration tools.
 
 An image is the packaged software used to create a container. Building prepares those images;
-starting creates and runs the containers from them. For a complete CEDAR installation, build the
-three core stacks: infrastructure, microservices, and frontends. The CLI starts them in dependency
-order. Normal stop and restart operations reuse the images and preserve the data stored in Docker
-volumes.
+starting creates and runs the containers from them. A complete CEDAR installation uses three core
+stacks: infrastructure, microservices, and frontends. The normal installation downloads their
+verified images from Nexus; it does not build them. The CLI starts the stacks in dependency order.
+Normal stop and restart operations reuse the images and preserve the data stored in Docker volumes.
 
 ## Runtime Inventory
 
@@ -32,19 +32,20 @@ gives every Java artifact and image one unique version and records the exact sou
 package inputs used to create it. The Docker CLI never guesses from whichever Maven snapshot or
 container tag happened to be uploaded last.
 
-CEDAR maintainers create a complete published set with `cedarcli publish train`. It builds Java in
-dependency order, builds the two Java base images followed by the 29 runtime images, and pushes them
-to Nexus. A clean verifier then pulls all 31 images and records their immutable registry digests.
-The deployable Docker pointer changes only after that inventory succeeds.
+CEDAR maintainers create a complete published set with `cedarcli publish train`. The command starts
+the build-train workflow, which builds Java in dependency order, builds the two Java base images
+followed by the 29 runtime images, and pushes them to Nexus. A clean verifier then pulls all 31
+images and records their immutable registry digests. The deployable Docker pointer changes only
+after that inventory succeeds.
 
 An ordinary installation does not run that publication workflow and does not need to build the
 images. `cedarcli docker start all` selects the most recently verified train, and the pull policy
 decides whether Docker downloads it.
 
-### Build Images Locally
+### Build Images Yourself
 
-The build commands are for developers changing image definitions or application source. Build the
-images for CEDAR's three core stacks with:
+The build commands are for developers changing image definitions or deliberately reconstructing a
+published train. Build the images for CEDAR's three core stacks with:
 
 ```bash
 cedarcli docker build infra
@@ -58,21 +59,29 @@ and `frontends` builds the browser applications. `admin` builds the optional dia
 administration tools. `all` builds every image, including the optional administration images. You
 can also use an individual image name when rebuilding one container image.
 
-Without `--local`, a microservice build downloads the selected train's exact Java application
-artifacts from Nexus. The frontend build downloads immutable, commit-specific npm packages from
-Nexus; npm packages do not use a moving Maven-style snapshot version.
+Without `--local`, the build uses the current completed Maven train. Microservice images download
+that train's exact Java application artifacts from Nexus. Frontend images download the immutable
+npm packages pinned by the selected `cedar-docker-build` source; npm packages do not use a moving
+Maven-style snapshot version.
 
-To reproduce an older completed train, select it explicitly for both build and start:
+To run an older verified image train, no build is needed:
 
 ```bash
-cedarcli docker build microservices --train <TRAIN>
-cedarcli docker start all --train <TRAIN> --pull never
+cedarcli docker start all --train <TRAIN_ID> --pull missing --timeout 1800
 ```
 
-To rebuild Java from checked-out source instead, first clone and compile the complete Java estate on
-JDK 17, then stage each local JAR into its image:
+When reconstructing an older train, pass the same ID to every build group. A later start with
+`--pull never` succeeds only when all 29 runtime images for that ID are already present locally.
+
+To rebuild Java from checked-out source instead, prepare a complete development checkout rather
+than the three-repository Docker checkout used by the normal installation. In an empty development
+`CEDAR_HOME`, `cedarcli git clone all` retrieves that source estate. Compile it on JDK 17 before
+constructing the images. `--local` stages each checked-out JAR into its Java image. The
+infrastructure and frontend images still come from their Docker definitions and pinned upstream or
+npm inputs; `--local` gives the complete locally constructed set the development tag:
 
 ```bash
+cedarcli git clone all
 cedarcli build java
 cedarcli docker build infra --local
 cedarcli docker build microservices --local
@@ -90,9 +99,8 @@ installation. It uses the development image tag rather than claiming to reproduc
 train.
 
 The 29 locally built runtime images are tagged under the `CEDAR_IMAGE_PREFIX` selected during
-configuration. `CEDAR_BASE_IMAGE_PREFIX` can place `cedar-java` and `cedar-microservice` in a
-separate internal repository and otherwise defaults to the runtime prefix. If you change either,
-rebuild under the new prefixes or pull a complete published set from those registries.
+configuration; the two Java bases use `CEDAR_BASE_IMAGE_PREFIX`. If you change either prefix,
+rebuild under the new values or pull a complete published set from those repositories.
 
 ## Start the Deployment
 
@@ -152,9 +160,14 @@ docker compose logs --tail 200 <service>
 Build and start the admin stack only when needed:
 
 ```bash
-cedarcli docker build admin
-cedarcli docker start admin --detach
+cedarcli env status                                  # note the Active image set TRAIN_ID
+cedarcli docker build admin --train <TRAIN_ID>
+cedarcli docker start admin --train <TRAIN_ID> --detach
 ```
+
+The four admin images are optional and are not part of the verified 31-image core train. Building
+and starting them with the active train ID keeps their Java input and image tag aligned with the
+running deployment.
 
 ## Stop and Restart
 

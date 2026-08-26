@@ -5,7 +5,7 @@ checking the installation. Make it available and select a persistent deployment 
 first native or Docker operation:
 
 ```bash
-export CEDAR_HOME=$HOME/CEDAR
+export CEDAR_HOME=$HOME/CEDAR_DOCKER
 alias cedarcli='source "$CEDAR_HOME/cedar-cli/cli.sh"'
 cedarcli mode docker
 ```
@@ -70,7 +70,7 @@ selection or control how it reaches this machine:
 - `--pull missing` downloads only absent images. This is the normal first-start choice.
 - `--pull always` checks the registry even when a local image is present.
 - `--pull never` requires every selected image to exist locally.
-- `--train <TRAIN>` selects a particular older, completed train.
+- `--train <TRAIN_ID>` selects a particular older, completed train.
 - `--local` selects locally built development tags rather than a published train.
 
 The timeout covers the complete start, including image downloads. A cold pull is several gigabytes,
@@ -100,7 +100,7 @@ CEDAR maintainers publish one internally consistent Maven and Docker set with:
 
 ```bash
 cedarcli publish train
-cedarcli publish train --resume <TRAIN>
+cedarcli publish train --resume <TRAIN_ID>
 ```
 
 The first command allocates an identifier such as `<NEXT>-dev.YYYYMMDD.HHMM`; operators do not

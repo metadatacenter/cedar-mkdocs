@@ -2,8 +2,9 @@
 
 `cedarcli` is the command-line tool used to set up and operate a CEDAR installation. It is a small
 Python program that knows how CEDAR's repositories, scripts, and Docker Compose projects fit
-together. In this guide, it retrieves the Docker support files, builds images, starts and stops the
-application, and reports whether the complete deployment is healthy.
+together. In this guide, it retrieves the core Docker repositories, selects a verified image train,
+starts and stops the application, and reports whether the complete deployment is healthy. It can
+also build images when a developer deliberately chooses the source-build path.
 
 It does not replace Docker, and it is not a service that remains running with CEDAR. It provides a
 consistent interface to Docker Compose and the deployment scripts that would otherwise have to be
@@ -53,9 +54,9 @@ cd "$CEDAR_HOME"
 cedarcli git clone docker
 ```
 
-This does not clone the entire CEDAR source tree. A normal Docker build combines these Docker
-deployment definitions with packaged Java and frontend artifacts from Nexus. You only need the
-application source repositories if you want to rebuild those artifacts yourself.
+This does not clone the entire CEDAR source tree. A normal installation starts the verified images
+published to Nexus. You only need the application source repositories if you want to rebuild Java
+and then construct local images yourself.
 
 At this point the tools are installed, but the application is not configured yet. Continue to
 [Configure Your Installation](configuration.md) before running Docker commands.
