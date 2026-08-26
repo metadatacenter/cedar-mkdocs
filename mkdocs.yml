@@ -100,6 +100,17 @@ nav:
 
   - Developer Guide:
       - developer-overview/index.md
+      - cedarcli Manual:
+          - developer-guide/cedarcli/index.md
+          - developer-guide/cedarcli/repositories.md
+          - developer-guide/cedarcli/maven.md
+          - developer-guide/cedarcli/building.md
+          - developer-guide/cedarcli/publishing.md
+          - developer-guide/cedarcli/modes.md
+          - developer-guide/cedarcli/native.md
+          - developer-guide/cedarcli/hybrid.md
+          - developer-guide/cedarcli/docker.md
+          - Other Command Groups: developer-guide/cedarcli/other-commands.md
       - developer-guide/cedar-artifact-library.md
       - developer-guide/cedar-model-typescript-library.md
       - developer-guide/cedar-rest-apis.md
