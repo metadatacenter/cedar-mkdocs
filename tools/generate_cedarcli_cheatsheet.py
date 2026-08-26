@@ -60,8 +60,9 @@ def draw_lines(
         x: float,
         top: float,
         leading: float = BODY_LEADING,
+        font_size: float = BODY_SIZE,
 ) -> None:
-    c.setFont("MenloBold", BODY_SIZE)
+    c.setFont("MenloBold", font_size)
     y = top
     for entry in entries:
         if isinstance(entry, tuple):
@@ -166,6 +167,7 @@ def panel(
         span: int = 1,
         icon: Icon | None = None,
         icon_scale: float = 0.24,
+        body_size: float = BODY_SIZE,
 ) -> None:
     x = column * CELL_WIDTH
     y = PAGE_HEIGHT - (row + 1) * CELL_HEIGHT
@@ -183,10 +185,10 @@ def panel(
 
     if isinstance(entries, tuple):
         left, right = entries
-        draw_lines(c, left, x + 8, body_top)
-        draw_lines(c, right, x + width / 2 + 4, body_top)
+        draw_lines(c, left, x + 8, body_top, font_size=body_size)
+        draw_lines(c, right, x + width / 2 + 4, body_top, font_size=body_size)
     else:
-        draw_lines(c, entries, x + 8, body_top)
+        draw_lines(c, entries, x + 8, body_top, font_size=body_size)
 
     if icon is not None:
         icon(c, x + width - 34, y + 12, icon_scale)
@@ -272,8 +274,10 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     panel(c, 3, 0, "maven", [("clean all", ORANGE), "clean cedar"],
           icon=clean_icon, icon_scale=0.25)
     panel(c, 4, 0, "build", [
-        ("all", ORANGE), "<build_target>", "this",
-    ])
+        ("all [--skip-tests]", ORANGE),
+        "<build_target> [--skip-tests]",
+        "this [--skip-tests]",
+    ], body_size=7.0)
     panel(c, 5, 0, "publish", [
         ("all", ORANGE), "<build_target>", "this",
         ("train [--resume TRAIN_ID]", ORANGE),

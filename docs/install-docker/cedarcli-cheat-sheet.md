@@ -89,6 +89,11 @@ cedarcli docker build frontends --local
 cedarcli docker start all --local --pull never
 ```
 
+`cedarcli build` runs Java tests by default. Use `cedarcli build java --skip-tests` for an explicit
+compile/install-only pass; `--tests` is the paired explicit spelling of the default. The option is
+available on `this`, `parent`, `libraries`, `project`, `clients`, `java`, and `all`, but not
+on frontend-only build commands.
+
 Docker build targets are `infra`, `microservices`, `frontends`, `admin`, `all`, or one
 image name. `all` builds every image, including the four optional administration images.
 `--no-deps` skips required CEDAR base images and should be used only when the exact bases are

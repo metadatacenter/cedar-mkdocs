@@ -13,7 +13,18 @@ cedarcli build java
 ```
 
 This is the safest choice after changing a shared library or pulling coordinated backend changes,
-because cedarcli follows the required dependency order.
+because cedarcli follows the required dependency order. Java test suites run by default and require
+no live backend; a successful build therefore means the code compiled and its unit and embedded
+integration tests passed.
+
+For a fast compile/install loop after those tests have already passed, skip them explicitly:
+
+```bash
+cedarcli build java --skip-tests
+```
+
+The Java-reaching commands accept the paired `--tests` / `--skip-tests` option. Tests are enabled
+when neither is supplied. Frontend-only commands do not expose this Java-specific option.
 
 Use a narrower target when the earlier layers are already current:
 
@@ -31,7 +42,8 @@ cedarcli build this
 ```
 
 That is usually the quickest backend development loop: build the repository you changed, then
-restart the affected service in the selected deployment mode.
+restart the affected service in the selected deployment mode. It also runs that repository's tests
+unless `--skip-tests` is supplied.
 
 ## Build the Frontends
 
@@ -67,5 +79,6 @@ cedarcli build all --dry-run
 ```
 
 The preview is particularly useful after the repository inventory or a project's build process has
-changed. A successful preview only confirms the selected work; the real build and relevant tests
-must still pass.
+changed. The generated plan says `Maven clean install` when tests will run and
+`Maven clean install skip tests` when `--skip-tests` was selected. A successful preview only
+confirms the selected work; the real build must still pass.
