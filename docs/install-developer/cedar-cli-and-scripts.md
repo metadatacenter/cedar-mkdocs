@@ -1,7 +1,7 @@
 # CEDAR CLI and Scripts
 
 ## Overview
-The CEDAR system is relatively complex: it uses 15 microservices, 6 frontends and 7 infrastructure services.
+The CEDAR system is relatively complex: it uses 15 microservices, seven frontends and seven infrastructure services.
 
 Orchestrating the startup, shutdown, rebuild of this system would be a heavy burden if only shell commands were to be used.
 
@@ -9,11 +9,15 @@ Orchestrating the startup, shutdown, rebuild of this system would be a heavy bur
 In order to make the developer's life easier, we created a command line interface that centralizes all the commands. This tool will help the user to easily handle the tasks that will be performed during the development and deployment.
 
 ### Environment variables
-In order to make the system relatively easily configurable, we extracted the configuration data into environment variables.
-These environment variables should be always available in the shell of the user whop develops/maintains the system. 
 
-Currently, there are approximately 180 variables maintained.
-These are either read directly from the environment (this is the rare case), or are embedded through automatic interpolation into different configuration files (this is the typical scenario).
+CEDAR profiles express installation configuration as environment variables. After you select
+`native`, `hybrid`, or `docker` with `cedarcli mode`, the CLI loads the appropriate profile for each
+command. A bare shell therefore needs `CEDAR_HOME` and the `cedarcli` alias, but it does not need to
+export the complete CEDAR profile itself.
+
+There are many CEDAR variables because they configure the infrastructure, microservices, frontend
+routes, build system, and releases. Use the safe `cedarcli env` commands below to inspect the
+effective values; credential values are redacted.
 
 ## cedar-cli
 
@@ -192,47 +196,42 @@ Please make sure, that during this installation, and later during development yo
 
 If you are using a terminal with multiple profile support (e.g. iTerm), make sure the active profile has the `CEDAR` environment set.
 
-## env list
+## Inspect the Effective Environment
 
-`cedarcli env list` stands for CEDAR Environment Variables List. You can check the values of all the environment variables that begin with the prefix `CEDAR_` in your current environment.
+CEDAR profiles contain the addresses, ports, credentials, and other settings used by the running
+topology. `cedarcli env` inspects the profile selected by `cedarcli mode`; it does not merely repeat
+whatever happened to be exported in the calling shell.
 
-### Running `env list`
-Execute this: 
+Start with a concise summary:
+
+```sh
+cedarcli env status
+```
+
+This shows the selected mode, profile path, host and network, plus Docker image information when
+applicable. It never prints credentials.
+
+List or search the effective CEDAR variables with:
+
 ```sh
 cedarcli env list
-```
-
-You should see an output resembling this:
-
-```
-                                                            CEDAR environment variables
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Name                                          ┃ Value                                                                                           ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ CEDAR_ADMIN_USER_API_KEY                      │ 0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff                                │
-...
-│ CEDAR_WORKER_STOP_PORT                        │ 9211                                                                                            │
-└───────────────────────────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────┘
-                                                                   182 variables
-```
-
-### Debugging `env list`
-If your output looks different, than the one presented above, please go back, and start from beginning.
-You will need your environment set up correctly before proceeding.
-
-### Other `env` commands
-Executing 
-```sh
-cedarcli env
-```
-will present you with the other subcommands related to environment variables. Some examples:
-```sh
-cedarcli env
-cedarcli env list
-cedarcli env core
-cedarcli env release
 cedarcli env filter WORKER
 ```
+
+Password, secret, token, private-key, credential, and API-key values are always displayed as
+`<redacted>`. In hybrid mode, native frontend processes and the Docker backend use separate
+profiles, so select the surface explicitly:
+
+```sh
+cedarcli env list native
+cedarcli env list docker
+cedarcli env filter HOST native
+cedarcli env filter HOST docker
+```
+
+The release-specific view remains available as `cedarcli env release`. It reports whether the
+release and next-development version inputs are present. The former `env core` command has been
+removed; `env status` is its mode-aware replacement.
 
 ## Check deployment status
 

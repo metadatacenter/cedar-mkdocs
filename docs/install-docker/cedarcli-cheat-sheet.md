@@ -17,17 +17,24 @@ project is running, stop it separately with `cedarcli docker stop admin`.
 If Docker has already been deliberately shut down and therefore cannot confirm teardown, use
 `cedarcli mode --clear --force` to discard the inactive deployment record.
 
+Use `cedarcli env status` to see the selected mode and effective profile. `env list` and `env filter`
+read that effective profile and redact credentials. In hybrid mode, append `native` or `docker` to
+select the environment being inspected.
+
 ## Normal Docker Workflow
 
 ```bash
 cedarcli docker validate
-cedarcli docker one-time-setup
+cedarcli docker setup one-time-setup
 cedarcli docker start all --pull missing --timeout 1800
 cedarcli docker status
 cedarcli docker stop all
 ```
 
 `one-time-setup` recreates the private Docker network, so run it only while the stack is stopped.
+The three lower-level setup commands are available separately as
+`cedarcli docker setup create-network`, `create-certificates-volume`, and `copy-certificates` when
+repairing one resource. In normal use, run the aggregate command above.
 Ordinary stop and start operations preserve the named volumes that hold CEDAR data.
 Keep Docker running until stop completes. When the daemon is unavailable, aggregate stop reports one
 error without attempting each stack. `mode --clear --force` clears CLI state only; it does not stop

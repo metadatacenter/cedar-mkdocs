@@ -232,17 +232,15 @@ def docker_panel(c: canvas.Canvas) -> None:
     body_top = y + CELL_HEIGHT - 42
     draw_lines(c, [
         "status",
-        "build all | <run_target> | <image>",
         "start",
         "  all [--train TRAIN_ID|--local] [--pull POLICY] [--timeout SEC]",
         ("  <run_target> [--detach] [--train TRAIN_ID|--local] [--pull POLICY]", ORANGE),
         ("  POLICY=never|missing|always", TEAL),
         "stop all | <run_target>",
+        "build all | <run_target> | <image>",
         ("validate", ORANGE),
-        "create-network",
-        "create-certificates-volume",
-        "copy-certificates",
-        ("one-time-setup", ORANGE),
+        "setup one-time-setup | create-network",
+        "  create-certificates-volume | copy-certificates",
         ("remove containers | images | network | volumes | all", OUTLINE),
     ], x + 8, body_top, leading=8.1)
 
@@ -284,7 +282,10 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     panel(c, 0, 2, "repo", [("config", ORANGE)])
     panel(c, 1, 2, "check", [("repos", ORANGE), ("versions", ORANGE)],
           icon=check_icon, icon_scale=0.24)
-    panel(c, 2, 2, "env", ["core", "filter TERM", "list", "release"])
+    panel(c, 2, 2, "env", [
+        ("status", ORANGE), "list [native|docker]",
+        "filter TERM", "  [native|docker]", "release",
+    ])
     panel(c, 3, 2, "cert", ["ca", "domains", ("setup", ORANGE)],
           icon=check_icon, icon_scale=0.22)
     panel(c, 4, 2, "dev", [

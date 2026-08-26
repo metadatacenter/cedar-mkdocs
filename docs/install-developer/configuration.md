@@ -56,19 +56,22 @@ Since there are numerous such subdomains, we created a script which will add the
 
 ### Check the `CEDAR_HOST` variable
 
+Select the native topology once, then inspect the effective native profile:
+
 ```sh
-cedarcli env filter CEDAR_HOST
+cedarcli mode native
+cedarcli env filter CEDAR_HOST native
 ```
 
 The output should be:
 ```
-    CEDAR environment variables
+    CEDAR native environment variables matching CEDAR_HOST
 ┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Name       ┃ Value               ┃
 ┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
 │ CEDAR_HOST │ metadatacenter.orgx │
 └────────────┴─────────────────────┘
-            1 variables
+       1 variables; sensitive values are redacted
 ```
 
 If this is not what you see, please go back to the previous steps, and fix this. 

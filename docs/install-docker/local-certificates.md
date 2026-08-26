@@ -41,7 +41,7 @@ Run this only while the CEDAR Docker stack is stopped. It recreates the external
 creates the `cedar_cert` and `cedar_ca` volumes, and copies the generated certificates into them:
 
 ```bash
-cedarcli docker one-time-setup
+cedarcli docker setup one-time-setup
 ```
 
 Verify the resulting resources:
