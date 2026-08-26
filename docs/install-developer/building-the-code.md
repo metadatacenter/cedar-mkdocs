@@ -38,22 +38,9 @@ This will check out the `develop` branch for all the CEDAR repos.
 cedarcli check repos
 ```
 
-Should render something similar:
-```
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━┓
-┃ Repo/File/Dir                                    ┃ File Type ┃    Repo Type     ┃ Recognized as ┃ Status ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━┩
-│ cedar-admin-tool                                 │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
-│ cedar-artifact-library                           │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
-│ cedar-artifact-server                            │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
-│ cedar-bridge-server                              │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
-...
-│ cedar-util                                       │  📁 dir   │       misc       │  CEDAR repo   │   ✅   │
-│ cedar-valuerecommender-server                    │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
-│ cedar-worker-server                              │  📁 dir   │       java       │  CEDAR repo   │   ✅   │
-└──────────────────────────────────────────────────┴───────────┴──────────────────┴───────────────┴────────┘
-                                         63 object/files recognized
-```
+The summary should report every configured repository as present. The command exits nonzero if any
+configured repository is missing. It may also list top-level Git clones that are not part of the
+current profile; those are warnings and do not fail the check.
 
 ## CEDAR Maven utils
 

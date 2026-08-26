@@ -34,6 +34,11 @@ cedarcli cert domains
 ```
 
 These commands write the CA and domain certificates under `$CEDAR_HOME/CEDAR_CA`.
+`cert setup` is safe to repeat: it creates missing files and directories without resetting the CA
+serial number, issuance history, or local CA configuration. The other two commands protect existing
+keys and certificates. Use `cert domains --force` when renewing existing leaf certificates. Use
+`cert ca --force` only when deliberately replacing the CA, because browsers must then trust the new
+CA and all leaves must be regenerated.
 
 ## Create the Docker Network and Certificate Volumes
 

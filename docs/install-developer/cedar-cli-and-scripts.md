@@ -109,37 +109,15 @@ cp cedar-development/bin/templates/set-env-external.sh .
 cp cedar-development/bin/templates/cedar-profile-native-develop.sh .
 ```
 
-### Check the location of the new files
+### Check the repository inventory
 
 ```sh
 cedarcli check repos
 ```
 
-should result in:
-```
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
-┃ Repo/File/Dir                                    ┃ File Type ┃    Repo Type     ┃      Recognized as       ┃ Status ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
-...
-│ cedar-profile-native-develop.sh                  │  📄 file  │                  │ Known CEDAR shell script │   ✅   │
-│ cedar-project                                    │  📁 dir   │   java-wrapper   │        CEDAR repo        │   ✅   │
-│ cedar-repo-server                                │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-resource-server                            │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-rest-library                               │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-schema-server                              │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-shared-data                                │  📁 dir   │ content-delivery │        CEDAR repo        │   ✅   │
-│ cedar-submission-server                          │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-swagger-ui                                 │  📁 dir   │ content-delivery │        CEDAR repo        │   ✅   │
-│ cedar-template-editor                            │  📁 dir   │    angularJS     │        CEDAR repo        │   ✅   │
-│ cedar-terminology-server                         │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-user-server                                │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-util                                       │  📁 dir   │       misc       │        CEDAR repo        │   ✅   │
-│ cedar-valuerecommender-server                    │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
-│ cedar-worker-server                              │  📁 dir   │       java       │        CEDAR repo        │   ✅   │
-│ set-env-external.sh                              │  📄 file  │                  │ Known CEDAR shell script │   ✅   │
-│ set-env-internal.sh                              │  📄 file  │                  │ Known CEDAR shell script │   ✅   │
-└──────────────────────────────────────────────────┴───────────┴──────────────────┴──────────────────────────┴────────┘
-                                              69 object/files recognized```
+The command checks the repository inventory selected by the current profile. It exits nonzero when
+a configured repository is missing. Extra top-level Git clones are listed separately as warnings;
+ordinary files and working directories under `$CEDAR_HOME` are intentionally ignored.
 
 ### Change the environment variable values
 
