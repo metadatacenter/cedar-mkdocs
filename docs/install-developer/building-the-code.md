@@ -1,202 +1,79 @@
-# Getting and Building the Code
+# Build CEDAR from Source
 
-## Overview
+A native installation runs the Java artifacts and frontend dependencies produced from your local
+checkouts. Build once before the first start, then rebuild only the area you change.
 
-The preferred way for the setup of CEDAR would be to first install the infrastructure services, and then proceed with CEDAR code.
+## Build the Complete Source Tree
 
-However, there is a dependency, where a CEDAR `jar` needs to be installed under `Keycloak`.
+From any directory, run:
 
-In order to do the `Keycloak` installation and setup in one pass (instead of doing a partial setup, and later coming back to it again)
-we chose to build the CEDAR code first, and then proceed with the infrastructure services.
-
-We strongly recommend this approach, but the 'infra-first code-second' approach is also valid.
-
-## Clone the project repos
-
-CEDAR is composed of numerous  `git` repos. However, it is possible, it would be tedious to clone these repos one by one.
-We have a utility script that does just that.  
-
-### Clone the repos using `cedarcli`
-
-```sh
-cedarcli git clone all
+```bash
+cedarcli build all
 ```
 
-This will clone all the repos that are needed for the CEDAR development. One warning will be thrown since we already cloned the `cedar-cli` repo manually.
+The CLI builds the Java repositories in dependency order and then prepares the frontend
+repositories. This is the simplest first build and the safest choice after pulling a coordinated
+change across several repositories.
 
-### Checkout `develop` branch
+## Build Java or Frontends Separately
 
-```sh
-cedarcli git checkout develop
+For backend-only work:
+
+```bash
+cedarcli build java
 ```
 
-This will check out the `develop` branch for all the CEDAR repos.
+The Java build always follows the required parent, libraries, project, and clients order. You do
+not need to remember or reproduce that sequence manually.
 
-### Check the status of the repos
+For frontend-only work:
 
-```sh
-cedarcli check repos
+```bash
+cedarcli build frontends
 ```
 
-The summary should report every configured repository as present. The command exits nonzero if any
-configured repository is missing. It may also list top-level Git clones that are not part of the
-current profile; those are warnings and do not fail the check.
+The frontend build installs each repository's declared npm dependencies and runs the build defined
+for that project.
 
-## CEDAR Maven utils
+## Build a Smaller Target
 
-During development you could take advantage if the following `maven`-related aliases:
+The main Java layers can be built independently when the earlier layers have not changed:
 
-You need to be in a directory with a `pom.xml` to take advantage of these aliases.
-
-### Clean install skipTests 
-
-```sh
-mcit
-#aliases to 'mvn clean install -DskipTests=true'
-```
-
-### Install skipTests 
-
-```sh
-mit
-#aliases to 'mvn install -DskipTests=true'
-```
-
-### Clean install 
-
-```sh
-mci
-#aliases to 'mvn clean install'
-```
-
-### Clean 
-
-```sh
-mcl
-#aliases to 'mvn clean'
-```
-
-## Build CEDAR parent and libraries
-
-The CEDAR parent repo sets the versions for the components used throughout the project. It is a pom-only project.
-Before building CEDAR, you need to build this repo first.
-Once built, you do not need to build it again, unless you change the `pom.xml`.
-
-### Build the parent
-Execute this from anywhere:
-```sh
+```bash
 cedarcli build parent
-```
-
-The same can be achieved by a more down-to earth approach:
-```sh
-goparent
-mcit
-```
-
-The above is a shorthand for the following, full version:
-```sh
-cd ${CEDAR_HOME}/cedar-parent
-mvn clean install -DskipTests=true
-```
-
-Another way, useful in some cases:
-```sh
-goparent
-cedarcli build this
-```
-
-### What are CEDAR Libraries
-
-The CEDAR Libraries is a collection of common code used throughout the project.
-This codebase is also helpful to write third-party projects that use CEDAR constants and common model classes.
-
-### Build the libraries
-Execute this from anywhere:
-```sh
 cedarcli build libraries
-```
-or 
-
-```sh
-golibraries
-mcit
-```
-
-The above is a shorthand for the following, full version:
-
-```sh
-cd ${CEDAR_HOME}/cedar-libraries
-mvn clean install -DskipTests=true
-```
-
-## Build CEDAR project
-
-### Build the project
-Execute this from anywhere:
-```sh
 cedarcli build project
-```
-or
-```sh
-goproject
-mcit
+cedarcli build clients
 ```
 
-The above is a shorthand for the following, full version:
- 
-```sh
-cd ${CEDAR_HOME}/cedar-project
-mvn clean install -DskipTests=true
+Inside an individual repository, use:
+
+```bash
+cedarcli build this --wd "$PWD"
 ```
 
-???+ warning "Important"
-    
-    You can see that we are building the project by skipping the tests at this point.
-   
-    Running the tests is the preferred way of building, however at this point the underlying infrastructure is not ready, so the tests would definitely fail.
+After rebuilding a running microservice, restart it so the new JAR replaces the process that was
+already serving requests:
 
-    Because of this, we will skip the tests this time.
-
-## More CEDAR utils
-
-Above, you could have seen some aliases that we are using to get around the CEDAR development environment.
-
-A partial list of these aliases is listed below. For the full list, please inspect the `${CEDAR_DEVELOP_HOME}/bin/util/set-dev-aliases.sh` script file.
-
-### Change to the parent project directory
-
-```sh
-goparent
-# aliases to 'cd $CEDAR_HOME/cedar-parent'
+```bash
+cedarcli native restart resource
 ```
 
-### Change to the libraries directory
+`cedarcli native status` marks a Java process as stale when its JAR was rebuilt after that process
+started.
 
-```sh
-golibraries
-# aliases to 'cd $CEDAR_HOME/cedar-libraries'
+## Recover from a Corrupt Maven Cache
+
+Normal builds reuse Maven's local dependency cache. If that cache is demonstrably inconsistent,
+remove only the CEDAR artifacts and rebuild:
+
+```bash
+cedarcli maven clean cedar
+cedarcli build java
 ```
 
-### Change to the CEDAR project directory
+`cedarcli maven clean all` removes the complete Maven cache and should be reserved for a deliberate
+full reset, because every dependency must then be downloaded again.
 
-```sh
-goproject
-# aliases to 'cd $CEDAR_HOME/cedar-project'
-```
-
-### Clean `Maven` cache
-
-```sh
-cedarcli maven clean all
-# performs to 'rm -rf ~/.m2/repository/'
-```
-
-???+ warning "Important"
-
-    Please use this command with caution.
-    It will empty your local `maven` cache. This is desirable when something 'strange' happens during the build process.
-    Strange things can happen if a wrong version of remote or local repo is cached.
-    
-    Only use this command when you want to start with a clean slate for `maven`.
-    All the dependencies will be downloaded from remote repos afterwards (and cached locally), resulting in an increased first build time.
+Build trains and publication are development workflows rather than installation steps. They are
+explained in the [cedarcli Manual](../developer-guide/cedarcli/).

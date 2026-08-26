@@ -1,17 +1,86 @@
-# Developer Install Overview
+# Developer Install
 
-## Introduction
+A developer installation runs CEDAR from source on your Mac. Choose it when you want to change a
+backend service or frontend application, rebuild it locally, and see the result in a complete CEDAR
+system.
 
-The CEDAR Developer Team uses `macOS Sonoma` for development.
+If you want to run CEDAR without changing its source, use the [Docker Install](../../install-docker/)
+instead. Docker starts published application images and requires much less host configuration.
 
-Of course, the project could be installed to other operating systems as well, and we encourage you to do so.
+## How the Installation Works
 
-It is possible that CEDAR would work with other versions as well, but please try to use the software that we specify here. Otherwise we can not guarrantee that the system will work as expected.
+CEDAR combines browser applications, APIs, authentication, routing, and data services. A native
+installation runs these components as host processes while preserving the local names and secure
+URLs used by the complete application.
 
-## System Architecture
+`cedarcli` provides one entry point for this work. It retrieves the source repositories, builds the
+code in dependency order, selects the deployment mode, starts and stops CEDAR, and reports what is
+running. It is a command-line tool, not a service that remains active beside the application.
 
-Our system is an open-source, Java microservice-based, REST-heavy system, with one frontend developed in `AngularJS` and five frontends in `Angular`.
-The backend is provided by several industry standard storage solutions.
-The authentication is based on `Keycloak`. An `nginx` acts as a reverse proxy in front of our services and frontends.
+This guide first prepares the host, then configures the local CEDAR environment, and finally builds
+and starts the application. Follow the pages in order for a first installation.
 
-![CEDAR Architecture](../../img/architecture.png)
+## Install `cedarcli`
+
+Choose a home for the source tree. The rest of this guide refers to it as `CEDAR_HOME`:
+
+```bash
+export CEDAR_HOME="$HOME/CEDAR"
+mkdir -p "$CEDAR_HOME"
+cd "$CEDAR_HOME"
+```
+
+Clone the CLI and give it its own Python environment:
+
+```bash
+git clone https://github.com/metadatacenter/cedar-cli
+cd cedar-cli
+git checkout develop
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+The following alias makes `cedarcli` available in the current shell. Its wrapper activates the
+Python environment automatically, so you do not need to activate it before every command.
+
+```bash
+alias cedarcli='source "$CEDAR_HOME/cedar-cli/cli.sh"'
+```
+
+Add the `CEDAR_HOME` export and the alias to your normal shell profile so that they are available in
+new terminals.
+
+## Get the CEDAR Source
+
+Use `cedarcli` to retrieve the complete development source tree and place every repository on the
+development branch:
+
+```bash
+cd "$CEDAR_HOME"
+cedarcli git clone all
+cedarcli git checkout develop
+cedarcli check repos
+```
+
+The final command confirms that the expected repositories are present. It does not build or start
+CEDAR.
+
+## Continue the Installation
+
+Continue with [Prepare the Development Mac](../../install-developer/prerequisites/). The next page
+installs the host toolchain, and the Configuration page creates the local profile and selects native
+mode. Mode selection is a safety boundary; it does not start CEDAR.
+
+The remaining pages generate certificates, configure the native infrastructure, and bring up the
+backend and frontends. Once that one-time setup is complete, a normal rebuild and start looks like
+this:
+
+```bash
+cedarcli build all
+cedarcli native start all
+cedarcli native status
+```
+
+The [cedarcli Manual](../../developer-guide/cedarcli/) explains the build workflow, deployment
+modes, selective starts and stops, and the supporting commands used during development.

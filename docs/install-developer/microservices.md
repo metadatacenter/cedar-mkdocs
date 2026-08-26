@@ -1,98 +1,64 @@
-# Microservices
+# Start the Native Backend
 
-## Configuring the CEDAR microservices
+The Java microservices provide CEDAR's artifact, repository, user, terminology, submission, and
+supporting APIs. They all use the infrastructure configured on the previous page and run from the
+JARs produced by `cedarcli build java`.
 
-Some CEDAR microservices must be configured to allow them to access external resources.
+## Connect CEDAR to BioPortal
 
-This configuration information is stored in environment variables that are assigned by the `set-env-external.sh` script, which is located at the base of your CEDAR installation directory.
-You will have created this file earlier in the CEDAR installation process.
+CEDAR uses BioPortal to search ontologies and controlled terms. Create a BioPortal account, obtain
+its API key, and set it in `$CEDAR_HOME/set-env-external.sh`:
 
-### Terminology microservice configuration
-
-CEDAR is supplied with controlled terminologies via a BioPortal or OntoPortal service, which may be running locally or remotely.
-
-All access to a BioPortal or OntoPortal service is routed through the CEDAR terminology microservice. 
-
-This microservice is configured using two environment variables: 
-
-| Environment Variable                 | Description  |
-| -----------                          | ------------ |
-| `CEDAR_BIOPORTAL_API_KEY`            | Specifies an API key for accessing BioPortal or OntoPortal REST services  |
-| `CEDAR_BIOPORTAL_REST_BASE`          | Specifies the base URL of the REST APIs for a BioPortal or OntoPortal service |
-
-Instructions for obtaining a BioPortal or OntoPortal API key can be found  [here](https://bioportal.bioontology.org/help#Getting_an_API_key).
-If you want information on installing your own OntoPortal service (OntoPortal is the name we give the BioPortal software distribution
-that is used for external deployments) you can see the [OntoPortal Administration Documentation](https://ontoportal.github.io/administration/).
-
-The default `CEDAR_BIOPORTAL_REST_BASE` value is `https://data.bioontology.org/`, which is the public BioPortal service. 
-If you wish to use this service, you can create an account there and immediately obtain the BioPortal API key associated with that account.
-
-After obtaining an API key and determining the base REST endpoint URL, edit your `set-env-internal.sh` file to set these variables.
-
-These variables are read at microservice startup, so you will need to stop and restart the terminology microservice if it is aready running (using the commands, `stopterminology` and `startterminology`, respectively) so that it picks up updated values.
-
-## Initializing the backend data stores
-
-### System reset
-
-Before running the microservices for the first time, execute the following script to initialize the CEDAR databases:
-
-```sh
-cedarat system-reset
+```bash
+export CEDAR_BIOPORTAL_REST_BASE="https://data.bioontology.org/"
+export CEDAR_BIOPORTAL_API_KEY="your-api-key"
 ```
 
-???+ warning "Use System Reset with care"
+The terminology service reads these values when it starts. Restart that service after changing
+them.
 
-    This system-reset option deletes all user content in CEDAR. 
-    It should only be used before the microservices are first started or when you want to bring a system back to a clean-slate condition.
-    
-Answer `yes` to all the questions to confirm that a system reset should be performed.
+## Build and Start the Microservices
 
-???+ error "System Reset failing last step"
+If the Java source has not been built yet, build it in dependency order:
 
-    The last step of the system reset will fail. This is expected behavior at this point.
+```bash
+cedarcli build java
+```
 
-    We will execute a second round of system reset after all the microservices are started.
+Start the complete microservice tier and inspect the result:
 
-## Starting the CEDAR microservices
-
-### Running the microservices
-
-To run all the CEDAR microservices:
-
-```sh
+```bash
 cedarcli native start microservices
-```
-
-To check that all the microservices are running, execute:
-
-```sh
 cedarcli native status
 ```
 
-The command reports the managed application processes and then checks the native host ports.
-Every microservice should be healthy; frontends that you have not started may still be reported as
-stopped.
+Every microservice should report a healthy application port. Frontends will still appear stopped
+until the next page.
 
-### Stopping the CEDAR microservices
+If a service does not become healthy, follow its log by process name. For example:
 
-Do not stop microservices at this point! But if you need to do that in the future, you can perform:
-```sh
-cedarcli native stop microservices
+```bash
+cedarcli native logs resource
 ```
 
-## Performing a system reset
+## Initialize an Empty Installation
 
-### System reset
+A new installation needs its initial users, folders, permissions, and search state. Run the system
+reset only after the infrastructure and microservices are healthy:
 
-After all the microservices are started, perform another system reset.
-
-```sh
+```bash
+source "$CEDAR_HOME/cedar-profile-native-develop.sh"
 cedarat system-reset
 ```
 
-Answer `yes` to all the questions to confirm that a system reset should be performed.
+Confirm the reset when prompted. This command deletes existing CEDAR content, so do not use it to
+repair a development installation whose data you intend to keep.
 
-???+ ok "System Reset success"
+For later backend work, individual services can be restarted without disturbing the rest of the
+stack:
 
-    This time all the steps should succeed!
+```bash
+cedarcli native restart terminology
+cedarcli native stop microservice terminology
+cedarcli native start microservice terminology
+```

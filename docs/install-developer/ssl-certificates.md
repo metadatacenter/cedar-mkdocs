@@ -1,110 +1,67 @@
-# SSL Certificates
+# Create Local HTTPS Certificates
 
-## Overview
-To closely replicate the behavior of `CEDAR` in production environment, we will set up HTTPS access for `nginx` later during the installation.
-This means that the browser will communicate with the `nginx` using https.
-`Nginx` acting as a reverse proxy will communicate using plain HTTP with the microservices and frontends behind it.
+The browser reaches native CEDAR through HTTPS, using the same family of local hostnames as the
+complete application. A development machine therefore needs its own certificate authority and a
+certificate for each CEDAR hostname.
 
-Since this is a development installation, it is not easy to get proper SSL certificates.
-To overcome this, we will use self-signed certificates for development.
+`cedarcli` creates these files from the domain and certificate identity in
+`set-env-internal.sh`. It preserves an existing certificate authority unless replacement is
+explicitly requested.
 
-There is also back-channel communication between microservices and `Keycloak`.
-In order to make this work, we will need to add our self-signed certificates to the Java truststore.
+## Generate the Certificate Authority
 
-## Copy self-signed certificates
+Prepare the certificate workspace, create the local authority, and issue all domain certificates:
 
-We are using self-signed certificates for the local development.
-
-Instead of generating these, we are reusing the pre-created self-signed certificates.
-
-### Copy the certificates to working location
-
-```sh
-mkdir ${CEDAR_HOME}/CEDAR_CA
-cp -R ${CEDAR_HOME}/cedar-development/os-mirror/development-macos/CEDAR_HOME/CEDAR_CA/ ${CEDAR_HOME}/CEDAR_CA
+```bash
+cedarcli cert setup
+cedarcli cert ca
+cedarcli cert domains
 ```
 
-???+ warning "Important"
-    
-    Keep this folder, and its contents intact. You will need these certificates at several points of the installation.
+The files are written below `$CEDAR_HOME/CEDAR_CA`. Keep the CA key private and do not commit this
+directory.
 
-## Install the self-signed root certificates
+To renew selected leaf certificates later without replacing the authority:
 
-### Add to Java trust store
-
-Execute the commands below to navigate to the folder where the root CA certificate is stored.
-Then import it into the `cacerts`: 
-```sh
-gocedar
-cd CEDAR_CA
-
-sudo keytool -import -cacerts -alias metadatacenter.orgx -file ./ca.crt
-# or
-sudo keytool -import -keystore $JAVA_HOME/lib/security/cacerts -alias metadatacenter.orgx -file ./ca.crt
+```bash
+cedarcli cert domains cedar workspace designer --force
 ```
 
-When prompted, enter these value:
+Replacing the CA with `cedarcli cert ca --force` invalidates every certificate it previously
+issued. Regenerate all domain certificates and repeat the trust steps if you deliberately do that.
 
-| Question                     | Answer                                     |
-|------------------------------|--------------------------------------------|
-| Password:                    | ```<YOUR ACCOUNT PASSWORD FOR THE SUDO>``` |
-| Enter keystore password:     | ```changeit```                             |
-| Trust this certificate [no]: | ```yes```                                  |
+## Trust the Authority in macOS
 
+Chrome, Safari, and other applications using the macOS trust store need to trust the local CA:
 
-???+ warning "Trust store password"
+```bash
+sudo security add-trusted-cert -d -r trustRoot \
+  -k /Library/Keychains/System.keychain \
+  "$CEDAR_HOME/CEDAR_CA/ca.crt"
+```
 
-    The `cacerts` trust store had a default password: `changeit`
-    
-???+ success "Useful commands"
+Firefox may use its own certificate store, depending on its configuration. If it still rejects the
+local sites, import `$CEDAR_HOME/CEDAR_CA/ca.crt` as a trusted authority in Firefox settings.
 
-    If you run into problems with the certificates, use these commands to list and filter the certificates:
+## Trust the Authority in JDK 17
 
-    ```sh
-    keytool -list -cacerts | grep metadatacenter
-    # or
-    keytool -list -keystore $JAVA_HOME/lib/security/cacerts | grep metadatacenter
-    ```
+CEDAR services also make HTTPS calls to Keycloak. Add the same CA to the JDK selected for native
+CEDAR:
 
-    respectively to delete a certificate    
-    ```
-    keytool -delete -cacerts -alias metadatacenter.orgx
-    # or
-    keytool -delete -keystore $JAVA_HOME/lib/security/cacerts -alias metadatacenter.orgx
-    ```
+```bash
+export JAVA_HOME="$(/usr/libexec/java_home -v 17)"
+sudo "$JAVA_HOME/bin/keytool" -importcert -trustcacerts -noprompt \
+  -storepass changeit \
+  -alias cedar-local-ca \
+  -file "$CEDAR_HOME/CEDAR_CA/ca.crt" \
+  -cacerts
+```
 
-### Add to `Firefox`
-If you use Firefox, you will need to add the root CA certificate to the trusted list of the browser.
+Confirm the entry when diagnosing trust problems:
 
-The process is the following:
+```bash
+"$JAVA_HOME/bin/keytool" -list -cacerts -storepass changeit -alias cedar-local-ca
+```
 
-- Open the `Preferences`.
-- In the `Find in Preferences` input type `certificates`.
-- Click the `View Certificates...` button.
-- Make sure the `Authorities` tab is open.
-- Click `Import`.
-- Browse for `ca.crt` file. It will be located in:<br>`${CEDAR_HOME}/CEDAR_CA/`.
-- Click both checkbox:
-    - `Trust this CA to identify websites.`
-    - `Trust this CA to identify email users.`
-- Click `OK`
-
-### Add to `Keychain Access`
-If you use Chrome or Safari, or other browsers that use the system's trust store for certificates, you will need to add the root CA certificate to `Keychain Access`.
-
-The process is the following:
-
-* Using `Finder` navigate to `${CEDAR_HOME}/CEDAR_CA/`.
-* Double-click the `ca.crt` file.
-* The application called `Keychain Access` will be launched.
-* A dialog will pop up, prompting for a location for the certificate. The `iCloud` might be preselected. Change this to `login`.
-* Click the `Add` button. If the `Keychain Access` does not stay opened after the `Add`, launch it manually.
-* Locate the certificate you just added. It should be either in `System` or `login` Keychain. Search for `metadatacenter`.
-* The certificate will have a white `x` in a red circle, meaning it is not trusted.
-* Open it by double-clicking it.
-* Expand the `Trust` branch on the top.
-* Change the dropdown labeled `When using this certificate:` to `Always Trust`.
-* Close the popup.
-* You will be prompted for your password.
-* You should see the icon of the certificate having a white cross inside a blue circle (Keychain Access is still bogus at this point, you need to refresh the cert in order to see that it is trusted. One way to do it is to search for `metadatacenter`)
-* You are done.
+The next page installs nginx and copies the generated domain certificates into the location used by
+its native configuration.

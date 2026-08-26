@@ -1,213 +1,72 @@
-# Frontend Components
+# Start the Native Frontends
 
-## Overview
+The native frontend processes compile and serve checked-out source, which makes them suitable for
+interactive development. nginx remains the public entry point: the browser uses CEDAR's HTTPS
+hostnames, and nginx routes each request to the appropriate local frontend or backend service.
 
-The CEDAR frontend was developed in `AngularJS` and `Angular`.
+No frontend files are copied into nginx.
 
-On a development machine you will run local servers to compile and serve the code.
-The frontend servers are - as all the components of the system - proxied by `nginx`.
+## Build the Frontends
 
-You will need the following components to run and develop the frontend:
+Prepare the frontend dependencies and builds:
 
-* Node.js
-* npm
-* gulp
-* Agular CLI
-
-## Install Node.js
-
-Please install `Node`, version 20 LTS:
-
-```sh
-brew install node@20
+```bash
+cedarcli build frontends
 ```
 
-And pin this version:
+Run this after a fresh checkout, after dependency changes, or after pulling coordinated frontend
+updates. Normal source edits are handled by the frontend development servers while they run.
 
-```sh
-brew pin node@20
+## Start the Frontend Tier
+
+Start every native frontend as a managed background process:
+
+```bash
+cedarcli native start frontends
+cedarcli native status
 ```
 
-### Add `node` and `npm` to `PATH`
+The process controller records PIDs under `$CEDAR_HOME/log/run` and writes each application's output
+under `$CEDAR_HOME/log`. It does not open terminal windows.
 
-The first lines of confirmation will contain something similar:
+The browser-facing applications are:
 
-```
-node@20 is keg-only, which means it was not symlinked into /opt/homebrew,
-because this is an alternate version of another formula.
+| Application | URL |
+| --- | --- |
+| CEDAR | `https://cedar.metadatacenter.orgx` |
+| Workspace | `https://workspace.metadatacenter.orgx` |
+| Template Designer | `https://designer.metadatacenter.orgx` |
+| OpenView | `https://openview.metadatacenter.orgx` |
+| Content | `https://content.metadatacenter.orgx` |
+| Monitoring | `https://monitoring.metadatacenter.orgx` |
+| Bridging | `https://bridging.metadatacenter.orgx` |
 
-If you need to have node@20 first in your PATH, run:
-  echo 'export PATH="/opt/homebrew/opt/node@20/bin:$PATH"' >> ~/.zshrc
-```
+## Log In and Verify the Installation
 
-Please execute the suggested command to add the node `bin` directory to the `PATH` (this line can be different based in your shell):
+Open `https://cedar.metadatacenter.orgx` and log in. A reset development installation provides
+`test1@test.com` with password `test1` and `test2@test.com` with password `test2`.
 
-```sh
-echo 'export PATH="$(brew --prefix)/opt/node@20/bin:$PATH"' >> ~/.zshrc
-```
+Open a folder, create or edit a template, and open a metadata instance. That path exercises shared
+authentication, frontend routing, and the main backend APIs rather than merely proving that a page
+can be downloaded.
 
-### Check the installation
+Once the complete native stack is running, require every managed application to be healthy:
 
-Close the previously active terminal (or source your profile) to have `node` and `npm` in your `PATH`.
-
-`Node.js` will come with `npm` as well.
-You can check if both of them are installed:
- 
-```sh
-node --version
-npm --version
-```
-
-You should see something like the following:
-
-```
-v20.18.1
-10.8.2
+```bash
+cedarcli native health
 ```
 
-## Install Gulp and Angular CLI
+For a frontend problem, follow the relevant managed log. The auxiliary Angular applications use a
+`ui-` prefix:
 
-### Install `gulp`
-
-Please install the latest `Gulp`, make it available globally:
-
-```sh
-npm -g install gulp
+```bash
+cedarcli native logs workspace
+cedarcli native logs designer
+cedarcli native logs ui-openview
 ```
 
-### Install `Angular CLI`
+Stop all frontend processes without disturbing the backend with:
 
-Please install the latest `Angular CLI`, make it available globally:
-
-```sh
-npm install -g @angular/cli@14
+```bash
+cedarcli native stop frontends
 ```
-
-## Launch main frontend
-
-You will need to install the dependencies for the frontend before the first run,
-and every time you add or change a dependency.
-
-### Install dependencies
-
-```sh
-goeditor
-npm install
-``` 
-
-### Start the main frontend
-
-```sh
-goeditor
-gulp
-```
-
-### Stop the main frontend
-
-If you need to stop the frontend, you can do this by pressing ++ctrl++ + C.
-
-## Launch OpenView frontend
-
-You will need to install the dependencies for the frontend before the first run,
-and every time you add or change a dependency.
-
-### Install dependencies
-
-```sh
-goopenfront
-npm install --legacy-peer-deps
-``` 
-
-### Start the OpenView frontend
-
-```sh
-goopenfront
-ng serve
-```
-
-### Stop the OpenView frontend
-
-If you need to stop the frontend, you can do this by pressing ++ctrl++ + C.
-
-## Launch Monitoring frontend
-
-You will need to install the dependencies for the frontend before the first run,
-and every time you add or change a dependency.
-
-### Install dependencies
-
-```sh
-gomonitoring
-npm install --legacy-peer-deps
-``` 
-
-### Start the Monitoring frontend
-
-```sh
-gomonitoring
-ng serve
-```
-
-### Stop the Monitoring frontend
-
-If you need to stop the frontend, you can do this by pressing ++ctrl++ + C.
-
-## Launch Bridging frontend
-
-You will need to install the dependencies for the frontend before the first run,
-and every time you add or change a dependency.
-
-### Install dependencies
-
-```sh
-gobridging
-npm install --legacy-peer-deps
-``` 
-
-### Start the Bridging frontend
-
-```sh
-gobridging
-ng serve
-```
-
-### Stop the Bridging frontend
-
-If you need to stop the frontend, you can do this by pressing ++ctrl++ + C.
-
-## Launch Content frontend
-
-You will need to install the dependencies for the frontend before the first run,
-and every time you add or change a dependency.
-
-### Install dependencies
-
-```sh
-gocontent
-npm install --legacy-peer-deps
-``` 
-
-### Start the Content frontend
-
-```sh
-gocontent
-ng serve
-```
-
-### Stop the Content frontend
-
-If you need to stop the frontend, you can do this by pressing ++ctrl++ + C.
-
-## Logging in to CEDAR
-
-In a web browser, go to the following URL:
-
-```
-https://cedar.metadatacenter.orgx
-```
-
-You should be presented with the CEDAR login page.
-
-Two test users are provided initially. These are `test1@test.com` and `test2@test.com`, with passwords `test1` and `test2`, respectively.
-
-Log in using these users and verify that you can create CEDAR artifacts.
