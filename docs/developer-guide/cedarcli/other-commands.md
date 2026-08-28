@@ -5,11 +5,9 @@ normal edit-build-run loop.
 
 ## `release`
 
-`cedarcli release` performs a formal CEDAR release, including version, branch, tag, merge, and
-publication work across the repositories. This is different from a build train, which publishes a
-fixed development state without changing branches or tags. Follow the
-[CEDAR Release Runbook](https://github.com/metadatacenter/cedar-development/blob/main/ops/RELEASE-RUNBOOK.md)
-for the complete release procedure.
+`cedarcli release` performs a formal CEDAR release from a completed build train, changing versions,
+branches, and tags across the repositories and publishing to Nexus.
+[Releasing CEDAR](release.md) covers the whole route.
 
 ## Inspection and Setup Commands
 

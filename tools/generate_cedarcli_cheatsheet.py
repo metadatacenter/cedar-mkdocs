@@ -288,7 +288,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
           icon=check_icon, icon_scale=0.24)
     panel(c, 2, 2, "env", [
         ("status", ORANGE), "list [native|docker]",
-        "filter TERM", "  [native|docker]", "release",
+        "filter TERM", "  [native|docker]",
     ])
     panel(c, 3, 2, "cert", ["ca", "domains", ("setup", ORANGE)],
           icon=check_icon, icon_scale=0.22)
@@ -306,9 +306,11 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     ], icon=terminal_icon, icon_scale=0.20)
     docker_panel(c)
     panel(c, 5, 1, "release", [
-        ("all-in-one", ORANGE), "prepare", "commit", "cleanup", "check-tools",
-        "rollback --tag --branch",
-    ])
+        ("plan", ORANGE), ("start [--unattended]", ORANGE), "resume", "status [--json]",
+        "plan / start require:",
+        "  --version --next-version",
+        "  --from-train --cee-version",
+    ], body_size=7.0)
 
     panel(c, 0, 3, "<build_target>", [
         "java", "project", "parent", "libraries", "clients", "frontends",

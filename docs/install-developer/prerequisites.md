@@ -21,7 +21,7 @@ The backend requires JDK 17 and Maven. The frontends require Node.js, npm, Gulp 
 CLI. OpenSSL is used to create the local certificate authority.
 
 ```bash
-brew install openjdk@17 maven node@20 openssl@3
+brew install openjdk@17 maven node@20 openssl@3 nvm
 ```
 
 Homebrew may ask you to register JDK 17 with macOS. If `/usr/libexec/java_home -v 17` cannot find it,
@@ -36,11 +36,30 @@ Add the keg-only Node.js and OpenSSL installations to your shell path:
 
 ```bash
 export PATH="$(brew --prefix node@20)/bin:$(brew --prefix openssl@3)/bin:$PATH"
-npm install --global gulp-cli @angular/cli@14
+npm install --global gulp-cli @angular/cli
 ```
 
 Add that export to your normal shell profile so that native frontend and certificate commands use
 the same tools in new terminals.
+
+The global Angular CLI acts only as a launcher. Each Angular project supplies its own CLI version in
+`devDependencies`, ranging from 15 to 22 across CEDAR, and the global `ng` delegates to whichever
+one the project declares. Do not pin the global CLI to a project's version.
+
+## Node Versions
+
+Node 20 builds the AngularJS frontends and the Angular 15 and 16 sources. Three repositories need a
+newer one: the Embeddable Editor, the TypeScript model library, and the term picker all pin 24.19.0
+in a `.nvmrc`, because Angular 22 accepts only `^22.22.3 || ^24.15.0 || >=26`. Node 20 cannot build
+them.
+
+Working across both therefore needs a version manager rather than one Homebrew Node. With `nvm`
+installed, each of those repositories selects its own version:
+
+```bash
+cd $CEDAR_HOME/cedar-embeddable-editor
+nvm use          # reads .nvmrc
+```
 
 ## Verify the Toolchain
 
@@ -55,6 +74,9 @@ gulp --version
 ng version
 openssl version
 ```
+
+`ng version` reports the global launcher. Inside a project it reports that project's own CLI
+instead, which is the version that matters.
 
 JDK 17 must be installed even if another Java release is your shell default. `cedarcli` selects JDK
 17 for native CEDAR commands.

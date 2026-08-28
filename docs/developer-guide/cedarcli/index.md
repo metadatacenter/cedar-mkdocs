@@ -23,9 +23,10 @@ the intended branches and identify repositories that need attention. [Maven](mav
 [Building CEDAR](building.md) then explain how source becomes usable local artifacts.
 
 [Publishing Artifacts and Build Trains](publishing.md) covers the point at which artifacts leave one
-machine and become shared inputs for other developers and deployments.
+machine and become shared inputs for other developers and deployments, and
+[Releasing CEDAR](release.md) covers turning one of those build trains into a published version.
 
 Finally, [Selecting a Deployment Mode](modes.md) introduces the three ways to run CEDAR. The
 [native](native.md), [hybrid](hybrid.md), and [Docker](docker.md) chapters show the normal workflow
 for each mode. A short [Other Command Groups](other-commands.md) page covers the less frequently used
-release, inspection, certificate, and deployment helpers.
+inspection, certificate, and deployment helpers.
