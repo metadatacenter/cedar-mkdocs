@@ -32,8 +32,9 @@ cedarcli native start microservices
 cedarcli native status
 ```
 
-Every microservice should report a healthy application port. Frontends will still appear stopped
-until the next page.
+Every microservice should report a healthy application port and a `current` binary. A `STALE`
+binary means the service is healthy but still running an older JAR and must be restarted. Frontends
+will still appear stopped until the next page.
 
 If a service does not become healthy, follow its log by process name. For example:
 

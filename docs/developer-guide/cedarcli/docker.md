@@ -33,6 +33,13 @@ Select an older verified train when reproducing a specific deployment:
 cedarcli docker start all --train <TRAIN_ID> --pull missing --timeout 1800
 ```
 
+`cedarcli docker status` renders one grouped table for infrastructure, microservices, and, in full
+Docker mode, frontends. Each service row shows Compose health, whether the running image is the
+configured image, its published or internal ports, and its restart count. `MISMATCH` is a failure
+even when the container is healthy: it means the running image is not the selected train or local
+development tag. The final summary also reports the authentication and public-route acceptance
+checks and the active image set.
+
 ## Operate on One Part
 
 The start and stop commands also accept smaller targets:
@@ -61,8 +68,12 @@ cedarcli docker build microservices
 cedarcli docker build frontends
 ```
 
-By default, these builds use the current completed artifact train. To construct images from locally
-built Java artifacts, use the local path consistently:
+Infrastructure and microservice builds use the current completed Maven train unless `--train` or
+`--local` selects another input. An interactive frontend build uses compatibility pins and is not a
+reconstruction of the train's verified npm graph; use the already-published train images when exact
+frontend reproduction matters.
+
+To construct images from locally built Java artifacts, use the local path consistently:
 
 ```bash
 cedarcli build java
@@ -73,7 +84,8 @@ cedarcli docker start all --local --pull never
 ```
 
 Use the published train path for reproducible deployments and the local path while developing
-changes that have not been published.
+changes that have not been published. The local frontend build is an explicit development
+experiment, not promotion evidence for a train.
 
 ## Stop or Reset CEDAR
 

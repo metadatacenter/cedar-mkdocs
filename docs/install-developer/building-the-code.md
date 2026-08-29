@@ -35,6 +35,14 @@ cedarcli build frontends
 The frontend build installs each repository's declared npm dependencies and runs the build defined
 for that project.
 
+Workspace and Template Designer also have a narrow split-deployment route. Install only those two
+locked dependency trees with `cedarcli build split-frontends`. A native staging or production host
+uses `cedarcli build split-frontends --server-payload` to produce source-hashed static `app` trees
+for nginx after the environment-specific Workspace and Designer URLs have been configured.
+
+All Java-reaching build selectors run their unit and embedded integration suites by default. Use
+`--skip-tests` only for an explicit compile/install-only pass after the tests have already passed.
+
 ## Build a Smaller Target
 
 The main Java layers can be built independently when the earlier layers have not changed:
@@ -59,8 +67,9 @@ already serving requests:
 cedarcli native restart resource
 ```
 
-`cedarcli native status` marks a Java process as stale when its JAR was rebuilt after that process
-started.
+`cedarcli native status` marks a Java process as `STALE` when its JAR was rebuilt after that process
+started. A green health value does not override that warning; restart the service and confirm its
+binary is `current` before testing it.
 
 ## Recover from a Corrupt Maven Cache
 

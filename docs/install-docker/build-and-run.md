@@ -27,16 +27,18 @@ frontend containers.
 
 ## Select the Image Set
 
-CEDAR publishes development Java artifacts and Docker images as immutable build trains. A train
-gives every Java artifact and image one unique version and records the exact source commits and
-package inputs used to create it. The Docker CLI never guesses from whichever Maven snapshot or
+CEDAR publishes development Maven artifacts, npm packages, and Docker images as immutable build
+trains. A train gives each layer an exact identity and records the source commits and package inputs
+used to create it. The Docker CLI never guesses from whichever Maven snapshot, npm dist-tag, or
 container tag happened to be uploaded last.
 
 CEDAR maintainers create a complete published set with `cedarcli publish train`. The command starts
-the build-train workflow, which builds Java in dependency order, builds the two Java base images
-followed by the 29 runtime images, and pushes them to Nexus. A clean verifier then pulls all 31
-images and records their immutable registry digests. The deployable Docker pointer changes only
-after that inventory succeeds.
+the build-train workflow, which first publishes the immutable Maven graph, then publishes and
+verifies the captured TypeScript model → CEE → seven-frontend npm graph, and finally builds the two
+Java base images followed by the 29 runtime images. A clean verifier pulls all 31 images and records
+their immutable registry digests and npm/source provenance. The deployable Docker pointer changes
+only after all three inventories succeed. `cedarcli publish train-status <TRAIN_ID>` shows that
+major-stage state without the GitHub matrix noise.
 
 An ordinary installation does not run that publication workflow and does not need to build the
 images. `cedarcli docker start all` selects the most recently verified train, and the pull policy
@@ -44,8 +46,9 @@ decides whether Docker downloads it.
 
 ### Build Images Yourself
 
-The build commands are for developers changing image definitions or deliberately reconstructing a
-published train. Build the images for CEDAR's three core stacks with:
+The build commands are for developers changing image definitions or diagnosing how an
+infrastructure or microservice image consumes a published Maven train. Build the images for CEDAR's
+three core stacks with:
 
 ```bash
 cedarcli docker build infra
@@ -59,10 +62,11 @@ and `frontends` builds the browser applications. `admin` builds the optional dia
 administration tools. `all` builds every image, including the optional administration images. You
 can also use an individual image name when rebuilding one container image.
 
-Without `--local`, the build uses the current completed Maven train. Microservice images download
-that train's exact Java application artifacts from Nexus. Frontend images download the immutable
-npm packages pinned by the selected `cedar-docker-build` source; npm packages do not use a moving
-Maven-style snapshot version.
+Without `--local`, infrastructure and microservice builds use the current completed Maven train.
+Microservice images download that train's exact Java application artifacts from Nexus. Exact
+frontend reproduction uses the frontend images already published by the central train, because an
+interactive frontend image build uses compatibility package pins rather than reconstructing the
+train's recorded npm graph.
 
 To run an older verified image train, no build is needed:
 
@@ -70,8 +74,11 @@ To run an older verified image train, no build is needed:
 cedarcli docker start all --train <TRAIN_ID> --pull missing --timeout 1800
 ```
 
-When reconstructing an older train, pass the same ID to every build group. A later start with
-`--pull never` succeeds only when all 29 runtime images for that ID are already present locally.
+When rebuilding infrastructure or microservice definitions against an older Maven train, pass the
+same ID to each relevant build group. Do not rebuild the frontend group as proof of that train; pull
+the centrally published frontend images whose recorded npm graph was already verified. A later
+start with `--pull never` succeeds only when all 29 runtime images for the selected ID are already
+present locally.
 
 To rebuild Java from checked-out source instead, prepare a complete development checkout rather
 than the three-repository Docker checkout used by the normal installation. In an empty development
@@ -136,11 +143,13 @@ Check that all CEDAR containers are running and healthy:
 cedarcli docker status
 ```
 
-Status uses the configured mode. In Docker mode the result includes 29 healthy containers and
-passing authentication and frontend-route checks.
+Status uses the configured mode. In Docker mode the grouped table includes 29 service rows with
+`Health`, `Image`, `Ports`, and `Restarts`, followed by the authentication and frontend-route
+acceptance summary. A healthy container marked `MISMATCH` is not accepted: its running image does
+not match the selected train or local development tag.
 
-If a service is missing or unhealthy, note its `Stack` and `Service` in the status table. Each stack
-has its own Docker Compose directory:
+If a service is missing, unhealthy, or mismatched, note its grouped section and service name. Each
+section has its own Docker Compose directory:
 
 | Stack | Directory |
 | --- | --- |

@@ -2,7 +2,8 @@
 
 A release turns one immutable build train into a permanent, published version of CEDAR. It moves
 every repository's `main` to the released content, tags it, advances `develop` to the next
-development snapshot, and publishes Maven and npm-format artifacts to CEDAR's Nexus.
+development snapshot, and publishes the Maven release plus the stable frontend npm surfaces to
+CEDAR's Nexus.
 
 A release consumes a train rather than building one. The train has already built and verified a
 coordinated source state, so the release never compiles from a moving target: it takes the exact
@@ -13,12 +14,10 @@ what the train built. Creating a train is covered in
 The route is these commands:
 
 ```bash
-cedarcli release preflight  # settle the estate, before a train is built
-cedarcli release plan       # settle everything, against a completed train
+cedarcli release plan       # read-only rehearsal against a completed train
 cedarcli release start      # run the release
 cedarcli release status     # show where it is
-cedarcli release resume     # continue after a failure
-cedarcli release conclude   # free the slot a finished release still holds
+cedarcli release resume     # verify the recorded boundary and continue
 ```
 
 ## The Four Inputs
@@ -67,22 +66,20 @@ and nothing is changed.
 
 ## Rehearsing a Release
 
-Start before the train. Most of what stops a release has nothing to do with a train: a dirty working
-tree, a credential that no longer authenticates, a remote that will refuse the push, a red source
-commit. Those answers cost about ninety seconds, and a train costs half an hour, so they are worth
-having in that order:
+Once the train is complete, rehearse the entire release without changing anything:
 
 ```bash
-cedarcli release preflight --version 2.9.4 --next-version 2.9.5-SNAPSHOT
+cedarcli release plan \
+  --version 2.9.4 \
+  --next-version 2.9.5-SNAPSHOT \
+  --from-train 2.9.4-dev.20260829.1200 \
+  --cee-version 2.0.3
 ```
 
-It reads the repository set the next train will use and reports on the estate as it stands. Build a
-train once it is clean.
+`plan` validates the train and runs every machine, source, permission, registry, CEE, and content
+check that gates `start`. It finishes with `No changes made.`
 
-`cedarcli release plan` then runs the same checks against a completed train, adding the ones only a
-train can answer, and reports that it changed nothing.
-
-Preflight settles four groups of question.
+Plan settles four groups of question.
 
 **The machine can run a release.** Java 17 is active, `git`, `mvn`, `node`, and `npm` are on PATH,
 the CEDAR profile is sourced, and there is disk for the train, the attempt tree, and the archives.
@@ -113,7 +110,7 @@ back to anonymous and succeed either way.
 The Nexus check reads a repository rather than a status endpoint, because the status endpoints stay
 green while everything behind them fails. One shape of that is worth recognising: when Nexus serves
 its status endpoints and returns 500 for every repository path, the instance is over its daily
-request budget rather than broken. Preflight says so. Retrying makes it worse, and the budget is a
+request budget rather than broken. Plan says so. Retrying makes it worse, and the budget is a
 rolling 24-hour window, so the answer is to stop and let it roll off.
 
 **The content is stampable.** Every file a Maven build regenerates with the version inside is
@@ -132,13 +129,20 @@ cedarcli release start \
   --cee-version 2.0.3
 ```
 
-`start` runs the identical preflight before it touches anything, so a release cannot begin from a
+`start` runs the identical release gate before it touches anything, so a release cannot begin from a
 state `plan` would have refused.
 
-Add `--unattended` for a release nobody will watch. A release runs for hours across two registries
-and forty remotes, and `--unattended` retries a refused connection with backoff so a network fault
-does not end it. Only the transport is retried. A changed tree, a failed verification, or any
-refusal carrying an HTTP status stops the release at once, however transient it looks.
+Transient transport retries are built in. A release runs for hours across two registries and forty
+remotes, so it retries direct connection failures, HTTP 502/503/504 from resumable Git, Maven, and
+npm commands, and Git's server-side 5xx failures with bounded backoff. A
+changed tree, protected-ref refusal, failed byte verification, authentication failure, or Nexus
+HTTP 500 stops the release at once. Nexus 500 is deliberately not retried because it is also how
+the daily request-budget failure presents itself.
+
+Before snapshot publication, release publication, and final acceptance, a circuit breaker reads
+Nexus writable status and one real repository object. It does this before changing the phase ledger
+or beginning request-heavy verification. A direct connection failure remains retryable; an HTTP
+refusal opens the circuit.
 
 ## Phases and the Ledger
 
@@ -153,7 +157,7 @@ verifies its work before the next one begins:
 | `creating-local-refs` | Creates the release commits and tags locally, without touching any remote |
 | `publishing-snapshots` | Deploys the next-development snapshots to Nexus, in dependency order |
 | `integrating-remotes` | Writes `main`, the tag, and `develop` in each remote |
-| `publishing-artifacts` | Uploads the release artifacts to Nexus and verifies the published bytes |
+| `publishing-artifacts` | Uploads the Maven release and six stable frontend npm packages to Nexus and verifies their published bytes |
 | `accepted` | Proves the finished release from outside its own ledger |
 
 Three properties of that sequence are worth knowing. Nothing reaches a remote until every local ref
@@ -174,7 +178,10 @@ Follow a running release with:
 cedarcli release status
 ```
 
-`cedarcli release status --json` emits the same state as JSON for monitoring.
+The human view is a compact phase table with completed/total counts. It says `COMPLETE` only after
+acceptance, highlights the single next or failed phase, and prints the safe commands to run next.
+Older ledgers that stored snapshot and release publication records together are classified by task
+identity, so their totals remain truthful.
 
 ## Acceptance
 
@@ -183,6 +190,9 @@ recorded the work, whether the release actually holds: every repository carries 
 every remote ref stands where the ledger says, every published artifact still matches its recorded
 bytes, and the frontends pin the proven CEE. The answers are recorded, and `accepted` is the
 terminal phase.
+
+The exact-ref check proves each release tag at its recorded commit as part of the same remote read.
+Acceptance therefore does not repeat a tag-only request across all repositories.
 
 A release that reports success has therefore been checked rather than assumed. Treat any other
 final phase as an incomplete release, whatever else the output says.
@@ -193,22 +203,21 @@ A failure stops the release, records the reason in the ledger, and retains the f
 under `~/.cedar/train-releases/attempts/<version>/`. Nothing is rolled back and nothing is deleted,
 because a failed attempt is the evidence for diagnosing what happened.
 
-Fix the cause, then continue from the recorded phase:
+Fix the cause, reconcile without changing anything, then continue from the recorded phase:
 
 ```bash
 cedarcli release resume
 ```
 
-Resume repeats only the work that did not complete. Completed phases are re-verified rather than
-re-run, so a release interrupted during publication does not rebuild anything.
+Resume starts at the recorded phase, verifies the completed evidence that phase consumes, and
+continues with bounded transient retry. Completed phases are not re-run, so a release interrupted
+during publication does not rebuild anything.
 
 Never edit a ledger or a release manifest by hand. Those files are the release's own record of what
 it verified, and a hand-edited record makes every guard downstream of it meaningless.
 
-One release is active at a time, and acceptance marks it finished. A release that ended under an
-older layout, before acceptance existed, still holds the slot; `cedarcli release conclude` records
-that it finished and frees it. It refuses a release that has not reached a terminal phase, so the
-slot is never freed by deleting state.
+One release is active at a time. Acceptance is the only path that marks it finished and frees the
+slot for the next release; the slot is never freed by deleting or editing state.
 
 ## What a Release Changes
 
@@ -219,7 +228,9 @@ In each of the release repositories:
 - The copyright year in `license.txt` moves to the release year on both branches. Only the year
   changes, and a licence without a recognisable copyright line is left alone.
 
-In CEDAR's Nexus, the release artifacts are published under the release version and the next
-development snapshots under the new snapshot version. Nothing is published to public npmjs, which
-is a separate procedure for the Embeddable Editor and the TypeScript model library. Docker images
-belong to the train and are not promoted by a release.
+In CEDAR's Nexus, the Maven release artifacts and six stable frontend surfaces are published under
+the release version, and the next-development Maven snapshots under the new snapshot version.
+Workspace and Template Designer receive the stable CEE wiring but retain their independent
+publication route while migration is in progress. Nothing is published to public npmjs, which is a
+separate procedure for the Embeddable Editor and the TypeScript model library. Docker images belong
+to the train and are not promoted by a release.

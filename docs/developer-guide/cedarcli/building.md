@@ -57,6 +57,25 @@ cedarcli uses the appropriate build for each frontend, even though the projects 
 the same JavaScript framework or packaging process. During normal frontend development, the running
 development servers then rebuild source changes as you work.
 
+Workspace and Template Designer also have a deliberately narrow build route while their split
+deployment is being stabilized:
+
+```bash
+cedarcli build split-frontends
+```
+
+That command installs their locked dependencies without touching the other frontends. For a native
+staging or production deployment, supply the configured Workspace and Designer URLs and generate
+the static trees that nginx serves directly:
+
+```bash
+cedarcli build split-frontends --server-payload
+```
+
+The payload build refuses dirty source, records source and content hashes in each generated
+`app/config/build-info.json`, and exits after producing the static trees. It does not start a
+development server or require Docker.
+
 ## Build Everything
 
 Use the broadest build when a change crosses Java and frontend boundaries or when you want a final

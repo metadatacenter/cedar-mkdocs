@@ -272,21 +272,23 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         "remote", ("status", ORANGE),
     ], body_size=6.7)
     panel(c, 2, 0, "build", [
-        ("maven clean all", ORANGE),
-        "maven clean cedar",
         ("all [--skip-tests]", ORANGE),
         "<build_target> [--skip-tests]",
         "this [--skip-tests]",
+        "split-frontends",
+        "  [--server-payload]",
+        ("maven clean all", ORANGE),
+        "maven clean cedar",
     ], icon=clean_icon, icon_scale=0.18, body_size=6.9)
     panel(c, 3, 0, "publish", [
         ("all", ORANGE), "<build_target>", "this",
         ("train [--resume TRAIN_ID]", ORANGE),
+        "  [--dry-run]",
+        "train-status TRAIN_ID",
+        "split-frontends [--dry-run]",
     ], icon=deploy_icon, icon_scale=0.22)
     panel(c, 4, 0, "release", (
         [
-            ("preflight", ORANGE),
-            "  --version VER",
-            "  --next-version NEXT",
             ("plan", ORANGE),
             "  --version VER",
             "  --next-version NEXT",
@@ -294,31 +296,30 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
             "  --cee-version CEE",
         ],
         [
-            ("start [--unattended]", ORANGE),
+            ("start", ORANGE),
             "  --version VER",
             "  --next-version NEXT",
             "  --from-train TRAIN_ID",
             "  --cee-version CEE",
             "resume",
-            "status [--json]",
-            "conclude",
+            "status",
         ],
     ), span=2, body_size=6.7)
 
-    panel(c, 0, 2, "repo", [("config", ORANGE)])
-    panel(c, 1, 2, "check", [("repos", ORANGE), ("versions", ORANGE)],
+    panel(c, 0, 3, "repo", [("config", ORANGE)])
+    panel(c, 1, 3, "check", [("repos", ORANGE), ("versions", ORANGE)],
           icon=check_icon, icon_scale=0.24)
-    panel(c, 2, 2, "env", [
+    panel(c, 2, 3, "env", [
         ("status", ORANGE), "list [native|docker]",
         "filter TERM", "  [native|docker]",
     ])
-    panel(c, 3, 2, "cert", ["ca", "domains", ("setup", ORANGE)],
+    panel(c, 3, 3, "cert", ["ca", "domains", ("setup", ORANGE)],
           icon=check_icon, icon_scale=0.22)
-    panel(c, 4, 2, "dev", [
+    panel(c, 4, 3, "dev", [
         ("add-hosts", ORANGE), "copy-keycloak-listener", "create-directories",
         "generate-api-key",
     ])
-    panel(c, 5, 2, "prod", ["configure-frontends", "reset-frontends"])
+    panel(c, 5, 3, "prod", ["configure-frontends", "reset-frontends"])
 
     panel(c, 0, 1, "mode", ["native", "hybrid", "docker", "--clear [--force]"])
     panel(c, 1, 1, "native", [
@@ -328,20 +329,20 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     ], icon=terminal_icon, icon_scale=0.20)
     docker_panel(c)
 
-    panel(c, 0, 3, "<build_target>", [
+    panel(c, 0, 2, "<build_target>", [
         "java", "project", "parent", "libraries", "clients", "frontends",
     ])
-    panel(c, 1, 3, "<run_target>", [
+    panel(c, 1, 2, "<run_target>", [
         "infra", "microservices",
         ("microservice all", ORANGE), "microservice <microservice>",
         "frontends", ("frontend all", ORANGE), "frontend <frontend>", "admin",
         "keycloak / kk",
     ])
-    panel(c, 2, 3, "<frontend>", [
+    panel(c, 2, 2, "<frontend>", [
         "main", "openview", "monitoring", "bridging", "content", "workspace",
         "designer",
     ], icon=browser_icon, icon_scale=0.21)
-    panel(c, 3, 3, "<microservice>", (
+    panel(c, 3, 2, "<microservice>", (
         ["artifact", "bridge", "group", "impex", "messaging", "monitor", "open"],
         ["repo", "resource", "schema", "submission", "terminology", "user",
          "valuerecommender", "worker"],

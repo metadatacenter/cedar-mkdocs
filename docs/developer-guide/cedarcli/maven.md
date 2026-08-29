@@ -21,8 +21,11 @@ convenient on one development machine because a new local build can replace the 
 When an exact shared version is required, CEDAR publishes an immutable build train instead. The
 [publishing chapter](publishing.md) explains the difference.
 
-Estate-wide cedarcli builds skip Java tests so that compilation does not depend on a running CEDAR
-environment. Run the tests for the repositories you changed before considering the work complete.
+Every cedarcli build that can reach Java runs the unit and embedded integration suites by default.
+Those suites are backend-free, so a live CEDAR stack is not required. Use `--skip-tests` explicitly
+for a compile/install-only pass after the tests have already passed. Immutable train assembly and
+release publication deliberately skip the suites; run the default `cedarcli build java` gate or
+confirm repository CI before starting either workflow.
 
 ## Repair Maven State
 

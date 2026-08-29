@@ -53,9 +53,12 @@ Use status for the broad view:
 cedarcli native status
 ```
 
-It reports managed application processes and the native host ports used by infrastructure. Use
-health when a script or test needs a simple success or failure result for the complete managed
-application tier:
+It reports microservices, infrastructure, and frontends in one grouped table. Managed application
+rows show PID, port/listener state, health, binary freshness, and cumulative log errors;
+infrastructure rows show their configured ports and availability. `STALE` means a healthy process
+is still running an older JAR. A `~` PID is a verified unmanaged CEDAR process that restart can
+adopt; `!` is a foreign listener that native control will not touch. Use health when a script or
+test needs a simple success or failure result for the complete managed application tier:
 
 ```bash
 cedarcli native health

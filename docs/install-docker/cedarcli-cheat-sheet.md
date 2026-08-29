@@ -108,18 +108,65 @@ cedarcli build maven clean cedar
 cedarcli build maven clean all
 ```
 
-## Immutable Development Trains
+## Split Workspace and Designer
 
-CEDAR maintainers publish one internally consistent Maven and Docker set with:
+Workspace and Template Designer have explicit routes while their split deployment is being
+stabilized:
 
 ```bash
+cedarcli build split-frontends
+cedarcli build split-frontends --server-payload
+cedarcli publish split-frontends --dry-run
+cedarcli publish split-frontends
+```
+
+The ordinary build installs only their locked dependencies. `--server-payload` creates the static
+trees used by native staging/production nginx. Publication creates immutable commit-derived
+development packages in CEDAR Nexus without changing either checkout; the generic frontend and
+`all` publication selectors intentionally exclude them.
+
+## Immutable Development Trains
+
+CEDAR maintainers publish one internally consistent Maven, npm, and Docker set with:
+
+```bash
+cedarcli publish train --dry-run
 cedarcli publish train
+cedarcli publish train-status <TRAIN_ID>
+cedarcli publish train --resume <TRAIN_ID> --dry-run
 cedarcli publish train --resume <TRAIN_ID>
 ```
 
-The first command allocates an identifier such as `<NEXT>-dev.YYYYMMDD.HHMM`; operators do not
-choose it. Resume uses the source manifest already recorded for that train. Create a new train when
-newer source commits must be included.
+The first command rehearses dispatch without creating state. The real dispatch allocates an
+identifier such as `<NEXT>-dev.YYYYMMDD.HHMM`; operators do not choose it. `train-status` reduces
+the workflow to its persisted Maven, npm, and Docker stages. Resume uses the exact source manifest
+already recorded for that train; preview it with `--dry-run` when diagnosing an interruption.
+Create a new train when newer source commits must be included.
+
+## Formal Release
+
+A formal release consumes a completed train and requires all four inputs explicitly:
+
+```bash
+cedarcli release plan \
+  --version <VER> \
+  --next-version <NEXT>-SNAPSHOT \
+  --from-train <TRAIN_ID> \
+  --cee-version <PUBLIC_CEE_VERSION>
+
+cedarcli release start \
+  --version <VER> \
+  --next-version <NEXT>-SNAPSHOT \
+  --from-train <TRAIN_ID> \
+  --cee-version <PUBLIC_CEE_VERSION>
+
+cedarcli release status
+cedarcli release resume
+```
+
+`plan` is the complete read-only release gate. `start` reruns that gate and advances the
+manifest-owned ledger. Transient transport retries are automatic; after a hard failure, fix the
+cause and use the option-free `resume`. Only an accepted status means the release is complete.
 
 ## Diagnose a Docker Service
 
@@ -129,6 +176,10 @@ cd $CEDAR_HOME/cedar-docker-deploy/cedar-microservices
 docker compose ps
 docker compose logs --tail 200 server-resource
 ```
+
+The grouped status table reports Health, Image, Ports, and Restarts for each service. A healthy
+container marked `MISMATCH` is still a failure because it is not running the selected image set.
+The summary reports container readiness, acceptance checks, and the active train or local tag.
 
 If the CLI says no mode is configured, run `cedarcli mode docker`. If another mode is configured,
 stop it, clear it with `cedarcli mode --clear`, and then select Docker mode.
