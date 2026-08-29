@@ -132,14 +132,22 @@ verifies its work before the next one begins:
 | `preparing-versions` | Stamps the release and next-development versions, and the copyright year |
 | `validating-builds` | Builds the stamped trees and records proof of their output |
 | `creating-local-refs` | Creates the release commits and tags locally, without touching any remote |
+| `publishing-snapshots` | Deploys the next-development snapshots to Nexus, in dependency order |
 | `integrating-remotes` | Writes `main`, the tag, and `develop` in each remote |
-| `publishing-artifacts` | Uploads to Nexus and verifies the published bytes |
+| `publishing-artifacts` | Uploads the release artifacts to Nexus and verifies the published bytes |
 | `accepted` | Proves the finished release from outside its own ledger |
 
-Two properties of that sequence are worth knowing. Nothing reaches a remote until every local ref
+Three properties of that sequence are worth knowing. Nothing reaches a remote until every local ref
 has been created and verified, so a release that fails during preparation has changed nothing
-outside the machine it ran on. And each integration commit is written from the prepared tree rather
+outside the machine it ran on. Each integration commit is written from the prepared tree rather
 than merged towards it, so `main` comes to hold exactly the released content.
+
+The third explains why the snapshots are deployed before the remotes rather than after. Integrating
+the remotes advances `develop` to the next version everywhere at once, and the CI those pushes
+trigger resolves the parent and the libraries at that version from Nexus. Publishing the snapshots
+first means those builds find what they are looking for. Deployed afterwards, as they once were,
+they arrived minutes too late and left a tail of red `develop` builds that said nothing about the
+code.
 
 Follow a running release with:
 
