@@ -68,12 +68,12 @@ Normal builds reuse Maven's local dependency cache. If that cache is demonstrabl
 remove only the CEDAR artifacts and rebuild:
 
 ```bash
-cedarcli maven clean cedar
+cedarcli build maven clean cedar
 cedarcli build java
 ```
 
-`cedarcli maven clean all` removes the complete Maven cache and should be reserved for a deliberate
-full reset, because every dependency must then be downloaded again.
+`cedarcli build maven clean all` removes the complete Maven cache and should be reserved for a
+deliberate full reset, because every dependency must then be downloaded again.
 
 Build trains and publication are development workflows rather than installation steps. They are
 explained in the [cedarcli Manual](../developer-guide/cedarcli/).

@@ -32,14 +32,14 @@ interfering with the current source.
 Remove the locally cached CEDAR artifacts and rebuild them with:
 
 ```bash
-cedarcli maven clean cedar
+cedarcli build maven clean cedar
 cedarcli build java
 ```
 
 If the entire Maven cache is damaged, the broader command is:
 
 ```bash
-cedarcli maven clean all
+cedarcli build maven clean all
 ```
 
 This removes CEDAR and third-party dependencies, so the next build must download everything again.

@@ -229,7 +229,7 @@ def docker_panel(c: canvas.Canvas) -> None:
     row = 1
     x = column * CELL_WIDTH
     y = PAGE_HEIGHT - (row + 1) * CELL_HEIGHT
-    panel(c, column, row, "docker", [], span=3)
+    panel(c, column, row, "docker", [], span=4)
 
     body_top = y + CELL_HEIGHT - 42
     draw_lines(c, [
@@ -265,23 +265,41 @@ def latest_cli_version() -> str:
 
 def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     brand_panel(c, cli_version)
-    panel(c, 1, 0, "git", (
-        [("add-commit-push COMMENT", OUTLINE), "branch", "checkout BRANCH",
-         "clone all / docker", "fetch"],
-        ["list branch / tag", ("next", ORANGE), ("pull", ORANGE),
-         "remote", ("status", ORANGE)],
-    ), span=2)
-    panel(c, 3, 0, "maven", [("clean all", ORANGE), "clean cedar"],
-          icon=clean_icon, icon_scale=0.25)
-    panel(c, 4, 0, "build", [
+    panel(c, 1, 0, "git", [
+        ("add-commit-push COMMENT", OUTLINE),
+        "branch", "checkout BRANCH", "clone all / docker", "fetch",
+        "list branch / tag", ("next", ORANGE), ("pull", ORANGE),
+        "remote", ("status", ORANGE),
+    ], body_size=6.7)
+    panel(c, 2, 0, "build", [
+        ("maven clean all", ORANGE),
+        "maven clean cedar",
         ("all [--skip-tests]", ORANGE),
         "<build_target> [--skip-tests]",
         "this [--skip-tests]",
-    ], body_size=7.0)
-    panel(c, 5, 0, "publish", [
+    ], icon=clean_icon, icon_scale=0.18, body_size=6.9)
+    panel(c, 3, 0, "publish", [
         ("all", ORANGE), "<build_target>", "this",
         ("train [--resume TRAIN_ID]", ORANGE),
     ], icon=deploy_icon, icon_scale=0.22)
+    panel(c, 4, 0, "release", (
+        [
+            ("plan", ORANGE),
+            "  --version VER",
+            "  --next-version NEXT",
+            "  --from-train TRAIN_ID",
+            "  --cee-version CEE",
+        ],
+        [
+            ("start [--unattended]", ORANGE),
+            "  --version VER",
+            "  --next-version NEXT",
+            "  --from-train TRAIN_ID",
+            "  --cee-version CEE",
+            "resume",
+            "status [--json]",
+        ],
+    ), span=2, body_size=6.7)
 
     panel(c, 0, 2, "repo", [("config", ORANGE)])
     panel(c, 1, 2, "check", [("repos", ORANGE), ("versions", ORANGE)],
@@ -305,12 +323,6 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         "restart [microservice...]", "logs <microservice>",
     ], icon=terminal_icon, icon_scale=0.20)
     docker_panel(c)
-    panel(c, 5, 1, "release", [
-        ("plan", ORANGE), ("start [--unattended]", ORANGE), "resume", "status [--json]",
-        "plan / start require:",
-        "  --version --next-version",
-        "  --from-train --cee-version",
-    ], body_size=7.0)
 
     panel(c, 0, 3, "<build_target>", [
         "java", "project", "parent", "libraries", "clients", "frontends",

@@ -99,6 +99,15 @@ image name. `all` builds every image, including the four optional administration
 `--no-deps` skips required CEDAR base images and should be used only when the exact bases are
 already present.
 
+If the local Maven cache is demonstrably inconsistent, remove only CEDAR artifacts before
+rebuilding. A complete cache reset also removes third-party dependencies and is deliberately
+broader:
+
+```bash
+cedarcli build maven clean cedar
+cedarcli build maven clean all
+```
+
 ## Immutable Development Trains
 
 CEDAR maintainers publish one internally consistent Maven and Docker set with:
