@@ -6,6 +6,7 @@
   "description": "Playwright step-driver that walks the CEDAR Workbench and generates tutorial screenshots",
   "scripts": {
     "auth": "node auth.mjs",
+    "capture:mcps": "node mcp-capture.mjs",
     "run": "node run.mjs",
     "run:headed": "HEADED=1 node run.mjs"
   },

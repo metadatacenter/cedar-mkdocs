@@ -80,8 +80,8 @@ what the template should hold:
 > organ from Uberon; and Assay Type, allowing three specific assays:
 > histopathology, imaging, and microscopy.
 
-Everything after this is the LLM working. It happens in three moves:
-resolve the terms, assemble the template, and preview it.
+Everything after this is the LLM working. It resolves the terms, assembles and
+saves the template, then previews it.
 
 ## Step 2: Resolve the Terms
 
@@ -185,22 +185,7 @@ but this is what a CEDAR writer emits. This is compact CEDAR YAML — the form y
 identifier, because the template does not have one yet: CEDAR assigns that when
 the template is saved.
 
-## Step 4: Preview the Template
-
-YAML is exact but hard to picture. The embeddable-editor server renders the
-template as the CEDAR form it describes, opened read-only in your browser, so you
-can check the design before saving anything. The LLM calls `show_template`
-and returns a link:
-
-![The Tissue Sample template, rendered by the CEDAR embeddable editor](../img/tutorials/mcps-tutorial-template.png)
-
-The red asterisk marks Sample ID as required. Cell Type, Organ, and Assay Type
-render as ontology-backed pickers, each inviting you to "Start typing to filter"
-its allowed terms. Behind the form is the very same template as JSON-LD and as
-JSON Schema, the standards-based forms CEDAR speaks natively; the download control
-in the toolbar hands you either one.
-
-## Step 5: Save the Template
+## Step 4: Save the Template
 
 An instance says which template it was filled from, and it says so by IRI. Only
 CEDAR can supply that: the template you have authored exists on your machine and
@@ -218,6 +203,20 @@ them are invented anywhere else: an artifact reaches CEDAR naming nothing, and C
 it. That is also why the YAML you send is the YAML you wrote — the upload is the compact form
 itself, not a JSON translation of it, and what comes back is the same form with the identifiers
 filled in.
+
+## Step 5: Preview the Stored Template
+
+YAML is exact but hard to picture. The embeddable-editor server renders the stored template as the
+CEDAR form it describes, opened read-only in your browser. The LLM hands the saved template returned
+by CEDAR to `show_template` and returns a link:
+
+![The Tissue Sample template, rendered by CEE 2.0.3](../img/tutorials/mcps-tutorial-template.png)
+
+Saving comes before previewing for a concrete reason: CEE requires the template's `@id`, because
+every instance must identify the template it came from. The red asterisk marks Sample ID as
+required. Cell Type, Organ, and Assay Type render as ontology-backed pickers, each inviting you to
+"Start typing to filter" its allowed terms. Behind the form is the same template as JSON-LD and JSON
+Schema, the standards-based forms CEDAR speaks natively; the download control offers either one.
 
 ## Step 6: Fill an Instance
 
@@ -259,7 +258,7 @@ for. `isBasedOn` links the instance back to the template it was filled from.
 
 Preview it the same way, with `show_instance`:
 
-![The filled Tissue Sample instance, rendered by the CEDAR embeddable editor](../img/tutorials/mcps-tutorial-instance.png)
+![The filled Tissue Sample instance, rendered by CEE 2.0.3](../img/tutorials/mcps-tutorial-instance.png)
 
 Each controlled value shows its label beside the IRI it stands for, and links out to the term.
 That is the whole point. The instance stores *hepatocyte* as `CL_0000182`, not as the loose word
@@ -295,6 +294,22 @@ want, keep the approach, and the servers keep the output honest.
 ## Appendix: Configuring the MCP Servers
 
 Each server is a standalone MCP server that your LLM launches over stdio.
+The three Java servers require Java 17 and Maven 3.9 or newer; the BioPortal server requires Python
+3.14 and `uv`. Clone the four repositories, then build and test them from their repository roots:
+
+```bash
+uv sync && uv run pytest                         # bioportal-term-mcp
+mvn verify                                       # cedar-artifact-mcp
+mvn verify                                       # cedar-cee-mcp
+mvn verify                                       # cedar-artifact-rest-mcp
+```
+
+The Maven builds produce fixed client-facing paths under `target/`:
+`cedar-artifact-mcp.jar`, `cedar-cee-mcp.jar`, and `cedar-artifact-rest-mcp.jar`. The artifact and
+CEE servers resolve released `cedar-artifact-library` 2.9.3 from the anonymous-read BMIR Nexus, so
+they need no sibling library checkout. The CEE server also embeds stable CEE 2.0.3 in its JAR; a
+form session does not need npmjs or a CDN at runtime.
+
 You register the four in your client's MCP configuration once. The shape is the
 same across MCP-capable clients (Claude Desktop, Claude Code, and others); the
 launch command and paths depend on how you installed each server. A
@@ -304,20 +319,20 @@ representative configuration:
 {
   "mcpServers": {
     "bioportal-term": {
-      "command": "uv",
+      "command": "/absolute/path/to/uv",
       "args": ["--directory", "/path/to/bioportal-term-mcp", "run", "bioportal-term-mcp"],
       "env": { "BIOPORTAL_API_KEY": "your-bioportal-api-key" }
     },
     "cedar-artifact": {
-      "command": "java",
+      "command": "/absolute/path/to/java",
       "args": ["-jar", "/path/to/cedar-artifact-mcp.jar"]
     },
     "cedar-cee": {
-      "command": "java",
+      "command": "/absolute/path/to/java",
       "args": ["-jar", "/path/to/cedar-cee-mcp.jar"]
     },
     "cedar-artifact-rest": {
-      "command": "java",
+      "command": "/absolute/path/to/java",
       "args": ["-jar", "/path/to/cedar-artifact-rest-mcp.jar"],
       "env": {
         "CEDAR_API_KEY": "your-cedar-api-key",
@@ -335,12 +350,14 @@ A few notes on configuration:
 - The artifact and embeddable-editor servers need no credentials. One builds,
   validates, and renders locally; the other renders locally in your browser.
 - `CEDAR_API_KEY` authenticates the REST server with CEDAR. It is required only
-  if you save artifacts, as in [Save the Template](#step-5-save-the-template).
+  if you save artifacts, as in [Save the Template](#step-4-save-the-template).
 - `CEDAR_BASE_URL` is the CEDAR resource-server URL. For the public CEDAR system,
   use `https://resource.metadatacenter.org`; the REST MCP server uses that value
   by default when the variable is omitted. Set it only when targeting another
   CEDAR deployment.
 
-After adding the block, restart your client. The LLM then has the tools
-this tutorial used, from `find_class` and `set_branch_constraint` to
-`show_template`, ready to call.
+Use absolute executable and JAR paths: GUI clients commonly do not inherit your shell's `PATH`.
+After adding the block, restart your client. Rebuilding a JAR or changing an environment variable
+also requires a restart because the client holds each MCP server process open. The LLM then has the
+tools this tutorial used, from `find_class` and `set_branch_constraint` to `show_template`, ready to
+call.

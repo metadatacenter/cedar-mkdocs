@@ -83,6 +83,21 @@ CEDAR Workbench. It lives in [`runner/`](runner/) and writes straight into
 tooling (Node/Playwright); it never runs during a Read the Docs build. See
 [`runner/README.md`](runner/README.md) for setup and usage.
 
+The two screenshots in the CEDAR MCPs Tutorial come from the local browser pages served by
+`cedar-cee-mcp`, not from the Workbench. Build the current MCP JAR, use its `show_template` and
+`show_instance` tools with the tutorial's stored Tissue Sample template and filled instance, and
+keep that MCP process running while the capture runs:
+
+```bash
+cd runner
+npm install
+node mcp-capture.mjs <show-template-url> <show-instance-url>
+```
+
+The capture waits for CEE to finish rendering, refuses a page whose status or console reports a
+problem, and writes the two 2000×1756 PNGs under `docs/img/tutorials/`. See
+[`runner/README.md`](runner/README.md#cedar-mcp-tutorial) for the full workflow.
+
 ## Diagrams
 
 Diagrams are hand-authored inline SVG in the Markdown, not images. That is a

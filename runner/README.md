@@ -2,7 +2,8 @@
 
 Walks the CEDAR Workbench through the tutorial arc and writes screenshots
 straight into the docs tree: `../docs/tutorials/img/` (the CEDAR Tutorial) and
-`../docs/tutorials/term-img/` (the CEDAR Controlled Term Tutorial). Built from
+`../docs/tutorials/term-img/` (the CEDAR Controlled Term Tutorial). It also captures the CEDAR
+MCPs Tutorial's two CEE previews from pages served by `cedar-cee-mcp`. Built from
 [`TRACE.md`](TRACE.md).
 
 > **Status: verified end-to-end (2026-07-16).** A full `node run.mjs` runs all
@@ -33,6 +34,26 @@ The CEDAR Controlled Term Tutorial has its own driver with the same flags:
 node term-run.mjs        # builds the Tissue Sample template, writes ../docs/tutorials/term-img/
 ```
 
+### CEDAR MCP Tutorial
+
+The MCP tutorial uses the real CEE bundle embedded in `cedar-cee-mcp`. Build and launch the MCP,
+then call `show_template` with the tutorial's stored Tissue Sample template and `show_instance` with
+its filled instance. The template needs its CEDAR-assigned identifier; an unsaved template correctly
+produces a CEE error because an instance could not identify what it is based on.
+
+Keep the MCP process alive and pass the two returned loopback URLs to the capture:
+
+```bash
+node mcp-capture.mjs \
+  http://127.0.0.1:<port>/s/<template-session-id> \
+  http://127.0.0.1:<port>/s/<instance-session-id>
+```
+
+The script waits for the component and its fonts, fails on a CEE status or console error, and
+writes `../docs/img/tutorials/mcps-tutorial-template.png` and
+`../docs/img/tutorials/mcps-tutorial-instance.png`. Its 1000×878 viewport at device scale 2 keeps
+the checked-in output at 2000×1756.
+
 Each run creates its own `Tutorial Run <timestamp>` folder, builds everything
 inside it, then deletes artifacts (**instances before templates**) and the
 folder. On failure it saves `failures/FAILED-<step>.png` and leaves the folder
@@ -47,6 +68,7 @@ for inspection (teardown still attempts in `finally`).
 | `lib.mjs`    | browser launch, screenshot, toast wait, row/menu helpers |
 | `steps.mjs`  | one function per tutorial section + teardown |
 | `run.mjs`    | orchestrator, CLI flags, failure capture |
+| `mcp-capture.mjs` | CEE preview URLs → the two MCP tutorial screenshots |
 
 ## Verified selectors & gotchas (live, 2026-07-16)
 
