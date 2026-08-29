@@ -10,13 +10,15 @@ commits the train recorded, stamps versions onto them, and proves that what it p
 what the train built. Creating a train is covered in
 [Publishing Artifacts and Build Trains](publishing.md).
 
-Four commands make up the route:
+The route is these commands:
 
 ```bash
-cedarcli release plan     # settle every precondition, change nothing
-cedarcli release start    # run the release
-cedarcli release status   # show where it is
-cedarcli release resume   # continue after a failure
+cedarcli release preflight  # settle the estate, before a train is built
+cedarcli release plan       # settle everything, against a completed train
+cedarcli release start      # run the release
+cedarcli release status     # show where it is
+cedarcli release resume     # continue after a failure
+cedarcli release conclude   # free the slot a finished release still holds
 ```
 
 ## The Four Inputs
@@ -65,9 +67,20 @@ and nothing is changed.
 
 ## Rehearsing a Release
 
-`cedarcli release plan` runs every check a release can make before it changes anything, and then
-reports that it changed nothing. Run it first, always. It answers in about a minute what previously
-took a build phase to discover.
+Start before the train. Most of what stops a release has nothing to do with a train: a dirty working
+tree, a credential that no longer authenticates, a remote that will refuse the push, a red source
+commit. Those answers cost about ninety seconds, and a train costs half an hour, so they are worth
+having in that order:
+
+```bash
+cedarcli release preflight --version 2.9.4 --next-version 2.9.5-SNAPSHOT
+```
+
+It reads the repository set the next train will use and reports on the estate as it stands. Build a
+train once it is clean.
+
+`cedarcli release plan` then runs the same checks against a completed train, adding the ones only a
+train can answer, and reports that it changed nothing.
 
 Preflight settles four groups of question.
 
@@ -96,6 +109,12 @@ identity for CEDAR's Nexus registry, the release version is unused in every repo
 remote accepts a dry-run push of the `main` update and the release tag it will later make for real.
 Nexus authorization cannot be inferred from the variables being present, because Nexus reads fall
 back to anonymous and succeed either way.
+
+The Nexus check reads a repository rather than a status endpoint, because the status endpoints stay
+green while everything behind them fails. One shape of that is worth recognising: when Nexus serves
+its status endpoints and returns 500 for every repository path, the instance is over its daily
+request budget rather than broken. Preflight says so. Retrying makes it worse, and the budget is a
+rolling 24-hour window, so the answer is to stop and let it roll off.
 
 **The content is stampable.** Every file a Maven build regenerates with the version inside is
 declared, every `license.txt` carries a recognisable copyright line, and each remote's `main` holds
@@ -185,6 +204,11 @@ re-run, so a release interrupted during publication does not rebuild anything.
 
 Never edit a ledger or a release manifest by hand. Those files are the release's own record of what
 it verified, and a hand-edited record makes every guard downstream of it meaningless.
+
+One release is active at a time, and acceptance marks it finished. A release that ended under an
+older layout, before acceptance existed, still holds the slot; `cedarcli release conclude` records
+that it finished and frees it. It refuses a release that has not reached a terminal phase, so the
+slot is never freed by deleting state.
 
 ## What a Release Changes
 

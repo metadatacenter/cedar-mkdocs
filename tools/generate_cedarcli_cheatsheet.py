@@ -284,6 +284,9 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     ], icon=deploy_icon, icon_scale=0.22)
     panel(c, 4, 0, "release", (
         [
+            ("preflight", ORANGE),
+            "  --version VER",
+            "  --next-version NEXT",
             ("plan", ORANGE),
             "  --version VER",
             "  --next-version NEXT",
@@ -298,6 +301,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
             "  --cee-version CEE",
             "resume",
             "status [--json]",
+            "conclude",
         ],
     ), span=2, body_size=6.7)
 
