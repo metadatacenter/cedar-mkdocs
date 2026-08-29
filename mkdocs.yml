@@ -52,7 +52,6 @@ nav:
           - user-guide/viewing-resource-information.md
           - user-guide/understanding-the-suggestion-system.md
           - user-guide/cedar-identifiers-and-iris.md
-          - user-guide/cedars-api.md
           - user-guide/working-with-cdes.md
           - user-guide/cedar-for-cadsr.md
       - user-guide/pages/faq.md
