@@ -84,7 +84,7 @@ Follow its managed log with:
 cedarcli native logs resource
 ```
 
-The same commands work with frontend process names such as `workspace`, `designer`, and
+The same commands work with frontend process names such as `ui-workspace`, `ui-designer`, and
 `ui-openview`.
 
 ## Use the Profile Outside `cedarcli`

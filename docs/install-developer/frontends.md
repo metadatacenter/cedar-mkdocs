@@ -56,12 +56,12 @@ Once the complete native stack is running, require every managed application to 
 cedarcli native health
 ```
 
-For a frontend problem, follow the relevant managed log. The auxiliary Angular applications use a
-`ui-` prefix:
+For a frontend problem, follow the relevant managed log. Every frontend is named `ui-<name>`, which
+keeps it apart from the like-named microservice:
 
 ```bash
-cedarcli native logs workspace
-cedarcli native logs designer
+cedarcli native logs ui-workspace
+cedarcli native logs ui-designer
 cedarcli native logs ui-openview
 ```
 

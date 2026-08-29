@@ -69,7 +69,7 @@ Frontend development servers usually rebuild source changes automatically. Resta
 dependencies or process configuration have changed:
 
 ```bash
-cedarcli native restart workspace
+cedarcli native restart ui-workspace
 ```
 
 ## Stop CEDAR

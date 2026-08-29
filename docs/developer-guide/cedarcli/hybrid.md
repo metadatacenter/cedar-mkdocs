@@ -41,8 +41,8 @@ The frontend servers normally rebuild when source changes. Restart or inspect on
 native command group when needed:
 
 ```bash
-cedarcli native restart workspace
-cedarcli native logs workspace
+cedarcli native restart ui-workspace
+cedarcli native logs ui-workspace
 ```
 
 The mode keeps ownership clear. Native backend starts are rejected because the backend belongs to
