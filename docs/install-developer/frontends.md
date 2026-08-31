@@ -34,8 +34,6 @@ The browser-facing applications are:
 | Application | URL |
 | --- | --- |
 | CEDAR | `https://cedar.metadatacenter.orgx` |
-| Workspace | `https://workspace.metadatacenter.orgx` |
-| Template Designer | `https://designer.metadatacenter.orgx` |
 | OpenView | `https://openview.metadatacenter.orgx` |
 | Content | `https://content.metadatacenter.orgx` |
 | Monitoring | `https://monitoring.metadatacenter.orgx` |
@@ -60,9 +58,9 @@ For a frontend problem, follow the relevant managed log. Every frontend is named
 keeps it apart from the like-named microservice:
 
 ```bash
-cedarcli native logs ui-workspace
-cedarcli native logs ui-designer
+cedarcli native logs ui-main
 cedarcli native logs ui-openview
+cedarcli native logs ui-content
 ```
 
 Stop all frontend processes without disturbing the backend with:

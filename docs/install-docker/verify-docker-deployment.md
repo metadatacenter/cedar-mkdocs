@@ -24,21 +24,19 @@ CEDAR provides several browser applications, each at its own local HTTPS address
 all resolve to your computer, where the infrastructure nginx container is the single public entry
 point for the Docker deployment.
 
-For example, a request to `https://workspace.metadatacenter.orgx` reaches nginx on port 443. Nginx
-handles the HTTPS connection, recognizes the `workspace` hostname, and forwards the request across
-the private `cedarnet` Docker network to the Workspace frontend container. That container returns
+For example, a request to `https://cedar.metadatacenter.orgx` reaches nginx on port 443. Nginx
+handles the HTTPS connection, recognizes the `cedar` hostname, and forwards the request across
+the private `cedarnet` Docker network to the main editor frontend container. That container returns
 the HTML, JavaScript, and other files that your browser displays. Authentication and API requests
 from the application also return through the public nginx entry point to the appropriate backend
 containers. Compose also publishes their development ports on localhost for diagnostics, but the
 browser route above goes through nginx.
 
-You can open any of the seven browser applications directly:
+You can open any of the browser applications directly:
 
 | Application | URL |
 | --- | --- |
 | Main editor | [https://cedar.metadatacenter.orgx/](https://cedar.metadatacenter.orgx/) |
-| Workspace | [https://workspace.metadatacenter.orgx/](https://workspace.metadatacenter.orgx/) |
-| Template Designer | [https://designer.metadatacenter.orgx/](https://designer.metadatacenter.orgx/) |
 | OpenView | [https://openview.metadatacenter.orgx/](https://openview.metadatacenter.orgx/) |
 | Content | [https://content.metadatacenter.orgx/](https://content.metadatacenter.orgx/) |
 | Monitoring | [https://monitoring.metadatacenter.orgx/](https://monitoring.metadatacenter.orgx/) |
@@ -46,12 +44,13 @@ You can open any of the seven browser applications directly:
 
 ## Log In to CEDAR
 
-Start with [CEDAR Workspace](https://workspace.metadatacenter.orgx/). When you sign in, CEDAR sends
+Start with the [main editor](https://cedar.metadatacenter.orgx/). When you sign in, CEDAR sends
 you to the local Keycloak service at `auth.metadatacenter.orgx`. After Keycloak accepts your
-credentials, it returns you to Workspace.
+credentials, it returns you to the main editor.
 
-The browser applications share that Keycloak session. For example, opening a template from
-Workspace takes you to Template Designer without asking you to sign in again.
+The browser applications that require a sign-in share that Keycloak session. Each registers its own
+client in the same `CEDAR` realm, so opening [Monitoring](https://monitoring.metadatacenter.orgx/)
+after signing in to the main editor does not ask you to sign in again.
 
 The local realm provides these accounts:
 
