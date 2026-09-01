@@ -58,11 +58,16 @@ a train ID might be:
 2.9.3-dev.20260825.2045
 ```
 
-First rehearse source capture and dispatch without creating state or starting GitHub Actions:
+Optionally rehearse source capture and dispatch without creating state or starting GitHub Actions:
 
 ```bash
 cedarcli publish train --dry-run
 ```
+
+Dry-run and real dispatch use the same local preflight. It validates the Maven, model → CEE →
+frontend, and 31-image Docker configuration as one contract; checks GitHub authentication and the
+workflow; requires the train slot to be idle; rejects dirty, unpushed, or remote-diverged source;
+and rejects an ID collision. No extra parameter enables these checks.
 
 Then create the train with:
 
@@ -70,15 +75,18 @@ Then create the train with:
 cedarcli publish train
 ```
 
-cedarcli chooses the ID and dispatches the build in GitHub Actions. It prints the workflow run and a
+cedarcli repeats the preflight, chooses the ID, and dispatches the build in GitHub Actions. It prints the workflow run and a
 major-stage status command:
 
 ```bash
 cedarcli publish train-status <TRAIN_ID>
 ```
 
-The workflow owns one exact source manifest and advances three independently verified pointers in
-order:
+Before creating state or starting the long Maven build, the workflow validates the exact captured
+files and cross-repository configuration, checks exact-source CI wherever a repository defines a
+workflow, requires Node 24.19.0, authenticates to Nexus/npm/Docker, and proves Nexus is writable and
+can serve a real repository object. It then owns one exact source manifest and advances three
+independently verified pointers in order:
 
 1. Maven is compiled in dependency order, published under the immutable train version, and checked
    for a complete Nexus inventory.
@@ -106,8 +114,9 @@ cedarcli publish train --resume <TRAIN_ID> --dry-run
 cedarcli publish train --resume <TRAIN_ID>
 ```
 
-The dry run confirms the immutable manifest and reports the first incomplete major stage without
-dispatching it. Resume uses the source commits already attached to that ID and accepts an existing
+The dry run confirms the immutable manifest, repeats the applicable preflight, and reports the
+first incomplete major stage without dispatching it. The hosted preflight also runs again on real
+resume. Resume uses the source commits already attached to that ID and accepts an existing
 artifact only when its recorded identity and bytes agree. Use it when the source should remain
 unchanged and only the interrupted publication needs to continue. If the fix requires a code
 change, commit the fix and create a new train.

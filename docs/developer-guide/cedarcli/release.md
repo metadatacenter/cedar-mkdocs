@@ -82,15 +82,20 @@ check that gates `start`. It finishes with `No changes made.`
 
 Plan settles four groups of question.
 
-**The machine can run a release.** Java 17 is active, `git`, `mvn`, `node`, and `npm` are on PATH,
-the CEDAR profile is sourced, and there is disk for the train, the attempt tree, and the archives.
+**The machine can run a release.** Java 17 and Node 24.19.0 are active, `git`, `mvn`, and `npm` are
+on PATH, Git author name and email are configured, the CEDAR profile is sourced, and there is disk
+for the train, the attempt tree, and the archives.
 An unsourced profile is worth its own mention: the Maven suites read variables the profile defines,
 and without them a build fails deep inside Dropwizard configuration rather than at its start.
 
-**The source is ready.** Every repository is on `develop`, clean, and pushed, and the CI run for the
-exact commit the train was built from is green. The question is asked of that commit rather than of
-whatever `develop` points at now, which matters because a release advances `develop` everywhere at
-once and the runs those pushes trigger can race the parent snapshot they resolve against.
+**The source is ready.** Every participating repository, including independent CEE consumers, is
+clean and pushed. The exact train commit contains every declared wrapper, manifest, lock, build,
+preserve, version, and Docker stamp input. CI for that exact commit must be green wherever the
+commit defines a workflow; missing, unreadable, queued, or running required checks block. A source
+with no workflow is advisory because there is no CI contract to query. The question is asked of the
+train commit rather than of whatever `develop` points at now, which matters because a release
+advances `develop` everywhere at once and the runs those pushes trigger can race the parent snapshot
+they resolve against.
 
 When CI is genuinely broken for a reason that must not hold up a release, accept the specific run
 rather than disabling the check:
@@ -102,17 +107,26 @@ cedarcli release start ... --accept-red-develop cedar-repo-server=33211136456
 The acceptance names one repository and one run, and it is recorded in the release ledger. There is
 no flag that skips the check for everything.
 
-**The writes will be accepted.** Both Nexus credentials are set and authenticate, npm holds an
-identity for CEDAR's Nexus registry, the release version is unused in every repository, and each
-remote accepts a dry-run push of the `main` update and the release tag it will later make for real.
+**The writes will be accepted.** Both Nexus credentials are available and authenticate, npm holds an
+identity for CEDAR's Nexus registry, the release version is unused in every repository and absent
+from the target Maven and npm namespaces, and each remote accepts a dry-run push of every ref it
+will later receive: `main`, `develop`, `release/pre-<version>`, the release tag, and, where
+applicable, `release/post-<next-version>`.
 Nexus authorization cannot be inferred from the variables being present, because Nexus reads fall
-back to anonymous and succeed either way.
+back to anonymous and succeed either way. The CLI prefers `BMIR_NEXUS_USERNAME` and
+`BMIR_NEXUS_PASSWORD` when both are set; otherwise it reads the `bmir-nexus-releases` server entry
+from `~/.m2/settings.xml`. Namespaced and unnamespaced Maven settings files are both supported, and
+credential values are never printed. There is no `release auth` command: credential resolution and
+authentication happen automatically during `release plan`, `release start`, and `release resume`.
 
 The Nexus check reads a repository rather than a status endpoint, because the status endpoints stay
 green while everything behind them fails. One shape of that is worth recognising: when Nexus serves
 its status endpoints and returns 500 for every repository path, the instance is over its daily
 request budget rather than broken. Plan says so. Retrying makes it worse, and the budget is a
 rolling 24-hour window, so the answer is to stop and let it roll off.
+
+**The completed train is releasable.** Its Maven and npm inventories are complete, and its Docker
+plan and completion record contain the same 31 images with immutable `sha256` registry digests.
 
 **The content is stampable.** Every file a Maven build regenerates with the version inside is
 declared, every `license.txt` carries a recognisable copyright line, and each remote's `main` holds
@@ -195,8 +209,12 @@ cedarcli release status
 
 The human view is a compact phase table with completed/total counts. It says `COMPLETE` only after
 acceptance, highlights the single next or failed phase, and prints the safe commands to run next.
-Older ledgers that stored snapshot and release publication records together are classified by task
-identity, so their totals remain truthful.
+During Maven release publication, the running command reports every uploaded or already-present
+file. Each result is also checkpointed in the ledger, so `release status` shows Maven file progress,
+the current path, and the two disposition counts while the enclosing artifact task is still open.
+An interrupted upload resumes by comparing the immutable remote bytes and continuing. Older ledgers
+that stored snapshot and release publication records together are classified by task identity, so
+their totals remain truthful.
 
 ## Acceptance
 
@@ -230,8 +248,12 @@ cedarcli release resume
 ```
 
 Resume starts at the recorded phase, verifies the completed evidence that phase consumes, and
-continues with bounded transient retry. Completed phases are not re-run, so a release interrupted
-during publication does not rebuild anything.
+continues with bounded transient retry. It also reruns the checks that remain meaningful at that
+phase: source and toolchain checks during local preparation, exact-ref and push checks before remote
+integration, and credential, registry, and target-object checks before publication. Conditions
+deliberately changed by a completed phase are not tested as though this were a brand-new release.
+Completed phases are not re-run, so a release interrupted during publication does not rebuild
+anything. This phase-aware gate is automatic; `resume` takes no additional option.
 
 Never edit a ledger or a release manifest by hand. Those files are the release's own record of what
 it verified, and a hand-edited record makes every guard downstream of it meaningless.
