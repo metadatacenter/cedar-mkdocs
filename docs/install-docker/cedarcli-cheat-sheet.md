@@ -133,14 +133,18 @@ CEDAR maintainers publish one internally consistent Maven, npm, and Docker set w
 cedarcli publish train --dry-run
 cedarcli publish train
 cedarcli publish train-status <TRAIN_ID>
+cedarcli publish train-status <TRAIN_ID> --watch
 cedarcli publish train --resume <TRAIN_ID> --dry-run
 cedarcli publish train --resume <TRAIN_ID>
 ```
 
 The first command rehearses dispatch without creating state. The real dispatch allocates an
 identifier such as `<NEXT>-dev.YYYYMMDD.HHMM`; operators do not choose it. `train-status` reduces
-the workflow to its persisted Maven, npm, and Docker stages. Resume uses the exact source manifest
-already recorded for that train; preview it with `--dry-run` when diagnosing an interruption.
+the workflow to its Maven, npm, and Docker stages, names a failed subcheck, and prints whether to
+start a new ID, resume, or do nothing; `--watch` follows compact matrix counts. Local dry-run also
+performs the live read-only publication probe using environment credentials or
+`~/.m2/settings.xml`. Resume uses the exact source manifest already recorded for that train; preview
+it with `--dry-run` when diagnosing an interruption.
 Create a new train when newer source commits must be included.
 
 ## Formal Release

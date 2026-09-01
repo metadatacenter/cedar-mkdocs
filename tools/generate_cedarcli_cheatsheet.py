@@ -285,6 +285,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         ("train [--resume TRAIN_ID]", ORANGE),
         "  [--dry-run]",
         "train-status TRAIN_ID",
+        "  [--watch]",
         "split-frontends [--dry-run]",
     ], icon=deploy_icon, icon_scale=0.22)
     panel(c, 4, 0, "release", (

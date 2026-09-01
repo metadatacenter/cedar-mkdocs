@@ -38,7 +38,8 @@ verifies the captured TypeScript model → CEE → seven-frontend npm graph, and
 Java base images followed by the 29 runtime images. A clean verifier pulls all 31 images and records
 their immutable registry digests and npm/source provenance. The deployable Docker pointer changes
 only after all three inventories succeed. `cedarcli publish train-status <TRAIN_ID>` shows that
-major-stage state without the GitHub matrix noise.
+major-stage state and recovery decision without the GitHub matrix noise; add `--watch` for compact
+live Maven, npm, and Docker-matrix progress.
 
 An ordinary installation does not run that publication workflow and does not need to build the
 images. `cedarcli docker start all` selects the most recently verified train, and the pull policy

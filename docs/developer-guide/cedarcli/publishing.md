@@ -67,7 +67,11 @@ cedarcli publish train --dry-run
 Dry-run and real dispatch use the same local preflight. It validates the Maven, model → CEE →
 frontend, and 31-image Docker configuration as one contract; checks GitHub authentication and the
 workflow; requires the train slot to be idle; rejects dirty, unpushed, or remote-diverged source;
-and rejects an ID collision. No extra parameter enables these checks.
+and rejects an ID collision. It also reads the live Nexus service and writable status, the
+Release-policy `cedar-maven-dev` repository root, npm identity, and Docker Registry v2 token flow.
+It takes credentials from the environment or the `bmir-nexus-releases` server in
+`~/.m2/settings.xml`. No extra parameter enables these checks, and the probe does not publish,
+write train state, or change npm or Docker client configuration.
 
 Then create the train with:
 
@@ -79,16 +83,24 @@ cedarcli repeats the preflight, chooses the ID, and dispatches the build in GitH
 major-stage status command:
 
 ```bash
-cedarcli publish train-status <TRAIN_ID>
+cedarcli publish train-status <TRAIN_ID> --watch
 ```
+
+The compact watcher reports Maven, the three npm stages, the Docker plan, counts for the 31-image
+matrix, and final verification. Omit `--watch` for a one-shot view. Both forms show the exact failed
+job and step when available, the workflow URL, how much publication is verified, and the safe next
+command.
 
 Before creating state or starting the long Maven build, the workflow validates the exact captured
 files and cross-repository configuration, checks exact-source CI wherever a repository defines a
-workflow, requires Node 24.19.0, and requires the Docker image, Maven, and application suite-version
-selectors to equal the captured source snapshot. It authenticates to Nexus/npm/Docker and proves
-Nexus is writable and can serve the `cedar-maven-dev` repository root. The train repository uses a
-Release version policy, so artifact-level `maven-metadata.xml` is not expected and is not used as a
-health probe. It then owns one exact source manifest and advances three
+workflow, and requires the Docker image, Maven, and application suite-version
+selectors to equal the captured source snapshot. It repeats the same read-only Nexus/npm/Docker
+probe and proves Nexus is writable and can serve the `cedar-maven-dev` repository root. The train
+repository uses a Release version policy, so artifact-level `maven-metadata.xml` is not expected and
+is not used as a health probe. Probe failures name the target and distinguish rejected credentials,
+missing access,
+an absent endpoint/repository contract, rate limiting, and service failure. It then owns one exact
+source manifest and advances three
 independently verified pointers in order:
 
 1. Maven is compiled in dependency order, published under the immutable train version, and checked
@@ -110,6 +122,15 @@ Docker chapter shows how to select a train when starting or building containers.
 
 ## Resume a Failed Train
 
+First run `cedarcli publish train-status <TRAIN_ID>`. Its decision follows the persisted boundary:
+
+- no source record means no publication could start, so create a new train;
+- recorded source with incomplete publication can resume if the source remains unchanged;
+- Docker completion means the train is complete, so neither resume nor abandon applies.
+
+There is no train-abandon operation. A failed immutable ID remains evidence and does not prevent a
+new train.
+
 If publication failed for a temporary reason, resume the same recorded train:
 
 ```bash
@@ -123,6 +144,11 @@ resume. Resume uses the source commits already attached to that ID and accepts a
 artifact only when its recorded identity and bytes agree. Use it when the source should remain
 unchanged and only the interrupted publication needs to continue. If the fix requires a code
 change, commit the fix and create a new train.
+
+A scheduled publication-preflight canary runs the same read-only external checks every day and opens
+an issue if they stop working. It is an early warning only. A real train still compares Maven/npm
+bytes and hashes and pulls all 31 images back to verify their recorded registry digests and
+provenance.
 
 A build train is not a formal CEDAR release. Releases change versions, branches, and tags and are
 handled through the release procedure summarized on [Other Command Groups](other-commands.md).
