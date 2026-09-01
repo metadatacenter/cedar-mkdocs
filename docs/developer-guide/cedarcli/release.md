@@ -18,6 +18,7 @@ cedarcli release plan       # read-only rehearsal against a completed train
 cedarcli release start      # run the release
 cedarcli release status     # show where it is
 cedarcli release resume     # verify the recorded boundary and continue
+cedarcli release abandon    # retain and close a local-only superseded attempt
 ```
 
 ## The Four Inputs
@@ -154,7 +155,7 @@ verifies its work before the next one begins:
 | `preparing-frontends` | Clones the train's exact commits and builds the frontends against the proven CEE |
 | `preparing-versions` | Stamps the release and next-development versions, and the copyright year |
 | `validating-builds` | Builds the stamped trees and records proof of their output |
-| `creating-local-refs` | Creates the release commits and tags locally, without touching any remote |
+| `creating-local-refs` | Replaces tracked distributions with the validated builds, removes obsolete generated files, and creates the release commits and tags locally without touching any remote |
 | `publishing-snapshots` | Deploys the next-development snapshots to Nexus, in dependency order |
 | `integrating-remotes` | Writes `main`, the tag, and `develop` in each remote |
 | `publishing-artifacts` | Uploads the Maven release and six stable frontend npm packages to Nexus and verifies their published bytes |
@@ -171,6 +172,20 @@ trigger resolves the parent and the libraries at that version from Nexus. Publis
 first means those builds find what they are looking for. Deployed afterwards, as they once were,
 they arrived minutes too late and left a tail of red `develop` builds that said nothing about the
 code.
+
+For distribution repositories, the local-ref phase is the boundary at which generated output
+becomes release content. The CLI retains the package metadata, replaces everything else in the
+tracked distribution with the inventoried production build, and records additions, changes, and
+deletions in the release commit. OpenView receives an extra proof: its distributed CEE JavaScript
+must equal the public CEE selected by `--cee-version` after only the declared production endpoint
+normalization.
+
+Publication packs the integrated commit rather than overlaying another build afterward. OpenView's
+CEE and Web Components runtime files live under `node_modules`, which npm normally omits; the release
+packer explicitly retains those declared runtime assets and verifies their hashes again after
+downloading the registry tarball. Final acceptance binds the OpenView distribution and npm package
+to the proven CEE bytes. Deployment remains a separate operational boundary, so the environment
+smoke check must still confirm what the web server is serving.
 
 Follow a running release with:
 
@@ -194,8 +209,13 @@ terminal phase.
 The exact-ref check proves each release tag at its recorded commit as part of the same remote read.
 Acceptance therefore does not repeat a tag-only request across all repositories.
 
-A release that reports success has therefore been checked rather than assumed. Treat any other
-final phase as an incomplete release, whatever else the output says.
+Acceptance also marks the release concluded and frees the active slot. There is no separate
+`finish` command. If the process stops between writing the accepted ledger and concluding its
+pointer, `cedarcli release resume` repairs that bookkeeping step without rerunning any phase.
+
+A release that reports success has therefore been checked rather than assumed. Only `COMPLETE`
+means successfully released. `ABANDONED` means the retained attempt was closed without releasing
+it; every other status remains incomplete.
 
 ## When a Phase Fails
 
@@ -216,8 +236,27 @@ during publication does not rebuild anything.
 Never edit a ledger or a release manifest by hand. Those files are the release's own record of what
 it verified, and a hand-edited record makes every guard downstream of it meaningless.
 
-One release is active at a time. Acceptance is the only path that marks it finished and frees the
-slot for the next release; the slot is never freed by deleting or editing state.
+Sometimes the immutable train is the cause of the failure, so retrying the same evidence cannot
+work. If the attempt has not gone beyond `local-refs-created`, retain it and free the slot with:
+
+```bash
+cedarcli release abandon \
+  --version 2.9.4 \
+  --reason "superseded by corrected train 2.9.4-dev.20260901.0555"
+```
+
+The version must exactly match the active release, and the non-empty reason becomes part of its
+ledger. Status then reports `ABANDONED`; the manifest and numbered attempt workspace remain intact,
+and a new attempt may use the same release version.
+
+Abandonment is intentionally limited to local-only work. Once snapshot publication may have begun,
+Maven could have changed Nexus even if the deploy failed before recording a completed task. The CLI
+therefore refuses abandonment from `publishing-snapshots` onward, or whenever snapshot,
+remote-integration, or artifact-publication evidence exists. Repair and `release resume` from that
+boundary; never use deletion as a substitute.
+
+One release is active at a time. Acceptance closes a successful release, while guarded abandonment
+closes a local-only attempt that must be replaced by another train.
 
 ## What a Release Changes
 

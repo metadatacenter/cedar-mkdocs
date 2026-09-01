@@ -303,6 +303,9 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
             "  --cee-version CEE",
             "resume",
             "status",
+            "abandon",
+            "  --version VER",
+            "  --reason WHY",
         ],
     ), span=2, body_size=6.7)
 

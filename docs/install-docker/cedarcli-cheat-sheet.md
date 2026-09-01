@@ -162,11 +162,14 @@ cedarcli release start \
 
 cedarcli release status
 cedarcli release resume
+cedarcli release abandon --version <VER> --reason "<WHY>"
 ```
 
 `plan` is the complete read-only release gate. `start` reruns that gate and advances the
 manifest-owned ledger. Transient transport retries are automatic; after a hard failure, fix the
-cause and use the option-free `resume`. Only an accepted status means the release is complete.
+cause and use the option-free `resume`. If a corrected train must replace an attempt that has not
+begun snapshot publication, `abandon` retains its evidence and frees the release slot. It is refused
+after external publication may have begun. Only an accepted status means the release is complete.
 
 ## Diagnose a Docker Service
 
