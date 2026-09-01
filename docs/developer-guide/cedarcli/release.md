@@ -134,6 +134,10 @@ nothing that `develop` does not. That last one is reported rather than refused: 
 `main` from the released tree, so anything committed to `main` alone and never merged back is
 replaced.
 
+The Docker source's `IMAGE_VERSION`, `CEDAR_MAVEN_VERSION`, and `CEDAR_APPLICATION_VERSION` must all
+equal the train source version. Release stamping advances them together for both the release and
+next-development trees, so a new image tag cannot silently retain old Maven or application inputs.
+
 ## Running a Release
 
 ```bash

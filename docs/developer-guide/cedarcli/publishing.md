@@ -84,8 +84,9 @@ cedarcli publish train-status <TRAIN_ID>
 
 Before creating state or starting the long Maven build, the workflow validates the exact captured
 files and cross-repository configuration, checks exact-source CI wherever a repository defines a
-workflow, requires Node 24.19.0, authenticates to Nexus/npm/Docker, and proves Nexus is writable and
-can serve a real repository object. It then owns one exact source manifest and advances three
+workflow, requires Node 24.19.0, and requires the Docker image, Maven, and application suite-version
+selectors to equal the captured source snapshot. It authenticates to Nexus/npm/Docker and proves
+Nexus is writable and can serve a real repository object. It then owns one exact source manifest and advances three
 independently verified pointers in order:
 
 1. Maven is compiled in dependency order, published under the immutable train version, and checked
