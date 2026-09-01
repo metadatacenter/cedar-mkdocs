@@ -291,21 +291,20 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         [
             ("plan", ORANGE),
             "  --version VER",
-            "  --next-version NEXT",
+            "  --next-version NEXT_VER",
             "  --from-train TRAIN_ID",
-            "  --cee-version CEE",
+            "  --cee-version CEE_VER",
         ],
         [
             ("start", ORANGE),
             "  --version VER",
-            "  --next-version NEXT",
+            "  --next-version NEXT_VER",
             "  --from-train TRAIN_ID",
-            "  --cee-version CEE",
+            "  --cee-version CEE_VER",
             "resume",
             "status",
             "abandon",
-            "  --version VER",
-            "  --reason WHY",
+            "  --version VER --reason WHY",
         ],
     ), span=2, body_size=6.7)
 
@@ -324,7 +323,14 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     ])
     panel(c, 5, 3, "prod", ["configure-frontends", "reset-frontends"])
 
-    panel(c, 0, 1, "mode", ["native", "hybrid", "docker", "--clear [--force]"])
+    panel(c, 0, 1, "mode", [
+        "native",
+        "  --profile develop|server",
+        "hybrid",
+        "  --profile develop|server",
+        "docker",
+        "--clear [--force]",
+    ], body_size=7.0)
     panel(c, 1, 1, "native", [
         ("status", ORANGE), ("start all | <run_target>", ORANGE),
         ("stop all | <run_target>", ORANGE), "health", "watch",

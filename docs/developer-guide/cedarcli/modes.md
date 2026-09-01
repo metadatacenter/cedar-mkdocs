@@ -15,20 +15,28 @@ competing for the same ports or being stopped by the wrong command.
 Choose one mode before using native or Docker commands:
 
 ```bash
-cedarcli mode native
+cedarcli mode native --profile develop
 ```
 
 ```bash
-cedarcli mode hybrid
+cedarcli mode hybrid --profile develop
 ```
 
 ```bash
 cedarcli mode docker
 ```
 
-Selecting a mode starts nothing. It checks that the requested arrangement is configured and does
-not conflict with services already running. cedarcli remembers the choice for later commands and
-loads the appropriate environment automatically.
+Native and hybrid modes require `--profile develop|server`; there is no inferred default.
+`develop` is the workstation environment: it builds and serves frontends locally and permits the
+TLS exception needed for local `.orgx` certificates. `server` is the staging/production
+environment: it uses served frontend payloads, verifies certificates, and rejects placeholder
+server secrets. Docker runs no native applications and therefore takes no profile.
+
+Running `cedarcli mode native` or `cedarcli mode hybrid` without the profile fails and records
+nothing. Selecting a complete mode starts nothing. It checks that the requested arrangement and
+profile are configured, verifies that they do not conflict with services already running, records
+both values in `$CEDAR_HOME/.cedar/mode.json`, and loads that environment automatically for later
+commands.
 
 See the current mode and its important settings with:
 
@@ -36,6 +44,9 @@ See the current mode and its important settings with:
 cedarcli mode
 cedarcli env status
 ```
+
+`cedarcli mode` with no mode argument only reports the current selection and recorded profile; it
+does not reconfigure the machine.
 
 ## Change Modes
 

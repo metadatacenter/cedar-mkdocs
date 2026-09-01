@@ -17,9 +17,13 @@ by the [Developer Install](../../install-developer/frontends.md). Select `hybrid
 Then build the frontend dependencies:
 
 ```bash
-cedarcli mode hybrid
+cedarcli mode hybrid --profile develop
 cedarcli build frontends
 ```
+
+Hybrid also runs native applications, so its profile is required. `develop` is the normal hybrid
+workstation choice; `server` is available for a server host. Running `cedarcli mode hybrid` without
+`--profile develop|server` fails without recording a mode.
 
 ## Start the Deployment
 

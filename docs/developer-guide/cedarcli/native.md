@@ -12,11 +12,16 @@ provides the host tools and services that a native deployment expects.
 Select native mode, build the source, and start the complete system:
 
 ```bash
-cedarcli mode native
+cedarcli mode native --profile develop
 cedarcli build java
 cedarcli build frontends
 cedarcli native start all
 ```
+
+The profile is required when selecting native mode. Use `develop` on a workstation and `server` on
+a staging or production host. The choice controls the frontend target, TLS verification policy,
+and server-secret validation for every later native child process; selecting the mode itself starts
+nothing. `cedarcli mode native` without `--profile develop|server` fails without changing mode.
 
 Check that the applications and their supporting services are ready:
 
