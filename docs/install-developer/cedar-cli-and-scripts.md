@@ -94,7 +94,7 @@ depend on shell aliases and environment variables from that profile. Load it onl
 you intend to use those tools:
 
 ```bash
-source "$CEDAR_HOME/cedar-profile-native-develop.sh"
+CEDAR_PROFILE=develop source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-native.sh"
 ```
 
 This is not required for routine `cedarcli` commands.

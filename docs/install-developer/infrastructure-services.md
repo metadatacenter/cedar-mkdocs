@@ -169,7 +169,7 @@ Load the profile for the one-time direct Keycloak commands, install the CEDAR ev
 by `cedarcli build java`, and import the supplied realm:
 
 ```bash
-source "$CEDAR_HOME/cedar-profile-native-develop.sh"
+CEDAR_PROFILE=develop source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-native.sh"
 cedarcli dev copy-keycloak-listener
 "$CEDAR_HOME/keycloak/bin/kc.sh" import \
   --file "$CEDAR_HOME/keycloak/keycloak-realm.CEDAR.development.2023-07-05.json"

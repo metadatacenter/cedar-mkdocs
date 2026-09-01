@@ -12,7 +12,6 @@ Copy the editable templates into `CEDAR_HOME`:
 cd "$CEDAR_HOME"
 cp cedar-development/bin/templates/set-env-internal.sh .
 cp cedar-development/bin/templates/set-env-external.sh .
-cp cedar-development/bin/templates/cedar-profile-native-develop.sh .
 ```
 
 The files have separate purposes:
@@ -21,7 +20,10 @@ The files have separate purposes:
 | --- | --- |
 | `set-env-internal.sh` | Local domain, service credentials, certificate identity, and native data connections |
 | `set-env-external.sh` | Credentials for BioPortal and other services outside the local installation |
-| `cedar-profile-native-develop.sh` | The native topology and its CEDAR development defaults |
+
+The environment that reads them is not copied. Every native host loads the same file from the
+checkout, `cedar-development/bin/templates/cedar-profile-native.sh`, and `CEDAR_PROFILE` chooses
+between `develop` for a workstation and `server` for a staging or production host.
 
 The supplied local credentials are intended only for a development machine. If you change them,
 use the same values when creating the MongoDB, MySQL, Neo4j, and Keycloak accounts later in this
@@ -36,10 +38,11 @@ colliding with the public CEDAR domain.
 Tell `cedarcli` which deployment topology this checkout will operate:
 
 ```bash
-cedarcli mode native
+cedarcli mode native --profile develop
 ```
 
-This validates the native profile and records the choice under `$CEDAR_HOME/.cedar`. It does not
+This validates the native profile and records both the topology and the environment under
+`$CEDAR_HOME/.cedar`. It does not
 start anything. Native commands are allowed after this point, while Docker commands are rejected so
 that the two deployments cannot accidentally claim the same ports.
 
