@@ -86,7 +86,9 @@ Before creating state or starting the long Maven build, the workflow validates t
 files and cross-repository configuration, checks exact-source CI wherever a repository defines a
 workflow, requires Node 24.19.0, and requires the Docker image, Maven, and application suite-version
 selectors to equal the captured source snapshot. It authenticates to Nexus/npm/Docker and proves
-Nexus is writable and can serve a real repository object. It then owns one exact source manifest and advances three
+Nexus is writable and can serve the `cedar-maven-dev` repository root. The train repository uses a
+Release version policy, so artifact-level `maven-metadata.xml` is not expected and is not used as a
+health probe. It then owns one exact source manifest and advances three
 independently verified pointers in order:
 
 1. Maven is compiled in dependency order, published under the immutable train version, and checked
