@@ -138,10 +138,12 @@ cedarcli publish train --resume <TRAIN_ID> --dry-run
 cedarcli publish train --resume <TRAIN_ID>
 ```
 
-The first command rehearses dispatch without creating state. The real dispatch allocates an
+The first command rehearses dispatch without creating state; its displayed ID is prospective and
+not reserved. The real dispatch allocates an
 identifier such as `<NEXT>-dev.YYYYMMDD.HHMM`; operators do not choose it. `train-status` reduces
 the workflow to its Maven, npm, and Docker stages, names a failed subcheck, and prints whether to
-start a new ID, resume, or do nothing; `--watch` follows compact matrix counts. Local dry-run also
+start a new ID, resume, or do nothing; `--watch` follows compact matrix counts and emits a quiet
+one-minute active-step heartbeat during unchanged stages. Local dry-run also
 performs the live read-only publication probe using environment credentials or
 `~/.m2/settings.xml`. Resume uses the exact source manifest already recorded for that train; preview
 it with `--dry-run` when diagnosing an interruption.

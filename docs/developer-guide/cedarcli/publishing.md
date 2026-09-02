@@ -64,6 +64,7 @@ Optionally rehearse source capture and dispatch without creating state or starti
 cedarcli publish train --dry-run
 ```
 
+The displayed dry-run ID is prospective and is not reserved; the real dispatch allocates again.
 Dry-run and real dispatch use the same local preflight. It validates the Maven, model → CEE →
 frontend, and 31-image Docker configuration as one contract; checks GitHub authentication and the
 workflow; requires the train slot to be idle; rejects dirty, unpushed, or remote-diverged source;
@@ -87,7 +88,8 @@ cedarcli publish train-status <TRAIN_ID> --watch
 ```
 
 The compact watcher reports Maven, the three npm stages, the Docker plan, counts for the 31-image
-matrix, and final verification. Omit `--watch` for a one-shot view. Both forms show the exact failed
+matrix, and final verification. An unchanged long stage emits a one-minute heartbeat naming its
+active job/step and elapsed time. Omit `--watch` for a one-shot view. Both forms show the exact failed
 job and step when available, the workflow URL, how much publication is verified, and the safe next
 command.
 
@@ -99,9 +101,15 @@ probe and proves Nexus is writable and can serve the `cedar-maven-dev` repositor
 repository uses a Release version policy, so artifact-level `maven-metadata.xml` is not expected and
 is not used as a health probe. Probe failures name the target and distinguish rejected credentials,
 missing access,
-an absent endpoint/repository contract, rate limiting, and service failure. It then owns one exact
-source manifest and advances three
-independently verified pointers in order:
+an absent endpoint/repository contract, rate limiting, and service failure.
+
+The same early gate binds the reviewed npm advisory counts to each lockfile's SHA-256. Any changed
+dependency graph must be audited and have its baseline updated before Maven starts. Required npm 11
+install scripts are approved by exact package version, and strict policy makes an unreviewed new
+lifecycle script fail. The historical frontend counts remain visible as debt; the baseline prevents
+them increasing silently, while CEE's production dependency audit remains a blocking zero gate.
+
+It then owns one exact source manifest and advances three independently verified pointers in order:
 
 1. Maven is compiled in dependency order, published under the immutable train version, and checked
    for a complete Nexus inventory.
