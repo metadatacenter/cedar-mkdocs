@@ -65,6 +65,14 @@ CEE executable:      identical after declared release-provenance changes
 Naming a public version that is not equivalent stops the release at planning time. Nothing is built
 and nothing is changed.
 
+The normalization is deliberately narrow. It covers package channel metadata, the declared CEE and
+model identities, the load trace, the one public-release changelog entry, and CEE's `allowScripts`
+install policy when Angular embeds the root `package.json` into its bundle. For that last case the
+planner reads the exact policy from the train-captured CEE source, requires the corresponding
+minified literal exactly once, and removes only that literal. `allowScripts` controls which npm
+dependencies may run install scripts; it is not CEE runtime behavior. An undeclared policy, a second
+copy, or a changed byte beside it still fails the executable comparison.
+
 ## Rehearsing a Release
 
 Once the train is complete, rehearse the entire release without changing anything:
