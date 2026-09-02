@@ -113,7 +113,12 @@ nav:
           - Other Command Groups: developer-guide/cedarcli/other-commands.md
       - developer-guide/cedar-artifact-library.md
       - developer-guide/cedar-model-typescript-library.md
-      - developer-guide/cedar-rest-apis.md
+      - CEDAR REST APIs:
+          - Overview: developer-guide/cedar-rest-apis/index.md
+          - Authentication: developer-guide/cedar-rest-apis/authentication.md
+          - Working with Artifacts: developer-guide/cedar-rest-apis/working-with-artifacts.md
+          - ETag Concurrency: developer-guide/cedar-rest-apis/etag-concurrency.md
+          - Interactive API Documentation: developer-guide/cedar-rest-apis/interactive-api.md
 
   - YAML Specification:
       - yaml-spec/index.md

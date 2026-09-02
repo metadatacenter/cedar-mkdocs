@@ -216,4 +216,4 @@ const compactTemplateYaml = yamlWriters
   .getAsYamlString(study, true);
 ```
 
-CEDAR's REST APIs accept either serialization. Send JSON Schema or JSON-LD with `Content-Type: application/json`, or send YAML with `Content-Type: application/yaml`. Use the corresponding `Accept` header when the response should use the same representation; JSON is the default. See the [CEDAR REST APIs](cedar-rest-apis.md) for routes and content negotiation.
+CEDAR's REST APIs accept either serialization. Send JSON Schema or JSON-LD with `Content-Type: application/json`, or send YAML with `Content-Type: application/yaml`. Use the corresponding `Accept` header when the response should use the same representation; JSON is the default. See the [CEDAR REST APIs](cedar-rest-apis/index.md) for routes and content negotiation.

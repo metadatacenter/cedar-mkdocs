@@ -127,4 +127,4 @@ LinkedHashMap<String, Object> instanceYaml = yamlRenderer.renderTemplateInstance
 CEDAR's REST APIs accept either serialization. Send JSON Schema or JSON-LD with
 `Content-Type: application/json`, or send the YAML form with `Content-Type: application/yaml`.
 Use the corresponding `Accept` header when the response should use the same representation; JSON is
-the default. See the [CEDAR REST APIs](cedar-rest-apis.md) for the routes and negotiation rules.
+the default. See the [CEDAR REST APIs](cedar-rest-apis/index.md) for the routes and negotiation rules.
