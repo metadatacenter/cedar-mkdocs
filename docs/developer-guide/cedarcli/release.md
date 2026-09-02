@@ -16,7 +16,8 @@ The route is these commands:
 ```bash
 cedarcli release plan       # read-only rehearsal against a completed train
 cedarcli release start      # run the release
-cedarcli release status     # show where it is
+cedarcli release status     # one-shot phase table
+cedarcli release status --watch  # compact live progress
 cedarcli release resume     # verify the recorded boundary and continue
 cedarcli release abandon    # retain and close a local-only superseded attempt
 ```
@@ -92,7 +93,10 @@ Plan settles four groups of question.
 
 **The machine can run a release.** Java 17 and Node 24.19.0 are active, `git`, `mvn`, and `npm` are
 on PATH, Git author name and email are configured, the CEDAR profile is sourced, and there is disk
-for the train, the attempt tree, and the archives.
+for the train, the attempt tree, and the archives. Plan also inspects the effective npm user
+configuration by key name only. It never prints values or registry tokens: obsolete authentication
+settings block once, while harmless author-setting deprecations appear as one advisory instead of
+being repeated by every install.
 An unsourced profile is worth its own mention: the Maven suites read variables the profile defines,
 and without them a build fails deep inside Dropwizard configuration rather than at its start.
 
@@ -104,6 +108,16 @@ with no workflow is advisory because there is no CI contract to query. The quest
 train commit rather than of whatever `develop` points at now, which matters because a release
 advances `develop` everywhere at once and the runs those pushes trigger can race the parent snapshot
 they resolve against.
+
+GitHub may briefly return no run while indexing a pushed SHA or transiently return 502/503/504. The
+same bounded probe used by train preflight retries only those cases, naming its repository, SHA,
+attempt, and delay. It does not retry 401/403, malformed data, completed red CI, or a persistently
+absent run. Queued and running CI remain an immediate semantic refusal with the workflow URL.
+
+Every frontend lockfile is checked against the `allowScripts` policy from that exact captured
+`package.json`. Each dependency with an install script must have an exact package/version true or
+false decision. Planning names an unreviewed dependency before any workspace or build exists, and
+preparation plus both stamped build variants run with `NPM_CONFIG_STRICT_ALLOW_SCRIPTS=true`.
 
 When CI is genuinely broken for a reason that must not hold up a release, accept the specific run
 rather than disabling the check:
@@ -159,6 +173,11 @@ cedarcli release start \
 `start` runs the identical release gate before it touches anything, so a release cannot begin from a
 state `plan` would have refused.
 
+The default foreground view is compact. Raw Maven, npm, embedded-service, and package output is
+retained in per-task logs under the numbered attempt rather than streamed into the terminal. Use
+`--verbose` on `start` or `resume` when live raw output is needed; it does not change release
+semantics.
+
 Transient transport retries are built in. A release runs for hours across two registries and forty
 remotes, so it retries direct connection failures, HTTP 502/503/504 from resumable Git, Maven, and
 npm commands, and Git's server-side 5xx failures with bounded backoff. A
@@ -179,7 +198,7 @@ verifies its work before the next one begins:
 | Phase | What it does |
 | --- | --- |
 | `preparing-frontends` | Clones the train's exact commits and builds the frontends against the proven CEE |
-| `preparing-versions` | Stamps the release and next-development versions, and the copyright year |
+| `preparing-versions` | Stamps the release and next-development versions and copyright year, and refreshes train lock baselines changed by those stamps |
 | `validating-builds` | Builds the stamped trees and records proof of their output |
 | `creating-local-refs` | Replaces tracked distributions with the validated builds, removes obsolete generated files, and creates the release commits and tags locally without touching any remote |
 | `publishing-snapshots` | Deploys the next-development snapshots to Nexus, in dependency order |
@@ -216,17 +235,18 @@ smoke check must still confirm what the web server is serving.
 Follow a running release with:
 
 ```bash
-cedarcli release status
+cedarcli release status --watch
 ```
 
-The human view is a compact phase table with completed/total counts. It says `COMPLETE` only after
-acceptance, highlights the single next or failed phase, and prints the safe commands to run next.
-During Maven release publication, the running command reports every uploaded or already-present
-file. Each result is also checkpointed in the ledger, so `release status` shows Maven file progress,
-the current path, and the two disposition counts while the enclosing artifact task is still open.
-An interrupted upload resumes by comparing the immutable remote bytes and continuing. Older ledgers
-that stored snapshot and release publication records together are classified by task identity, so
-their totals remain truthful.
+The watcher prints on state changes and otherwise gives a quiet one-minute heartbeat with elapsed
+time, phase counts, the active task, Maven upload counts, scheduled transient retries, and the exact
+terminal failure. It remains attached through automatic backoff; Ctrl-C stops only the watcher.
+Without `--watch`, the same command is a one-shot phase table. It says `COMPLETE` only
+after acceptance, highlights the single next or failed phase, and prints the safe commands to run
+next. Every Maven file and its disposition are checkpointed in the ledger, so status shows live file
+progress while the enclosing artifact task is still open. An interrupted upload resumes by comparing
+the immutable remote bytes and continuing. Older ledgers that stored snapshot and release publication
+records together are classified by task identity, so their totals remain truthful.
 
 ## Acceptance
 

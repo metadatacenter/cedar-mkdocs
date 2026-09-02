@@ -143,7 +143,9 @@ not reserved. The real dispatch allocates an
 identifier such as `<NEXT>-dev.YYYYMMDD.HHMM`; operators do not choose it. `train-status` reduces
 the workflow to its Maven, npm, and Docker stages, names a failed subcheck, and prints whether to
 start a new ID, resume, or do nothing; `--watch` follows compact matrix counts and emits a quiet
-one-minute active-step heartbeat during unchanged stages. Local dry-run also
+one-minute active-step heartbeat during unchanged stages. Local dry-run also checks CI for each
+exact remote `develop` commit, giving only GitHub indexing delay and transient 502/503/504 failures
+a bounded retry, and validates npmrc key names without printing values. It
 performs the live read-only publication probe using environment credentials or
 `~/.m2/settings.xml`. Resume uses the exact source manifest already recorded for that train; preview
 it with `--dry-run` when diagnosing an interruption.
@@ -166,14 +168,18 @@ cedarcli release start \
   --from-train <TRAIN_ID> \
   --cee-version <PUBLIC_CEE_VERSION>
 
-cedarcli release status
-cedarcli release resume
+cedarcli release status --watch
+cedarcli release resume             # compact, retained task logs
+cedarcli release resume --verbose   # stream raw task output
 cedarcli release abandon --version <VER> --reason "<WHY>"
 ```
 
 `plan` is the complete read-only release gate. `start` reruns that gate and advances the
-manifest-owned ledger. Transient transport retries are automatic; after a hard failure, fix the
-cause and use the option-free `resume`. If a corrected train must replace an attempt that has not
+manifest-owned ledger. It requires exact package/version decisions for every npm install script and
+runs release installs in strict mode. Compact progress is the default; `--verbose` streams the raw
+output that is otherwise retained in task logs, and `status --watch` follows the ledger with a
+one-minute heartbeat. Transient transport retries are automatic; after a hard failure, fix the
+cause and use `resume`. If a corrected train must replace an attempt that has not
 begun snapshot publication, `abandon` retains its evidence and frees the release slot. It is refused
 after external publication may have begun. Only an accepted status means the release is complete.
 

@@ -67,12 +67,20 @@ cedarcli publish train --dry-run
 The displayed dry-run ID is prospective and is not reserved; the real dispatch allocates again.
 Dry-run and real dispatch use the same local preflight. It validates the Maven, model → CEE →
 frontend, and 31-image Docker configuration as one contract; checks GitHub authentication and the
-workflow; requires the train slot to be idle; rejects dirty, unpushed, or remote-diverged source;
-and rejects an ID collision. It also reads the live Nexus service and writable status, the
+workflow plus CI for every exact remote `develop` SHA that defines one; requires the train slot to
+be idle; rejects dirty, unpushed, or remote-diverged source; and rejects an ID collision. It also
+reads the live Nexus service and writable status, the
 Release-policy `cedar-maven-dev` repository root, npm identity, and Docker Registry v2 token flow.
 It takes credentials from the environment or the `bmir-nexus-releases` server in
 `~/.m2/settings.xml`. No extra parameter enables these checks, and the probe does not publish,
 write train state, or change npm or Docker client configuration.
+
+The exact-SHA probe gives only a short GitHub indexing absence and transient network or 502/503/504
+failures bounded retries, naming the repository, SHA, attempt, and delay. Pending/red CI, 401/403,
+malformed data, and a persistently absent run remain early failures; pending output includes the
+workflow URL. Local preflight also inspects npmrc key names once without exposing values or tokens:
+obsolete authentication semantics block, while harmless author-setting deprecations are one
+advisory.
 
 Then create the train with:
 
@@ -102,12 +110,17 @@ repository uses a Release version policy, so artifact-level `maven-metadata.xml`
 is not used as a health probe. Probe failures name the target and distinguish rejected credentials,
 missing access,
 an absent endpoint/repository contract, rate limiting, and service failure.
+The hosted controller loads the CI and lifecycle-script policy from the exact captured cedar-cli
+commit, so it cannot silently disagree with the local rehearsal.
 
 The same early gate binds the reviewed npm advisory counts to each lockfile's SHA-256. Any changed
 dependency graph must be audited and have its baseline updated before Maven starts. Required npm 11
 install scripts are approved by exact package version, and strict policy makes an unreviewed new
 lifecycle script fail. The historical frontend counts remain visible as debt; the baseline prevents
 them increasing silently, while CEE's production dependency audit remains a blocking zero gate.
+Release planning and execution use the same validator and strict environment. When release
+stamping changes a root lockfile, it refreshes that lock's baseline in the release and
+next-development train configuration so the next train does not inherit a stale digest.
 
 It then owns one exact source manifest and advances three independently verified pointers in order:
 
