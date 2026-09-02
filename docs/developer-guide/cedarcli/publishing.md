@@ -158,5 +158,23 @@ an issue if they stop working. It is an early warning only. A real train still c
 bytes and hashes and pulls all 31 images back to verify their recorded registry digests and
 provenance.
 
+### CEE CI reports a missing development model tarball
+
+CEE's source manifests and locks pin one exact development model package in both the repository root
+and `visual/`. Nexus cleanup can remove an old tarball while those otherwise-valid locks still name
+it; the CEE workflow then fails early with an npm 404. Do not republish the missing immutable version
+or switch the dependency to a moving npm tag. Select a model package recorded and byte-verified by
+an appropriate completed train in
+`npm/model/completed/<TRAIN_ID>.json` on the `build-trains` branch, and first confirm that package
+still installs.
+
+Update the model alias in CEE's root and visual manifests and regenerate both lockfiles with Node
+24.19.0. Run both installs with `NPM_CONFIG_STRICT_ALLOW_SCRIPTS=true`, review the dependency graphs,
+and update the matching lockfile SHA-256 baselines in
+`cedar-development/ops/frontend-train.json` (including advisory counts if they changed). The local
+train dry-run and the pushed CEE workflow must then pass. Because this is a source correction, start
+a new train rather than resuming an existing immutable ID. During that new train, the isolated CEE
+checkout is wired again to the newly built train model package.
+
 A build train is not a formal CEDAR release. Releases change versions, branches, and tags and are
 handled through the release procedure summarized on [Other Command Groups](other-commands.md).
