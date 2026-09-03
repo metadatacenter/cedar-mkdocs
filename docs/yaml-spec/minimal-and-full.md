@@ -1,8 +1,8 @@
-# Compact and Full Serializations
+# Minimal, Compact, and Full Serializations
 
-The same artifact can be written in a compact (minimal) form or a full form. The CEDAR user
-interfaces call the former **Compact YAML**. The compact form describes an artifact being authored;
-the full form represents one a repository has stored and carries what the repository assigned to it.
+An artifact being authored can be written in a minimal form. Once a repository has assigned its
+identity and metadata, that same stored artifact can be serialized in compact or full form. Compact
+YAML keeps artifact identity but omits repository-recorded metadata; full YAML carries both.
 
 ## What an Artifact Requires
 
@@ -67,21 +67,23 @@ An instance follows the same pattern. Authored minimally it needs only `type`, `
 `version`, `status`, and `modelVersion` belong to schema artifacts and do not appear on an
 instance.
 
-## The Minimal Form Carries No Schema-Artifact Identity
+## Minimal Does Not Name an Artifact; Compact Does
 
-A minimal document leaves out the `id` of the artifact it describes and the repository-assigned `id`
-of every embedded field and element. It is an identity-free structural description, not a compressed
-representation of stored artifacts. A reader refuses a root `id`; for compatibility it can read older
-minimal documents containing child IDs, but canonical output does not reproduce them.
+A minimal document leaves out the `id` of the artifact it describes. It describes something new,
+which a repository will name when it is stored.
 
-So a minimal document describes something new. To represent a stored artifact, use the full form,
-which carries both the artifact's `id` and its children's `propertyIri`.
+Compact YAML is different: it is a lean representation of an existing artifact and retains the
+artifact's `id`, including the assigned IDs of embedded fields and elements when present. It omits
+`modelVersion`, version, status, provenance, and child `propertyIri` values. Those omissions make it
+read-only: writing a compact document back would silently regenerate repository state, so the REST
+API rejects it. Use the full form for an update, or omit the root `id` to author minimally.
 
-Semantic references are unaffected because they are data, not schema-artifact identity:
+Semantic references appear in every applicable form because they are data, not the document's own
+identity:
 
 - An instance's `isBasedOn`, which identifies the template the instance conforms to.
 - An `id` used as a link value or controlled-term value in an instance.
 
-One thing the form cannot express: renaming a child. A minimal document identifies children by key, so
+One thing the minimal form cannot express: renaming a child. A minimal document identifies children by key, so
 a renamed child reads as one child gone and another arrived, and the new one is given a fresh
 name-derived property IRI. Rename in the full form, where the child's `propertyIri` is written down.

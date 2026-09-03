@@ -141,10 +141,10 @@ could only move them somewhere nothing answers.
 |---|---|---|
 | JSON-LD - Instance | The instance as a CEDAR JSON-LD document | `-instance.json` |
 | YAML - Instance | The same instance as CEDAR YAML | `-instance.yaml` |
-| Compact YAML - Instance | The instance without root identity and provenance metadata | `-instance-compact.yaml` |
+| Compact YAML - Instance | The instance with identity but without provenance metadata | `-instance-compact.yaml` |
 | JSON Schema - Template | The template exactly as the application supplied it | `-template.json` |
 | YAML - Template | The same template as CEDAR YAML | `-template.yaml` |
-| Compact YAML - Template | Its compact authoring form, without repository-managed metadata | `-template-compact.yaml` |
+| Compact YAML - Template | Its identified compact form, without repository-managed metadata | `-template-compact.yaml` |
 | Data Quality Report | Required-field totals and constraint violations | `-data-quality.json` |
 
 The filename begins with the template's own `schema:name`, reduced to filename-safe characters:

@@ -181,8 +181,8 @@ three constraint shapes, each pointing at an IRI the BioPortal server returned i
 Step 2. The quoting is the canonical CEDAR style: plain scalars for the structural
 keys whose vocabulary CEDAR controls — `type`, `datatype`, `status`, `version`,
 `modelVersion` — and double quotes on every other string. A reader accepts either,
-but this is what a CEDAR writer emits. This is compact CEDAR YAML — the form you author in. It carries no
-identifier, because the template does not have one yet: CEDAR assigns that when
+but this is what a CEDAR writer emits. This is minimal CEDAR YAML — the form you author in. It carries no
+identifier because the template does not have one yet: CEDAR assigns that when
 the template is saved.
 
 ## Step 4: Save the Template
@@ -200,8 +200,8 @@ That IRI is also what makes the template findable and reusable by other people.
 CEDAR assigns more than that one identifier. The stored template comes back with an IRI for every
 field as well, and a property IRI for each one in the `@context` its JSON form carries. None of
 them are invented anywhere else: an artifact reaches CEDAR naming nothing, and CEDAR is what names
-it. That is also why the YAML you send is the YAML you wrote — the upload is the compact form
-itself, not a JSON translation of it, and what comes back is the same form with the identifiers
+it. That is also why the YAML you send is the YAML you wrote — the upload is the minimal form
+itself, not a JSON translation of it, and what comes back is a stored form with the identifiers
 filled in.
 
 ## Step 5: Preview the Stored Template
