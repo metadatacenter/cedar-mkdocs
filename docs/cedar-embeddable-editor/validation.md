@@ -1,34 +1,27 @@
 # Validation and the Data Quality Report
 
-The CEE provides two kinds of validation:
-
-- **Field validation** gives users feedback while they edit the form.
-- **The data quality report** gives the host application a snapshot of the entire metadata
-  instance.
-
-The CEE reports validity but does not perform saves. The host application decides how to present
-validation errors and whether to submit the metadata.
+The CEE validates individual fields during editing and exposes a data quality
+report for the complete instance. It does not save or submit metadata; the host
+application decides how validation affects its workflow.
 
 ## Field Validation
 
-The CEE validates a field whenever its value changes. Typed fields wait until the user leaves the
-field before displaying an error, so partially entered values are not marked invalid. Common
-messages cover missing required values, text length, malformed email addresses and links, and
-numeric ranges.
+The CEE revalidates a field when its value changes. Text and numeric controls
+usually wait until the user leaves the field before showing an error, avoiding
+warnings for partially entered values.
 
-Controlled-term and external-authority fields accept only values selected from or resolved by their
-lookup service. If the user enters text that does not identify a result, the CEE clears it or restores
-the previously selected value.
+Field messages cover required values, text constraints, formats, numeric ranges,
+dates and times, choice membership, and repetition limits. Controlled-term and
+external-authority fields accept only selected or resolved values; unresolved
+text is cleared or replaced with the previous valid value.
 
-## Reading the Data Quality Report
-
-Read the current report from the editor element:
+## Read the Report
 
 ```javascript
 const report = cee.dataQualityReport;
 ```
 
-The property returns a snapshot with four top-level members:
+The returned snapshot has this shape:
 
 ```typescript
 interface CeeDataQualityReport {
@@ -39,24 +32,24 @@ interface CeeDataQualityReport {
 }
 ```
 
-`requiredFieldValueCount` is the number of required field declarations in the template.
-`nonNullRequiredFieldValueCount` is the number of those requirements satisfied by the current
-instance. A required field is counted once even when the field, or an element containing it, is
-repeatable. Any populated occurrence satisfies that requirement.
+- `requiredFieldValueCount` is the number of required field declarations in the
+  template.
+- `nonNullRequiredFieldValueCount` is the number currently satisfied.
+- `problems` contains required, constraint, structure, and cardinality errors.
+- `isValid` is `true` only when all required fields are populated and
+  `problems` is empty.
 
-`problems` contains one `required` entry for each unsatisfied required field declaration, plus
-constraint violations for present values and structural or cardinality problems. The two counts
-remain available as an aggregate view of required-field progress.
+A required field is counted once even when it, or an enclosing element, can
+repeat. Any populated occurrence satisfies that requirement.
 
-`isValid` is `true` only when every required field is populated and `problems` is empty. For example,
-a host can use it to control a save button:
+The host can use the summary directly:
 
 ```javascript
 saveButton.disabled = !cee.dataQualityReport.isValid;
 ```
 
-The CEE recomputes the report after every instance change. The `change` event includes the updated
-report and the same validity result:
+The report is recomputed after every instance change and is included in the
+`change` event:
 
 ```javascript
 cee.addEventListener('change', ({ detail }) => {
@@ -65,10 +58,11 @@ cee.addEventListener('change', ({ detail }) => {
 });
 ```
 
-Validation is local and synchronous; reading the report does not make a network request. When
-`showDownloadMenu` is enabled, the download menu also offers the report as JSON.
+Validation is local and synchronous. Reading the report makes no network
+request. If `showDownloadMenu` is enabled, the menu also offers the report as
+JSON.
 
-## Validation Problems
+## Problem Records
 
 Each entry in `problems` describes one violation:
 
@@ -83,17 +77,16 @@ Each entry in `problems` describes one violation:
 }
 ```
 
-- `path` is the component path from the template root. It identifies the field declaration, but it
-  does not include occurrence indexes for repeatable fields or elements.
-- `field` is the final segment of `path`.
-- `inputType` is the field's declared input type, or `null` if none is declared.
-- `code` is a stable, machine-readable problem type.
-- `message` is an English diagnostic for developers. It is not translated and should not be used as
-  application UI copy.
-- `value` is the offending value in its CEDAR JSON representation. For example, a controlled term
-  with an `@id` but no label is reported as `{ '@id': 'https://example.org/term/1' }`.
+| Member | Meaning |
+|---|---|
+| `path` | Component path from the template root. Repetition indexes are not included. |
+| `field` | Final segment of `path`. |
+| `inputType` | Declared input type, or `null`. |
+| `code` | Stable machine-readable problem type. |
+| `message` | English developer diagnostic; not translated for application UI. |
+| `value` | Offending value in its CEDAR JSON representation. |
 
-Use `code` and `path`, rather than parsing `message`, when handling a problem.
+Use `code` and `path` in application logic rather than parsing `message`.
 
 | Area | Codes |
 |---|---|
@@ -107,31 +100,30 @@ Use `code` and `path`, rather than parsing `message`, when handling a problem.
 | Controlled and authority values | `controlledStructure`, `iriMalformed` |
 | Repeatable fields and elements | `minItems`, `maxItems` |
 
-## Checks Performed
+## Checks Included
 
 The report checks:
 
-- [Required](../yaml-spec/fields-core.md#requirement) fields.
-- Minimum and maximum text length, and regular-expression constraints.
-- Email, link, phone-number, and external-authority identifier formats.
-- Numeric type and range, including the range of the declared XSD numeric type, and the template's
-  `minValue`, `maxValue`, and `decimalPlace` constraints.
-- Temporal type, granularity, time-zone use, and calendar validity.
-- Membership in a field's declared literal choices.
-- `minItems`, `maxItems`, and required array structure for repeatable fields and
-  [elements](../yaml-spec/elements-core.md#repetition).
-- The structure of a [controlled value](../yaml-spec/field-types/controlled-term-field.md): `@id`
-  and `rdfs:label` must appear together, and `@id` must be a well-formed IRI.
+- [required fields](../yaml-spec/fields-core.md#requirement);
+- minimum and maximum text length, and regular expressions;
+- email, link, phone-number, and external-authority formats;
+- numeric type, XSD range, `minValue`, `maxValue`, and `decimalPlace`;
+- temporal type, granularity, time-zone use, and calendar validity;
+- literal choice membership;
+- `minItems`, `maxItems`, and array structure for repeatable fields and
+  [elements](../yaml-spec/elements-core.md#repetition); and
+- the structure and IRI format of
+  [controlled values](../yaml-spec/field-types/controlled-term-field.md).
 
-An empty optional field does not produce a constraint problem. An empty required field affects the
-required-field counts and produces a `required` problem containing that field's path.
+An empty optional field produces no problem. An empty required field contributes
+to the required-field counts and adds a `required` problem.
 
-## Checks Not Performed
+## Checks Excluded
 
-The report does not verify that a controlled term belongs to the ontology, class, branch, or value
-set declared by the template. That check requires the terminology service. The local report checks
-only the controlled value's structure and IRI format.
+The local report does not contact the terminology service to confirm that a term
+belongs to the ontology, class, branch, or value set declared by the template.
+It checks only the stored value's structure and IRI format.
 
-The report also does not perform full CEDAR artifact validation. When an application saves metadata
-through CEDAR, the server validates the complete instance against its template and rejects an
-invalid artifact.
+It is also not a substitute for full server-side artifact validation. When an
+application stores an instance through CEDAR, the server validates the complete
+artifact against its template.

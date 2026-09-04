@@ -87,7 +87,7 @@ nav:
           - Verify the Docker Deployment: install-docker/verify-docker-deployment.md
 
       - CEDAR Embeddable Editor:
-          - cedar-embeddable-editor/intro/index.md
+          - cedar-embeddable-editor/index.md
           - cedar-embeddable-editor/first-editor.md
           - cedar-embeddable-editor/frameworks.md
           - cedar-embeddable-editor/templates-and-metadata.md

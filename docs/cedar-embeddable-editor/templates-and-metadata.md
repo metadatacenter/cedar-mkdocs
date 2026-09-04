@@ -1,26 +1,23 @@
 # Templates and Metadata
 
-A [template](../yaml-spec/templates-core.md) goes into the CEE and an
-[instance](../yaml-spec/instances-core.md) comes out. Each direction offers more than one route:
-several ways to supply a template and an existing instance, several ways to read the metadata back,
-a serialization to choose on each side, and an event that fires when a value changes.
+A [template](../yaml-spec/templates-core.md) defines the form, and an
+[instance](../yaml-spec/instances-core.md) holds its values. The CEE accepts both
+as parsed JavaScript objects and exposes the current instance as JSON-LD or YAML.
 
-## Supplying a Template
+## Supply a Template
 
-The template is a parsed object, assigned to `templateObject`:
+Assign the template after configuring the element:
 
 ```javascript
 cee.templateObject = template;
 ```
 
-Assigning it builds the form, so configuration should already be set when it happens. Each input
-takes one assignment: a second template is reported and ignored, and the first form stays. An
-application that has to show a different template creates a new element.
+This assignment builds the form. The property accepts one successful assignment;
+to show another template, create a new CEE element.
 
-### Supplying an Instance as Well
+## Supply an Existing Instance
 
-An instance can be supplied on its own input, `instanceObject`, or together with its template on
-`templateAndInstanceObject`. Prefer the combined input:
+When the template and instance are available together, use the combined input:
 
 ```javascript
 cee.templateAndInstanceObject = {
@@ -29,86 +26,72 @@ cee.templateAndInstanceObject = {
 };
 ```
 
-One assignment produces one build. The CEE constructs the form with the values already known
-instead of building it empty and then filling it, which is faster. The two properties inside the
-object are named `templateObject` and `instanceObject`, matching the separate inputs.
+The CEE can then build the populated form once. The instance must have been
+created from the supplied template.
 
-The separate inputs remain available for an application that genuinely obtains the two at different
-times. They are independent, and either order works, because the CEE does not build the form until a
-template is present — an instance supplied ahead of one waits rather than loading against nothing:
+Separate properties are available when the values arrive at different times:
 
 ```javascript
 cee.instanceObject = instance;
 cee.templateObject = template;
 ```
 
-An instance must have come from the template it is loaded against. A mismatched pair produces no
-single clear error. The CEE drops values whose fields it cannot find, leaving a form that has
-silently lost data.
+Either order works; the CEE waits for a template before rendering. Each property
+still accepts only one successful assignment. Do not combine
+`templateAndInstanceObject` with either separate property.
 
-An artifact is a template and optionally an instance, and each half can be claimed once.
-`templateAndInstanceObject` claims both, so it cannot be combined with either separate input. What
-an application supplies twice is reported and ignored:
+A duplicate assignment is ignored and reported through the console and
+`eventHandler`:
 
 ```
 CEE ERROR: CEDAR Embeddable Editor: "instanceObject" ignored, because the instance is already set.
 Each input takes one assignment; create a new editor element to load a different artifact.
 ```
 
-The error reaches the browser console and any handler on the `eventHandler` property. Loading a
-different template or instance means a new element, which is also what keeps the two halves of a
-document from being mixed across artifacts.
+If the CEE cannot parse a combined input, it renders nothing and leaves both
+properties available for a corrected assignment. An unreadable `instanceObject`
+similarly does not consume that input.
 
-The combined object contains exactly `templateObject` and `instanceObject`. If the CEE cannot read
-the instance, it reports the rejection, renders no replacement empty form, and leaves the artifact
-inputs available for a corrected value. A failed combined assignment therefore claims neither half.
-The same rule applies to `instanceObject` on its own: only a readable instance spends the one
-assignment.
+## JSON Schema and YAML Templates
 
-### Supplying a YAML Template
-
-A template is supplied as JSON Schema or as [YAML](../yaml-spec/index.md), and the CEE recognizes
-which it has been given. An application holding either assigns it directly:
+The CEE accepts templates in CEDAR's JSON Schema and
+[YAML](../yaml-spec/index.md) representations. Assign the parsed object in either
+case:
 
 ```javascript
 cee.templateObject = template;
 ```
 
-For YAML, assign the **parsed** YAML object rather than the YAML source text.
+Browsers parse JSON natively but need a library such as
+[js-yaml](https://www.npmjs.com/package/js-yaml) to parse YAML source text. Both
+representations pass through the same CEDAR model library and produce the same
+form.
 
-Parsing falls to the application. Browsers parse JSON natively and YAML not at all, so a YAML template obliges the page to carry a
-parser such as [js-yaml](https://www.npmjs.com/package/js-yaml). Nothing else differs, because the
-The CEE reads both serializations through the same model library and either builds the same editor.
+## Read the Current Instance
 
-## Reading the Metadata Back
+The output properties are read-only and have no side effects:
 
-Two read-only properties expose the instance under edit. Each reads the current state of the form
-at the moment it is accessed, and none of them has side effects.
-
-| Property | Returns |
+| Property | Value |
 |---|---|
-| `currentMetadata` | The instance as a CEDAR JSON-LD object. |
-| `currentMetadataYaml` | The instance as a CEDAR YAML string. |
-
-Each says which form it returns, so no code has to reason about what the configuration happens to
-be:
+| `currentMetadata` | The current instance as a CEDAR JSON-LD object. |
+| `currentMetadataYaml` | The current instance as a CEDAR YAML string. |
 
 ```javascript
 const instance = cee.currentMetadata;
-const asYaml = cee.currentMetadataYaml;
+const yaml = cee.currentMetadataYaml;
 ```
 
-An instance supplied to the editor is always read as JSON-LD, whichever serialization the template
-was written in.
+Existing instances are supplied as JSON-LD, regardless of the template's input
+representation.
 
-## Knowing When Something Changed
+## Observe Changes
 
-The CEE publishes a `change` event only when an operation changes the serialized instance. That
-event crosses the shadow boundary and bubbles. Focus, blur, paging, read-only control traffic and a
-write that leaves `currentMetadata` identical produce no event; field edits, clears,
-controlled-term selections and repeating-group operations do.
+The CEE dispatches a bubbling `change` event across the shadow boundary whenever
+an operation changes the serialized instance. It does not dispatch for focus,
+blur, page navigation, read-only activity, or a write that leaves the instance
+unchanged.
 
-The package declarations type the listener as `CustomEvent<CeeChangeDetail>`:
+The package declares the event as `CustomEvent<CeeChangeDetail>`:
 
 ```typescript
 import type { CeeChangeDetail } from 'cedar-embeddable-editor';
@@ -123,50 +106,36 @@ cee.addEventListener('change', (event) => {
 });
 ```
 
-Every detail carries the state after the operation:
+Each event detail contains the state after the operation:
 
 | Member | Meaning |
 |---|---|
-| `operation` | `valueChanged`, `multiInstanceAdded`, `multiInstanceCopied` or `multiInstanceDeleted`. |
-| `path` | The component path from the template root. |
-| `value` | The value supplied to the model operation. |
+| `operation` | `valueChanged`, `multiInstanceAdded`, `multiInstanceCopied`, or `multiInstanceDeleted`. |
+| `path` | Component path from the template root. |
+| `value` | Value supplied to the model operation. |
 | `validity` | Whether the resulting instance is valid. |
-| `dataQualityReport` | The full report for the resulting instance. |
-| `title`, `description` | The current instance envelope values, or `null` when absent. |
+| `dataQualityReport` | Full validation report for the resulting instance. |
+| `title`, `description` | Current instance envelope values, or `null`. |
 
-Structural edits to a [repeating group](../yaml-spec/elements-core.md#repetition) also retain a
-compatibility `detail.message` naming what happened:
+Repeating-group events also include the legacy `detail.message` value
+`multiInstanceAdded`, `multiInstanceCopied`, or `multiInstanceDeleted`.
 
-| `detail.message` | Meaning |
-|---|---|
-| `multiInstanceAdded` | An empty instance was added to a multi-valued element. |
-| `multiInstanceCopied` | The current instance was duplicated. |
-| `multiInstanceDeleted` | The current instance was removed. |
+Angular can receive the same event with `(change)="onChange($event)"`.
 
-```javascript
-cee.addEventListener('change', (event) => {
-  if (event.detail?.message === 'multiInstanceDeleted') {
-    // ...
-  }
-});
-```
+Loading a canonical instance does not produce a change event. The exception is a
+temporal value with more precision than the template permits: the CEE normalizes
+the value during loading and reports that change. Attach the listener before
+assigning the artifact if the application needs to observe it.
 
-In Angular the same event is available as an output binding, `(change)="onChange($event)"`.
+## Track Unsaved Changes
 
-A canonical instance produces no event merely because it was loaded. Temporal values are the
-exception when their stored precision exceeds the field's declared granularity: loading normalizes
-the serialized value, so the CEE publishes that real change during initialization. Install the
-listener before assigning the artifact if the application needs to observe normalization.
+The CEE does not maintain a dirty flag. Store a structural snapshot of
+`currentMetadata` after loading and after each successful save, then compare it
+with the current value after every `change`. This also clears the dirty state
+when a user exactly reverses an edit.
 
-The CEE does not own an unsaved-changes flag. Keep a structural snapshot of `currentMetadata` after
-load and after each successful save, then compare the current value after every `change`. This marks
-an edit dirty, clears dirty state when the edit is exactly undone, and establishes a new baseline
-only after persistence succeeds.
-
-### Saving Periodically
-
-The CEE persists nothing. An application wanting an autosave writes one, reading the instance on
-a timer:
+Autosave works the same way: read the current instance on the application's
+schedule and send it to the application's own service.
 
 ```javascript
 const SAVE_INTERVAL = 15000;
@@ -180,30 +149,27 @@ setInterval(async () => {
 }, SAVE_INTERVAL);
 ```
 
-## How Dates and Times Are Stored
+## Temporal Values
 
-A [temporal field's](../yaml-spec/field-types/temporal-field.md) `temporalType`,
-`temporalGranularity` and `timezoneEnabled` settings are a storage contract, and the CEE treats them as
-one. The editor shows only the parts the template asks for, and writes a complete lexical
-`xsd:date`, `xsd:time` or `xsd:dateTime` value:
+A temporal field's `temporalType`, `temporalGranularity`, and `timezoneEnabled`
+settings determine the stored lexical value. The CEE fills omitted lower-order
+parts with their minimum valid value:
 
 | Declared precision | Stored value |
 |---|---|
-| date, year | `2026-01-01` |
-| date, month | `2026-08-01` |
-| date, day | `2026-08-09` |
-| time, hour | `21:00:00` |
-| time, minute | `21:45:00` |
-| time, second | `21:45:32` |
-| time, decimal second | `21:45:32.001` |
-| date-time, day | `2026-08-09T00:00:00` |
-| date-time, minute | `2026-08-09T21:45:00` |
+| Date, year | `2026-01-01` |
+| Date, month | `2026-08-01` |
+| Date, day | `2026-08-09` |
+| Time, hour | `21:00:00` |
+| Time, minute | `21:45:00` |
+| Time, second | `21:45:32` |
+| Time, decimal second | `21:45:32.001` |
+| Date-time, day | `2026-08-09T00:00:00` |
+| Date-time, minute | `2026-08-09T21:45:00` |
 
-The same padding rule applies to the remaining date-time granularities. When time zones are enabled
-the CEE appends the selected fixed offset, `Z` or `+/-HH:mm`; when they are disabled it removes any
-offset present.
+When time zones are enabled, the CEE appends `Z` or the selected `+/-HH:mm`
+offset. When they are disabled, it removes any offset.
 
-Granularity wins when an existing instance is loaded. The CEE discards information finer than the
-template declares rather than carrying it along invisibly, so a day-granularity date-time field
-given `2026-08-09T21:45:32.125-07:00` stores `2026-08-09T00:00:00-07:00`. An application comparing
-a saved instance against the bytes it supplied should expect that normalization.
+The template's granularity also governs loaded values. For example, a day-level
+date-time field normalizes `2026-08-09T21:45:32.125-07:00` to
+`2026-08-09T00:00:00-07:00` rather than retaining invisible precision.

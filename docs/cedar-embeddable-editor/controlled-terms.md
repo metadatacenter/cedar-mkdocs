@@ -1,35 +1,30 @@
 # Controlled Terms and External Authorities
 
-Two kinds of field in a CEDAR template collect an identifier rather than a string. A
-[controlled-term field](../yaml-spec/field-types/controlled-term-field.md) draws its value from an
-ontology or a value set. An
-[external-authority field](../yaml-spec/field-types/external-authority-fields.md) draws it from a
-registry such as ORCID or ROR. Both turn what the user types into a lookup, and both store a
-resolvable identifier alongside a human-readable label.
+CEDAR templates can require identifiers instead of unconstrained text:
 
-These two field kinds are the only parts of the CEE that reach the network. Each needs one
-configured URL.
+- a [controlled-term field](../yaml-spec/field-types/controlled-term-field.md)
+  selects a class from an ontology or value set; and
+- an [external-authority field](../yaml-spec/field-types/external-authority-fields.md)
+  selects a record from a registry such as ORCID or ROR.
+
+Both store a resolvable identifier together with a human-readable label. Their
+lookups are the only form controls that depend on CEDAR network services.
 
 ## Controlled-Term Fields
 
-A template constrains a controlled-term field in one of
-[four ways](../yaml-spec/field-types/controlled-term-field.md#value-specifications), and a field can
-combine them:
+A template may combine four kinds of value constraint:
 
-| Constraint | Allows |
+| Constraint | Permitted values |
 |---|---|
 | Ontology | Any class in the named ontology. |
-| Branch | Any class beneath a named class, so "any disease" rather than "any DOID class". |
-| Class | One specific class, named outright. |
-| Value set | Any member of a named value set. |
+| Branch | Any class below the named root class. |
+| Class | One specified class. |
+| Value set | Any member of the named value set. |
 
-The constraint lives in the template rather than in the configuration. As the user types, the CEE
-sends the typed text and the constraint together to CEDAR's integrated-search endpoint, which
-searches the permitted terms and returns the matches. Choosing a suggestion stores the term.
+As the user types, the CEE sends the text and the template constraint to CEDAR's
+integrated-search endpoint. Selecting a result stores the term.
 
-### Configuring the Lookup
-
-One key enables the lookup, naming the terminology server and nothing below it:
+### Configure Terminology Lookup
 
 ```json
 {
@@ -37,20 +32,16 @@ One key enables the lookup, naming the terminology server and nothing below it:
 }
 ```
 
-The CEE appends `bioportal/integrated-search` itself. The base must end in a slash, and it has no
-default: unset, controlled fields offer no terms and the CEE says so once, naming the key.
+The base URL must end in `/`. The CEE appends
+`bioportal/integrated-search`; do not include that route in the setting.
 
-That URL is CEDAR's production terminology service, and it serves most applications. An
-organization running its own CEDAR deployment points the key at that deployment's terminology
-service instead.
+There is no default endpoint. If the setting is absent, controlled-term fields
+return no suggestions and the CEE reports the missing key once. Other fields
+continue to work.
 
-Left unset, the key stops the CEE making any request, and controlled fields show their
-empty-results row. The rest of the form works unchanged, so an application can defer the decision
-safely.
+### Stored Value
 
-### What Gets Stored
-
-A chosen term is stored as its IRI and its label together:
+The instance records both the IRI and label:
 
 ```json
 "disease": {
@@ -59,43 +50,31 @@ A chosen term is stored as its IRI and its label together:
 }
 ```
 
-The IRI makes the metadata machine-actionable, and the label makes it readable without a lookup.
-The CEE also renders a link beside the selected term, back to the term's page in BioPortal, built
-from BioPortal's own address and the constraint the field carries.
+The selected value also links to its BioPortal page in the interface.
 
-### Text That Is Not a Term
-
-A controlled-term field accepts a term, not free text. Typing something that matches nothing and
-then leaving the field discards the entry rather than storing it, and the CEE says so:
-
-> Entered value is not a term from the allowed set and has been cleared.
-
-Where the field already held a valid term, the CEE restores that term instead, and says so. A
-controlled field that quietly accepted free text would produce metadata that looks controlled and
-is not.
+A controlled-term field does not accept free text. If the user leaves an
+unresolved value, the CEE clears it or restores the previous valid term and
+displays an explanation.
 
 ## External Authorities
 
-Seven authorities are supported, each with a field type of its own:
+The CEE supports seven authority field types:
 
-| Authority | Identifies | The user types |
+| Authority | Identifies | Search input |
 |---|---|---|
-| ORCID | A researcher | A name or an ORCID |
-| ROR | An institution | An institution name or a ROR |
-| DOI | A publication or dataset | A title or a DOI |
-| PubMed | A publication | A title or a PubMed ID |
-| RRID | A research resource | A resource name or an RRID |
-| NIH Grant | A grant | Grant details or an NIH Grant ID |
-| PFAS | A chemical | A chemical name or a PFAS identifier |
+| ORCID | Researcher | Name or ORCID |
+| ROR | Institution | Name or ROR |
+| DOI | Publication or dataset | Title or DOI |
+| PubMed | Publication | Title or PubMed ID |
+| RRID | Research resource | Name or RRID |
+| NIH Grant | Grant | Grant details or NIH grant ID |
+| PFAS | Chemical | Name or PFAS identifier |
 
-Each field offers suggestions as the user types, and stores the persistent identifier of whatever
-is chosen. As with controlled terms, an entry that resolves to nothing is discarded on leaving the
-field, and a previously valid identifier is restored where there was one.
+Each field offers suggestions and stores the selected record's persistent
+identifier. Unresolved text is handled in the same way as a controlled-term
+field.
 
-### Configuring the Bridge
-
-Lookups go through the CEDAR bridge server, which fronts the authorities. One key names it, and it
-**must** end in a slash:
+### Configure the Bridge
 
 ```json
 {
@@ -103,15 +82,10 @@ Lookups go through the CEDAR bridge server, which fronts the authorities. One ke
 }
 ```
 
-It has no default, so an application that does not set it gets fields offering no terms and
-resolving no identifiers, reported once.
+This base URL must also end in `/` and has no default. The CEE appends the
+authority-specific route:
 
-Below that base the CEE appends the bridge server's `ext-auth/` resource, then a search path or a
-details path, depending on whether it is offering suggestions or resolving a chosen identifier. None
-of those paths is configurable: they are the bridge server's own routes, so an application free to
-move them could only move them somewhere nothing answers.
-
-| Authority | Search path | Details path |
+| Authority | Search route | Details route |
 |---|---|---|
 | ORCID | `ext-auth/orcid/search-by-name` | `ext-auth/orcid` |
 | ROR | `ext-auth/ror/search-by-name` | `ext-auth/ror` |
@@ -121,21 +95,18 @@ move them could only move them somewhere nothing answers.
 | NIH Grant | `ext-auth/nih-grant/search-by-name` | `ext-auth/nih-grant` |
 | PFAS | `ext-auth/comp-tox/search-by-name` | `ext-auth/comp-tox` |
 
-## When a Lookup Service Is Unreachable
+## Service Failures
 
-The CEE reports a failed request in the field as a search that could not be completed, rather
-than as an empty result set. Empty results invite the user to try a different word; an unreachable
-service invites them to try again later.
+The CEE distinguishes a failed request from an empty result. A failed request is
+shown as an unavailable search so the user knows to try again later. Other parts
+of the form remain usable.
 
-Nothing else in the form depends on either service, so a terminology outage degrades term selection
-and leaves the rest of the form intact.
+## Validation Boundary
 
-## What the CEE Does Not Check
+Local validation checks that a controlled value has a well-formed `@id` and a
+matching `rdfs:label`. It does not verify that an existing value still belongs to
+the ontology, branch, class, or value set declared by the template; that would
+require a terminology-service request.
 
-The CEE does not verify that a stored term belongs to the ontologies, branches, classes or value
-sets its field declares. Only the terminology service can answer that, and asking it would make an
-otherwise local operation depend on the network.
-
-The CEE does perform the structural checks. A controlled value must carry an `@id` and an
-`rdfs:label` together, and the `@id` must be well formed. [Validation](validation.md) covers what the data
-quality report does and does not examine.
+See [Validation and the Data Quality Report](validation.md) for the complete list
+of local checks.

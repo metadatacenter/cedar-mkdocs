@@ -1,43 +1,38 @@
 # Security
 
-The CEE runs inside the embedding page, in the embedding origin. Its content lives in a shadow
-root, but **Shadow DOM is not a security boundary**: it scopes styles and markup, not privileges.
-Anything the CEE executes reaches cookies, storage and network exactly as the rest of the
-application does.
+The CEE executes in the host page's origin and has the same access to cookies,
+storage, and network resources as the rest of that page. Shadow DOM isolates
+markup and styles; it is not a security boundary.
 
-## Templates Are Trusted Input
+## Treat Templates as Input
 
-For a component whose inputs are data, that arrangement costs nothing, because data does not
-execute. But one of the CEE's inputs is not purely data: a CEDAR template can carry a
-[static rich-text field](../yaml-spec/field-types/static-fields.md), whose body is HTML composed by
-the template's author and rendered as HTML by the CEE. Template authors use it for instructions,
-formatted notes and links.
+Most template content is data. The exception is a
+[static rich-text field](../yaml-spec/field-types/static-fields.md), whose body
+contains HTML written by the template author.
 
-Instance data raises no such question inside the CEE. A value a user typed is sanitized every time
-it is rendered, in the editable form and in read-only view alike, and no configuration changes
-that. A person filling in a form cannot introduce markup that runs in the editor.
+The CEE sanitizes this HTML by default. It always sanitizes values from metadata
+instances when rendering them in editable and read-only views.
 
-Sanitizing happens at render, though, and not in the data. The instance the CEE hands back holds
-what the user typed, verbatim, because that is the metadata the application asked for. An
-application that displays those values somewhere else, in a summary or a search result, sanitizes
-them there as it would any other user input.
+Sanitizing at render time does not modify the instance. `currentMetadata`
+contains the user's original text, so the host must sanitize that text again if
+it later renders the value elsewhere.
 
-That leaves a template author's rich text as the one input whose treatment an application can change.
+## Default Rich-Text Sanitizing
 
-## The Default: Sanitize
+The default sanitizer removes executable content, including:
 
-The CEE sanitizes template rich text unless told not to. Script elements, event-handler attributes such
-as `onerror`, `javascript:` URLs, `iframe` elements, form controls and AngularJS directive
-attributes such as `ng-click` are removed before rendering.
+- `<script>` and `<iframe>` elements;
+- event-handler attributes such as `onerror`;
+- `javascript:` URLs;
+- form controls; and
+- AngularJS directive attributes such as `ng-click`.
 
-Formatting survives. Inline styles, tables, lists, headings, links, and inline `data:` images in
-the raster formats all render as the author composed them. Sanitizing removes the executable parts
-and leaves the rendering otherwise untouched, so template authors gain nothing by turning it off.
+Formatting such as headings, lists, tables, links, inline styles, and raster
+`data:` images remains available.
 
-## Rendering Markup Verbatim
+## Trusted Rich Text
 
-An application that controls which templates load can choose to render an author's markup exactly as
-written:
+The host can disable sanitizing for template-authored rich text:
 
 ```json
 {
@@ -45,88 +40,71 @@ written:
 }
 ```
 
-**Set this only if template authors are as trusted as the application's own source code.** With it
-on, a template author can run JavaScript in the application's origin. "Allowed to define a form"
-and "allowed to run code in this page" are very different permissions, and setting this key declares
-them to be the same.
+Enable this only when template authors are trusted to run JavaScript in the host
+application's origin. This is appropriate only when templates ship with the
+application or come from a repository controlled by the same operators.
 
-Only a narrow case justifies it. Templates ship with the application, or come from a repository
-the operators control, and whoever can write a template could already deploy code.
+Do not enable it when users can select templates from a public library, a
+collaborator, or any other source whose authors do not have permission to deploy
+application code.
 
-**Do not set it if users choose their own templates.** A template from CEDAR's public library, from
-a colleague, or from anywhere users can write to is untrusted input, and rendering its markup
-verbatim hands whoever wrote it the application's session. Leaving the key off renders the
-formatting without the risk.
+## Sanitizing by Content Type
 
-## What Is Sanitized Where
-
-| Content | Origin | Treatment |
+| Content | Source | Treatment |
 |---|---|---|
-| Static rich-text field body | Template author | Sanitized, unless `trustTemplateRichText` is on |
-| Static section break, image, YouTube | Template author | Not rendered as HTML. Used as text or as a URL |
-| Field values, in the form and in read-only view | Instance data | Always sanitized. Not configurable |
-| Multi-instance value summaries | Instance data | Always sanitized. Not configurable |
+| Static rich-text body | Template author | Sanitized unless `trustTemplateRichText` is `true`. |
+| Static section break, image, or YouTube field | Template author | Treated as text or a validated URL, not arbitrary HTML. |
+| Field values in editable or read-only views | Instance | Always sanitized. |
+| Repeating-value summaries | Instance | Always sanitized. |
 
-The three static kinds in the second row render no markup at all, so nothing an author writes in
-them executes. Their URLs are still checked before the browser sees them. An image field refuses a
-scheme that cannot address an image, and refuses a `data:` URL that declares anything other than
-one. A video field embeds a validated YouTube video ID on a fixed `youtube.com` origin, so a link
-to a host that merely ends in the YouTube one is refused. Every refusal names the offending URL on
-the card rather than leaving it blank, so a template author can see what to correct.
+Static image fields accept image URLs and image `data:` URLs. Static video fields
+accept validated YouTube identifiers on the fixed `youtube.com` origin. Invalid
+URLs are refused and reported in the form.
 
-The image field accepts any image type, `image/svg+xml` among them, because it renders an `img`
-element the CEE writes itself and an SVG cannot execute from one. Rich text is stricter about the
-same URL, allowing the raster types only, because there the `img` is one element in an allowlist
-over markup the author composed.
+An image field may display `image/svg+xml` because the CEE creates the `<img>`
+element itself. Rich-text HTML permits only raster `data:` images, since those
+elements originate in author-supplied markup.
 
-## Requests the CEE Makes
+## Network Requests
 
-Requests come from three places: the two CEDAR servers the application configures, a language map it
-may point the CEE at, and the template itself. Only the first two are the application's to decide.
+The CEE can make requests from four sources:
 
-Of the servers, neither `terminologyBaseUrl` nor `bridgeBaseUrl` has a default, so an application
-that sets neither has the CEE make no requests of its own: a controlled-term field offers no terms,
-an external-authority field resolves no identifiers, and the CEE reports which key is missing the
-first time a field needs it.
+| Source | Request |
+|---|---|
+| `terminologyBaseUrl` | Controlled-term search using the user's text and the template constraint. |
+| `bridgeBaseUrl` | External-authority search and identifier details. |
+| `languageMapPathPrefix` | External interface language maps. |
+| Static template content | Images from author-selected origins and video from `youtube.com`. |
 
-Each request carries only the text the user typed and the constraint the template declares. An
-application that must keep those queries inside its own network points both settings at its own
-CEDAR deployment.
+The two CEDAR service URLs and the language-map path have no defaults. Leaving
+them unset prevents those requests. Organizations that must keep lookup queries
+inside their network should use endpoints from their own CEDAR deployment.
 
-A template adds requests the application did not configure. A static image field makes the browser
-fetch the URL the template author wrote, at whatever origin that names, and a video field loads
-the player from `youtube.com`. Both tell that origin the reader's address and the page they are
-on. The player is loaded with a `strict-origin-when-cross-origin` referrer policy; an image sends
-the referrer its origin would ordinarily see. An application that must not leak either serves the
-images it is willing to show, and bounds the rest with a content security policy.
+The host supplies templates and instances directly; the CEE never fetches a
+template or submits completed metadata.
 
-Everything else happens locally. The application supplies the template and the instance, the
-browser renders the form, and the browser produces the metadata. The CEE sends metadata nowhere.
+Static content deserves separate review because its destinations come from the
+template. Loading an image or video reveals the reader's network address and
+referrer information permitted by the browser. The YouTube player uses a
+`strict-origin-when-cross-origin` referrer policy. Hosts with stricter privacy
+requirements should proxy or host approved images and restrict destinations with
+a content security policy.
 
-One configuration key makes the CEE fetch on its own: `languageMapPathPrefix`, which sends it
-looking for a language map instead of using the one inside the bundle. An application that would
-rather hold every network decision itself leaves it unset and takes the built-in languages. The CEE
-never fetches a template — the application supplies it.
+## Content Security Policy
 
-## A Content Security Policy
+The CEE is a precompiled classic script and does not require `unsafe-eval`. Fonts
+are embedded in the bundle, so it introduces no remote `font-src` requirement.
 
-The CEE is a classic script, compiled ahead of time, and does not need `unsafe-eval`. Its fonts and
-stylesheets travel inside the bundle rather than being fetched, so nothing has to be added to
-`font-src` or to `style-src` for a remote origin.
+Account for these directives in the host policy:
 
-A policy does have to allow the styles and the endpoints. The CEE installs its component styles as
-inline `<style>` elements, in the manner of any Angular application, so `style-src` must permit
-inline styles.
+| Directive | Required allowance |
+|---|---|
+| `script-src` | The origin serving `cedar-embeddable-editor.js`. |
+| `style-src` | Inline styles, because the component installs compiled styles in its shadow root. |
+| `connect-src` | Configured terminology, bridge, and external language-map origins. |
+| `img-src` | Image origins allowed by templates, plus `data:` if inline images are permitted. |
+| `frame-src` | `https://www.youtube.com` when templates may contain video fields. |
 
-`connect-src` has to name every origin the CEE fetches from, which is exactly what the application
-configured: the terminology service, the bridge, and the origin serving the language maps if
-`languageMapPathPrefix` points at another one. Configure none of the three and `connect-src` needs
-nothing for the CEE at all. There is no default to account for — a policy written against one would
-be naming an origin the CEE never contacts.
-
-Templates carrying static content need two more directives. An image field renders an `img`, so
-`img-src` has to cover the origins those templates point at, along with `data:` for an image
-carried inline in a rich-text body or in the field itself. A video field renders an `iframe`, so
-`frame-src` has to allow `https://www.youtube.com`. Omitting either costs the content and not the
-form: a blocked image reports that it could not be loaded, a blocked video leaves an empty frame,
-and the rest of the template renders.
+If the service and language settings are unset, the CEE adds no `connect-src`
+destinations. Blocking a template image or video affects only that content; the
+rest of the form continues to render.

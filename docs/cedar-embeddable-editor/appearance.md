@@ -1,23 +1,14 @@
 # Appearance and Language
 
-The CEE renders inside a shadow root. The page's stylesheets do not reach into the form, and the
-form's styles do not leak out, so an application cannot restyle the CEE with CSS selectors written
-against its internals, and the CEE cannot disturb the application's own layout.
+The CEE renders inside Shadow DOM. Its styles do not affect the host page, and
+selectors from the host page cannot reach the form's internal elements. The host
+controls the editor's available width; CEE configuration controls its language
+and read-only state.
 
-Two things cross that boundary, each deliberately: the width of the container the application puts
-the CEE in, and the language it is told to render in.
+## Size and Layout
 
-| What the application writes | How far it gets |
-|---|---|
-| `font-size` or `font-family` on the element | Inherits into the text the CEE styles itself — field labels, the time picker, chips — and stops before the form controls. |
-| A rule naming the CEE's internals, such as `.mat-mdc-text-field-wrapper` | Stops at the shadow boundary. Nothing changes. |
-| `html { font-size: 62.5% }` on the page | Nothing changes. The CEE states its own sizes absolutely. |
-| A Material token, such as `--mat-form-field-container-text-size` | Nothing changes. The theme writes px literals into the bundle instead of emitting those tokens, so input text, hints and the colour of the controls have nothing to override. |
-
-## Sizing and Layout
-
-The element fills whatever width it is given, so the application controls its size by sizing the
-container around it:
+The element fills its container. Size that container to place the editor within
+the host layout:
 
 ```css
 .metadata-panel {
@@ -26,64 +17,46 @@ container around it:
 }
 ```
 
-The CEE measures itself as a CSS container, so it lays itself out against that width rather than
-against the browser window. A form in a narrow sidebar arranges itself as it would on a narrow
-screen, even on a wide monitor. No configuration and no breakpoint are involved.
+The CEE uses container queries, so its layout responds to the space actually
+available rather than to the browser viewport. A narrow sidebar therefore gets
+the narrow layout even on a wide screen.
 
-Height is not part of the contract in either direction. The form is as tall as its content and
-reports that height to the page. Giving the container a fixed height clips the form rather than
-scrolling it, because the CEE has no internal scroller.
+The form grows to the height of its content and has no internal scroller. A
+fixed-height container clips it unless the host provides scrolling.
 
-## Theming
+## Styling and Theming
 
-The CEE publishes no theming properties. It renders in its own type and its own colours, and an
-application places it rather than styles it.
+The current CEE release does not expose a public theme API. Its colors, control
+typography, spacing, and Material theme are compiled into the bundle.
 
-Setting a `--cee-*` custom property does nothing, and nothing reports it: a custom property nobody
-reads is not an error.
+| Host style | Result |
+|---|---|
+| A selector for a CEE internal element | No effect because of the shadow boundary. |
+| `font-size` or `font-family` on the CEE element | Inherited by some CEE-owned text, but not Material form controls. |
+| `html { font-size: ... }` | No effect on the CEE's absolute sizes. |
+| Angular Material custom properties | No effect because the bundle contains compiled values. |
+| A `--cee-*` property | Unsupported; no public property currently reads it. |
 
-An appearance contract — colours named for the roles the interface has, a Material theme that
-reads them, and a stated position on type — is open work rather than a decision against it.
-
-## What the Application Cannot Change
-
-Everything about the CEE's appearance except its width, short of the language it renders in. Any
-`--cee-` name occurring inside the bundle is an internal: it is not declared on the element, and it
-can be renamed or dropped without notice, so setting one may happen to work today and will not be
-kept working.
-
-Three things that look like they should work do not, and each fails differently.
-
-**Selectors written against the CEE's internals do nothing.** The CEE draws the shadow boundary
-deliberately, and it holds in both directions:
+Avoid rules such as these:
 
 ```css
-/* No effect. The CEE's internals are not in the page's tree. */
-cedar-embeddable-editor .mat-mdc-text-field-wrapper { min-height: 80px; }
+/* No effect: the selector cannot cross the shadow boundary. */
+cedar-embeddable-editor .mat-mdc-text-field-wrapper {
+  min-height: 80px;
+}
+
+/* Partial effect: labels change, but Material controls do not. */
+cedar-embeddable-editor {
+  font-size: 24px;
+}
 ```
 
-**Setting a font on the element changes only part of the form.** `font-size` and `font-family`
-inherit across the shadow boundary, so they reach the CEE's own text — field labels, the time picker,
-chips — but not the form controls, whose type is set by the CEE's Angular Material theme at build
-time. The result is a form whose labels have moved and whose input values have not:
+Names beginning with `--cee-` that appear inside the bundle are internal and may
+change without notice.
 
-```css
-/* Avoid. Labels become 24px; the values inside the fields stay 14px. */
-cedar-embeddable-editor { font-size: 24px; }
-```
+## Read-Only Display
 
-There is no property for the body type size, the field height, or the colour of the form controls,
-because those come from a Material theme compiled into the bundle. Making them settable is open work
-rather than a decision against it.
-
-**The host page's root font size does not resize the form.** The CEE states its own sizes
-absolutely, so `html { font-size: 62.5% }` — a common CSS reset — leaves the form as it is. That is
-deliberate. A form embedded in an application should not change size because the application adjusted
-a root value for its own typography.
-
-## Read-Only Viewing
-
-One setting turns the editor into a viewer:
+Use `readOnlyMode` to display a template or instance without editing controls:
 
 ```json
 {
@@ -91,26 +64,19 @@ One setting turns the editor into a viewer:
 }
 ```
 
-Read-only mode presents the values without controls and permits no editing. An application uses it
-to show a submitted record, a previous version, or someone else's metadata, and avoids building a
-second renderer that would drift from the editor. The RADx Data Hub and HuBMAP both display
-metadata records and templates through the CEE this way.
+This allows the same component to render records during authoring and review.
+RADx and HuBMAP use the CEE in this mode for metadata presentation.
 
-Configuration is applied once, so an application offering the user a choice between editing and
-viewing builds a new element for the other mode rather than reconfiguring this one.
+Configuration is accepted once. To switch between editable and read-only modes,
+replace the CEE element with a newly configured one.
 
-`readOnlyMode` is the only way in or out of read-only mode. Nothing inside the form can change it,
-so a record shown for reading stays that way.
+## Host Page and Template Description
 
-## Surrounding Chrome
+The CEE does not provide page-level navigation or headings. The host application
+supplies that surrounding interface. The form retains the CEDAR mark and bundle
+version in its own title block.
 
-The CEE draws no page chrome. An application renders its own headings and navigation around the
-element.
-
-What the CEE keeps is the CEDAR mark and the version stamp inside the form's own title block, which
-is a component naming itself rather than dressing someone else's page.
-
-One key adds to that block:
+To show the template's description below its title, set:
 
 ```json
 {
@@ -118,14 +84,12 @@ One key adds to that block:
 }
 ```
 
-It renders the template's own description under its title. Turn it on where users meet a template
-they have not filled in before, and leave it off where the application already shows the description
-in its own header.
+Leave this off if the host already displays the description.
 
 ## Translations
 
-The CEE ships language maps for English and Hungarian, and renders in English unless told otherwise.
-Selecting the other built-in language takes two keys:
+English and Hungarian interface maps are bundled with the CEE. English is the
+default. To use Hungarian with English fallback:
 
 ```json
 {
@@ -134,9 +98,7 @@ Selecting the other built-in language takes two keys:
 }
 ```
 
-An application can supply its own language file instead. Point `languageMapPathPrefix` at a
-directory, and the CEE looks there for `<language>.json`, structured like [the CEE's own English
-map](https://github.com/metadatacenter/cedar-embeddable-editor/blob/main/src/assets/i18n-cee/en.json):
+For another language, host a JSON map and configure its directory:
 
 ```json
 {
@@ -146,42 +108,40 @@ map](https://github.com/metadatacenter/cedar-embeddable-editor/blob/main/src/ass
 }
 ```
 
-That configuration asks for `/assets/i18n-cee/de.json`. A leading slash makes the path absolute; a
-relative prefix resolves against the page.
+This example requests `/assets/i18n-cee/de.json`. A relative prefix is resolved
+against the page URL. Custom files follow the structure of the
+[bundled English map](https://github.com/metadatacenter/cedar-embeddable-editor/blob/main/src/assets/i18n-cee/en.json).
 
-The CEE tries four sources in turn, so a partial or missing translation degrades the wording
-rather than breaking the form:
+The CEE checks translation sources in this order:
 
-1. The external file for the default language.
-2. The external file for the fallback language.
-3. The built-in map for the default language.
-4. The built-in map for the fallback language.
+1. external map for `defaultLanguage`;
+2. external map for `fallbackLanguage`;
+3. bundled map for `defaultLanguage`; and
+4. bundled map for `fallbackLanguage`.
 
-With that configuration and no German file present, the CEE loads `/assets/i18n-cee/en.json`. With
-neither file present it uses the built-in English map, because no built-in German map exists.
+Missing or partial maps therefore fall back without preventing the form from
+rendering. `CEE TRACE` messages in the console and `eventHandler` show which maps
+were loaded.
 
-The CEE logs each step to the console under a `CEE TRACE` prefix and reports it to any handler
-registered on `eventHandler`. That trace is the quickest way to see which map a page actually
-loaded.
+### Translation Scope
 
-### What a Language Map Does Not Cover
+Language maps cover the CEE's own buttons, picker labels, repetition controls,
+and validation text. They do not translate content supplied by the template:
 
-A language map holds the CEE's own wording: its buttons, its picker labels, the multi-instance
-controls, and its validation messages. Everything the template supplies stays in the language its
-author wrote it in, including field and element names, help text, and the template's title and
-description. So do the labels of controlled terms, which arrive from the terminology service. A
-German map therefore gives a German interface around English field names.
+- template titles and descriptions;
+- field and element labels;
+- help text; or
+- controlled-term labels returned by the terminology service.
 
-The date fields ignore the setting entirely. `defaultLanguage` selects a string map and nothing else,
-so the calendar names its months in English and a date field reads `MM/DD/YYYY` in every language.
+Date controls also remain in English and use `MM/DD/YYYY`; `defaultLanguage`
+selects an interface string map, not a date locale.
 
 ## Fonts
 
-The CEE embeds the fonts it needs and registers them under private names, `CEE Roboto` and
-`CEE Material Icons`, rather than the global `Roboto` and `Material Icons`. A page defining fonts
-under the ordinary names therefore cannot collide with the CEE's, and the CEE cannot change how the
-page's own text renders.
+The bundle embeds its fonts under the private names `CEE Roboto` and
+`CEE Material Icons`. This prevents font definitions in the host page from
+changing CEE controls, and prevents CEE fonts from affecting the host page.
 
-The private names are also why an application cannot give the CEE its own typeface. The Material
-theme names `CEE Roboto` for the form controls when the bundle is built, so a `font-family` set on
-the element restyles the CEE's own text and leaves the controls in Roboto.
+The same isolation means the host cannot replace the control typeface. Setting
+`font-family` on the custom element changes only text that inherits from the
+element, producing an inconsistent result.
