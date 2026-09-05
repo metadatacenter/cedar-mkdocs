@@ -1,7 +1,5 @@
 # CEDAR Permission Model
 
-**Status:** Proposal. These pages do not describe the current implementation.
-
 This section defines how CEDAR content is owned, shared with collaborators, and made available to
 the public.
 
