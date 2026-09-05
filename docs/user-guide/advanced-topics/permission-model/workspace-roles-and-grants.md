@@ -8,7 +8,7 @@ action.
 | Role | Capabilities |
 |---|---|
 | **Viewer** | Ability to read the resource and its descriptive metadata and, for a folder, see the resources it contains. |
-| **Editor** | Ability to change the resource's content and descriptive metadata or delete the resource. For a folder, ability to create, copy or delete resources within it. |
+| **Editor** | Ability to change the resource's content and descriptive metadata or delete the resource. For a folder, ability to create resources within it, place copies there when the user can read the source, and delete resources it contains. |
 | **Manager** | Ability to change who is a Viewer, Editor or Manager of the resource on which the role is held, and to move or delete that resource. Ability to enable or disable OpenView for that resource. |
 
 Assigning one of these workspace roles to a user or group on one resource is called a **direct
