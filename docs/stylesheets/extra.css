@@ -37,8 +37,10 @@ img.right {
     float: right;
 }
 
-div.md-sidebar.md-sidebar--primary {
-    width:14rem;
+@media screen and (min-width: 76.25em) {
+    div.md-sidebar.md-sidebar--primary {
+        width: 14rem;
+    }
 }
 
 /* Keep key/type names in a table's first column from wrapping. */
