@@ -6,13 +6,20 @@ groups.
 ## Artifacts and Folders
 
 CEDAR has three roles for access to artifacts and folders. Each role can be assigned to a user or
-group.
+group. Each role provides a defined set of capabilities on the artifact or folder. The table below
+shows the capabilities provided by each role.
 
-| Role | Capabilities |
-|---|---|
-| **Viewer** | Ability to read the resource and its descriptive metadata. If the resource is a folder, ability to see the resources it contains. |
-| **Editor** | Ability to change the resource's content and descriptive metadata. Ability to delete the resource. If the resource is a folder, ability to create resources within it, place copies there when the user can read the source, and delete resources it contains. |
-| **Manager** | Ability to change which users and groups have the **Viewer**, **Editor** or **Manager** role on the resource. Ability to move or delete the resource. Ability to enable or disable OpenView for the resource. |
+| Capability | **Viewer** | **Editor** | **Manager** |
+|---|:---:|:---:|:---:|
+| Read the resource and its descriptive metadata | ✓ | ✓ | ✓ |
+| View resources contained in a folder | ✓ | ✓ | ✓ |
+| Change the resource's content or descriptive metadata | — | ✓ | ✓ |
+| Create a resource in a folder | — | ✓ | ✓ |
+| Copy a readable resource into a folder | — | ✓ | ✓ |
+| Delete a resource | — | ✓ | ✓ |
+| Change who has the **Viewer**, **Editor** or **Manager** role | — | — | ✓ |
+| Move a resource | — | — | ✓ |
+| Enable or disable OpenView | — | — | ✓ |
 
 The roles are cumulative. **Editor** includes every **Viewer** action. **Manager** includes every
 **Editor** action.
@@ -33,8 +40,19 @@ contains, including resources inside nested folders.
 
 ## Groups
 
-Groups also have a separate **Group Administrator** role. A user with this role may change a group's
-name, membership and administrators.
+Groups have a separate **Group Administrator** role. The table below compares the capabilities of
+every group member with the additional capabilities provided by this role.
+
+| Group capability | Member | **Group Administrator** |
+|---|:---:|:---:|
+| View the group's name | ✓ | ✓ |
+| View the group's members and administrators | ✓ | ✓ |
+| Change the group's name | — | ✓ |
+| Add or remove members | — | ✓ |
+| Add or remove a **Group Administrator** role | — | ✓ |
+
+Membership is not a role. Every **Group Administrator** is also a member. A **Group Administrator**
+therefore has every member capability.
 
 A grant to a group applies to every current member of that group. A user added to the group gains the
 access given to the group. A user removed from the group loses the access received through the group.
