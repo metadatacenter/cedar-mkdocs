@@ -49,6 +49,17 @@ nav:
           - user-guide/artifact-versioning.md
       - Advanced Topics:
           - user-guide/advanced-topics/index.md
+          - Permission Model:
+              - Overview: user-guide/advanced-topics/permission-model/index.md
+              - user-guide/advanced-topics/permission-model/workspace-resources.md
+              - user-guide/advanced-topics/permission-model/users-groups-and-ownership.md
+              - user-guide/advanced-topics/permission-model/workspace-roles-and-grants.md
+              - user-guide/advanced-topics/permission-model/access-to-resources.md
+              - user-guide/advanced-topics/permission-model/required-authority.md
+              - user-guide/advanced-topics/permission-model/sharing.md
+              - user-guide/advanced-topics/permission-model/ownership-transfer.md
+              - user-guide/advanced-topics/permission-model/group-administration.md
+              - user-guide/advanced-topics/permission-model/openview.md
           - user-guide/viewing-resource-information.md
           - user-guide/understanding-the-suggestion-system.md
           - user-guide/cedar-identifiers-and-iris.md
