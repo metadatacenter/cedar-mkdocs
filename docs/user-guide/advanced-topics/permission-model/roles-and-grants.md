@@ -6,20 +6,33 @@ groups.
 ## Artifacts and Folders
 
 CEDAR has three roles for access to artifacts and folders. Each role can be assigned to a user or
-group. Each role provides a defined set of capabilities on the artifact or folder. The table below
-shows the capabilities provided by each role.
+group. Each role provides a defined set of capabilities on the artifact or folder. The tables below
+show the capabilities provided by each role for each resource type.
+
+### Artifact Capabilities
 
 | Capability | **Viewer** | **Editor** | **Manager** |
 |---|:---:|:---:|:---:|
-| Read the resource and its descriptive metadata | ✓ | ✓ | ✓ |
-| View resources contained in a folder | ✓ | ✓ | ✓ |
-| Change the resource's content or descriptive metadata | — | ✓ | ✓ |
-| Create a resource in a folder | — | ✓ | ✓ |
-| Copy a readable resource into a folder | — | ✓ | ✓ |
-| Delete a resource | — | ✓ | ✓ |
+| Read the artifact and its descriptive metadata | ✓ | ✓ | ✓ |
+| Change the artifact's content or descriptive metadata | — | ✓ | ✓ |
+| Delete the artifact | — | ✓ | ✓ |
 | Change who has the **Viewer**, **Editor** or **Manager** role | — | — | ✓ |
-| Move a resource | — | — | ✓ |
-| Enable or disable OpenView | — | — | ✓ |
+| Move the artifact | — | — | ✓ |
+| Enable or disable OpenView for the resource | — | — | ✓ |
+
+### Folder Capabilities
+
+| Capability | **Viewer** | **Editor** | **Manager** |
+|---|:---:|:---:|:---:|
+| Read the folder and its descriptive metadata | ✓ | ✓ | ✓ |
+| View resources contained in the folder | ✓ | ✓ | ✓ |
+| Change the folder's descriptive metadata | — | ✓ | ✓ |
+| Create a resource in the folder | — | ✓ | ✓ |
+| Copy a resource into the folder | — | ✓ | ✓ |
+| Delete the folder | — | ✓ | ✓ |
+| Change who has the **Viewer**, **Editor** or **Manager** role | — | — | ✓ |
+| Move the folder | — | — | ✓ |
+| Enable or disable OpenView for the folder | — | — | ✓ |
 
 The roles are cumulative. **Editor** includes every **Viewer** action. **Manager** includes every
 **Editor** action.
