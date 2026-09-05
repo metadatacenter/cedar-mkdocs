@@ -6,7 +6,7 @@ The permission model recognizes four resource types: **users**, **groups**, **ar
 **folders.**
 
 A **user** is an authenticated CEDAR account. A **group** is a named set of users. **Everyone** is a
-built-in group. Every authenticated user belongs to the Everyone group.
+built-in group. Every authenticated user belongs to the **Everyone** group.
 
 An **artifact** is a resource that defines or contains metadata. An artifact is a **template**,
 **element**, **field** or **metadata instance**. Templates, elements and fields define metadata.
