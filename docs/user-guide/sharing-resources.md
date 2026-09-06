@@ -226,32 +226,6 @@ To share with groups, see [Creating Groups](#creating-groups).
 
 ## Sharing Via the Web
 
-### What OpenView Does
-
-CEDAR OpenView shares your content on the web. It works for templates, elements, fields, and
-metadata instances. You must own the content to share it, and to share an instance its template
-must already be shared. Templates, elements, and fields appear as empty forms showing their
-fields.
-
-### Sharing to the Web
-
-To share a template, element, or field, choose Enable OpenView from its menu. CEDAR confirms
-the share.
-
-![](../img/userguide/enable-openview-menu-20190908.png){:width="25%" class="centered"}
-
-To share a metadata instance, also share the template it is based on. Until the template is shared, anyone who
-opens the shared instance sees an error rather than the metadata.
-
-### Viewing Shared Content on the Web
-
-Choose Visit OpenView from an artifact's menu to open its public view in a new page. You can
-copy that page's URL and give it to anyone to view. On the page, click the down-arrow in the
-title bar to see the content's metadata, which includes a link to open the document in CEDAR
-(the link works only for users whose account has permission to view it). The page also offers
-the raw source representations of the content for anyone who wants them.
-
-### Ending Sharing
-
-The owner of a document with OpenView enabled can turn it off at any time by choosing Disable
-OpenView from the document's menu.
+CEDAR publishes content to the web through OpenView, which makes a resource readable by anyone
+holding its address, with no CEDAR account required. [OpenView](openview.md) covers publishing a
+resource, reading a published one, and withdrawing it.

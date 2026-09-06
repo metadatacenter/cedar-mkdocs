@@ -47,6 +47,7 @@ nav:
           - user-guide/managing-resources.md
           - user-guide/sharing-resources.md
           - user-guide/artifact-versioning.md
+          - user-guide/openview.md
       - Advanced Topics:
           - user-guide/advanced-topics/index.md
           - Permission Model:
