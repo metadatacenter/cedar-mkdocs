@@ -65,6 +65,7 @@ nav:
           - user-guide/cedar-identifiers-and-iris.md
           - user-guide/working-with-cdes.md
           - user-guide/cedar-for-cadsr.md
+          - Category Permission Model: user-guide/advanced-topics/category-permission-model.md
       - user-guide/pages/faq.md
       - user-guide/pages/glossary.md
 
