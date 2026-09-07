@@ -20,6 +20,15 @@ npx playwright install chromium
 node auth.mjs            # opens a browser; log in to CEDAR; saves storageState.json
 ```
 
+To drive a local stack instead, point `CEDAR_BASE` at it and let `auth.mjs` sign in at the
+Keycloak form with one of the stack's test accounts. The state is saved per host
+(`storageState.<host>.json`), so the production login stays intact.
+
+```bash
+export CEDAR_BASE=https://cedar.metadatacenter.orgx
+CEDAR_LOGIN=<login> CEDAR_PASSWORD=<password> node auth.mjs
+```
+
 ## Run
 
 ```bash
@@ -33,6 +42,39 @@ The CEDAR Controlled Term Tutorial has its own driver with the same flags:
 ```bash
 node term-run.mjs        # builds the Tissue Sample template, writes ../docs/tutorials/term-img/
 ```
+
+### User guide
+
+The user guide's screenshots land in `../docs/img/userguide/`, which also holds hand-captured
+images that are kept, so these runners add to that directory and never wipe it:
+
+```bash
+node manual-run.mjs             # the workspace, Template Designer, Metadata Creator and resource menu
+node manual-run-building.mjs    # the import window
+node manual-run-sharing.mjs     # the Groups page and the Permissions dialog
+```
+
+`manual-run.mjs` builds its content either way, so `--only=` re-captures a few figures without
+re-shooting the set: `building`, `filling`, `overview`, `cards`, `resource-menu`,
+`destination-dialog`, `info-panel`.
+
+```bash
+node manual-run.mjs --only=resource-menu
+```
+
+Every dashboard capture closes the sidebar's CATEGORIES section first, through
+`setCategoriesFilter` in `lib.mjs`. A CEDAR install accumulates categories and a development
+stack carries test ones, which otherwise crowd the figure. The section's open state lives in the
+controller and resets on each page load, so this changes nothing for the account being used.
+
+`manual-run-sharing.mjs` creates a group, adds a second account to it, and grants that account,
+the group and Everyone access to a folder, so it needs two accounts on the same host. Run it
+against a local stack (`CEDAR_BASE` as above); `CEDAR_COLLABORATOR` names the second account
+when it is not the stack's default. It deletes the folder tree and the group afterwards, and a
+re-run first removes a group left behind by an interrupted one.
+
+It captures the dialog twice, on a folder and on a template. The two differ: a folder's dialog
+carries the notice that access reaches the folder's contents, and a template's does not.
 
 ### CEDAR MCP Tutorial
 
@@ -68,6 +110,8 @@ for inspection (teardown still attempts in `finally`).
 | `lib.mjs`    | browser launch, screenshot, toast wait, row/menu helpers |
 | `steps.mjs`  | one function per tutorial section + teardown |
 | `run.mjs`    | orchestrator, CLI flags, failure capture |
+| `manual-steps.mjs`, `manual-run.mjs`, `manual-run-building.mjs` | user-guide captures of the workspace, designer, editor and dialogs |
+| `sharing-steps.mjs`, `manual-run-sharing.mjs` | user-guide captures of the Groups page and the Permissions dialog |
 | `mcp-capture.mjs` | CEE preview URLs → the two MCP tutorial screenshots |
 
 ## Verified selectors & gotchas (live, 2026-07-16)

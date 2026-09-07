@@ -3,7 +3,7 @@
 // shots into docs/img/userguide/.
 import { mkdir } from 'node:fs/promises';
 import { USERGUIDE_IMG_DIR, BASE, BASIC, RICH } from './config.mjs';
-import { gotoFolder, row, openRowMenu, menuItem, enc, waitToast } from './lib.mjs';
+import { gotoFolder, row, openRowMenu, menuItem, enc, waitToast, setCategoriesFilter } from './lib.mjs';
 import { addField, saveTemplate } from './steps.mjs';
 
 const PICKER_CLOSE = '[ng-click="dialogOpen = false"]';   // controlled-term picker ×
@@ -151,6 +151,7 @@ export async function captureNewArtifactForms(page, folderId, artifacts) {
 // The clean workspace overview: the populated folder in list view.
 export async function captureOverview(page, folderId) {
   await gotoFolder(page, folderId);
+  await setCategoriesFilter(page, false);
   await ensureInfoClosed(page);
   await page.waitForTimeout(600);
   await ug(page, 'workspace-overview');
@@ -159,6 +160,7 @@ export async function captureOverview(page, folderId) {
 // The card layout of the same folder.
 export async function captureCards(page, folderId) {
   await gotoFolder(page, folderId);
+  await setCategoriesFilter(page, false);
   await ensureInfoClosed(page);
   await page.waitForTimeout(400);
   await page.locator(TOGGLE_VIEW).click();
@@ -172,6 +174,7 @@ export async function captureCards(page, folderId) {
 // A resource's ⋮ menu, open.
 export async function captureResourceMenu(page, folderId, title) {
   await gotoFolder(page, folderId);
+  await setCategoriesFilter(page, false);
   await ensureInfoClosed(page);
   await openRowMenu(page, title);
   await ug(page, 'resource-menu');
@@ -181,6 +184,7 @@ export async function captureResourceMenu(page, folderId, title) {
 // The Copy to… destination-picker dialog.
 export async function captureDestinationDialog(page, folderId, title) {
   await gotoFolder(page, folderId);
+  await setCategoriesFilter(page, false);
   await ensureInfoClosed(page);
   await openRowMenu(page, title);
   await page.locator('a:visible:has-text("Copy to")').first().click();
@@ -195,6 +199,7 @@ export async function captureDestinationDialog(page, folderId, title) {
 // then closes it to reset the persisted state for later runs.
 export async function captureInfoPanel(page, folderId, selectTitle) {
   await gotoFolder(page, folderId);
+  await setCategoriesFilter(page, false);
   await ensureInfoClosed(page);
   await row(page, selectTitle).click(); // single click selects (double-click opens)
   await page.waitForTimeout(400);

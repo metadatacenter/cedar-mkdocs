@@ -15,7 +15,12 @@ export const OPENVIEW = 'https://openview.metadatacenter.org';
 export const VIEWPORT = { width: 1120, height: 1000 };
 export const DEVICE_SCALE_FACTOR = 2;
 
-export const STORAGE_STATE = resolve(__dirname, 'storageState.json');
+// One saved login per CEDAR host, so a login to a local stack (CEDAR_BASE set) never
+// overwrites the production one: storageState.json for production, storageState.<host>.json
+// otherwise. Both are git-ignored.
+const HOST = new URL(BASE).hostname;
+export const STORAGE_STATE = resolve(__dirname,
+  HOST === 'cedar.metadatacenter.org' ? 'storageState.json' : `storageState.${HOST}.json`);
 export const IMG_DIR = resolve(__dirname, '..', 'docs', 'tutorials', 'img');
 // User-guide (manual) screenshots. This directory also holds hand-captured
 // images we keep, so the manual runner adds to it and never wipes it.
@@ -57,4 +62,12 @@ export const RICH = {
     disease: { type: 'asthma', pick: 'asthma' },
   },
   publish: { major: 1, minor: 0, patch: 0 },
+};
+
+// Content used by the sharing page of the user guide (manual-run-sharing.mjs). The
+// collaborator is another account on the same CEDAR host, addressed by display name;
+// the default is the local stack's second test account.
+export const SHARING = {
+  groupName: 'ABCD Lab Team',
+  collaborator: process.env.CEDAR_COLLABORATOR ?? 'Test User 2',
 };

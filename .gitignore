@@ -6,7 +6,7 @@ site/
 
 # Screenshot-generation runner (Node/Playwright) — local tooling only
 node_modules/
-runner/storageState.json
+runner/storageState*.json
 runner/failures/
 test-results/
 playwright-report/

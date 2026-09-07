@@ -157,6 +157,24 @@ export async function emptyAndDeleteFolder(page, folderId, folderName, log = con
   log(`  🗑  folder ${folderName}`);
 }
 
+// Open or close the CATEGORIES section of the dashboard's filter sidebar.
+//
+// A CEDAR install accumulates categories, and a development stack carries test ones, which
+// crowd a screenshot of anything else on the dashboard. The section starts open, so the
+// dashboard captures close it and the run reopens it at the end: the state is held in the
+// controller, so it survives navigation within a session.
+export async function setCategoriesFilter(page, open) {
+  const toggle = page.locator(`a[ng-click="dc.toggleFilters('category')"]`).first();
+  if (!(await toggle.count())) return;                      // no category tree on this listing
+  const isOpen = await toggle.locator('i.fa-caret-down').count() > 0;
+  if (isOpen !== open) {
+    await toggle.click();
+    // The clicked anchor keeps focus, and its focus ring would show in the shot.
+    await toggle.evaluate(el => el.blur()).catch(() => {});
+    await page.waitForTimeout(400);
+  }
+}
+
 // Parse the artifact/folder IRI out of a CEDAR editor/dashboard URL.
 export function idFromUrl(url) {
   const m = url.match(/(templates\/edit\/|instances\/(?:create|edit)\/|folderId=)(.+?)(?:\?|$)/);
