@@ -1,231 +1,192 @@
 # Sharing Resources
 
-CEDAR offers several ways to share content, with group and permission management for its
-artifacts and a web-sharing service called OpenView.
+A resource in CEDAR, whether a folder, a template, an element, a field, or a metadata instance,
+starts out reachable only by its owner. To let other people see or work on it, you grant them a
+role on the resource, or on a folder that contains it. Sharing rests on those roles, on the
+Permissions dialog that assigns them, on groups that let you grant access to a whole team at
+once, and on ownership. To publish a resource to the open web, for readers without a CEDAR
+account, use [OpenView](openview.md) instead.
 
-## Creating Groups
+The Workbench applies the rules of the
+[CEDAR permission model](advanced-topics/permission-model/index.md). That specification is the
+authority on what each role permits. The Permissions dialog and the Groups page put it to work.
 
-### What Are Groups?
+## Roles and the Owner
 
-A group is a set of people who share the same access to particular content. If you want your
-whole team to see the metadata it produces, put that metadata in a folder and share the folder
-with a group of your teammates. You might also use a group to make metadata visible to a team of
-curators once it is ready for review. Any time a set of people should have equal access, read or
-write, to some content, use a group.
+CEDAR has three roles for access to a resource. Each can be given to a user or to a group, and
+giving one is called a grant.
 
-### Sharing with Everybody
+| Role | What it permits |
+|---|---|
+| **Viewer** | Read the resource. On a folder, see what it contains. |
+| **Editor** | Everything a Viewer can do, plus change the resource's content and descriptive metadata and delete it. On a folder, create resources in it or copy resources into it. |
+| **Manager** | Everything an Editor can do, plus change who has access, move the resource, and enable or disable OpenView for it. |
 
-Suppose you have created an element and want everyone in CEDAR to use it. CEDAR has a built-in
-group called Everyone; share your content with it for reading and every CEDAR user can find and
-view it.
+The roles are cumulative, so a Manager is also an Editor and a Viewer. The line between Editor
+and Manager is deliberate. An Editor can change what a resource says but not who can reach it.
+[Roles and Grants](advanced-topics/permission-model/roles-and-grants.md) lists every capability
+of every role, and [Required Authority](advanced-topics/permission-model/required-authority.md)
+gives the minimum role for each operation.
 
-Open the sharing window as described in [Sharing for Reading and Writing](#sharing-for-reading-and-writing),
-then start typing the name of the Everyone group. Several groups may appear; pick the one you
-want.
+Every resource also has exactly one **owner**, the user who created it. A copy belongs to
+whoever made the copy. The owner has every Manager capability and is the only user who can hand
+the resource to a new owner. Ownership is recorded apart from the roles, so the owner's row in
+the Permissions dialog carries no role. A group cannot own a resource.
 
-![](../img/userguide/share-settings-find-your-group-20190909.png){:width="75%" class="centered"}
+### Access Through Folders
 
-With the Everyone group selected, choose the kind of sharing. Leave it at the default, "can
-read", which is strongly recommended.
+A role granted on a folder applies to every resource inside it, through every level of nested
+folders. Granting a team the Editor role on one project folder is therefore the usual way to let
+it work on many resources at once. Access flows down the folder tree only. Holding a role on a
+resource reveals nothing about the folder that holds it or about its neighbors.
 
-![](../img/userguide/share-with-everyone-group-20190909.png){:width="75%" class="centered"}
+Owning a folder gives you the Manager role on everything in it, without making you the owner of
+those resources. Moving a resource keeps its owner and its own grants, but the grants of the old
+location stop applying and those of the new location begin to. When several grants apply to one
+user, the most capable role wins, and no grant ever reduces the access another grant supplies.
+[Access to Resources](advanced-topics/permission-model/access-to-resources.md) states the full
+evaluation order.
 
-Click OK. The group then appears in the right-hand panel with its permission.
+## The Permissions Dialog
 
-![](../img/userguide/shared-with-everyone-group-20190909.png){:width="75%" class="centered"}
+**Permissions…** on a resource's menu, the vertical dots (**⋮**) at the right of its row, opens
+the dialog. The command is available to the resource's owner and to anyone with the Manager role
+on it, and grayed out for everyone else.
 
-To share with a different group, such as the CEDAR Dev Team, choose it instead after typing the
-start of its name.
+![](../img/userguide/permissions-menu.png){:width="75%" class="centered"}
 
-### Creating a New Group
+The dialog names the resource and its type. On a folder, a notice reminds you that whatever you
+grant here applies to the folder's contents as well. The table under **Access on this resource**
+lists the owner and every role assigned directly to this resource. Roles that reach the resource
+through a containing folder are not listed, so to learn who else can reach it, look at the
+folders above it.
 
-If the group does not exist yet, type its name in the box labeled 'enter new group name' rather
-than choosing an existing one. Here the name is "ABCD Lab Team".
+![](../img/userguide/permissions-dialog.png){:width="75%" class="centered"}
 
-![](../img/userguide/share-settings-create-group-20190909.png){:width="40%" class="centered"}
+Every change made in the dialog is saved as soon as you make it. **Done** closes the dialog and
+refreshes the workspace.
 
-Press Return to create the group, then give it read or write access by clicking OK.
+### Granting Access
 
-![](../img/userguide/group-created-ready-to-ok-20190909.png){:width="40%" class="centered"}
+Under **Add users or groups**, start typing a name into the **User or group** box. Users and
+groups that match appear as you type, and you pick one. Choose a role, Viewer unless you change
+it, and click **Add**. The new grant joins the table.
 
-### Modifying Groups
+![](../img/userguide/permissions-add-user.png){:width="75%" class="centered"}
 
-Click the blue Group settings link (the green arrow below).
+Repeat for each person or group. The **Type** column distinguishes a user, a group that you or a
+colleague created, and the built-in group Everyone.
 
-[//]: # (![]&#40;../img/userguide/group-settings-xselector-20190909.png&#41;{:width="75%" class="centered"})
+![](../img/userguide/permissions-access-list.png){:width="75%" class="centered"}
 
-A window opens in which you re-select the group to modify.
+### Sharing with Everyone
 
-![](../img/userguide/group-settings-empty-20190909.png){:width="75%" class="centered"}
+The built-in group **Everyone** contains every CEDAR user. Granting it the Viewer role makes a
+resource readable by anyone who is signed in, and the resource then appears under *Shared with
+Everyone* in the left pane of every user's workspace. Everyone can hold no role other than
+Viewer, so nobody can open a resource to editing by all users at once. The grant reaches
+signed-in users only. Readers without an account need [OpenView](openview.md).
 
-Choose the group, and its members appear.
+### Changing and Removing Access
 
-![](../img/userguide/group-settings-selected-group-20190909.png){:width="75%" class="centered"}
+To change a grant, choose another role in its row. To remove one, click the trash icon at the
+end of the row. Both take effect at once. Removing a grant removes only that grant. A user who
+also belongs to a group with access, or who holds a role on a containing folder, keeps the
+access those grants supply.
 
-To add someone, start typing their name in the Add people box, select it from the list, and
-click OK. To remove someone, click the X by their name. The Detailed info link below the box on
-the right shows more about the group, some of which you can edit.
+Revocation applies immediately to every access check. The lists and search results that show a
+user their resources come from a search index, which can take a little longer to reflect the
+change.
 
-![](../img/userguide/group-settings-detailed-info-20190909.png){:width="75%" class="centered"}
+### Transferring Ownership
 
-### Group Administration
+Only the owner can transfer ownership, and only to a user. In the new owner's row, check the box
+in the **Owner** column. The dialog asks you to confirm, because you may lose your own access to
+the resource.
 
-You can make several people administrators of a group by checking the box next to each name in
-the People list.
+![](../img/userguide/permissions-transfer-ownership.png){:width="75%" class="centered"}
 
-## How Permissions Work
+Once you confirm, the other user becomes the owner. Any direct grant that user held on the
+resource is removed, since ownership supersedes it, and all other grants stay as they were. You
+keep only the access that other grants still give you, such as a role through a group or a
+containing folder, or ownership of a containing folder. The dialog then closes, since you may no
+longer be able to manage the resource.
+[Ownership Transfer](advanced-topics/permission-model/ownership-transfer.md) covers the
+remaining cases.
 
-CEDAR's access privileges raise a few common questions:
+## Groups
 
-1. How do I keep my files private, or make them public?
-2. How can someone collaborate with me on many files?
-3. Why can't I save metadata where its template is?
-4. How can I tell who else can see my file?
-5. Why can't I see some shared files just after my first login?
+A group is a named set of CEDAR users. A role granted to a group applies to every current
+member, so someone who joins the group gains that access and someone who leaves it loses it. Use
+a group whenever a set of people should have the same access to some content, such as a lab team
+or a set of curators.
 
-The answers are at the end of this section.
+Groups have a page of their own. Open the menu at the top right of the Workbench, the vertical
+dots (**⋮**) next to your user icon, and choose **Groups**.
 
-### Permission Types
+![](../img/userguide/header-more-menu.png){:width="75%" class="centered"}
 
-To control access to a resource, what matters is whether a given user can, for that node:
+### Creating a Group
 
-- read it,
-- write it,
-- publish it,
-- create a draft version of it,
-- change its permissions (sharing), or
-- change its owner.
+On the **Create group** tab, enter a name and click **Create group**. You become the group's
+first member and its Group Administrator. A group name must be unique across CEDAR.
 
-CEDAR computes these on the fly. They are not stored on nodes but derived, when needed, from
-relationships such as the folder hierarchy and from properties. A helpful rule of thumb: you
-need only one grant of a permission on a resource to perform that operation.
+![](../img/userguide/groups-create.png){:width="75%" class="centered"}
 
-### Permission Rules
+### Managing a Group
 
-The rules below speak of a resource, meaning a template, element, field, or metadata instance,
-but they apply to folders too. For practical reasons, the CEDAR system administrator can perform
-all six operations.
+On the **Manage groups** tab, type the group's name into **Find a group** and pick it. The page
+then shows the group's name and description, which a Group Administrator can edit and **Save**,
+and its members.
 
-#### Who Can Change the Owner of a Resource?
+![](../img/userguide/groups-manage.png){:width="75%" class="centered"}
 
-Only the owner. Each resource has exactly one owner.
+To add someone, search for them under **Add a member** and click **Add member**. To remove
+someone, click the trash icon in their row. The **Group Administrator** checkbox in each row
+marks the members who may change the group's name, membership, and administrators. Every other
+member can view the group but not change it. A group must always have at least one Group
+Administrator, so the last one can neither be removed from the group nor lose the role.
 
-#### Who Can Change a Resource's Permissions?
+The trash icon beside the group's details deletes the whole group. Every grant that named the
+group stops applying to its former members, though a member may still have access through
+another grant. The built-in group Everyone cannot be changed or deleted.
+[Group Administration](advanced-topics/permission-model/group-administration.md) states the
+rules for groups in full.
 
-Permissions are changed through the resource's Share menu. To change them, the user must have
-write access to the resource.
+## Seeing What Is Shared with You
 
-#### Who Can Read a Resource?
-
-At least one of these must hold:
-
-- The user owns the resource, or a folder containing it.
-- The user, or a group they belong to, can read or write the resource or a folder containing it
-  (except the root folder '/' and the users folder '/Users').
-
-For example, because any user can read '/Shared', any user can read everything beneath it. This
-is also why users cannot be given write permission there; it would let them overwrite anyone's
-shared content.
-
-#### Who Can Update a Resource?
-
-Much like reading. At least one of these must hold:
-
-- The user owns the resource, or a folder containing it.
-- The user, or a group they belong to, can write the resource or a folder containing it.
-
-Creating a resource is similar but simpler, since a user cannot own or write something that does
-not exist yet. To create a resource (with the **New+** icon at the upper left of your
-workspace), one of these must hold:
-
-- The user owns some folder above the new resource.
-- The user can write some folder above the new resource.
-
-No one can write or create resources directly in '/', '/Users', or '/Shared'. Copying or moving
-a resource into a folder needs the same permission as creating one there.
-
-#### Who Can Create a Draft Version of a Published Resource?
-
-A draft is a resource that can be overwritten by editing and saving. Everything in CEDAR starts
-as a draft and must be published before this applies. To create a draft from a published
-resource, all of these must hold:
-
-- The user owns the published resource the draft is based on.
-- The resource is a versioned type: a field, element, or template.
-- The resource is the most recent in its version history.
-
-The last rule means you cannot branch a draft from an earlier published version.
-
-#### Who Can Publish a Resource?
-
-Publishing is like releasing software or fixing a document version: a published resource can
-never be modified. Only templates, elements, and fields can be published, and they must be in
-draft state (publishing replaces the draft). All of these must hold:
-
-- The user owns the resource.
-- The resource is in draft state.
-- The resource is a versioned type: a field, element, or template.
-
-### Answers
-
-1. **Keeping files private or making them public.** Resources stay private while they sit in
-   your own user folder and none of their parent folders are shared. To make them public, share
-   them, or a parent folder, with the people or groups who should have access. The Everyone
-   group shares with all CEDAR users.
-2. **Collaborating on many files.** Share the folder that holds them. Granting write on the
-   folder lets collaborators modify everything inside. For a shared project folder under
-   `/Users/Shared/`, ask the CEDAR team to create it, remembering its contents are readable by
-   *all* users.
-3. **Saving metadata where its template is.** Templates often live in a read-only folder, so
-   they cannot be changed. CEDAR saves new metadata to your home folder, from which you can move
-   it to any folder you can write to.
-4. **Seeing who else can access a file.** There is no simple readout; you would have to examine
-   the sharing on the resource and on every folder above it.
-5. **Missing shared files just after first login.** CEDAR resolves permissions through a search
-   index, and that index must be built for your account when you first log in, which takes a
-   while. A later permission change is likewise not reflected instantly; for a large folder, it
-   can take several seconds to propagate.
-
-## Sharing for Reading and Writing
-
-### What It Means
-
-Sharing comes in two kinds: for reading and for writing. Sharing for reading lets people see
-your content but change nothing, not its metadata, its sharing, or its existence. Sharing for
-writing lets them change the content, change its sharing, and even delete it.
-
-Sharing a folder applies the permission to everything inside it, and inside every folder within
-it. Be sure you want everyone to read, or write, **all** of a folder's content before sharing it
-that way.
-
-### How to Share
-
-Find the artifact in your workspace and open its menu (the small green arrow below), then click
-Share (the larger green arrow).
-
-![](../img/userguide/opening-share-menu-20190909.png){:width="75%" class="centered"}
-
-Type a person's or a group's name; matches appear as you type, and you select the one you want.
-
-![](../img/userguide/sharing-with-person-20190909.png){:width="75%" class="centered"}
-
-The chosen name appears with the default permission, read. To allow writing, or (as owner) to
-reassign ownership, click the down arrow and pick the permission.
-
-![](../img/userguide/sharing-with-person-choose-permission-20190909.png){:width="25%" class="centered"}
-
-Click OK to complete the share.
-
-![](../img/userguide/sharing-with-person-click-ok-20190909.png){:width="25%" class="centered"}
-
-The person now appears in the list of shared permissions on the right.
-
-![](../img/userguide/sharing-with-person-completed-20190909.png){:width="75%" class="centered"}
-
-To share with groups, see [Creating Groups](#creating-groups).
+The left pane of the workspace has two entries for content other people have opened to you.
+*Shared with Me* lists resources shared with you directly or through a group you belong to, and
+*Shared with Everyone* lists those shared with every CEDAR user. Selecting a resource and opening
+the information panel, the **i** icon above the listing, shows its owner and, in the **Access**
+row, the role you hold on it.
 
 ## Sharing Via the Web
 
 CEDAR publishes content to the web through OpenView, which makes a resource readable by anyone
-holding its address, with no CEDAR account required. [OpenView](openview.md) covers publishing a
-resource, reading a published one, and withdrawing it.
+holding its address, with no CEDAR account required. Only the owner or a Manager can enable it.
+[OpenView](openview.md) covers publishing a resource, reading a published one, and withdrawing
+it.
+
+## Common Questions
+
+**How do I keep a resource private, or make it public?** A resource stays private while it sits
+in your own folders and neither it nor any folder above it carries a grant. To open it to every
+CEDAR user, grant the Everyone group the Viewer role. To open it to the web, enable OpenView.
+
+**How can someone collaborate with me on many resources?** Put them in one folder and grant your
+collaborator, or a group, the Editor role on that folder. Grant the Manager role instead if they
+should also share the folder onward or move resources out of it.
+
+**Why can't I save metadata in the folder that holds its template?** Templates are often kept in
+folders their users can only view. Filling out a template creates a new instance, which needs
+the Editor role on the destination folder, so CEDAR saves the instance in your home folder. From
+there you can move it into any folder where you are an Editor.
+
+**How can I tell who else can reach a resource?** The Permissions dialog lists its owner and the
+grants made directly on it. Grants on the folders above it apply as well, so check their dialogs
+too.
+
+**Why does a shared resource not appear right away?** Access itself is granted the moment the
+change is saved. The listings and search results that show the resource are drawn from a search
+index, which can take a few seconds to catch up, and longer for a large folder.
