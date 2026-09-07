@@ -68,7 +68,7 @@ current revision, the error body's `parameters.currentETag` reports its tag. Do 
 that newer tag to the body you had already prepared: retrieve the current representation, reconcile
 the other client's change with yours, and then retry using the ETag that accompanied that body.
 
-Representation-specific tags such as `"7-yaml"`, `"7-yaml-compact"`, `"7-json"`, or
+Representation-specific tags such as `"7-yaml"`, `"7-yaml-compact-v2"`, `"7-json"`, or
 `"7-resource-record"` distinguish byte-different renderings of the same stored revision. They are
 valid `If-Match` values. Always use the value returned with the representation you actually read.
 Weak validators such as `W/"7"` do not satisfy CEDAR's write precondition.

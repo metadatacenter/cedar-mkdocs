@@ -2,7 +2,8 @@
 
 An artifact being authored can be written in a minimal form. Once a repository has assigned its
 identity and metadata, that same stored artifact can be serialized in compact or full form. Compact
-YAML keeps artifact identity but omits repository-recorded metadata; full YAML carries both.
+YAML keeps only the document-root artifact's identity and omits repository-recorded metadata; full
+YAML carries the complete identity and metadata tree.
 
 ## What an Artifact Requires
 
@@ -73,10 +74,12 @@ A minimal document leaves out the `id` of the artifact it describes. It describe
 which a repository will name when it is stored.
 
 Compact YAML is different: it is a lean representation of an existing artifact and retains the
-artifact's `id`, including the assigned IDs of embedded fields and elements when present. It omits
+top-level artifact's `id`. It omits the assigned IDs of embedded fields and elements, along with
 `modelVersion`, version, status, provenance, and child `propertyIri` values. Those omissions make it
 read-only: writing a compact document back would silently regenerate repository state, so the REST
-API rejects it. Use the full form for an update, or omit the root `id` to author minimally.
+API rejects it. Use the full form for an update, or omit the root `id` to author minimally. Readers
+continue to accept older compact documents carrying nested IDs, but a new compact rendering removes
+them.
 
 Semantic references appear in every applicable form because they are data, not the document's own
 identity:

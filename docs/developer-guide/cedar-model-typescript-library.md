@@ -216,4 +216,8 @@ const compactTemplateYaml = yamlWriters
   .getAsYamlString(study, true);
 ```
 
+Compact YAML is a read-only display form. It keeps the top-level artifact ID but omits nested
+artifact IDs and repository metadata; semantic IDs such as controlled-term values and links remain.
+Use full YAML for an edit that will be stored again.
+
 CEDAR's REST APIs accept either serialization. Send JSON Schema or JSON-LD with `Content-Type: application/json`, or send YAML with `Content-Type: application/yaml`. Use the corresponding `Accept` header when the response should use the same representation; JSON is the default. See the [CEDAR REST APIs](cedar-rest-apis/index.md) for routes and content negotiation.
