@@ -19,6 +19,15 @@ branches, and tags across the repositories and publishing to Nexus.
 | `cert` | Create or renew the local certificate authority and domain certificates | `cedarcli cert setup` |
 | `dev` | Prepare a development host, including directories, hostnames, and the Keycloak listener | `cedarcli dev --help` |
 | `prod` | Configure built static frontends for a native production domain | `cedarcli prod --help` |
+| `test` | Run the whole-stack smoke tiers and manage test-owned processes | `cedarcli test e2e` |
+
+`cedarcli test e2e` runs the REST and browser smoke tiers under `cedar-development/ops/e2e` against
+the native stack and records the run against the `develop` heads it tested. Both
+`cedarcli publish train` and `cedarcli release plan` require that record for exactly the source they
+are about to ship, so run it after the last build and restart and before dispatching a train. It
+refuses to start while any managed service is unhealthy or stale. `cedarcli test status` and
+`cedarcli test cleanup` inventory and terminate embedded MongoDB processes left behind by backend
+test runs.
 
 Use `cedarcli check versions` before coordinated publication or release work. `cedarcli env list`
 and `cedarcli env filter <TERM>` provide more detail when diagnosing configuration; sensitive

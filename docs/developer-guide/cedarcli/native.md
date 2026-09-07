@@ -33,7 +33,7 @@ The grouped status table is the authoritative native view. For microservices and
 the managed PID, application port and listener state, health, binary freshness, and cumulative log
 error count. Infrastructure rows show their configured ports and availability in the same table.
 A healthy service whose `Binary` value is `STALE` is still running an older JAR; restart it before
-trusting a smoke test. A PID prefixed with `~` is a verified but unmanaged CEDAR process that restart
+trusting a smoke test, and expect `cedarcli test e2e` to refuse to run until you do. A PID prefixed with `~` is a verified but unmanaged CEDAR process that restart
 can adopt, while `!` marks a foreign listener that native control will not touch.
 
 For scripts and CI checks, `cedarcli native health` provides a simple success or failure result for

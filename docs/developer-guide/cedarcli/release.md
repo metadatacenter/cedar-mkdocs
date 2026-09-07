@@ -107,7 +107,9 @@ commit defines a workflow; missing, unreadable, queued, or running required chec
 with no workflow is advisory because there is no CI contract to query. The question is asked of the
 train commit rather than of whatever `develop` points at now, which matters because a release
 advances `develop` everywhere at once and the runs those pushes trigger can race the parent snapshot
-they resolve against.
+they resolve against. A whole-stack smoke run recorded by `cedarcli test e2e` must also have passed
+both tiers against exactly the train's source commits. The record is kept per set of heads, so a
+rerun against newer heads does not disturb it, and nothing accepts a missing or failed run.
 
 GitHub may briefly return no run while indexing a pushed SHA or transiently return 502/503/504. The
 same bounded probe used by train preflight retries only those cases, naming its repository, SHA,

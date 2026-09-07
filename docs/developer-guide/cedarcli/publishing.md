@@ -68,7 +68,9 @@ The displayed dry-run ID is prospective and is not reserved; the real dispatch a
 Dry-run and real dispatch use the same local preflight. It validates the Maven, model → CEE →
 frontend, and 31-image Docker configuration as one contract; checks GitHub authentication and the
 workflow plus CI for every exact remote `develop` SHA that defines one; requires the train slot to
-be idle; rejects dirty, unpushed, or remote-diverged source; and rejects an ID collision. It also
+be idle; rejects dirty, unpushed, or remote-diverged source; requires a passing whole-stack smoke
+run, recorded by `cedarcli test e2e`, against exactly the `develop` heads the train would capture;
+and rejects an ID collision. It also
 reads the live Nexus service and writable status, the
 Release-policy `cedar-maven-dev` repository root, npm identity, and Docker Registry v2 token flow.
 It takes credentials from the environment or the `bmir-nexus-releases` server in
