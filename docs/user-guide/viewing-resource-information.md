@@ -26,7 +26,7 @@ or select the artifact and use the resource menu (*⋮*) to select Open.
 Both techniques work whether you are in search or browse mode.
 
 You will be shown a viewing window that lets you navigate throughout the artifact,
-open and close sections of metadata instances, and if you have write permission,
+open and close sections of metadata instances, and if you hold the Editor role,
 make changes to the document. 
 
 This is also the view which enables seeing the raw artifact content inside CEDAR.
@@ -92,13 +92,13 @@ The artifact is saved only when you click the Save button; it will not be saved 
 When the artifact opens, you will see a formatted view of its content.
 You can navigate throughout the artifact,
 in some cases open and close sections of the document, 
-and if you have write permission, make changes to the document. 
+and if you hold the Editor role, make changes to the document. 
 
 #### Artifact Headers
 
 At the top of the view, you will see the name of the artifact, 
 an identifier field, and the artifact description. 
-All three fields can be modified by a user with write permission on the artifact.
+All three fields can be modified by a user who holds the Editor role on the artifact.
 
 To the left of the artifact name is a left arrow. 
 If you click on this left arrow, CEDAR will return to the previous folder view.

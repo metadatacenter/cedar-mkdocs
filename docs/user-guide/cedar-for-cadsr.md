@@ -190,7 +190,7 @@ If you fill out your template and click the SAVE button, the {{ page.cedarw }} w
 
 If you want to organize your templates using folders, you can create new folders by clicking the "New +" button at the top left and selecting Folder from the resulting dropdown menu. Once you have your desired folder structure in place, you can click on the More buttons associated with your templates and select the "Copy to..." and/or "Move to..." menu items to relocate your templates:
 
-![More menu for artifacts](../img/userguide/cadsr/more-menu.png)<br />
+![More menu for artifacts](../img/userguide/resource-menu.png)<br />
 
 The More menu also contains options for renaming and deleting your templates.
 
@@ -198,15 +198,17 @@ The More menu also contains options for renaming and deleting your templates.
 #### Step 6 - Share your template
 <a name="share-template"></a>
 
-When you create a template in your workspace or inside of a personal folder structure, you are the only person that can view and edit your template. The {{ page.cedarw }} facilitates the ability to grant other users and groups of users the ability to view and/or edit your templates.
+When you create a template in your workspace or inside of a personal folder structure, you are the only person that can view and edit your template. The {{ page.cedarw }} lets you grant other users, and groups of users, access to your templates.
 
-If you wish to share your template with another user or group, click the More icon and select the "Share..." menu item to bring up the "Share settings" modal dialog:
+If you wish to share your template, click the More icon and select the "Permissions..." menu item to bring up the Permissions dialog:
 
-![Share settings modal dialog](../img/userguide/cadsr/share-settings-modal.png)<br />
+![Permissions dialog for a template](../img/userguide/permissions-dialog-template.png)<br />
 
-Use the "With people" section to locate other users with whom you would like to share your template. After selecting a user name, you can use the dropdown on the right hand side of the user name to specify whether the user has read, write, or owner privileges for your template.
+Under "Add users or groups", type a name to find the user or group you want, choose a role for them, and click Add. The role decides what they can do: a Viewer can read the template, an Editor can also change it, and a Manager can additionally change who else has access. The table below lists the template's owner and everyone you have added, and you can change or remove a role there at any time.
 
-Use the "With groups" section to search for group names with whom you would like to share your template. The same read, write, and owner privileges are available to groups.
+To hand the template to someone else, check the box in the Owner column of their row. Only the owner can transfer ownership, and only to a user, since a group cannot own a template.
+
+[Sharing Resources](sharing-resources.md) covers the dialog, groups, and the roles in full.
 
 
 <!-- ## Modifying CDEs using the copy method
@@ -352,7 +354,7 @@ When forms are imported into the {{ page.cedarw }}, the resulting templates are 
 
 Published templates are unmodifiable. If you wish to make changes to an imported template, you first need to make a copy of the template. Click the More menu (three vertical dots), select Copy to..., and save a copy of the template to a location of your choice.
 
-![More menu for a template](../img/userguide/cadsr/template-more-menu.png)<br />
+![More menu for a template](../img/userguide/resource-menu.png)<br />
 
 The copied template will not have a published status and will allow you to make any desired modifications:
 

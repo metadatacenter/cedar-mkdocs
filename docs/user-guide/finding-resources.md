@@ -16,7 +16,7 @@ A search can return more resources than you want to scan. CEDAR groups resources
 sets by ownership and sharing: resources you created, under the **Workspace** tab; resources
 shared with you; and public resources shared with everyone.
 
-To search within one set, click it (for example, **Shared With Everybody**) and type the
+To search within one set, click it (for example, **Shared with Everyone**) and type the
 search string as before. CEDAR shows only the resources in that set whose label, version, or
 description matches.
 

@@ -3,19 +3,21 @@
 In CEDAR, resources are the artifacts (templates, elements, fields, and metadata instances)
 and the folders that hold them. You manage them from your
 [workspace](your-cedar-workspace.md). Management covers copying, moving, renaming, and deleting
-resources, and setting their sharing permissions.
+resources, and setting who can reach them.
 
 To fill out metadata for a template, the **Populate** command opens the Metadata Creator set
 up for that template. To edit an artifact, including a filled-out instance, the **Open**
 command opens the right tool: the Template Designer for templates, elements, and fields, and
 the Metadata Creator for instances. For a folder, **Open** shows that folder in the middle
-pane. Other commands, such as Publish, Create Version, and Submit, are covered in their own
-sections of this guide.
+pane. The version commands are covered in [Artifact Versioning](artifact-versioning.md), and the
+OpenView commands in [OpenView](openview.md).
 
 Every command lives on a resource's menu, opened by the vertical dots (the kebab menu, **⋮**)
-at the right of the resource. From it you can move, copy, rename, delete, and share the
-resource. A grayed-out item, such as Copy…, is unavailable for that resource. If *every* item
-is grayed out, no resource is selected, or there is a permissions inconsistency.
+at the right of the resource. From it you can move, copy, rename, and delete the resource, and
+set who can reach it. A grayed-out item is unavailable for that resource, such as Copy folder
+Id on an artifact, which only folders have, or Create version on a template that has never been
+published. If *every* item is grayed out, no resource is selected, or there is a permissions
+inconsistency.
 
 ## Choosing a Destination
 
@@ -31,24 +33,26 @@ display; with one highlighted, that folder is the destination.
 
 ### Copy To
 
-After choosing **Copy to…**, select the destination folder and click COPY. Copying needs read
-permission on the resource, and write permission on the destination. You can copy any artifact
-to a folder you can write to, but you cannot copy a whole folder in one command.
+After choosing **Copy to…**, select the destination folder and click COPY. Copying needs the
+Viewer role on the resource and the Editor role on the destination. You can copy any artifact
+to a folder where you are an Editor, but you cannot copy a whole folder in one command.
 
 ### Move To
 
-After choosing **Move to…**, select the destination folder and click MOVE. Moving needs write
-permission on the resource. You can move any artifact or folder to a folder you can write to.
+After choosing **Move to…**, select the destination folder and click MOVE. Moving needs the
+Manager role on the resource and the Editor role on the destination. You can move any artifact
+or folder to a folder where you are an Editor.
 
 ## Rename
 
-After choosing **Rename…**, enter the new name. Renaming needs write permission on the
+After choosing **Rename…**, enter the new name. Renaming needs the Editor role on the
 resource.
 
-## Share
+## Permissions
 
-The **Share…** command opens the sharing window, where you handle all sharing and group
-management. See [Sharing Resources](sharing-resources.md) for details.
+The **Permissions…** command opens the Permissions dialog, which shows who can reach the
+resource and lets its owner or a Manager grant, change, and remove access. See
+[Sharing Resources](sharing-resources.md) for details.
 
 ## Delete
 

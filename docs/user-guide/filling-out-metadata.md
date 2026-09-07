@@ -55,12 +55,13 @@ template of sorts, an instance profile, with the shared fields already filled in
 Object template, you might save a profile named "MyLab Study Object Metadata name date",
 pre-filled with everything common to every instance.
 
-Make the profile read-only so it is not overwritten by accident, and give everyone who will
-copy it read permission on it or its folder. To create a new instance, copy the profile and
-replace the placeholder parts of the title, such as "name" and "date", with the author and
-date of the copy. The copy carries all the profile's values and is filled out and saved
-normally. See [Sharing Resources](sharing-resources.md) for setting up folders others can write
-to.
+Give everyone who will copy the profile the Viewer role on it or on its folder, which lets them
+read it without changing it. To create a new instance, copy the profile and replace the
+placeholder parts of the title, such as "name" and "date", with the author and date of the copy.
+The copy carries all the profile's values and is filled out and saved normally. Copying needs
+the Editor role on the destination folder, so the people who use the profile need that role
+somewhere to save their copies. See [Sharing Resources](sharing-resources.md) for granting
+it.
 
 ### From the API
 

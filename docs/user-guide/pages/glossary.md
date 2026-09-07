@@ -126,9 +126,9 @@ allows users to search, browse, and manage CEDAR resources.
 
 ---
 
-**share**: allow a user or group of users to have access permissions (read-only, 
-or read + write) to an artifact or folder (folder access permissions are
-inherited recursively to all content in that folder).
+**share**: grant a user or group the Viewer, Editor, or Manager role on an artifact or
+folder. A role granted on a folder applies to everything the folder contains, at every
+level of nesting.
 
 ---
 

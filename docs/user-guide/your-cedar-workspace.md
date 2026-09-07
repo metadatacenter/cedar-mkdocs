@@ -12,7 +12,7 @@ pane between this list and a card view.
 
 **The links on the left** choose which resources appear. *Workspace* is your own home folder,
 *Shared with Me* is content shared with you or with a team you belong to, *Shared with
-Everybody* is content shared with every CEDAR user, and *Community Folders* gathers folders
+Everyone* is content shared with every CEDAR user, and *Community Folders* gathers folders
 shared by CEDAR communities. Above the pane, a location string shows the folder you are in;
 click a folder in it to move up the hierarchy.
 
