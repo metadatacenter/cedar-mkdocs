@@ -38,6 +38,9 @@ try {
   stepName = 'capture-groups';
   await G.captureGroups(page, folder.folderId);
 
+  stepName = 'capture-group-confirmations';
+  await G.captureGroupConfirmations(page);
+
   stepName = 'capture-folder-permissions';
   await G.captureFolderPermissions(page, folder.folderId, SUBFOLDER);
 

@@ -21,6 +21,7 @@ const CREATE_TAB = '#create-group-tab';
 const GROUP_FINDER = '#group-selector';               // "Find a group" typeahead
 const GROUP_NAME = '#group-name';                     // details form; present once a group is selected
 const MEMBER_ROW = '.groups-member-row';
+const ADMIN_CHECKBOX = '.groups-admin-control input';   // Group Administrator, one per member row
 const NEW_GROUP_NAME = '#new-group-name';
 const NEW_MEMBER = '#new-group-member';               // "Add a member" typeahead
 const DELETE_GROUP = 'button.groups-delete-button';
@@ -156,6 +157,34 @@ export async function captureGroups(page, folderId) {
   await toastsGone(page);
   await page.mouse.move(40, 600); // no tooltip in the shot
   await ug(page, 'groups-manage');
+}
+
+// The Groups page confirms both changes that affect who controls a group: assigning or
+// removing a Group Administrator, and deleting the group. Both confirmations are captured from
+// the group captureGroups left behind, and both are cancelled, so the group survives for the
+// caller to tear down and the membership stays as groups-manage.png shows it.
+export async function captureGroupConfirmations(page, name = SHARING.groupName) {
+  await gotoGroups(page);
+  if (!(await findGroup(page, name))) throw new Error(`the group ${name} was not offered by Find a group`);
+
+  // The collaborator's checkbox is the one that can move: the sole administrator's is disabled,
+  // which is how the page keeps a group from losing its last one.
+  const memberRow = page.locator(MEMBER_ROW).filter({ hasText: SHARING.collaborator }).first();
+  const checkbox = memberRow.locator(ADMIN_CHECKBOX).first();
+  if (await checkbox.isDisabled()) throw new Error(`the Group Administrator checkbox for ${SHARING.collaborator} is disabled`);
+  await checkbox.click();
+  await page.getByText(/Assign Group Administrator/i).waitFor({ timeout: 10_000 });
+  await settle(page, 600);
+  await ug(page, 'groups-administrator-confirm');
+  await confirmButton(page, 'Cancel');
+  await settle(page, 600);
+
+  await page.locator(DELETE_GROUP).first().click();
+  await page.getByText(/Delete this group/i).waitFor({ timeout: 10_000 });
+  await settle(page, 600);
+  await ug(page, 'groups-delete-confirm');
+  await confirmButton(page, 'Cancel');
+  await settle(page, 600);
 }
 
 // ── Permissions dialog ────────────────────────────────────────────────────

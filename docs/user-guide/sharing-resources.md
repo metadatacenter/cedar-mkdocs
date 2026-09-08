@@ -142,14 +142,26 @@ and its members.
 ![](../img/userguide/groups-manage.png){:width="75%" class="centered"}
 
 To add someone, search for them under **Add a member** and click **Add member**. To remove
-someone, click the trash icon in their row. The **Group Administrator** checkbox in each row
-marks the members who may change the group's name, membership, and administrators. Every other
-member can view the group but not change it. A group must always have at least one Group
-Administrator, so the last one can neither be removed from the group nor lose the role.
+someone, click the trash icon in their row. Every member can view the group, and the
+**Group Administrator** checkbox in each row marks those who may also change its name,
+membership, and administrators.
 
-The trash icon beside the group's details deletes the whole group. Every grant that named the
-group stops applying to its former members, though a member may still have access through
-another grant. The built-in group Everyone cannot be changed or deleted.
+Granting that role, or taking it away, asks you to confirm and names both the member and the
+group. Nothing is saved until you confirm, so the checkbox stays as it was if you cancel.
+
+![](../img/userguide/groups-administrator-confirm.png){:width="75%" class="centered"}
+
+A group must always have at least one Group Administrator, so the last one can neither be
+removed from the group nor lose the role. Their checkbox and their trash icon are disabled, and
+hovering over either says why.
+
+The trash icon beside the group's name and description deletes the whole group, after a
+confirmation that states the consequence. Every grant that named the group stops applying to
+its former members, though a member may still have access through another grant.
+
+![](../img/userguide/groups-delete-confirm.png){:width="75%" class="centered"}
+
+The built-in group Everyone cannot be changed or deleted.
 [Group Administration](advanced-topics/permission-model/group-administration.md) states the
 rules for groups in full.
 

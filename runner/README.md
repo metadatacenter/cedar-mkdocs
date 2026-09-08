@@ -74,7 +74,10 @@ when it is not the stack's default. It deletes the folder tree and the group aft
 re-run first removes a group left behind by an interrupted one.
 
 It captures the dialog twice, on a folder and on a template. The two differ: a folder's dialog
-carries the notice that access reaches the folder's contents, and a template's does not.
+carries the notice that access reaches the folder's contents, and a template's does not. It also
+captures the two confirmations the Groups page raises, over a Group Administrator role and over
+deleting a group, and cancels both, so the group it made survives for teardown and the
+membership stays as the figure above it shows.
 
 ### CEDAR MCP Tutorial
 
