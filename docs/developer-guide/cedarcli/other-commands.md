@@ -14,7 +14,7 @@ branches, and tags across the repositories and publishing to Nexus.
 | Group | Purpose | Starting Point |
 | --- | --- | --- |
 | `repo` | Explain which repositories cedarcli manages | `cedarcli repo config` |
-| `check` | Check repository presence and version consistency | `cedarcli check repos` |
+| `check` | Check repository presence, version consistency, and OpenAPI contract completeness | `cedarcli check repos` |
 | `env` | Inspect the selected mode and effective settings without exposing credentials | `cedarcli env status` |
 | `cert` | Create or renew the local certificate authority and domain certificates | `cedarcli cert setup` |
 | `dev` | Prepare a development host, including directories, hostnames, and the Keycloak listener | `cedarcli dev --help` |
@@ -29,7 +29,9 @@ refuses to start while any managed service is unhealthy or stale. `cedarcli test
 `cedarcli test cleanup` inventory and terminate embedded MongoDB processes left behind by backend
 test runs.
 
-Use `cedarcli check versions` before coordinated publication or release work. `cedarcli env list`
+Use `cedarcli check versions` before coordinated publication or release work. Run
+`cedarcli check openapi` after changing any REST resource annotation and before dispatching a train,
+because a response that describes no content generates a client operation with no type. `cedarcli env list`
 and `cedarcli env filter <TERM>` provide more detail when diagnosing configuration; sensitive
 values remain redacted.
 
