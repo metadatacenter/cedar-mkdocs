@@ -52,6 +52,9 @@ retrieve it through the `templates` route when an integration needs the definiti
 instance. A template-instance `GET` can also use the `format` query parameter with `jsonld`, `json`,
 or `rdf-nquad`; an explicit `format` takes precedence over the `Accept` header.
 
+The response also carries an `ETag` header identifying the revision just read. Retain it alongside
+the body when the retrieved artifact is about to be changed.
+
 ## Create and Validate Metadata
 
 An instance must name its template in `schema:isBasedOn`. CEDAR also supplies its repository
@@ -92,3 +95,22 @@ resource type, then send it to `templates` or `template-elements`. The
 [CEDAR Artifact Library](../cedar-artifact-library.md) and
 [CEDAR Model TypeScript Library](../cedar-model-typescript-library.md) can construct those artifacts
 without requiring application code to assemble the model by hand.
+
+## Update an Existing Artifact
+
+Replacing a stored artifact uses `PUT` on the route that retrieved it, and the request must carry
+the artifact's current revision in an `If-Match` header:
+
+```bash
+curl -X PUT "$CEDAR_API/templates/<URL_ENCODED_TEMPLATE_ID>" \
+  -H "Authorization: apiKey $CEDAR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H 'If-Match: "7"' \
+  --data-binary @updated-template.json
+```
+
+The server replaces the artifact only if it still holds the revision that validator identifies, so
+a concurrent change by another client produces `412 Precondition Failed` instead of a lost update.
+Deleting an artifact requires the same header, and an artifact's permissions are revisioned
+separately from its content. [ETag Concurrency](etag-concurrency.md) gives the full rules, including
+the responses a missing or stale validator produces.
