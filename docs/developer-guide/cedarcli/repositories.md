@@ -41,7 +41,11 @@ cedarcli git pull
 
 These commands do not discard local work. If a repository cannot switch or pull cleanly, cedarcli
 reports it and continues the estate-wide scan. Resolve those repositories individually before
-building.
+building. The command returns a nonzero exit status if any selected repository fails, including
+when Git prints no error text. Scripts should check that status before starting a dependent build.
+
+Checkout treats the branch name as a literal Git argument. Quote branch names containing shell
+metacharacters when entering them in your shell.
 
 ## See What Needs Attention
 
@@ -67,6 +71,9 @@ estate.
 When several repositories need separate work, run `cedarcli git next`. Each invocation moves to
 the next checkout reported by the status scan, making it easier to review and resolve them one at a
 time.
+
+A failed status scan does not replace the navigation record used by `git next`. Resolve the scan
+failure and run `cedarcli git status` successfully before using that record to navigate again.
 
 ## Commit at the Right Scope
 

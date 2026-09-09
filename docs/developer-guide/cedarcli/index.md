@@ -14,6 +14,15 @@ This manual assumes that `cedarcli` is installed. If it is not, follow the
 [cedarcli installation steps](../../install-docker/cli-and-scripts.md) in the Docker installation
 guide.
 
+The `cedarcli` alias sources `"$CEDAR_HOME/cedar-cli/cli.sh"`. The wrapper runs the CLI in its
+own Python environment and preserves your shell's environment and working directory, except when
+a successful Git navigation command deliberately changes directory. Commands such as
+`build this` and `publish this` therefore operate on the repository you are in.
+
+If environment setup or a command fails, the wrapper returns a nonzero exit status without closing
+your shell. Scripts can use that status to stop dependent work. Maven cache cleanup and the
+cheat-sheet opener also report failures through their exit status.
+
 ## How the Manual Is Organized
 
 The manual follows the path a change takes through CEDAR.

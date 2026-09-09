@@ -22,6 +22,20 @@ cedarcli release resume     # verify the recorded boundary and continue
 cedarcli release abandon    # retain and close a local-only superseded attempt
 ```
 
+## One Modifying Command at a Time
+
+`release start`, `release resume`, and `release abandon` hold an exclusive process lock in the
+release state directory for their entire operation, including preflight checks and automatic
+retries. A second modifying command using the same state directory refuses immediately. Use
+`cedarcli release status --watch` to follow the existing operation; status remains available while
+the lock is held.
+
+The operating system releases the lock when the command exits, including after a crash. The
+`release.lock` file remains in the state directory, normally `~/.cedar/train-releases/`; its
+presence alone does not mean a release is running. Do not delete it while a release command is
+running, because replacing the file would break the shared lock boundary. After a failed operation,
+follow [When a Phase Fails](#when-a-phase-fails) to resume from the recorded state.
+
 ## The Four Inputs
 
 Every release input is stated explicitly. None is derived, defaulted, or read from the environment,
