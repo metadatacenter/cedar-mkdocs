@@ -60,12 +60,12 @@ nav:
               - user-guide/advanced-topics/permission-model/ownership-transfer.md
               - user-guide/advanced-topics/permission-model/group-administration.md
               - user-guide/advanced-topics/permission-model/openview.md
+          - Category Permission Model: user-guide/advanced-topics/category-permission-model.md
           - user-guide/viewing-resource-information.md
           - user-guide/understanding-the-suggestion-system.md
           - user-guide/cedar-identifiers-and-iris.md
           - user-guide/working-with-cdes.md
           - user-guide/cedar-for-cadsr.md
-          - Category Permission Model: user-guide/advanced-topics/category-permission-model.md
       - user-guide/pages/faq.md
       - user-guide/pages/glossary.md
 
