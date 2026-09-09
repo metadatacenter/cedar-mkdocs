@@ -119,6 +119,7 @@ a well-formed CEDAR template, rendered as YAML:
 type: template
 name: "Tissue Sample"
 description: "A tissue-sample record whose fields are constrained to ontology terms."
+id: "https://repo.metadatacenter.org/templates/940fa702"
 children:
   - key: "sample-id"
     type: text-field
@@ -234,7 +235,8 @@ template, validates it, and renders it:
 ```yaml
 type: instance
 name: "Tissue Sample TS-0001"
-isBasedOn: "https://repo.metadatacenter.org/templates/940fa702-460a-4880-846d-d22cc168ea11"
+id: "https://repo.metadatacenter.org/template-instances/4b2af5ae"
+isBasedOn: "https://repo.metadatacenter.org/templates/940fa702"
 children:
   sample-id:
     value: "TS-0001"
