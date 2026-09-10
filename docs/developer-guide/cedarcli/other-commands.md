@@ -29,6 +29,23 @@ refuses to start while any managed service is unhealthy or stale. `cedarcli test
 `cedarcli test cleanup` inventory and terminate embedded MongoDB processes left behind by backend
 test runs.
 
+`cedarcli check versions` compares the version each repository declares on disk against the version
+most of the estate carries, and reports one row per repository. A repository that does not match is
+classified by how its checkout stands against its remote-tracking branch, because the cause decides
+the remedy. A checkout that is behind its remote holds the remote's version, so it is counted
+separately, reported with `cedarcli git pull` as the fix, and does not fail the command. A checkout
+that is current and still disagrees is a divergence in the estate, and that is what the exit status
+reports. A checkout carrying local commits is never excused by its remote. Where a repository's own
+files disagree with each other, the report names a half-applied bump, which no pull repairs.
+
+Two options adjust it. `--by-file` returns to one row per version-carrying file, which is the view
+that shows which file inside a repository disagrees with its siblings. `--strict` also fails on a
+checkout that is behind, for a caller judging one workspace rather than the estate: a host that
+builds from its own checkout, such as a native production or staging host, gets the wrong binaries
+from a stale clone, and CI runs on a fresh checkout where being behind is never expected. A build
+train needs neither option, because its own preflight already requires every checked-out
+repository's `develop` to equal the live remote `develop`.
+
 Use `cedarcli check versions` before coordinated publication or release work. Run
 `cedarcli check openapi` after changing any REST resource annotation and before dispatching a train,
 because a response that describes no content generates a client operation with no type. `cedarcli env list`
