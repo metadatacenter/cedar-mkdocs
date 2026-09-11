@@ -45,7 +45,7 @@ The frontend servers normally rebuild when source changes. Restart or inspect on
 native command group when needed:
 
 ```bash
-cedarcli native restart ui-workspace
+cedarcli native restart frontend workspace
 cedarcli native logs ui-workspace
 ```
 

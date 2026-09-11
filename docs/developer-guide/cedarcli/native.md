@@ -66,7 +66,7 @@ After changing one backend repository, the normal loop is:
 ```bash
 cd "$CEDAR_HOME/cedar-resource-server"
 cedarcli build this
-cedarcli native restart resource
+cedarcli native restart microservice resource
 cedarcli native logs resource
 ```
 
@@ -74,8 +74,29 @@ Frontend development servers usually rebuild source changes automatically. Resta
 dependencies or process configuration have changed:
 
 ```bash
-cedarcli native restart ui-workspace
+cedarcli native restart frontend workspace
 ```
+
+Restart uses the same application targets:
+
+```bash
+cedarcli native restart microservice repo
+cedarcli native restart microservices
+cedarcli native restart frontend openview
+cedarcli native restart frontends
+cedarcli native restart frontend split-frontends
+cedarcli native restart all
+```
+
+`restart all` restarts all managed applications while infrastructure stays running. The aliases
+`restart microservice all` and `restart frontend all` are also supported. Infrastructure targets
+such as `infra`, `backends` and `keycloak` belong to start/stop and are not restart targets.
+
+For compatibility, bare `restart` still restarts all applications, and flat lists such as
+`restart repo ui-openview` still work. Prefer the grouped syntax in new commands and scripts;
+`frontend openview` identifies the browser app, while `microservice openview` identifies the Java
+service. In hybrid mode, only frontend restart targets are allowed. A failed stop aborts restart
+before the start step; the CLI returns the controller's failure status.
 
 ## Stop CEDAR
 

@@ -337,7 +337,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     panel(c, 1, 1, "native", [
         ("status", ORANGE), ("start all | <run_target>", ORANGE),
         ("stop all | <run_target>", ORANGE), "health", "watch",
-        "restart [microservice...]", "logs <microservice>",
+        "restart all | <run_target>", "logs <microservice>",
     ], icon=terminal_icon, icon_scale=0.20)
     docker_panel(c)
 
@@ -345,17 +345,17 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         "java", "project", "parent", "libraries", "clients", "frontends",
     ])
     panel(c, 1, 2, "<run_target>", [
-        "infra", "microservices",
+        "infra [start/stop only]", "microservices",
         ("microservice all", ORANGE), "microservice <microservice>",
-        "frontends", ("frontend all", ORANGE), "frontend <frontend>", "admin",
-        "keycloak / kk",
+        "frontends", ("frontend all", ORANGE), "frontend <frontend>",
+        "keycloak / kk [start/stop]",
     ])
     panel(c, 2, 2, "<frontend>", [
         "main", "openview", "monitoring", "bridging", "content", "workspace",
         "designer",
     ], icon=browser_icon, icon_scale=0.21)
     panel(c, 3, 2, "<microservice>", (
-        ["artifact", "bridge", "group", "impex", "messaging", "monitor", "open"],
+        ["artifact", "bridge", "group", "impex", "messaging", "monitor", "openview"],
         ["repo", "resource", "schema", "submission", "terminology", "user",
          "valuerecommender", "worker"],
     ), span=3)
