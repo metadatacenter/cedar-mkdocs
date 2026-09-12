@@ -108,6 +108,7 @@ nav:
           - cedar-embeddable-editor/validation.md
           - cedar-embeddable-editor/appearance.md
           - cedar-embeddable-editor/security.md
+          - cedar-embeddable-editor/using-the-cef.md
 
   - Developer Guide:
       - developer-overview/index.md
