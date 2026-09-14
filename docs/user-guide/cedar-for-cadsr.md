@@ -74,7 +74,7 @@ The CDE Browser is currently perceived to have richer search capabilities for lo
 
 **Modifying CDE options**
 
-CDEs are imported into the {{ page.cedarw }} with a "published" status. Published artifacts are considered final, which means they can't be modified or deleted. When you add a published CDE to a template, you have the opportunity to edit some common options, e.g.:
+CDEs are imported into the {{ page.cedarw }} with a "published" status. Published artifacts are considered final, which means they can't be modified. When you add a published CDE to a template, you have the opportunity to edit some common options, e.g.:
 
 * required vs. optional
 * specify a default value

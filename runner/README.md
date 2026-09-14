@@ -135,8 +135,8 @@ for inspection (teardown still attempts in `finally`).
   to close (the success toast text collides with the menu item).
 - ✅ **OpenView**: enable on BOTH the template *and* the instance, else the
   public page 401s ("metadata is open… but the corresponding template is not").
-- ✅ **Deletion order**: instances before templates — a published template can't
-  be deleted while an instance of it exists. Deletes are laggy; `deleteRowByName`
+- ✅ **Deletion order**: instances before templates — a template can't be
+  deleted while an instance of it exists. Deletes are laggy; `deleteRowByName`
   verifies by reload-and-recount with retries.
 
 Screenshots land in `../docs/tutorials/img/` and `../docs/tutorials/term-img/`,

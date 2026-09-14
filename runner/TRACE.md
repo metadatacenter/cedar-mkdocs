@@ -111,7 +111,7 @@ RRID · Page Break · Pubmed · Section Break.
 - Each delete: row **⋮ → Delete** → "Are you sure?" → **"Yes, delete it!"**.
 - Then delete the (now-empty) run folder from its parent, same pattern
   ("remove the selected folder?"). Folder must be empty first.
-- **Versioned/published artifacts *can* be deleted** (contrary to the manual).
+- **Versioned/published artifacts *can* be deleted.**
 - **REST API delete is not an option** here: the cedar-artifact-rest MCP
   authenticates as a *different* CEDAR user → HTTP 401 "no write access".
   Teardown must go through the UI (or an API session authed as the owner).

@@ -112,7 +112,7 @@ CEDAR resources occurs.
 ---
 
 **publish**: specify that the status of an artifact is final, and have the user assign a version to it. 
-Published artifacts cannot be modified or deleted.
+Published artifacts cannot be modified.
 
 ---
 
