@@ -64,7 +64,6 @@ nav:
           - Versioning Model:
               - Overview: user-guide/advanced-topics/versioning-model/index.md
               - user-guide/advanced-topics/versioning-model/version-lifecycle.md
-              - user-guide/advanced-topics/versioning-model/reusing-versioned-artifacts.md
               - Managing Versioned Artifacts:
                   - user-guide/advanced-topics/versioning-model/managing-versioned-artifacts/versioning-and-permissions.md
                   - user-guide/advanced-topics/versioning-model/managing-versioned-artifacts/deleting-versions.md
