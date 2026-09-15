@@ -63,12 +63,7 @@ nav:
           - Category Permission Model: user-guide/advanced-topics/category-permission-model.md
           - Versioning Model:
               - Overview: user-guide/advanced-topics/versioning-model/index.md
-              - user-guide/advanced-topics/versioning-model/artifacts-and-versions.md
-              - user-guide/advanced-topics/versioning-model/developing-a-draft.md
-              - user-guide/advanced-topics/versioning-model/publishing-a-version.md
-              - user-guide/advanced-topics/versioning-model/creating-the-next-version.md
-              - user-guide/advanced-topics/versioning-model/starting-a-separate-series.md
-              - user-guide/advanced-topics/versioning-model/version-history.md
+              - user-guide/advanced-topics/versioning-model/version-lifecycle.md
               - user-guide/advanced-topics/versioning-model/reusing-versioned-artifacts.md
               - Managing Versioned Artifacts:
                   - user-guide/advanced-topics/versioning-model/managing-versioned-artifacts/versioning-and-permissions.md
