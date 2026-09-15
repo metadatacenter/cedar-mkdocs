@@ -61,6 +61,19 @@ nav:
               - user-guide/advanced-topics/permission-model/group-administration.md
               - user-guide/advanced-topics/permission-model/openview.md
           - Category Permission Model: user-guide/advanced-topics/category-permission-model.md
+          - Versioning Model:
+              - Overview: user-guide/advanced-topics/versioning-model/index.md
+              - user-guide/advanced-topics/versioning-model/artifacts-and-versions.md
+              - user-guide/advanced-topics/versioning-model/developing-a-draft.md
+              - user-guide/advanced-topics/versioning-model/publishing-a-version.md
+              - user-guide/advanced-topics/versioning-model/creating-the-next-version.md
+              - user-guide/advanced-topics/versioning-model/starting-a-separate-series.md
+              - user-guide/advanced-topics/versioning-model/version-history.md
+              - user-guide/advanced-topics/versioning-model/reusing-versioned-artifacts.md
+              - Managing Versioned Artifacts:
+                  - user-guide/advanced-topics/versioning-model/managing-versioned-artifacts/versioning-and-permissions.md
+                  - user-guide/advanced-topics/versioning-model/managing-versioned-artifacts/deleting-versions.md
+                  - user-guide/advanced-topics/versioning-model/managing-versioned-artifacts/stored-version-information.md
           - user-guide/viewing-resource-information.md
           - user-guide/understanding-the-suggestion-system.md
           - user-guide/cedar-identifiers-and-iris.md

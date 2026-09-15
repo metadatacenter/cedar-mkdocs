@@ -6,3 +6,6 @@ They include the [permission model](permission-model/) for owning, sharing and m
 
 The [category permission model](category-permission-model.md) defines who can browse, use, change
 and control categories.
+
+The [versioning model](versioning-model/index.md) defines drafts, publication and version histories for
+templates, elements and fields.

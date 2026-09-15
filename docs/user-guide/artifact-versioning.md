@@ -1,5 +1,7 @@
 # Artifact Versioning
 
+For the lifecycle rules, see the [CEDAR Versioning Model](advanced-topics/versioning-model/index.md).
+
 As your templates grow and start reusing elements, you will want to update those elements.
 Doing so is a little subtle in CEDAR, especially when you want rigorous version control.
 
