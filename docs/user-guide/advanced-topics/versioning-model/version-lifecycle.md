@@ -12,7 +12,9 @@ and later versions of the same artifact. Its status is either **Draft** or **Pub
 A new CEDAR artifact starts in the **Draft** state at version `0.0.1`. The author can edit and
 save it throughout development. Each save updates the same artifact, so its identifier stays the
 same and its version number does not automatically increase. Individual saves do not appear as
-separate versions in the history.
+separate versions in the history. The normal creation API starts a separate series at Draft `0.0.1`;
+importing a definition does not import its publication authority or attach it to an existing history.
+Lifecycle metadata cannot be changed through an ordinary save.
 
 CEDAR uses the `major.minor.patch` number format from **Semantic Versioning**. The author chooses the
 number to assign to a release. CEDAR does not determine the number from the changes or guarantee
@@ -43,7 +45,9 @@ the next patch number, but the author can choose a higher number. For example, a
 `1.0.0` starts with the suggested number `1.0.1`. The owner can later publish it as `1.0.1`, `1.1.0`
 or another higher version.
 
-Each new draft records the published version it came from as its **predecessor**. Repeating the
+Each new draft initially records the published version it came from as its **predecessor**. Deleting
+a version reconnects the surviving history as described in
+[Deleting Versions](managing-versioned-artifacts/deleting-versions.md). Repeating the
 publish-and-draft process builds a **version series**: a sequence of versions linked to their
 predecessors.
 
@@ -74,7 +78,8 @@ series and the copy can then develop independently.
 As the series grows, CEDAR keeps the current work and the current release visible. Its
 default **Latest** filter shows the newest published version and any draft. Turning the filter off also
 shows older versions. The selected folder, access permissions and other filters still determine
-which results appear.
+which results appear. These filters do not promote an older version when the current one is outside
+the folder or is inaccessible to the user.
 
 The **latest version** is the draft when one exists. Otherwise it is the newest published version.
 The default filter can therefore show two artifacts: the latest version and its published

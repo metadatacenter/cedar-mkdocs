@@ -75,3 +75,17 @@ values remain redacted.
 Certificate replacement deserves particular care. Renew domain certificates with
 `cedarcli cert domains --force`. Replace the CA with `cedarcli cert ca --force` only when you intend
 to update browser trust and regenerate the domain certificates.
+
+## Artifact Versioning
+
+`cedarcli check artifact-versioning` audits the selected stack's graph for missing predecessors,
+branches, non-increasing version numbers, invalid publication states, multiple drafts, disagreement
+between predecessor properties and relationships, and incorrect latest-version flags. It prints a
+JSON report and exits non-zero when it finds a divergence. It reads all schema artifacts, regardless
+of their owners or folders, using the selected profile's database credentials without printing them.
+
+After deploying the lifecycle implementation, `cedarcli check artifact-versioning --apply` repairs
+only unambiguous latest flags and durably queues reindexing. It never guesses missing history or
+repairs a branched series. Review those findings against stored documents and backups separately.
+The inventory checks graph structure; the REST versioning smoke verifies document links, graph
+flags and search results together on newly created templates, elements and fields.
