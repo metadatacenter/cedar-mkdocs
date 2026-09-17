@@ -55,7 +55,10 @@ cedarcli build frontends
 
 cedarcli uses the appropriate build for each frontend, even though the projects do not all share
 the same JavaScript framework or packaging process. During normal frontend development, the running
-development servers then rebuild source changes as you work.
+development servers usually rebuild source changes as you work. Workspace uses a static Node
+server: run `npm run build` in `cedar-workspace` after source edits, then refresh the page.
+The general frontend build includes Workspace’s `npm ci` and `npm run build` in an isolated
+checkout, so it does not replace the running server’s dependency tree.
 
 Workspace and Template Designer also have a deliberately narrow build route while their split
 deployment is being stabilized:
@@ -64,7 +67,8 @@ deployment is being stabilized:
 cedarcli build split-frontends
 ```
 
-That command installs their locked dependencies without touching the other frontends. For a native
+That command builds Workspace’s Angular application and installs Template Designer’s locked
+dependencies without touching the other frontends. For a native
 staging or production deployment, supply the configured Workspace and Designer URLs and generate
 the static trees that nginx serves directly:
 

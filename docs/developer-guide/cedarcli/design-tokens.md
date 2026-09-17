@@ -1,12 +1,13 @@
 # Monitoring Design Token Adoption
 
-`cedarcli check design-tokens` tracks shared styling across the embeddable components:
+`cedarcli check design-tokens` tracks shared styling across the embeddable components and modern Workspace:
 
 | Repository | Components |
 | --- | --- |
 | `cedar-embeddable-editor` | CEE and CEF |
 | `cedar-embeddable-designer` | CED and CEFD |
 | `cedar-embeddable-term-picker` | CETP |
+| `cedar-workspace` | Angular Workspace, account pages and CEE host |
 
 The retiring AngularJS applications are excluded. The default scan visits these repositories when
 present under `CEDAR_HOME`; an explicitly selected repository must exist. Keep the CLI and
