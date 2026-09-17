@@ -14,7 +14,7 @@ branches, and tags across the repositories and publishing to Nexus.
 | Group | Purpose | Starting Point |
 | --- | --- | --- |
 | `repo` | Explain which repositories cedarcli manages | `cedarcli repo config` |
-| `check` | Check repository presence, version consistency, and OpenAPI contract completeness | `cedarcli check repos` |
+| `check` | Check that repositories, versions, published artifacts, CI and served components agree with the source | `cedarcli check repos` |
 | `env` | Inspect the selected mode and effective settings without exposing credentials | `cedarcli env status` |
 | `cert` | Create or renew the local certificate authority and domain certificates | `cedarcli cert setup` |
 | `dev` | Prepare a development host, including directories, hostnames, and the Keycloak listener | `cedarcli dev --help` |
@@ -45,6 +45,21 @@ builds from its own checkout, such as a native production or staging host, gets 
 from a stale clone, and CI runs on a fresh checkout where being behind is never expected. A build
 train needs neither option, because its own preflight already requires every checked-out
 repository's `develop` to equal the live remote `develop`.
+
+The remaining checks each compare a declaration against what exists. `cedarcli check repos`
+reports configured repositories that are absent, and Git clones the configuration does not name.
+`cedarcli check snapshots` compares the Maven snapshot Nexus serves for each publishing repository
+against the head commit on `develop`, which is the condition that leaves every consumer building
+against an artifact nobody shipped. `cedarcli check components` asks the same question of the
+browser applications, whose components reach each other as published npm packages: it measures each
+pin against the component's own history, the bundles a host serves against the packages it locks,
+and the elements a host creates against what those bundles define.
+
+Two checks read continuous integration rather than artifacts. `cedarcli check ci` reports the CI
+state at every `develop` head a train would capture, and `cedarcli check ci-env` compares each Java
+repository's CI environment block against the one its tests require, rewriting the copies that have
+drifted under `--apply`. `cedarcli check main` is separate again: it names any repository whose
+`main` carries commits `develop` does not, which a release would otherwise leave behind.
 
 Use `cedarcli check versions` before coordinated publication or release work. Run
 `cedarcli check openapi` after changing any REST resource annotation and before dispatching a train,

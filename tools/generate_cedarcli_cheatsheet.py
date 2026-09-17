@@ -312,7 +312,8 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
 
     panel(c, 0, 3, "repo", [("config", ORANGE)])
     panel(c, 1, 3, "check", [
-        ("repos", ORANGE), ("versions", ORANGE), "snapshots", "ci", "openapi",
+        ("repos", ORANGE), ("versions", ORANGE), "components", "snapshots",
+        "ci", "ci-env", "openapi", "main",
     ], icon=check_icon, icon_scale=0.24)
     panel(c, 2, 3, "env", [
         ("status", ORANGE), "list [native|docker]",
