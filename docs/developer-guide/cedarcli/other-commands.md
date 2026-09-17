@@ -14,7 +14,7 @@ branches, and tags across the repositories and publishing to Nexus.
 | Group | Purpose | Starting Point |
 | --- | --- | --- |
 | `repo` | Explain which repositories cedarcli manages | `cedarcli repo config` |
-| `check` | Check that repositories, versions, published artifacts, CI and served components agree with the source | `cedarcli check repos` |
+| `check` | Check that repositories, versions, published artifacts, CI, served components and shared styling agree with the source | `cedarcli check repos` |
 | `env` | Inspect the selected mode and effective settings without exposing credentials | `cedarcli env status` |
 | `cert` | Create or renew the local certificate authority and domain certificates | `cedarcli cert setup` |
 | `dev` | Prepare a development host, including directories, hostnames, and the Keycloak listener | `cedarcli dev --help` |
@@ -54,6 +54,11 @@ against an artifact nobody shipped. `cedarcli check components` asks the same qu
 browser applications, whose components reach each other as published npm packages: it measures each
 pin against the component's own history, the bundles a host serves against the packages it locks,
 and the elements a host creates against what those bundles define.
+
+`cedarcli check design-tokens` reports shared-style adoption across CEE/CEF, CED/CEFD and CETP.
+Its `--strict` mode gates new color and typography drift against reviewed baselines, while spacing
+and geometry remain advisory. The retiring AngularJS applications are excluded. See
+[Monitoring Design Token Adoption](design-tokens.md) for options, baseline maintenance and CI use.
 
 Two checks read continuous integration rather than artifacts. `cedarcli check ci` reports the CI
 state at every `develop` head a train would capture, and `cedarcli check ci-env` compares each Java

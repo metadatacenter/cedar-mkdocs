@@ -124,6 +124,7 @@ nav:
           - developer-guide/cedarcli/repositories.md
           - developer-guide/cedarcli/maven.md
           - developer-guide/cedarcli/building.md
+          - developer-guide/cedarcli/design-tokens.md
           - developer-guide/cedarcli/publishing.md
           - Releasing CEDAR: developer-guide/cedarcli/release.md
           - developer-guide/cedarcli/modes.md

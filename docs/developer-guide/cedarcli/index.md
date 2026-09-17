@@ -30,6 +30,8 @@ The manual follows the path a change takes through CEDAR.
 First, [Working Across Git Repositories](repositories.md) explains how to keep the source estate on
 the intended branches and identify repositories that need attention. [Maven](maven.md) and
 [Building CEDAR](building.md) then explain how source becomes usable local artifacts.
+[Monitoring Design Token Adoption](design-tokens.md) covers shared styling checks for the
+embeddable components, existing-debt baselines and the CI gate.
 
 [Publishing Artifacts and Build Trains](publishing.md) covers the point at which artifacts leave one
 machine and become shared inputs for other developers and deployments, and
