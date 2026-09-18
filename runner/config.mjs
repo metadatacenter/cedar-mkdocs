@@ -71,3 +71,29 @@ export const SHARING = {
   groupName: 'ABCD Lab Team',
   collaborator: process.env.CEDAR_COLLABORATOR ?? 'Test User 2',
 };
+
+// Content used by the artifact-versioning page of the user guide (manual-run-versioning.mjs).
+// One element is carried through a full version series, and one template reuses it, so the
+// figures on that page all come from a single arc rather than from unrelated artifacts.
+export const VERSIONING = {
+  folderName: 'Versioning Demo',
+  element: {
+    name: 'Principal Investigator',
+    description: 'The researcher responsible for a study',
+    fields: [
+      { type: 'text', name: 'Investigator Name', help: 'Full name of the principal investigator' },
+      { type: 'ORCID', name: 'ORCID', help: "The investigator's ORCID identifier" },
+    ],
+    // Added to the second draft, which is what the update-propagation figures show moving
+    // into the template that reuses the element.
+    addedField: { type: 'text', name: 'Institution', help: "The investigator's primary institution" },
+  },
+  template: {
+    name: 'Study',
+    description: 'A research study and the investigator responsible for it',
+    field: { type: 'text', name: 'Study Name', help: 'The full name of the study' },
+    values: { 'Study Name': 'Wearable Sensor Pilot Study' },
+  },
+  firstRelease: { major: 1, minor: 0, patch: 0 },
+  secondRelease: { major: 1, minor: 1, patch: 0 },
+};

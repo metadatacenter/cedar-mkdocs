@@ -52,6 +52,7 @@ images that are kept, so these runners add to that directory and never wipe it:
 node manual-run.mjs             # the workspace, Template Designer, Metadata Creator and resource menu
 node manual-run-building.mjs    # the import window
 node manual-run-sharing.mjs     # the Groups page and the Permissions dialog
+node manual-run-versioning.mjs  # the draft, release, reuse and update-propagation figures
 ```
 
 `manual-run.mjs` builds its content either way, so `--only=` re-captures a few figures without
@@ -78,6 +79,17 @@ carries the notice that access reaches the folder's contents, and a template's d
 captures the two confirmations the Groups page raises, over a Group Administrator role and over
 deleting a group, and cancels both, so the group it made survives for teardown and the
 membership stays as the figure above it shows.
+
+`manual-run-versioning.mjs` builds a whole version series, because no single artifact can show
+the lifecycle: a Principal Investigator element is published, drafted again, reused by a Study
+template, edited and propagated into that template, populated, and published a second time.
+It takes about four minutes. Its folder name is fixed (`Versioning Demo` in `config.mjs`), so a
+re-run tears down a folder an interrupted run left behind before building a fresh one.
+
+Two states it captures are saved user preferences rather than session defaults, and the run puts
+both back where it found them: the CATEGORIES section, and the Version section's **Latest**
+filter, which the step drives to a known position before shooting the on and off figures. A
+freshly provisioned CEDAR account starts with Latest off, so neither state can be assumed.
 
 ### CEDAR MCP Tutorial
 
@@ -115,6 +127,7 @@ for inspection (teardown still attempts in `finally`).
 | `run.mjs`    | orchestrator, CLI flags, failure capture |
 | `manual-steps.mjs`, `manual-run.mjs`, `manual-run-building.mjs` | user-guide captures of the workspace, designer, editor and dialogs |
 | `sharing-steps.mjs`, `manual-run-sharing.mjs` | user-guide captures of the Groups page and the Permissions dialog |
+| `versioning-steps.mjs`, `manual-run-versioning.mjs` | user-guide captures of the draft/publish/reuse/propagate cycle |
 | `mcp-capture.mjs` | CEE preview URLs → the two MCP tutorial screenshots |
 
 ## Verified selectors & gotchas (live, 2026-07-16)
