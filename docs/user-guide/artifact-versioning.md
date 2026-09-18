@@ -115,11 +115,12 @@ Bubbling window.
 The window lists the artifacts that hold a copy, grouped by kind, and the information icon
 beside a name shows its location, owner and provenance. Tick the ones that should take the new
 definition and click **Update**. Each is rewritten where it stands, keeping its own identifier,
-name, version and publication status, with only the embedded copy replaced. Cancelling, or
-leaving an artifact unticked, leaves it on the copy it already has.
+name and version, with only the embedded copy replaced. Cancelling, or leaving an artifact
+unticked, leaves it on the copy it already has.
 
-Tick only artifacts that are still drafts. A published version is meant to stay fixed, so bring
-the change into a new draft of it rather than into the release.
+Only drafts can take the change. Publication fixes a version's content, so the window offers no
+tick for a published artifact: its checkbox is greyed, and a globe beside the name marks the
+version as released. Create a new version of it first, and tick that instead.
 
 The Study template now carries the element with its Institution field.
 

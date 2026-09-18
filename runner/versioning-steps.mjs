@@ -225,13 +225,19 @@ export async function step8_propagate(page, folderId, draftId, templateId) {
   await page.waitForTimeout(1100);
   await page.getByRole('button', { name: 'Save Element' }).click();
 
-  const selector = page.locator('artifact-selector');
+  // VERIFIED (live DOM): the window is an AngularJS directive, <cedar-artifact-selector>, whose
+  // rows are .tree-artifact and whose ticks are plain checkboxes. It replaced a compiled Angular
+  // web component whose rows were <mat-tree-node> and whose ticks carried Material's mdc- classes.
+  const selector = page.locator('cedar-artifact-selector');
   await selector.getByText(VERSIONING.template.name, { exact: false }).first()
     .waitFor({ timeout: 30_000 });
   await page.waitForTimeout(1200);
   await ug(page, 'versioning-update-bubbling');
 
-  await selector.locator('input.mdc-checkbox__native-control').first().click({ force: true });
+  // Name the row rather than taking the first tick: a published artifact's tick is disabled, so
+  // clicking blindly can select nothing and leave the propagation below with no target.
+  await selector.locator('.tree-artifact').filter({ hasText: VERSIONING.template.name })
+    .locator('input[type="checkbox"]').first().click({ force: true });
   await page.waitForTimeout(600);
   await page.getByRole('button', { name: 'Update', exact: true }).click();
   await waitToast(page, /updates successfully/i).catch(() => {});
