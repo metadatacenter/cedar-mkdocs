@@ -24,8 +24,8 @@ template or folder.
 
 ---
 
-**draft**: a CEDAR artifact that has not been published, and therefore has no version
-identifier. All new CEDAR artifacts start in the draft status.
+**draft**: a CEDAR artifact that has not been published and can still be edited. All new CEDAR
+artifacts start in the draft status, numbered 0.0.1.
 
 ---
 
@@ -171,7 +171,8 @@ uses any of its tools.
 ---
 
 **version**: way to categorize the different states of an artifact by giving
-it a sequence identifier. CEDAR artifacts must be published to have a version.
+it a sequence identifier. Publishing a version fixes its content under the number its author
+assigned.
 
 ---
 
