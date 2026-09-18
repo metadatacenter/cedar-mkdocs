@@ -2,7 +2,7 @@
 
 The [CEDAR Model TypeScript Library](https://github.com/metadatacenter/cedar-model-typescript-library) reads, builds, and writes CEDAR templates, elements, fields, and instances in TypeScript. It supports the same [CEDAR model](../yaml-spec/cedar-model.md) and JSON and YAML representations as the Java [CEDAR Artifact Library](cedar-artifact-library.md).
 
-This page introduces the main API through small examples. The library's [test suite](https://github.com/metadatacenter/cedar-model-typescript-library/tree/main/test) and [companion demo](https://github.com/metadatacenter/cedar-model-typescript-library-demo) contain more examples.
+This page introduces the main API through small examples. The library's [test suite](https://github.com/metadatacenter/cedar-model-typescript-library/tree/main/test) contains more examples.
 
 ## Adding the Library
 
