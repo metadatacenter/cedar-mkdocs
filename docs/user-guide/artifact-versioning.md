@@ -1,167 +1,161 @@
 # Artifact Versioning
 
-Templates, elements and fields change as metadata requirements change. A definition that other
-people already fill out, or that other templates already reuse, cannot change underneath them
-without invalidating their work. CEDAR separates the copy an author is still working on from the
-copy everyone else depends on: an editable **draft**, and a **published** version whose content
-is fixed. The [CEDAR Versioning Model](advanced-topics/versioning-model/index.md) sets out the
-rules those two states obey.
+CEDAR lets you publish versions of templates, elements and fields so that people can keep using
+an existing version while you work on changes. A **draft** is editable. A **published** version
+has fixed content and remains available when you create a newer version.
 
-Templates, elements and fields follow the same cycle. One element serves as the example
-throughout: a Principal Investigator element holding an investigator's name and ORCID, which is
-published, drafted again, reused by a Study template, and then changed while that template is
-using it.
+You publish and create versions from the resource's menu in the workspace. The same steps apply
+to templates, elements and fields. For the full versioning rules, see the
+[CEDAR Versioning Model](advanced-topics/versioning-model/index.md).
 
 ## Working on a Draft
 
-A new template, element or field starts as a draft numbered `0.0.1`. Save a draft as often as
-you like. Each save replaces the stored content, keeps the same identifier, and leaves the
-version number where it is, so ordinary saves never accumulate as separate versions.
+A new template, element or field starts as a draft with version number `0.0.1`. You can edit and
+save it as often as you need. Saving updates the draft without changing its identifier or
+version number.
 
-The Template Designer shows the number in the Version box at the top, beside the artifact's name
-and description. The open padlock at the top right marks the artifact as editable, and the Save
-button commits each change. [Saving and Closing](building-basic-templates.md#saving) explains
-the three status icons.
+The example below is a Principal Investigator element with fields for an investigator's name
+and ORCID. Its version number appears in the Version box beside the name and description.
+The open padlock at the top right indicates that you can edit it. Click **Save** to save your
+changes. See [Saving and Closing](building-basic-templates.md#saving-and-closing) for an
+explanation of the three status icons.
 
 ![](../img/userguide/versioning-element-draft.png){:width="80%" class="centered"}
 
-In the workspace listing, a published version carries a globe and its number. A draft carries
-its number alone, and a draft still at the starting `0.0.1` carries nothing at all, so an
-artifact with no version marking has never been published.
-
 ## Publishing a Version
 
-Publishing fixes the content of a draft and gives it a number others can cite.
-
-Open the resource's kebab menu (**⋮**) and choose **Publish version…**. Next to it,
-**Create version…** stays unavailable while the artifact is a draft, because there is no release
-for a new draft to continue from.
+To publish a draft, open the resource's menu (the vertical dots, **⋮**) and choose
+**Publish version…**. **Create version…** is unavailable for drafts.
 
 ![](../img/userguide/versioning-draft-menu.png){:width="80%" class="centered"}
 
-The dialog offers the three parts of a `major.minor.patch` number, starting from the draft's
-current one. You can keep that number or raise any part of it, and you cannot lower it. CEDAR
-neither derives the number from what changed nor checks that a patch release stays compatible
-with the release before it. The choice is the author's: raise the major part for a change users
-of the artifact must react to, and the patch part for a correction they can ignore.
+In the dialog, choose a version number in `major.minor.patch` format, following the
+[semantic versioning](https://semver.org/#summary) convention. CEDAR accepts only the three
+numeric parts; suffixes such as `-RC1` or `-beta` are not supported. You can keep the draft's
+number or enter a higher one. You cannot publish with a lower number.
+
+Use the major number for changes that require users to adapt their templates or metadata, the
+minor number for compatible additions, and the patch number for small corrections. CEDAR does
+not choose a number based on your changes or check compatibility with earlier versions.
 
 ![](../img/userguide/versioning-publish-dialog.png){:width="80%" class="centered"}
 
-Once the version is published, its row in the workspace carries a globe and the number, and the
-two version commands reverse. **Publish version…** greys out, and **Create version…** becomes
-available.
+After publishing, the workspace shows the globe icon and the version number. In the resource's
+menu, **Publish version…** is grayed out and **Create version…** is available.
 
 ![](../img/userguide/versioning-published-menu.png){:width="80%" class="centered"}
 
-A published version opens read-only. The padlock at the top right is closed and yellow, and the
-Clear, Cancel and Save buttons are gone.
+Published versions open read-only in the Template Designer. The padlock at the top right is
+closed and yellow, and the Clear, Cancel and Save buttons are no longer shown.
 
 ![](../img/userguide/versioning-published-locked.png){:width="80%" class="centered"}
 
 ## Creating the Next Version
 
-**Create version…** copies the published version into a new artifact with an identifier of its
-own, and records the published version as its predecessor. The published version itself is not
-touched and stays available to everyone using it.
+To update a published artifact, choose **Create version…** from its menu. CEDAR creates a new
+draft with its own identifier and records which published version it came from. The published
+version remains unchanged.
 
-The dialog opens on the next patch number, `1.0.1` for a release of `1.0.0`. Raise it here, or
-leave it and raise it when the draft is published.
+The dialog suggests the next patch number: for example, `1.0.1` after `1.0.0`. You can choose a
+higher number now or when you publish the draft.
 
 ![](../img/userguide/versioning-create-version-dialog.png){:width="80%" class="centered"}
 
-The workspace then lists the series under one title: the new draft, and the published version it
-came from.
+The workspace lists the new draft and its published predecessor under the same title.
 
 ![](../img/userguide/versioning-series-listing.png){:width="80%" class="centered"}
 
-A series carries one draft at a time. That draft must be published before another can be
-created, which keeps development in a single line with no branches. Creating a draft is reserved
-to the owner of the latest published version, who also needs Editor access to the folder the
-draft goes into. The rest of the access rules are in
-[Versioning and Permissions](advanced-topics/versioning-model/managing-versioned-artifacts/versioning-and-permissions.md).
+An artifact can have only one draft at a time. Publish that draft before creating another.
+Only the owner of the latest published version can create the next draft, and they must have
+Editor access to the destination folder. See
+[Versioning and Permissions](advanced-topics/versioning-model/managing-versioned-artifacts/versioning-and-permissions.md)
+for details.
 
-Copying an artifact does something different. The copy starts a series of its own at draft
-`0.0.1` and records where it came from, but it does not continue the release history of the
-artifact it was copied from.
+To make a separate artifact instead, use **Copy to…**. A copy starts at draft version `0.0.1`
+and has its own version history. CEDAR records which artifact it was copied from.
 
 ## Reusing a Version in a Template
 
-When a template imports an element, it takes a copy of that element as it stands at that moment.
-The copy belongs to the template, so later work on the element does not reach the template by
-itself.
+When you import an element into a template, CEDAR embeds a copy of the selected version.
+Later changes to the original element do not automatically update that copy.
 
-[Adding Elements](building-basic-templates.md#adding-elements) covers the import window. Every
-version of an element appears there under the same title, so the details pane on the right is
-what tells them apart: it names the version, with a globe if that version is published.
+Open the import window as described in [Adding Elements](building-basic-templates.md#adding-elements).
+Versions of an element have the same title, so select an entry and check its version in the
+details pane on the right. A globe icon indicates a published version.
 
 ![](../img/userguide/versioning-import-window.png){:width="80%" class="centered"}
 
-Importing the `1.0.1` draft puts its number beside the element icon inside the template, which
-records the version the copy was taken from.
+Here, the Study template contains a copy of the Principal Investigator draft, version `1.0.1`.
+The number beside the element icon identifies the version that was imported.
 
 ![](../img/userguide/versioning-template-with-element.png){:width="80%" class="centered"}
 
-## Carrying a Change to the Artifacts That Reuse It
+## Updating Imported Elements
 
-Because the template holds a copy, an edit to the element does not reach it. CEDAR offers to
-reconcile the two at the moment of the edit.
+When you save changes to an element, CEDAR lets you update templates and elements that have
+imported it. For example, adding an Institution field to the Principal Investigator draft
+allows you to add that field to the Study template too.
 
-Adding an Institution field to the `1.0.1` draft and saving it stores the element immediately.
-CEDAR then looks for every element and template holding a copy of it and opens the Update
-Bubbling window.
+Save the element first. CEDAR saves your changes, then opens the **Update Bubbling** window
+with the templates and elements that contain a copy.
 
 ![](../img/userguide/versioning-update-bubbling.png){:width="80%" class="centered"}
 
-The window lists the artifacts that hold a copy, grouped by kind, and the information icon
-beside a name shows its location, owner and provenance. Tick the ones that should take the new
-definition and click **Update**. Each is rewritten where it stands, keeping its own identifier,
-name and version, with only the embedded copy replaced. Cancelling, or leaving an artifact
-unticked, leaves it on the copy it already has.
+Select the artifacts you want to update and click **Update**. The information icon beside each
+name shows its location, owner and provenance. Updating replaces the imported copy in each
+selected artifact; its identifier, name and version number stay the same. Artifacts you leave
+unselected keep their existing copies. Cancelling leaves all copies unchanged, but your changes
+to the original element are already saved.
 
-Only drafts can take the change. Publication fixes a version's content, so the window offers no
-tick for a published artifact: its checkbox is greyed, and a globe beside the name marks the
-version as released. Create a new version of it first, and tick that instead.
+Only drafts can be updated. Published artifacts have a globe icon and a disabled checkbox.
+To update one, first create a new draft of that artifact, then select the draft in the Update
+Bubbling window.
 
-The Study template now carries the element with its Institution field.
+After the update, the Study template includes the Institution field.
 
 ![](../img/userguide/versioning-template-updated.png){:width="80%" class="centered"}
 
-### When Metadata Already Depends on the Element
+### Updating Elements Used by Existing Metadata
 
-Instances are filled out against the fields their template had at the time. Changing those
-fields would leave the stored instances describing a shape the template no longer has. CEDAR
-therefore warns before any editing starts when the element is reused by a template that already
-has instances.
+CEDAR warns you when you open an element for editing if a template that uses it already has
+metadata instances. Changes to the element's fields could make those instances incompatible
+with their template.
 
 ![](../img/userguide/versioning-element-in-use.png){:width="80%" class="centered"}
 
-Display labels, descriptions, help text and the order of children can still change, because none
-of them alters what an instance holds. Any other change does, and CEDAR will not propagate it:
-the update is refused, none of the selected artifacts are written, and the template needs a new
-version of its own before the updated element can go into it. Instances stay attached to the
-template they were filled out against.
+You can update display labels, descriptions, help text and the order of fields and elements
+without changing the structure of existing metadata. CEDAR allows these changes to be applied
+to the templates that use the element.
+
+For other changes, CEDAR refuses the update and leaves all selected artifacts unchanged. Create
+a new version of the template before adding the updated element. Existing metadata instances
+remain associated with the template version used to create them.
 
 ## Finding Earlier Versions
 
-Every published version stays on the system and remains available to the people using it.
+Earlier published versions remain available after you publish a new one.
 
-The Version tab of the information panel lists the whole series for the selected artifact,
-newest first, with a globe on each published version and a Latest badge on the current one.
-Clicking a title opens that version.
-[Viewing Resource Metadata](viewing-resource-information.md#viewing-resource-metadata) covers
-the panel itself.
+In the workspace, published versions display a globe icon and a version number. Drafts display
+only the number, except for an initial `0.0.1` draft, which has no version marking.
+
+To see all versions of an artifact, open its information panel and select the **Version** tab.
+Versions are listed newest first. A globe icon marks published versions, and a **Latest** badge
+marks the current version. Click a title to open that version. See
+[Viewing Resource Metadata](viewing-resource-information.md#viewing-resource-metadata) for more
+about the information panel.
 
 ![](../img/userguide/versioning-version-history.png){:width="80%" class="centered"}
 
-**Latest**, in the Version section of the Filter sidebar, decides which versions reach listings
-and search results. With Latest on, each series contributes its newest published version and its
-draft, if it has one.
+The **Latest** checkbox in the Filter sidebar's Version section controls which versions appear
+in workspace listings and search results. When selected, it shows the latest published version
+of each artifact and its draft, if one exists.
 
 ![](../img/userguide/versioning-latest-on.png){:width="80%" class="centered"}
 
-With Latest off, every version appears in any folder or search that holds it.
+Clear **Latest** to include earlier versions in listings and search results.
 
 ![](../img/userguide/versioning-latest-off.png){:width="80%" class="centered"}
 
-The folder, the access you have, and the other filters still apply either way, and **Reset all**
-at the top of the sidebar returns the Version section to Latest along with everything else.
+Your current folder, access permissions and other filters still determine which artifacts you
+see. **Reset all** at the top of the sidebar resets the filters, including selecting **Latest**
+again.
