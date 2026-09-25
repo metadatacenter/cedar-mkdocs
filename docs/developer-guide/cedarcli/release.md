@@ -206,6 +206,13 @@ Nexus writable status and one real repository object. It does this before changi
 or beginning request-heavy verification. A direct connection failure remains retryable; an HTTP
 refusal opens the circuit.
 
+Within a release, independent repositories and the release and next-development variants can
+overlap. By default it runs two isolated builds at once, with four frontend workers each and
+two Maven reactor threads per variant. `release start --jobs N --workers N --maven-threads N`
+changes those limits, and `release resume` reuses the ones the release recorded. Each repository
+keeps its own build order, and a failure stops new work, lets running tasks finish, and keeps the
+successful ones for the resume.
+
 ## Phases and the Ledger
 
 A release records its own progress in a ledger under `~/.cedar/train-releases/`, and every phase

@@ -21,13 +21,27 @@ branches, and tags across the repositories and publishing to Nexus.
 | `prod` | Configure built static frontends for a native production domain | `cedarcli prod --help` |
 | `test` | Run the whole-stack smoke tiers and manage test-owned processes | `cedarcli test e2e` |
 
-`cedarcli test e2e` runs the REST and browser smoke tiers under `cedar-development/ops/e2e` against
-the native stack and records the run against the `develop` heads it tested. Both
+`cedarcli test e2e` runs the REST, browser and split-frontend smoke tiers under
+`cedar-development/ops/e2e` against the native stack and records the run against the `develop`
+heads it tested. Both
 `cedarcli publish train` and `cedarcli release plan` require that record for exactly the source they
 are about to ship, so run it after the last build and restart and before dispatching a train. It
 refuses to start while any managed service is unhealthy or stale. `cedarcli test status` and
 `cedarcli test cleanup` inventory and terminate embedded MongoDB processes left behind by backend
 test runs.
+
+The REST tier can run its independent suites concurrently. It uses two workers by default and
+accepts `--rest-workers` from one to four:
+
+```bash
+cedarcli test e2e --rest-workers 4
+```
+
+Four workers is the fastest setting. On a 16-core workstation the REST tier takes about 51
+seconds with four, against 119 serially. Suites that depend on global state, such as account
+credentials or global counts, still run alone after the concurrent batch, and the full check
+inventory must still pass. `--rest-workers 1` restores the serial order for diagnosis. The browser
+and split-frontend tiers run serially and account for most of a whole run.
 
 `cedarcli check versions` compares the version each repository declares on disk against the version
 most of the estate carries, and reports one row per repository. A repository that does not match is

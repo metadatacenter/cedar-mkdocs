@@ -93,6 +93,32 @@ For the normal edit-build-run cycle, prefer the narrowest target that includes t
 dependency. A complete build is more reassuring, but it should not replace understanding what the
 change actually affects.
 
+## Build Concurrency
+
+A build uses the machine's cores without being asked. For the Java code, cedarcli gives Maven one
+reactor thread per detected CPU, at least one and at most sixteen, and Maven schedules modules by
+their dependency graph. The four Java layers still build in order, one Maven reactor at a time.
+Test classes still run serially inside each test JVM, and the resource server spreads its suite
+over two test JVMs of its own.
+
+Frontend builds run two repositories at a time, each with a worker budget of half the detected
+CPUs, at most eight. They do not follow the core count the way Maven does, because every
+concurrent repository spends its own worker budget.
+
+Both can be set explicitly. The options go before the build target:
+
+```bash
+cedarcli build --jobs 4 java
+cedarcli build --jobs 3 --workers 4 frontends
+cedarcli build --jobs 1 --workers 1 all
+```
+
+`--jobs N` sets the Maven thread count and the number of concurrent frontend repositories
+together, and `--jobs 1 --workers 1` is the serial path for diagnosing a failure. On a 16-core
+workstation the full Java build takes about 166 seconds at the default of sixteen threads, against
+305 at two threads and 680 serially. Each build records its command timings and exit codes under
+`$CEDAR_HOME/.cedar/build-reports/`.
+
 ## Preview a Broad Build
 
 Before running a large build, inspect its planned scope without executing the underlying commands:
