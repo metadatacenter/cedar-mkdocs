@@ -22,6 +22,27 @@ what indexing, integrity checking, and instances all refer to. Its `name` is pur
 presentation. A value in an instance is bound to a
 child by its `key`, never by its `name`.
 
+## Reserved Child Keys
+
+A child's `key` is also a property name in the JSON-LD form of the template's instances,
+where it sits beside the properties CEDAR writes into every instance. A key that would collide
+with one of those properties is reserved, whichever form an artifact is written in. No field
+or element may take:
+
+- a key that begins with `@`, which covers every JSON-LD keyword;
+- one of the CEDAR instance properties `schema:name`, `schema:description`,
+  `schema:identifier`, `schema:isBasedOn`, `pav:createdOn`, `pav:createdBy`,
+  `pav:lastUpdatedOn`, `pav:derivedFrom`, `oslc:modifiedBy`, `rdfs:label`, `skos:notation`,
+  `skos:prefLabel`, `skos:altLabel` or `_annotations`;
+- `__proto__`, `constructor` or `prototype`, which a JavaScript object cannot hold as
+  ordinary keys.
+
+Keys such as `type`, `name` and `children` remain available to an ordinary field or element,
+because an instance writes its value under `children`. An attribute-value field is written
+differently, so its key has [further reservations](field-types/attribute-value-field.md#reserved-keys).
+The attribute names an instance author supplies for an attribute-value field are subject to
+the reservations listed here.
+
 ## Template Keys
 
 Beyond the [core keys](core-structure.md) every artifact carries, a template can carry a
