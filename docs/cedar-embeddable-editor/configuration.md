@@ -161,3 +161,61 @@ cee.eventHandler = {
 Each callback is optional. Unlike configuration and artifact inputs,
 `eventHandler` can be replaced; the most recently assigned handler receives later
 events.
+
+## Scroll to a Field
+
+An application that lists the problems in the
+[data quality report](validation.md) can take the user to each one. The CEE shows
+one page of a paged template at a time, one entry of each repeating field or
+element at a time, and an element's fields only while its panel is open, so a
+field with a problem is often not on screen. The `reveal` method brings it there.
+The CEE turns to the field's page, moves each repeating field or element above it
+to the entry that holds it, expands the elements around it, scrolls it into view,
+and moves keyboard focus to its control.
+
+Each problem record carries the location `reveal` needs, so the application can
+pass the record itself:
+
+```javascript
+for (const problem of cee.dataQualityReport.problems) {
+  const item = document.createElement('button');
+  item.textContent = describeProblem(problem); // the application's own wording
+  item.addEventListener('click', () => cee.reveal(problem));
+  problemList.append(item);
+}
+```
+
+An application can also state a location itself. `path` is the component path
+from the template root, as a problem record gives it. `occurrences` gives the
+entry to show at each repeating field or element along the path, outermost first
+and counting from zero:
+
+```javascript
+// The email field in the second entry of the repeating author element.
+await cee.reveal({ path: ['_author', '_email'], occurrences: [1] });
+```
+
+`occurrences` is optional. A repeating field or element that it does not reach
+keeps the entry it already shows.
+
+`reveal` returns a promise. It resolves to `true` once the field is on screen,
+and to `false`, having changed nothing, when the path names nothing the template
+declares, when the field is hidden, or when a named entry does not exist. When a
+repeating element along the path has no entries, the CEE shows that element
+instead, because nothing inside it appears on the form.
+
+A field the user has been taken to also states an unanswered requirement. Until
+the user reaches an empty required field, the CEE keeps it quiet, so that a new
+form does not open with every required field in error.
+
+By default `reveal` moves keyboard focus to the field. An application that keeps
+focus in its own controls, such as a list the user is stepping through with the
+keyboard, passes `focus: false`:
+
+```javascript
+cee.reveal({ path: ['_title'] }, { focus: false });
+```
+
+`reveal` is defined once the element is in the document, and resolves to `false`
+until it has a template. The npm package declares its arguments as `CeeLocation`
+and `CeeRevealOptions`.
