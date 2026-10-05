@@ -73,7 +73,10 @@ built from the pushed head. `--component <ID>` limits a run to one of `tokens`, 
 Every repository the command would write must be free of uncommitted tracked changes, and the
 command commits nothing: review each repository's diff, then commit and push it. When a run moves a
 pin inside a component's own repository, that component is skipped, because its pushed head does
-not yet carry the new pin. Push the change and run the command again to publish it.
+not yet carry the new pin. Push the change and run the command again to publish it. A component is
+built from its checkout, so the checkout must stand at the pushed `develop` head the package is
+named after. One left on another branch, or whose `develop` is not pushed, is held back with the
+reason in the report.
 
 ## Publish an Immutable Build Train
 
