@@ -37,7 +37,7 @@ swatch can be appropriate.
 | `--init-baseline` | Create an initial baseline after review. Refuses to overwrite an existing baseline. |
 | `--prune-baseline` | Remove resolved findings or reduce their occurrence allowances; never add or increase an allowance. |
 | `--sync-surfaces` | Regenerate each scanned frontend's copy of the surface contract helper before reporting on it. |
-| `--surface-inventory FILE` | Write the Markdown hierarchy of the modern UI's pages and surfaces to `FILE`, an absolute path. |
+| `--surface-inventory FILE` | Write the Markdown hierarchy of the modern UI's pages and surfaces to `FILE`. |
 
 The baseline-writing options are mutually exclusive. Normal reporting does not change files.
 [Keep Surface Contracts Current](#keep-surface-contracts-current) explains the two surface options.
@@ -81,11 +81,11 @@ cedarcli check design-tokens --sync-surfaces
 
 `--surface-inventory` writes the current hierarchy of pages and surfaces as Markdown, generated from
 the registries rather than maintained by hand. It first validates the registries of all eight
-frontends that must have one, and writes nothing if any is invalid. The checker runs from
-`$CEDAR_HOME/cedar-cli`, where a relative path would land, so give an absolute one:
+frontends that must have one, and writes nothing if any is invalid. A relative path resolves
+against the directory the command runs in:
 
 ```bash
-cedarcli check design-tokens --surface-inventory "$PWD/ui-surfaces.md"
+cedarcli check design-tokens --surface-inventory ui-surfaces.md
 ```
 
 ## Use It in CI
