@@ -334,7 +334,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     ])
     panel(c, 5, 3, "dev", [
         ("add-hosts", ORANGE), "copy-keycloak-listener", "create-directories",
-        "generate-api-key [USER_ID]",
+        "generate-api-key USER_ID",
     ])
 
     c.setStrokeColor(OUTLINE)
