@@ -80,10 +80,10 @@ index cannot be built over a collection that already holds a repeated identifier
 [backend runbook](https://github.com/metadatacenter/cedar-development/blob/develop/ops/BACKEND-RUNBOOK.md#one-document-per-identifier-which-the-store-enforces)
 explains how to count the duplicates and provision the index.
 
-`cedarcli check design-tokens` reports shared-style adoption across CEE/CEF, CED/CEFD and CETP.
-Its `--strict` mode gates new color and typography drift against reviewed baselines, while spacing
-and geometry remain advisory. The retiring AngularJS applications are excluded. See
-[Monitoring Design Token Adoption](design-tokens.md) for options, baseline maintenance and CI use.
+`cedarcli check design-tokens` reports shared-style adoption across the embeddable components and
+the applications that host them, and its `--strict` mode gates new drift against reviewed
+baselines. See [Monitoring Design Token Adoption](design-tokens.md) for the repositories it scans,
+its options, baseline maintenance and CI use.
 
 Two checks read continuous integration rather than artifacts. `cedarcli check ci` reports the CI
 state at every `develop` head a train would capture, and `cedarcli check ci-env` compares each Java

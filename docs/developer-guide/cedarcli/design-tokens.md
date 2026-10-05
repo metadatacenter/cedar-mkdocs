@@ -1,18 +1,24 @@
 # Monitoring Design Token Adoption
 
-`cedarcli check design-tokens` tracks shared styling across the embeddable components and modern Workspace:
+`cedarcli check design-tokens` tracks shared styling across the embeddable components and the
+applications that host them:
 
-| Repository | Components |
+| Repository | Covers |
 | --- | --- |
 | `cedar-embeddable-editor` | CEE and CEF |
 | `cedar-embeddable-designer` | CED and CEFD |
 | `cedar-embeddable-term-picker` | CETP |
 | `cedar-workspace` | Angular Workspace, account pages and CEE host |
+| `cedar-template-designer` | Template Designer, which hosts CED and CETP |
+| `cedar-openview` | OpenView |
+| `cedar-monitoring` | Monitoring |
+| `cedar-bridging` | Bridging |
+| `mcp/cedar-cee-mcp` | The session page `cedar-cee-mcp` serves |
 
-The retiring AngularJS applications are excluded. The default scan visits these repositories when
-present under `CEDAR_HOME`; an explicitly selected repository must exist. Keep the CLI and
-`cedar-design-tokens` checkouts up to date: the CLI runs the checker from the token repository.
-No frontend build, running stack, registry credential or network connection is needed.
+The legacy Template Editor, `cedar-template-editor`, is excluded. The default scan visits these
+repositories when present under `CEDAR_HOME`; an explicitly selected repository must exist. Keep the
+CLI and `cedar-design-tokens` checkouts up to date: the CLI runs the checker from the token
+repository. No frontend build, running stack, registry credential or network connection is needed.
 
 ## Run the Check
 
@@ -23,8 +29,8 @@ cedarcli check design-tokens --strict
 cedarcli check design-tokens --json > adoption.json
 ```
 
-Each repository's summary shows new and existing color/typography findings, advisory spacing and
-geometry findings, resolved baseline entries, and the declared and locked token versions. These
+Each repository's summary shows its new, existing, and advisory findings, resolved baseline
+entries, and the declared and locked token versions. These
 are candidates for review, not an adoption percentage: a local dimension or a deliberate brand
 swatch can be appropriate.
 
@@ -32,7 +38,7 @@ swatch can be appropriate.
 | --- | --- |
 | `--repo NAME` | Select a repository under `CEDAR_HOME`; repeat to select several. |
 | `--all` | Include existing and excepted findings in the text details. The JSON report always includes all findings. |
-| `--strict` | Fail on new color/typography findings or a missing baseline. Spacing, geometry and version differences remain advisory. |
+| `--strict` | Fail on a new gated finding, a missing baseline, an inexact or unknown token pin, a pinned package that lacks a token the repository uses, a baseline allowance that is no longer needed, or a shared token that no scanned repository reads or only one does. A difference from the local token checkout's version remains advisory. |
 | `--json` | Emit a machine-readable report with per-repository findings and errors. Combine with `--strict` for a gate. |
 | `--init-baseline` | Create an initial baseline after review. Refuses to overwrite an existing baseline. |
 | `--prune-baseline` | Remove resolved findings or reduce their occurrence allowances; never add or increase an allowance. |
@@ -42,9 +48,13 @@ swatch can be appropriate.
 The baseline-writing options are mutually exclusive. Normal reporting does not change files.
 [Keep Surface Contracts Current](#keep-surface-contracts-current) explains the two surface options.
 Exit status **0** means the selected reporting or gate conditions passed; **1** means strict mode
-found new gated drift or a missing baseline; **2** means the check could not run correctly, such
+found one of the conditions it fails on; **2** means the check could not run correctly, such
 as a missing checker, invalid baseline or invalid arguments. Without `--strict`, findings alone
 do not fail the command.
+
+Which findings gate depends on the policy level each baseline records. At level 1, color and
+typography findings gate, while spacing and geometry findings are advisory. From level 2, every
+finding gates.
 
 ## Work Down Existing Findings
 
