@@ -330,10 +330,10 @@ cedarcli release timings
 
 Each phase reports its attempts and its wall time, split into execution, time spent waiting for CI,
 and time spent backing off before a transient retry. Failed attempts remain in the totals, and a
-process killed mid-phase leaves its record marked incomplete. `--compare <VERSION>` adds each
-phase's change in execution time against another release's ledger, provided both ledgers describe
-the same repositories, phases, and concurrency settings. A new release deletes the ledgers of
-earlier ones, so the state directory normally holds no ledger to compare against.
+process killed mid-phase leaves its record marked incomplete. Each phase also shows its change in
+execution time against the newest earlier release, or against the release `--compare <VERSION>`
+names, provided both describe the same repositories, phases, and concurrency settings. A new release
+deletes the ledgers of earlier ones but keeps their timings for this comparison.
 
 ## Acceptance
 
