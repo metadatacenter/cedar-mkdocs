@@ -153,9 +153,10 @@ covers the order of the first deployment and sharing one key across several host
 - `copy-keycloak-listener` copies the built CEDAR event listener into the Keycloak installation's
   providers and rebuilds Keycloak, which loads the listener on its next start. Build
   `cedar-keycloak-event-listener` first. Production deployments use the same command.
-- `generate-api-key [USER_ID]` prints a key derived from `CEDAR_SALT_API_KEY` and a user identifier
-  by repeated SHA-256 hashing. The same inputs always give the same key, and the command writes
-  nothing.
+- `generate-api-key USER_ID` prints the API key of the account with that CEDAR user identifier,
+  provided the account was created before its server began issuing random keys, a change made in
+  September 2026. Until then the server derived each new account's key from `CEDAR_SALT_API_KEY`
+  and the identifier, and the command repeats that derivation. It writes nothing.
 
 `cedarcli prod` prepares a native production host:
 
