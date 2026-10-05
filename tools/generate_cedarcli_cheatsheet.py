@@ -7,9 +7,8 @@ import argparse
 import re
 import subprocess
 from pathlib import Path
-from typing import Callable
 
-from reportlab.lib.colors import HexColor, white
+from reportlab.lib.colors import HexColor
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -34,14 +33,11 @@ GRID = HexColor("#F6A24A")
 OUTLINE = HexColor("#FF5C4D")
 BLACK = HexColor("#111111")
 TEAL = HexColor("#087F78")
-BLUE = HexColor("#1976B9")
-GREEN = HexColor("#16A85B")
 PAPER = HexColor("#FFFEFC")
 
 MENLO = "/System/Library/Fonts/Menlo.ttc"
 LOGO = Path(__file__).resolve().parents[1] / "assets" / "cedar-logo-image.png"
 Entry = str | tuple[str, object]
-Icon = Callable[[canvas.Canvas, float, float, float], None]
 
 
 def register_fonts() -> None:
@@ -75,89 +71,6 @@ def draw_lines(
         y -= leading
 
 
-def browser_icon(c: canvas.Canvas, x: float, y: float, scale: float) -> None:
-    c.setStrokeColor(TEAL)
-    c.setFillColor(HexColor("#E8F5F3"))
-    c.setLineWidth(4 * scale)
-    c.roundRect(x, y, 86 * scale, 62 * scale, 8 * scale, stroke=1, fill=1)
-    c.line(x, y + 45 * scale, x + 86 * scale, y + 45 * scale)
-    for offset, color in ((14, OUTLINE), (27, ORANGE), (40, GREEN)):
-        c.setFillColor(color)
-        c.circle(x + offset * scale, y + 53 * scale, 3.3 * scale, stroke=0, fill=1)
-
-
-def server_icon(c: canvas.Canvas, x: float, y: float, scale: float) -> None:
-    for index, color in enumerate((BLUE, TEAL, GREEN)):
-        yy = y + index * 27 * scale
-        c.setFillColor(HexColor("#EAF4FA"))
-        c.setStrokeColor(color)
-        c.setLineWidth(3 * scale)
-        c.roundRect(x, yy, 96 * scale, 21 * scale, 5 * scale, stroke=1, fill=1)
-        c.setFillColor(color)
-        c.circle(x + 12 * scale, yy + 10.5 * scale, 3.3 * scale, stroke=0, fill=1)
-        c.circle(x + 24 * scale, yy + 10.5 * scale, 3.3 * scale, stroke=0, fill=1)
-
-
-def terminal_icon(c: canvas.Canvas, x: float, y: float, scale: float) -> None:
-    c.setFillColor(TEAL)
-    c.circle(x, y, 43 * scale, stroke=0, fill=1)
-    c.setFillColor(white)
-    c.setFont("MenloBold", 24 * scale)
-    c.drawCentredString(x, y - 8 * scale, ">_")
-
-
-def deploy_icon(c: canvas.Canvas, x: float, y: float, scale: float) -> None:
-    c.setLineWidth(4 * scale)
-    c.setStrokeColor(HexColor("#22313F"))
-    c.setFillColor(white)
-    points = [
-        (x + 45 * scale, y + 88 * scale),
-        (x + 84 * scale, y + 66 * scale),
-        (x + 84 * scale, y + 22 * scale),
-        (x + 45 * scale, y),
-        (x + 6 * scale, y + 22 * scale),
-        (x + 6 * scale, y + 66 * scale),
-    ]
-    path = c.beginPath()
-    path.moveTo(*points[0])
-    for point in points[1:]:
-        path.lineTo(*point)
-    path.close()
-    c.drawPath(path, stroke=1, fill=1)
-    c.line(x + 6 * scale, y + 66 * scale, x + 45 * scale, y + 44 * scale)
-    c.line(x + 84 * scale, y + 66 * scale, x + 45 * scale, y + 44 * scale)
-    c.line(x + 45 * scale, y + 44 * scale, x + 45 * scale, y)
-    c.setStrokeColor(GREEN)
-    c.setLineWidth(6 * scale)
-    c.line(x + 54 * scale, y + 25 * scale, x + 54 * scale, y + 51 * scale)
-    c.line(x + 54 * scale, y + 51 * scale, x + 67 * scale, y + 44 * scale)
-
-
-def clean_icon(c: canvas.Canvas, x: float, y: float, scale: float) -> None:
-    c.setFillColor(HexColor("#E52B5B"))
-    c.circle(x, y, 45 * scale, stroke=0, fill=1)
-    c.setStrokeColor(white)
-    c.setLineWidth(6 * scale)
-    c.line(x - 24 * scale, y - 18 * scale, x + 24 * scale, y + 28 * scale)
-    c.setFillColor(white)
-    path = c.beginPath()
-    path.moveTo(x - 31 * scale, y - 27 * scale)
-    path.lineTo(x - 9 * scale, y - 31 * scale)
-    path.lineTo(x - 17 * scale, y - 9 * scale)
-    path.close()
-    c.drawPath(path, stroke=0, fill=1)
-
-
-def check_icon(c: canvas.Canvas, x: float, y: float, scale: float) -> None:
-    c.setFillColor(GREEN)
-    c.circle(x, y, 45 * scale, stroke=0, fill=1)
-    c.setStrokeColor(white)
-    c.setLineWidth(9 * scale)
-    c.setLineCap(1)
-    c.line(x - 23 * scale, y, x - 7 * scale, y - 17 * scale)
-    c.line(x - 7 * scale, y - 17 * scale, x + 25 * scale, y + 22 * scale)
-
-
 def panel(
         c: canvas.Canvas,
         column: int,
@@ -166,8 +79,6 @@ def panel(
         entries: list[Entry] | tuple[list[Entry], list[Entry]],
         *,
         span: int = 1,
-        icon: Icon | None = None,
-        icon_scale: float = 0.24,
         body_size: float = BODY_SIZE,
 ) -> None:
     x = column * CELL_WIDTH
@@ -197,8 +108,6 @@ def panel(
     else:
         draw_lines(c, entries, x + 8, body_top, leading, body_size)
 
-    if icon is not None:
-        icon(c, x + width - 34, y + 12, icon_scale)
 
 
 def brand_panel(c: canvas.Canvas, cli_version: str) -> None:
@@ -269,7 +178,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         "  [--days N] [--max-mib N]",
         ("maven clean all", ORANGE),
         "maven clean cedar",
-    ], icon=clean_icon, icon_scale=0.18, body_size=6.7)
+    ], body_size=6.7)
     panel(c, 3, 0, "publish", [
         "all | <build_target> | this",
         ("train [--dry-run]", ORANGE),
@@ -285,7 +194,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         "components [--apply]",
         "  [--component ID]",
         "probe [--upload]",
-    ], icon=deploy_icon, icon_scale=0.22, body_size=6.5)
+    ], body_size=6.5)
     panel(c, 4, 0, "release", (
         [
             "readiness [--full]",
@@ -342,7 +251,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         "logs <microservice> [-n LINES]",
         "  [--dropwizard]",
         "watch",
-    ], icon=terminal_icon, icon_scale=0.20, body_size=6.5)
+    ], body_size=6.5)
     panel(c, 2, 1, "docker", [
         "status",
         "start",
@@ -379,7 +288,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     panel(c, 2, 2, "<frontend>", [
         "main", "openview", "monitoring", "bridging", "content", "workspace",
         "designer",
-    ], icon=browser_icon, icon_scale=0.21)
+    ])
     panel(c, 3, 2, "<microservice>", (
         ["artifact", "bridge", "group", "impex", "messaging", "monitor", "openview",
          "  [docker: open]"],
@@ -413,7 +322,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
             "artifact-versioning [--apply]",
             "stores",
         ],
-    ), span=2, icon=check_icon, icon_scale=0.24, body_size=6.7)
+    ), span=2, body_size=6.7)
     panel(c, 3, 3, "env", [
         ("status", ORANGE), "list [native|docker]",
         "filter TERM", "  [native|docker]",
@@ -422,7 +331,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     ])
     panel(c, 4, 3, "cert", [
         "ca [--force]", "domains [NAME...]", "  [--force]", ("setup", ORANGE),
-    ], icon=check_icon, icon_scale=0.22)
+    ])
     panel(c, 5, 3, "dev", [
         ("add-hosts", ORANGE), "copy-keycloak-listener", "create-directories",
         "generate-api-key [USER_ID]",
