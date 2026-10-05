@@ -26,6 +26,7 @@ CELL_HEIGHT = PAGE_HEIGHT / ROW_COUNT
 HEADING_SIZE = 12
 BODY_SIZE = 7.8
 BODY_LEADING = 10.5
+BODY_BOTTOM = 12
 
 RED = HexColor("#B00020")
 ORANGE = HexColor("#FF8A00")
@@ -183,12 +184,18 @@ def panel(
     draw_title(c, heading, x, y + CELL_HEIGHT - 21, width)
     body_top = y + CELL_HEIGHT - 42
 
+    # A panel with more lines than the standard leading allows tightens it to end at the bottom.
+    longest = max(map(len, entries)) if isinstance(entries, tuple) else len(entries)
+    leading = BODY_LEADING
+    if longest > 1:
+        leading = min(BODY_LEADING, (body_top - y - BODY_BOTTOM) / (longest - 1))
+
     if isinstance(entries, tuple):
         left, right = entries
-        draw_lines(c, left, x + 8, body_top, font_size=body_size)
-        draw_lines(c, right, x + width / 2 + 4, body_top, font_size=body_size)
+        draw_lines(c, left, x + 8, body_top, leading, body_size)
+        draw_lines(c, right, x + width / 2 + 4, body_top, leading, body_size)
     else:
-        draw_lines(c, entries, x + 8, body_top, font_size=body_size)
+        draw_lines(c, entries, x + 8, body_top, leading, body_size)
 
     if icon is not None:
         icon(c, x + width - 34, y + 12, icon_scale)
@@ -224,29 +231,6 @@ def brand_panel(c: canvas.Canvas, cli_version: str) -> None:
     c.drawCentredString(x + CELL_WIDTH / 2, y + 15, cli_version)
 
 
-def docker_panel(c: canvas.Canvas) -> None:
-    column = 2
-    row = 1
-    x = column * CELL_WIDTH
-    y = PAGE_HEIGHT - (row + 1) * CELL_HEIGHT
-    panel(c, column, row, "docker", [], span=4)
-
-    body_top = y + CELL_HEIGHT - 42
-    draw_lines(c, [
-        "status",
-        "start",
-        "  all [--train TRAIN_ID|--local] [--pull POLICY] [--timeout SEC]",
-        ("  <run_target> [--detach] [--train TRAIN_ID|--local] [--pull POLICY]", ORANGE),
-        ("  POLICY=never|missing|always", TEAL),
-        "stop all | <run_target>",
-        "build all | <run_target> | <image>",
-        ("validate", ORANGE),
-        "setup one-time-setup | create-network",
-        "  create-certificates-volume | copy-certificates",
-        ("remove containers | images | network | volumes | all", OUTLINE),
-    ], x + 8, body_top, leading=8.1)
-
-
 def latest_cli_version() -> str:
     cli_repository = Path(__file__).resolve().parents[2] / "cedar-cli"
     result = subprocess.run(
@@ -267,34 +251,57 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     brand_panel(c, cli_version)
     panel(c, 1, 0, "git", [
         ("add-commit-push COMMENT", OUTLINE),
-        "branch", "checkout BRANCH", "clone all / docker", "fetch",
+        "  --repo REPO --path PATH...",
+        "branch", "checkout BRANCH", "clone all / docker", "clone-missing", "fetch",
         "list branch / tag", ("next", ORANGE), ("pull", ORANGE),
         "remote", ("status", ORANGE),
     ], body_size=6.7)
     panel(c, 2, 0, "build", [
+        "[--jobs N] [--workers N] <cmd>",
         ("all [--skip-tests]", ORANGE),
         "<build_target> [--skip-tests]",
         "this [--skip-tests]",
         "split-frontends",
         "  [--server-payload]",
+        "server-frontends",
+        "  [--server-payload]",
+        "diagnostics [--apply]",
+        "  [--days N] [--max-mib N]",
         ("maven clean all", ORANGE),
         "maven clean cedar",
-    ], icon=clean_icon, icon_scale=0.18, body_size=6.9)
+    ], icon=clean_icon, icon_scale=0.18, body_size=6.7)
     panel(c, 3, 0, "publish", [
-        ("all", ORANGE), "<build_target>", "this",
-        ("train [--resume TRAIN_ID]", ORANGE),
-        "  [--dry-run]",
-        "train-status TRAIN_ID",
+        "all | <build_target> | this",
+        ("train [--dry-run]", ORANGE),
+        "  [--resume TRAIN_ID]",
+        "  [--release-version VER]",
+        "  [--next-version NEXT_VER]",
+        "  [--cee-version CEE_VER]",
+        "  [--accept-main-only REPO]",
+        "train-status [TRAIN_ID]",
         "  [--watch]",
-        "split-frontends [--dry-run]",
-    ], icon=deploy_icon, icon_scale=0.22)
+        "baselines [--refresh] [--all]",
+        "  [--repository REPO]",
+        "components [--apply]",
+        "  [--component ID]",
+        "probe [--upload]",
+    ], icon=deploy_icon, icon_scale=0.22, body_size=6.5)
     panel(c, 4, 0, "release", (
         [
+            "readiness [--full]",
+            "  [--version VER]",
+            "  [--next-version NEXT_VER]",
+            "  [--from-train TRAIN_ID]",
+            "  [--cee-version CEE_VER]",
+            "  [--model-version MODEL_VER]",
+            "  [--skip-packaging]",
             ("plan", ORANGE),
             "  --version VER",
             "  --next-version NEXT_VER",
             "  --from-train TRAIN_ID",
             "  --cee-version CEE_VER",
+            "  [--accept-red-develop REPO=RUN]",
+            "  [--accept-main-only REPO]",
         ],
         [
             ("start", ORANGE),
@@ -302,30 +309,17 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
             "  --next-version NEXT_VER",
             "  --from-train TRAIN_ID",
             "  --cee-version CEE_VER",
-            "  [--verbose]",
-            "resume [--verbose]",
+            "  [--accept-red-develop REPO=RUN]",
+            "  [--accept-main-only REPO]",
+            "  [--jobs N] [--workers N]",
+            "  [--maven-threads N] [--verbose]",
+            "resume [--dry-run] [--verbose]",
             "status [--watch]",
+            "timings [--compare VER]",
             "abandon",
             "  --version VER --reason WHY",
         ],
-    ), span=2, body_size=6.7)
-
-    panel(c, 0, 3, "repo", [("config", ORANGE)])
-    panel(c, 1, 3, "check", [
-        ("repos", ORANGE), ("versions", ORANGE), "components", "snapshots",
-        "ci", "ci-env", "openapi", "main",
-    ], icon=check_icon, icon_scale=0.24)
-    panel(c, 2, 3, "env", [
-        ("status", ORANGE), "list [native|docker]",
-        "filter TERM", "  [native|docker]",
-    ])
-    panel(c, 3, 3, "cert", ["ca", "domains", ("setup", ORANGE)],
-          icon=check_icon, icon_scale=0.22)
-    panel(c, 4, 3, "dev", [
-        ("add-hosts", ORANGE), "copy-keycloak-listener", "create-directories",
-        "generate-api-key",
-    ])
-    panel(c, 5, 3, "prod", ["configure-frontends", "reset-frontends"])
+    ), span=2, body_size=6.5)
 
     panel(c, 0, 1, "mode", [
         "native",
@@ -336,30 +330,103 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         "--clear [--force]",
     ], body_size=7.0)
     panel(c, 1, 1, "native", [
-        ("status", ORANGE), ("start all | <run_target>", ORANGE),
-        ("stop all | <run_target>", ORANGE), "health", "watch",
-        "restart all | <run_target>", "logs <microservice>",
-    ], icon=terminal_icon, icon_scale=0.20)
-    docker_panel(c)
+        ("status", ORANGE),
+        ("start [--refresh-dependencies]", ORANGE),
+        "  all | <run_target>",
+        ("stop all | <run_target>", ORANGE),
+        "restart [--refresh-dependencies]",
+        "  all | <run_target>",
+        "health [--group GROUP]",
+        "  all|microservices|frontends",
+        "logs ui-<frontend> [-n LINES]",
+        "logs <microservice> [-n LINES]",
+        "  [--dropwizard]",
+        "watch",
+    ], icon=terminal_icon, icon_scale=0.20, body_size=6.5)
+    panel(c, 2, 1, "docker", [
+        "status",
+        "start",
+        "  all [--train TRAIN_ID|--local] [--pull POLICY] [--timeout SEC]",
+        ("  <run_target> [--detach] [--train TRAIN_ID|--local] [--pull POLICY]", ORANGE),
+        ("  POLICY=never|missing|always", TEAL),
+        "stop all | <run_target>",
+        "build all | <run_target> | <image>",
+        "  [--no-deps] [--local] [--train TRAIN_ID]",
+        ("validate", ORANGE),
+        "setup one-time-setup | create-network",
+        "  create-certificates-volume | copy-certificates",
+        ("remove containers | images | network | volumes | all", OUTLINE),
+    ], span=3)
+    panel(c, 5, 1, "test", [
+        ("e2e [--rest-workers N]", ORANGE), "status", "cleanup",
+    ])
 
     panel(c, 0, 2, "<build_target>", [
-        "java", "project", "parent", "libraries", "clients", "frontends",
+        "java", "project", "parent", "libraries", "clients",
+        "frontends [no --skip-tests]",
     ])
     panel(c, 1, 2, "<run_target>", [
-        "infra [start/stop only]", "microservices",
+        "infra [start/stop only]",
+        "backends [native start/stop]",
+        "microservices",
         ("microservice all", ORANGE), "microservice <microservice>",
         "frontends", ("frontend all", ORANGE), "frontend <frontend>",
+        "frontend split-frontends",
+        "  [native only]",
         "keycloak / kk [start/stop]",
-    ])
+        "admin [docker only]",
+    ], body_size=7.0)
     panel(c, 2, 2, "<frontend>", [
         "main", "openview", "monitoring", "bridging", "content", "workspace",
         "designer",
     ], icon=browser_icon, icon_scale=0.21)
     panel(c, 3, 2, "<microservice>", (
-        ["artifact", "bridge", "group", "impex", "messaging", "monitor", "openview"],
+        ["artifact", "bridge", "group", "impex", "messaging", "monitor", "openview",
+         "  [docker: open]"],
         ["repo", "resource", "schema", "submission", "terminology", "user",
          "valuerecommender", "worker"],
-    ), span=3)
+    ), span=2)
+    panel(c, 5, 2, "prod", [
+        "configure-frontends", "reset-frontends", "provision-artifact-key",
+    ])
+
+    panel(c, 0, 3, "repo", [("config", ORANGE)])
+    panel(c, 1, 3, "check", (
+        [
+            ("repos", ORANGE),
+            ("versions [--strict] [--by-file]", ORANGE),
+            "components [--strict] [--all]",
+            "snapshots [--version VER]",
+            "  [--grace-hours N] [--nexus URL]",
+            "ci [--all]",
+            "ci-env [--apply]",
+            "openapi [--all]",
+            "main [--all]",
+        ],
+        [
+            "design-tokens [--repo REPO]",
+            "  [--strict] [--all] [--json]",
+            "  [--init-baseline]",
+            "  [--prune-baseline]",
+            "  [--sync-surfaces]",
+            "  [--surface-inventory FILE]",
+            "artifact-versioning [--apply]",
+            "stores",
+        ],
+    ), span=2, icon=check_icon, icon_scale=0.24, body_size=6.7)
+    panel(c, 3, 3, "env", [
+        ("status", ORANGE), "list [native|docker]",
+        "filter TERM", "  [native|docker]",
+        "artifact-key",
+        "  init|rotate|retire",
+    ])
+    panel(c, 4, 3, "cert", [
+        "ca [--force]", "domains [NAME...]", "  [--force]", ("setup", ORANGE),
+    ], icon=check_icon, icon_scale=0.22)
+    panel(c, 5, 3, "dev", [
+        ("add-hosts", ORANGE), "copy-keycloak-listener", "create-directories",
+        "generate-api-key [USER_ID]",
+    ])
 
     c.setStrokeColor(OUTLINE)
     c.setLineWidth(1.2)
