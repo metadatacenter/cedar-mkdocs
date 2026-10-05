@@ -132,3 +132,21 @@ The preview is particularly useful after the repository inventory or a project's
 changed. The generated plan says `Maven clean install` when tests will run and
 `Maven clean install skip tests` when `--skip-tests` was selected. A successful preview only
 confirms the selected work; the real build must still pass.
+
+## Keep Failed-Build Evidence
+
+An isolated frontend build works in a temporary copy that is deleted when it finishes. When one
+fails, cedarcli first copies the npm debug logs, the test and coverage reports, and the build's
+command log into `$CEDAR_HOME/.cedar/build-reports/failures/`, and the build prints the bundle's
+path. A bundle holds at most 250 MiB. Nothing removes the bundles automatically, so review them
+from time to time:
+
+```bash
+cedarcli build diagnostics
+cedarcli build diagnostics --apply
+```
+
+The command selects every bundle older than `--days`, 14 by default. Counting from the newest, it
+also selects those that would take the kept bundles past `--max-mib`, 1024 by default. Without
+`--apply` it only lists its selection. It never removes a directory it does not recognize as a
+completed bundle, such as one an interrupted capture left behind.

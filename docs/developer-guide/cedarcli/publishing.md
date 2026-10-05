@@ -21,6 +21,19 @@ Publish the Java estate in dependency order with:
 cedarcli publish java
 ```
 
+`publish java` deploys the four layers that `build java` builds, in the same order, and each layer
+can also be published alone:
+
+```bash
+cedarcli publish parent
+cedarcli publish libraries
+cedarcli publish project
+cedarcli publish clients
+```
+
+These run Maven's deploy with tests skipped and publish whatever version the checked-out POMs
+declare, so build and test a layer before publishing it.
+
 The broader targets are available when the change spans more of CEDAR:
 
 ```bash
@@ -34,6 +47,33 @@ changed projects locally before making their artifacts shared inputs.
 `publish frontends` and `publish all` include Workspace and Template Designer. Build trains and
 formal releases carry their packages with the other frontends. Public releases of the TypeScript
 model library and CEE follow a separate npmjs procedure.
+
+## Publish Component Development Packages
+
+The browser applications consume the design tokens and the embeddable components as npm packages,
+and npm has no snapshot version that moves with the source. A consumer receives a component change
+only when its pin moves to a newly published version, and moving a pin is a source change in each
+consuming repository. `cedarcli publish components` does both:
+
+```bash
+cedarcli publish components
+cedarcli publish components --apply
+```
+
+Without `--apply` the command reports its plan and changes nothing, because an npm version once
+taken cannot be published again. With `--apply` it publishes the design tokens, CETP, and CED as
+development packages named after their pushed `develop` heads, in the form
+`<version>-dev.<YYYYMMDD>.<commit>`. It then rewrites each consumer's pin, updates the consumer's
+lock, and restages any bundle the consumer serves. The model library and CEE are published by their
+own CI, so for those two the command moves the consumers only once the registry holds the version
+built from the pushed head. `--component <ID>` limits a run to one of `tokens`, `cetp`, `ced`,
+`model`, or `cee`. The components and their consumers are declared in
+`cedar-development/ops/frontend-train.json`.
+
+Every repository the command would write must be free of uncommitted tracked changes, and the
+command commits nothing: review each repository's diff, then commit and push it. When a run moves a
+pin inside a component's own repository, that component is skipped, because its pushed head does
+not yet carry the new pin. Push the change and run the command again to publish it.
 
 ## Publish an Immutable Build Train
 
@@ -67,6 +107,35 @@ Release-policy `cedar-maven-dev` repository root, npm identity, and Docker Regis
 It takes credentials from the environment or the `bmir-nexus-releases` server in
 `~/.m2/settings.xml`. No extra parameter enables these checks, and the probe does not publish,
 write train state, or change npm or Docker client configuration.
+
+The publication checks can also run on their own:
+
+```bash
+cedarcli publish probe
+cedarcli publish probe --upload
+```
+
+`--upload` adds a write. It puts a 64 KiB file into the `cedar-cli-probes` Nexus repository, reads
+it back, and deletes it. A passing upload shows that Nexus accepts writes now. It does not show that
+a large artifact will upload.
+
+A train intended for a release can also check, before dispatch, the release prerequisites a train
+cannot change:
+
+```bash
+cedarcli publish train --dry-run \
+  --release-version 2.9.4 \
+  --next-version 2.9.5-SNAPSHOT \
+  --cee-version 2.0.3
+```
+
+The three options go together, and the release version must be the version `develop` carries,
+which also begins the train ID. The CLI then runs most of the machine, permission, version, and
+content checks of `release plan` against the commits the train would capture, so a problem no train
+can fix stops the train rather than the release. `--cee-version` is checked only as a version
+number, because its equivalence proof needs the completed train. `--accept-main-only <repository>`
+accepts a file that only `main` carries, as [`release plan`](release.md) does. The acceptance
+applies to this command alone, so repeat it for `release plan` and `release start`.
 
 The exact-SHA probe gives only a short GitHub indexing absence and transient network or 502/503/504
 failures bounded retries, naming the repository, SHA, attempt, and delay. Pending/red CI, 401/403,
@@ -111,6 +180,20 @@ dependency graph must be audited and have its baseline updated before Maven star
 install scripts are approved by exact package version, and strict policy makes an unreviewed new
 lifecycle script fail. The historical frontend counts remain visible as debt; the baseline prevents
 them increasing silently, while CEE's production dependency audit remains a blocking zero gate.
+
+`cedarcli publish baselines` lists the baselines that no longer match their lockfiles, which are
+the locks a train would refuse:
+
+```bash
+cedarcli publish baselines
+cedarcli publish baselines --refresh
+```
+
+`--refresh` runs `npm audit` for each stale lock with the estate's Node and npm, then writes the
+lock's new digest and advisory counts into `cedar-development/ops/frontend-train.json`. The printed
+change in counts is the review the baseline records, so read it before committing the file in
+`cedar-development`. `--repository <name>` limits either form to one repository's locks, and `--all`
+lists the current baselines too.
 Release planning and execution use the same validator and strict environment. When release
 stamping changes a root lockfile, it refreshes that lock's baseline in the release and
 next-development train configuration so the next train does not inherit a stale digest.

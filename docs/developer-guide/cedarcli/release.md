@@ -14,11 +14,13 @@ what the train built. Creating a train is covered in
 The route is these commands:
 
 ```bash
+cedarcli release readiness  # settle the workspace before building the train
 cedarcli release plan       # read-only rehearsal against a completed train
 cedarcli release start      # run the release
 cedarcli release status     # one-shot phase table
 cedarcli release status --watch  # compact live progress
 cedarcli release resume     # verify the recorded boundary and continue
+cedarcli release timings    # measured stage timings of the current release
 cedarcli release abandon    # retain and close a local-only superseded attempt
 ```
 
@@ -88,6 +90,43 @@ minified literal exactly once, and removes only that literal. `allowScripts` con
 dependencies may run install scripts; it is not CEE runtime behavior. An undeclared policy, a second
 copy, or a changed byte beside it still fails the executable comparison.
 
+## Checking Readiness Before the Train
+
+Some release preconditions concern the workspace rather than any train. Repairing one of them
+changes source, and a train built before the repair captured the old source, so it would have to be
+built again. Settle those preconditions before building the train:
+
+```bash
+cedarcli release readiness --version 2.9.4 --next-version 2.9.5-SNAPSHOT
+```
+
+Readiness checks that every CEE consumer, Maven artifact, and npm release surface declared in the
+train configuration under `cedar-development/ops` is present in the checkout, and that the version
+arithmetic holds when the versions are given. It then packs each npm surface from an archive of its
+committed tree, which exposes a `prepack` script that depends on the checkout's `node_modules`.
+`--skip-packaging` omits the packing, the slowest of the checks. A run takes about ten seconds and
+writes no release state.
+
+`--full` adds the checks that read registries, CI, and the train, and reports one row per check:
+
+```bash
+cedarcli release readiness --full \
+  --version 2.9.4 \
+  --next-version 2.9.5-SNAPSHOT \
+  --model-version <PUBLIC_MODEL_VERSION> \
+  --cee-version 2.0.3 \
+  --from-train 2.9.4-dev.20260829.1200
+```
+
+The rows cover the public model package, the model version CEE declares and embeds, each consumer's
+manifest, lock, and installed pins, CI at the exact source commits, the whole-stack smoke record,
+clean and pushed source, and the release prerequisites the train cannot change. Once a train exists,
+they also cover its artifacts, the CEE equivalence proof, and whether its source still matches
+`develop`. A row whose inputs were not given reads `not checked` rather than passing, and the
+command exits nonzero until every row passes. Before a train exists, omit `--from-train` and expect
+its rows to read `not checked`. Readiness accepts no exceptions, and `plan` and `start` enforce
+every gate again.
+
 ## Rehearsing a Release
 
 Once the train is complete, rehearse the entire release without changing anything:
@@ -142,8 +181,9 @@ rather than disabling the check:
 cedarcli release start ... --accept-red-develop cedar-repo-server=33211136456
 ```
 
-The acceptance names one repository and one run, and it is recorded in the release ledger. There is
-no flag that skips the check for everything.
+The acceptance names one repository and one completed run, and turns that one finding into an
+advisory for the command that names it. Queued and running CI cannot be accepted, and there is no
+flag that skips the check for everything.
 
 **The writes will be accepted.** Both Nexus credentials are available and authenticate, npm holds an
 identity for CEDAR's Nexus registry, the release version is unused in every repository and absent
@@ -168,9 +208,18 @@ plan and completion record contain the same 31 images with immutable `sha256` re
 
 **The content is stampable.** Every file a Maven build regenerates with the version inside is
 declared, every `license.txt` carries a recognisable copyright line, and each remote's `main` holds
-nothing that `develop` does not. That last one is reported rather than refused: a release writes
-`main` from the released tree, so anything committed to `main` alone and never merged back is
-replaced.
+no file that `develop` lacks. A release writes `main` from the released tree, so a file changed on
+`main` alone and never merged back would be lost. Plan therefore refuses until that work reaches
+`develop` and a new train captures it, or until the replacement is accepted for that repository:
+
+```bash
+cedarcli release start ... --accept-main-only <repository>
+```
+
+The comparison counts changed files rather than commits, and it ignores `pom.xml`, `package.json`,
+and the npm lock files, which every release changes on `main`. Each file it names is labelled as
+either a declared generated distribution, which the release rebuilds, or source that needs review.
+`cedarcli check main` asks the same question of the current `main` and `develop` between releases.
 
 The Docker source's `IMAGE_VERSION`, `CEDAR_MAVEN_VERSION`, and `CEDAR_APPLICATION_VERSION` must all
 equal the train source version. Release stamping advances them together for both the release and
@@ -270,6 +319,20 @@ next. Every Maven file and its disposition are checkpointed in the ledger, so st
 progress while the enclosing artifact task is still open. An interrupted upload resumes by comparing
 the immutable remote bytes and continuing. Older ledgers that stored snapshot and release publication
 records together are classified by task identity, so their totals remain truthful.
+
+The ledger also times every phase. A successful `start` or `resume` ends with a summary, and
+`cedarcli release timings` prints it again at any later point:
+
+```bash
+cedarcli release timings
+```
+
+Each phase reports its attempts and its wall time, split into execution, time spent waiting for CI,
+and time spent backing off before a transient retry. Failed attempts remain in the totals, and a
+process killed mid-phase leaves its record marked incomplete. `--compare <VERSION>` adds each
+phase's change in execution time against another release's ledger, provided both ledgers describe
+the same repositories, phases, and concurrency settings. A new release deletes the ledgers of
+earlier ones, so the state directory normally holds no ledger to compare against.
 
 ## Acceptance
 

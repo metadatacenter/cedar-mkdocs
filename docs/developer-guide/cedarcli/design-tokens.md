@@ -36,8 +36,11 @@ swatch can be appropriate.
 | `--json` | Emit a machine-readable report with per-repository findings and errors. Combine with `--strict` for a gate. |
 | `--init-baseline` | Create an initial baseline after review. Refuses to overwrite an existing baseline. |
 | `--prune-baseline` | Remove resolved findings or reduce their occurrence allowances; never add or increase an allowance. |
+| `--sync-surfaces` | Regenerate each scanned frontend's copy of the surface contract helper before reporting on it. |
+| `--surface-inventory FILE` | Write the Markdown hierarchy of the modern UI's pages and surfaces to `FILE`, an absolute path. |
 
 The baseline-writing options are mutually exclusive. Normal reporting does not change files.
+[Keep Surface Contracts Current](#keep-surface-contracts-current) explains the two surface options.
 Exit status **0** means the selected reporting or gate conditions passed; **1** means strict mode
 found new gated drift or a missing baseline; **2** means the check could not run correctly, such
 as a missing checker, invalid baseline or invalid arguments. Without `--strict`, findings alone
@@ -63,6 +66,27 @@ For an intentional local value, the baseline's `exceptions` object maps the repo
 to a specific written reason. Exceptions apply to the exact declaration, not a whole file or rule.
 The [token usage guide](https://github.com/metadatacenter/cedar-design-tokens/blob/develop/README.md#monitor-adoption)
 explains common role choices and exceptions. Do not delete and regenerate a baseline to hide new drift.
+
+## Keep Surface Contracts Current
+
+The token repository also holds rendered-style contracts for the registered surfaces of the modern
+UI, which each frontend's browser tests check at desktop and phone widths. Each frontend declares
+its surfaces in `.ui-surfaces.json` and carries a generated copy of the contract helper under
+`browser/tests/` or `visual/tests/`. After the central rules change, or when the check reports a
+stale helper, regenerate the copies and commit them in each frontend:
+
+```bash
+cedarcli check design-tokens --sync-surfaces
+```
+
+`--surface-inventory` writes the current hierarchy of pages and surfaces as Markdown, generated from
+the registries rather than maintained by hand. It first validates the registries of all eight
+frontends that must have one, and writes nothing if any is invalid. The checker runs from
+`$CEDAR_HOME/cedar-cli`, where a relative path would land, so give an absolute one:
+
+```bash
+cedarcli check design-tokens --surface-inventory "$PWD/ui-surfaces.md"
+```
 
 ## Use It in CI
 

@@ -19,6 +19,9 @@ own Python environment and preserves your shell's environment and working direct
 a successful Git navigation command deliberately changes directory. Commands such as
 `build this` and `publish this` therefore operate on the repository you are in.
 
+`cedarcli cheat` opens a one-page sheet of every command and its principal options in the default
+PDF viewer. `--help` at any level of a command lists its options in full.
+
 If environment setup or a command fails, the wrapper returns a nonzero exit status without closing
 your shell. Scripts can use that status to stop dependent work. Maven cache cleanup and the
 cheat-sheet opener also report failures through their exit status.

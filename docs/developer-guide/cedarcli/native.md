@@ -37,7 +37,10 @@ trusting a smoke test, and expect `cedarcli test e2e` to refuse to run until you
 can adopt, while `!` marks a foreign listener that native control will not touch.
 
 For scripts and CI checks, `cedarcli native health` provides a simple success or failure result for
-the managed application tier. During an interactive startup, `cedarcli native watch` keeps the
+the managed application tier: it succeeds only when every managed microservice and frontend is
+healthy. A staging or production host that serves its frontends from nginx runs no frontend
+processes, so it checks the microservices alone with `--group microservices`. `--group frontends`
+checks the frontends alone. During an interactive startup, `cedarcli native watch` keeps the
 lower-level process view current.
 
 ## Work on One Part
@@ -69,6 +72,11 @@ cedarcli build this
 cedarcli native restart microservice resource
 cedarcli native logs resource
 ```
+
+`native logs` follows the service's standard output, starting from its last 100 lines. `-n` sets
+that number. A restart truncates that file. For history that survives restarts, `--dropwizard`
+follows the service's Dropwizard log instead, which rotates daily. A frontend's log is named with
+its `ui-` prefix, as in `cedarcli native logs ui-workspace`, and has no Dropwizard log.
 
 Frontend development servers usually rebuild source changes automatically. Restart one when its
 dependencies or process configuration have changed:

@@ -55,7 +55,8 @@ cedarcli docker start keycloak --detach
 
 Use these after the deployment has been prepared, when diagnosing or restarting one part. The
 optional `admin` target starts the administration tools and is managed separately from the main
-deployment.
+deployment. Docker targets spell the OpenView microservice `open`, as in
+`cedarcli docker start microservice open`, where native mode uses `openview`.
 
 ## Build Docker Images
 
@@ -72,6 +73,12 @@ Infrastructure and microservice builds use the current completed Maven train unl
 `--local` selects another input. An interactive frontend build uses compatibility pins and is not a
 reconstruction of the train's verified npm graph; use the already-published train images when exact
 frontend reproduction matters.
+
+Building one server image, such as `cedarcli docker build microservice resource`, first builds the
+CEDAR base images it is built from, `cedar-java` and `cedar-microservice`, so that it cannot inherit
+stale ones. `--no-deps` skips those bases. Nothing checks what it finds instead, so use it only when
+bases of exactly the version being built, made from the current base definitions, are already
+present.
 
 To construct images from locally built Java artifacts, use the local path consistently:
 

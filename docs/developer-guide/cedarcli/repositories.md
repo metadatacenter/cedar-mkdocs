@@ -21,6 +21,11 @@ application source:
 cedarcli git clone docker
 ```
 
+A release can add a repository to the configuration that existing checkouts lack.
+`cedarcli git clone-missing` clones each configured repository that has no directory under
+`$CEDAR_HOME`, then checks out its `main`. `cedarcli check versions` names this command when it
+finds a repository missing.
+
 ## Align the Repositories
 
 Before a broad build, put the repositories on the intended branch and update them together. Normal
@@ -55,16 +60,20 @@ Start with:
 cedarcli git status
 ```
 
-The summary identifies uncommitted changes, branches that are ahead or behind, and Git errors. Use
-the related commands when you need a narrower view:
+The summary identifies uncommitted changes, branches that are ahead or behind, and Git errors. The
+ahead and behind counts compare against the remote-tracking branches as last fetched.
+`cedarcli git fetch` refreshes those branches in every repository without changing any checkout.
+Use the related commands when you need a narrower view:
 
 ```bash
 cedarcli git branch
+cedarcli git remote
 cedarcli git list branch
 cedarcli git list tag
 ```
 
-`git branch` answers which branch each checkout is currently using. The two `list` commands are
+`git branch` answers which branch each checkout is currently using, and `git remote` lists the
+remotes each one fetches from and pushes to. The two `list` commands are
 useful around releases, when you need to confirm that expected branches or tags exist across the
 estate.
 
@@ -80,6 +89,14 @@ failure and run `cedarcli git status` successfully before using that record to n
 Ordinary feature work should be committed inside the repository that owns it. This keeps each
 history understandable and prevents unrelated changes from travelling together.
 
-`cedarcli git add-commit-push "message"` is intentionally broad: it stages, commits, and pushes
-changes across the configured repositories. Reserve it for a coordinated change that you have
-already reviewed with `cedarcli git status`.
+`cedarcli git add-commit-push` stages, commits, and pushes named paths in one named repository:
+
+```bash
+cedarcli git add-commit-push "Describe the change" --repo cedar-parent --path pom.xml
+```
+
+`--repo` takes the repository's exact name, and `--path` takes a file or directory relative to it,
+repeated for each one to include. The command refuses before writing anything when the repository
+has no changes, or when any change lies outside the named paths, so it cannot sweep unrelated work
+into the commit. It then pushes to the branch's configured upstream. A failed push leaves the commit
+in place locally.
