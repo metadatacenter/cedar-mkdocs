@@ -60,8 +60,7 @@ server: run `npm run build` in `cedar-workspace` after source edits, then refres
 The general frontend build includes Workspace’s `npm ci` and `npm run build` in an isolated
 checkout, so it does not replace the running server’s dependency tree.
 
-Workspace and Template Designer also have a deliberately narrow build route while their split
-deployment is being stabilized:
+A narrower route builds Workspace and Template Designer alone:
 
 ```bash
 cedarcli build split-frontends
@@ -78,7 +77,9 @@ cedarcli build split-frontends --server-payload
 
 The payload build refuses dirty source, records source and content hashes in each generated
 `app/config/build-info.json`, and exits after producing the static trees. It does not start a
-development server or require Docker.
+development server or require Docker. On a host that also serves the legacy Template Editor,
+`cedar-template-editor`, `cedarcli build server-frontends --server-payload` generates all three
+trees.
 
 ## Build Everything
 

@@ -108,22 +108,21 @@ cedarcli build maven clean cedar
 cedarcli build maven clean all
 ```
 
-## Split Workspace and Designer
+## Build Workspace and Template Designer
 
-Workspace and Template Designer have explicit routes while their split deployment is being
-stabilized:
+Workspace and Template Designer can be built without the other frontends:
 
 ```bash
 cedarcli build split-frontends
 cedarcli build split-frontends --server-payload
-cedarcli publish split-frontends --dry-run
-cedarcli publish split-frontends
 ```
 
-The ordinary build installs only their locked dependencies. `--server-payload` creates the static
-trees used by native staging/production nginx. Publication creates immutable commit-derived
-development packages in CEDAR Nexus without changing either checkout; the generic frontend and
-`all` publication selectors intentionally exclude them.
+The ordinary build compiles Workspace's Angular application and installs Template Designer's locked
+dependencies. `--server-payload` instead generates the static trees that nginx serves directly on a
+native staging or production host. On a host that also serves the legacy Template Editor,
+`cedar-template-editor`, `cedarcli build server-frontends --server-payload` generates all three
+trees. Workspace and Template Designer publish with the other frontends, through
+`cedarcli publish frontends` and `cedarcli publish all`.
 
 ## Immutable Development Trains
 

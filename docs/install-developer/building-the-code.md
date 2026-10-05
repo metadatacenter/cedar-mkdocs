@@ -35,10 +35,10 @@ cedarcli build frontends
 The frontend build installs each repository's declared npm dependencies and runs the build defined
 for that project.
 
-Workspace and Template Designer also have a narrow split-deployment route. Install only those two
-locked dependency trees with `cedarcli build split-frontends`. A native staging or production host
-uses `cedarcli build split-frontends --server-payload` to produce source-hashed static `app` trees
-for nginx after the environment-specific Workspace and Designer URLs have been configured.
+`cedarcli build split-frontends` builds Workspace and Template Designer alone. A native staging or
+production host uses `cedarcli build split-frontends --server-payload` to produce source-hashed
+static `app` trees for nginx after the environment-specific Workspace and Designer URLs have been
+configured.
 
 All Java-reaching build selectors run their unit and embedded integration suites by default. Use
 `--skip-tests` only for an explicit compile/install-only pass after the tests have already passed.

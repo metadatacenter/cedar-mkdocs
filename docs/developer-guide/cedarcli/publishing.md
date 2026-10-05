@@ -31,18 +31,9 @@ cedarcli publish all
 Publishing does not deploy or restart an environment. It also does not replace testing: verify the
 changed projects locally before making their artifacts shared inputs.
 
-Workspace and Template Designer remain outside the generic frontend and `all` publication
-selectors while their split deployment is being stabilized. Publish exactly those two immutable,
-commit-derived development packages with the explicit route:
-
-```bash
-cedarcli publish split-frontends --dry-run
-cedarcli publish split-frontends
-```
-
-The preview and publication both require clean source. Publication packs from the committed tree,
-does not change either checkout, and writes to the configured CEDAR Nexus registry. Public releases
-of the TypeScript model library and CEE remain a separate npmjs procedure.
+`publish frontends` and `publish all` include Workspace and Template Designer. Build trains and
+formal releases carry their packages with the other frontends. Public releases of the TypeScript
+model library and CEE follow a separate npmjs procedure.
 
 ## Publish an Immutable Build Train
 
