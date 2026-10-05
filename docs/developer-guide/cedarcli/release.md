@@ -182,8 +182,8 @@ cedarcli release start ... --accept-red-develop cedar-repo-server=33211136456
 ```
 
 The acceptance names one repository and one completed run, and turns that one finding into an
-advisory for the command that names it. Queued and running CI cannot be accepted, and there is no
-flag that skips the check for everything.
+advisory. `start` records it in the release ledger, and `release resume` applies it again. Queued
+and running CI cannot be accepted, and there is no flag that skips the check for everything.
 
 **The writes will be accepted.** Both Nexus credentials are available and authenticate, npm holds an
 identity for CEDAR's Nexus registry, the release version is unused in every repository and absent
@@ -216,10 +216,11 @@ no file that `develop` lacks. A release writes `main` from the released tree, so
 cedarcli release start ... --accept-main-only <repository>
 ```
 
-The comparison counts changed files rather than commits, and it ignores `pom.xml`, `package.json`,
-and the npm lock files, which every release changes on `main`. Each file it names is labelled as
-either a declared generated distribution, which the release rebuilds, or source that needs review.
-`cedarcli check main` asks the same question of the current `main` and `develop` between releases.
+`start` records this acceptance too, and `release resume` applies it again. The comparison counts
+changed files rather than commits, and it ignores `pom.xml`, `package.json`, and the npm lock files,
+which every release changes on `main`. Each file it names is labelled as either a declared generated
+distribution, which the release rebuilds, or source that needs review. `cedarcli check main` asks
+the same question of the current `main` and `develop` between releases.
 
 The Docker source's `IMAGE_VERSION`, `CEDAR_MAVEN_VERSION`, and `CEDAR_APPLICATION_VERSION` must all
 equal the train source version. Release stamping advances them together for both the release and
