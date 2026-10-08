@@ -3,6 +3,13 @@ theme:
   name: material
   features:
     - navigation.indexes
+    # Material 9 made these three opt-in; each was on by default in Material 8.
+    - navigation.footer
+    - content.action.edit
+    - content.code.copy
+  # Material 9 draws the edit action as a page with a pencil; keep Material 8's pencil.
+  icon:
+    edit: material/pencil
 
 markdown_extensions:
   - markdown.extensions.toc:
