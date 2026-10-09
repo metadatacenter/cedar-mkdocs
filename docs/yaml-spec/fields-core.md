@@ -33,13 +33,15 @@ The settings fall into a few groups.
 
 By default a field collects one value. `multiple` makes it collect a list, and `minItems`
 and `maxItems` bound the length. Checkbox, multi-select list, and attribute-value fields are
-multi-valued by nature and do not use `multiple`.
+multi-valued by nature and do not use `multiple`, but take the same bounds. An absent
+`minItems` means zero, as it does in JSON Schema. The CEDAR libraries write it for every field
+that collects a list, so only a document written by hand leaves it out.
 
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
 | `multiple` | boolean | optional | The field accepts a list of values. |
-| `minItems` | integer | optional | Minimum number of values, when multiple. |
-| `maxItems` | integer | optional | Maximum number of values, when multiple. |
+| `minItems` | integer | optional | Minimum number of values, when the field collects a list. Absent means 0. |
+| `maxItems` | integer | optional | Maximum number of values, when the field collects a list. |
 
 ### Property Binding
 

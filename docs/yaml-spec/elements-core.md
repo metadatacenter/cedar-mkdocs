@@ -40,12 +40,13 @@ element sits, not on the element itself. They fall into a few groups.
 ### Repetition
 
 A repeating element stands for a list of occurrences. `multiple` marks it as repeating, and
-`minItems` and `maxItems` bound how many times it may occur.
+`minItems` and `maxItems` bound how many times it may occur. An absent `minItems` means zero,
+as it does in JSON Schema. The CEDAR libraries write it for every repeating element.
 
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `multiple` | boolean | The element may occur more than once. |
-| `minItems` | integer | Minimum number of occurrences. |
+| `minItems` | integer | Minimum number of occurrences. Absent means 0. |
 | `maxItems` | integer | Maximum number of occurrences. |
 
 ### Property Binding
