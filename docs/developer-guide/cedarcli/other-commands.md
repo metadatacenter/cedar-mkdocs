@@ -43,19 +43,35 @@ credentials or global counts, still run alone after the concurrent batch, and th
 inventory must still pass. `--rest-workers 1` restores the serial order for diagnosis. The browser
 and split-frontend tiers account for most of a whole run.
 
-The split-frontend tier runs its journeys in lanes, each a sequence of Node processes that drive a
-browser, all at once. A core lane runs the chain of Workspace steps that depend on one another, an
-identity lane runs everything that signs the second test user in or logs out, and the general lanes
-share the remaining journeys and scripts. The tier uses two general lanes by default and accepts
-`--split-lanes` from one to four:
+The split-frontend tier runs its journeys and scripts in lanes, all at once, each with a browser of
+its own. A core lane first runs the chain of Workspace steps that depend on one another, an identity
+lane runs everything that signs the second test user in or logs out, one at a time, and general
+lanes run the rest. The lanes take their work from one queue, longest first, so a lane that
+finishes its own work early takes a share of the others'. The tier uses two general lanes by
+default and accepts `--split-lanes` from one to four:
 
 ```bash
 cedarcli test e2e --rest-workers 4 --split-lanes 1
 ```
 
 `--split-lanes 1` runs the tier sequentially, one script after another, which is the diagnostic
-path. A failing lane does not stop the others, so the record names every lane that failed and the
-step it failed in.
+path. A lane that fails takes no further work while the others carry on, so the record names every
+lane that failed and the step it failed in.
+
+Every journey and script has a deadline derived from how long it took in recent runs, with
+generous headroom, so one that hangs cannot hang the command. One that overruns is killed, what it
+created is removed, and the record names it with its lane and how long it ran.
+`--split-timeout-cap` sets the longest any one of them may take, from 60 to 7,200 seconds, and
+defaults to 1,200. The cap is also the deadline of a journey no earlier run has measured. A slower
+host can raise it:
+
+```bash
+cedarcli test e2e --rest-workers 4 --split-timeout-cap 1800
+```
+
+Only one split-frontend tier runs on a machine at a time, since each run takes a lock that every
+session on the machine shares. A second run, from this command or any other, stops at once and
+names the PID, start time and command of the run that holds it.
 
 `cedarcli check versions` compares the version each repository declares on disk against the version
 most of the estate carries, and reports one row per repository. A repository that does not match is

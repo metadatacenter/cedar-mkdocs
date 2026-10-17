@@ -267,7 +267,8 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         ("remove containers | images | network | volumes | all", OUTLINE),
     ], span=3)
     panel(c, 5, 1, "test", [
-        ("e2e [--rest-workers N]", ORANGE), ("  [--split-lanes N]", ORANGE), "status", "cleanup",
+        ("e2e [--rest-workers N]", ORANGE), ("  [--split-lanes N]", ORANGE),
+        ("  [--split-timeout-cap SEC]", ORANGE), "status", "cleanup",
     ])
 
     panel(c, 0, 2, "<build_target>", [
