@@ -41,7 +41,21 @@ Four workers is the fastest setting. On a 16-core workstation the REST tier take
 seconds with four, against 119 serially. Suites that depend on global state, such as account
 credentials or global counts, still run alone after the concurrent batch, and the full check
 inventory must still pass. `--rest-workers 1` restores the serial order for diagnosis. The browser
-and split-frontend tiers run serially and account for most of a whole run.
+and split-frontend tiers account for most of a whole run.
+
+The split-frontend tier runs its journeys in lanes, each a sequence of Node processes that drive a
+browser, all at once. A core lane runs the chain of Workspace steps that depend on one another, an
+identity lane runs everything that signs the second test user in or logs out, and the general lanes
+share the remaining journeys and scripts. The tier uses two general lanes by default and accepts
+`--split-lanes` from one to four:
+
+```bash
+cedarcli test e2e --rest-workers 4 --split-lanes 1
+```
+
+`--split-lanes 1` runs the tier sequentially, one script after another, which is the diagnostic
+path. A failing lane does not stop the others, so the record names every lane that failed and the
+step it failed in.
 
 `cedarcli check versions` compares the version each repository declares on disk against the version
 most of the estate carries, and reports one row per repository. A repository that does not match is
