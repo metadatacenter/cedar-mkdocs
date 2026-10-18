@@ -32,7 +32,7 @@ template's row, or open its dropdown menu (the kebab `⋮`) and choose Populate.
 
 A template can have a web link (an IRI) that creates an instance when opened in a browser or
 clicked in a page. To make such a link, see
-[Building Shareable Metadata Creation IRIs](cedar-identifiers-and-iris.md#building-shareable-metadata-creation-iris).
+[Building Shareable Metadata Creation Links](cedar-identifiers-and-iris.md#building-shareable-metadata-creation-iris).
 
 For example, the following link starts an instance of the Adaptive Immune Receptor Repertoire
 community's minimum information model (MiAIRR). The string after `templates/` is the template's
