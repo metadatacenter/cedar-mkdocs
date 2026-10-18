@@ -116,6 +116,15 @@ the applications that host them, and its `--strict` mode gates new drift against
 baselines. See [Monitoring Design Token Adoption](design-tokens.md) for the repositories it scans,
 its options, baseline maintenance and CI use.
 
+`cedarcli check test-tags` reads the Java test sources. A test class that starts a Dropwizard
+application, an embedded store, embedded Redis, OpenSearch or a local socket server must carry
+`@Tag("integration")`, on itself or on a class it extends, and the check names each class that does
+not. `cedarcli build java` runs the same check before any Maven work whenever it runs the tests, and
+refuses the build on a finding. A train dry run reports findings without refusing, because the tag
+changes nothing a default build runs. The
+[backend runbook](https://github.com/metadatacenter/cedar-development/blob/develop/ops/BACKEND-RUNBOOK.md#default-test-environment)
+explains how the tag selects either kind of test.
+
 Two checks read continuous integration rather than artifacts. `cedarcli check ci` reports the CI
 state at every `develop` head a train would capture, and `cedarcli check ci-env` compares each Java
 repository's CI environment block against the one its tests require, rewriting the copies that have
