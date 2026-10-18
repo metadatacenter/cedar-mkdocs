@@ -93,8 +93,9 @@ repository's `develop` to equal the live remote `develop`.
 The remaining checks each compare a declaration against what exists. `cedarcli check repos`
 reports configured repositories that are absent, and Git clones the configuration does not name.
 `cedarcli check snapshots` compares the Maven snapshot Nexus serves for each publishing repository
-against the head commit on `develop`, which is the condition that leaves every consumer building
-against an artifact nobody shipped. `cedarcli check components` asks the same question of the
+against the newest commit on `develop` that can change it, since a snapshot older than its source
+leaves every consumer building against an artifact nobody shipped. A commit that changes only CI
+configuration or documentation is passed over. `cedarcli check components` asks the same question of the
 browser applications, whose components reach each other as published npm packages: it measures each
 pin against the component's own history, the bundles a host serves against the packages it locks,
 and the elements a host creates against what those bundles define.
