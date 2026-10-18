@@ -5,6 +5,11 @@ repositories, rebuild the affected software, and run a native, hybrid, or Docker
 developers build applications that use CEDAR through its model, libraries, and REST APIs. This
 guide covers both.
 
+[CEDAR Artifact Validation Architecture](../developer-guide/cedar-artifact-validation-architecture.md)
+explains how the artifact model connects designers, editors, libraries, and
+services, and how they preserve values and apply consistent validation and save
+policies.
+
 The [cedarcli Manual](../developer-guide/cedarcli/) explains the first workflow. It starts with the
 Git repository estate, follows Java and frontend code through local builds and immutable build
 trains, and then shows how the same software is run in each supported deployment mode.

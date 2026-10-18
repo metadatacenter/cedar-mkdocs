@@ -126,6 +126,7 @@ nav:
 
   - Developer Guide:
       - developer-overview/index.md
+      - developer-guide/cedar-artifact-validation-architecture.md
       - cedarcli Manual:
           - developer-guide/cedarcli/index.md
           - developer-guide/cedarcli/repositories.md
