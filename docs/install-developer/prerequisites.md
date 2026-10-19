@@ -49,7 +49,7 @@ one the project declares. Do not pin the global CLI to a project's version.
 ## Node Versions
 
 Node 20 builds the AngularJS frontends and the Angular 15 and 16 sources. Three repositories need a
-newer one: the Embeddable Editor, the TypeScript model library, and the term picker all pin 24.19.0
+newer one: the Embeddable Editor, the TypeScript model library, and the term picker all pin 24.22.0
 in a `.nvmrc`, because Angular 22 accepts only `^22.22.3 || ^24.15.0 || >=26`. Node 20 cannot build
 them.
 
