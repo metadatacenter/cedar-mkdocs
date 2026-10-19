@@ -45,6 +45,17 @@ That is usually the quickest backend development loop: build the repository you 
 restart the affected service in the selected deployment mode. It also runs that repository's tests
 unless `--skip-tests` is supplied.
 
+### Test Coverage
+
+Every build that runs Java tests measures their coverage with JaCoCo. Each module that runs tests
+writes an HTML report to `target/site/jacoco/index.html`. A module with Failsafe suites writes a
+second report to `target/site/jacoco-it/`. When the build finishes, cedarcli says how many reports
+it wrote.
+
+A report counts only the classes its own module compiles, and credits them only with that module's
+tests. When a server's suites exercise a shared library, that execution counts toward neither the
+server's report nor the library's.
+
 ## Build the Frontends
 
 Build the registered frontend projects with:
