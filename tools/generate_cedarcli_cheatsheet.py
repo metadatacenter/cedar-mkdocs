@@ -293,8 +293,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     panel(c, 3, 2, "<microservice>", (
         ["artifact", "bridge", "group", "impex", "messaging", "monitor", "openview",
          "  [docker: open]"],
-        ["repo", "resource", "schema", "submission", "terminology", "user",
-         "valuerecommender", "worker"],
+        ["repo", "resource", "terminology", "user", "worker"],
     ), span=2)
     panel(c, 5, 2, "prod", [
         "configure-frontends", "reset-frontends", "provision-artifact-key",

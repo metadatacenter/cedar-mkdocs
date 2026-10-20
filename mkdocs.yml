@@ -76,7 +76,6 @@ nav:
                   - user-guide/advanced-topics/versioning-model/managing-versioned-artifacts/deleting-versions.md
                   - user-guide/advanced-topics/versioning-model/managing-versioned-artifacts/stored-version-information.md
           - user-guide/viewing-resource-information.md
-          - user-guide/understanding-the-suggestion-system.md
           - user-guide/cedar-identifiers-and-iris.md
           - user-guide/working-with-cdes.md
           - user-guide/cedar-for-cadsr.md

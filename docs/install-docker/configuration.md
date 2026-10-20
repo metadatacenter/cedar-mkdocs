@@ -65,7 +65,7 @@ export CEDAR_BASE_IMAGE_PREFIX=nexus.bmir.stanford.edu/docker-cedar-internal
 
 Anonymous reads are enabled for these repositories, so an ordinary installation does not need a
 Nexus login. The values use Docker image syntax, not web addresses: do not add `https://`, an image
-tag, or a trailing slash. The runtime prefix controls the 29 images Compose pulls and starts. The
+tag, or a trailing slash. The runtime prefix controls the 26 images Compose pulls and starts. The
 base prefix identifies the two Java base images used only while constructing images. CLI image
 cleanup covers both prefixes, so keep them unchanged throughout a build and deployment.
 

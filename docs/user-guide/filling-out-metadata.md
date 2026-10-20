@@ -147,16 +147,6 @@ Within a second or two of your stopping, a list of matching labels appears. Clic
 want, or keep typing to refine the search. Synonyms are not matched, so it helps to know which
 label the vocabulary uses, for instance "human" versus "homo sapiens".
 
-**Field suggestions.** A field may be enabled for suggestions. Suggested terms appear at the
-top of the list, out of alphabetical order, each with a number from roughly 50 to 100.
-
-![](../img/userguide/entering-metadata-dropdown-suggestions-20191126.png){:width="35%" class="right"}
-The number is the *strength* of the suggestion, not the likelihood of that value. Click a
-suggestion to choose it. Suggestions come from an authoring algorithm that learns from
-metadata already entered for the template and surfaces the answers that commonly follow the
-pattern you are filling in. See
-[Understanding the Suggestion System](understanding-the-suggestion-system.md).
-
 **Attribute-value fields.** Some forms let you add your own attributes, capturing metadata the
 template did not anticipate.
 
@@ -194,6 +184,3 @@ rules. This catches missing required fields and malformed values, such as a link
 something that is not a link. A successful check shows a green "Instance saved successfully"
 notice. If required fields are missing, CEDAR lists them. If something more fundamental is
 wrong, it shows a red "Instance not saved" message with the errors.
-
-In some cases, such as MiAIRR submissions, CEDAR also runs an external validator on the
-metadata and, if that fails, presents its report.

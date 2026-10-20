@@ -128,8 +128,8 @@ Clicking Add opens a window for choosing a term, a branch, or a whole ontology o
 values. Repeat to add more. For guidance on finding good terms, see
 [Choosing Controlled Terms](more-fair-templates.md#choosing-controlled-terms).
 
-**Suggestions.** Set the Suggestions tab to Yes to enable authoring suggestions for the field.
-See [Understanding the Suggestion System](understanding-the-suggestion-system.md).
+**Suggestions.** The Suggestions tab marks the field for value suggestions. CEDAR keeps the
+setting with the field but does not generate suggestions.
 
 #### Options for a Numeric Field
 
@@ -364,8 +364,8 @@ single-precision real. The choice constrains what the author may enter.
 **Required.** When set to Yes, the Metadata Editor marks the field as required and warns the
 author on save if it is empty. The author can dismiss the warning and save anyway.
 
-**Suggestions.** Set the Suggestions tab to Yes to enable authoring suggestions for the field.
-See [Understanding the Suggestion System](understanding-the-suggestion-system.md).
+**Suggestions.** The Suggestions tab marks the field for value suggestions. CEDAR keeps the
+setting with the field but does not generate suggestions.
 
 **Unit of Measure (numeric).** A free-text label for the field's unit, shown to authors and
 viewers of the metadata, before and after a value is entered.

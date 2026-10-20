@@ -204,7 +204,7 @@ request budget rather than broken. Plan says so. Retrying makes it worse, and th
 rolling 24-hour window, so the answer is to stop and let it roll off.
 
 **The completed train is releasable.** Its Maven and npm inventories are complete, and its Docker
-plan and completion record contain the same 31 images with immutable `sha256` registry digests.
+plan and completion record contain the same 28 images with immutable `sha256` registry digests.
 
 **The content is stampable.** Every file a Maven build regenerates with the version inside is
 declared, every `license.txt` carries a recognisable copyright line, and each remote's `main` holds

@@ -9,10 +9,10 @@ its health check:
 cedarcli docker status
 ```
 
-For a Docker deployment, the grouped table should contain 29 healthy, `current` service rows with
+For a Docker deployment, the grouped table should contain 26 healthy, `current` service rows with
 the expected ports and zero unexplained restarts, followed by successful authentication and
 frontend-route checks. `MISMATCH` is a failure even when health is green because the container is
-not running the configured image set. `hybrid` mode expects 22 containers and additionally checks
+not running the configured image set. `hybrid` mode expects 19 containers and additionally checks
 the seven routes served by native frontend processes.
 
 If the CLI reports that no mode is configured, run `cedarcli mode docker` and try again. If another

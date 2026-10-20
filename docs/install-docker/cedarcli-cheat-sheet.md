@@ -58,8 +58,8 @@ the clearer group spellings are `frontends` and `microservices`.
 
 | Mode | Runtime selected by the CLI |
 | --- | --- |
-| `docker` | All 29 core containers, including the seven frontend applications |
-| `hybrid` | The 22-container Docker backend, with Docker nginx routing to seven native frontend servers |
+| `docker` | All 26 core containers, including the seven frontend applications |
+| `hybrid` | The 19-container Docker backend, with Docker nginx routing to seven native frontend servers |
 | `native` | The complete host-based deployment; Docker commands are unavailable |
 
 ## Image Selection and Pulling

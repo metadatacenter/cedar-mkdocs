@@ -1,7 +1,7 @@
 # Start the Native Backend
 
-The Java microservices provide CEDAR's artifact, repository, user, terminology, submission, and
-supporting APIs. They all use the infrastructure configured on the previous page and run from the
+The Java microservices provide CEDAR's artifact, repository, user, terminology, and supporting
+APIs. They all use the infrastructure configured on the previous page and run from the
 JARs produced by `cedarcli build java`.
 
 ## Connect CEDAR to BioPortal

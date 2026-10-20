@@ -35,7 +35,7 @@ templates and metadata, and an API built for flexible integration with external 
 
 With CEDAR semantics, you control exactly what terms can satisfy a query—and as soon as the source ontology changes, users see the updated list in the drop-down choices. By connecting your questions to other questions on the same subject, and connecting your answers to other answers that use different words but mean the same thing, these semantic relations can be exploited in the resulting metadata. As CEDAR collects more metadata for more standards and external systems, those connections will become more valuable whenever you ask about existing metadata (or build new CEDAR templates!).
 
-And CEDAR knows a lot about entering metadata. For starters, it can give a list of (semantically precise!) controlled terms to choose from, and auto-suggest completions for you. It can also learn and share how the community filled out those forms, to help you check your own work. And using CEDAR, your lab manager can pre-configure a form for the team to use, hiding all the irrelevant fields and pre-setting your team's defaults, 
+And CEDAR knows a lot about entering metadata. For starters, it can give a list of (semantically precise!) controlled terms to choose from, and auto-suggest completions for you. And using CEDAR, your lab manager can pre-configure a form for the team to use, hiding all the irrelevant fields and pre-setting your team's defaults, 
 to make your job faster.
 
 CEDAR's [model](../../yaml-spec/cedar-model.md) supports the specification of 

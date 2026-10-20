@@ -137,15 +137,6 @@ options.
 
 ---
 
-**submission**: metadata content that is sent out from CEDAR into another repository 
-(may also include data).
-
----
-
-**submit**: send metadata to a repository, possibly along with data files.
-
----
-
 **template**: group of fields and/or elements that specifies what metadata 
 is to be collected for a specific purpose.
 

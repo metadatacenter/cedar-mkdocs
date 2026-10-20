@@ -507,7 +507,7 @@ The REQUIRED link allows you to specify whether or not the CDE needs to be fille
 ##### Suggestions
 <a name="opts-suggest"></a>
 
-Setting SUGGESTIONS to YES enables the {{ page.cedarw }} intelligent authoring suggestion system for the field. For a detailed explanation of this functionality, see [Understanding the Suggestion System](understanding-the-suggestion-system.md).
+SUGGESTIONS marks the field for value suggestions. The {{ page.cedarw }} keeps the setting with the field but does not generate suggestions.
 
 ##### Hidden
 <a name="opts-hide"></a>

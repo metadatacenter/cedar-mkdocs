@@ -16,11 +16,11 @@ Normal stop and restart operations reuse the images and preserve the data stored
 | Stack | Containers | Purpose |
 | --- | ---: | --- |
 | Infrastructure | 7 | nginx, Keycloak, MySQL, MongoDB, Redis, Neo4j, and OpenSearch |
-| Microservices | 15 | CEDAR REST and background services |
+| Microservices | 12 | CEDAR REST and background services |
 | Frontends | 7 | Main editor, Workspace, Designer, OpenView, Content, Monitoring, and Bridging |
 | Admin tools | 4 | Optional Kibana, phpMyAdmin, Redis Commander, and CEDAR admin tool |
 
-The first three stacks form the complete 29-container deployment. Admin tools are optional.
+The first three stacks form the complete 26-container deployment. Admin tools are optional.
 
 The infrastructure nginx remains the single public TLS endpoint and routes browser requests to the
 frontend containers.
@@ -35,7 +35,7 @@ container tag happened to be uploaded last.
 CEDAR maintainers create a complete published set with `cedarcli publish train`. The command starts
 the build-train workflow, which first publishes the immutable Maven graph, then publishes and
 verifies the captured TypeScript model → CEE → seven-frontend npm graph, and finally builds the two
-Java base images followed by the 29 runtime images. A clean verifier pulls all 31 images and records
+Java base images followed by the 26 runtime images. A clean verifier pulls all 28 images and records
 their immutable registry digests and npm/source provenance. The deployable Docker pointer changes
 only after all three inventories succeed. `cedarcli publish train-status <TRAIN_ID>` shows that
 major-stage state and recovery decision without the GitHub matrix noise; add `--watch` for compact
@@ -78,7 +78,7 @@ cedarcli docker start all --train <TRAIN_ID> --pull missing --timeout 1800
 When rebuilding infrastructure or microservice definitions against an older Maven train, pass the
 same ID to each relevant build group. Do not rebuild the frontend group as proof of that train; pull
 the centrally published frontend images whose recorded npm graph was already verified. A later
-start with `--pull never` succeeds only when all 29 runtime images for the selected ID are already
+start with `--pull never` succeeds only when all 26 runtime images for the selected ID are already
 present locally.
 
 To rebuild Java from checked-out source instead, prepare a complete development checkout rather
@@ -106,7 +106,7 @@ The local path is useful while changing Java source but is not required for a no
 installation. It uses the development image tag rather than claiming to reproduce a published
 train.
 
-The 29 locally built runtime images are tagged under the `CEDAR_IMAGE_PREFIX` selected during
+The 26 locally built runtime images are tagged under the `CEDAR_IMAGE_PREFIX` selected during
 configuration; the two Java bases use `CEDAR_BASE_IMAGE_PREFIX`. If you change either prefix,
 rebuild under the new values or pull a complete published set from those repositories.
 
@@ -134,8 +134,8 @@ Three persistent deployment modes are available, although this installation guid
 
 | Mode | What the CLI starts and checks |
 | --- | --- |
-| `docker` | All 29 core containers and all seven public frontend routes |
-| `hybrid` | The 22-container backend plus seven native frontend routes through Docker nginx |
+| `docker` | All 26 core containers and all seven public frontend routes |
+| `hybrid` | The 19-container backend plus seven native frontend routes through Docker nginx |
 | `native` | The host-based backend and frontend processes; Docker commands are rejected |
 
 Check that all CEDAR containers are running and healthy:
@@ -144,7 +144,7 @@ Check that all CEDAR containers are running and healthy:
 cedarcli docker status
 ```
 
-Status uses the configured mode. In Docker mode the grouped table includes 29 service rows with
+Status uses the configured mode. In Docker mode the grouped table includes 26 service rows with
 `Health`, `Image`, `Ports`, and `Restarts`, followed by the authentication and frontend-route
 acceptance summary. A healthy container marked `MISMATCH` is not accepted: its running image does
 not match the selected train or local development tag.
@@ -175,7 +175,7 @@ cedarcli docker build admin --train <TRAIN_ID>
 cedarcli docker start admin --train <TRAIN_ID> --detach
 ```
 
-The four admin images are optional and are not part of the verified 31-image core train. Building
+The four admin images are optional and are not part of the verified 28-image core train. Building
 and starting them with the active train ID keeps their Java input and image tag aligned with the
 running deployment.
 

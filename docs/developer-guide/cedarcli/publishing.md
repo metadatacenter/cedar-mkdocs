@@ -100,7 +100,7 @@ cedarcli publish train --dry-run
 
 The displayed dry-run ID is prospective and is not reserved; the real dispatch allocates again.
 Dry-run and real dispatch use the same local preflight. It validates the Maven, model → CEE →
-frontend, and 31-image Docker configuration as one contract; checks GitHub authentication and the
+frontend, and 28-image Docker configuration as one contract; checks GitHub authentication and the
 workflow plus CI for every exact remote `develop` SHA that defines one; requires the train slot to
 be idle; rejects dirty, unpushed, or remote-diverged source; requires a passing whole-stack smoke
 run, recorded by `cedarcli test e2e`, against exactly the `develop` heads the train would capture;
@@ -160,7 +160,7 @@ major-stage status command:
 cedarcli publish train-status <TRAIN_ID> --watch
 ```
 
-The compact watcher reports Maven, the three npm stages, the Docker plan, counts for the 31-image
+The compact watcher reports Maven, the three npm stages, the Docker plan, counts for the 28-image
 matrix, and final verification. An unchanged long stage emits a one-minute heartbeat naming its
 active job/step and elapsed time. Omit `--watch` for a one-shot view. Both forms show the exact failed
 job and step when available, the workflow URL, how much publication is verified, and the safe next
@@ -209,8 +209,8 @@ It then owns one exact source manifest and advances three independently verified
    captured CEE is wired to that exact package, tested, published, and then pinned into all seven
    captured frontend packages. Every downloaded npm tarball, integrity value, source commit, and
    prepared lock or payload is verified.
-3. The workflow builds the two Java bases and 29 runtime images from those recorded Maven and npm
-   inputs, pulls all 31 images back from Nexus, and verifies their digests and provenance labels.
+3. The workflow builds the two Java bases and 26 runtime images from those recorded Maven and npm
+   inputs, pulls all 28 images back from Nexus, and verifies their digests and provenance labels.
 
 Only completion of all three stages advances the deployable Docker pointer. The disposable train
 workspaces receive the train versions and dependency pins; the ordinary source checkouts and their
@@ -247,7 +247,7 @@ change, commit the fix and create a new train.
 
 A scheduled publication-preflight canary runs the same read-only external checks every day and opens
 an issue if they stop working. It is an early warning only. A real train still compares Maven/npm
-bytes and hashes and pulls all 31 images back to verify their recorded registry digests and
+bytes and hashes and pulls all 28 images back to verify their recorded registry digests and
 provenance.
 
 ### CEE CI reports a missing development model tarball
