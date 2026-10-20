@@ -163,4 +163,6 @@ cedarcli build diagnostics --apply
 The command selects every bundle older than `--days`, 14 by default. Counting from the newest, it
 also selects those that would take the kept bundles past `--max-mib`, 1024 by default. Without
 `--apply` it only lists its selection. It never removes a directory it does not recognize as a
-completed bundle, such as one an interrupted capture left behind.
+completed bundle, such as one an interrupted capture left behind. The same age limit applies to the
+coverage records Java builds write to `$CEDAR_HOME/.cedar/coverage/`, which need no size limit,
+because each takes a few kilobytes.
