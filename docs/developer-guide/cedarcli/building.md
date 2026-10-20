@@ -54,7 +54,10 @@ it wrote.
 
 A report counts only the classes its own module compiles, and credits them only with that module's
 tests. When a server's suites exercise a shared library, that execution counts toward neither the
-server's report nor the library's.
+server's report nor the library's. cedarcli therefore also merges the execution data of every test
+the build ran, and credits each module's classes with whichever test ran them. It prints that figure
+beside the own-tests figure, and writes both, per module and per repository, to a JSON file under
+`$CEDAR_HOME/.cedar/coverage/`.
 
 ## Build the Frontends
 
