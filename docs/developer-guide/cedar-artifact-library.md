@@ -39,7 +39,7 @@ A numeric field constrains its value to a number type and an optional range and 
 ```java
 NumericField completed = NumericField.builder()
     .withName("Treatment Completed %")
-    .withNumericType(XsdNumericDatatype.INTEGER)
+    .withNumericType(XsdNumericDatatype.INT)
     .withMinValue(0)
     .withMaxValue(100)
     .withDefaultValue(0)
