@@ -20,6 +20,11 @@ repositories when present under `CEDAR_HOME`; an explicitly selected repository 
 CLI and `cedar-design-tokens` checkouts up to date: the CLI runs the checker from the token
 repository. No frontend build, running stack, registry credential or network connection is needed.
 
+Local `cedarcli build frontends` and `cedarcli test frontends` apply the same style rules against
+the current token source that their consumers will actually build with. New, unpublished tokens
+work immediately without a pin update, publication or follow-up approval. Standalone checks and
+CI retain registry-pin validation; vendored copies retain their checksum checks.
+
 ## Run the Check
 
 ```bash

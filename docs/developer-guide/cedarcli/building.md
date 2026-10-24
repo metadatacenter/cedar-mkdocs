@@ -1,8 +1,10 @@
 # Building CEDAR
 
-A build turns checked-out source into artifacts on the current machine. It does not publish those
-artifacts, start CEDAR, or create Docker images. Keeping those actions separate lets you prove a
-change locally before it affects another developer or deployment.
+A build turns checked-out source into artifacts on the current machine. Development frontend
+builds have Java/Maven-like SNAPSHOT semantics: current local components automatically flow into
+their consumers, including uncommitted edits. No publication, manual pin update, commit, clean
+checkout or follow-up approval is required. Releases, immutable trains and explicit server
+payloads retain their separate version rules.
 
 ## Build the Java Code
 
@@ -67,29 +69,47 @@ Build the registered frontend projects with:
 cedarcli build frontends
 ```
 
-cedarcli uses the appropriate build for each frontend, even though the projects do not all share
-the same JavaScript framework or packaging process. During normal frontend development, the running
-development servers usually rebuild source changes as you work. Workspace uses a static Node
-server: run `npm run build` in `cedar-workspace` after source edits, then refresh the page.
-The general frontend build includes Workspace’s `npm ci` and `npm run build` in an isolated
-checkout, so it does not replace the running server’s dependency tree.
+The full reactor builds current local library and component sources in isolated copies, checks
+their consumers, runs the applicable integration and visual suites and consumer demos, restarts
+the local frontends, verifies the served component bytes, and runs whole-stack smoke. A request
+for this command authorizes those steps. It does not publish packages or commit or push Git changes.
 
-A narrower route builds Workspace and Template Designer alone:
+Each build starts its component selection from current source. A producer can reuse a passing
+result only when all relevant inputs still match; a missing or failed producer stops the build.
+Registry pins and earlier local artifacts cannot silently substitute for that producer. Dependency
+rewrites and resolved locks stay in the isolated build and its evidence; tracked pins need not move.
+Existing edits are valid inputs. The build guard detects changes made during the build, so keep
+the inputs stable while it runs; there is no requirement to commit or stash them first.
+
+For the same build and verification without deployment or whole-stack smoke, use:
+
+```bash
+cedarcli test frontends
+```
+
+Both commands reuse matching passing results by default. Add `--no-reuse` to run every repository's
+checks again. The full deployment and smoke contract belongs to `cedarcli build frontends`.
+
+A narrower compile route targets Workspace and Template Designer:
 
 ```bash
 cedarcli build split-frontends
 ```
 
-That command builds Workspace’s Angular application and installs Template Designer’s locked
-dependencies without touching the other frontends. For a native
-staging or production deployment, supply the configured Workspace and Designer URLs and generate
-the static trees that nginx serves directly:
+This command, `cedarcli build this` from a frontend repository, and ordinary
+`cedarcli build server-frontends` automatically include and verify their transitive local package
+producers. They do not perform the full reactor's deployment and smoke. There is no switch that
+silently restores pinned dependencies for a development build.
+
+For a native staging or production deployment, explicitly select the separate pinned server-payload
+workflow. Supply the configured Workspace and Designer URLs and generate the static trees that
+nginx serves directly:
 
 ```bash
 cedarcli build split-frontends --server-payload
 ```
 
-The payload build refuses dirty source, records source and content hashes in each generated
+The payload build uses locked packages, refuses dirty source, records source and content hashes in each generated
 `app/config/build-info.json`, and exits after producing the static trees. It does not start a
 development server or require Docker. On a host that also serves the legacy Template Editor,
 `cedar-template-editor`, `cedarcli build server-frontends --server-payload` generates all three
@@ -116,15 +136,15 @@ their dependency graph. The four Java layers still build in order, one Maven rea
 Test classes still run serially inside each test JVM, and the resource server spreads its suite
 over two test JVMs of its own.
 
-Frontend builds run two repositories at a time, each with a worker budget of half the detected
-CPUs, at most eight. They do not follow the core count the way Maven does, because every
-concurrent repository spends its own worker budget.
+On hosts with at least 16 cores, frontend builds default to three repository jobs and twelve
+workers per repository. Smaller hosts use two jobs and half the cores per repository, at least one
+and at most eight. A shared host worker pool bounds total concurrency across repositories.
 
 Both can be set explicitly. The options go before the build target:
 
 ```bash
 cedarcli build --jobs 4 java
-cedarcli build --jobs 3 --workers 4 frontends
+cedarcli build --jobs 3 --workers 12 frontends
 cedarcli build --jobs 1 --workers 1 all
 ```
 

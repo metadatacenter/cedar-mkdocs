@@ -50,10 +50,14 @@ model library and CEE follow a separate npmjs procedure.
 
 ## Publish Component Development Packages
 
-The browser applications consume the design tokens and the embeddable components as npm packages,
-and npm has no snapshot version that moves with the source. A consumer receives a component change
-only when its pin moves to a newly published version, and moving a pin is a source change in each
-consuming repository. `cedarcli publish components` does both:
+Local development builds already supply current component source to consumers automatically,
+including uncommitted changes. Run `cedarcli build frontends`, or `cedarcli test frontends` for
+checks only; no publication, manual pin update or follow-up approval is required. See
+[Building CEDAR](building.md#build-the-frontends).
+
+Standalone `npm ci` and registry-based CI consume the exact versions their lockfiles name.
+Delivering a component change through that route requires publishing a new version and updating
+the consumer's pin and lockfile. `cedarcli publish components` handles that separate registry task:
 
 ```bash
 cedarcli publish components

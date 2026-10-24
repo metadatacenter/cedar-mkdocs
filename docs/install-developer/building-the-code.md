@@ -32,11 +32,15 @@ For frontend-only work:
 cedarcli build frontends
 ```
 
-The frontend build installs each repository's declared npm dependencies and runs the build defined
-for that project.
+The frontend reactor uses current local library and component source, including uncommitted edits,
+with Java/Maven-like SNAPSHOT semantics. It builds and checks consumers, restarts local frontends,
+verifies served bundles and runs whole-stack smoke. No registry publication, pin update, commit or
+follow-up approval is required. Use `cedarcli test frontends` for builds and checks without deployment.
+Missing or failed local producers stop the build instead of falling back to older packages.
 
-`cedarcli build split-frontends` builds Workspace and Template Designer alone. A native staging or
-production host uses `cedarcli build split-frontends --server-payload` to produce source-hashed
+`cedarcli build split-frontends` targets Workspace and Template Designer and automatically includes
+their local component producers. A native staging or production host explicitly uses the separate
+pinned workflow, `cedarcli build split-frontends --server-payload`, to produce source-hashed
 static `app` trees for nginx after the environment-specific Workspace and Designer URLs have been
 configured.
 
@@ -57,7 +61,7 @@ cedarcli build clients
 Inside an individual repository, use:
 
 ```bash
-cedarcli build this --wd "$PWD"
+cedarcli build this
 ```
 
 After rebuilding a running microservice, restart it so the new JAR replaces the process that was
