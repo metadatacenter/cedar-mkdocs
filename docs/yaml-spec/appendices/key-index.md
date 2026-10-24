@@ -60,6 +60,7 @@ Keys, in alphabetical order, with the page that defines each.
 | `sourceIri` | [Controlled Term Field](../field-types/controlled-term-field.md) |
 | `sourceName` | [Controlled Term Field](../field-types/controlled-term-field.md) |
 | `sourceSystem` | [Controlled Term Field](../field-types/controlled-term-field.md) |
+| `sourceUri` | [Controlled Term Field](../field-types/controlled-term-field.md) |
 | `status` | [Versioning and Status](../versioning.md) |
 | `termBaseIri` | [Controlled Term Field](../field-types/controlled-term-field.md) |
 | `termBaseLabel` | [Controlled Term Field](../field-types/controlled-term-field.md) |

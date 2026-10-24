@@ -29,11 +29,13 @@ Ontology, so any cell type is permitted.
 | `sourceAcronym` | string | The ontology's acronym, e.g. `CL`. |
 | `sourceName` | string | The ontology's name, e.g. Cell Ontology. |
 | `sourceIri` | IRI | The ontology's canonical, source-independent identity. |
+| `sourceUri` | IRI | The ontology's service address, stated only when it lies outside BioPortal. |
 | `termCount` | integer | Number of terms, when known. |
 
-The ontology's backend address is not an authored key: it is reconstructed from the acronym —
-`https://data.bioontology.org/ontologies/{sourceAcronym}` for BioPortal — when the constraint is
-converted to a CEDAR JSON Schema.
+A BioPortal ontology is named by its acronym, and its service address is not written. The address
+is derived from the acronym, as `https://data.bioontology.org/ontologies/{sourceAcronym}`, when the
+constraint is converted to a CEDAR JSON Schema. An ontology addressed outside BioPortal, such as by
+an OBO PURL, states its address as `sourceUri`, and the conversion keeps that address.
 
 ```yaml
 - key: "cell-type"
