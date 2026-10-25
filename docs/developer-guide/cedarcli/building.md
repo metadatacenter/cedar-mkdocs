@@ -124,6 +124,10 @@ preflight of the complete checkout:
 cedarcli build all
 ```
 
+This runs the Java and frontend build/check plans and applicable consumer demos. It does not
+activate a runtime, restart applications, or run whole-stack smoke. After the configured backend
+is running, `cedarcli build frontends` performs that complete frontend deployment and acceptance.
+
 For the normal edit-build-run cycle, prefer the narrowest target that includes the changed
 dependency. A complete build is more reassuring, but it should not replace understanding what the
 change actually affects.

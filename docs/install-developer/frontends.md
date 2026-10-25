@@ -8,21 +8,32 @@ No frontend files are copied into nginx.
 
 ## Build the Frontends
 
-Prepare the frontend dependencies and builds:
+With the infrastructure and initialized backend from the preceding pages running, execute the
+full frontend reactor:
 
 ```bash
 cedarcli build frontends
 ```
 
-Run this after a fresh checkout, after dependency changes, or after pulling coordinated frontend
-updates. Normal source edits are handled by the frontend development servers while they run.
+This builds current local component and application sources, runs the applicable unit, integration,
+browser and visual checks, deploys the frontends, verifies the served component bytes, and runs
+whole-stack smoke. Development builds have Maven-like SNAPSHOT semantics: uncommitted component
+changes flow into every consumer without publication, manual dependency updates or extra approval.
+Deployment installs missing or stale dependencies in the live frontend checkouts automatically
+before applying the built components; there is no separate first-install npm step.
+
+Run it after component or dependency changes and after pulling coordinated frontend updates.
+Matching earlier passing checks are reused automatically; `--no-reuse` forces every check to run.
+Use `cedarcli test frontends` when only the build and checks are wanted. That command does not
+deploy or start the frontends.
 
 ## Start the Frontend Tier
 
-Start every native frontend as a managed background process:
+The full reactor already starts the frontends. On a later visit, start an already-built and
+configured installation with:
 
 ```bash
-cedarcli native start frontends
+cedarcli native start all
 cedarcli native status
 ```
 
@@ -34,6 +45,8 @@ The browser-facing applications are:
 | Application | URL |
 | --- | --- |
 | CEDAR | `https://cedar.metadatacenter.orgx` |
+| Workspace | `https://workspace.metadatacenter.orgx` |
+| Template Designer | `https://designer.metadatacenter.orgx` |
 | OpenView | `https://openview.metadatacenter.orgx` |
 | Content | `https://content.metadatacenter.orgx` |
 | Monitoring | `https://monitoring.metadatacenter.orgx` |

@@ -265,7 +265,7 @@ an appropriate completed train in
 still installs.
 
 Update the model alias in CEE's root and visual manifests and regenerate both lockfiles with Node
-24.22.0. Run both installs with `NPM_CONFIG_STRICT_ALLOW_SCRIPTS=true`, review the dependency graphs,
+24.22.1. Run both installs with `NPM_CONFIG_STRICT_ALLOW_SCRIPTS=true`, review the dependency graphs,
 and update the matching lockfile SHA-256 baselines in
 `cedar-development/ops/frontend-train.json` (including advisory counts if they changed). The local
 train dry-run and the pushed CEE workflow must then pass. Because this is a source correction, start

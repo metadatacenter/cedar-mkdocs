@@ -3,17 +3,22 @@
 A native installation runs the Java artifacts and frontend dependencies produced from your local
 checkouts. Build once before the first start, then rebuild only the area you change.
 
-## Build the Complete Source Tree
+## Build Java for the First Installation
 
 From any directory, run:
 
 ```bash
-cedarcli build all
+cedarcli build java
 ```
 
-The CLI builds the Java repositories in dependency order and then prepares the frontend
-repositories. This is the simplest first build and the safest choice after pulling a coordinated
-change across several repositories.
+This builds the Java repositories in dependency order, including the event listener needed by
+Keycloak's setup on the infrastructure page. Unit and embedded integration tests run without a
+live CEDAR stack. Continue with certificates, infrastructure, and backend initialization before
+running the full frontend reactor on the final installation page.
+
+To also compile and check the frontend sources before a backend is available, use
+`cedarcli build all`. It runs Java and frontend verification, including the applicable consumer
+demos, but does not activate a frontend runtime, restart applications, or run whole-stack smoke.
 
 ## Build Java or Frontends Separately
 
@@ -37,6 +42,8 @@ with Java/Maven-like SNAPSHOT semantics. It builds and checks consumers, restart
 verifies served bundles and runs whole-stack smoke. No registry publication, pin update, commit or
 follow-up approval is required. Use `cedarcli test frontends` for builds and checks without deployment.
 Missing or failed local producers stop the build instead of falling back to older packages.
+The full reactor needs the configured, initialized backend and HTTPS router to be running.
+Its deployment and smoke steps are part of completion, not a separate command to remember.
 
 `cedarcli build split-frontends` targets Workspace and Template Designer and automatically includes
 their local component producers. A native staging or production host explicitly uses the separate
@@ -89,4 +96,4 @@ cedarcli build java
 deliberate full reset, because every dependency must then be downloaded again.
 
 Build trains and publication are development workflows rather than installation steps. They are
-explained in the [cedarcli Manual](../developer-guide/cedarcli/).
+explained in the [cedarcli Manual](../developer-guide/cedarcli/index.md).

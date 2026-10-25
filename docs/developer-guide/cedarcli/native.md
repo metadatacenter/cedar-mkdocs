@@ -4,7 +4,7 @@ Native mode runs CEDAR directly from the checked-out source and locally built ar
 backend developers a short build-and-restart loop and lets frontend developers use the normal
 development servers.
 
-Complete the [Developer Install](../../install-developer/overview/) before using this mode. It
+Complete the [Developer Install](../../install-developer/overview/index.md) before using this mode. It
 provides the host tools and services that a native deployment expects.
 
 ## Start CEDAR
@@ -14,9 +14,15 @@ Select native mode, build the source, and start the complete system:
 ```bash
 cedarcli mode native --profile develop
 cedarcli build java
+cedarcli native start backends
+cedarcli native restart microservices
 cedarcli build frontends
-cedarcli native start all
 ```
+
+Starting the backend before the frontend reactor makes its HTTPS and smoke checks possible. The
+microservice restart ensures an already-running stack uses the JARs just built. For a first
+installation, complete the database, Keycloak and initial-content setup in the installation guide
+before this sequence. The reactor itself starts or restarts the frontends.
 
 The profile is required when selecting native mode. Use `develop` on a workstation and `server` on
 a staging or production host. The choice controls the frontend target, TLS verification policy,
@@ -78,8 +84,10 @@ that number. A restart truncates that file. For history that survives restarts, 
 follows the service's Dropwizard log instead, which rotates daily. A frontend's log is named with
 its `ui-` prefix, as in `cedarcli native logs ui-workspace`, and has no Dropwizard log.
 
-Frontend development servers usually rebuild source changes automatically. Restart one when its
-dependencies or process configuration have changed:
+Angular CLI development servers rebuild application source changes automatically. Workspace's
+native host builds when started; restart it after changing its application source. For shared
+component or dependency changes, run `cedarcli build frontends` so current sources reach every
+consumer and the complete deployment is checked. A single host can be restarted with:
 
 ```bash
 cedarcli native restart frontend workspace

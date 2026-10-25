@@ -48,7 +48,8 @@ A new installation needs its initial users, folders, permissions, and search sta
 reset only after the infrastructure and microservices are healthy:
 
 ```bash
-CEDAR_PROFILE=develop source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-native.sh"
+export CEDAR_PROFILE=develop
+source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-native.sh"
 cedarat system-reset
 ```
 

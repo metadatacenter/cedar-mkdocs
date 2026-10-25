@@ -3,7 +3,7 @@
 Docker mode runs the complete CEDAR system in containers. It is the simplest way to reproduce a
 known application state because the whole deployment can use one verified build train.
 
-Follow the [Docker installation guide](../../install-docker/overview/) for configuration,
+Follow the [Docker installation guide](../../install-docker/overview/index.md) for configuration,
 certificates, and first-time setup. This page covers the normal cedarcli workflow after that setup.
 
 ## Start CEDAR

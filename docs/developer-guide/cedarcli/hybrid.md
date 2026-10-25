@@ -10,15 +10,15 @@ and navigation between applications continue to work.
 ## Prepare Hybrid Mode
 
 Complete the configuration and certificate steps in the
-[Docker installation guide](../../install-docker/overview/), and install the frontend tools covered
-by the [Developer Install](../../install-developer/frontends.md). Select `hybrid` rather than
+[Docker installation guide](../../install-docker/overview/index.md), retrieve the full source tree
+as described in the [Developer Install](../../install-developer/overview/index.md#get-the-cedar-source),
+and install its [frontend tools](../../install-developer/prerequisites.md). Select `hybrid` rather than
 `docker` when the guide reaches mode selection.
 
-Then build the frontend dependencies:
+Select the mode:
 
 ```bash
 cedarcli mode hybrid --profile develop
-cedarcli build frontends
 ```
 
 Hybrid also runs native applications, so its profile is required. `develop` is the normal hybrid
@@ -27,22 +27,36 @@ workstation choice; `server` is available for a server host. Running `cedarcli m
 
 ## Start the Deployment
 
-Start the native frontends first, followed by the Docker-owned backend:
+For the first source build, start the Docker-owned infrastructure and microservices separately:
 
 ```bash
-cedarcli native start frontends
+cedarcli docker start infra --detach --pull missing
+cedarcli docker start microservices --detach --pull missing
+cedarcli docker status
+```
+
+Wait until the infrastructure and microservice rows are healthy. Public frontend checks cannot
+pass yet because no native frontend is running. With the backend ready, the full reactor can
+build, deploy and smoke-test the current local frontend sources:
+
+```bash
+cedarcli build frontends
 cedarcli docker start all --pull missing --timeout 1800
 cedarcli docker status
 ```
 
 In hybrid mode, `docker start all` starts everything assigned to Docker, not the frontend
 containers. Its final readiness check includes the public frontend routes, so the native servers
-must already be running.
+must already be running. The final aggregate start verifies and records the complete deployment.
+On later starts with an unchanged, already-built frontend tree, use `cedarcli native start frontends`
+followed by `cedarcli docker start all --pull missing --timeout 1800`.
 
 ## Work on a Frontend
 
-The frontend servers normally rebuild when source changes. Restart or inspect one through the
-native command group when needed:
+Angular CLI development servers rebuild application source changes automatically. Workspace's
+native host builds when started, so restart it after source changes. For shared component or
+dependency changes, use `cedarcli build frontends` to build and verify the complete local graph.
+Restart or inspect a host through the native command group:
 
 ```bash
 cedarcli native restart frontend workspace

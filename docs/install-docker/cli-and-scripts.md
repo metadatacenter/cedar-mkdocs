@@ -22,10 +22,11 @@ mkdir -p "$CEDAR_HOME"
 cd "$CEDAR_HOME"
 ```
 
-Clone the CLI and give it its own Python environment:
+Clone the CLI's development branch and give it its own Python environment, using Python 3.10 or
+later:
 
 ```bash
-git clone https://github.com/metadatacenter/cedar-cli
+git clone --branch develop https://github.com/metadatacenter/cedar-cli
 cd cedar-cli
 python3 -m venv .venv
 source .venv/bin/activate
@@ -52,7 +53,13 @@ environment settings the deployment shares:
 ```bash
 cd "$CEDAR_HOME"
 cedarcli git clone docker
+git -C "$CEDAR_HOME/cedar-development" checkout develop
+git -C "$CEDAR_HOME/cedar-docker-build" checkout develop
+git -C "$CEDAR_HOME/cedar-docker-deploy" checkout develop
 ```
+
+The three checkouts select the current deployment tooling described by this guide. Application
+versions still come from the verified image train selected at startup.
 
 This does not clone the entire CEDAR source tree. A normal installation starts the verified images
 published to Nexus. You only need the application source repositories if you want to rebuild Java

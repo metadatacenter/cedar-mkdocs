@@ -94,10 +94,11 @@ depend on shell aliases and environment variables from that profile. Load it onl
 you intend to use those tools:
 
 ```bash
-CEDAR_PROFILE=develop source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-native.sh"
+export CEDAR_PROFILE=develop
+source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-native.sh"
 ```
 
 This is not required for routine `cedarcli` commands.
 
-The [cedarcli Manual](../developer-guide/cedarcli/) covers repository work, build trains, hybrid and
+The [cedarcli Manual](../developer-guide/cedarcli/index.md) covers repository work, build trains, hybrid and
 Docker modes, publication, and less frequently used command groups.

@@ -17,11 +17,12 @@ brew update
 
 ## Install the Build Tools
 
-The backend requires JDK 17 and Maven. The frontends require Node.js, npm, Gulp CLI, and Angular
-CLI. OpenSSL is used to create the local certificate authority.
+The backend requires JDK 17 and Maven. The frontends require Node.js, npm, and the Gulp CLI
+launcher for the retained AngularJS application. Angular projects install their own CLI through
+their lockfiles. OpenSSL is used to create the local certificate authority.
 
 ```bash
-brew install openjdk@17 maven node@20 openssl@3 nvm
+brew install openjdk@17 maven node@24 openssl@3
 ```
 
 Homebrew may ask you to register JDK 17 with macOS. If `/usr/libexec/java_home -v 17` cannot find it,
@@ -35,30 +36,39 @@ sudo ln -sfn "$(brew --prefix openjdk@17)/libexec/openjdk.jdk" \
 Add the keg-only Node.js and OpenSSL installations to your shell path:
 
 ```bash
-export PATH="$(brew --prefix node@20)/bin:$(brew --prefix openssl@3)/bin:$PATH"
-npm install --global gulp-cli @angular/cli
+export PATH="$(brew --prefix node@24)/bin:$(brew --prefix openssl@3)/bin:$PATH"
+npm install --global gulp-cli
 ```
 
 Add that export to your normal shell profile so that native frontend and certificate commands use
 the same tools in new terminals.
 
-The global Angular CLI acts only as a launcher. Each Angular project supplies its own CLI version in
-`devDependencies`, ranging from 15 to 22 across CEDAR, and the global `ng` delegates to whichever
-one the project declares. Do not pin the global CLI to a project's version.
+The modern frontends use Angular 22. The reactor installs each project's exact CLI and build tools;
+you do not need a global Angular CLI or a manual Angular upgrade step.
 
 ## Node Versions
 
-Node 20 builds the AngularJS frontends and the Angular 15 and 16 sources. Three repositories need a
-newer one: the Embeddable Editor, the TypeScript model library, and the term picker all pin 24.22.0
-in a `.nvmrc`, because Angular 22 accepts only `^22.22.3 || ^24.15.0 || >=26`. Node 20 cannot build
-them.
+Use **Node 24.22.1** throughout the frontend reactor, including the retained AngularJS application,
+the modern Angular applications, components, model library and consumer demos. CI and the CLI's
+toolchain check use this exact security-patched version. Angular 22 accepts
+`^22.22.3 || ^24.15.0 || >=26`; Node 20 cannot build it.
 
-Working across both therefore needs a version manager rather than one Homebrew Node. With `nvm`
-installed, each of those repositories selects its own version:
+If Node 24 is already installed through Homebrew, update it and verify the binary:
 
 ```bash
-cd $CEDAR_HOME/cedar-embeddable-editor
-nvm use          # reads .nvmrc
+brew update
+brew upgrade node@24
+node --version  # must print v24.22.1
+```
+
+`cedarcli` selects a supported installed toolchain automatically; it does not install Node. If
+Homebrew offers a different patch version, use an exact Node installation instead. For example,
+with an existing `nvm` installation:
+
+```bash
+cd "$CEDAR_HOME/cedar-embeddable-editor"
+nvm install     # installs the version in .nvmrc
+nvm use
 ```
 
 ## Verify the Toolchain
@@ -71,15 +81,17 @@ mvn --version
 node --version
 npm --version
 gulp --version
-ng version
 openssl version
 ```
 
-`ng version` reports the global launcher. Inside a project it reports that project's own CLI
-instead, which is the version that matters.
-
 JDK 17 must be installed even if another Java release is your shell default. `cedarcli` selects JDK
-17 for native CEDAR commands.
+17 for native CEDAR commands. For direct Java commands, including the one-time Neo4j and Keycloak
+setup later in this guide, select it in that shell too:
+
+```bash
+export JAVA_HOME="$(/usr/libexec/java_home -v 17)"
+export PATH="$JAVA_HOME/bin:$PATH"
+```
 
 The infrastructure software is installed later, when the guide explains how each data service is
 configured. Continue with [Configure the Native Installation](configuration.md).

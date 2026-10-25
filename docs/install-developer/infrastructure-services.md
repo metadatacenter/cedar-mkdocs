@@ -7,17 +7,38 @@ these services, but their initial databases and configuration still have to be c
 The credentials below match the development defaults in `set-env-internal.sh`. Substitute your own
 values consistently if you changed that file.
 
-## Install the Homebrew Services
+## Check the Locked Service Versions
 
-Install the services managed by Homebrew:
+The infrastructure versions are held separately from the frontend toolchain. Do not use a blanket
+`brew install mysql redis opensearch` or `brew upgrade` to prepare a native CEDAR host: those
+unversioned formulas now select different server releases. The retained native services are
+MongoDB 5.0.31, Redis 7.2.7 and OpenSearch 2.19.1; Neo4j 5.26.0 and Keycloak 22.0.5 are installed
+from explicit distributions below.
+
+The official [MongoDB Homebrew tap](https://github.com/mongodb/homebrew-brew) no longer supplies
+the 5.0 formula. A fresh native installation needs retained formulas/binaries and their matching
+configuration. This guide does not yet provide a reproducible installer for that set. The
+[Docker installation](../install-docker/overview/index.md) provides the packaged infrastructure;
+[hybrid mode](../developer-guide/cedarcli/hybrid.md) supports native frontend development over it.
+
+MySQL also needs an explicit decision on a new native host: Docker uses 8.4.11, while the audited
+native workstation already runs 9.6.0. These are not interchangeable installations, and changing
+an existing database's version is a separate migration. The native service controller currently
+uses the `mysql` formula name.
+
+The remaining steps assume the retained native Homebrew services and their service definitions
+are available. Inspect the installed versions and existing protections first:
 
 ```bash
-brew tap mongodb/brew
-brew install mongodb-community@5.0 mysql redis opensearch nginx
+brew list --versions mongodb-community@5.0 mysql redis opensearch
+brew list --pinned
+brew install nginx
 ```
 
-Do not configure them to run permanently at login. CEDAR starts and stops them through
-`cedarcli native start infra` and `cedarcli native stop infra`.
+Once the intended server versions are installed, protect the available formulas with `brew pin`.
+Pinning preserves an installed version; it does not install or downgrade to the required version.
+CEDAR starts and stops the services through `cedarcli native start infra` and
+`cedarcli native stop infra`.
 
 ## Configure MongoDB
 
@@ -111,6 +132,16 @@ cluster.name: opensearch_cedar
 Redis needs no additional development configuration. Its persistent local instance is used for
 CEDAR's queue and cache coordination.
 
+OpenSearch 2.19 must also use JDK 17. Its Homebrew service inherits the launchd environment, so
+set this before starting it:
+
+```bash
+launchctl setenv OPENSEARCH_JAVA_HOME "$(/usr/libexec/java_home -v 17)"
+```
+
+This setting lasts for the login session; arrange for it to run at login on a persistent native
+installation. A newer Homebrew JDK selected implicitly can prevent OpenSearch from starting.
+
 ## Install Neo4j
 
 Neo4j stores users, groups, categories, and permissions. The native scripts expect an unpacked
@@ -169,7 +200,9 @@ Load the profile for the one-time direct Keycloak commands, install the CEDAR ev
 by `cedarcli build java`, and import the supplied realm:
 
 ```bash
-CEDAR_PROFILE=develop source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-native.sh"
+export CEDAR_PROFILE=develop
+source "$CEDAR_HOME/cedar-development/bin/templates/cedar-profile-native.sh"
+export JAVA_HOME="$(/usr/libexec/java_home -v 17)"
 cedarcli dev copy-keycloak-listener
 "$CEDAR_HOME/keycloak/bin/kc.sh" import \
   --file "$CEDAR_HOME/keycloak/keycloak-realm.CEDAR.development.2023-07-05.json"

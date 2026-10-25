@@ -4,8 +4,14 @@ A developer installation runs CEDAR from source on your Mac. Choose it when you 
 backend service or frontend application, rebuild it locally, and see the result in a complete CEDAR
 system.
 
-If you want to run CEDAR without changing its source, use the [Docker Install](../../install-docker/)
+If you want to run CEDAR without changing its source, use the [Docker Install](../../install-docker/overview/index.md)
 instead. Docker starts published application images and requires much less host configuration.
+
+For a new Mac, read the [native infrastructure requirements](../infrastructure-services.md#check-the-locked-service-versions)
+before choosing this path. The current Homebrew catalog cannot recreate all of CEDAR's locked
+server versions. This guide's infrastructure steps require those retained versions; Docker uses
+the already-packaged versions, and [hybrid development](../../developer-guide/cedarcli/hybrid.md)
+keeps frontend development native over that Docker backend.
 
 ## How the Installation Works
 
@@ -30,6 +36,10 @@ mkdir -p "$CEDAR_HOME"
 cd "$CEDAR_HOME"
 ```
 
+Install Git and **Python 3.10 or later** before running the following commands. On a Mac with
+Homebrew, `brew install git python@3.12` provides both; if the system `python3` is older, use
+`python3.12` in the environment-creation command.
+
 Clone the CLI and give it its own Python environment:
 
 ```bash
@@ -53,13 +63,27 @@ new terminals.
 
 ## Get the CEDAR Source
 
-Use `cedarcli` to retrieve the complete development source tree and place every repository on the
-development branch:
+Use `cedarcli` to retrieve the missing repositories. This preserves the CLI checkout you just
+created instead of attempting to clone it a second time:
 
 ```bash
 cd "$CEDAR_HOME"
-cedarcli git clone all
-cedarcli git checkout develop
+cedarcli git clone-missing
+```
+
+`clone-missing` selects `main` where available. For this fresh development tree, switch the
+application repositories that have a `develop` branch to it; leave MkDocs on `main`. The CLI's
+estate-wide checkout command has no per-repository branch exception, so use Git for this step:
+
+```bash
+for repo in "$CEDAR_HOME"/cedar-*; do
+  [ -d "$repo/.git" ] || continue
+  if [ "$repo" = "$CEDAR_HOME/cedar-mkdocs" ]; then
+    git -C "$repo" checkout main || break
+  elif git -C "$repo" show-ref --verify --quiet refs/remotes/origin/develop; then
+    git -C "$repo" checkout develop || break
+  fi
+done
 cedarcli check repos
 ```
 
@@ -68,7 +92,7 @@ CEDAR.
 
 ## Continue the Installation
 
-Continue with [Prepare the Development Mac](../../install-developer/prerequisites/). The next page
+Continue with [Prepare the Development Mac](../prerequisites.md). The next page
 installs the host toolchain, and the Configuration page creates the local profile and selects native
 mode. Mode selection is a safety boundary; it does not start CEDAR.
 
@@ -77,10 +101,16 @@ backend and frontends. Once that one-time setup is complete, a normal rebuild an
 this:
 
 ```bash
-cedarcli build all
-cedarcli native start all
+cedarcli build java
+cedarcli native start backends
+cedarcli native restart microservices
+cedarcli build frontends
 cedarcli native status
 ```
 
-The [cedarcli Manual](../../developer-guide/cedarcli/) explains the build workflow, deployment
+The restart replaces any microservices already serving older JARs. The frontend reactor deploys
+the frontends and runs smoke against that backend. To start an unchanged installation later,
+`cedarcli native start all` is sufficient.
+
+The [cedarcli Manual](../../developer-guide/cedarcli/index.md) explains the build workflow, deployment
 modes, selective starts and stops, and the supporting commands used during development.

@@ -37,6 +37,8 @@ You can open any of the browser applications directly:
 | Application | URL |
 | --- | --- |
 | Main editor | [https://cedar.metadatacenter.orgx/](https://cedar.metadatacenter.orgx/) |
+| Workspace | [https://workspace.metadatacenter.orgx/](https://workspace.metadatacenter.orgx/) |
+| Template Designer | [https://designer.metadatacenter.orgx/](https://designer.metadatacenter.orgx/) |
 | OpenView | [https://openview.metadatacenter.orgx/](https://openview.metadatacenter.orgx/) |
 | Content | [https://content.metadatacenter.orgx/](https://content.metadatacenter.orgx/) |
 | Monitoring | [https://monitoring.metadatacenter.orgx/](https://monitoring.metadatacenter.orgx/) |

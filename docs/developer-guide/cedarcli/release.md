@@ -144,7 +144,7 @@ check that gates `start`. It finishes with `No changes made.`
 
 Plan settles four groups of question.
 
-**The machine can run a release.** Java 17 and Node 24.22.0 are active, `git`, `mvn`, and `npm` are
+**The machine can run a release.** Java 17 and Node 24.22.1 are active, `git`, `mvn`, and `npm` are
 on PATH, Git author name and email are configured, the CEDAR profile is sourced, and there is disk
 for the train, the attempt tree, and the archives. Plan also inspects the effective npm user
 configuration by key name only. It never prints values or registry tokens: obsolete authentication

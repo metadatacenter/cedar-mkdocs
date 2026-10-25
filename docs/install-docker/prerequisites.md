@@ -11,7 +11,7 @@ The current setup has been verified on an Apple Silicon Mac. A recent Docker Des
 Compose v2 is the practical requirement. Other Docker Desktop platforms may work, but the complete
 installation has not recently been exercised on them.
 
-You will also need Git, Python 3, and OpenSSL. Git retrieves the core Docker repositories, Python
+You will also need Git, Python 3.10 or later, and OpenSSL. Git retrieves the core Docker repositories, Python
 runs the CEDAR command-line helper, and OpenSSL creates certificates that your browser can trust.
 The installation downloads orchestration code from GitHub and the verified CEDAR image train from
 Nexus, so it needs normal internet access during the initial setup and first start.

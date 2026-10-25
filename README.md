@@ -9,17 +9,18 @@ Conda. The `pip` approach is the simplest and does not require installing Conda.
 
 ## Python virtual environment (pip)
 
-Requires Python 3 (any recent version). The pinned dependencies live in `requirements.txt`.
+Use Python 3.11 to match CI and Read the Docs. The package requirements live in
+`requirements.txt`; use the same file for local previews and published builds.
 
 ### Create the virtual environment
 
-    python3 -m venv .venv
+    python3.11 -m venv .venv
 
 ### Activate it and install the dependencies
 
     source .venv/bin/activate
-    pip install --upgrade pip
-    pip install -r requirements.txt
+    python -m pip install --upgrade pip
+    python -m pip install -r requirements.txt
 
 Once activated, `mkdocs` is on your `PATH` and the commands under
 [MkDocs](#mkdocs) below work directly. Run `deactivate` to leave the environment.
@@ -50,7 +51,7 @@ Install Anaconda, close all your terminals and start a new one.
 
 ## MKDocs Material
 
-MkDocs-Material will be installed from conda-forge when creating the environment. 
+Both setup paths install MkDocs Material with pip from `requirements.txt`.
 
 The documentation can be found at: https://squidfunk.github.io/mkdocs-material/
  
@@ -63,7 +64,10 @@ Please read the full documentation at: https://www.mkdocs.org/
 You can see the content served by this dev server at http://localhost:8000/ 
 
 ### Build the documentation
-    mkdocs build
+    mkdocs build --strict
+
+This is the same check CI runs. It fails on warnings, including missing navigation targets and
+recognized broken Markdown links. Preview changed pages with `mkdocs serve` as well.
 
 ### Build clean documentation
     mkdocs build --clean
