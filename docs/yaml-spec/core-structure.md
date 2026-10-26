@@ -135,9 +135,11 @@ itself changes. An instance does not carry it.
 |-----|-------|----------|---------|
 | `modelVersion` | string | optional | The version of the CEDAR model the artifact conforms to (currently `1.6.0`). |
 
-The full form states `modelVersion` for the artifact and for each child within it, and the compact
-form states it for neither. A reader of the full form refuses an artifact or a child without one,
-and a reader of either form refuses one that names a version other than the current one.
+The full form states `modelVersion` for the artifact, and a writer states it for each child within
+the artifact as well. A hand-written child may leave it to the artifact it is in. The compact form
+states it for neither. A reader of the full form refuses an artifact without one, and a reader of
+either form refuses a `modelVersion` that names a version other than the current one, whether the
+artifact states it or a child does.
 
 ## Keys Outside the Form
 
