@@ -9,7 +9,8 @@ Two pieces of the model carry the semantics that make this possible. Both are de
 schema, not repeated in the instance.
 
 - **`instanceType`**, on a template or element, gives the RDF type asserted on its instances.
-  It becomes the `rdf:type` of the resource the instance describes.
+  It becomes the `rdf:type` of the resource the instance describes. An instance or a nested
+  element can also state its own classes under the same key.
 - **`propertyIri`**, on each child, gives the property the child binds to. It becomes the
   predicate that links the resource to the child's value.
 

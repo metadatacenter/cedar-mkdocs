@@ -97,6 +97,42 @@ level. A repeating element holds a list of such entries.
         value: "Alan Turing"
 ```
 
+## Instance Types
+
+An instance can state the classes it is an instance of, its RDF types. They sit under
+`instanceType`, the key a template uses for the type it asserts on its instances. One class is
+written as a string and several as a list, and each is an absolute IRI. In the JSON-LD form they
+are the instance's `@type`.
+
+```yaml
+type: instance
+name: "SDY232"
+id: "https://repo.metadatacenter.org/template-instances/1f9a2b3"
+instanceType:
+- "https://schema.org/Dataset"
+- "https://schema.org/CreativeWork"
+isBasedOn: "https://repo.metadatacenter.org/templates/ec3f500"
+children:
+  study-name:
+    value: "Cardiology cohort"
+```
+
+A nested element states its own classes the same way, after its `id` and before its
+`children`. A compact document keeps them, since they are the instance's data rather than the
+repository's. An element that states classes and holds no value is still written, with
+`type: element-instance` to mark it as an element.
+
+```yaml
+  address:
+    instanceType: "https://schema.org/PostalAddress"
+    children:
+      street:
+        value: "450 Serra Mall"
+  contact:
+    type: element-instance
+    instanceType: "https://schema.org/ContactPoint"
+```
+
 ## Standalone Element Instances
 
 An element instance can also stand on its own, outside any template instance, using

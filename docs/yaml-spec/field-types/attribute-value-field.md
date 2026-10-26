@@ -55,9 +55,11 @@ storage-details:
 An attribute-value field's `key` is written beside its parent's own keys rather than under
 `children`, so it may not be one of them. The reserved keys depend on the parent. In a
 template, the field sits beside every key of the instance: `type`, `name`, `description`,
-`id`, `isBasedOn`, `derivedFrom`, `children`, `annotations`, `createdOn`, `createdBy`,
-`modifiedOn` and `modifiedBy`. In an element, the field sits beside the keys of an element
-instance nested in its parent, which are only `type`, `id` and `children`.
+`id`, `instanceType`, `isBasedOn`, `derivedFrom`, `children`, `annotations`, `createdOn`,
+`createdBy`, `modifiedOn` and `modifiedBy`. In an element, the field sits beside the keys of an
+element instance, which can be written nested in its parent or on its own, so it may take none of
+the keys of either form: `type`, `name`, `description`, `id`, `instanceType`, `children`,
+`createdOn`, `createdBy`, `modifiedOn` and `modifiedBy`.
 
 These reservations add to the [reserved child keys](../templates-core.md#reserved-child-keys)
 that apply to every field and element. The attribute names an instance author supplies are

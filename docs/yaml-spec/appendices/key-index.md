@@ -30,7 +30,7 @@ Keys, in alphabetical order, with the page that defines each.
 | `identifier` | [Core Artifact Structure](../core-structure.md#descriptive-keys) |
 | `inputTimeFormat` | [Temporal Field](../field-types/temporal-field.md) |
 | `inputTimeZone` | [Temporal Field](../field-types/temporal-field.md) |
-| `instanceType` | [Templates: Core Structure](../templates-core.md), [Elements: Core Structure](../elements-core.md) |
+| `instanceType` | [Templates: Core Structure](../templates-core.md), [Elements: Core Structure](../elements-core.md), [Instances: Core Structure](../instances-core.md#instance-types) |
 | `isBasedOn` | [Instances: Core Structure](../instances-core.md) |
 | `key` | [Templates: Core Structure](../templates-core.md), [Reserved Child Keys](../templates-core.md#reserved-child-keys), [Attribute-Value Field](../field-types/attribute-value-field.md#reserved-keys), [Fields: Core Structure](../fields-core.md) |
 | `label` | [Radio Field](../field-types/radio-field.md), [Controlled Term Field](../field-types/controlled-term-field.md), [Instances: Core Structure](../instances-core.md) |
