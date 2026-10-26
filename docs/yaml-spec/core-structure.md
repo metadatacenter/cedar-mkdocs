@@ -134,3 +134,26 @@ itself changes. An instance does not carry it.
 | Key | Value | Presence | Meaning |
 |-----|-------|----------|---------|
 | `modelVersion` | string | optional | The version of the CEDAR model the artifact conforms to (currently `1.6.0`). |
+
+The full form states `modelVersion` for the artifact and for each child within it, and the compact
+form states it for neither. A reader of the full form refuses an artifact or a child without one,
+and a reader of either form refuses one that names a version other than the current one.
+
+## Keys Outside the Form
+
+A reader refuses a key that the form does not have where the key appears, and it reports the key
+with its path. A misspelled key such as `descripton:` is therefore refused rather than read as
+nothing, which would lose its value without a word. The same holds for a key that the form has only
+for another field type. A `unit` belongs to a `numeric-field`, so a `text-field` that states one is
+refused.
+
+Some keys are names that a document chooses itself, and a reader accepts any name there. They are
+the keys of an instance's `children`, the names under `annotations`, and the attribute names of an
+attribute-value field. Beside an instance's `children`, a key whose value is a mapping is read as an
+attribute-value field, since only the template can say whether the instance holds one by that name.
+A key there whose value is not a mapping is refused.
+
+A reader also accepts a few keys that earlier writers emitted and that the model has no place for,
+and it discards them. They are a field's settings (`continuePreviousLine`, `valueRecommendation`,
+`hidden`, `required` and `recommended`) stated in an element's `configuration`, and `required` or
+`recommended` stated for a static field or an attribute-value field.
