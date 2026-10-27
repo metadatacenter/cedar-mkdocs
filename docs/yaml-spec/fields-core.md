@@ -72,11 +72,13 @@ Static fields additionally carry `width` and `height` here; see [Static Fields](
 ## Nested and Standalone Fields
 
 A field written as a child of a template or element carries its parent-relative settings in
-`configuration`. A field written as a top-level definition has no parent, so the
-field-level settings that do not depend on a parent — `hidden`, `continuePreviousLine`, and
-the static-field `width` and `height` — appear directly among the field's keys instead. The parent-only settings (`propertyIri`, `overrideLabel`,
-`overrideDescription`, and the required/recommended/multiple bindings) do not apply to a
-standalone field.
+`configuration`, which says how the parent places the field: whether it is required or
+recommended, whether and how often it repeats, the property it binds to, and how it is labelled
+and laid out there. A field written as a top-level definition has no parent, so it has no
+`configuration`, and a reader refuses one. Its own presentation settings (`hidden`,
+`continuePreviousLine`, `valueRecommendation`, and the static-field `width` and `height`) appear
+directly among the field's keys instead. It is neither required nor recommended, and it does not
+repeat, until a parent says so.
 
 ## Semantic Labels
 
