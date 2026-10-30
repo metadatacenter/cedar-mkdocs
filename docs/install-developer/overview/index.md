@@ -40,7 +40,12 @@ Install Git and **Python 3.10 or later** before running the following commands. 
 Homebrew, `brew install git python@3.12` provides both; if the system `python3` is older, use
 `python3.12` in the environment-creation command.
 
-Clone the CLI and give it its own Python environment:
+This guide follows CEDAR's unreleased development sources. Use `develop` for the CLI so it stays
+aligned with the application repositories selected below. `main` carries released code; the
+[Docker installation guide](../../install-docker/cli-and-scripts.md) pins its tooling to a specific
+release tag for reproducibility.
+
+Clone the CLI, select `develop`, and give it its own Python environment:
 
 ```bash
 git clone https://github.com/metadatacenter/cedar-cli

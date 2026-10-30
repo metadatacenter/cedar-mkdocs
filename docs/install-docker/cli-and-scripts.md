@@ -22,16 +22,23 @@ mkdir -p "$CEDAR_HOME"
 cd "$CEDAR_HOME"
 ```
 
-Clone the CLI's development branch and give it its own Python environment, using Python 3.10 or
-later:
+Use the released tooling tagged `release-2.9.31` throughout this guide. Keep the CLI and the three
+deployment repositories on that same tag so their commands, profiles, image definitions, and
+Compose configuration come from one release.
+
+Clone that CLI release and give it its own Python environment, using Python 3.10 or later:
 
 ```bash
-git clone --branch develop https://github.com/metadatacenter/cedar-cli
+git clone --branch release-2.9.31 https://github.com/metadatacenter/cedar-cli
 cd cedar-cli
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
+
+Git reports a detached HEAD when checking out a release tag. That is expected for these pinned
+installation tools. For work on CEDAR's development sources, follow the
+[Developer Install](../install-developer/overview/index.md) instead.
 
 The following alias makes `cedarcli` available in the current shell. The wrapper activates its
 Python environment automatically, so you do not need to activate the virtual environment before
@@ -53,13 +60,18 @@ environment settings the deployment shares:
 ```bash
 cd "$CEDAR_HOME"
 cedarcli git clone docker
-git -C "$CEDAR_HOME/cedar-development" checkout develop
-git -C "$CEDAR_HOME/cedar-docker-build" checkout develop
-git -C "$CEDAR_HOME/cedar-docker-deploy" checkout develop
+git -C "$CEDAR_HOME/cedar-development" checkout --detach release-2.9.31
+git -C "$CEDAR_HOME/cedar-docker-build" checkout --detach release-2.9.31
+git -C "$CEDAR_HOME/cedar-docker-deploy" checkout --detach release-2.9.31
 ```
 
-The three checkouts select the current deployment tooling described by this guide. Application
-versions still come from the verified image train selected at startup.
+The tooling release and the application image set are separate selections. This guide runs
+verified development image trains, as described in [Build and Run CEDAR](build-and-run.md#select-the-image-set).
+Pinning the tooling to `release-2.9.31` does not select release-versioned application images.
+
+When upgrading the installation tools, select the same new release tag in all four repositories
+and reinstall the CLI's Python requirements in its virtual environment. A tag stays fixed;
+`git pull` does not update these detached checkouts.
 
 This does not clone the entire CEDAR source tree. A normal installation starts the verified images
 published to Nexus. You only need the application source repositories if you want to rebuild Java

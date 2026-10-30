@@ -228,7 +228,7 @@ This page covers the basics of importing caDSR Form Builder forms into the {{ pa
   - Step 4 - [Perform an import](#import)
   - Step 5 - [Look over the import report](#import-report)
   - Step 6 - [View the imported template](#view-template)
-- [Editing imported templates](#edit-template)
+- [Editing imported templates](#editing-imported-templates)
 
 ---
 
