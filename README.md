@@ -87,6 +87,12 @@ CEDAR Workbench. It lives in [`runner/`](runner/) and writes straight into
 tooling (Node/Playwright); it never runs during a Read the Docs build. See
 [`runner/README.md`](runner/README.md) for setup and usage.
 
+The **CEDAR 3 Tutorial** has its own Angular runner, `runner/cedar3-run.mjs`,
+which captures Workspace, CED, CEE, and the controlled-term picker into
+`docs/tutorials/cedar3-img/`. It defaults to the local stack and retains the
+synthetic tutorial artifacts, including the published OpenView template. See
+the [Angular capture workflow](runner/README.md#cedar-3-tutorial-angular).
+
 The two screenshots in the CEDAR MCPs Tutorial come from the local browser pages served by
 `cedar-cee-mcp`, not from the Workbench. Build the current MCP JAR, use its `show_template` and
 `show_instance` tools with the tutorial's stored Tissue Sample template and filled instance, and

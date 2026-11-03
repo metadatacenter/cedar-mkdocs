@@ -7,6 +7,7 @@
   "scripts": {
     "auth": "node auth.mjs",
     "capture:mcps": "node mcp-capture.mjs",
+    "capture:cedar3": "node cedar3-run.mjs",
     "run": "node run.mjs",
     "run:headed": "HEADED=1 node run.mjs"
   },

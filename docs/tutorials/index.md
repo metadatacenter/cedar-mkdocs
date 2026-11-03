@@ -7,7 +7,11 @@ straight to the one you need.
 
 - [**CEDAR Tutorial**](cedar_tutorial.md): build a template and fill it out by
   hand in the CEDAR Workbench, then publish a versioned release and share an
-  instance on the public web. Start here if you are new to CEDAR.
+  instance on the public web.
+- [**CEDAR 3 Tutorial**](cedar3_tutorial.md): work through the same Study and
+  Clinical Study examples in CEDAR 3, starting at
+  [workspace.metadatacenter.org](https://workspace.metadatacenter.org).
+  Start here if you use CEDAR 3.
 - [**CEDAR Controlled Term Tutorial**](cedar_term_tutorial.md): constrain template
   fields to ontology terms from BioPortal, binding a field to a whole ontology, a
   branch, or a set of individual classes you assemble yourself.

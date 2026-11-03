@@ -43,6 +43,40 @@ The CEDAR Controlled Term Tutorial has its own driver with the same flags:
 node term-run.mjs        # builds the Tissue Sample template, writes ../docs/tutorials/term-img/
 ```
 
+### CEDAR 3 Tutorial (Angular)
+
+`cedar3-run.mjs` follows the separate Angular Workspace, Template Designer (CED),
+Metadata Editor (CEE), and controlled-term picker. It uses the same Study and
+Clinical Study examples as the original tutorial and writes 22 JPEG screenshots
+to `../docs/tutorials/cedar3-img/`. The original Workbench runner and images are
+independent.
+
+Authenticate against the **Workspace** origin, so its saved login is kept
+separate from the Workbench login:
+
+```bash
+CEDAR_BASE=https://workspace.metadatacenter.orgx node auth.mjs
+node cedar3-run.mjs --workspace https://workspace.metadatacenter.orgx
+```
+
+Use `--headed` to watch, and `--folder "CEDAR 3 Tutorial Screenshots"` to choose
+another folder name. The run creates a new folder and refuses to reuse an
+existing folder with that name. It retains its two templates and two instances
+for inspection. **The full run publishes Clinical Study at 1.0.0 and enables
+OpenView on that synthetic template.** Use a local test account for local
+captures; the production origin is supported by authenticating and passing it
+explicitly instead.
+
+The captures use a 1296×824 viewport at scale 2, light mode, disabled screenshot
+animations, and a hidden caret. The runner waits for field cards, search
+results, and successful saves. It uses actual UI actions and live authority
+lookups; it does not seed artifacts, mock results, or change application code.
+The checked-in set was captured from the local Angular stack on 2026-11-03.
+
+Each run stages images under the ignored `failures/cedar3-<timestamp>/` directory.
+Only a complete set replaces the documentation images; a failure preserves the
+previous set and retains a failure screenshot with the partial captures.
+
 ### User guide
 
 The user guide's screenshots land in `../docs/img/userguide/`, which also holds hand-captured
