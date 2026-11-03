@@ -77,6 +77,42 @@ Each run stages images under the ignored `failures/cedar3-<timestamp>/` director
 Only a complete set replaces the documentation images; a failure preserves the
 previous set and retains a failure screenshot with the partial captures.
 
+### CEDAR 3 Controlled Term Tutorial
+
+`cedar3-term-run.mjs` creates the Tissue Sample and PFAS Test templates and filled
+metadata instances through Workspace, the Template Designer, and the Metadata
+Editor. It reuses `term-config.mjs` and the CEDAR 3 field-authoring helpers. The
+25 captures cover a whole Cell Ontology constraint, Uberon's organ branch, three
+OBI classes, and EPA PFAS value sets, including searches and the resulting forms.
+
+```bash
+CEDAR_BASE=https://workspace.metadatacenter.orgx node auth.mjs
+node cedar3-term-run.mjs --folder "CEDAR 3 Controlled Term Screenshots"
+# Regenerate only the six PFAS images, retaining the existing ontology images:
+node cedar3-term-run.mjs --section pfas --folder "CEDAR 3 PFAS Screenshots"
+```
+
+It accepts `--workspace`, `--folder`, `--headed`, and `--section` (`all`,
+`ontology`, or `pfas`), defaults to the local stack, and refuses an existing
+folder name. It retains the synthetic templates and instances for inspection.
+Nothing is published or enabled in OpenView.
+
+Captures use a 1296×1040 viewport at scale 2 so the five-field template and form
+fit, with light mode, disabled screenshot animations, and a hidden caret. The
+runner waits for the picker's input debounce and search completion, verifies
+the three allowed assay choices, and saves the populated instances. The PFAS
+steps verify the 25- and 18-member lists and their 29-member union, lookup by
+name/synonym/CAS/DTXSID, and the EPA and CompTox links. They retain the display
+name `PFAS Method 537.1` with the valid property key `PFAS Method 537-1`.
+The runner stages images under `failures/cedar3-term-<timestamp>/` and replaces
+the selected images in `../docs/tutorials/cedar3-term-img/` only after all captures
+for that section succeed (25 for all, 19 for ontology, or 6 for PFAS).
+
+To narrow the broad `organ` search, the steps first search for the ontology's
+name, select UBERON in the Ontologies filter, and then search for `organ`.
+The broad query can omit UBERON from its filter even though its terms appear
+in the results. The tutorial follows the working ontology-name route.
+
 ### User guide
 
 The user guide's screenshots land in `../docs/img/userguide/`, which also holds hand-captured

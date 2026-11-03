@@ -93,6 +93,12 @@ which captures Workspace, CED, CEE, and the controlled-term picker into
 synthetic tutorial artifacts, including the published OpenView template. See
 the [Angular capture workflow](runner/README.md#cedar-3-tutorial-angular).
 
+The **CEDAR 3 Controlled Term Tutorial** uses `runner/cedar3-term-run.mjs` to
+capture its Tissue Sample and PFAS Test templates, vocabulary and value-set
+selections, and populated forms
+into `docs/tutorials/cedar3-term-img/`. See the
+[controlled-term capture workflow](runner/README.md#cedar-3-controlled-term-tutorial).
+
 The two screenshots in the CEDAR MCPs Tutorial come from the local browser pages served by
 `cedar-cee-mcp`, not from the Workbench. Build the current MCP JAR, use its `show_template` and
 `show_instance` tools with the tutorial's stored Tissue Sample template and filled instance, and
