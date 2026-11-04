@@ -291,7 +291,7 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
         "designer",
     ])
     panel(c, 3, 2, "<microservice>", (
-        ["artifact", "bridge", "group", "impex", "messaging", "monitor", "openview",
+        ["artifact", "bridge", "group", "messaging", "monitor", "openview",
          "  [docker: open]"],
         ["repo", "resource", "terminology", "user", "worker"],
     ), span=2)
