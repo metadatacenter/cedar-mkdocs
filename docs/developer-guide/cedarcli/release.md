@@ -38,7 +38,7 @@ presence alone does not mean a release is running. Do not delete it while a rele
 running, because replacing the file would break the shared lock boundary. After a failed operation,
 follow [When a Phase Fails](#when-a-phase-fails) to resume from the recorded state.
 
-## The Four Inputs
+## The Six Inputs
 
 Every release input is stated explicitly. None is derived, defaulted, or read from the environment,
 because each one names something a release can only get wrong once:
@@ -48,7 +48,9 @@ cedarcli release plan \
   --version 2.9.3 \
   --next-version 2.9.4-SNAPSHOT \
   --from-train 2.9.3-dev.20260828.1956 \
-  --cee-version 2.0.3
+  --cee-version 2.0.3 \
+  --ced-version 0.1.0 \
+  --cetp-version 0.1.0
 ```
 
 `--version` is the version being released, and `--next-version` is the snapshot `develop` moves to
@@ -90,6 +92,19 @@ minified literal exactly once, and removes only that literal. `allowScripts` con
 dependencies may run install scripts; it is not CEE runtime behavior. An undeclared policy, a second
 copy, or a changed byte beside it still fails the executable comparison.
 
+`--ced-version` and `--cetp-version` are the same obligation for the CEDAR Embeddable Designer (CED)
+and the CEDAR Embeddable Term Picker (CETP), which the Template Designer serves beside CEE. The
+train builds and tests both as development packages. The release pins each public version into the
+Template Designer only once it has proved that package a promotion of the one the train tested.
+Their bundles embed no `package.json` and no load trace, so their proof normalizes less: the one
+version a bundle reports, the build fingerprints its manifest records, and the public release's
+changelog entry. `plan` prints a line for each, beside CEE's:
+
+```text
+CED equivalence:     0.1.0-dev.20261108.gbe8f533c3b80.t2032 -> 0.1.0
+CED payload SHA-256: f61c…
+```
+
 ## Checking Readiness Before the Train
 
 Some release preconditions concern the workspace rather than any train. Repairing one of them
@@ -115,13 +130,16 @@ cedarcli release readiness --full \
   --next-version 2.9.5-SNAPSHOT \
   --model-version <PUBLIC_MODEL_VERSION> \
   --cee-version 2.0.3 \
+  --ced-version 0.1.0 \
+  --cetp-version 0.1.0 \
   --from-train 2.9.4-dev.20260829.1200
 ```
 
-The rows cover the public model package, the model version CEE declares and embeds, each consumer's
+The rows cover the public model package, the model version CEE declares and embeds, the model
+version CED and CETP declare, each consumer's
 manifest, lock, and installed pins, CI at the exact source commits, the whole-stack smoke record,
 clean and pushed source, and the release prerequisites the train cannot change. Once a train exists,
-they also cover its artifacts, the CEE equivalence proof, and whether its source still matches
+they also cover its artifacts, the CEE, CED and CETP equivalence proofs, and whether its source still matches
 `develop`. A row whose inputs were not given reads `not checked` rather than passing, and the
 command exits nonzero until every row passes. Before a train exists, omit `--from-train` and expect
 its rows to read `not checked`. Readiness accepts no exceptions, and `plan` and `start` enforce
@@ -136,11 +154,13 @@ cedarcli release plan \
   --version 2.9.4 \
   --next-version 2.9.5-SNAPSHOT \
   --from-train 2.9.4-dev.20260829.1200 \
-  --cee-version 2.0.3
+  --cee-version 2.0.3 \
+  --ced-version 0.1.0 \
+  --cetp-version 0.1.0
 ```
 
-`plan` validates the train and runs every machine, source, permission, registry, CEE, and content
-check that gates `start`. It finishes with `No changes made.`
+`plan` validates the train and runs every machine, source, permission, registry, public package and
+content check that gates `start`. It finishes with `No changes made.`
 
 Plan settles four groups of question.
 
@@ -233,7 +253,9 @@ cedarcli release start \
   --version 2.9.3 \
   --next-version 2.9.4-SNAPSHOT \
   --from-train 2.9.3-dev.20260828.1956 \
-  --cee-version 2.0.3
+  --cee-version 2.0.3 \
+  --ced-version 0.1.0 \
+  --cetp-version 0.1.0
 ```
 
 `start` runs the identical release gate before it touches anything, so a release cannot begin from a
@@ -270,7 +292,7 @@ verifies its work before the next one begins:
 
 | Phase | What it does |
 | --- | --- |
-| `preparing-frontends` | Clones the train's exact commits and builds the frontends against the proven CEE |
+| `preparing-frontends` | Clones the train's exact commits and builds the frontends against the proven CEE, CED and CETP |
 | `preparing-versions` | Stamps the release and next-development versions and copyright year, and refreshes train lock baselines changed by those stamps |
 | `validating-builds` | Builds the stamped trees and records proof of their output |
 | `creating-local-refs` | Replaces tracked distributions with the validated builds, removes obsolete generated files, and creates the release commits and tags locally without touching any remote |
@@ -340,7 +362,8 @@ deletes the ledgers of earlier ones but keeps their timings for this comparison.
 Publication is not the end of the route. The acceptance phase asks, from outside the ledger that
 recorded the work, whether the release actually holds: every repository carries the release tag,
 every remote ref stands where the ledger says, every published artifact still matches its recorded
-bytes, and the frontends pin the proven CEE. The answers are recorded, and `accepted` is the
+bytes, the frontends pin the proven CEE, and the Template Designer pins the proven CED and CETP. The
+answers are recorded, and `accepted` is the
 terminal phase.
 
 The exact-ref check proves each release tag at its recorded commit as part of the same remote read.
@@ -410,21 +433,23 @@ In each of the release repositories:
 
 In CEDAR's Nexus, the Maven release artifacts and six stable frontend surfaces are published under
 the release version, and the next-development Maven snapshots under the new snapshot version.
-Workspace and Template Designer receive the stable CEE wiring but retain their independent
-publication route while migration is in progress. Nothing is published to public npmjs, which is a
-separate route for the Embeddable Editor and the TypeScript model library. Docker images belong to
+Workspace and Template Designer receive the stable CEE wiring, and Template Designer the stable CED
+and CETP wiring as well, but both retain their independent publication route while migration is in
+progress. Nothing is published to public npmjs, which is a separate route for the TypeScript model
+library, CEE, CED and CETP. Docker images belong to
 the train and are not promoted by a release.
 
 ## Releasing the Public npm Packages
 
-The TypeScript model library and the Embeddable Editor (CEE) reach public npmjs on versions of their
-own, outside the platform release. `cedarcli release npm` releases them through a ledger of its own,
-one package at a time and the model first:
+The TypeScript model library, CEE, CED and CETP reach public npmjs on versions of their own, outside
+the platform release. `cedarcli release npm` releases them through a ledger of its own, one package
+at a time and the model first:
 
 ```bash
-cedarcli release npm plan model@1.0.28 cee@2.0.34 \
-  --next model@1.0.29 --next cee@2.0.35 \
-  --notes model=model-notes.md --notes cee=cee-notes.md
+cedarcli release npm plan model@1.0.28 cee@2.0.34 ced@0.1.0 cetp@0.1.0 \
+  --next model@1.0.29 --next cee@2.0.35 --next ced@0.1.1 --next cetp@0.1.1 \
+  --notes model=model-notes.md --notes cee=cee-notes.md \
+  --notes ced=ced-notes.md --notes cetp=cetp-notes.md
 cedarcli release npm start ...     # the same arguments
 cedarcli release npm status
 cedarcli release npm resume
@@ -432,7 +457,7 @@ cedarcli release npm abandon --reason "<why>"
 ```
 
 Every version is explicit. `--next` gives each package's next development base, `--model-version`
-gives the public model CEE pins when the run does not release the model, and `--notes` gives the
+gives the public model CEE, CED and CETP pin when the run does not release the model, and `--notes` gives the
 bullets of each release entry. `plan` checks every precondition and changes nothing.
 
 For each package, `start` prepares and gates a release commit on `develop` and merges it to `main`

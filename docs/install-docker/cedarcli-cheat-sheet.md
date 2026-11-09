@@ -153,20 +153,24 @@ Create a new train when newer source commits must be included.
 
 ## Formal Release
 
-A formal release consumes a completed train and requires all four inputs explicitly:
+A formal release consumes a completed train and requires all six inputs explicitly:
 
 ```bash
 cedarcli release plan \
   --version <VER> \
   --next-version <NEXT>-SNAPSHOT \
   --from-train <TRAIN_ID> \
-  --cee-version <PUBLIC_CEE_VERSION>
+  --cee-version <PUBLIC_CEE_VERSION> \
+  --ced-version <PUBLIC_CED_VERSION> \
+  --cetp-version <PUBLIC_CETP_VERSION>
 
 cedarcli release start \
   --version <VER> \
   --next-version <NEXT>-SNAPSHOT \
   --from-train <TRAIN_ID> \
-  --cee-version <PUBLIC_CEE_VERSION>
+  --cee-version <PUBLIC_CEE_VERSION> \
+  --ced-version <PUBLIC_CED_VERSION> \
+  --cetp-version <PUBLIC_CETP_VERSION>
 
 cedarcli release status --watch
 cedarcli release resume             # compact, retained task logs
@@ -185,11 +189,12 @@ after external publication may have begun. Only an accepted status means the rel
 
 ## Public npm Release
 
-The TypeScript model library and CEE publish to npmjs on versions of their own:
+The TypeScript model library, CEE, CED and CETP publish to npmjs on versions of their own:
 
 ```bash
-cedarcli release npm plan model@<VER> cee@<VER> \
-  --next model@<NEXT> --next cee@<NEXT> --notes cee=<NOTES_FILE>
+cedarcli release npm plan model@<VER> cee@<VER> ced@<VER> cetp@<VER> \
+  --next model@<NEXT> --next cee@<NEXT> --next ced@<NEXT> --next cetp@<NEXT> \
+  --notes cee=<NOTES_FILE> --notes ced=<NOTES_FILE> --notes cetp=<NOTES_FILE>
 cedarcli release npm start ...     # the same arguments
 cedarcli release npm status
 cedarcli release npm resume
