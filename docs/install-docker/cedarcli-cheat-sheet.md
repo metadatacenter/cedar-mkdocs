@@ -187,6 +187,17 @@ cause and use `resume`. If a corrected train must replace an attempt that has no
 begun snapshot publication, `abandon` retains its evidence and frees the release slot. It is refused
 after external publication may have begun. Only an accepted status means the release is complete.
 
+## Local CI
+
+A passing local run of a repository's own workflows answers for its commit wherever a gate would
+wait for green GitHub Actions:
+
+```bash
+cedarcli ci coverage                  # which repositories local CI answers for
+cedarcli ci run cedar-core-library    # run one repository's CI at origin/develop
+cedarcli ci status                    # local CI's answer for each develop head
+```
+
 ## Public npm Release
 
 The TypeScript model library, CEE, CED and CETP publish to npmjs on versions of their own:
