@@ -183,6 +183,21 @@ cause and use `resume`. If a corrected train must replace an attempt that has no
 begun snapshot publication, `abandon` retains its evidence and frees the release slot. It is refused
 after external publication may have begun. Only an accepted status means the release is complete.
 
+## Public npm Release
+
+The TypeScript model library and CEE publish to npmjs on versions of their own:
+
+```bash
+cedarcli release npm plan model@<VER> cee@<VER> \
+  --next model@<NEXT> --next cee@<NEXT> --notes cee=<NOTES_FILE>
+cedarcli release npm start ...     # the same arguments
+cedarcli release npm status
+cedarcli release npm resume
+```
+
+`plan` changes nothing. `start` publishes each package from `main` after green CI and returns
+`develop` to development. A run that stops, waiting or failing, continues with `resume`.
+
 ## Diagnose a Docker Service
 
 ```bash

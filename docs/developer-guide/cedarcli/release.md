@@ -412,5 +412,34 @@ In CEDAR's Nexus, the Maven release artifacts and six stable frontend surfaces a
 the release version, and the next-development Maven snapshots under the new snapshot version.
 Workspace and Template Designer receive the stable CEE wiring but retain their independent
 publication route while migration is in progress. Nothing is published to public npmjs, which is a
-separate procedure for the Embeddable Editor and the TypeScript model library. Docker images belong
-to the train and are not promoted by a release.
+separate route for the Embeddable Editor and the TypeScript model library. Docker images belong to
+the train and are not promoted by a release.
+
+## Releasing the Public npm Packages
+
+The TypeScript model library and the Embeddable Editor (CEE) reach public npmjs on versions of their
+own, outside the platform release. `cedarcli release npm` releases them through a ledger of its own,
+one package at a time and the model first:
+
+```bash
+cedarcli release npm plan model@1.0.28 cee@2.0.34 \
+  --next model@1.0.29 --next cee@2.0.35 \
+  --notes model=model-notes.md --notes cee=cee-notes.md
+cedarcli release npm start ...     # the same arguments
+cedarcli release npm status
+cedarcli release npm resume
+cedarcli release npm abandon --reason "<why>"
+```
+
+Every version is explicit. `--next` gives each package's next development base, `--model-version`
+gives the public model CEE pins when the run does not release the model, and `--notes` gives the
+bullets of each release entry. `plan` checks every precondition and changes nothing.
+
+For each package, `start` prepares and gates a release commit on `develop` and merges it to `main`
+once its CI is green. It publishes the tarball it built from the merge commit, then proves that
+npmjs serves those bytes. It tags the merge commit, drafts the GitHub release, and returns `develop`
+to the next development version. Once every package is out, it refreshes the npm lock baselines in
+`cedar-development`. A run that waits on CI or on npmjs exits with status 2, and one that fails exits
+with status 1. `resume` continues either from the stage it stopped at. The
+[npmjs release runbook](https://github.com/metadatacenter/cedar-development/blob/develop/ops/NPMJS-RELEASE-RUNBOOK.md)
+describes each stage and what remains for the operator after a run.
