@@ -24,6 +24,22 @@ A template may combine four kinds of value constraint:
 As the user types, the CEE sends the text and the template constraint to CEDAR's
 integrated-search endpoint. Selecting a result stores the term.
 
+### Author Vocabulary Constraints
+
+The [CEDAR Embeddable Designer (CED)](../cedar-embeddable-designer/index.md)
+uses the [CEDAR Embeddable Term Picker (CETP)](../cedar-embeddable-term-picker/index.md)
+to define these constraints and choose controlled-term defaults. The author can
+select whole ontologies, branches, individual terms, or value sets and inspect
+available vocabulary releases. The resulting template carries those choices
+to CEE, where they govern the values offered during metadata entry.
+
+CEE performs that metadata-entry lookup itself. Loading the CETP bundle is
+needed for the separate vocabulary-authoring interface, not for filling a CEE
+form. CETP requires a terminology service with version-aware search; see
+[Your First Embedded Term Picker](../cedar-embeddable-term-picker/first-picker.md)
+for setup and [Constraints and Selections](../cedar-embeddable-term-picker/selections.md)
+for its output and version handling.
+
 ### Configure Terminology Lookup
 
 ```json
@@ -103,10 +119,16 @@ of the form remain usable.
 
 ## Validation Boundary
 
-Local validation checks that a controlled value has a well-formed `@id` and a
-matching `rdfs:label`. It does not verify that an existing value still belongs to
-the ontology, branch, class, or value set declared by the template; that would
-require a terminology-service request.
+Local validation checks the structure of a controlled value, including its
+`@id` and label. CEE also uses the configured services to verify controlled-term
+membership and external-authority identifiers for selected, loaded, and imported
+values. Selecting a term alone does not establish that it satisfies the current
+field constraints.
 
-See [Validation and the Data Quality Report](validation.md) for the complete list
-of local checks.
+The data quality report's `semanticChecks` records whether verification passed,
+failed, was not checked, or was unavailable. Missing configuration and failed
+requests do not count as successful verification. The host remains responsible
+for enforcing its submission policy and validating writes on the server.
+
+See [Validation and the Data Quality Report](validation.md) for semantic
+verification, quality findings, and the separate instance save decision.

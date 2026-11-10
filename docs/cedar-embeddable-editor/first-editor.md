@@ -127,6 +127,15 @@ properties, serialization formats, change events, and temporal values.
 
 ## Obtain a Template
 
+To author a template within your own application, use the
+[CEDAR Embeddable Designer (CED)](../cedar-embeddable-designer/index.md).
+Its integration with the
+[CEDAR Embeddable Term Picker (CETP)](../cedar-embeddable-term-picker/index.md)
+lets authors choose the vocabularies and default terms for controlled-term fields.
+The host stores the resulting template and passes its chosen version to CEE
+for metadata entry. [Your First Embedded Designer](../cedar-embeddable-designer/first-designer.md)
+covers that authoring setup; CEE performs its own term lookup when the form is filled.
+
 Templates can be exported from the CEDAR Workbench or retrieved through the
 [CEDAR REST API](../developer-guide/cedar-rest-apis/working-with-artifacts.md).
 They can also be created in code with the

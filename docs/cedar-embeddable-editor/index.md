@@ -36,6 +36,38 @@ The division of responsibilities is:
 The same component also supports read-only display, so a platform can use one renderer
 for both authoring and reviewing metadata.
 
+## How the Components Fit Together
+
+CEDAR provides three embeddable components for template authoring, vocabulary
+selection, and metadata entry:
+
+| Component | Role | Result |
+|---|---|---|
+| [CEDAR Embeddable Designer (CED)](../cedar-embeddable-designer/index.md) | Authors templates and reusable elements, including their fields, structure, constraints, and defaults. | A template or element definition; the included Field Designer authors standalone fields. |
+| [CEDAR Embeddable Term Picker (CETP)](../cedar-embeddable-term-picker/index.md) | Searches vocabularies and selects constraints and default terms during authoring. | Vocabulary selections for the host to apply; ontology-property selection is also available. |
+| CEDAR Embeddable Editor (CEE) | Renders the template for metadata entry or read-only display. | A metadata instance containing the values entered against that template. |
+
+In a typical workflow, an author designs a template in CED and uses its embedded
+Term Picker to choose the vocabularies a field draws from. The host stores the
+template and supplies a selected version to CEE. A researcher completes the
+resulting form, and the host receives and stores the metadata instance.
+
+CEE also supplies the form preview inside CED, and the CEF widget included in
+CEE's bundle provides individual field controls. CED manages its embedded
+pickers and preview after the host loads the sibling bundles and configures
+the required services.
+
+Each component is a separate package. A host collecting metadata from an
+existing template needs only CEE: its controlled-term fields perform their own
+lookup through the configured terminology service. CED and CETP add authoring
+workflows when the application needs them. The host retains responsibility for
+authentication, template version choices, and saving templates and instances.
+
+See [Your First Embedded Designer](../cedar-embeddable-designer/first-designer.md)
+to add template authoring, or
+[Your First Embedded Term Picker](../cedar-embeddable-term-picker/first-picker.md)
+to add vocabulary selection independently.
+
 ## What Goes In and What Comes Out
 
 The CEE accepts templates in CEDAR's JSON Schema or YAML representation. It can start
