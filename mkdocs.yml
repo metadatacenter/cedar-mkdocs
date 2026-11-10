@@ -127,6 +127,20 @@ nav:
           - cedar-embeddable-editor/security.md
           - cedar-embeddable-editor/using-the-cef.md
 
+      - CEDAR Embeddable Designer:
+          - cedar-embeddable-designer/index.md
+          - cedar-embeddable-designer/first-designer.md
+          - cedar-embeddable-designer/artifacts-and-validation.md
+          - cedar-embeddable-designer/reusable-content.md
+          - cedar-embeddable-designer/field-designer.md
+          - cedar-embeddable-designer/configuration.md
+
+      - CEDAR Embeddable Term Picker:
+          - cedar-embeddable-term-picker/index.md
+          - cedar-embeddable-term-picker/first-picker.md
+          - cedar-embeddable-term-picker/selections.md
+          - cedar-embeddable-term-picker/configuration.md
+
   - Developer Guide:
       - developer-overview/index.md
       - cedarcli Manual:
