@@ -17,8 +17,23 @@ Component that a host can load into an existing page, independently of a full
 CEDAR installation. The host controls its own authentication, storage, and
 workflow; lookup features use configured CEDAR services.
 
-| Component | Purpose | First Integration |
+Choose the component for the workflow your application needs:
+
+| Component | When to Use It | First Integration |
 |---|---|---|
-| [CEDAR Embeddable Editor (CEE)](../cedar-embeddable-editor/index.md) | Render a template as a form for entering or viewing metadata. | [Your First Embedded Editor](../cedar-embeddable-editor/first-editor.md) |
-| [CEDAR Embeddable Designer (CED)](../cedar-embeddable-designer/index.md) | Create and edit templates, reusable elements, and standalone field definitions. | [Your First Embedded Designer](../cedar-embeddable-designer/first-designer.md) |
-| [CEDAR Embeddable Term Picker (CETP)](../cedar-embeddable-term-picker/index.md) | Search vocabularies and select field constraints, default terms, or ontology properties. Requires a compatible terminology service. | [Your First Embedded Term Picker](../cedar-embeddable-term-picker/first-picker.md) |
+| [CEDAR Embeddable Editor (CEE)](../cedar-embeddable-editor/index.md) | You have a template and want users to fill in metadata or review existing records in a form. | [Your First Embedded Editor](../cedar-embeddable-editor/first-editor.md) |
+| [CEDAR Embeddable Designer (CED)](../cedar-embeddable-designer/index.md) | Your users need to create or maintain the templates, reusable elements, and field definitions that describe what metadata to collect. | [Your First Embedded Designer](../cedar-embeddable-designer/first-designer.md) |
+| [CEDAR Embeddable Term Picker (CETP)](../cedar-embeddable-term-picker/index.md) | Your users need to choose a field's allowed vocabularies or default terms, or select ontology properties. Search requires a compatible CEDAR terminology service. | [Your First Embedded Term Picker](../cedar-embeddable-term-picker/first-picker.md) |
+
+The components can work together: an author designs a template in CED and uses
+its embedded CETP to choose controlled vocabularies and default terms. The host
+stores the template and passes a selected version to CEE. Users complete the
+form, and the host stores the resulting metadata instances separately from
+the template definition.
+
+Use CEE on its own when you already have templates: its controlled-term fields
+perform their own lookup through the configured terminology service. Add CED
+when users need to author templates, or embed CETP independently when they need
+vocabulary selection. CED also uses CEE for form previews and individual field
+controls. Each component is a separate package; the host loads the bundles and
+configures the services needed for its chosen workflow.
