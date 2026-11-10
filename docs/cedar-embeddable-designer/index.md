@@ -19,18 +19,39 @@ requirements, repeatable groups, and vocabulary bindings. CED lets the people
 responsible for that standard maintain a machine-readable template through a
 visual interface, without hand-writing a schema or developing an authoring tool.
 
-CED creates the templates that the [CEDAR Embeddable Editor
-(CEE)](../cedar-embeddable-editor/index.md) renders as metadata entry forms.
-An application can embed both to support template design and metadata entry
-within its own pages, while retaining control of storage and access.
+## How the Components Fit Together
 
-| Part | Responsibility |
-|---|---|
-| Template author | Defines the fields, structure, labels, constraints, and defaults. |
-| CED | Provides the authoring interface, local validation, and the current artifact. |
-| CEE and CEF | Provide form preview and individual field controls when their bundle is loaded. |
-| Term Picker | Provides vocabulary constraint and default-term selection when configured. |
-| Host application | Loads artifacts, authenticates users, supplies services and reusable content, and saves or publishes documents. |
+CEDAR provides three embeddable components for template authoring, vocabulary
+selection, and metadata entry:
+
+| Component | Role | Result |
+|---|---|---|
+| CEDAR Embeddable Designer (CED) | Authors templates and reusable elements, including their fields, structure, constraints, and defaults. | A template or element definition; the included Field Designer authors standalone fields. |
+| [CEDAR Embeddable Term Picker (CETP)](../cedar-embeddable-term-picker/index.md) | Searches vocabularies and selects constraints and default terms during authoring. | Vocabulary selections for the host to apply; ontology-property selection is also available. |
+| [CEDAR Embeddable Editor (CEE)](../cedar-embeddable-editor/index.md) | Renders the template for metadata entry or read-only display. | A metadata instance containing the values entered against that template. |
+
+An author designs a template in CED and uses its embedded Term Picker to define
+the vocabularies a field draws from. CED applies those selections to the field
+definition. The host stores the template and supplies a selected version to
+CEE. A researcher completes the resulting form, and the host stores the
+metadata instance.
+
+CEE also supplies the form preview inside CED, and the CEF widget included in
+CEE's bundle supplies individual field controls. Each component is a separate
+package. The host loads the sibling bundles and configures the services, then
+CED manages its embedded preview and pickers. Authentication, template version
+choices, reusable content, and saving or publishing remain the host's
+responsibility.
+
+CETP can also be embedded independently for vocabulary selection. A host
+collecting metadata from an existing template needs only CEE, whose
+controlled-term fields perform their own lookup through the configured
+terminology service.
+
+See [Your First Embedded Term Picker](../cedar-embeddable-term-picker/first-picker.md)
+for standalone vocabulary selection, and
+[Your First Embedded Editor](../cedar-embeddable-editor/first-editor.md)
+to collect metadata from a finished template.
 
 ## Templates, Elements, and Fields
 

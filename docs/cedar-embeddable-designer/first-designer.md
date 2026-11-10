@@ -11,8 +11,13 @@ Install the stable packages from npm:
 npm install cedar-embeddable-designer cedar-embeddable-editor cedar-embeddable-term-picker
 ```
 
-CED can run on its own. This example also loads CEE for preview and field controls,
-and the Term Picker for vocabulary authoring when a terminology service is configured.
+CED can run on its own. This example also loads the
+[CEDAR Embeddable Editor (CEE)](../cedar-embeddable-editor/index.md) for preview
+and field controls, and the
+[CEDAR Embeddable Term Picker (CETP)](../cedar-embeddable-term-picker/index.md)
+for vocabulary authoring when a terminology service is configured. CED manages
+these embedded components after the host loads their bundles and configures
+the required services.
 
 Create an `assets` directory in your web application's public directory and copy:
 
@@ -127,3 +132,18 @@ with a late response.
 [Artifacts and Validation](artifacts-and-validation.md) covers precise JSON
 serialization, server findings, and adopting a saved document. For a field-only
 workflow, continue with [Designing a Single Field](field-designer.md).
+
+## Collect Metadata With the Finished Template
+
+Once the host has saved the template, supply the chosen version to CEE to
+collect metadata instances. The host stores those instances separately from
+the template definition. CEE uses the field constraints authored with CETP
+when looking up controlled terms through its configured terminology service;
+a page that only fills an existing template needs only the CEE bundle.
+
+[Your First Embedded Editor](../cedar-embeddable-editor/first-editor.md)
+shows how to render the form, and
+[Templates and Metadata](../cedar-embeddable-editor/templates-and-metadata.md)
+explains how to read the resulting instance. To use vocabulary selection
+outside CED, see
+[Your First Embedded Term Picker](../cedar-embeddable-term-picker/first-picker.md).

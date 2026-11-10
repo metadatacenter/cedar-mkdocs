@@ -43,17 +43,37 @@ controlled-term field. The host decides where a selected property belongs.
 [Constraints and Selections](selections.md) explains the input properties,
 selection events, cancellation, and version information.
 
-## How It Works With CEDAR's Other Components
+## How the Components Fit Together
 
-The [CEDAR Embeddable Designer](../cedar-embeddable-designer/index.md) uses CETP
-to author vocabulary constraints and select controlled-term defaults. A host
-using CED loads the picker bundle and configures the designer's terminology
-endpoint; the designer manages its embedded pickers.
+CEDAR provides three embeddable components for template authoring, vocabulary
+selection, and metadata entry:
 
-The [CEDAR Embeddable Editor](../cedar-embeddable-editor/index.md) renders the
-finished template for metadata entry and performs its own value lookup. An
-application can also embed CETP independently when it needs a vocabulary
-selection interface without a full template designer.
+| Component | Role | Result |
+|---|---|---|
+| [CEDAR Embeddable Designer (CED)](../cedar-embeddable-designer/index.md) | Authors templates and reusable elements, including their fields, structure, constraints, and defaults. | A template or element definition; the included Field Designer authors standalone fields. |
+| CEDAR Embeddable Term Picker (CETP) | Searches vocabularies and selects constraints and default terms during authoring. | Vocabulary selections for the host to apply; ontology-property selection is also available. |
+| [CEDAR Embeddable Editor (CEE)](../cedar-embeddable-editor/index.md) | Renders the template for metadata entry or read-only display. | A metadata instance containing the values entered against that template. |
+
+In a typical workflow, an author designs a template in CED and uses CETP to
+choose its controlled vocabularies and default terms. CED applies those
+selections to the field definition. The host stores the template and supplies
+a selected version to CEE, which collects the metadata instance the host saves.
+
+Each component is a separate package. A host using CED loads CETP and configures
+the designer's terminology endpoint; CED manages its embedded pickers. CEE also
+provides CED's form preview, and its included CEF widget supplies individual
+field controls. The host owns authentication, template version choices, and
+saving templates and instances.
+
+CETP can also be embedded independently: the host receives selections and
+decides how to apply them. A host filling an existing template needs only CEE,
+whose controlled-term fields perform their own lookup through the configured
+terminology service.
+
+See [Your First Embedded Designer](../cedar-embeddable-designer/first-designer.md)
+to use the picker within template authoring, and
+[Your First Embedded Editor](../cedar-embeddable-editor/first-editor.md)
+to collect metadata from the resulting template.
 
 ## Start Here
 

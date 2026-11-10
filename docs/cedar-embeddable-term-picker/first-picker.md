@@ -127,3 +127,23 @@ representation. CETP does not serialize or save a template. Preserve term
 identifiers, source information, pinned versions, and any actions when applying
 the set. [Constraints and Selections](selections.md) covers these details and
 the separate single-term workflow.
+
+## Use the Picker With the Designer and Editor
+
+The [CEDAR Embeddable Designer (CED)](../cedar-embeddable-designer/index.md)
+integrates CETP into template authoring. Load the picker bundle and configure
+CED's terminology endpoint; CED manages the embedded picker and applies its
+constraint or default-term selections to the field definition. See
+[Your First Embedded Designer](../cedar-embeddable-designer/first-designer.md)
+for that setup. A standalone picker such as the example above leaves those
+steps to its host.
+
+The host saves the template and supplies a selected version to the
+[CEDAR Embeddable Editor (CEE)](../cedar-embeddable-editor/index.md). CEE renders
+the form and returns the metadata instance for the host to save. It also
+provides CED's form preview and, through its included CEF widget, individual
+field controls. CEE's controlled-term fields perform their own lookup through
+the configured terminology service, so a page filling an existing template
+needs only the CEE bundle. Continue with
+[Your First Embedded Editor](../cedar-embeddable-editor/first-editor.md)
+to collect metadata from the finished template.
