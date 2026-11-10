@@ -196,6 +196,7 @@ wait for green GitHub Actions:
 cedarcli ci coverage                  # which repositories local CI answers for
 cedarcli ci run cedar-core-library    # run one repository's CI at origin/develop
 cedarcli ci status                    # local CI's answer for each develop head
+cedarcli ci status --post             # publish each passing record's commit status
 ```
 
 ## Public npm Release

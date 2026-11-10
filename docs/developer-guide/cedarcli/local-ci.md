@@ -28,7 +28,8 @@ stands in for the one Nexus serves.
 
 When a run finishes, it writes a record under `~/.cedar/local-ci/evidence` and posts a
 `cedar/local-ci` status on the commit, where a pull request shows it and a gate on another machine
-reads it. `--no-status` keeps the record local.
+reads it. `--no-status` keeps the record local, and `cedarcli ci status --post` publishes its
+status later.
 
 ## What Local CI Covers
 
@@ -55,6 +56,15 @@ cedarcli ci status
 The command shows, for each repository's `develop` head, whether local CI passed, failed or has not
 run there. `cedarcli check ci` shows the answer every train gate uses, which is a green GitHub run or
 a passing local one.
+
+A build train checks CI a second time on GitHub's runner, which holds no workstation's records and
+reads a local run from its commit status. `cedarcli check ci` therefore refuses a commit that
+passed only in a record on your machine while GitHub Actions is not green there. Publish the status
+of every such record:
+
+```bash
+cedarcli ci status --post
+```
 
 A GitHub run that failed without any of its jobs failing never ran the code, as happens when GitHub
 itself is failing. The gates no longer take such a run for a red commit: `cedarcli check ci` and

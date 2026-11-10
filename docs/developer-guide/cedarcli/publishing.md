@@ -103,7 +103,9 @@ cedarcli publish train --dry-run
 ```
 
 The displayed dry-run ID is prospective and is not reserved; the real dispatch allocates again.
-Dry-run and real dispatch use the same local preflight. It validates the Maven, model → CEE →
+Dry-run and real dispatch use the same local preflight. A dispatch stops once the workspace
+checks have refused it, while a dry run goes on to ask GitHub and the registries, so one rehearsal
+lists every finding. It validates the Maven, model → CEE →
 frontend, and 28-image Docker configuration as one contract; checks GitHub authentication and the
 workflow plus CI for every exact remote `develop` SHA that defines one; requires the train slot to
 be idle; rejects dirty, unpushed, or remote-diverged source; requires a passing whole-stack smoke
