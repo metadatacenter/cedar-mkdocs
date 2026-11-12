@@ -22,6 +22,7 @@ cedarcli release status --watch  # compact live progress
 cedarcli release resume     # verify the recorded boundary and continue
 cedarcli release timings    # measured stage timings of the current release
 cedarcli release abandon    # retain and close a local-only superseded attempt
+cedarcli release follow-through  # after acceptance: pull, repin, baselines, rebuild and smoke
 ```
 
 ## One Modifying Command at a Time
