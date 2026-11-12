@@ -21,9 +21,10 @@ branches, and tags across the repositories and publishing to Nexus.
 | `prod` | Configure built static frontends for a native production domain, and provision the artifact service key | `cedarcli prod --help` |
 | `test` | Run the whole-stack smoke tiers and manage test-owned processes | `cedarcli test e2e` |
 
-`cedarcli test e2e` runs the REST, browser and split-frontend smoke tiers under
+`cedarcli test e2e` runs the REST, browser, split-frontend and artifact-search smoke tiers under
 `cedar-development/ops/e2e` against the native stack and records the run against the `develop`
-heads it tested. Both
+heads it tested. The REST tier runs beside the other three, which run one after another, and its
+output goes to a log file beside its report. Both
 `cedarcli publish train` and `cedarcli release plan` require that record for exactly the source they
 are about to ship, so run it after the last build and restart and before dispatching a train. It
 refuses to start while any managed service is unhealthy or stale. `cedarcli test status` and
@@ -40,15 +41,15 @@ cedarcli test e2e --rest-workers 4
 Four workers is the fastest setting. On a 16-core workstation the REST tier takes about 51
 seconds with four, against 119 serially. Suites that depend on global state, such as account
 credentials or global counts, still run alone after the concurrent batch, and the full check
-inventory must still pass. `--rest-workers 1` restores the serial order for diagnosis. The browser
-and split-frontend tiers account for most of a whole run.
+inventory must still pass. `--rest-workers 1` restores the serial order for diagnosis. Since the
+REST tier runs beside the others, its time overlaps theirs.
 
 The split-frontend tier runs its journeys and scripts in lanes, all at once, each with a browser of
-its own. A core lane first runs the chain of Workspace steps that depend on one another, an identity
-lane runs everything that signs the second test user in or logs out, one at a time, and general
+its own. A core lane first runs the chain of Workspace steps that depend on one another, and general
 lanes run the rest. The lanes take their work from one queue, longest first, so a lane that
-finishes its own work early takes a share of the others'. The tier uses two general lanes by
-default and accepts `--split-lanes` from one to four:
+finishes its own work early takes a share of the others'. A journey that signs in or logs out may
+run in any lane. Every sign-in takes one lock that the whole machine shares, so no two happen at
+once. The tier uses five general lanes by default and accepts `--split-lanes` from one to six:
 
 ```bash
 cedarcli test e2e --rest-workers 4 --split-lanes 1
