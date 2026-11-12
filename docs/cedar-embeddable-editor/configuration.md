@@ -1,14 +1,17 @@
 # Configuration
 
-Assign configuration as a JavaScript object on the element. All nine keys are
-optional:
+Assign configuration as a JavaScript object after the element is registered
+and before supplying its template or instance. All keys are optional:
 
 ```javascript
 cee.config = {
-  terminologyBaseUrl: 'https://terminology.metadatacenter.org/',
-  bridgeBaseUrl: 'https://bridge.metadatacenter.org/',
+  terminologyBaseUrl: 'https://terminology.example.org/',
+  bridgeBaseUrl: 'https://bridge.example.org/',
 };
 ```
+
+Replace these placeholder URLs with your deployment's service bases, or omit
+them when the form needs no lookups.
 
 Frameworks bind to the same property. An application may also fetch a deployed
 JSON file and assign the parsed result:
@@ -95,12 +98,16 @@ The CEE appends its fixed service routes to these bases. See
 |---|---|---|---|
 | `showTemplateDescription` | boolean | `false` | Show the template description below its title. |
 | `showDownloadMenu` | boolean | `false` | Offer artifact and validation downloads. |
+| `previewMode` | boolean | `false` | Hide the CEE identity header or the CEF field header when the host supplies its own heading. |
+| `showFieldType` | boolean | `false` | Show the type in a read-only CEF preview when the host's heading does not identify it. |
 
 The download menu provides:
 
 | Entry | Filename suffix |
 |---|---|
 | JSON-LD instance | `-instance.json` |
+| Turtle instance | `-instance.ttl` |
+| N-Quads instance | `-instance.nq` |
 | YAML instance | `-instance.yaml` |
 | Compact YAML instance | `-instance-compact.yaml` |
 | JSON Schema template | `-template.json` |
@@ -121,6 +128,8 @@ traces each download attempt through `eventHandler` to aid diagnosis.
 |---|---|---|---|
 | `readOnlyMode` | boolean | `false` | Display the metadata without editing controls. |
 | `trustTemplateRichText` | boolean | `false` | Render template-authored rich text without sanitizing it. |
+| `suppressEmptyFieldErrors` | boolean | `false` | Keep empty trial fields quiet without changing validity or errors on populated values. |
+| `required` | boolean | `false` | Mark a standalone CEF as required where the host places it. The CEE reads requirements from its template. |
 
 Only enable `trustTemplateRichText` when template authors are trusted to run code
 in the host application's origin. See [Security](security.md).
@@ -219,3 +228,15 @@ cee.reveal({ path: ['_title'] }, { focus: false });
 `reveal` is defined once the element is in the document, and resolves to `false`
 until it has a template. The npm package declares its arguments as `CeeLocation`
 and `CeeRevealOptions`.
+
+## Troubleshooting
+
+| Symptom | Check |
+|---|---|
+| Empty custom element | Load the classic bundle and wait for `customElements.whenDefined()`; inspect `eventHandler.error` for rejected inputs. |
+| Changing `config` has no effect | Supply the complete configuration once, or create a new element. |
+| A different instance does not load | Create a new element for that editing session; instance inputs accept one successful assignment. |
+| Metadata is `{}` despite a visible preview | The template must have an identifier before its instance can be serialized for saving. |
+| Save stays unavailable | Read `canSave` and `pendingValidation`, handle `validationChange`, and inspect the report's findings. |
+| Lookup or pattern validation is unavailable | Check service bases, trailing slashes, CORS, and the [content security policy](security.md#content-security-policy). |
+| Fonts fall back unexpectedly | Register CEDAR Roboto 400 and 500 globally before loading the host-font bundle. |

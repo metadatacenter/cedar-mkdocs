@@ -11,11 +11,11 @@ Install the stable packages from npm:
 npm install cedar-embeddable-designer cedar-embeddable-editor cedar-embeddable-term-picker
 ```
 
-CED can run on its own. This example also loads the
+The CED can run on its own. This example also loads the
 [CEDAR Embeddable Editor (CEE)](../cedar-embeddable-editor/index.md) for preview
 and field controls, and the
 [CEDAR Embeddable Term Picker (CETP)](../cedar-embeddable-term-picker/index.md)
-for vocabulary authoring when a terminology service is configured. CED manages
+for vocabulary authoring when a terminology service is configured. The CED manages
 these embedded components after the host loads their bundles and configures
 the required services.
 
@@ -28,8 +28,19 @@ Create an `assets` directory in your web application's public directory and copy
 | `node_modules/cedar-embeddable-term-picker/cedar-embeddable-term-picker.js` | `assets/cedar-embeddable-term-picker.js` |
 
 These are classic scripts loaded with ordinary `<script>` tags. The designer
-package also contains TypeScript declarations, bundle manifests, a changelog,
-and a variant for hosts that already supply CEDAR fonts.
+package also contains:
+
+| File | Purpose |
+|---|---|
+| `cedar-embeddable-designer.host-fonts.js` | An alternative for pages that already register CEDAR fonts. |
+| `cedar-embeddable-designer.d.ts` | TypeScript declarations for the CED and the CEFD. |
+| `bundle-manifest.json`, `bundle-manifest.host-fonts.json` | Digests and byte counts for the two bundles. |
+| `README.md`, `CHANGELOG.md` | Package and release documentation. |
+
+Load one variant of each component. [Configuration and Appearance](configuration.md#appearance-and-fonts)
+explains the host-font option. Coordinated builds using `integration.mjs` also
+need matching model and framework runtimes; the separate classic scripts above
+are the starting point for an ordinary embed.
 
 Keep the installed versions in the application's lockfile and review the
 [release notes](https://github.com/metadatacenter/cedar-embeddable-designer/releases)
@@ -88,10 +99,22 @@ template without the development application's sample fields.
 The empty configuration is sufficient for basic authoring. Controlled-term and
 external-authority lookups need the services described below.
 
+## Use JavaScript Properties
+
+Assign objects such as `config`, `artifact`, and `childSource` through the
+element reference, rather than string-valued HTML attributes. Framework hosts
+use property binding or a DOM reference in the same way. The string-valued
+`language` setting also supports an HTML attribute.
+
+Configuration is accepted once per element. Document inputs may be replaced,
+but doing so discards the current editing session; check for unsaved work first.
+See [Artifacts and Validation](artifacts-and-validation.md).
+
 ## Configure Lookup Services
 
 Replace the empty configuration with the URLs of services your application can
-reach. The following names are placeholders for your deployment:
+reach. Use this as the initial configuration instead of `{}`, since a second
+assignment is ignored. The following names are placeholders for your deployment:
 
 ```javascript
 designer.config = {

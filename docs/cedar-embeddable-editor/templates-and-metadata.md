@@ -12,8 +12,14 @@ Assign the template after configuring the element:
 cee.templateObject = template;
 ```
 
-This assignment builds the form. The property accepts one successful assignment;
-to show another template, create a new CEE element.
+This assignment builds the form. Before an existing instance has been supplied,
+the host may replace the template, as the CED does for a live preview. A replacement
+with the same `@id` retains compatible answers and pager positions; incompatible
+answers can be discarded. A different `@id` starts an empty form.
+
+Once an instance has been supplied, its template is fixed. Create a new CEE
+element to edit another stored instance or to change its template. Check for
+unsaved work before replacing either a preview template or the element.
 
 ## Supply an Existing Instance
 
@@ -36,8 +42,8 @@ cee.instanceObject = instance;
 cee.templateObject = template;
 ```
 
-Either order works; the CEE waits for a template before rendering. Each property
-still accepts only one successful assignment. Do not combine
+Either order works; the CEE waits for a template before rendering. The instance
+accepts one successful assignment and fixes the template. Do not combine
 `templateAndInstanceObject` with either separate property.
 
 A duplicate assignment is ignored and reported through the console and
@@ -62,10 +68,31 @@ case:
 cee.templateObject = template;
 ```
 
-Browsers parse JSON natively but need a library such as
-[js-yaml](https://www.npmjs.com/package/js-yaml) to parse YAML source text. Both
-representations pass through the same CEDAR model library and produce the same
-form.
+Use the model library's `JsonSourcePolicy.parse` for JSON source text and
+`YamlSourcePolicy.parse` for YAML source text when numeric precision matters.
+Both return a parsed artifact suitable for `templateObject`. Do not assign a
+raw string or a model class instance to that property. Both representations
+pass through the same CEDAR model library and produce the same form.
+
+### Preserve Exact Numbers
+
+Numeric constraints and values can exceed JavaScript's number precision.
+The [CEDAR Model TypeScript Library](../developer-guide/cedar-model-typescript-library.md)
+preserves such values as exact numeric atoms. Use its source readers and
+`JsonSourcePolicy.stringify` rather than rounding through `Number`, native
+`JSON.parse`, or `JSON.stringify`:
+
+```typescript
+import { JsonSourcePolicy, YamlSourcePolicy } from 'cedar-model-typescript-library';
+
+const jsonTemplate = JsonSourcePolicy.parse(jsonSource);
+const yamlTemplate = YamlSourcePolicy.parse(yamlSource);
+const requestBody = JsonSourcePolicy.stringify(cee.currentMetadata);
+```
+
+This is host code compiled by a bundler. The CEE's classic script exports no
+runtime helpers. Use a model-library version compatible with the installed
+CEE release; its release notes identify the bundled model version.
 
 ## Read the Current Instance
 
@@ -83,6 +110,48 @@ const yaml = cee.currentMetadataYaml;
 
 Existing instances are supplied as JSON-LD, regardless of the template's input
 representation.
+
+`currentMetadata` is `{}` when no readable artifact is loaded or the instance
+names no template. A preview of an unsaved template can therefore render without
+being saveable. `currentMetadataYaml` is empty when YAML cannot be written,
+including when the instance has no template reference or name.
+
+## Save an Instance
+
+Check `cee.dataQualityReport.canSave === true` immediately before submission.
+`isValid` and the change event's `validity` describe answer quality, which is a
+different decision. Listen for `validationChange` when checks are pending;
+see [Validation](validation.md).
+
+Call `captureSave()` to retain the exact state being submitted:
+
+```typescript
+import { JsonSourcePolicy } from 'cedar-model-typescript-library';
+
+if (cee.dataQualityReport.canSave === true) {
+  const snapshot = cee.captureSave();
+  if (snapshot) {
+    const requestBody = JsonSourcePolicy.stringify(snapshot.metadata);
+    // Submit requestBody through the host's persistence API.
+    // Keep snapshot with that request until its response has been reconciled.
+  }
+}
+```
+
+The snapshot is `null` before a readable form is loaded or when its instance
+names no template. It does not replace the save-readiness check.
+
+If `snapshot.needsElementIds` is true, obtain the complete stored instance from
+the revision acknowledged by the successful write. With CEDAR's REST API,
+verify that a readback's ETag matches the write's returned ETag before calling
+`snapshot.acknowledge(storedInstance)`.
+
+Acknowledgement adopts assigned element identifiers without replacing the form
+or losing edits and reordering made while the request was pending. It returns
+the submitted metadata with those identifiers for the host's dirty baseline.
+If acknowledgement or readback fails, retain the draft and reconcile the write
+before permitting another save. The host and server still enforce permissions,
+validation, and [revision checks](../developer-guide/cedar-rest-apis/etag-concurrency.md).
 
 ## Observe Changes
 
@@ -102,7 +171,7 @@ if (!cee) throw new Error('CEE element is missing');
 cee.addEventListener('change', (event) => {
   const detail: CeeChangeDetail = event.detail;
   console.log(detail.operation, detail.path, detail.value);
-  saveButton.disabled = !detail.validity;
+  saveButton.disabled = detail.dataQualityReport.canSave !== true;
 });
 ```
 
@@ -120,6 +189,11 @@ Each event detail contains the state after the operation:
 Repeating-group events also include the legacy `detail.message` value
 `multiInstanceAdded`, `multiInstanceCopied`, or `multiInstanceDeleted`.
 
+Use `dataQualityReport.canSave` for saving. `validity` reflects `isValid`, not
+the save policy. Also handle `validationChange`, which can change readiness
+without changing the instance; [Validation](validation.md#read-the-report)
+shows both listeners.
+
 Angular can receive the same event with `(change)="onChange($event)"`.
 
 Loading a canonical instance does not produce a change event. The exception is a
@@ -129,25 +203,31 @@ assigning the artifact if the application needs to observe it.
 
 ## Track Unsaved Changes
 
-The CEE does not maintain a dirty flag. Store a structural snapshot of
-`currentMetadata` after loading and after each successful save, then compare it
-with the current value after every `change`. This also clears the dirty state
-when a user exactly reverses an edit.
+The CEE does not maintain a dirty flag. Keep a structural baseline after loading
+and compare it with the current metadata after each `change`. After a successful
+save, advance the baseline to the submitted snapshot, including acknowledged
+identifiers, rather than the current form: edits made during the request are
+still unsaved. Reversing an edit can then return the form to its clean state.
 
-Autosave works the same way: read the current instance on the application's
-schedule and send it to the application's own service.
+Unfinished input may not appear in the accepted metadata. Include the draft
+state returned by `captureDraft()` when detecting or preserving such work.
 
-```javascript
-const SAVE_INTERVAL = 15000;
+Autosave follows the same save-readiness and acknowledgement rules as an explicit
+save. Serialize writes and reconcile each response before submitting another.
+Saving a recovery draft is a separate operation and need not wait for validity.
 
-setInterval(async () => {
-  await fetch('/api/metadata/draft', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/yaml' },
-    body: cee.currentMetadataYaml,
-  });
-}, SAVE_INTERVAL);
-```
+## Recover Unfinished Work
+
+`captureDraft()` returns the template, accepted metadata, and unfinished input
+as a JSON-serializable recovery document. It returns `null` when no readable
+form is loaded or the instance names no template. The result is recovery data,
+not an artifact to submit to a CEDAR write endpoint.
+
+Configure a fresh CEE element and call `restoreDraft(draft)` before assigning
+artifact inputs. It returns `false` without consuming those inputs when the
+draft is malformed or incompatible; a successful restore resumes validation.
+The host owns storage, retention, account and deployment isolation, and checks
+for an interrupted save before permitting another write.
 
 ## Temporal Values
 

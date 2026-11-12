@@ -120,7 +120,15 @@ read-only presentation, create a new element with the desired configuration.
 Fields using controlled terms or external authorities also need the appropriate
 `terminologyBaseUrl` or `bridgeBaseUrl` in that configuration.
 
-The CEF handles one field occurrence. Requiredness and repetition imposed by a
-containing template do not apply, and an absent value is allowed. If the field
-definition declares a default, it is shown initially unless the host supplies a
-value.
+The CEF handles one field occurrence. Repetition is managed by the host.
+A standalone field definition does not declare whether its placement is required;
+set `required: true` in the CEF's configuration when the host requires a value:
+
+```javascript
+cef.config = { required: true };
+```
+
+Use this in the initial configuration assignment. Without it, an absent value is
+allowed. If the definition declares a default, it is shown initially unless the
+host supplies a value. Numeric values may be decimal strings when their exact
+digits would be rounded by a JavaScript number.

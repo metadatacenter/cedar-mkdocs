@@ -30,6 +30,9 @@ Keep the installed version in the application's lockfile and review the
 [release notes](https://github.com/metadatacenter/cedar-embeddable-term-picker/releases)
 before upgrading.
 
+Load one bundle variant; [Configuration and Appearance](configuration.md#hosts-that-supply-cedar-fonts)
+explains the host-font option.
+
 ## Connect a Terminology Service
 
 The picker speaks to the **CEDAR terminology server**, rather than directly to

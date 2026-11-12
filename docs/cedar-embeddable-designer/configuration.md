@@ -4,6 +4,11 @@ Configure a designer after its custom element is registered and before opening
 or creating a document. Object settings are JavaScript properties, rather than
 string-valued HTML attributes.
 
+The `config` object is accepted once per element. Other host inputs have their
+own lifetimes: `language` and `readOnly` can change at runtime, and `childSource`
+can be replaced between documents. Loading an artifact replaces the editing
+session; see [Artifacts and Validation](artifacts-and-validation.md).
+
 ## Service Endpoints
 
 ```javascript
@@ -67,7 +72,7 @@ profile.
 The components use Shadow DOM and CEDAR's shared design tokens. The host controls
 the available page space and can supply inherited CEDAR font and control tokens.
 Avoid styling private component selectors. CEE's
-[shared styling guide](https://github.com/metadatacenter/cedar-embeddable-editor/blob/develop/STYLING.md)
+[shared styling guide](https://github.com/metadatacenter/cedar-embeddable-editor/blob/main/STYLING.md)
 describes the shared control contract.
 
 The default CED bundle includes CEDAR Roboto at weights 400 and 500. A host that
@@ -117,3 +122,15 @@ the origins named in the artifact when rendered in field controls or preview.
 Validate writes on the server and recheck permissions and revisions there.
 Recovery snapshots can contain unfinished user content; scope their storage
 to the correct account and deployment.
+
+## Troubleshooting
+
+| Symptom | Check |
+|---|---|
+| Empty custom element | The classic bundle loaded and the tag registered; wait for `customElements.whenDefined()`. |
+| Preview or field controls are unavailable | Load the CEE bundle before using the CED. |
+| Vocabulary authoring is unavailable | Load the CETP bundle and configure a compatible version-aware terminology service. |
+| Changing `config` has no effect | Supply the complete configuration once, or create a new element. |
+| Saving is unavailable | Inspect `validate().canSave`, pending checks, read-only state, and unfinished settings. |
+| Repository selector is unavailable | Supply `childSource` and choose the Modular authoring profile. |
+| Browser blocks a request | Check HTTPS, CORS, the proxy route, and the content security policy. |

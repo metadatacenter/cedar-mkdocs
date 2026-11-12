@@ -66,7 +66,9 @@ The instance records both the IRI and label:
 }
 ```
 
-The selected value also links to its BioPortal page in the interface.
+The selected value links to the source page supplied by the terminology service
+or the field's constraints. This may be BioPortal or another vocabulary provider;
+the CEE does not assume every term comes from BioPortal.
 
 A controlled-term field does not accept free text. If the user leaves an
 unresolved value, the CEE clears it or restores the previous valid term and

@@ -101,6 +101,8 @@ Account for these directives in the host policy:
 |---|---|
 | `script-src` | The origin serving `cedar-embeddable-editor.js`. |
 | `style-src` | Inline styles, because the component installs compiled styles in its shadow root. |
+| `font-src` | `data:` for embedded fonts; the host's font origins when using the host-font bundle. |
+| `worker-src` | `blob:` for bounded pattern-validation workers. |
 | `connect-src` | Configured terminology, bridge, and external language-map origins. |
 | `img-src` | Image origins allowed by templates, plus `data:` if inline images are permitted. |
 | `frame-src` | `https://www.youtube.com` when templates may contain video fields. |
@@ -108,3 +110,8 @@ Account for these directives in the host policy:
 If the service and language settings are unset, the CEE adds no `connect-src`
 destinations. Blocking a template image or video affects only that content; the
 rest of the form continues to render.
+
+If workers are blocked, pattern validation cannot be treated as completed.
+Read `canSave` and `pendingValidation` rather than assuming that a rendered
+form is ready to submit. The host also owns storage and access controls for
+[recovery drafts](templates-and-metadata.md#recover-unfinished-work).

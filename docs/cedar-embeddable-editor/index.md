@@ -47,19 +47,19 @@ selection, and metadata entry:
 | [CEDAR Embeddable Term Picker (CETP)](../cedar-embeddable-term-picker/index.md) | Searches vocabularies and selects constraints and default terms during authoring. | Vocabulary selections for the host to apply; ontology-property selection is also available. |
 | CEDAR Embeddable Editor (CEE) | Renders the template for metadata entry or read-only display. | A metadata instance containing the values entered against that template. |
 
-In a typical workflow, an author designs a template in CED and uses its embedded
+In a typical workflow, an author designs a template in the CED and uses its embedded
 Term Picker to choose the vocabularies a field draws from. The host stores the
-template and supplies a selected version to CEE. A researcher completes the
+template and supplies a selected version to the CEE. A researcher completes the
 resulting form, and the host receives and stores the metadata instance.
 
-CEE also supplies the form preview inside CED, and the CEF widget included in
-CEE's bundle provides individual field controls. CED manages its embedded
+The CEE also supplies the form preview inside the CED, and the CEF widget included in
+the CEE's bundle provides individual field controls. The CED manages its embedded
 pickers and preview after the host loads the sibling bundles and configures
 the required services.
 
 Each component is a separate package. A host collecting metadata from an
-existing template needs only CEE: its controlled-term fields perform their own
-lookup through the configured terminology service. CED and CETP add authoring
+existing template needs only the CEE: its controlled-term fields perform their own
+lookup through the configured terminology service. The CED and the CETP add authoring
 workflows when the application needs them. The host retains responsibility for
 authentication, template version choices, and saving templates and instances.
 
@@ -92,7 +92,9 @@ workflow.
 The CEF is included in the CEE bundle and supports both editing and read-only
 display. See [Using the CEF](using-the-cef.md) for embedding and API details.
 
-## Optional Network Services
+<a id="optional-network-services"></a>
+
+## Services and Host Responsibilities
 
 Rendering, editing, local validation, and serialization all happen in the browser.
 Network access is needed only for features that depend on remote data or content:
@@ -142,16 +144,20 @@ also tested releases in Chrome, Firefox, Safari, Edge, and selected mobile brows
 Internet Explorer, EdgeHTML, and web views without these Web Component APIs are not
 supported.
 
-The editor is designed for keyboard and screen-reader use, with WCAG AA as its
-accessibility target.
+The interface is available in English and Hungarian. Keyboard navigation,
+focus handling, contrast, and responsive layouts are covered by automated checks;
+WCAG 2.2 AA is the accessibility target. The host remains responsible for its
+surrounding page and for testing the complete workflow with assistive technology.
 
 ## Get Started
 
-- [Build Your First Embedded Editor](first-editor.md).
-- [Integrate the CEE with a Framework](frameworks.md).
-- [Configure Services and Behavior](configuration.md).
-- [Work with Controlled Terms and External Authorities](controlled-terms.md).
-- [Read Validation Results](validation.md).
+- [Your First Embedded Editor](first-editor.md) installs the package and builds a working page.
+- [Templates and Metadata](templates-and-metadata.md) covers inputs, outputs, saving, and recovery.
+- [Controlled Terms and External Authorities](controlled-terms.md) connects lookup services.
+- [Validation and the Data Quality Report](validation.md) explains save readiness and quality findings.
+- [Using the CEF](using-the-cef.md) introduces individual field controls.
+- [Configuration](configuration.md), [Appearance and Language](appearance.md), and [Embedding in a Framework](frameworks.md) cover host integration.
+- [Security](security.md) describes content handling and host network policy.
 
 ## Citation and Source
 

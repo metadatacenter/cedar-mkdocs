@@ -59,7 +59,10 @@ export function templateBody(designer: CedarEmbeddableDesignerElement): string {
 ```
 
 This example is host application code compiled by a bundler; the designer's
-classic script exports no runtime functions. CED 0.1.0 uses model library 1.0.27.
+classic script exports no runtime functions. Use a model-library version
+compatible with the installed CED release; its
+[release notes](https://github.com/metadatacenter/cedar-embeddable-designer/releases)
+identify the bundled model version.
 
 ## Check Save Readiness
 
