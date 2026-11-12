@@ -62,6 +62,7 @@ the consumer's pin and lockfile. `cedarcli publish components` handles that sepa
 ```bash
 cedarcli publish components
 cedarcli publish components --apply
+cedarcli publish components --apply --push --settle
 ```
 
 Without `--apply` the command reports its plan and changes nothing, because an npm version once
@@ -74,10 +75,17 @@ built from the pushed head. `--component <ID>` limits a run to one of `tokens`, 
 `model`, or `cee`. The components and their consumers are declared in
 `cedar-development/ops/frontend-train.json`.
 
-Every repository the command would write must be free of uncommitted tracked changes, and the
-command commits nothing: review each repository's diff, then commit and push it. When a run moves a
-pin inside a component's own repository, that component is skipped, because its pushed head does
-not yet carry the new pin. Push the change and run the command again to publish it. A component is
+Every repository the command would write must be free of uncommitted tracked changes. By default
+the command commits nothing, and each repository's diff waits for review. When a run moves a pin
+inside a component's own repository, that component is skipped, because its pushed head does not
+yet carry the new pin. Push the change and run the command again to publish it.
+
+`--commit` commits each repository's moves with a message naming every pin and version it moved,
+and a later pass amends that commit while it is unpushed. `--push` commits and pushes. `--settle`,
+which needs `--push`, repeats the passes until nothing moves: it pushes each component a pass wrote,
+waits up to thirty minutes for CI to publish what that component's consumers follow, and passes
+again. After a CEDAR release, `--apply --push --settle` returns every consumer to the development
+packages in one command. A component is
 built from its checkout, so the checkout must stand at the pushed `develop` head the package is
 named after. One left on another branch, or whose `develop` is not pushed, is held back with the
 reason in the report.
