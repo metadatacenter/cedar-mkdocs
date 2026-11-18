@@ -98,7 +98,9 @@ The CEE appends its fixed service routes to these bases. See
 |---|---|---|---|
 | `showTemplateDescription` | boolean | `false` | Show the template description below its title. |
 | `showDownloadMenu` | boolean | `false` | Offer artifact and validation downloads. |
+| `showExpandCollapseAll` | boolean | `true` | Offer the Expand All and Collapse All buttons above the form. |
 | `previewMode` | boolean | `false` | Hide the CEE identity header or the CEF field header when the host supplies its own heading. |
+| `wrapFieldNames` | boolean | `false` | Wrap long field names with their required markers instead of truncating them. |
 | `showFieldType` | boolean | `false` | Show the type in a read-only CEF preview when the host's heading does not identify it. |
 
 The download menu provides:

@@ -243,9 +243,9 @@ which every release changes on `main`. Each file it names is labelled as either 
 distribution, which the release rebuilds, or source that needs review. `cedarcli check main` asks
 the same question of the current `main` and `develop` between releases.
 
-The Docker source's `IMAGE_VERSION`, `CEDAR_MAVEN_VERSION`, and `CEDAR_APPLICATION_VERSION` must all
-equal the train source version. Release stamping advances them together for both the release and
-next-development trees, so a new image tag cannot silently retain old Maven or application inputs.
+The Docker source's `IMAGE_VERSION` and `CEDAR_MAVEN_VERSION` must both equal the train source
+version. Release stamping advances them together for both the release and next-development trees,
+so a new image tag cannot silently retain old Maven inputs.
 
 ## Running a Release
 
