@@ -24,8 +24,9 @@ error handling. CED has no default repository. Replacing `childSource` closes an
 open selector and cancels pending work. Without a source, repository selection
 reports that it is unavailable.
 
-The **Modular** authoring profile exposes the reusable-child selector. Existing
-nested content stays visible in every profile.
+Every preset except **Basic** offers the reusable-child selector. Existing
+nested content stays visible in every preset. See
+[Author Preferences](configuration.md#author-preferences).
 
 ## Understand Linked and Copied Content
 

@@ -5,9 +5,9 @@ or creating a document. Object settings are JavaScript properties, rather than
 string-valued HTML attributes.
 
 The `config` object is accepted once per element. Other host inputs have their
-own lifetimes: `language` and `readOnly` can change at runtime, and `childSource`
-can be replaced between documents. Loading an artifact replaces the editing
-session; see [Artifacts and Validation](artifacts-and-validation.md).
+own lifetimes: `language`, `readOnly`, and `preferences` can change at runtime,
+and `childSource` can be replaced between documents. Loading an artifact replaces
+the editing session; see [Artifacts and Validation](artifacts-and-validation.md).
 
 ## Service Endpoints
 
@@ -62,12 +62,102 @@ Published children inside an editable parent retain their definitions while
 allowing the parent to configure their placement. Descendants of a published
 element remain locked, including their placement within that element.
 
-## Appearance and Fonts
+## Author Preferences
 
-Authoring profiles in Preferences control which settings are shown. The
-**Semantic** preset exposes default-value controls, and **Modular** exposes
-the reusable-child selector. Existing nested content remains visible in every
-profile.
+An author sets preferences from the designer's user menu. **Preferences** selects
+the field settings and field types the designer offers and the place of the
+field-type picker. **Define Presets** changes what each preset sets. CED keeps
+these choices in memory for one element, so an author returns to the defaults on
+every reload unless the host stores them.
+
+The `preferences` property and the `preferencesChange` event let a host store
+them. Both were added after CED 0.1.3. CEFD has no preferences.
+
+```javascript
+const key = 'designer-preferences';
+const stored = localStorage.getItem(key);
+if (stored) designer.preferences = JSON.parse(stored);
+
+designer.addEventListener('preferencesChange', (event) => {
+  localStorage.setItem(key, JSON.stringify(event.detail));
+});
+```
+
+The value is plain JSON. This example uses the browser's `localStorage`. A host
+can equally keep the value with the author's account on its server.
+
+| Member | Behavior |
+|---|---|
+| `preferences`, when read | Returns the complete current preferences. |
+| `preferences`, when assigned | Replaces the preferences. An assignment can come at any time, including before the element is connected to the page. An omitted key takes its default, and `null` restores every default. |
+| `preferencesChange` | Carries the complete preferences after each change the author makes. CED sends none at startup and none for the host's own assignment. |
+
+A host can therefore store every value it receives. It never stores defaults the
+author did not choose, and it never receives its own assignment back. Because an
+omitted key takes its default, a value stored by one CED version remains
+assignable after a later version adds a preference.
+
+Preferences change the controls the designer offers and never the document. A
+field of a hidden type, or an element while elements are switched off, stays in
+the artifact and stays visible.
+
+### Preference Keys
+
+| Key | Type | Default | Purpose |
+|---|---|---|---|
+| `showRequired` | boolean | `true` | Offer the Required setting on a field. |
+| `showAllowMultiple` | boolean | `true` | Offer the Allow multiple setting on a field. |
+| `showDefaultValue` | boolean | `true` | Record the dialog's Default Value setting. No control depends on it at present. |
+| `showElements` | boolean | `true` | Offer the action that adds an element. |
+| `fieldSelectionStyle` | `'inline'` or `'sidebar'` | `'inline'` | Offer field types beside the insertion point, or in the library sidebar. |
+| `hiddenFieldTypes` | array of field types | `[]` | Leave these field types out of the type pickers. |
+| `presets` | object | see [Presets](#presets) | Define what the Basic, Semantic, and Modular presets set. |
+
+The package's `CedFieldType` type lists the field types, such as `'text'`,
+`'email'`, and `'controlledTerms'`. `CedPreferences` types the complete value,
+and `CedPreferencesInput` types the value a host assigns, in which every key is
+optional.
+
+### Presets
+
+`presets` holds one definition under each of `basic`, `semantic`, and `modular`.
+A definition has the keys `showRequired`, `showAllowMultiple`,
+`showDefaultValue`, `showElements`, and `hiddenFieldTypes`. Choosing a preset
+copies its definition into the preferences.
+
+| Preset | Default Definition |
+|---|---|
+| Basic | Hides the Controlled Terms field type and the element action. |
+| Semantic | Offers every field type and hides the element action. |
+| Modular | Offers every field type and the element action. A new designer starts in Modular. |
+
+The designer identifies the active preset by comparing the preferences with each
+definition. While Basic is active, it also withholds the selector for reusable
+fields and elements. An author can redefine a preset, so the definitions travel
+with the preferences. A stored value that omitted them could open the next page
+in a different preset.
+
+### Values CED Cannot Use
+
+An assignment never throws. CED checks each key independently, names what it
+cannot use in a console warning, and leaves that preference at its default.
+The warnings read:
+
+```
+Unknown designer preference "theme". Ignored.
+Designer preference "showRequired" must be true or false. Ignored.
+Unknown field type "hologram" in "hiddenFieldTypes". Ignored.
+```
+
+Other valid keys in the same object still apply. A value that is not an object,
+such as a string or an array, is rejected whole and leaves the preferences as
+they were, with this warning:
+
+```
+CEDAR designer preferences must be an object. Ignored.
+```
+
+## Appearance and Fonts
 
 The components use Shadow DOM and CEDAR's shared design tokens. The host controls
 the available page space and can supply inherited CEDAR font and control tokens.
@@ -121,7 +211,8 @@ the origins named in the artifact when rendered in field controls or preview.
 
 Validate writes on the server and recheck permissions and revisions there.
 Recovery snapshots can contain unfinished user content; scope their storage
-to the correct account and deployment.
+to the correct account and deployment. Stored preferences contain no document
+content, and belong to the author who chose them.
 
 ## Troubleshooting
 
@@ -132,5 +223,6 @@ to the correct account and deployment.
 | Vocabulary authoring is unavailable | Load the CETP bundle and configure a compatible version-aware terminology service. |
 | Changing `config` has no effect | Supply the complete configuration once, or create a new element. |
 | Saving is unavailable | Inspect `validate().canSave`, pending checks, read-only state, and unfinished settings. |
-| Repository selector is unavailable | Supply `childSource` and choose the Modular authoring profile. |
+| Repository selector is unavailable | Supply `childSource` and choose a preset other than Basic. |
+| Preferences return to their defaults on reload | Store the value `preferencesChange` carries and assign it to `preferences`. |
 | Browser blocks a request | Check HTTPS, CORS, the proxy route, and the content security policy. |

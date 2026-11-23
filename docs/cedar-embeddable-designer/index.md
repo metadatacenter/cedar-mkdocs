@@ -92,6 +92,7 @@ output, validation, and recovery APIs.
 | External-authority defaults | The CEF and a CEDAR bridge service. |
 | Reusable fields, elements, and versions | A host repository adapter with permission-filtered search and retrieval. |
 | Saving and publishing | The host application's own workflow and persistence. |
+| Author preferences that outlast the page | Storage for the value the designer reports when an author changes a preference. |
 
 Service endpoints have no defaults. Features that need an absent component or
 service report that they are unavailable. Configure them explicitly as described
@@ -113,7 +114,7 @@ page and for testing the complete workflow with assistive technology.
 - [Artifacts and Validation](artifacts-and-validation.md) covers loading, saving, host findings, and recovery.
 - [Reusable Fields and Elements](reusable-content.md) connects a repository and explains version handling.
 - [Designing a Single Field](field-designer.md) introduces CEFD.
-- [Configuration and Appearance](configuration.md) covers service endpoints, language, styling, and framework integration.
+- [Configuration and Appearance](configuration.md) covers service endpoints, language, author preferences, styling, and framework integration.
 
 ## Source and Releases
 
