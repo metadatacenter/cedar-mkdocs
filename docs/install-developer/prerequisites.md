@@ -53,23 +53,22 @@ the modern Angular applications, components, model library and consumer demos. C
 toolchain check use this exact security-patched version. Angular 22 accepts
 `^22.22.3 || ^24.15.0 || >=26`; Node 20 cannot build it.
 
-If Node 24 is already installed through Homebrew, update it and verify the binary:
+Homebrew's `node@24` offers the newest Node 24 patch, which is not always 24.22.1. `cedarcli`
+therefore provisions the exact version itself when no installed Node is 24.22.1. It downloads the
+archive nodejs.org publishes for your machine, checks it against the SHA-256 the CLI pins, and
+keeps it under `$CEDAR_HOME/.cedar/toolchains`, where every later command reuses it. It changes
+only the PATH of the command it runs.
+
+To run `npm` or `ng` in a frontend repository outside the CLI, put that Node first on your PATH.
+On Apple silicon:
 
 ```bash
-brew update
-brew upgrade node@24
-node --version  # must print v24.22.1
+export PATH="$CEDAR_HOME/.cedar/toolchains/node-v24.22.1-darwin-arm64/bin:$PATH"
+node --version  # prints v24.22.1
 ```
 
-`cedarcli` selects a supported installed toolchain automatically; it does not install Node. If
-Homebrew offers a different patch version, use an exact Node installation instead. For example,
-with an existing `nvm` installation:
-
-```bash
-cd "$CEDAR_HOME/cedar-embeddable-editor"
-nvm install     # installs the version in .nvmrc
-nvm use
-```
+An Intel Mac uses `darwin-x64` in that path. The directory exists once any `cedarcli build
+frontends` has run.
 
 ## Verify the Toolchain
 
