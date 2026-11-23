@@ -107,7 +107,6 @@ the artifact and stays visible.
 |---|---|---|---|
 | `showRequired` | boolean | `true` | Offer the Required setting on a field. |
 | `showAllowMultiple` | boolean | `true` | Offer the Allow multiple setting on a field. |
-| `showDefaultValue` | boolean | `true` | Record the dialog's Default Value setting. No control depends on it at present. |
 | `showElements` | boolean | `true` | Offer the action that adds an element. |
 | `fieldSelectionStyle` | `'inline'` or `'sidebar'` | `'inline'` | Offer field types beside the insertion point, or in the library sidebar. |
 | `hiddenFieldTypes` | array of field types | `[]` | Leave these field types out of the type pickers. |
@@ -121,9 +120,9 @@ optional.
 ### Presets
 
 `presets` holds one definition under each of `basic`, `semantic`, and `modular`.
-A definition has the keys `showRequired`, `showAllowMultiple`,
-`showDefaultValue`, `showElements`, and `hiddenFieldTypes`. Choosing a preset
-copies its definition into the preferences.
+A definition has the keys `showRequired`, `showAllowMultiple`, `showElements`,
+and `hiddenFieldTypes`. Choosing a preset copies its definition into the
+preferences.
 
 | Preset | Default Definition |
 |---|---|
