@@ -9,6 +9,43 @@ normal edit-build-run loop.
 branches, and tags across the repositories and publishing to Nexus.
 [Releasing CEDAR](release.md) covers the whole route.
 
+## AI Review of Captured Designer Screens
+
+Review an existing Designer capture without recapturing or changing the application:
+
+```bash
+cedarcli test ui-review-coordinate \
+  --capture /absolute/path/to/capture/designer \
+  --output /absolute/path/to/designer-review --plan
+cedarcli test ui-review-coordinate \
+  --capture /absolute/path/to/capture/designer \
+  --output /absolute/path/to/designer-review
+```
+
+`--plan` checks evidence hashes and lists every captured state without contacting AI or writing
+files. Execution copies the packet to a separate output directory and sends its images and selected
+supporting evidence to the configured Codex service. Codex must be installed and authenticated.
+This command is currently Designer-only and is not automatically run by a frontend build.
+
+Each state and crop receives a structured assessment, candidate findings receive independent
+verification, and each reviewer is calibrated after its assessment is sealed. A subset of states is
+also reviewed independently to check initially clean assessments. The report presents grouped
+actionable findings and design decisions; the coverage ledger retains every state's image hashes,
+assessment and delivery receipt. This records complete assessment coverage, not proof that the
+model detected every defect.
+
+Use `--resume` with the same input and output to continue interrupted work. `--batch-size` defaults
+to 8 states (1–12), `--workers` to 2 (1–4), and `--timeout` to 900 seconds per model turn. `--model`
+selects the Codex model; omission uses the runner's default. Failed calibration is retained rather
+than retried until it passes. Output must be outside the input capture, which is never modified.
+
+Open `report.html` for findings and decisions, `report.json` for full results, and `coverage.json`
+for the per-state ledger. Exit 0 means `REVIEWED`, 1 means `FINDINGS` or `DESIGN_REVIEW`, and 2 means
+`INCOMPLETE`. Missing images or assessments, changed evidence, original capture blockers and
+calibration failures prevent a pass. The report assesses the recorded capture, not the current
+deployment. The frontend runbook in `cedar-development/ops/FRONTEND-RUNBOOK.md` documents the full
+evidence, isolation, calibration and interruption contract.
+
 ## Inspection and Setup Commands
 
 | Group | Purpose | Starting Point |

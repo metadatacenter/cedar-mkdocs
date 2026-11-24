@@ -269,6 +269,10 @@ def draw_sheet(c: canvas.Canvas, cli_version: str) -> None:
     panel(c, 5, 1, "test", [
         ("e2e [--rest-workers N]", ORANGE), ("  [--split-lanes N]", ORANGE),
         ("  [--split-timeout-cap SEC]", ORANGE), "status", "cleanup",
+        "ui-review-coordinate",
+        "  --capture DIR --output DIR",
+        "  [--plan | --resume]",
+        "  [--model MODEL]",
     ])
 
     panel(c, 0, 2, "<build_target>", [
