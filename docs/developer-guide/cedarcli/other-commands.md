@@ -24,8 +24,10 @@ cedarcli test ui-review-coordinate \
 
 `--plan` checks evidence hashes and lists every captured state without contacting AI or writing
 files. Execution copies the packet to a separate output directory and sends its images and selected
-supporting evidence to the configured Codex service. Codex must be installed and authenticated.
-This command is currently Designer-only and is not automatically run by a frontend build.
+supporting evidence to the reviewer's service. `--reviewer` chooses Codex, the default, or `claude`
+for Claude Code, which must be on `PATH` or named by `CEDAR_UI_REVIEW_CLAUDE`. Either must be
+installed and signed in, and the command refuses to start with a signed-out Claude Code. This
+command is currently Designer-only and is not automatically run by a frontend build.
 
 Each state and crop receives a structured assessment, candidate findings receive independent
 verification, and each reviewer is calibrated after its assessment is sealed. A subset of states is
@@ -35,8 +37,9 @@ assessment and delivery receipt. This records complete assessment coverage, not 
 model detected every defect.
 
 Use `--resume` with the same input and output to continue interrupted work. `--batch-size` defaults
-to 8 states (1–12), `--workers` to 2 (1–4), and `--timeout` to 900 seconds per model turn. `--model`
-selects the Codex model; omission uses the runner's default. Failed calibration is retained rather
+to 8 states (1–12), `--workers` to 2 (1–4), and `--timeout` to 900 seconds per model turn. A batch
+whose evidence exceeds the reviewer's limits is refused before any call. `--model` selects the
+reviewer's model, and omission uses its default. Failed calibration is retained rather
 than retried until it passes. Output must be outside the input capture, which is never modified.
 
 Open `report.html` for findings and decisions, `report.json` for full results, and `coverage.json`
@@ -45,6 +48,28 @@ for the per-state ledger. Exit 0 means `REVIEWED`, 1 means `FINDINGS` or `DESIGN
 calibration failures prevent a pass. The report assesses the recorded capture, not the current
 deployment. The frontend runbook in `cedar-development/ops/FRONTEND-RUNBOOK.md` documents the full
 evidence, isolation, calibration and interruption contract.
+
+## Triaging Retained UI Reviews
+
+Answer the findings of retained UI reviews, and the design decisions put to you, on a local board:
+
+```bash
+cedarcli test ui-review-board --plan
+cedarcli test ui-review-board
+```
+
+The board reads every coordinated and single-reviewer review under `.cedar/reports`, newest first
+and grouped by application, and shows each finding with its verifier's decision, its severity and
+the screenshots it cites. `--plan` lists what it would show without serving. The board listens on
+port 47831 of the loopback interface only. `--port` chooses another and `--reports` another report
+root. It never writes to a review. Answers go to `.cedar/reports/ui-review-board/answers.json`, and
+the decisions it offers come from `decisions.json` beside it.
+
+Each review identifies its findings afresh, so an answer belongs to an issue rather than to one
+review's finding. Answering a finding opens an issue for it. When a later review reports what
+appears to be the same problem, the board suggests the earlier issue, and linking the finding to it
+carries the answer over. The suggestion compares wording and captured states, so it can miss a
+problem described in other words on other states.
 
 ## Inspection and Setup Commands
 
