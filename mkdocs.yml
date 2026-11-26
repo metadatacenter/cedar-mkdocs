@@ -163,7 +163,8 @@ nav:
       - CEDAR REST APIs:
           - Overview: developer-guide/cedar-rest-apis/index.md
           - Authentication: developer-guide/cedar-rest-apis/authentication.md
-          - Working with Artifacts: developer-guide/cedar-rest-apis/working-with-artifacts.md
+          - Working With Artifacts: developer-guide/cedar-rest-apis/working-with-artifacts.md
+          - Resource Changes and API Conventions: developer-guide/cedar-rest-apis/resource-changes.md
           - ETag Concurrency: developer-guide/cedar-rest-apis/etag-concurrency.md
           - Paging: developer-guide/cedar-rest-apis/paging.md
           - Interactive API Documentation: developer-guide/cedar-rest-apis/interactive-api.md

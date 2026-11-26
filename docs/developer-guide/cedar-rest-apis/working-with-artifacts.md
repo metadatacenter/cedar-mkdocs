@@ -1,4 +1,4 @@
-# Working with Artifacts
+# Working With Artifacts
 
 ## Understand What the API Stores
 
@@ -45,12 +45,18 @@ curl "$CEDAR_API/templates/<URL_ENCODED_TEMPLATE_ID>" \
   -H "Accept: application/json"
 ```
 
-Use `template-elements` for an element and `template-instances` for an instance. Request
+Use `template-elements` for an element, `template-fields` for a field, and `template-instances`
+for an instance. These typed routes also accept the identifier's bare UUID. Request
 `application/yaml` instead when the YAML form is easier for the calling workflow to read or edit.
 An instance's `schema:isBasedOn` value is the identifier of its template; URL-encode that value and
 retrieve it through the `templates` route when an integration needs the definition that governs an
-instance. A template-instance `GET` can also use the `format` query parameter with `jsonld`, `json`,
-or `rdf-nquad`; an explicit `format` takes precedence over the `Accept` header.
+instance. Every artifact `GET`, including `/{id}/download`, also accepts `format=jsonld`, `json`,
+`yaml`, or `rdf-nquad`. An explicit `format` takes precedence over `Accept`, even if that header
+requests another representation. An unknown or repeated `format` returns 400.
+
+`jsonld` preserves the stored document; `json` removes JSON-LD structure; `yaml` renders CEDAR YAML.
+Use `compact=true` with YAML for its compact form. `rdf-nquad` returns N-Quads for instances.
+Schema artifacts have no supported RDF mapping and return 406 for that format.
 
 The response also carries an `ETag` header identifying the revision just read. Retain it alongside
 the body when the retrieved artifact is about to be changed.
@@ -70,15 +76,18 @@ with `null` values in a new instance so the server can fill them in:
 Validate the completed instance before storing it:
 
 ```bash
-curl -X POST "$CEDAR_API/command/validate?resource_type=instance" \
+curl -X POST "$CEDAR_API/artifact-validations/instance" \
   -H "Authorization: apiKey $CEDAR_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   --data-binary @instance.json
 ```
 
-Validation catches structural and value errors without creating a repository resource. Once it
-passes, store the instance with:
+Validation catches structural and value errors without creating a repository resource. A completed
+validation returns 200 even when the artifact is invalid: inspect the report's `validates`, `errors`,
+and `warnings` properties. A JSON request may supply both the template and instance as
+`{"schema": <template>, "instance": <instance>}`. YAML requests carry the artifact itself.
+Once validation passes, store the instance with:
 
 ```bash
 curl -X POST "$CEDAR_API/template-instances?folder_id=<URL_ENCODED_FOLDER_ID>" \
@@ -90,8 +99,9 @@ curl -X POST "$CEDAR_API/template-instances?folder_id=<URL_ENCODED_FOLDER_ID>" \
 The folder identifier determines where the instance appears in Workspace. Omit `folder_id` to use
 the account's home folder.
 
-The same pattern creates templates and elements: validate the artifact with the appropriate
-resource type, then send it to `templates` or `template-elements`. The
+The same pattern creates templates, elements, and fields: validate at
+`/artifact-validations/template`, `/artifact-validations/element`, or `/artifact-validations/field`,
+then send it to `templates`, `template-elements`, or `template-fields`. The
 [CEDAR Artifact Library](../cedar-artifact-library.md) and
 [CEDAR Model TypeScript Library](../cedar-model-typescript-library.md) can construct those artifacts
 without requiring application code to assemble the model by hand.
@@ -114,3 +124,6 @@ a concurrent change by another client produces `412 Precondition Failed` instead
 Deleting an artifact requires the same header, and an artifact's permissions are revisioned
 separately from its content. [ETag Concurrency](etag-concurrency.md) gives the full rules, including
 the responses a missing or stale validator produces.
+
+To change a name, description, or sharing state without replacing the complete artifact, use the
+PATCH routes in [Resource Changes and API Conventions](resource-changes.md).

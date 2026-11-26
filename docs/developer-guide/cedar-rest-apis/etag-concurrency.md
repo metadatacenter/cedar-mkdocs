@@ -80,9 +80,11 @@ are independently revisioned. Read the same REST resource that the later operati
 
 | Change | Read first | Send its ETag with |
 | --- | --- | --- |
-| Template, element, field, or instance content | `GET` the artifact | `PUT` or `DELETE` that artifact |
-| Artifact, folder, or category permissions | `GET .../permissions` | `PUT .../permissions` |
-| Folder or category properties | `GET` the folder or category | its update or delete operation |
+| Template, element, field, or instance content | `GET` the artifact | `PUT`, rename/description `PATCH`, or `DELETE` that artifact |
+| Artifact or folder open state | `GET` the artifact or folder | `PATCH` with `isOpen` |
+| Artifact, folder, or category permissions | `GET .../permissions` | `PUT .../permissions` to replace grants, or `PATCH .../permissions` to transfer ownership |
+| Folder properties | `GET` the folder | `PUT`, `PATCH`, or `DELETE` that folder |
+| Category properties | `GET` the category | `PUT` or `DELETE` that category |
 | Group properties | `GET /groups/{id}` on the group service | `PUT`, `PATCH`, or `DELETE /groups/{id}` |
 | Group membership | `GET /groups/{id}/users` on the group service | `PUT /groups/{id}/users` |
 
