@@ -11,11 +11,21 @@ Paths use lowercase words separated by hyphens, such as `/template-instances` an
 `resource_types`. JSON operation options use camelCase, such as `newOwnerId`. Artifact and
 resource properties retain their model names, including `@id`, `schema:name`, and `schema:description`.
 
-Artifact and folder routes accept either a bare UUID or the full stored IRI, percent-encoded as
-one path segment. Both forms address the same resource and revision. Category and group routes
-currently require the full stored IRI; a bare UUID does not resolve to that resource. Preserve the
-identifier returned by the API rather than constructing a new one. User and terminology routes
-have their own identifier types, described in their interactive references.
+Artifact, folder, group, and category routes accept either a bare UUID or the full stored IRI,
+percent-encoded as one path segment. Both forms address the same resource and revision, including
+group membership and category permissions. An ETag read through either address works with the
+other; authorization, ownership, and conditional-write rules are identical.
+
+The matching type-qualified selector also works as one encoded path segment, for example
+`groups%2F<UUID>` on a group route or `categories%2F<UUID>` on a category route. A selector naming
+the wrong resource type is rejected with 400. A full IRI is preserved exactly, including its host;
+UUID shorthand resolves within the current deployment and must not be used to retarget a historical
+IRI. Responses retain the stored full IRI. The dedicated `/categories/root` and `/categories/tree`
+reads and protections for the root category and built-in groups are unchanged.
+
+This path convention does not change identifiers inside JSON bodies. Preserve identifiers returned
+by the API there. User and terminology routes have their own identifier types, described in their
+interactive references.
 
 ## Partial Resource Changes
 
